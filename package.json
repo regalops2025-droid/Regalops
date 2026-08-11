@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\"",
-    "build": "npm run build --prefix frontend && node -e \"const fs = require('fs'); fs.cpSync('frontend/dist', 'dist', {recursive: true});\"",
+    "build": "npm run build --prefix frontend && node deploy-copy.js",
     "start": "concurrently \"npm run start --prefix frontend\" \"npm run start --prefix backend\""
   },
   "dependencies": {

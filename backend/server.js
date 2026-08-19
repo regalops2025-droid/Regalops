@@ -1305,6 +1305,15 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "OK", timestamp: new Date() });
 });
 
+// Serve static frontend files in production
+const frontendBuildPath = path.join(__dirname, "../");
+app.use(express.static(frontendBuildPath));
+
+// Handle React Router routing, return index.html for all other non-API routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(frontendBuildPath, "index.html"));
+});
+
 app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
   await initDB();

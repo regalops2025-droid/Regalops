@@ -317,9 +317,8 @@ async function initDB() {
     }
 
     // Create contact_enquiries table
-    await pool.query(`DROP TABLE IF EXISTS contact_enquiries`);
     await pool.query(`
-      CREATE TABLE contact_enquiries (
+      CREATE TABLE IF NOT EXISTS contact_enquiries (
         id INT AUTO_INCREMENT PRIMARY KEY,
         first_name VARCHAR(255) NOT NULL,
         last_name VARCHAR(255) NOT NULL,
@@ -348,24 +347,27 @@ async function initDB() {
     `);
     console.log('Table "users" verified.');
 
-    // Truncate users table to ensure passwords get hashed
-    await pool.query("DELETE FROM users");
+    // Seed default admin users if they do not exist
+    const [existingUsers] = await pool.query("SELECT * FROM users");
+    const existingEmails = existingUsers.map(u => u.email);
 
-    // Seed default admin user
-    const hashedPass1 = await bcrypt.hash("admin123", 10);
-    await pool.query(
-      "INSERT INTO users (email, password, name) VALUES (?, ?, ?)",
-      ["admin@regalops.com", hashedPass1, "Regal Admin"]
-    );
-    console.log("Seeded default admin user with bcrypt.");
+    if (!existingEmails.includes("admin@regalops.com")) {
+      const hashedPass1 = await bcrypt.hash("admin123", 10);
+      await pool.query(
+        "INSERT INTO users (email, password, name) VALUES (?, ?, ?)",
+        ["admin@regalops.com", hashedPass1, "Regal Admin"]
+      );
+      console.log("Seeded default admin user with bcrypt.");
+    }
 
-    // Seed new admin user (regalops2025@gmail.com)
-    const hashedPass2 = await bcrypt.hash("Shivakumar1990", 10);
-    await pool.query(
-      "INSERT INTO users (email, password, name) VALUES (?, ?, ?)",
-      ["regalops2025@gmail.com", hashedPass2, "Shivakumar"]
-    );
-    console.log("Seeded requested admin user with bcrypt.");
+    if (!existingEmails.includes("regalops2025@gmail.com")) {
+      const hashedPass2 = await bcrypt.hash("Shivakumar1990", 10);
+      await pool.query(
+        "INSERT INTO users (email, password, name) VALUES (?, ?, ?)",
+        ["regalops2025@gmail.com", hashedPass2, "Shivakumar"]
+      );
+      console.log("Seeded requested admin user with bcrypt.");
+    }
 
     // Create solutions table
     await pool.query(`

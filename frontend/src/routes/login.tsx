@@ -33,7 +33,7 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/auth/me", { credentials: "include" })
+    fetch("/api/auth/me", { credentials: "include" })
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -56,7 +56,7 @@ function Login() {
     setUser(null);
 
     try {
-      const response = await fetch("http://localhost:5001/api/login", {
+      const response = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

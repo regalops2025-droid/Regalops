@@ -8,12 +8,12 @@ export function SiteFooter() {
   const [dynamicTechnologies, setDynamicTechnologies] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/solutions")
+    fetch("/api/solutions")
       .then((res) => res.json())
       .then((data) => setDynamicSolutions(data))
       .catch((err) => console.error("Failed to fetch footer solutions", err));
 
-    fetch("http://localhost:5001/api/technologies")
+    fetch("/api/technologies")
       .then((res) => res.json())
       .then((data) => setDynamicTechnologies(data))
       .catch((err) => console.error("Failed to fetch footer technologies", err));

@@ -33,7 +33,7 @@ function Technologies() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/technologies")
+    fetch("/api/technologies")
       .then((res) => res.json())
       .then((data) => {
         setTechList(data);

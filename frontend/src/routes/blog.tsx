@@ -28,7 +28,7 @@ function Blog() {
   const [selectedPost, setSelectedPost] = useState<any | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/blogs")
+    fetch("/api/blogs")
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);

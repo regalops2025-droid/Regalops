@@ -72,7 +72,7 @@ function Contact() {
         formData.append("job_title", jobTitle);
         formData.append("cv", cvFile);
 
-        const response = await fetch(`http://localhost:5001/api/jobs/${jobId}/apply`, {
+        const response = await fetch(`/api/jobs/${jobId}/apply`, {
           method: "POST",
           body: formData,
         });
@@ -82,7 +82,7 @@ function Contact() {
           throw new Error(data.error || "Failed to submit job application.");
         }
       } else {
-        const response = await fetch("http://localhost:5001/api/contact", {
+        const response = await fetch("/api/contact", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

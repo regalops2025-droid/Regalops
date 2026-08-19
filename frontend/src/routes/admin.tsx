@@ -134,7 +134,7 @@ function AdminDashboard() {
 
   // Authentication check
   useEffect(() => {
-    secureFetch("http://localhost:5001/api/auth/me")
+    secureFetch("/api/auth/me")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Unauthorized");
@@ -156,7 +156,7 @@ function AdminDashboard() {
     setEnquiriesLoading(true);
     setEnquiriesError("");
     try {
-      const response = await secureFetch("http://localhost:5001/api/enquiries");
+      const response = await secureFetch("/api/enquiries");
       if (!response.ok) {
         throw new Error("Failed to load enquiries.");
       }
@@ -175,7 +175,7 @@ function AdminDashboard() {
     setSolutionsLoading(true);
     setSolutionsError("");
     try {
-      const response = await secureFetch("http://localhost:5001/api/solutions");
+      const response = await secureFetch("/api/solutions");
       if (!response.ok) {
         throw new Error("Failed to load solutions.");
       }
@@ -194,7 +194,7 @@ function AdminDashboard() {
     setTechLoading(true);
     setTechError("");
     try {
-      const response = await secureFetch("http://localhost:5001/api/technologies");
+      const response = await secureFetch("/api/technologies");
       if (!response.ok) {
         throw new Error("Failed to load technologies.");
       }
@@ -213,7 +213,7 @@ function AdminDashboard() {
     setClientLoading(true);
     setClientError("");
     try {
-      const response = await secureFetch("http://localhost:5001/api/clients");
+      const response = await secureFetch("/api/clients");
       if (!response.ok) {
         throw new Error("Failed to load clients.");
       }
@@ -232,7 +232,7 @@ function AdminDashboard() {
     setJobLoading(true);
     setJobError("");
     try {
-      const response = await secureFetch("http://localhost:5001/api/jobs");
+      const response = await secureFetch("/api/jobs");
       if (!response.ok) {
         throw new Error("Failed to load jobs.");
       }
@@ -251,7 +251,7 @@ function AdminDashboard() {
     setBlogLoading(true);
     setBlogError("");
     try {
-      const response = await secureFetch("http://localhost:5001/api/blogs");
+      const response = await secureFetch("/api/blogs");
       if (!response.ok) {
         throw new Error("Failed to load blogs.");
       }
@@ -270,7 +270,7 @@ function AdminDashboard() {
     setApplicationsLoading(true);
     setApplicationsError("");
     try {
-      const response = await secureFetch("http://localhost:5001/api/applications");
+      const response = await secureFetch("/api/applications");
       if (!response.ok) {
         throw new Error("Failed to load applications.");
       }
@@ -289,7 +289,7 @@ function AdminDashboard() {
     if (!confirm("Are you sure you want to delete this job application?")) return;
     setDeleteApplicationStatus({ id, status: "loading" });
     try {
-      const response = await secureFetch(`http://localhost:5001/api/applications/${id}`, {
+      const response = await secureFetch(`/api/applications/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -321,7 +321,7 @@ function AdminDashboard() {
     if (!confirm("Are you sure you want to delete this enquiry?")) return;
     setDeleteEnquiryStatus({ id, status: "loading" });
     try {
-      const response = await secureFetch(`http://localhost:5001/api/enquiries/${id}`, {
+      const response = await secureFetch(`/api/enquiries/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -341,7 +341,7 @@ function AdminDashboard() {
     if (!confirm("Are you sure you want to delete this solution?")) return;
     setDeleteSolutionStatus({ id, status: "loading" });
     try {
-      const response = await secureFetch(`http://localhost:5001/api/solutions/${id}`, {
+      const response = await secureFetch(`/api/solutions/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -364,7 +364,7 @@ function AdminDashboard() {
     if (!confirm("Are you sure you want to delete this technology?")) return;
     setDeleteTechStatus({ id, status: "loading" });
     try {
-      const response = await secureFetch(`http://localhost:5001/api/technologies/${id}`, {
+      const response = await secureFetch(`/api/technologies/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -387,7 +387,7 @@ function AdminDashboard() {
     if (!confirm("Are you sure you want to delete this client record?")) return;
     setDeleteClientStatus({ id, status: "loading" });
     try {
-      const response = await secureFetch(`http://localhost:5001/api/clients/${id}`, {
+      const response = await secureFetch(`/api/clients/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -410,7 +410,7 @@ function AdminDashboard() {
     if (!confirm("Are you sure you want to delete this job record?")) return;
     setDeleteJobStatus({ id, status: "loading" });
     try {
-      const response = await secureFetch(`http://localhost:5001/api/jobs/${id}`, {
+      const response = await secureFetch(`/api/jobs/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -433,7 +433,7 @@ function AdminDashboard() {
     if (!confirm("Are you sure you want to delete this blog post?")) return;
     setDeleteBlogStatus({ id, status: "loading" });
     try {
-      const response = await secureFetch(`http://localhost:5001/api/blogs/${id}`, {
+      const response = await secureFetch(`/api/blogs/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -520,7 +520,7 @@ function AdminDashboard() {
 
     try {
       if (editingSolId !== null) {
-        const response = await secureFetch(`http://localhost:5001/api/solutions/${editingSolId}`, {
+        const response = await secureFetch(`/api/solutions/${editingSolId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -539,7 +539,7 @@ function AdminDashboard() {
         setFormSuccess(true);
         setTimeout(() => setFormSuccess(false), 3000);
       } else {
-        const response = await secureFetch("http://localhost:5001/api/solutions", {
+        const response = await secureFetch("/api/solutions", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -595,7 +595,7 @@ function AdminDashboard() {
 
     try {
       if (editingTechId !== null) {
-        const response = await secureFetch(`http://localhost:5001/api/technologies/${editingTechId}`, {
+        const response = await secureFetch(`/api/technologies/${editingTechId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -614,7 +614,7 @@ function AdminDashboard() {
         setTechFormSuccess(true);
         setTimeout(() => setTechFormSuccess(false), 3000);
       } else {
-        const response = await secureFetch("http://localhost:5001/api/technologies", {
+        const response = await secureFetch("/api/technologies", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -675,7 +675,7 @@ function AdminDashboard() {
 
     try {
       if (editingClientId !== null) {
-        const response = await secureFetch(`http://localhost:5001/api/clients/${editingClientId}`, {
+        const response = await secureFetch(`/api/clients/${editingClientId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -694,7 +694,7 @@ function AdminDashboard() {
         setClientFormSuccess(true);
         setTimeout(() => setClientFormSuccess(false), 3000);
       } else {
-        const response = await secureFetch("http://localhost:5001/api/clients", {
+        const response = await secureFetch("/api/clients", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -755,7 +755,7 @@ function AdminDashboard() {
 
     try {
       if (editingJobId !== null) {
-        const response = await secureFetch(`http://localhost:5001/api/jobs/${editingJobId}`, {
+        const response = await secureFetch(`/api/jobs/${editingJobId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -774,7 +774,7 @@ function AdminDashboard() {
         setJobFormSuccess(true);
         setTimeout(() => setJobFormSuccess(false), 3000);
       } else {
-        const response = await secureFetch("http://localhost:5001/api/jobs", {
+        const response = await secureFetch("/api/jobs", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -860,7 +860,7 @@ function AdminDashboard() {
 
     try {
       if (editingBlogId !== null) {
-        const response = await secureFetch(`http://localhost:5001/api/blogs/${editingBlogId}`, {
+        const response = await secureFetch(`/api/blogs/${editingBlogId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -879,7 +879,7 @@ function AdminDashboard() {
         setBlogFormSuccess(true);
         setTimeout(() => setFormSuccess(false), 3000);
       } else {
-        const response = await secureFetch("http://localhost:5001/api/blogs", {
+        const response = await secureFetch("/api/blogs", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -912,7 +912,7 @@ function AdminDashboard() {
 
   const handleLogout = async () => {
     try {
-      await secureFetch("http://localhost:5001/api/logout", {
+      await secureFetch("/api/logout", {
         method: "POST"
       });
     } catch (err) {
@@ -2495,7 +2495,7 @@ function AdminDashboard() {
 
                       <div className="mt-5 pt-3 border-t border-border/50">
                         <a
-                          href={`http://localhost:5001${appItem.cv_path}`}
+                          href={`${appItem.cv_path}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex w-full items-center justify-center gap-2 rounded-xl bg-zinc-800 text-white hover:bg-zinc-700 px-4 py-2.5 text-xs font-semibold transition-colors cursor-pointer text-center"

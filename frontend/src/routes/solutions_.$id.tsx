@@ -161,7 +161,7 @@ function SolutionDetail() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/solutions")
+    fetch("/api/solutions")
       .then((res) => res.json())
       .then((data) => {
         const found = data.find((s: any) => String(s.id) === String(id));

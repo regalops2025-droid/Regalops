@@ -114,7 +114,7 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/solutions")
+    fetch("/api/solutions")
       .then((res) => res.json())
       .then((data) => {
         setSolutions(data);

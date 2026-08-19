@@ -47,17 +47,17 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/solutions")
+    fetch("/api/solutions")
       .then((res) => res.json())
       .then((data) => setDynamicSolutions(data))
       .catch((err) => console.error("Failed to fetch header solutions", err));
 
-    fetch("http://localhost:5001/api/technologies")
+    fetch("/api/technologies")
       .then((res) => res.json())
       .then((data) => setDynamicTechnologies(data))
       .catch((err) => console.error("Failed to fetch header technologies", err));
 
-    fetch("http://localhost:5001/api/jobs")
+    fetch("/api/jobs")
       .then((res) => res.json())
       .then((data) => setDynamicJobs(data))
       .catch((err) => console.error("Failed to fetch header jobs", err));

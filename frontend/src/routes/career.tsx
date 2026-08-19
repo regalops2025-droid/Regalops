@@ -34,7 +34,7 @@ function Career() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/jobs")
+    fetch("/api/jobs")
       .then((res) => res.json())
       .then((data) => {
         setRoles(data);

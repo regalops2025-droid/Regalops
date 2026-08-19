@@ -28,7 +28,7 @@ function Clients() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/clients")
+    fetch("/api/clients")
       .then((res) => res.json())
       .then((data) => {
         setCases(data);

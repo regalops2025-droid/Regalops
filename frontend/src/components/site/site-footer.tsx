@@ -1,11 +1,24 @@
 import { Link } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { Linkedin, Instagram, Mail, MapPin } from "lucide-react";
 import { navItems } from "./nav-data";
 
-const solutions = navItems.find((i) => i.label === "Solutions")?.children ?? [];
-const technologies = navItems.find((i) => i.label === "Technologies")?.children ?? [];
-
 export function SiteFooter() {
+  const [dynamicSolutions, setDynamicSolutions] = useState<any[]>([]);
+  const [dynamicTechnologies, setDynamicTechnologies] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5001/api/solutions")
+      .then((res) => res.json())
+      .then((data) => setDynamicSolutions(data))
+      .catch((err) => console.error("Failed to fetch footer solutions", err));
+
+    fetch("http://localhost:5001/api/technologies")
+      .then((res) => res.json())
+      .then((data) => setDynamicTechnologies(data))
+      .catch((err) => console.error("Failed to fetch footer technologies", err));
+  }, []);
+
   return (
     <footer className="border-t border-border bg-surface">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -41,10 +54,10 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <FooterCol title="Solutions" items={solutions.map((s) => s.label)} to="/solutions" />
+          <FooterCol title="Solutions" items={dynamicSolutions.map((s) => s.name)} to="/solutions" />
           <FooterCol
             title="Technologies"
-            items={technologies.map((s) => s.label)}
+            items={dynamicTechnologies.map((s) => s.name)}
             to="/technologies"
           />
 
@@ -66,7 +79,7 @@ export function SiteFooter() {
 
         <div className="mt-12 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-t border-border pt-6 sm:flex sm:justify-between">
           <p className="min-w-0 text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Regal OPs Consult. All rights reserved.
+             © {new Date().getFullYear()} Regal OPs Consult. All rights reserved.
           </p>
           <div className="flex shrink-0 items-center gap-2">
             <a

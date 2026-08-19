@@ -32,14 +32,7 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const solutions = [
-  { icon: Layers, title: "Enterprise Software", desc: "Modular platforms designed around your operating model, not a template." },
-  { icon: Cloud, title: "Cloud Migration", desc: "Zero-drama moves to AWS, Azure or GCP with measurable cost reduction." },
-  { icon: LineChart, title: "Data & Analytics", desc: "Warehouses, streaming pipelines and decision dashboards leaders trust." },
-  { icon: Cpu, title: "AI Automation", desc: "Agents and copilots wired into real workflows with human oversight." },
-  { icon: ShieldCheck, title: "Cyber Security", desc: "Threat modelling, hardening and audit-ready compliance programmes." },
-  { icon: Headphones, title: "Managed Support", desc: "24/7 monitoring, incident response and SLAs you can hold us to." },
-];
+
 
 const stack = [
   "React", "Next.js", "TypeScript", "Node.js", "Python", "Go",
@@ -110,12 +103,27 @@ const testimonials = [
 
 function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [solutions, setSolutions] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % heroSlides.length);
     }, 6000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:5001/api/solutions")
+      .then((res) => res.json())
+      .then((data) => {
+        setSolutions(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch solutions", err);
+        setLoading(false);
+      });
   }, []);
 
   return (
@@ -148,27 +156,27 @@ function Home() {
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
               At Regal OPs, we help organizations accelerate digital transformation through innovative IT solutions, AI-driven automation, and specialized technology staffing across North America and global markets.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3.5">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-tr-2xl rounded-bl-2xl rounded-tl-sm rounded-br-sm bg-gradient-to-r from-primary to-gold/90 px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
               >
                 Talk to an engineer <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/solutions"
-                className="inline-flex items-center gap-2 rounded-xl border border-border px-5 py-3 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
+                className="inline-flex items-center gap-2 rounded-xl border border-border px-5 py-3.5 text-sm font-semibold transition-all duration-200 hover:bg-secondary/40 hover:border-primary/50 hover:text-primary"
               >
                 Explore solutions
               </Link>
             </div>
             <dl className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
               {stats.map((s) => (
-                <div key={s.label}>
-                  <dt className="font-display text-2xl font-semibold text-primary sm:text-3xl">
+                <div key={s.label} className="border-l border-primary/25 pl-4 py-1">
+                  <dt className="font-display text-3xl font-extrabold text-primary sm:text-4xl tracking-tight">
                     {s.value}
                   </dt>
-                  <dd className="mt-1 text-xs text-muted-foreground">{s.label}</dd>
+                  <dd className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{s.label}</dd>
                 </div>
               ))}
             </dl>
@@ -219,22 +227,22 @@ function Home() {
             <div className="mt-8">
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-tr-2xl rounded-bl-2xl rounded-tl-sm rounded-br-sm bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
               >
                 Learn more about us <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="panel p-6 bg-surface">
-              <h3 className="font-display text-3xl font-semibold text-primary">15+</h3>
-              <p className="mt-1 text-sm font-semibold">Years of experience</p>
-              <p className="mt-2 text-xs text-muted-foreground">Building mission-critical systems since 2011.</p>
+            <div className="panel p-6 bg-surface/50 border border-border/80 hover:border-primary/25 hover:shadow-md transition-all duration-300">
+              <h3 className="font-display text-4xl font-extrabold text-primary tracking-tight">15+</h3>
+              <p className="mt-1.5 text-sm font-semibold text-foreground">Years of experience</p>
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Building mission-critical systems since 2011.</p>
             </div>
-            <div className="panel p-6 bg-surface">
-              <h3 className="font-display text-3xl font-semibold text-primary">220</h3>
-              <p className="mt-1 text-sm font-semibold">Senior engineers</p>
-              <p className="mt-2 text-xs text-muted-foreground">No juniors on retainer — only seasoned experts.</p>
+            <div className="panel p-6 bg-surface/50 border border-border/80 hover:border-primary/25 hover:shadow-md transition-all duration-300">
+              <h3 className="font-display text-4xl font-extrabold text-primary tracking-tight">220</h3>
+              <p className="mt-1.5 text-sm font-semibold text-foreground">Senior engineers</p>
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">No juniors on retainer — only seasoned experts.</p>
             </div>
           </div>
         </div>
@@ -253,19 +261,47 @@ function Home() {
               architecture documentation, automated tests, and operational runbooks.
             </p>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {solutions.map(({ icon: Icon, title, desc }) => (
-              <article
-                key={title}
-                className="panel bg-background group p-6 transition-transform duration-300 hover:-translate-y-1"
-              >
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-surface text-primary border border-border">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <h3 className="mt-5 text-lg font-semibold">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
-              </article>
-            ))}
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {loading ? (
+              [1, 2, 3].map((i) => (
+                <div key={i} className="panel animate-pulse h-64 rounded-2xl bg-surface-2 border border-border/50"></div>
+              ))
+            ) : solutions.length === 0 ? (
+              <p className="text-sm text-muted-foreground col-span-full text-center py-8">No solutions available.</p>
+            ) : (
+              solutions.map((item) => (
+                <Link
+                  key={item.id}
+                  to="/solutions/$id"
+                  params={{ id: String(item.id) }}
+                  className="panel group overflow-hidden rounded-2xl border border-border/80 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl flex flex-col justify-between bg-background cursor-pointer"
+                >
+                  <div className="flex-1 flex flex-col">
+                    {item.image && (
+                      <div className="h-44 w-full overflow-hidden border-b border-border/60 relative">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+                    )}
+                    <div className="p-6 pt-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">{item.name}</h3>
+                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                      </div>
+                      <div className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-primary/80 group-hover:text-primary transition-colors">
+                        <span>Explore practice</span>
+                        <ArrowRight className="h-3.5 w-3.5 -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-200" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="h-1 w-0 bg-primary group-hover:w-full transition-all duration-300" />
+                </Link>
+              ))
+            )}
           </div>
         </Section>
       </section>
@@ -283,13 +319,23 @@ function Home() {
         </div>
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
           {cases.map((c) => (
-            <article key={c.title} className="panel p-6 sm:p-8">
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-                {c.sector}
-              </span>
-              <h3 className="mt-4 text-lg font-semibold">{c.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.result}</p>
-            </article>
+            <Link
+              key={c.title}
+              to="/clients"
+              className="panel group border border-border/80 hover:border-primary/30 p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl flex flex-col justify-between cursor-pointer bg-background"
+            >
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                  {c.sector}
+                </span>
+                <h3 className="mt-4 text-lg font-bold text-foreground group-hover:text-primary transition-colors">{c.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.result}</p>
+              </div>
+              <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-primary/80 group-hover:text-primary transition-colors">
+                <span>View case study</span>
+                <ArrowRight className="h-3.5 w-3.5 -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-200" />
+              </div>
+            </Link>
           ))}
         </div>
       </Section>
@@ -305,10 +351,13 @@ function Home() {
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {testimonials.map((t, idx) => (
-              <figure key={idx} className="panel bg-background p-8 flex flex-col justify-between">
-                <blockquote className="text-base italic leading-relaxed text-muted-foreground">
-                  “{t.quote}”
-                </blockquote>
+              <figure key={idx} className="panel bg-background p-8 relative flex flex-col justify-between hover:border-primary/20 hover:shadow-md transition-all duration-300">
+                <div className="relative pt-2">
+                  <span className="font-serif text-6xl text-primary/20 leading-none absolute -top-5 -left-4 select-none">“</span>
+                  <blockquote className="text-base italic leading-relaxed text-muted-foreground relative z-10">
+                    {t.quote}
+                  </blockquote>
+                </div>
                 <div className="mt-6 border-t border-border pt-4">
                   <figcaption className="text-sm font-semibold text-foreground">{t.author}</figcaption>
                   <p className="text-xs text-muted-foreground mt-0.5">{t.role}</p>
@@ -322,19 +371,19 @@ function Home() {
       {/* 6. Call to Action (CTA) */}
       <section>
         <Section>
-          <div className="panel hero-glow grid gap-6 p-8 sm:p-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+          <div className="panel hero-glow grid gap-6 p-8 sm:p-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center border border-primary/20 shadow-xl rounded-3xl overflow-hidden relative bg-background">
             <div>
-              <h2 className="text-2xl font-semibold sm:text-3xl">
+              <h2 className="text-2xl font-semibold sm:text-3xl text-foreground">
                 Start with a technical conversation
               </h2>
-              <p className="mt-3 max-w-xl text-muted-foreground">
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
                 Bring your architecture. We will tell you honestly what to fix
                 first — no slide deck required.
               </p>
             </div>
             <Link
               to="/contact"
-              className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+              className="inline-flex shrink-0 items-center gap-2 rounded-tr-2xl rounded-bl-2xl rounded-tl-sm rounded-br-sm bg-gradient-to-r from-primary to-gold/90 px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
             >
               Book a call <ArrowRight className="h-4 w-4" />
             </Link>

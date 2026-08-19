@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { SiteLayout, PageHero, Section } from "@/components/site/site-layout";
-import { navItems } from "@/components/site/nav-data";
-
-const items = navItems.find((i) => i.label === "Technologies")?.children ?? [];
 
 const stack = [
   "React", "Next.js", "TypeScript", "Node.js", "Python", "Go", "Rust",
@@ -31,6 +29,22 @@ export const Route = createFileRoute("/technologies")({
 });
 
 function Technologies() {
+  const [techList, setTechList] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:5001/api/technologies")
+      .then((res) => res.json())
+      .then((data) => {
+        setTechList(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load technologies", err);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <SiteLayout>
       <PageHero
@@ -39,14 +53,22 @@ function Technologies() {
         description="We standardise on technologies our teams have operated at scale for years — so your estate never becomes someone's learning project."
       />
       <Section>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <article key={item.label} className="panel p-6">
-              <h2 className="text-lg font-semibold">{item.label}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
-            </article>
-          ))}
-        </div>
+        {loading ? (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 animate-pulse">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="panel h-28 bg-surface-2 border border-border/50"></div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {techList.map((item) => (
+              <article key={item.id} className="panel p-6 hover:border-primary/30 transition-all duration-300">
+                <h2 className="text-lg font-semibold">{item.name}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+              </article>
+            ))}
+          </div>
+        )}
       </Section>
       <section className="border-t border-border bg-surface">
         <Section>

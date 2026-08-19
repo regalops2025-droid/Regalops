@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { SiteLayout, PageHero, Section } from "@/components/site/site-layout";
 
 export const Route = createFileRoute("/clients")({
@@ -22,25 +23,23 @@ export const Route = createFileRoute("/clients")({
 
 const industries = ["Banking", "Insurance", "Healthcare", "Logistics", "Manufacturing", "Energy", "Retail", "Public sector"];
 
-const cases = [
-  {
-    sector: "Banking",
-    title: "Core replatform, zero customer outage",
-    result: "14-year-old monolith split into 9 services; release cycle cut from 6 weeks to 2 days.",
-  },
-  {
-    sector: "Healthcare",
-    title: "Unified patient data platform",
-    result: "41 source systems consolidated; clinician report latency down from 9 hours to 4 minutes.",
-  },
-  {
-    sector: "Manufacturing",
-    title: "Predictive maintenance at 38 plants",
-    result: "Unplanned line stoppages reduced 27% in the first operating year.",
-  },
-];
-
 function Clients() {
+  const [cases, setCases] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:5001/api/clients")
+      .then((res) => res.json())
+      .then((data) => {
+        setCases(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load clients", err);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <SiteLayout>
       <PageHero
@@ -49,17 +48,39 @@ function Clients() {
         description="We publish outcomes, not logos-for-decoration. Here is what the last three years produced."
       />
       <Section>
-        <div className="grid gap-4 lg:grid-cols-3">
-          {cases.map((c) => (
-            <article key={c.title} className="panel p-6 sm:p-8">
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-                {c.sector}
-              </span>
-              <h2 className="mt-4 text-lg font-semibold">{c.title}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.result}</p>
-            </article>
-          ))}
-        </div>
+        {loading ? (
+          <div className="grid gap-6 lg:grid-cols-3 animate-pulse">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="panel h-80 bg-surface-2 border border-border/50 rounded-2xl"></div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid gap-6 lg:grid-cols-3">
+            {cases.map((c) => (
+              <article 
+                key={c.id} 
+                className="panel overflow-hidden border border-border/70 hover:border-primary/30 transition-all duration-300 flex flex-col h-full rounded-2xl bg-surface"
+              >
+                {c.image && (
+                  <img
+                    src={c.image}
+                    alt={c.name}
+                    className="h-48 w-full object-cover border-b border-border/60"
+                  />
+                )}
+                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                  <div>
+                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                      {c.sector}
+                    </span>
+                    <h2 className="mt-4 text-lg font-semibold leading-tight text-foreground">{c.name}</h2>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.description}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </Section>
       <section className="border-t border-border bg-surface">
         <Section>

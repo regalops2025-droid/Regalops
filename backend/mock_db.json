@@ -1,0 +1,225 @@
+{
+  "contact_enquiries": [],
+  "users": [
+    {
+      "id": 28,
+      "created_at": "2026-08-19T07:05:39.231Z",
+      "email": "admin@regalops.com",
+      "password": "$2b$10$l9y0bO9cpQMWAC3M5ahvwue0GqW0/RaJw8EWTFFUMXqjk.2gUF81C",
+      "name": "Regal Admin"
+    },
+    {
+      "id": 29,
+      "created_at": "2026-08-19T07:05:39.333Z",
+      "email": "regalops2025@gmail.com",
+      "password": "$2b$10$mAe2Yj2v5lKk9U/eSjamB.0Gtt7.N7F1LKPw8TQbasC0JuusD1x2G",
+      "name": "Shivakumar"
+    }
+  ],
+  "solutions": [
+    {
+      "id": 1,
+      "created_at": "2026-08-19T07:05:39.335Z",
+      "name": "Enterprise Software",
+      "image": "/hero-bg-1.png",
+      "description": "Modular platforms designed around your operating model, not a template.",
+      "capabilities": "[\"Domain-Driven Development (DDD) & clean architecture\",\"High-throughput event-driven microservices\",\"Strangler-fig migration of legacy monoliths\",\"Real-time transactional consistency at scale\"]",
+      "methodology": "[\"Event Storming & Domain Modeling\",\"Target Architecture Blueprinting\",\"Incremental Strangler Delivery\",\"Load Testing & Performance Tuning\"]",
+      "deliverables": "[\"Fully documented OpenAPI specifications\",\"Automated unit, integration, and contract test suites\",\"Structured JSON logging & Prometheus metrics\",\"Operational runbooks for infrastructure teams\"]",
+      "technologies": "[\"Node.js\",\"TypeScript\",\"Go\",\"PostgreSQL\",\"Kafka\",\"Docker\"]"
+    },
+    {
+      "id": 2,
+      "created_at": "2026-08-19T07:05:39.336Z",
+      "name": "Cloud Migration",
+      "image": "/hero-bg-2.png",
+      "description": "Zero-drama moves to AWS, Azure or GCP with measurable cost reduction.",
+      "capabilities": "[\"Zero-downtime database and asset migrations\",\"Multi-region high-availability configurations\",\"Infrastructure as Code (IaC) templates\",\"TCO analysis & cost optimization structures\"]",
+      "methodology": "[\"TCO & Compliance Readiness Audit\",\"Infrastructure Landing Zone Setup\",\"Data Sync & Pilot Shift\",\"DNS Cutover & Monolithic Decommission\"]",
+      "deliverables": "[\"Terraform or CloudFormation scripts\",\"Security audit & IAM compliance report\",\"Cost breakdown & auto-scaling configuration\",\"Disaster recovery runbook\"]",
+      "technologies": "[\"AWS\",\"Azure\",\"Terraform\",\"Kubernetes\",\"Docker\",\"Linux\"]"
+    },
+    {
+      "id": 3,
+      "created_at": "2026-08-19T07:05:39.337Z",
+      "name": "Data & Analytics",
+      "image": "/hero-bg-3.png",
+      "description": "Warehouses, streaming pipelines and decision dashboards leaders trust.",
+      "capabilities": "[\"Five-minute batch ETL pipelines at 1/10th streaming costs\",\"Real-time analytics warehousing & views\",\"Centralized metrics schema definition (dbt)\",\"Strict data sanitization & PII separation\"]",
+      "methodology": "[\"Source System Schema Auditing\",\"Warehouse Model Design\",\"ETL Pipeline Engineering\",\"BI Integration & Verification\"]",
+      "deliverables": "[\"dbt models with automated schema assertions\",\"Optimized warehouse queries & indexing\",\"Data lineage documentation\",\"Airflow/Prefect orchestration DAGs\"]",
+      "technologies": "[\"Snowflake\",\"PostgreSQL\",\"Python\",\"dbt\",\"Airflow\",\"Kafka\"]"
+    },
+    {
+      "id": 4,
+      "created_at": "2026-08-19T07:05:39.339Z",
+      "name": "AI Automation",
+      "image": "/hero-bg-1.png",
+      "description": "Agents and copilots wired into real workflows with human oversight.",
+      "capabilities": "[\"Intelligent workflows & agentic copilots\",\"Human-in-the-loop validation checkpoints\",\"Private Large Language Model (LLM) fine-tuning\",\"Audit logs of all autonomous decisions\"]",
+      "methodology": "[\"Workflow Observability Mapping\",\"Model Selection & Context Prompting\",\"Security & Guardrail Integration\",\"Production Evaluation & Tuning\"]",
+      "deliverables": "[\"Fully versioned model prompts & weights\",\"Observability dashboard tracking LLM drift\",\"Safety filter configurations\",\"Developer API wrapper code\"]",
+      "technologies": "[\"Python\",\"PyTorch\",\"HuggingFace\",\"AWS Bedrock\",\"FastAPI\"]"
+    },
+    {
+      "id": 5,
+      "created_at": "2026-08-19T07:05:39.341Z",
+      "name": "Cyber Security",
+      "image": "/hero-bg-2.png",
+      "description": "Threat modelling, hardening and audit-ready compliance programmes.",
+      "capabilities": "[\"Threat modeling & threat vector assessment\",\"SOC2, ISO27001, and HIPAA compliance readiness\",\"Identity and Access Management (IAM) hardening\",\"Automated vulnerability scanning pipelines\"]",
+      "methodology": "[\"Threat Vectors Assessment\",\"System Hardening & Config Fixes\",\"Compliance Assertions Mapping\",\"Penetration Test & Correction\"]",
+      "deliverables": "[\"Vulnerability scan reports & remediation logs\",\"IAM architecture diagrams\",\"SOC2-ready system control definitions\",\"Incident response policy files\"]",
+      "technologies": "[\"Vault\",\"SSL/TLS\",\"IAM\",\"OWASP\",\"SIEM\",\"Kubernetes NetworkPolicies\"]"
+    },
+    {
+      "id": 6,
+      "created_at": "2026-08-19T07:05:39.342Z",
+      "name": "Managed Support",
+      "image": "/hero-bg-3.png",
+      "description": "24/7 monitoring, incident response and SLAs you can hold us to.",
+      "capabilities": "[\"24/7 incident response by senior practitioners\",\"Custom SLAs built around core business metrics\",\"Blameless post-mortem analysis reports\",\"Continuous runtime optimization and patching\"]",
+      "methodology": "[\"Telemetry Integration\",\"Runbook Consolidation\",\"Alarm Threshold Calibration\",\"Continuous Optimization Iteration\"]",
+      "deliverables": "[\"Structured alert logs & notification settings\",\"Standard operating procedures (SOPs)\",\"Monthly SLA attainment reports\",\"Resource allocation suggestions\"]",
+      "technologies": "[\"Prometheus\",\"Grafana\",\"Datadog\",\"PagerDuty\",\"Terraform\"]"
+    }
+  ],
+  "technologies": [
+    {
+      "id": 1,
+      "created_at": "2026-08-19T07:05:39.343Z",
+      "name": "React & Next.js",
+      "description": "Fast, modern web interfaces"
+    },
+    {
+      "id": 2,
+      "created_at": "2026-08-19T07:05:39.344Z",
+      "name": "Node & Python",
+      "description": "APIs and backend services"
+    },
+    {
+      "id": 3,
+      "created_at": "2026-08-19T07:05:39.344Z",
+      "name": "AWS / Azure / GCP",
+      "description": "Cloud native infrastructure"
+    },
+    {
+      "id": 4,
+      "created_at": "2026-08-19T07:05:39.345Z",
+      "name": "Kubernetes & DevOps",
+      "description": "CI/CD and containerisation"
+    },
+    {
+      "id": 5,
+      "created_at": "2026-08-19T07:05:39.346Z",
+      "name": "Mobile — iOS & Android",
+      "description": "Native and cross-platform"
+    },
+    {
+      "id": 6,
+      "created_at": "2026-08-19T07:05:39.347Z",
+      "name": "Machine Learning",
+      "description": "Models, MLOps, vision, NLP"
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "created_at": "2026-08-19T07:05:39.349Z",
+      "name": "Core replatform, zero customer outage",
+      "sector": "Banking",
+      "image": "/hero-bg-1.png",
+      "description": "14-year-old monolith split into 9 services; release cycle cut from 6 weeks to 2 days."
+    },
+    {
+      "id": 2,
+      "created_at": "2026-08-19T07:05:39.350Z",
+      "name": "Unified patient data platform",
+      "sector": "Healthcare",
+      "image": "/hero-bg-2.png",
+      "description": "41 source systems consolidated; clinician report latency down from 9 hours to 4 minutes."
+    },
+    {
+      "id": 3,
+      "created_at": "2026-08-19T07:05:39.351Z",
+      "name": "Predictive maintenance at 38 plants",
+      "sector": "Manufacturing",
+      "image": "/hero-bg-3.png",
+      "description": "Unplanned line stoppages reduced 27% in the first operating year."
+    }
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "created_at": "2026-08-19T07:05:39.352Z",
+      "title": "Senior Platform Engineer",
+      "location": "Chennai / Hybrid",
+      "type": "Full-time"
+    },
+    {
+      "id": 2,
+      "created_at": "2026-08-19T07:05:39.353Z",
+      "title": "Cloud Architect — Azure",
+      "location": "Remote, India",
+      "type": "Full-time"
+    },
+    {
+      "id": 3,
+      "created_at": "2026-08-19T07:05:39.354Z",
+      "title": "Data Engineer (Snowflake, dbt)",
+      "location": "Bengaluru",
+      "type": "Full-time"
+    },
+    {
+      "id": 4,
+      "created_at": "2026-08-19T07:05:39.355Z",
+      "title": "ML Engineer — NLP",
+      "location": "Remote, EU",
+      "type": "Full-time"
+    },
+    {
+      "id": 5,
+      "created_at": "2026-08-19T07:05:39.356Z",
+      "title": "Security Analyst",
+      "location": "Chennai",
+      "type": "Full-time"
+    },
+    {
+      "id": 6,
+      "created_at": "2026-08-19T07:05:39.357Z",
+      "title": "Engineering Manager",
+      "location": "Chennai / Hybrid",
+      "type": "Full-time"
+    }
+  ],
+  "blogs": [
+    {
+      "id": 1,
+      "created_at": "2026-08-19T07:05:39.357Z",
+      "title": "Strangler-fig migrations that actually finish",
+      "tag": "Architecture",
+      "image": "/hero-bg-1.png",
+      "description": "Most incremental rewrites stall at 60%. The fix is a decommission deadline written into the contract.",
+      "content": "[{\"heading\":\"The 60% Trap\",\"image\":\"/hero-bg-2.png\",\"story\":\"Incremental strangler-fig migration patterns are highly popular, but they commonly hit a wall at 60%. The legacy system remains running because the remaining services are complex, causing double overhead costs.\"},{\"heading\":\"Decommission Deadline Contract\",\"image\":\"/hero-bg-3.png\",\"story\":\"To prevent project drift, define an absolute decommission deadline within the software development agreement. This forces engineering teams to focus on full migration rather than leaving legacy subsystems dangling.\"}]"
+    },
+    {
+      "id": 2,
+      "created_at": "2026-08-19T07:05:39.359Z",
+      "title": "Your warehouse does not need real-time",
+      "tag": "Data",
+      "image": "/hero-bg-2.png",
+      "description": "A five-minute batch answers 94% of enterprise questions at a fraction of streaming cost.",
+      "content": "[{\"heading\":\"The Overhead of Streaming Pipelines\",\"image\":\"/hero-bg-1.png\",\"story\":\"Many enterprises install Kafka or other real-time streaming tools blindly, underestimating the maintenance and query cost. Real-time streaming demands massive memory buffers and constant socket maintenance.\"},{\"heading\":\"Why 5-Minute Batches are Enough\",\"image\":\"/hero-bg-3.png\",\"story\":\"Most corporate dashboards are reviewed weekly or daily. Splitting workloads into a 5-minute micro-batch provides virtually instantaneous answers at a tenth of the operational cost.\"}]"
+    },
+    {
+      "id": 3,
+      "created_at": "2026-08-19T07:05:39.360Z",
+      "title": "Agents need audit trails before autonomy",
+      "tag": "AI",
+      "image": "/hero-bg-3.png",
+      "description": "In regulated environments, observability is the feature that makes automation approvable.",
+      "content": "[{\"heading\":\"Autonomy Without Visibility\",\"image\":\"/hero-bg-1.png\",\"story\":\"Giving AI agents write access to transaction logs or CRM databases without strict log trails is a major compliance risk. Regulated institutions will never approve autonomous workflows unless every action can be fully audited.\"}]"
+    }
+  ],
+  "job_applications": []
+}

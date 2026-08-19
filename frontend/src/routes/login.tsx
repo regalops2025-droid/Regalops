@@ -1,5 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { SiteLayout } from "@/components/site/site-layout";
 
 export const Route = createFileRoute("/login")({
@@ -30,6 +30,24 @@ function Login() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [user, setUser] = useState<any>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch("http://localhost:5001/api/auth/me", { credentials: "include" })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error("Not logged in");
+      })
+      .then((data) => {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        navigate({ to: "/admin" });
+      })
+      .catch(() => {
+        localStorage.removeItem("user");
+      });
+  }, [navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +61,7 @@ function Login() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ email, password }),
       });
 
@@ -54,8 +73,13 @@ function Login() {
       const data = await response.json();
       setStatus("success");
       setUser(data.user);
+      localStorage.setItem("user", JSON.stringify(data.user));
       setEmail("");
       setPassword("");
+      
+      setTimeout(() => {
+        navigate({ to: "/admin" });
+      }, 1000);
     } catch (err: any) {
       console.error(err);
       setStatus("error");

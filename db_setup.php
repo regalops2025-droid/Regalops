@@ -69,6 +69,8 @@ try {
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         description TEXT NOT NULL,
+        keywords VARCHAR(500),
+        how_to_work TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
     echo "<p>Table 'technologies' checked/created.</p>";

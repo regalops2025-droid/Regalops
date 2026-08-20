@@ -59,6 +59,8 @@ function AdminDashboard() {
   // Form State for new/editing technology
   const [techName, setTechName] = useState("");
   const [techDesc, setTechDesc] = useState("");
+  const [techKeywords, setTechKeywords] = useState("");
+  const [techHowToWork, setTechHowToWork] = useState("");
   const [techFormLoading, setTechFormLoading] = useState(false);
   const [techFormSuccess, setTechFormSuccess] = useState(false);
   const [techFormError, setTechFormError] = useState("");
@@ -586,6 +588,8 @@ function AdminDashboard() {
     setEditingTechId(item.id);
     setTechName(item.name);
     setTechDesc(item.description);
+    setTechKeywords(item.keywords || "");
+    setTechHowToWork(item.how_to_work || "");
     setTechFormSuccess(false);
     setTechFormError("");
   };
@@ -595,6 +599,8 @@ function AdminDashboard() {
     setEditingTechId(null);
     setTechName("");
     setTechDesc("");
+    setTechKeywords("");
+    setTechHowToWork("");
     setTechFormSuccess(false);
     setTechFormError("");
   };
@@ -608,6 +614,13 @@ function AdminDashboard() {
     setTechFormError("");
     setTechFormSuccess(false);
 
+    const payload = {
+      name: techName,
+      description: techDesc,
+      keywords: techKeywords || null,
+      how_to_work: techHowToWork || null
+    };
+
     try {
       if (editingTechId !== null) {
         const response = await secureFetch(`/api/technologies/${editingTechId}`, {
@@ -615,7 +628,7 @@ function AdminDashboard() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name: techName, description: techDesc }),
+          body: JSON.stringify(payload),
         });
 
         if (!response.ok) {
@@ -634,7 +647,7 @@ function AdminDashboard() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name: techName, description: techDesc }),
+          body: JSON.stringify(payload),
         });
 
         if (!response.ok) {
@@ -646,6 +659,8 @@ function AdminDashboard() {
         setTechList((prev) => [...prev, newTech]);
         setTechName("");
         setTechDesc("");
+        setTechKeywords("");
+        setTechHowToWork("");
         setTechFormSuccess(true);
         setTimeout(() => setTechFormSuccess(false), 3000);
       }
@@ -1752,9 +1767,18 @@ function AdminDashboard() {
                             : "border-border/85 hover:border-primary/30"
                         }`}
                       >
-                        <div className="min-w-0">
+                        <div className="min-w-0 flex-1">
                           <h4 className="font-bold text-foreground truncate">{item.name}</h4>
                           <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{item.description}</p>
+                          {item.keywords && (
+                            <div className="mt-2 flex flex-wrap gap-1">
+                              {item.keywords.split(",").map((k: string) => (
+                                <span key={k} className="text-[10px] px-1.5 py-0.5 bg-secondary text-secondary-foreground rounded border border-border">
+                                  {k.trim()}
+                                </span>
+                              ))}
+                            </div>
+                          )}
                         </div>
 
                         <div className="flex gap-2 shrink-0">
@@ -1826,12 +1850,36 @@ function AdminDashboard() {
                     <label className="block text-sm font-medium">
                       Description
                       <textarea
-                        rows={4}
+                        rows={3}
                         className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
                         placeholder="Describe what this technology/stack is used for..."
                         value={techDesc}
                         onChange={(e) => setTechDesc(e.target.value)}
                         required
+                        disabled={techFormLoading}
+                      />
+                    </label>
+
+                    <label className="block text-sm font-medium">
+                      Keywords (comma separated)
+                      <input
+                        type="text"
+                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                        placeholder="e.g. Frontend, Component, UI, State"
+                        value={techKeywords}
+                        onChange={(e) => setTechKeywords(e.target.value)}
+                        disabled={techFormLoading}
+                      />
+                    </label>
+
+                    <label className="block text-sm font-medium">
+                      How It Works / Usage Details
+                      <textarea
+                        rows={3}
+                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                        placeholder="Describe how we run or implement this technology..."
+                        value={techHowToWork}
+                        onChange={(e) => setTechHowToWork(e.target.value)}
                         disabled={techFormLoading}
                       />
                     </label>

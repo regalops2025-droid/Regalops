@@ -53,11 +53,30 @@ function Technologies() {
             ))}
           </div>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {techList.map((item) => (
-              <article key={item.id} className="panel p-6 hover:border-primary/30 transition-all duration-300">
-                <h2 className="text-lg font-semibold">{item.name}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+              <article key={item.id} className="panel p-6 hover:border-primary/30 transition-all duration-300 flex flex-col justify-between bg-surface-2 border border-border/50 rounded-2xl">
+                <div>
+                  <h2 className="text-xl font-bold text-foreground">{item.name}</h2>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                  
+                  {item.how_to_work && (
+                    <div className="mt-4 pt-3 border-t border-border/40">
+                      <h4 className="text-[10px] font-bold text-primary uppercase tracking-wider">How we use it</h4>
+                      <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{item.how_to_work}</p>
+                    </div>
+                  )}
+                </div>
+
+                {item.keywords && (
+                  <div className="mt-5 flex flex-wrap gap-1.5 pt-3 border-t border-border/20">
+                    {item.keywords.split(",").map((k: string) => (
+                      <span key={k} className="text-[9px] font-semibold px-2 py-0.5 bg-primary/10 text-primary border border-primary/10 rounded-lg">
+                        {k.trim()}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </article>
             ))}
           </div>

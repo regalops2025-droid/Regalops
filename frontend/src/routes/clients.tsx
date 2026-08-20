@@ -21,21 +21,32 @@ export const Route = createFileRoute("/clients")({
   component: Clients,
 });
 
-const industries = ["Banking", "Insurance", "Healthcare", "Logistics", "Manufacturing", "Energy", "Retail", "Public sector"];
-
 function Clients() {
   const [cases, setCases] = useState<any[]>([]);
+  const [industriesList, setIndustriesList] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Fetch clients
     fetch("/api/clients")
       .then((res) => res.json())
       .then((data) => {
         setCases(data);
-        setLoading(false);
       })
       .catch((err) => {
         console.error("Failed to load clients", err);
+      });
+
+    // Fetch industries
+    fetch("/api/industries")
+      .then((res) => res.json())
+      .then((data) => {
+        setIndustriesList(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load industries", err);
+        setIndustriesList([]);
         setLoading(false);
       });
   }, []);
@@ -86,12 +97,12 @@ function Clients() {
         <Section>
           <h2 className="text-2xl font-semibold sm:text-3xl">Industries we serve</h2>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {industries.map((i) => (
+            {industriesList.map((i) => (
               <div
-                key={i}
+                key={i.id}
                 className="rounded-2xl border border-border bg-background px-5 py-4 text-sm font-medium"
               >
-                {i}
+                {i.name}
               </div>
             ))}
           </div>

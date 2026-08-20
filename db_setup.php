@@ -82,6 +82,14 @@ try {
     )");
     echo "<p>Table 'blogs' checked/created.</p>";
 
+    // 6. industries
+    $pdo->exec("CREATE TABLE IF NOT EXISTS industries (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) UNIQUE NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
+    echo "<p>Table 'industries' checked/created.</p>";
+
     // Seed default admin user
     $adminEmail = 'regalops2025@gmail.com';
     $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
@@ -94,7 +102,10 @@ try {
         $stmt->execute([$adminEmail, $hashedPassword, 'Admin']);
         echo "<p style='color:green;'>Default admin user seeded!</p>";
     } else {
-        echo "<p>Admin user already exists.</p>";
+        $hashedPassword = password_hash('Regalops@123', PASSWORD_BCRYPT);
+        $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE email = ?");
+        $stmt->execute([$hashedPassword, $adminEmail]);
+        echo "<p style='color:green;'>Admin user password forced update to match current details!</p>";
     }
 
     echo "<h3 style='color:green;'>All done successfully!</h3>";

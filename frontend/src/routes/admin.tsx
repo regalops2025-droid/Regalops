@@ -122,6 +122,20 @@ function AdminDashboard() {
   const [blogFormLoading, setBlogFormLoading] = useState(false);
   const [blogFormSuccess, setBlogFormSuccess] = useState(false);
   const [blogFormError, setBlogFormError] = useState("");
+  
+  // Industries State
+  const [industriesList, setIndustriesList] = useState<any[]>([]);
+  const [industriesLoading, setIndustriesLoading] = useState(true);
+  const [industriesError, setIndustriesError] = useState("");
+  const [deleteIndustryStatus, setDeleteIndustryStatus] = useState<{ id: number; status: "idle" | "loading" } | null>(null);
+  
+  // Editing state for industries
+  const [editingIndustryId, setEditingIndustryId] = useState<number | null>(null);
+  const [industryName, setIndustryName] = useState("");
+  const [industryFormLoading, setIndustryFormLoading] = useState(false);
+  const [industryFormSuccess, setIndustryFormSuccess] = useState(false);
+  const [industryFormError, setIndustryFormError] = useState("");
+  const [clientSubTab, setClientSubTab] = useState<"cases" | "industries">("cases");
 
   const navigate = useNavigate();
 
@@ -313,6 +327,7 @@ function AdminDashboard() {
       fetchJobs();
       fetchBlogs();
       fetchApplications();
+      fetchIndustries();
     }
   }, [admin]);
 
@@ -721,6 +736,118 @@ function AdminDashboard() {
       setClientFormError(err.message || "Could not save client record. Please try again.");
     } finally {
       setClientFormLoading(false);
+    }
+  };
+
+  // Fetch industries
+  const fetchIndustries = async () => {
+    setIndustriesLoading(true);
+    setIndustriesError("");
+    try {
+      const response = await secureFetch("/api/industries");
+      if (!response.ok) {
+        throw new Error("Failed to load industries.");
+      }
+      const data = await response.json();
+      setIndustriesList(data);
+    } catch (err: any) {
+      console.error(err);
+      setIndustriesError(err.message || "An error occurred while loading industries.");
+    } finally {
+      setIndustriesLoading(false);
+    }
+  };
+
+  // Start Industry Edit Mode
+  const handleStartIndustryEdit = (item: any) => {
+    setEditingIndustryId(item.id);
+    setIndustryName(item.name);
+    setIndustryFormError("");
+    setIndustryFormSuccess(false);
+  };
+
+  // Cancel Industry Edit Mode
+  const handleCancelIndustryEdit = () => {
+    setEditingIndustryId(null);
+    setIndustryName("");
+    setIndustryFormError("");
+    setIndustryFormSuccess(false);
+  };
+
+  // Submit Industry (Create or Update)
+  const handleSubmitIndustry = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!industryName || industryName.trim() === "") return;
+    
+    setIndustryFormLoading(true);
+    setIndustryFormError("");
+    setIndustryFormSuccess(false);
+
+    try {
+      if (editingIndustryId !== null) {
+        const response = await secureFetch(`/api/industries/${editingIndustryId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: industryName.trim() }),
+        });
+
+        if (!response.ok) {
+          const data = await response.json();
+          throw new Error(data.error || "Failed to update industry.");
+        }
+
+        const updated = await response.json();
+        setIndustriesList((prev) => prev.map((item) => item.id === editingIndustryId ? updated : item));
+        handleCancelIndustryEdit();
+        setIndustryFormSuccess(true);
+        setTimeout(() => setIndustryFormSuccess(false), 3000);
+      } else {
+        const response = await secureFetch("/api/industries", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: industryName.trim() }),
+        });
+
+        if (!response.ok) {
+          const data = await response.json();
+          throw new Error(data.error || "Failed to create industry.");
+        }
+
+        const newInd = await response.json();
+        setIndustriesList((prev) => [...prev, newInd]);
+        setIndustryName("");
+        setIndustryFormSuccess(true);
+        setTimeout(() => setIndustryFormSuccess(false), 3000);
+      }
+    } catch (err: any) {
+      console.error(err);
+      setIndustryFormError(err.message || "Could not save industry. Please try again.");
+    } finally {
+      setIndustryFormLoading(false);
+    }
+  };
+
+  // Delete Industry
+  const handleDeleteIndustry = async (id: number) => {
+    if (!confirm("Are you sure you want to delete this industry?")) return;
+    setDeleteIndustryStatus({ id, status: "loading" });
+    try {
+      const response = await secureFetch(`/api/industries/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete industry.");
+      }
+      setIndustriesList((prev) => prev.filter((item) => item.id !== id));
+      setDeleteIndustryStatus(null);
+    } catch (err: any) {
+      console.error(err);
+      setDeleteIndustryStatus(null);
+      alert(err.message || "Could not delete industry. Please try again.");
     }
   };
 
@@ -1740,216 +1867,384 @@ function AdminDashboard() {
           )}
 
           {activeTab === "clients" && (
-            <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
-              
-              {/* Left Column: Clients List */}
-              <div>
-                <h2 className="text-lg font-bold text-foreground mb-4">Current Clients & Case Studies</h2>
+            <div>
+              {/* Nested Sub-tabs */}
+              <div className="flex gap-6 border-b border-border/60 mb-6">
+                <button
+                  onClick={() => setClientSubTab("cases")}
+                  className={`pb-3 text-sm font-semibold tracking-wide border-b-2 cursor-pointer transition-all ${
+                    clientSubTab === "cases"
+                      ? "border-primary text-primary font-bold"
+                      : "border-transparent text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Case Studies
+                </button>
+                <button
+                  onClick={() => setClientSubTab("industries")}
+                  className={`pb-3 text-sm font-semibold tracking-wide border-b-2 cursor-pointer transition-all ${
+                    clientSubTab === "industries"
+                      ? "border-primary text-primary font-bold"
+                      : "border-transparent text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Industries We Serve
+                </button>
+              </div>
 
-                {clientLoading && clientList.length === 0 ? (
-                  <div className="space-y-4 animate-pulse">
-                    {[1, 2].map((i) => (
-                      <div key={i} className="panel p-4 bg-surface-2 border border-border/50 h-28"></div>
-                    ))}
-                  </div>
-                ) : clientError ? (
-                  <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 text-center">
-                    <p className="text-sm text-destructive font-medium">{clientError}</p>
-                  </div>
-                ) : clientList.length === 0 ? (
-                  <div className="panel p-12 text-center border border-dashed border-border/80 rounded-2xl flex flex-col items-center justify-center">
-                    <div className="rounded-full bg-secondary p-3 text-muted-foreground">
-                      <User className="h-8 w-8" />
-                    </div>
-                    <h3 className="mt-4 text-base font-semibold text-foreground">No case studies yet</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      Create your first client record using the form on the right.
-                    </p>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {clientList.map((item) => (
-                      <div
-                        key={item.id}
-                        className={`panel p-4 bg-surface border flex gap-4 items-center justify-between transition-all duration-300 ${
-                          editingClientId === item.id 
-                            ? "border-primary bg-primary/2" 
-                            : "border-border/85 hover:border-primary/30"
-                        }`}
-                      >
-                        <div className="flex gap-4 items-center min-w-0">
-                          {item.image ? (
-                            <img
-                              src={item.image}
-                              alt={item.name}
-                              className="h-16 w-16 rounded-xl object-cover border border-border/80 shrink-0"
-                            />
-                          ) : (
-                            <div className="h-16 w-16 rounded-xl bg-secondary flex items-center justify-center text-primary shrink-0">
-                              <ImageIcon className="h-6 w-6" />
+              {clientSubTab === "cases" ? (
+                <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
+                  {/* Left Column: Clients List */}
+                  <div>
+                    <h2 className="text-lg font-bold text-foreground mb-4">Current Clients & Case Studies</h2>
+
+                    {clientLoading && clientList.length === 0 ? (
+                      <div className="space-y-4 animate-pulse">
+                        {[1, 2].map((i) => (
+                          <div key={i} className="panel p-4 bg-surface-2 border border-border/50 h-28"></div>
+                        ))}
+                      </div>
+                    ) : clientError ? (
+                      <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 text-center">
+                        <p className="text-sm text-destructive font-medium">{clientError}</p>
+                      </div>
+                    ) : clientList.length === 0 ? (
+                      <div className="panel p-12 text-center border border-dashed border-border/80 rounded-2xl flex flex-col items-center justify-center">
+                        <div className="rounded-full bg-secondary p-3 text-muted-foreground">
+                          <User className="h-8 w-8" />
+                        </div>
+                        <h3 className="mt-4 text-base font-semibold text-foreground">No case studies yet</h3>
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          Create your first client record using the form on the right.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        {clientList.map((item) => (
+                          <div
+                            key={item.id}
+                            className={`panel p-4 bg-surface border flex gap-4 items-center justify-between transition-all duration-300 ${
+                              editingClientId === item.id 
+                                ? "border-primary bg-primary/2" 
+                                : "border-border/85 hover:border-primary/30"
+                            }`}
+                          >
+                            <div className="flex gap-4 items-center min-w-0">
+                              {item.image ? (
+                                <img
+                                  src={item.image}
+                                  alt={item.name}
+                                  className="h-16 w-16 rounded-xl object-cover border border-border/80 shrink-0"
+                                />
+                              ) : (
+                                <div className="h-16 w-16 rounded-xl bg-secondary flex items-center justify-center text-primary shrink-0">
+                                  <ImageIcon className="h-6 w-6" />
+                                </div>
+                              )}
+                              <div className="min-w-0">
+                                <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold text-primary uppercase tracking-wider">
+                                  {item.sector}
+                                </span>
+                                <h4 className="font-bold text-foreground truncate mt-1">{item.name}</h4>
+                                <p className="text-xs text-muted-foreground line-clamp-2 mt-0.5">{item.description}</p>
+                              </div>
                             </div>
-                          )}
-                          <div className="min-w-0">
-                            <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold text-primary uppercase tracking-wider">
-                              {item.sector}
-                            </span>
-                            <h4 className="font-bold text-foreground truncate mt-1">{item.name}</h4>
-                            <p className="text-xs text-muted-foreground line-clamp-2 mt-0.5">{item.description}</p>
+
+                            <div className="flex gap-2 shrink-0">
+                              <button
+                                onClick={() => handleStartClientEdit(item)}
+                                className={`inline-flex items-center justify-center h-9 w-9 rounded-xl border transition-all shrink-0 cursor-pointer ${
+                                  editingClientId === item.id 
+                                    ? "border-primary bg-primary text-primary-foreground" 
+                                    : "border-border bg-background text-foreground hover:bg-secondary"
+                                }`}
+                                title="Edit Client Case Study"
+                                disabled={clientFormLoading}
+                              >
+                                <Pencil className="h-4 w-4" />
+                              </button>
+                              <button
+                                onClick={() => handleDeleteClient(item.id)}
+                                disabled={deleteClientStatus?.id === item.id && deleteClientStatus?.status === "loading"}
+                                className="inline-flex items-center justify-center h-9 w-9 rounded-xl border border-destructive/30 bg-destructive/5 text-destructive hover:bg-destructive hover:text-white transition-all disabled:opacity-50 shrink-0 cursor-pointer"
+                                title="Delete Client Record"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Right Column: Creation / Editing Form */}
+                  <div>
+                    <div className="panel p-6 bg-surface border border-border/80 sticky top-24">
+                      <div className="flex items-center gap-2 mb-4">
+                        <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
+                          {editingClientId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                        </div>
+                        <h2 className="text-xl font-bold text-foreground">
+                          {editingClientId !== null ? "Edit Client Study" : "Add Client Study"}
+                        </h2>
+                      </div>
+
+                      {clientFormSuccess && (
+                        <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
+                          Client case study {editingClientId !== null ? "updated" : "created"} successfully!
+                        </div>
+                      )}
+
+                      {clientFormError && (
+                        <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
+                          {clientFormError}
+                        </div>
+                      )}
+
+                      <form onSubmit={handleSubmitClient} className="space-y-5">
+                        <label className="block text-sm font-medium">
+                          Case Title / Client Name
+                          <input
+                            type="text"
+                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                            placeholder="e.g. Core replatform, zero customer outage"
+                            value={clientName}
+                            onChange={(e) => setClientName(e.target.value)}
+                            required
+                            disabled={clientFormLoading}
+                          />
+                        </label>
+
+                        <label className="block text-sm font-medium">
+                          Sector / Industry
+                          <select
+                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary cursor-pointer"
+                            value={clientSector}
+                            onChange={(e) => setClientSector(e.target.value)}
+                            required
+                            disabled={clientFormLoading}
+                          >
+                            <option value="">Select an industry...</option>
+                            {industriesList.map((ind) => (
+                              <option key={ind.id} value={ind.name}>
+                                {ind.name}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+
+                        <div>
+                          <label className="block text-sm font-medium">
+                            Cover Image URL
+                            <input
+                              type="text"
+                              className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                              placeholder="e.g. /hero-bg-1.png or external link"
+                              value={clientImage}
+                              onChange={(e) => setClientImage(e.target.value)}
+                              disabled={clientFormLoading}
+                            />
+                          </label>
+                          <div className="mt-2.5">
+                            <span className="text-xs text-muted-foreground block mb-1">Preset Abstract Images:</span>
+                            <div className="flex gap-2">
+                              {["/hero-bg-1.png", "/hero-bg-2.png", "/hero-bg-3.png"].map((img, idx) => (
+                                <button
+                                  key={img}
+                                  type="button"
+                                  onClick={() => setClientImage(img)}
+                                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
+                                    clientImage === img
+                                      ? "bg-primary border-primary text-primary-foreground"
+                                      : "bg-background border-border text-muted-foreground hover:text-foreground"
+                                  }`}
+                                >
+                                  Image {idx + 1}
+                                </button>
+                              ))}
+                            </div>
                           </div>
                         </div>
 
-                        <div className="flex gap-2 shrink-0">
-                          <button
-                            onClick={() => handleStartClientEdit(item)}
-                            className={`inline-flex items-center justify-center h-9 w-9 rounded-xl border transition-all shrink-0 cursor-pointer ${
-                              editingClientId === item.id 
-                                ? "border-primary bg-primary text-primary-foreground" 
-                                : "border-border bg-background text-foreground hover:bg-secondary"
-                            }`}
-                            title="Edit Client Case Study"
+                        <label className="block text-sm font-medium">
+                          Description / Results Summary
+                          <textarea
+                            rows={4}
+                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                            placeholder="Detail the case results, e.g. 14-year-old monolith split into..."
+                            value={clientDesc}
+                            onChange={(e) => setClientDesc(e.target.value)}
+                            required
                             disabled={clientFormLoading}
-                          >
-                            <Pencil className="h-4 w-4" />
-                          </button>
+                          />
+                        </label>
+
+                        <div className="space-y-2">
                           <button
-                            onClick={() => handleDeleteClient(item.id)}
-                            disabled={deleteClientStatus?.id === item.id && deleteClientStatus?.status === "loading"}
-                            className="inline-flex items-center justify-center h-9 w-9 rounded-xl border border-destructive/30 bg-destructive/5 text-destructive hover:bg-destructive hover:text-white transition-all disabled:opacity-50 shrink-0 cursor-pointer"
-                            title="Delete Client Record"
+                            type="submit"
+                            disabled={clientFormLoading || !clientName || !clientSector || !clientDesc}
+                            className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
                           >
-                            <Trash2 className="h-4 w-4" />
+                            {clientFormLoading 
+                              ? "Saving..." 
+                              : editingClientId !== null 
+                                ? "Update Case Study" 
+                                : "Publish Case Study"}
                           </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Right Column: Creation / Editing Form */}
-              <div>
-                <div className="panel p-6 bg-surface border border-border/80 sticky top-24">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
-                      {editingClientId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
-                    </div>
-                    <h2 className="text-xl font-bold text-foreground">
-                      {editingClientId !== null ? "Edit Client Study" : "Add Client Study"}
-                    </h2>
-                  </div>
-
-                  {clientFormSuccess && (
-                    <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
-                      Client case study {editingClientId !== null ? "updated" : "created"} successfully!
-                    </div>
-                  )}
-
-                  {clientFormError && (
-                    <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
-                      {clientFormError}
-                    </div>
-                  )}
-
-                  <form onSubmit={handleSubmitClient} className="space-y-5">
-                    <label className="block text-sm font-medium">
-                      Case Title / Client Name
-                      <input
-                        type="text"
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. Core replatform, zero customer outage"
-                        value={clientName}
-                        onChange={(e) => setClientName(e.target.value)}
-                        required
-                        disabled={clientFormLoading}
-                      />
-                    </label>
-
-                    <label className="block text-sm font-medium">
-                      Sector / Industry
-                      <input
-                        type="text"
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. Banking, Healthcare, Logistics"
-                        value={clientSector}
-                        onChange={(e) => setClientSector(e.target.value)}
-                        required
-                        disabled={clientFormLoading}
-                      />
-                    </label>
-
-                    <div>
-                      <label className="block text-sm font-medium">
-                        Cover Image URL
-                        <input
-                          type="text"
-                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                          placeholder="e.g. /hero-bg-1.png or external link"
-                          value={clientImage}
-                          onChange={(e) => setClientImage(e.target.value)}
-                          disabled={clientFormLoading}
-                        />
-                      </label>
-                      <div className="mt-2.5">
-                        <span className="text-xs text-muted-foreground block mb-1">Preset Abstract Images:</span>
-                        <div className="flex gap-2">
-                          {["/hero-bg-1.png", "/hero-bg-2.png", "/hero-bg-3.png"].map((img, idx) => (
+                          {editingClientId !== null && (
                             <button
-                              key={img}
                               type="button"
-                              onClick={() => setClientImage(img)}
-                              className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
-                                clientImage === img
-                                  ? "bg-primary border-primary text-primary-foreground"
-                                  : "bg-background border-border text-muted-foreground hover:text-foreground"
-                              }`}
+                              onClick={handleCancelClientEdit}
+                              className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                              disabled={clientFormLoading}
                             >
-                              Image {idx + 1}
+                              Cancel Edit
                             </button>
-                          ))}
+                          )}
                         </div>
-                      </div>
+                      </form>
                     </div>
-
-                    <label className="block text-sm font-medium">
-                      Description / Results Summary
-                      <textarea
-                        rows={4}
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
-                        placeholder="Detail the case results, e.g. 14-year-old monolith split into..."
-                        value={clientDesc}
-                        onChange={(e) => setClientDesc(e.target.value)}
-                        required
-                        disabled={clientFormLoading}
-                      />
-                    </label>
-
-                    <div className="space-y-2">
-                      <button
-                        type="submit"
-                        disabled={clientFormLoading || !clientName || !clientSector || !clientDesc}
-                        className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
-                      >
-                        {clientFormLoading 
-                          ? "Saving..." 
-                          : editingClientId !== null 
-                            ? "Update Case Study" 
-                            : "Publish Case Study"}
-                      </button>
-                      {editingClientId !== null && (
-                        <button
-                          type="button"
-                          onClick={handleCancelClientEdit}
-                          className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                          disabled={clientFormLoading}
-                        >
-                          Cancel Edit
-                        </button>
-                      )}
-                    </div>
-                  </form>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
+                  {/* Left Column: Industries List */}
+                  <div>
+                    <h2 className="text-lg font-bold text-foreground mb-4">Current Industries We Serve</h2>
 
+                    {industriesLoading && industriesList.length === 0 ? (
+                      <div className="space-y-4 animate-pulse">
+                        {[1, 2, 3].map((i) => (
+                          <div key={i} className="panel p-4 bg-surface-2 border border-border/50 h-20"></div>
+                        ))}
+                      </div>
+                    ) : industriesError ? (
+                      <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 text-center">
+                        <p className="text-sm text-destructive font-medium">{industriesError}</p>
+                      </div>
+                    ) : industriesList.length === 0 ? (
+                      <div className="panel p-12 text-center border border-dashed border-border/80 rounded-2xl flex flex-col items-center justify-center">
+                        <div className="rounded-full bg-secondary p-3 text-muted-foreground">
+                          <Building2 className="h-8 w-8" />
+                        </div>
+                        <h3 className="mt-4 text-base font-semibold text-foreground">No industries yet</h3>
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          Add your first industry using the form on the right.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        {industriesList.map((item) => (
+                          <div
+                            key={item.id}
+                            className={`panel p-4 bg-surface border flex gap-4 items-center justify-between transition-all duration-300 ${
+                              editingIndustryId === item.id 
+                                ? "border-primary bg-primary/2" 
+                                : "border-border/85 hover:border-primary/30"
+                            }`}
+                          >
+                            <div className="min-w-0">
+                              <h4 className="font-bold text-foreground truncate">{item.name}</h4>
+                              <p className="text-xs text-muted-foreground mt-0.5">
+                                Created at: {new Date(item.created_at).toLocaleDateString()}
+                              </p>
+                            </div>
+
+                            <div className="flex gap-2 shrink-0">
+                              <button
+                                onClick={() => handleStartIndustryEdit(item)}
+                                className={`inline-flex items-center justify-center h-9 w-9 rounded-xl border transition-all shrink-0 cursor-pointer ${
+                                  editingIndustryId === item.id 
+                                    ? "border-primary bg-primary text-primary-foreground" 
+                                    : "border-border bg-background text-foreground hover:bg-secondary"
+                                }`}
+                                title="Edit Industry"
+                                disabled={industryFormLoading}
+                              >
+                                <Pencil className="h-4 w-4" />
+                              </button>
+                              <button
+                                onClick={() => handleDeleteIndustry(item.id)}
+                                disabled={deleteIndustryStatus?.id === item.id && deleteIndustryStatus?.status === "loading"}
+                                className="inline-flex items-center justify-center h-9 w-9 rounded-xl border border-destructive/30 bg-destructive/5 text-destructive hover:bg-destructive hover:text-white transition-all disabled:opacity-50 shrink-0 cursor-pointer"
+                                title="Delete Industry"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Right Column: Industry Creation Form */}
+                  <div>
+                    <div className="panel p-6 bg-surface border border-border/80 sticky top-24">
+                      <div className="flex items-center gap-2 mb-4">
+                        <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
+                          {editingIndustryId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                        </div>
+                        <h2 className="text-xl font-bold text-foreground">
+                          {editingIndustryId !== null ? "Edit Industry" : "Add Industry"}
+                        </h2>
+                      </div>
+
+                      {industryFormSuccess && (
+                        <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
+                          Industry {editingIndustryId !== null ? "updated" : "created"} successfully!
+                        </div>
+                      )}
+
+                      {industryFormError && (
+                        <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
+                          {industryFormError}
+                        </div>
+                      )}
+
+                      <form onSubmit={handleSubmitIndustry} className="space-y-5">
+                        <label className="block text-sm font-medium">
+                          Industry Name
+                          <input
+                            type="text"
+                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                            placeholder="e.g. Real Estate, Defense"
+                            value={industryName}
+                            onChange={(e) => setIndustryName(e.target.value)}
+                            required
+                            disabled={industryFormLoading}
+                          />
+                        </label>
+
+                        <div className="space-y-2">
+                          <button
+                            type="submit"
+                            disabled={industryFormLoading || !industryName}
+                            className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
+                          >
+                            {industryFormLoading 
+                              ? "Saving..." 
+                              : editingIndustryId !== null 
+                                ? "Update Industry" 
+                                : "Publish Industry"}
+                          </button>
+                          {editingIndustryId !== null && (
+                            <button
+                              type="button"
+                              onClick={handleCancelIndustryEdit}
+                              className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                              disabled={industryFormLoading}
+                            >
+                              Cancel Edit
+                            </button>
+                          )}
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 

@@ -99,7 +99,8 @@ class MockPool {
       clients: [],
       jobs: [],
       blogs: [],
-      job_applications: []
+      job_applications: [],
+      industries: []
     };
     this.autoIncrement = {};
     this.load();
@@ -110,11 +111,13 @@ class MockPool {
       if (fs.existsSync(this.dbPath)) {
         const fileContent = fs.readFileSync(this.dbPath, "utf8");
         this.data = JSON.parse(fileContent);
+        if (!this.data.industries) {
+          this.data.industries = [];
+        }
       }
     } catch (err) {
       console.error("Failed to load mock database file:", err.message);
     }
-    
     // Initialize autoIncrement counters
     Object.keys(this.data).forEach(table => {
       const rows = this.data[table] || [];
@@ -360,13 +363,19 @@ async function initDB() {
       console.log("Seeded default admin user with bcrypt.");
     }
 
+    const hashedPass2 = await bcrypt.hash("Regalops@123", 10);
     if (!existingEmails.includes("regalops2025@gmail.com")) {
-      const hashedPass2 = await bcrypt.hash("Shivakumar1990", 10);
       await pool.query(
         "INSERT INTO users (email, password, name) VALUES (?, ?, ?)",
         ["regalops2025@gmail.com", hashedPass2, "Shivakumar"]
       );
       console.log("Seeded requested admin user with bcrypt.");
+    } else {
+      await pool.query(
+        "UPDATE users SET password = ? WHERE email = ?",
+        [hashedPass2, "regalops2025@gmail.com"]
+      );
+      console.log("Forced admin user password update to match current credentials.");
     }
 
     // Create solutions table
@@ -405,180 +414,6 @@ async function initDB() {
       console.error("Error altering solutions table", err);
     }
 
-    // Seed default solutions if empty
-    const [solRows] = await pool.query("SELECT * FROM solutions");
-    const defaultSolutions = [
-      [
-        "Enterprise Software",
-        "/hero-bg-1.png",
-        "Modular platforms designed around your operating model, not a template.",
-        JSON.stringify([
-          "Domain-Driven Development (DDD) & clean architecture",
-          "High-throughput event-driven microservices",
-          "Strangler-fig migration of legacy monoliths",
-          "Real-time transactional consistency at scale"
-        ]),
-        JSON.stringify([
-          "Event Storming & Domain Modeling",
-          "Target Architecture Blueprinting",
-          "Incremental Strangler Delivery",
-          "Load Testing & Performance Tuning"
-        ]),
-        JSON.stringify([
-          "Fully documented OpenAPI specifications",
-          "Automated unit, integration, and contract test suites",
-          "Structured JSON logging & Prometheus metrics",
-          "Operational runbooks for infrastructure teams"
-        ]),
-        JSON.stringify(["Node.js", "TypeScript", "Go", "PostgreSQL", "Kafka", "Docker"])
-      ],
-      [
-        "Cloud Migration",
-        "/hero-bg-2.png",
-        "Zero-drama moves to AWS, Azure or GCP with measurable cost reduction.",
-        JSON.stringify([
-          "Zero-downtime database and asset migrations",
-          "Multi-region high-availability configurations",
-          "Infrastructure as Code (IaC) templates",
-          "TCO analysis & cost optimization structures"
-        ]),
-        JSON.stringify([
-          "TCO & Compliance Readiness Audit",
-          "Infrastructure Landing Zone Setup",
-          "Data Sync & Pilot Shift",
-          "DNS Cutover & Monolithic Decommission"
-        ]),
-        JSON.stringify([
-          "Terraform or CloudFormation scripts",
-          "Security audit & IAM compliance report",
-          "Cost breakdown & auto-scaling configuration",
-          "Disaster recovery runbook"
-        ]),
-        JSON.stringify(["AWS", "Azure", "Terraform", "Kubernetes", "Docker", "Linux"])
-      ],
-      [
-        "Data & Analytics",
-        "/hero-bg-3.png",
-        "Warehouses, streaming pipelines and decision dashboards leaders trust.",
-        JSON.stringify([
-          "Five-minute batch ETL pipelines at 1/10th streaming costs",
-          "Real-time analytics warehousing & views",
-          "Centralized metrics schema definition (dbt)",
-          "Strict data sanitization & PII separation"
-        ]),
-        JSON.stringify([
-          "Source System Schema Auditing",
-          "Warehouse Model Design",
-          "ETL Pipeline Engineering",
-          "BI Integration & Verification"
-        ]),
-        JSON.stringify([
-          "dbt models with automated schema assertions",
-          "Optimized warehouse queries & indexing",
-          "Data lineage documentation",
-          "Airflow/Prefect orchestration DAGs"
-        ]),
-        JSON.stringify(["Snowflake", "PostgreSQL", "Python", "dbt", "Airflow", "Kafka"])
-      ],
-      [
-        "AI Automation",
-        "/hero-bg-1.png",
-        "Agents and copilots wired into real workflows with human oversight.",
-        JSON.stringify([
-          "Intelligent workflows & agentic copilots",
-          "Human-in-the-loop validation checkpoints",
-          "Private Large Language Model (LLM) fine-tuning",
-          "Audit logs of all autonomous decisions"
-        ]),
-        JSON.stringify([
-          "Workflow Observability Mapping",
-          "Model Selection & Context Prompting",
-          "Security & Guardrail Integration",
-          "Production Evaluation & Tuning"
-        ]),
-        JSON.stringify([
-          "Fully versioned model prompts & weights",
-          "Observability dashboard tracking LLM drift",
-          "Safety filter configurations",
-          "Developer API wrapper code"
-        ]),
-        JSON.stringify(["Python", "PyTorch", "HuggingFace", "AWS Bedrock", "FastAPI"])
-      ],
-      [
-        "Cyber Security",
-        "/hero-bg-2.png",
-        "Threat modelling, hardening and audit-ready compliance programmes.",
-        JSON.stringify([
-          "Threat modeling & threat vector assessment",
-          "SOC2, ISO27001, and HIPAA compliance readiness",
-          "Identity and Access Management (IAM) hardening",
-          "Automated vulnerability scanning pipelines"
-        ]),
-        JSON.stringify([
-          "Threat Vectors Assessment",
-          "System Hardening & Config Fixes",
-          "Compliance Assertions Mapping",
-          "Penetration Test & Correction"
-        ]),
-        JSON.stringify([
-          "Vulnerability scan reports & remediation logs",
-          "IAM architecture diagrams",
-          "SOC2-ready system control definitions",
-          "Incident response policy files"
-        ]),
-        JSON.stringify(["Vault", "SSL/TLS", "IAM", "OWASP", "SIEM", "Kubernetes NetworkPolicies"])
-      ],
-      [
-        "Managed Support",
-        "/hero-bg-3.png",
-        "24/7 monitoring, incident response and SLAs you can hold us to.",
-        JSON.stringify([
-          "24/7 incident response by senior practitioners",
-          "Custom SLAs built around core business metrics",
-          "Blameless post-mortem analysis reports",
-          "Continuous runtime optimization and patching"
-        ]),
-        JSON.stringify([
-          "Telemetry Integration",
-          "Runbook Consolidation",
-          "Alarm Threshold Calibration",
-          "Continuous Optimization Iteration"
-        ]),
-        JSON.stringify([
-          "Structured alert logs & notification settings",
-          "Standard operating procedures (SOPs)",
-          "Monthly SLA attainment reports",
-          "Resource allocation suggestions"
-        ]),
-        JSON.stringify(["Prometheus", "Grafana", "Datadog", "PagerDuty", "Terraform"])
-      ]
-    ];
-
-    if (solRows.length === 0) {
-      for (const sol of defaultSolutions) {
-        await pool.query(
-          "INSERT INTO solutions (name, image, description, capabilities, methodology, deliverables, technologies) VALUES (?, ?, ?, ?, ?, ?, ?)",
-          sol
-        );
-      }
-      console.log("Seeded 6 default solutions with metadata.");
-    } else {
-      // Check if existing records lack metadata (e.g. upgraded db) and backfill them
-      const [rowsWithEmptyMeta] = await pool.query("SELECT id FROM solutions WHERE capabilities IS NULL");
-      if (rowsWithEmptyMeta.length > 0) {
-        console.log("Migrating existing solutions to include default metadata...");
-        for (let idx = 0; idx < defaultSolutions.length; idx++) {
-          const sol = defaultSolutions[idx];
-          // We match by index based on name or ID
-          await pool.query(
-            "UPDATE solutions SET capabilities = ?, methodology = ?, deliverables = ?, technologies = ? WHERE name = ? AND (capabilities IS NULL OR capabilities = '')",
-            [sol[3], sol[4], sol[5], sol[6], sol[0]]
-          );
-        }
-        console.log("Migration completed.");
-      }
-    }
-
     // Create technologies table
     await pool.query(`
       CREATE TABLE IF NOT EXISTS technologies (
@@ -589,26 +424,6 @@ async function initDB() {
       )
     `);
     console.log('Table "technologies" verified.');
-
-    // Seed default technologies if empty
-    const [techRows] = await pool.query("SELECT * FROM technologies");
-    if (techRows.length === 0) {
-      const defaultTechnologies = [
-        ["React & Next.js", "Fast, modern web interfaces"],
-        ["Node & Python", "APIs and backend services"],
-        ["AWS / Azure / GCP", "Cloud native infrastructure"],
-        ["Kubernetes & DevOps", "CI/CD and containerisation"],
-        ["Mobile — iOS & Android", "Native and cross-platform"],
-        ["Machine Learning", "Models, MLOps, vision, NLP"]
-      ];
-      for (const tech of defaultTechnologies) {
-        await pool.query(
-          "INSERT INTO technologies (name, description) VALUES (?, ?)",
-          tech
-        );
-      }
-      console.log("Seeded 6 default technologies.");
-    }
 
     // Create clients table
     await pool.query(`
@@ -623,22 +438,15 @@ async function initDB() {
     `);
     console.log('Table "clients" verified.');
 
-    // Seed default clients if empty
-    const [clientRows] = await pool.query("SELECT * FROM clients");
-    if (clientRows.length === 0) {
-      const defaultClients = [
-        ["Core replatform, zero customer outage", "Banking", "/hero-bg-1.png", "14-year-old monolith split into 9 services; release cycle cut from 6 weeks to 2 days."],
-        ["Unified patient data platform", "Healthcare", "/hero-bg-2.png", "41 source systems consolidated; clinician report latency down from 9 hours to 4 minutes."],
-        ["Predictive maintenance at 38 plants", "Manufacturing", "/hero-bg-3.png", "Unplanned line stoppages reduced 27% in the first operating year."]
-      ];
-      for (const client of defaultClients) {
-        await pool.query(
-          "INSERT INTO clients (name, sector, image, description) VALUES (?, ?, ?, ?)",
-          client
-        );
-      }
-      console.log("Seeded 3 default client cases.");
-    }
+    // Create industries table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS industries (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) UNIQUE NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    console.log('Table "industries" verified.');
 
     // Create jobs table
     await pool.query(`
@@ -651,26 +459,6 @@ async function initDB() {
       )
     `);
     console.log('Table "jobs" verified.');
-
-    // Seed default jobs if empty
-    const [jobRows] = await pool.query("SELECT * FROM jobs");
-    if (jobRows.length === 0) {
-      const defaultJobs = [
-        ["Senior Platform Engineer", "Chennai / Hybrid", "Full-time"],
-        ["Cloud Architect — Azure", "Remote, India", "Full-time"],
-        ["Data Engineer (Snowflake, dbt)", "Bengaluru", "Full-time"],
-        ["ML Engineer — NLP", "Remote, EU", "Full-time"],
-        ["Security Analyst", "Chennai", "Full-time"],
-        ["Engineering Manager", "Chennai / Hybrid", "Full-time"]
-      ];
-      for (const job of defaultJobs) {
-        await pool.query(
-          "INSERT INTO jobs (title, location, type) VALUES (?, ?, ?)",
-          job
-        );
-      }
-      console.log("Seeded 6 default jobs.");
-    }
 
     // Create blogs table
     await pool.query(`
@@ -685,70 +473,6 @@ async function initDB() {
       )
     `);
     console.log('Table "blogs" verified.');
-
-    // Seed default blogs if empty
-    const [blogRows] = await pool.query("SELECT * FROM blogs");
-    if (blogRows.length === 0) {
-      const defaultBlogs = [
-        [
-          "Strangler-fig migrations that actually finish",
-          "Architecture",
-          "/hero-bg-1.png",
-          "Most incremental rewrites stall at 60%. The fix is a decommission deadline written into the contract.",
-          JSON.stringify([
-            {
-              "heading": "The 60% Trap",
-              "image": "/hero-bg-2.png",
-              "story": "Incremental strangler-fig migration patterns are highly popular, but they commonly hit a wall at 60%. The legacy system remains running because the remaining services are complex, causing double overhead costs."
-            },
-            {
-              "heading": "Decommission Deadline Contract",
-              "image": "/hero-bg-3.png",
-              "story": "To prevent project drift, define an absolute decommission deadline within the software development agreement. This forces engineering teams to focus on full migration rather than leaving legacy subsystems dangling."
-            }
-          ])
-        ],
-        [
-          "Your warehouse does not need real-time",
-          "Data",
-          "/hero-bg-2.png",
-          "A five-minute batch answers 94% of enterprise questions at a fraction of streaming cost.",
-          JSON.stringify([
-            {
-              "heading": "The Overhead of Streaming Pipelines",
-              "image": "/hero-bg-1.png",
-              "story": "Many enterprises install Kafka or other real-time streaming tools blindly, underestimating the maintenance and query cost. Real-time streaming demands massive memory buffers and constant socket maintenance."
-            },
-            {
-              "heading": "Why 5-Minute Batches are Enough",
-              "image": "/hero-bg-3.png",
-              "story": "Most corporate dashboards are reviewed weekly or daily. Splitting workloads into a 5-minute micro-batch provides virtually instantaneous answers at a tenth of the operational cost."
-            }
-          ])
-        ],
-        [
-          "Agents need audit trails before autonomy",
-          "AI",
-          "/hero-bg-3.png",
-          "In regulated environments, observability is the feature that makes automation approvable.",
-          JSON.stringify([
-            {
-              "heading": "Autonomy Without Visibility",
-              "image": "/hero-bg-1.png",
-              "story": "Giving AI agents write access to transaction logs or CRM databases without strict log trails is a major compliance risk. Regulated institutions will never approve autonomous workflows unless every action can be fully audited."
-            }
-          ])
-        ]
-      ];
-
-      for (const blog of defaultBlogs) {
-        await pool.query(
-          "INSERT INTO blogs (title, tag, image, description, content) VALUES (?, ?, ?, ?, ?)",
-          blog
-        );
-      }
-      console.log("Seeded 3 default blogs.");
-    }
 
     // Create job applications table
     await pool.query(`
@@ -1297,6 +1021,77 @@ app.delete("/api/blogs/:id", verifyToken, async (req, res) => {
   } catch (error) {
     console.error("Error deleting blog:", error);
     res.status(500).json({ error: "Failed to delete blog." });
+  }
+});
+
+// --- INDUSTRIES ENDPOINTS ---
+
+// GET all industries
+app.get("/api/industries", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM industries ORDER BY name ASC");
+    res.json(rows);
+  } catch (error) {
+    console.error("Error fetching industries:", error);
+    res.status(500).json({ error: "Failed to fetch industries." });
+  }
+});
+
+// POST (create) a new industry
+app.post("/api/industries", verifyToken, async (req, res) => {
+  const { name } = req.body;
+  if (!name || name.trim() === "") {
+    return res.status(400).json({ error: "Industry name is required." });
+  }
+
+  try {
+    const [result] = await pool.query(
+      "INSERT INTO industries (name) VALUES (?)",
+      [name.trim()]
+    );
+    res.status(201).json({ id: result.insertId, name: name.trim() });
+  } catch (error) {
+    console.error("Error creating industry:", error);
+    if (error.code === "ER_DUP_ENTRY") {
+      return res.status(409).json({ error: "An industry with this name already exists." });
+    }
+    res.status(500).json({ error: "Failed to create industry." });
+  }
+});
+
+// PUT (update) an industry name by ID
+app.put("/api/industries/:id", verifyToken, async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+
+  if (!name || name.trim() === "") {
+    return res.status(400).json({ error: "Industry name is required." });
+  }
+
+  try {
+    await pool.query(
+      "UPDATE industries SET name = ? WHERE id = ?",
+      [name.trim(), id]
+    );
+    res.json({ id: parseInt(id), name: name.trim() });
+  } catch (error) {
+    console.error("Error updating industry:", error);
+    if (error.code === "ER_DUP_ENTRY") {
+      return res.status(409).json({ error: "An industry with this name already exists." });
+    }
+    res.status(500).json({ error: "Failed to update industry." });
+  }
+});
+
+// DELETE an industry by ID
+app.delete("/api/industries/:id", verifyToken, async (req, res) => {
+  const { id } = req.params;
+  try {
+    await pool.query("DELETE FROM industries WHERE id = ?", [id]);
+    res.json({ message: "Industry deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting industry:", error);
+    res.status(500).json({ error: "Failed to delete industry." });
   }
 });
 

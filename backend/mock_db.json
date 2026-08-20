@@ -12,7 +12,7 @@
       "id": 29,
       "created_at": "2026-08-19T07:05:39.333Z",
       "email": "regalops2025@gmail.com",
-      "password": "$2b$10$mAe2Yj2v5lKk9U/eSjamB.0Gtt7.N7F1LKPw8TQbasC0JuusD1x2G",
+      "password": "$2b$10$7xcANNFmdu7mCorjbK3f7O5gceJvG.u6HBRIEUBYiaGvVavrO1Rm2",
       "name": "Shivakumar"
     }
   ],
@@ -221,5 +221,47 @@
       "content": "[{\"heading\":\"Autonomy Without Visibility\",\"image\":\"/hero-bg-1.png\",\"story\":\"Giving AI agents write access to transaction logs or CRM databases without strict log trails is a major compliance risk. Regulated institutions will never approve autonomous workflows unless every action can be fully audited.\"}]"
     }
   ],
-  "job_applications": []
+  "job_applications": [],
+  "industries": [
+    {
+      "id": 1,
+      "name": "Banking",
+      "created_at": "2026-08-20T04:40:04.693Z"
+    },
+    {
+      "id": 2,
+      "name": "Insurance",
+      "created_at": "2026-08-20T04:40:04.694Z"
+    },
+    {
+      "id": 3,
+      "name": "Healthcare",
+      "created_at": "2026-08-20T04:40:04.694Z"
+    },
+    {
+      "id": 4,
+      "name": "Logistics",
+      "created_at": "2026-08-20T04:40:04.694Z"
+    },
+    {
+      "id": 5,
+      "name": "Manufacturing",
+      "created_at": "2026-08-20T04:40:04.694Z"
+    },
+    {
+      "id": 6,
+      "name": "Energy",
+      "created_at": "2026-08-20T04:40:04.694Z"
+    },
+    {
+      "id": 7,
+      "name": "Retail",
+      "created_at": "2026-08-20T04:40:04.694Z"
+    },
+    {
+      "id": 8,
+      "name": "Public sector",
+      "created_at": "2026-08-20T04:40:04.694Z"
+    }
+  ]
 }

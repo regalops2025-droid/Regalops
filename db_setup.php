@@ -53,10 +53,13 @@ try {
     // 3. solutions
     $pdo->exec("CREATE TABLE IF NOT EXISTS solutions (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        image VARCHAR(500),
         description TEXT NOT NULL,
-        icon VARCHAR(255),
-        features TEXT,
+        capabilities TEXT,
+        methodology TEXT,
+        deliverables TEXT,
+        technologies TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
     echo "<p>Table 'solutions' checked/created.</p>";
@@ -65,22 +68,21 @@ try {
     $pdo->exec("CREATE TABLE IF NOT EXISTS technologies (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
-        category VARCHAR(255) NOT NULL,
-        logo VARCHAR(255),
+        description TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
     echo "<p>Table 'technologies' checked/created.</p>";
 
-    // 5. blogs
-    $pdo->exec("CREATE TABLE IF NOT EXISTS blogs (
+    // 5. clients
+    $pdo->exec("CREATE TABLE IF NOT EXISTS clients (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        content TEXT NOT NULL,
-        author VARCHAR(255) NOT NULL,
-        image_path VARCHAR(255),
+        name VARCHAR(255) NOT NULL,
+        sector VARCHAR(255) NOT NULL,
+        image VARCHAR(255),
+        description TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
-    echo "<p>Table 'blogs' checked/created.</p>";
+    echo "<p>Table 'clients' checked/created.</p>";
 
     // 6. industries
     $pdo->exec("CREATE TABLE IF NOT EXISTS industries (
@@ -89,6 +91,43 @@ try {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
     echo "<p>Table 'industries' checked/created.</p>";
+
+    // 7. jobs
+    $pdo->exec("CREATE TABLE IF NOT EXISTS jobs (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        location VARCHAR(255) NOT NULL,
+        type VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
+    echo "<p>Table 'jobs' checked/created.</p>";
+
+    // 8. blogs
+    $pdo->exec("CREATE TABLE IF NOT EXISTS blogs (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        tag VARCHAR(255) NOT NULL,
+        image VARCHAR(255),
+        description TEXT NOT NULL,
+        content LONGTEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
+    echo "<p>Table 'blogs' checked/created.</p>";
+
+    // 9. job_applications
+    $pdo->exec("CREATE TABLE IF NOT EXISTS job_applications (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        job_id INT NOT NULL,
+        job_title VARCHAR(255) NOT NULL,
+        first_name VARCHAR(255) NOT NULL,
+        last_name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        mobile VARCHAR(255) NOT NULL,
+        cv_path VARCHAR(500) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
+    echo "<p>Table 'job_applications' checked/created.</p>";
+
 
     // Seed default admin user
     $adminEmail = 'regalops2025@gmail.com';

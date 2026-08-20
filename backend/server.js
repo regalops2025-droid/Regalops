@@ -395,11 +395,31 @@ async function initDB() {
     `);
     console.log('Table "solutions" verified.');
 
-    // Add columns dynamically if table already existed without them
+    // Add columns dynamically if table already existed without them, and perform necessary migrations
     try {
       const [columns] = await pool.query("SHOW COLUMNS FROM solutions");
       const columnNames = columns.map(c => c.Field);
-      if (!columnNames.includes("capabilities")) {
+
+      // Rename title -> name if name is missing but title exists
+      if (columnNames.includes("title") && !columnNames.includes("name")) {
+        await pool.query("ALTER TABLE solutions CHANGE COLUMN title name VARCHAR(255) NOT NULL");
+        console.log("Database Migration: Renamed 'title' to 'name' in solutions table.");
+      }
+
+      // Rename icon -> image if image is missing but icon exists
+      if (columnNames.includes("icon") && !columnNames.includes("image")) {
+        await pool.query("ALTER TABLE solutions CHANGE COLUMN icon image VARCHAR(500)");
+        console.log("Database Migration: Renamed 'icon' to 'image' in solutions table.");
+      }
+
+      // Rename features -> capabilities if capabilities is missing but features exists
+      if (columnNames.includes("features") && !columnNames.includes("capabilities")) {
+        await pool.query("ALTER TABLE solutions CHANGE COLUMN features capabilities TEXT");
+        console.log("Database Migration: Renamed 'features' to 'capabilities' in solutions table.");
+      }
+
+      // Add missing columns
+      if (!columnNames.includes("capabilities") && !columnNames.includes("features")) {
         await pool.query("ALTER TABLE solutions ADD COLUMN capabilities TEXT");
       }
       if (!columnNames.includes("methodology")) {
@@ -412,7 +432,7 @@ async function initDB() {
         await pool.query("ALTER TABLE solutions ADD COLUMN technologies TEXT");
       }
     } catch (err) {
-      console.error("Error altering solutions table", err);
+      console.error("Error migrating solutions table:", err.message);
     }
 
     // Create technologies table
@@ -425,6 +445,18 @@ async function initDB() {
       )
     `);
     console.log('Table "technologies" verified.');
+
+    // Add columns dynamically if table already existed without them
+    try {
+      const [columns] = await pool.query("SHOW COLUMNS FROM technologies");
+      const columnNames = columns.map(c => c.Field);
+      if (columnNames.length > 0 && !columnNames.includes("description")) {
+        await pool.query("ALTER TABLE technologies ADD COLUMN description TEXT NOT NULL");
+        console.log("Database Migration: Added missing 'description' column to 'technologies' table.");
+      }
+    } catch (err) {
+      console.error("Error migrating technologies table:", err.message);
+    }
 
     // Create clients table
     await pool.query(`
@@ -474,6 +506,28 @@ async function initDB() {
       )
     `);
     console.log('Table "blogs" verified.');
+
+    // Add columns dynamically if table already existed without them
+    try {
+      const [columns] = await pool.query("SHOW COLUMNS FROM blogs");
+      const columnNames = columns.map(c => c.Field);
+      if (columnNames.length > 0) {
+        if (columnNames.includes("image_path") && !columnNames.includes("image")) {
+          await pool.query("ALTER TABLE blogs CHANGE COLUMN image_path image VARCHAR(255)");
+          console.log("Database Migration: Renamed 'image_path' to 'image' in 'blogs' table.");
+        }
+        if (!columnNames.includes("tag")) {
+          await pool.query("ALTER TABLE blogs ADD COLUMN tag VARCHAR(255) NOT NULL DEFAULT 'Engineering'");
+          console.log("Database Migration: Added missing 'tag' column to 'blogs' table.");
+        }
+        if (!columnNames.includes("description")) {
+          await pool.query("ALTER TABLE blogs ADD COLUMN description TEXT NOT NULL DEFAULT ''");
+          console.log("Database Migration: Added missing 'description' column to 'blogs' table.");
+        }
+      }
+    } catch (err) {
+      console.error("Error migrating blogs table:", err.message);
+    }
 
     // Create job applications table
     await pool.query(`

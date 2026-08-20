@@ -494,6 +494,7 @@ async function initDB() {
       ];
 
       let seededCount = 0;
+      let updatedCount = 0;
       for (const t of defaultTechs) {
         const [rows] = await pool.query("SELECT * FROM technologies WHERE name = ?", [t.name]);
         if (rows.length === 0) {
@@ -502,10 +503,19 @@ async function initDB() {
             [t.name, t.description, t.keywords, t.how_to_work]
           );
           seededCount++;
+        } else {
+          const existing = rows[0];
+          if (!existing.keywords || !existing.how_to_work) {
+            await pool.query(
+              "UPDATE technologies SET keywords = ?, how_to_work = ? WHERE id = ?",
+              [t.keywords, t.how_to_work, existing.id]
+            );
+            updatedCount++;
+          }
         }
       }
-      if (seededCount > 0) {
-        console.log(`Database Seed: Seeded ${seededCount} new default technologies into database.`);
+      if (seededCount > 0 || updatedCount > 0) {
+        console.log(`Database Seed: Seeded ${seededCount} new, updated ${updatedCount} existing technologies.`);
       }
     } catch (err) {
       console.error("Error migrating or seeding technologies table:", err.message);

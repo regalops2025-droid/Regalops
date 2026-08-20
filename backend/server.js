@@ -455,43 +455,47 @@ async function initDB() {
         console.log("Database Migration: Added missing 'description' column to 'technologies' table.");
       }
 
-      // Seed default technologies if table is empty
-      const [existingTech] = await pool.query("SELECT * FROM technologies");
-      if (existingTech.length === 0) {
-        const defaultTechs = [
-          { name: "React", description: "Fast, component-based frontend user interfaces." },
-          { name: "Next.js", description: "Server-side rendering and static React framework." },
-          { name: "TypeScript", description: "Strict syntactical superset of JavaScript adding static typing." },
-          { name: "Node.js", description: "Scalable event-driven asynchronous JavaScript runtime." },
-          { name: "Python", description: "Versatile language for backend services, scripting and ML." },
-          { name: "Go", description: "High-performance compiled language for concurrent microservices." },
-          { name: "Rust", description: "Memory-safe systems language for CPU-intensive modules." },
-          { name: "PostgreSQL", description: "Powerful object-relational open-source database system." },
-          { name: "MongoDB", description: "Flexible document-based NoSQL database for unstructured data." },
-          { name: "Kafka", description: "Distributed event streaming platform for high-throughput pipelines." },
-          { name: "Redis", description: "In-memory data structure store used as database, cache and broker." },
-          { name: "Kubernetes", description: "Container orchestration platform for scaling applications." },
-          { name: "Docker", description: "Containerization platform to package and deploy software." },
-          { name: "Terraform", description: "Infrastructure as Code to provision cloud resources." },
-          { name: "AWS", description: "Amazon Web Services cloud platform and serverless resources." },
-          { name: "Azure", description: "Microsoft cloud solutions for enterprise hosting and AD integration." },
-          { name: "GCP", description: "Google Cloud Platform tailored for Kubernetes, big data and AI." },
-          { name: "Snowflake", description: "Cloud data warehousing platform for analytics at scale." },
-          { name: "dbt", description: "Data build tool to transform data in warehouses using SQL." },
-          { name: "PyTorch", description: "Deep learning framework for training neural networks." },
-          { name: "TensorFlow", description: "Open-source machine learning platform for AI models." },
-          { name: "Swift", description: "Native iOS app development with compiled performance." },
-          { name: "Kotlin", description: "Modern Android app development with type-safe syntax." },
-          { name: "GraphQL", description: "Query language for APIs to fetch exactly the data needed." }
-        ];
+      // Seed default technologies if they don't exist
+      const defaultTechs = [
+        { name: "React", description: "Fast, component-based frontend user interfaces." },
+        { name: "Next.js", description: "Server-side rendering and static React framework." },
+        { name: "TypeScript", description: "Strict syntactical superset of JavaScript adding static typing." },
+        { name: "Node.js", description: "Scalable event-driven asynchronous JavaScript runtime." },
+        { name: "Python", description: "Versatile language for backend services, scripting and ML." },
+        { name: "Go", description: "High-performance compiled language for concurrent microservices." },
+        { name: "Rust", description: "Memory-safe systems language for CPU-intensive modules." },
+        { name: "PostgreSQL", description: "Powerful object-relational open-source database system." },
+        { name: "MongoDB", description: "Flexible document-based NoSQL database for unstructured data." },
+        { name: "Kafka", description: "Distributed event streaming platform for high-throughput pipelines." },
+        { name: "Redis", description: "In-memory data structure store used as database, cache and broker." },
+        { name: "Kubernetes", description: "Container orchestration platform for scaling applications." },
+        { name: "Docker", description: "Containerization platform to package and deploy software." },
+        { name: "Terraform", description: "Infrastructure as Code to provision cloud resources." },
+        { name: "AWS", description: "Amazon Web Services cloud platform and serverless resources." },
+        { name: "Azure", description: "Microsoft cloud solutions for enterprise hosting and AD integration." },
+        { name: "GCP", description: "Google Cloud Platform tailored for Kubernetes, big data and AI." },
+        { name: "Snowflake", description: "Cloud data warehousing platform for analytics at scale." },
+        { name: "dbt", description: "Data build tool to transform data in warehouses using SQL." },
+        { name: "PyTorch", description: "Deep learning framework for training neural networks." },
+        { name: "TensorFlow", description: "Open-source machine learning platform for AI models." },
+        { name: "Swift", description: "Native iOS app development with compiled performance." },
+        { name: "Kotlin", description: "Modern Android app development with type-safe syntax." },
+        { name: "GraphQL", description: "Query language for APIs to fetch exactly the data needed." }
+      ];
 
-        for (const t of defaultTechs) {
+      let seededCount = 0;
+      for (const t of defaultTechs) {
+        const [rows] = await pool.query("SELECT * FROM technologies WHERE name = ?", [t.name]);
+        if (rows.length === 0) {
           await pool.query(
             "INSERT INTO technologies (name, description) VALUES (?, ?)",
             [t.name, t.description]
           );
+          seededCount++;
         }
-        console.log("Database Seed: Seeded default technologies into database.");
+      }
+      if (seededCount > 0) {
+        console.log(`Database Seed: Seeded ${seededCount} new default technologies into database.`);
       }
     } catch (err) {
       console.error("Error migrating or seeding technologies table:", err.message);

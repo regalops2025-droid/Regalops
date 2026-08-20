@@ -2,13 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { SiteLayout, PageHero, Section } from "@/components/site/site-layout";
 
-const stack = [
-  "React", "Next.js", "TypeScript", "Node.js", "Python", "Go", "Rust",
-  "PostgreSQL", "MongoDB", "Kafka", "Redis", "Kubernetes", "Docker",
-  "Terraform", "AWS", "Azure", "GCP", "Snowflake", "dbt", "PyTorch",
-  "TensorFlow", "Swift", "Kotlin", "GraphQL",
-];
-
 export const Route = createFileRoute("/technologies")({
   head: () => ({
     meta: [
@@ -74,12 +67,12 @@ function Technologies() {
         <Section>
           <h2 className="text-2xl font-semibold sm:text-3xl">Full toolchain</h2>
           <div className="mt-8 flex flex-wrap gap-2.5">
-            {stack.map((tech) => (
+            {techList.map((tech) => (
               <span
-                key={tech}
+                key={tech.id}
                 className="rounded-xl border border-border bg-background px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-primary hover:text-primary"
               >
-                {tech}
+                {tech.name}
               </span>
             ))}
           </div>

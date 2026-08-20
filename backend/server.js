@@ -465,60 +465,31 @@ async function initDB() {
         console.log("Database Migration: Added missing 'how_to_work' column to 'technologies' table.");
       }
 
-      // Seed default technologies if they don't exist
-      const defaultTechs = [
-        { name: "React", description: "Fast, component-based frontend user interfaces.", keywords: "Frontend, SPA, UI", how_to_work: "We build reactive client-side interfaces and complex portals." },
-        { name: "Next.js", description: "Server-side rendering and static React framework.", keywords: "SSR, SSG, React", how_to_work: "Used for SEO-optimized landing pages and public-facing routes." },
-        { name: "TypeScript", description: "Strict syntactical superset of JavaScript adding static typing.", keywords: "Type-Safe, JS, Compile", how_to_work: "Adopted across all codebases to reduce runtime errors and bugs." },
-        { name: "Node.js", description: "Scalable event-driven asynchronous JavaScript runtime.", keywords: "Backend, Runtime, Express", how_to_work: "Powers our microservices, APIs, and real-time backend integrations." },
-        { name: "Python", description: "Versatile language for backend services, scripting and ML.", keywords: "ML, Data, Backend", how_to_work: "Used for data pipelines, scripting, and training machine learning models." },
-        { name: "Go", description: "High-performance compiled language for concurrent microservices.", keywords: "Microservices, Concurrency, Fast", how_to_work: "Powers performance-critical API routes and background worker services." },
-        { name: "Rust", description: "Memory-safe systems language for CPU-intensive modules.", keywords: "Systems, Memory-Safe, CPU", how_to_work: "Used for computational tasks and low-latency systems integration." },
-        { name: "PostgreSQL", description: "Powerful object-relational open-source database system.", keywords: "SQL, Relational, ACID", how_to_work: "Primary database engine for transactional and structured storage." },
-        { name: "MongoDB", description: "Flexible document-based NoSQL database for unstructured data.", keywords: "NoSQL, Document, JSON", how_to_work: "Stores log streams, audits, and unstructured document schemas." },
-        { name: "Kafka", description: "Distributed event streaming platform for high-throughput pipelines.", keywords: "Streaming, Events, Messaging", how_to_work: "Orchestrates asynchronous event pipelines between our backend jobs." },
-        { name: "Redis", description: "In-memory data structure store used as database, cache and broker.", keywords: "Cache, Key-Value, Session", how_to_work: "Utilized for session state storage and high-speed caching layers." },
-        { name: "Kubernetes", description: "Container orchestration platform for scaling applications.", keywords: "Containers, Cloud-Native, Devops", how_to_work: "Orchestrates container scaling and load balancing in our server clusters." },
-        { name: "Docker", description: "Containerization platform to package and deploy software.", keywords: "Containers, Packaging, Deploy", how_to_work: "Packages all environments to guarantee local-to-production parity." },
-        { name: "Terraform", description: "Infrastructure as Code to provision cloud resources.", keywords: "IaC, Terraform, Infra", how_to_work: "Provisions all server groups, databases, and networks via code declarations." },
-        { name: "AWS", description: "Amazon Web Services cloud platform and serverless resources.", keywords: "Cloud, Serverless, IAM", how_to_work: "Hosts our cloud resources, serverless operations, and file storage." },
-        { name: "Azure", description: "Microsoft cloud solutions for enterprise hosting and AD integration.", keywords: "Cloud, Enterprise, AD", how_to_work: "Primary hosting platform for clients with strict Active Directory needs." },
-        { name: "GCP", description: "Google Cloud Platform tailored for Kubernetes, big data and AI.", keywords: "Cloud, Kubernetes, AI", how_to_work: "Powers our container workloads, big data analytics, and AI models." },
-        { name: "Snowflake", description: "Cloud data warehousing platform for analytics at scale.", keywords: "Warehouse, Data, SQL", how_to_work: "Consolidates multi-platform records for big data reporting and BI." },
-        { name: "dbt", description: "Data build tool to transform data in warehouses using SQL.", keywords: "Data, SQL, ETL", how_to_work: "Transforms raw warehouse datasets into business-ready clean tables." },
-        { name: "PyTorch", description: "Deep learning framework for training neural networks.", keywords: "AI, Deep Learning, Tensor", how_to_work: "Engineers use it to train and test advanced custom AI architectures." },
-        { name: "TensorFlow", description: "Open-source machine learning platform for AI models.", keywords: "AI, Machine Learning, Models", how_to_work: "Runs and serves production computer vision and translation models." },
-        { name: "Swift", description: "Native iOS app development with compiled performance.", keywords: "iOS, Mobile, Native", how_to_work: "Powers high-performance native iOS clients for our business portals." },
-        { name: "Kotlin", description: "Modern Android app development with type-safe syntax.", keywords: "Android, Mobile, Native", how_to_work: "Used to write modern native Android clients with optimal performance." },
-        { name: "GraphQL", description: "Query language for APIs to fetch exactly the data needed.", keywords: "API, Query, Client", how_to_work: "Lets client portals query precise fields, minimizing network overhead." }
+      // One-time cleanup: remove any automatically seeded default technologies
+      const defaultTechNames = [
+        "React", "Next.js", "TypeScript", "Node.js", "Python", "Go", "Rust",
+        "PostgreSQL", "MongoDB", "Kafka", "Redis", "Kubernetes", "Docker",
+        "Terraform", "AWS", "Azure", "GCP", "Snowflake", "dbt", "PyTorch",
+        "TensorFlow", "Swift", "Kotlin", "GraphQL"
       ];
-
-      let seededCount = 0;
-      let updatedCount = 0;
-      for (const t of defaultTechs) {
-        const [rows] = await pool.query("SELECT * FROM technologies WHERE name = ?", [t.name]);
-        if (rows.length === 0) {
-          await pool.query(
-            "INSERT INTO technologies (name, description, keywords, how_to_work) VALUES (?, ?, ?, ?)",
-            [t.name, t.description, t.keywords, t.how_to_work]
+      // Run cleanup on MySQL, catch error in MockPool since it doesn't support complex DELETE WHERE IN
+      try {
+        const [delResult] = await pool.query("DELETE FROM technologies WHERE name IN (?)", [defaultTechNames]);
+        if (delResult && delResult.affectedRows > 0) {
+          console.log(`Database Migration: Cleaned up ${delResult.affectedRows} default seeded technologies.`);
+        }
+      } catch (mockErr) {
+        // If it's MockPool, let's clean up manually using supported queries
+        if (pool.data && pool.data.technologies) {
+          pool.data.technologies = pool.data.technologies.filter(
+            t => !defaultTechNames.includes(t.name)
           );
-          seededCount++;
-        } else {
-          const existing = rows[0];
-          if (!existing.keywords || !existing.how_to_work) {
-            await pool.query(
-              "UPDATE technologies SET keywords = ?, how_to_work = ? WHERE id = ?",
-              [t.keywords, t.how_to_work, existing.id]
-            );
-            updatedCount++;
-          }
+          pool.save();
+          console.log("Database Migration: Cleaned up default mock technologies.");
         }
       }
-      if (seededCount > 0 || updatedCount > 0) {
-        console.log(`Database Seed: Seeded ${seededCount} new, updated ${updatedCount} existing technologies.`);
-      }
     } catch (err) {
-      console.error("Error migrating or seeding technologies table:", err.message);
+      console.error("Error migrating or cleaning technologies table:", err.message);
     }
 
     // Create clients table

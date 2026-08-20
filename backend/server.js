@@ -583,7 +583,11 @@ app.post("/api/login", async (req, res) => {
     }
 
     const user = rows[0];
-    const isMatch = await bcrypt.compare(password, user.password);
+    // Normalize PHP $2y$ BCRYPT hash prefix to $2a$ for bcryptjs compatibility
+    const normalizedHash = user.password.startsWith("$2y$") 
+      ? user.password.replace(/^\$2y\$/, "$2a$") 
+      : user.password;
+    const isMatch = await bcrypt.compare(password, normalizedHash);
     if (!isMatch) {
       return res.status(401).json({ error: "Invalid email or password." });
     }

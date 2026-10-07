@@ -5,15 +5,15 @@ import { navItems } from "./nav-data";
 
 function Logo({ scrolled }: { scrolled: boolean }) {
   return (
-    <Link to="/" className="flex min-w-0 items-center gap-3.5 group">
+    <Link to="/" className="flex min-w-0 items-center gap-2.5 group">
       <img
         src="/logo.png"
         alt="Regal OPs Logo"
         className={`w-auto object-contain transition-all duration-300 ${
-          scrolled ? "h-14" : "h-18"
+          scrolled ? "h-9" : "h-10 sm:h-11"
         }`}
       />
-      <span className="font-display text-2xl font-bold tracking-tight text-foreground transition-all duration-300">
+      <span className="font-display text-xl sm:text-2xl font-bold tracking-tight text-foreground transition-all duration-300">
         Regal OPs
       </span>
     </Link>
@@ -65,11 +65,11 @@ export function SiteHeader() {
 
   return (
     <header
-      style={{ "--header-height": scrolled ? "78px" : "106px" } as React.CSSProperties}
+      style={{ "--header-height": scrolled ? "60px" : "68px" } as React.CSSProperties}
       className={`sticky top-0 z-50 transition-all duration-300 border-b ${
         scrolled
-          ? "border-primary/20 bg-[color-mix(in_oklab,var(--primary)_6%,var(--background))]/90 backdrop-blur-md shadow-md py-2.5"
-          : "border-border/40 bg-background/40 backdrop-blur-sm py-4"
+          ? "border-primary/20 bg-[color-mix(in_oklab,var(--primary)_6%,var(--background))]/90 backdrop-blur-md shadow-md py-2"
+          : "border-border/30 bg-background/50 backdrop-blur-sm py-2 sm:py-2.5"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
@@ -103,14 +103,17 @@ export function SiteHeader() {
               <div key={item.label} className="group relative">
                 <Link
                   to={item.to}
-                  className={`flex items-center gap-1.5 px-3.5 py-2 text-sm transition-all duration-200 border ${
+                  className={`relative flex items-center gap-1 px-3.5 py-2 text-sm font-medium transition-colors ${
                     active
-                      ? "text-primary-foreground bg-primary border-transparent font-semibold shadow-sm rounded-tr-2xl rounded-bl-2xl rounded-tl-sm rounded-br-sm"
-                      : "text-muted-foreground border-transparent font-medium rounded-xl hover:bg-secondary/50 hover:text-foreground"
+                      ? "text-neutral-900 font-semibold"
+                      : "text-neutral-600 hover:text-neutral-900"
                   }`}
                 >
                   {item.label}
-                  <ChevronDown className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-180" />
+                  <ChevronDown className="h-3.5 w-3.5 opacity-70 transition-transform duration-200 group-hover:rotate-180" />
+                  {active && (
+                    <span className="absolute bottom-0 left-3.5 right-3.5 h-[2px] bg-[#166534] rounded-full" />
+                  )}
                 </Link>
                 <div className="invisible absolute left-1/2 top-full w-[580px] -translate-x-1/2 pt-3.5 opacity-0 transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                   <div className="panel grid grid-cols-2 gap-2 p-4 bg-background/95 backdrop-blur-xl border border-border/80 shadow-xl rounded-2xl">
@@ -140,13 +143,16 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 to={item.to}
-                className={`px-3.5 py-2 text-sm transition-all duration-200 border ${
+                className={`relative px-3.5 py-2 text-sm font-medium transition-colors ${
                   active
-                    ? "text-primary-foreground bg-primary border-transparent font-semibold shadow-sm rounded-tr-2xl rounded-bl-2xl rounded-tl-sm rounded-br-sm"
-                    : "text-muted-foreground border-transparent font-medium rounded-xl hover:bg-secondary/50 hover:text-foreground"
+                    ? "text-neutral-900 font-semibold"
+                    : "text-neutral-600 hover:text-neutral-900"
                 }`}
               >
                 {item.label}
+                {active && (
+                  <span className="absolute bottom-0 left-3.5 right-3.5 h-[2px] bg-[#166534] rounded-full" />
+                )}
               </Link>
             );
           })}
@@ -155,9 +161,9 @@ export function SiteHeader() {
         <div className="flex shrink-0 items-center gap-2">
           <Link
             to="/login"
-            className="hidden rounded-tr-2xl rounded-bl-2xl rounded-tl-sm rounded-br-sm bg-gradient-to-r from-primary to-gold/90 px-6 py-2 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/10 hover:shadow-lg hover:shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 sm:inline-flex"
+            className="hidden rounded-full bg-[#13502c] hover:bg-[#0e3f22] px-5 py-2 text-sm font-semibold text-white shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 sm:inline-flex items-center gap-1.5"
           >
-            Login
+            Login <ArrowRight className="h-3.5 w-3.5" />
           </Link>
           <button
             type="button"

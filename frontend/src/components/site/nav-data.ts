@@ -29,7 +29,14 @@ export const navItems: NavItem[] = [
     ],
   },
   { label: "Clients", to: "/clients" },
-  { label: "Career", to: "/career" },
+  {
+    label: "Career",
+    to: "/career",
+    children: [
+      { label: "Open Positions", desc: "Join our global engineering team" },
+      { label: "Life at Regal OPs", desc: "Culture, benefits, and innovation" },
+    ],
+  },
   { label: "Blog", to: "/blog" },
   { label: "Contact Us", to: "/contact" },
 ];

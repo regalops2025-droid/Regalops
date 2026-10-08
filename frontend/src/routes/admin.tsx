@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { LogOut, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen } from "lucide-react";
+import { LogOut, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen, Compass } from "lucide-react";
 import { ImageUploadField } from "@/components/admin/image-upload-field";
 
 export const Route = createFileRoute("/admin")({
@@ -9,7 +9,7 @@ export const Route = createFileRoute("/admin")({
       { title: "Admin Portal — Regal OPs" },
       {
         name: "description",
-        content: "Admin portal to view enquiries and manage solutions, technologies, clients, careers & blogs.",
+        content: "Admin portal to view enquiries and manage solutions, technologies, services, clients, careers & blogs.",
       },
     ],
   }),
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/admin")({
 
 function AdminDashboard() {
   const [admin, setAdmin] = useState<any>(null);
-  const [activeTab, setActiveTab] = useState<"enquiries" | "solutions" | "technologies" | "clients" | "careers" | "blogs" | "applications">("enquiries");
+  const [activeTab, setActiveTab] = useState<"enquiries" | "solutions" | "technologies" | "services" | "clients" | "careers" | "blogs" | "applications">("enquiries");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   
   // Enquiries State
@@ -59,12 +59,33 @@ function AdminDashboard() {
 
   // Form State for new/editing technology
   const [techName, setTechName] = useState("");
+  const [techCategory, setTechCategory] = useState("ENTERPRISE WEB & FRONTEND");
+  const [techStatusBadge, setTechStatusBadge] = useState("PRODUCTION READY");
+  const [techBrands, setTechBrands] = useState("");
   const [techDesc, setTechDesc] = useState("");
   const [techKeywords, setTechKeywords] = useState("");
   const [techHowToWork, setTechHowToWork] = useState("");
   const [techFormLoading, setTechFormLoading] = useState(false);
   const [techFormSuccess, setTechFormSuccess] = useState(false);
   const [techFormError, setTechFormError] = useState("");
+
+  // Services State
+  const [serviceList, setServiceList] = useState<any[]>([]);
+  const [serviceLoading, setServiceLoading] = useState(true);
+  const [serviceError, setServiceError] = useState("");
+  const [deleteServiceStatus, setDeleteServiceStatus] = useState<{ id: number; status: "idle" | "loading" } | null>(null);
+
+  // Editing state for services
+  const [editingServiceId, setEditingServiceId] = useState<number | null>(null);
+
+  // Form State for new/editing service
+  const [serviceTitle, setServiceTitle] = useState("");
+  const [serviceDesc, setServiceDesc] = useState("");
+  const [serviceIcon, setServiceIcon] = useState("tech-consulting");
+  const [serviceLink, setServiceLink] = useState("/solutions");
+  const [serviceFormLoading, setServiceFormLoading] = useState(false);
+  const [serviceFormSuccess, setServiceFormSuccess] = useState(false);
+  const [serviceFormError, setServiceFormError] = useState("");
 
   // Clients State
   const [clientList, setClientList] = useState<any[]>([]);
@@ -225,6 +246,25 @@ function AdminDashboard() {
     }
   };
 
+  // Fetch services
+  const fetchServices = async () => {
+    setServiceLoading(true);
+    setServiceError("");
+    try {
+      const response = await secureFetch("/api/services");
+      if (!response.ok) {
+        throw new Error("Failed to load services.");
+      }
+      const data = await response.json();
+      setServiceList(data);
+    } catch (err: any) {
+      console.error(err);
+      setServiceError(err.message || "An error occurred while loading services.");
+    } finally {
+      setServiceLoading(false);
+    }
+  };
+
   // Fetch clients
   const fetchClients = async () => {
     setClientLoading(true);
@@ -326,6 +366,7 @@ function AdminDashboard() {
       fetchEnquiries();
       fetchSolutions();
       fetchTechnologies();
+      fetchServices();
       fetchClients();
       fetchJobs();
       fetchBlogs();
@@ -588,6 +629,9 @@ function AdminDashboard() {
   const handleStartTechEdit = (item: any) => {
     setEditingTechId(item.id);
     setTechName(item.name);
+    setTechCategory(item.category || "ENTERPRISE WEB & FRONTEND");
+    setTechStatusBadge(item.status_badge || "PRODUCTION READY");
+    setTechBrands(item.brands || "");
     setTechDesc(item.description);
     setTechKeywords(item.keywords || "");
     setTechHowToWork(item.how_to_work || "");
@@ -599,6 +643,9 @@ function AdminDashboard() {
   const handleCancelTechEdit = () => {
     setEditingTechId(null);
     setTechName("");
+    setTechCategory("ENTERPRISE WEB & FRONTEND");
+    setTechStatusBadge("PRODUCTION READY");
+    setTechBrands("");
     setTechDesc("");
     setTechKeywords("");
     setTechHowToWork("");
@@ -619,7 +666,10 @@ function AdminDashboard() {
       name: techName,
       description: techDesc,
       keywords: techKeywords || null,
-      how_to_work: techHowToWork || null
+      how_to_work: techHowToWork || null,
+      category: techCategory || null,
+      status_badge: techStatusBadge || null,
+      brands: techBrands || null,
     };
 
     try {
@@ -659,6 +709,9 @@ function AdminDashboard() {
         const newTech = await response.json();
         setTechList((prev) => [...prev, newTech]);
         setTechName("");
+        setTechCategory("ENTERPRISE WEB & FRONTEND");
+        setTechStatusBadge("PRODUCTION READY");
+        setTechBrands("");
         setTechDesc("");
         setTechKeywords("");
         setTechHowToWork("");
@@ -670,6 +723,118 @@ function AdminDashboard() {
       setTechFormError(err.message || "Could not save technology. Please try again.");
     } finally {
       setTechFormLoading(false);
+    }
+  };
+
+  // Start Service Edit Mode
+  const handleStartServiceEdit = (item: any) => {
+    setEditingServiceId(item.id);
+    setServiceTitle(item.title);
+    setServiceDesc(item.description);
+    setServiceIcon(item.icon || "tech-consulting");
+    setServiceLink(item.link || "/solutions");
+    setServiceFormSuccess(false);
+    setServiceFormError("");
+  };
+
+  // Cancel Service Edit Mode
+  const handleCancelServiceEdit = () => {
+    setEditingServiceId(null);
+    setServiceTitle("");
+    setServiceDesc("");
+    setServiceIcon("tech-consulting");
+    setServiceLink("/solutions");
+    setServiceFormSuccess(false);
+    setServiceFormError("");
+  };
+
+  // Submit Service (Create or Update)
+  const handleSubmitService = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!serviceTitle || !serviceDesc) return;
+
+    setServiceFormLoading(true);
+    setServiceFormError("");
+    setServiceFormSuccess(false);
+
+    const payload = {
+      title: serviceTitle,
+      description: serviceDesc,
+      icon: serviceIcon || "tech-consulting",
+      link: serviceLink || "/solutions",
+    };
+
+    try {
+      if (editingServiceId !== null) {
+        const response = await secureFetch(`/api/services/${editingServiceId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          const data = await response.json();
+          throw new Error(data.error || "Failed to update service.");
+        }
+
+        const updatedService = await response.json();
+        setServiceList((prev) => prev.map((s) => s.id === editingServiceId ? updatedService : s));
+        handleCancelServiceEdit();
+        setServiceFormSuccess(true);
+        setTimeout(() => setServiceFormSuccess(false), 3000);
+      } else {
+        const response = await secureFetch("/api/services", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          const data = await response.json();
+          throw new Error(data.error || "Failed to create service.");
+        }
+
+        const newService = await response.json();
+        setServiceList((prev) => [...prev, newService]);
+        setServiceTitle("");
+        setServiceDesc("");
+        setServiceIcon("tech-consulting");
+        setServiceLink("/solutions");
+        setServiceFormSuccess(true);
+        setTimeout(() => setServiceFormSuccess(false), 3000);
+      }
+    } catch (err: any) {
+      console.error(err);
+      setServiceFormError(err.message || "Could not save service. Please try again.");
+    } finally {
+      setServiceFormLoading(false);
+    }
+  };
+
+  // Delete Service
+  const handleDeleteService = async (id: number) => {
+    if (!confirm("Are you sure you want to delete this service?")) return;
+    setDeleteServiceStatus({ id, status: "loading" });
+    try {
+      const response = await secureFetch(`/api/services/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete service.");
+      }
+      setServiceList((prev) => prev.filter((item) => item.id !== id));
+      setDeleteServiceStatus(null);
+      if (editingServiceId === id) {
+        handleCancelServiceEdit();
+      }
+    } catch (err: any) {
+      console.error(err);
+      setDeleteServiceStatus(null);
+      alert(err.message || "Could not delete service. Please try again.");
     }
   };
 
@@ -1078,10 +1243,10 @@ function AdminDashboard() {
 
   // Sidebar navigation component
   const SidebarContent = () => (
-    <div className="flex h-full flex-col justify-between bg-zinc-950 text-zinc-200">
-      <div>
+    <div className="flex h-full flex-col justify-between bg-zinc-950 text-zinc-200 select-none">
+      <div className="flex-1 overflow-y-auto">
         {/* Branding */}
-        <div className="flex h-16 items-center gap-3 border-b border-border/30 px-6">
+        <div className="sticky top-0 z-10 flex h-16 items-center gap-3 border-b border-border/30 bg-zinc-950/95 backdrop-blur-md px-6">
           <img src="/logo.png" className="h-10 w-auto object-contain" alt="Logo" />
           <span className="font-display text-lg font-bold tracking-tight text-white">Regal Ops Portal</span>
         </div>
@@ -1152,6 +1317,26 @@ function AdminDashboard() {
               activeTab === "technologies" ? "bg-white/20 text-white" : "bg-zinc-800 text-zinc-400"
             }`}>
               {techList.length}
+            </span>
+          </button>
+
+          <button
+            onClick={() => {
+              setActiveTab("services");
+              setMobileSidebarOpen(false);
+            }}
+            className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all cursor-pointer ${
+              activeTab === "services"
+                ? "bg-primary text-primary-foreground shadow-md"
+                : "hover:bg-zinc-800/60 hover:text-white text-zinc-400"
+            }`}
+          >
+            <Compass className="h-4.5 w-4.5" />
+            Manage Services
+            <span className={`ml-auto rounded-full px-2 py-0.5 text-xs font-semibold ${
+              activeTab === "services" ? "bg-white/20 text-white" : "bg-zinc-800 text-zinc-400"
+            }`}>
+              {serviceList.length}
             </span>
           </button>
 
@@ -1238,7 +1423,7 @@ function AdminDashboard() {
       </div>
 
       {/* Logout Button */}
-      <div className="p-4 border-t border-border/20">
+      <div className="p-4 border-t border-border/20 bg-zinc-950 shrink-0">
         <button
           onClick={handleLogout}
           className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-all cursor-pointer"
@@ -1254,7 +1439,7 @@ function AdminDashboard() {
     <div className="flex min-h-screen bg-background">
       
       {/* 1. Desktop Sidebar (Left) */}
-      <aside className="hidden w-64 shrink-0 border-r border-border/70 xl:block">
+      <aside className="hidden w-64 shrink-0 border-r border-border/70 xl:block sticky top-0 h-screen z-30">
         <SidebarContent />
       </aside>
 
@@ -1298,11 +1483,15 @@ function AdminDashboard() {
                   ? "Manage Solutions"
                   : activeTab === "technologies"
                     ? "Manage Technologies"
-                    : activeTab === "clients"
-                      ? "Manage Clients"
-                      : activeTab === "careers"
-                        ? "Manage Careers"
-                        : "Manage Blogs"}
+                    : activeTab === "services"
+                      ? "Manage Services"
+                      : activeTab === "clients"
+                        ? "Manage Clients"
+                        : activeTab === "careers"
+                          ? "Manage Careers"
+                          : activeTab === "blogs"
+                            ? "Manage Blogs"
+                            : "Applications"}
             </h1>
           </div>
 
@@ -1312,14 +1501,16 @@ function AdminDashboard() {
                 fetchEnquiries();
                 fetchSolutions();
                 fetchTechnologies();
+                fetchServices();
                 fetchClients();
                 fetchJobs();
                 fetchBlogs();
+                fetchApplications();
               }}
               className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-foreground transition-all hover:bg-secondary"
               title="Refresh Data"
             >
-              <RefreshCw className={`h-3.5 w-3.5 ${enquiriesLoading || solutionsLoading || techLoading || clientLoading || jobLoading || blogLoading ? "animate-spin" : ""}`} />
+              <RefreshCw className={`h-3.5 w-3.5 ${enquiriesLoading || solutionsLoading || techLoading || serviceLoading || clientLoading || jobLoading || blogLoading ? "animate-spin" : ""}`} />
               <span className="hidden sm:inline">Refresh Data</span>
             </button>
           </div>
@@ -1329,7 +1520,7 @@ function AdminDashboard() {
         <main className="flex-1 p-6 md:p-8 max-w-7xl w-full mx-auto">
           
           {/* Stat Metrics Grid */}
-          <div className="grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 mb-8">
+          <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 mb-8">
             <div className="panel p-4 bg-surface border border-border/70">
               <p className="text-[10px] font-semibold uppercase tracking-wider text-primary">
                 Enquiries
@@ -1352,6 +1543,14 @@ function AdminDashboard() {
               </p>
               <h3 className="mt-1 font-display text-2xl font-bold text-foreground">
                 {techLoading ? "..." : techList.length}
+              </h3>
+            </div>
+            <div className="panel p-4 bg-surface border border-border/70">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-primary">
+                Services
+              </p>
+              <h3 className="mt-1 font-display text-2xl font-bold text-foreground">
+                {serviceLoading ? "..." : serviceList.length}
               </h3>
             </div>
             <div className="panel p-4 bg-surface border border-border/70">
@@ -1736,15 +1935,44 @@ function AdminDashboard() {
                     {techList.map((item) => (
                       <div
                         key={item.id}
-                        className={`panel p-4 bg-surface border flex gap-4 items-center justify-between transition-all duration-300 ${
+                        className={`panel p-4 bg-surface border flex gap-4 items-start justify-between transition-all duration-300 ${
                           editingTechId === item.id 
                             ? "border-primary bg-primary/2" 
                             : "border-border/85 hover:border-primary/30"
                         }`}
                       >
                         <div className="min-w-0 flex-1">
-                          <h4 className="font-bold text-foreground truncate">{item.name}</h4>
-                          <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{item.description}</p>
+                          {/* Category & Status Badge Row */}
+                          <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
+                            {item.category && (
+                              <span className="text-[10px] font-extrabold uppercase tracking-wider bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 px-2 py-0.5 rounded border border-cyan-500/25">
+                                {item.category}
+                              </span>
+                            )}
+                            {item.status_badge && (
+                              <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                                {item.status_badge}
+                              </span>
+                            )}
+                          </div>
+
+                          <h4 className="font-bold text-foreground text-base truncate">{item.name}</h4>
+
+                          {/* Brand Logos / Names Chips */}
+                          {item.brands && (
+                            <div className="mt-1.5 flex flex-wrap items-center gap-1">
+                              <span className="text-[10px] font-bold text-muted-foreground mr-1">Brands:</span>
+                              {item.brands.split(",").map((b: string) => (
+                                <span key={b} className="text-[10px] font-semibold px-2 py-0.5 bg-background text-foreground rounded-md border border-border/80">
+                                  {b.trim()}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+
+                          <p className="text-xs text-muted-foreground line-clamp-2 mt-1.5">{item.description}</p>
+
                           {item.keywords && (
                             <div className="mt-2 flex flex-wrap gap-1">
                               {item.keywords.split(",").map((k: string) => (
@@ -1756,7 +1984,7 @@ function AdminDashboard() {
                           )}
                         </div>
 
-                        <div className="flex gap-2 shrink-0">
+                        <div className="flex gap-2 shrink-0 pt-1">
                           <button
                             onClick={() => handleStartTechEdit(item)}
                             className={`inline-flex items-center justify-center h-9 w-9 rounded-xl border transition-all shrink-0 cursor-pointer ${
@@ -1808,13 +2036,13 @@ function AdminDashboard() {
                     </div>
                   )}
 
-                  <form onSubmit={handleSubmitTech} className="space-y-5">
+                  <form onSubmit={handleSubmitTech} className="space-y-4">
                     <label className="block text-sm font-medium">
                       Technology Name
                       <input
                         type="text"
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. React Native / Swift"
+                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                        placeholder="e.g. React & Next.js"
                         value={techName}
                         onChange={(e) => setTechName(e.target.value)}
                         required
@@ -1822,11 +2050,138 @@ function AdminDashboard() {
                       />
                     </label>
 
+                    {/* Category Badge & Quick Presets */}
+                    <div>
+                      <label className="block text-sm font-medium">
+                        Category Badge
+                        <input
+                          type="text"
+                          className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs uppercase"
+                          placeholder="e.g. ENTERPRISE WEB & FRONTEND"
+                          value={techCategory}
+                          onChange={(e) => setTechCategory(e.target.value)}
+                          disabled={techFormLoading}
+                        />
+                      </label>
+                      <div className="mt-1.5 flex flex-wrap gap-1">
+                        {[
+                          "ENTERPRISE WEB & FRONTEND",
+                          "RUNTIMES & DISTRIBUTED APIS",
+                          "MULTI-CLOUD ARCHITECTURE",
+                          "CONTAINER PLATFORMS & CI/CD",
+                          "MOBILE & CROSS-PLATFORM",
+                          "AI & MACHINE LEARNING",
+                          "ENTERPRISE ERP & SAP",
+                        ].map((cat) => (
+                          <button
+                            key={cat}
+                            type="button"
+                            onClick={() => setTechCategory(cat)}
+                            className={`text-[10px] px-2 py-0.5 rounded-md border font-bold uppercase transition-all cursor-pointer ${
+                              techCategory.toUpperCase() === cat
+                                ? "bg-primary text-primary-foreground border-primary"
+                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                            }`}
+                          >
+                            {cat}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Status Badge & Quick Presets */}
+                    <div>
+                      <label className="block text-sm font-medium">
+                        Status Badge
+                        <input
+                          type="text"
+                          className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs uppercase"
+                          placeholder="e.g. PRODUCTION READY"
+                          value={techStatusBadge}
+                          onChange={(e) => setTechStatusBadge(e.target.value)}
+                          disabled={techFormLoading}
+                        />
+                      </label>
+                      <div className="mt-1.5 flex flex-wrap gap-1">
+                        {["PRODUCTION READY", "ENTERPRISE SCALE", "HIGH AVAILABILITY", "LATEST STABLE"].map((badge) => (
+                          <button
+                            key={badge}
+                            type="button"
+                            onClick={() => setTechStatusBadge(badge)}
+                            className={`text-[10px] px-2 py-0.5 rounded-md border font-bold uppercase transition-all cursor-pointer ${
+                              techStatusBadge.toUpperCase() === badge
+                                ? "bg-emerald-500 text-white border-emerald-600"
+                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                            }`}
+                          >
+                            {badge}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Brand Logos / Frameworks with Clickable Toggle Chips */}
+                    <div>
+                      <label className="block text-sm font-medium">
+                        Brand Logos / Frameworks (Comma separated)
+                        <input
+                          type="text"
+                          className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          placeholder="e.g. React, Next.js, TypeScript"
+                          value={techBrands}
+                          onChange={(e) => setTechBrands(e.target.value)}
+                          disabled={techFormLoading}
+                        />
+                      </label>
+                      <p className="mt-1 text-[11px] text-muted-foreground">
+                        Click chips below to add/remove brand logos dynamically:
+                      </p>
+                      <div className="mt-1.5 flex flex-wrap gap-1.5 max-h-28 overflow-y-auto p-1.5 bg-background rounded-lg border border-border/70">
+                        {[
+                          "React", "Next.js", "TypeScript", "Node.js", "Python",
+                          "AWS", "Azure", "GCP", "Kubernetes", "Docker",
+                          "Terraform", "Apple iOS", "Android", "Flutter",
+                          "PyTorch", "TensorFlow", "OpenAI", "PostgreSQL",
+                          "Redis", "SAP"
+                        ].map((b) => {
+                          const currentSelected = techBrands
+                            .split(",")
+                            .map((s) => s.trim().toLowerCase())
+                            .includes(b.toLowerCase());
+                          return (
+                            <button
+                              key={b}
+                              type="button"
+                              onClick={() => {
+                                const current = techBrands
+                                  .split(",")
+                                  .map((s) => s.trim())
+                                  .filter(Boolean);
+                                const exists = current.some((c) => c.toLowerCase() === b.toLowerCase());
+                                if (exists) {
+                                  setTechBrands(current.filter((c) => c.toLowerCase() !== b.toLowerCase()).join(", "));
+                                } else {
+                                  setTechBrands([...current, b].join(", "));
+                                }
+                              }}
+                              className={`text-[10px] px-2 py-0.5 rounded-md font-bold transition-all cursor-pointer border ${
+                                currentSelected
+                                  ? "bg-primary text-primary-foreground border-primary shadow-xs"
+                                  : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                              }`}
+                            >
+                              {currentSelected ? `✓ ${b}` : `+ ${b}`}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
                     <label className="block text-sm font-medium">
                       Description
                       <textarea
                         rows={3}
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
                         placeholder="Describe what this technology/stack is used for..."
                         value={techDesc}
                         onChange={(e) => setTechDesc(e.target.value)}
@@ -1839,8 +2194,8 @@ function AdminDashboard() {
                       Keywords (comma separated)
                       <input
                         type="text"
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. Frontend, Component, UI, State"
+                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                        placeholder="e.g. Components, Designing, SSR, TypeScript"
                         value={techKeywords}
                         onChange={(e) => setTechKeywords(e.target.value)}
                         disabled={techFormLoading}
@@ -1851,7 +2206,7 @@ function AdminDashboard() {
                       How It Works / Usage Details
                       <textarea
                         rows={3}
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
                         placeholder="Describe how we run or implement this technology..."
                         value={techHowToWork}
                         onChange={(e) => setTechHowToWork(e.target.value)}
@@ -1877,6 +2232,222 @@ function AdminDashboard() {
                           onClick={handleCancelTechEdit}
                           className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
                           disabled={techFormLoading}
+                        >
+                          Cancel Edit
+                        </button>
+                      )}
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          )}
+
+          {activeTab === "services" && (
+            <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
+              
+              {/* Left Column: Services List */}
+              <div>
+                <h2 className="text-lg font-bold text-foreground mb-4">Current Services</h2>
+
+                {serviceLoading && serviceList.length === 0 ? (
+                  <div className="space-y-4 animate-pulse">
+                    {[1, 2].map((i) => (
+                      <div key={i} className="panel p-4 bg-surface-2 border border-border/50 h-24"></div>
+                    ))}
+                  </div>
+                ) : serviceError ? (
+                  <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 text-center">
+                    <p className="text-sm text-destructive font-medium">{serviceError}</p>
+                  </div>
+                ) : serviceList.length === 0 ? (
+                  <div className="panel p-12 text-center border border-dashed border-border/80 rounded-2xl flex flex-col items-center justify-center">
+                    <div className="rounded-full bg-secondary p-3 text-muted-foreground">
+                      <Compass className="h-8 w-8" />
+                    </div>
+                    <h3 className="mt-4 text-base font-semibold text-foreground">No services yet</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      Add your first service using the form on the right.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {serviceList.map((item) => (
+                      <div
+                        key={item.id}
+                        className={`panel p-4 bg-surface border flex gap-4 items-start justify-between transition-all duration-300 ${
+                          editingServiceId === item.id 
+                            ? "border-primary bg-primary/2" 
+                            : "border-border/85 hover:border-primary/30"
+                        }`}
+                      >
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2 mb-1.5">
+                            <span className="text-[10px] font-bold uppercase tracking-wider bg-sky-500/10 text-sky-600 dark:text-sky-400 px-2 py-0.5 rounded border border-sky-500/20">
+                              {item.icon || "tech-consulting"}
+                            </span>
+                            <span className="text-[10px] text-muted-foreground font-mono">
+                              {item.link || "/solutions"}
+                            </span>
+                          </div>
+
+                          <h4 className="font-bold text-foreground text-base truncate">{item.title}</h4>
+                          <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{item.description}</p>
+                        </div>
+
+                        <div className="flex gap-2 shrink-0 pt-1">
+                          <button
+                            onClick={() => handleStartServiceEdit(item)}
+                            className={`inline-flex items-center justify-center h-9 w-9 rounded-xl border transition-all shrink-0 cursor-pointer ${
+                              editingServiceId === item.id 
+                                ? "border-primary bg-primary text-primary-foreground" 
+                                : "border-border bg-background text-foreground hover:bg-secondary"
+                            }`}
+                            title="Edit Service"
+                            disabled={serviceFormLoading}
+                          >
+                            <Pencil className="h-4 w-4" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteService(item.id)}
+                            disabled={deleteServiceStatus?.id === item.id && deleteServiceStatus?.status === "loading"}
+                            className="inline-flex items-center justify-center h-9 w-9 rounded-xl border border-destructive/30 bg-destructive/5 text-destructive hover:bg-destructive hover:text-white transition-all disabled:opacity-50 shrink-0 cursor-pointer"
+                            title="Delete Service"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Right Column: Creation / Editing Form */}
+              <div>
+                <div className="panel p-6 bg-surface border border-border/80 sticky top-24">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
+                      {editingServiceId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                    </div>
+                    <h2 className="text-xl font-bold text-foreground">
+                      {editingServiceId !== null ? "Edit Service" : "Add New Service"}
+                    </h2>
+                  </div>
+
+                  {serviceFormSuccess && (
+                    <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
+                      Service {editingServiceId !== null ? "updated" : "created"} and published successfully!
+                    </div>
+                  )}
+
+                  {serviceFormError && (
+                    <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
+                      {serviceFormError}
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSubmitService} className="space-y-4">
+                    <label className="block text-sm font-medium">
+                      Service Title
+                      <input
+                        type="text"
+                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                        placeholder="e.g. Technology Consulting"
+                        value={serviceTitle}
+                        onChange={(e) => setServiceTitle(e.target.value)}
+                        required
+                        disabled={serviceFormLoading}
+                      />
+                    </label>
+
+                    {/* Icon Key / Presets */}
+                    <div>
+                      <label className="block text-sm font-medium">
+                        Service Icon Type
+                        <input
+                          type="text"
+                          className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs"
+                          placeholder="e.g. tech-consulting"
+                          value={serviceIcon}
+                          onChange={(e) => setServiceIcon(e.target.value)}
+                          disabled={serviceFormLoading}
+                        />
+                      </label>
+                      <p className="mt-1 text-[11px] text-muted-foreground">Select an icon preset:</p>
+                      <div className="mt-1.5 flex flex-wrap gap-1 max-h-28 overflow-y-auto p-1.5 bg-background rounded-lg border border-border/70">
+                        {[
+                          { id: "tech-consulting", label: "Tech Consulting" },
+                          { id: "bpo", label: "BPO / Operations" },
+                          { id: "custom-app", label: "Custom App Dev" },
+                          { id: "big-data", label: "Big Data" },
+                          { id: "mobile-solutions", label: "Mobile Solutions" },
+                          { id: "cloud-consulting", label: "Cloud Consulting" },
+                          { id: "project-implementation", label: "Implementation" },
+                          { id: "staffing-solutions", label: "Staffing" },
+                          { id: "ai-solutions", label: "AI & ML" },
+                          { id: "cyber-security", label: "Cyber Security" },
+                        ].map((iconItem) => (
+                          <button
+                            key={iconItem.id}
+                            type="button"
+                            onClick={() => setServiceIcon(iconItem.id)}
+                            className={`text-[10px] px-2 py-0.5 rounded-md border font-semibold transition-all cursor-pointer ${
+                              serviceIcon === iconItem.id
+                                ? "bg-primary text-primary-foreground border-primary"
+                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                            }`}
+                          >
+                            {iconItem.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <label className="block text-sm font-medium">
+                      Description
+                      <textarea
+                        rows={3}
+                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                        placeholder="Brief summary of what this service offers..."
+                        value={serviceDesc}
+                        onChange={(e) => setServiceDesc(e.target.value)}
+                        required
+                        disabled={serviceFormLoading}
+                      />
+                    </label>
+
+                    <label className="block text-sm font-medium">
+                      Target Link
+                      <input
+                        type="text"
+                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs"
+                        placeholder="/solutions"
+                        value={serviceLink}
+                        onChange={(e) => setServiceLink(e.target.value)}
+                        disabled={serviceFormLoading}
+                      />
+                    </label>
+
+                    <div className="space-y-2 pt-2">
+                      <button
+                        type="submit"
+                        disabled={serviceFormLoading || !serviceTitle || !serviceDesc}
+                        className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
+                      >
+                        {serviceFormLoading 
+                          ? "Saving..." 
+                          : editingServiceId !== null 
+                            ? "Update Service" 
+                            : "Publish Service"}
+                      </button>
+                      {editingServiceId !== null && (
+                        <button
+                          type="button"
+                          onClick={handleCancelServiceEdit}
+                          className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                          disabled={serviceFormLoading}
                         >
                           Cancel Edit
                         </button>

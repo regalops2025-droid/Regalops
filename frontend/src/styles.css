@@ -226,6 +226,14 @@
   animation: marquee 32s linear infinite;
 }
 
+@utility animate-marquee-services {
+  animation: marquee 38s linear infinite;
+}
+
+@utility animate-marquee-services-slow {
+  animation: marquee 52s linear infinite;
+}
+
 @utility glass-panel {
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(16px);

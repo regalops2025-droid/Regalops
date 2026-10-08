@@ -50,49 +50,63 @@ export function SiteFooter() {
         }}
       />
 
-      {/* Graceful flowing golden-green wave mesh curves running across mid-lower background */}
-      <div className="absolute inset-x-0 bottom-40 h-72 pointer-events-none select-none opacity-30 overflow-hidden">
+      {/* ==================================================================== */}
+      {/* 2. LUMINOUS GOLDEN WAVE RIBBON (Flows under metrics on left)         */}
+      {/* ==================================================================== */}
+      <div className="absolute inset-x-0 bottom-8 sm:bottom-12 lg:bottom-10 h-56 sm:h-68 lg:h-80 pointer-events-none select-none z-[1] overflow-hidden">
         <svg
-          viewBox="0 0 1600 350"
+          viewBox="0 0 1600 240"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full preserve-3d"
+          className="w-full h-full drop-shadow-[0_0_16px_rgba(229,169,60,0.4)]"
+          preserveAspectRatio="none"
         >
           <defs>
-            <linearGradient id="goldRibbon1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#d4af37" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#10b981" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#d4af37" stopOpacity="0.1" />
+            {/* Pure Warm Gold / Amber Gradient - Zero Green Shades */}
+            <linearGradient id="pureGoldRibbon1" gradientUnits="userSpaceOnUse" x1="-50" y1="0" x2="780" y2="0">
+              <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.05" />
+              <stop offset="12%" stopColor="#F59E0B" stopOpacity="0.9" />
+              <stop offset="38%" stopColor="#EAB308" stopOpacity="1" />
+              <stop offset="60%" stopColor="#FCD34D" stopOpacity="0.95" />
+              <stop offset="78%" stopColor="#F59E0B" stopOpacity="0.55" />
+              <stop offset="90%" stopColor="#D4AF37" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
             </linearGradient>
-            <linearGradient id="goldRibbon2" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.7" />
-              <stop offset="70%" stopColor="#059669" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#d4af37" stopOpacity="0" />
+            <linearGradient id="pureGoldRibbon2" gradientUnits="userSpaceOnUse" x1="-50" y1="0" x2="780" y2="0">
+              <stop offset="0%" stopColor="#B45309" stopOpacity="0" />
+              <stop offset="15%" stopColor="#D4AF37" stopOpacity="0.85" />
+              <stop offset="42%" stopColor="#FBBF24" stopOpacity="0.95" />
+              <stop offset="68%" stopColor="#F59E0B" stopOpacity="0.7" />
+              <stop offset="88%" stopColor="#D4AF37" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
             </linearGradient>
           </defs>
+
+          {/* Ambient luminous glow trail under brand & metrics */}
           <path
-            d="M-50,220 C250,140 450,280 800,210 C1150,140 1350,240 1650,190"
-            stroke="url(#goldRibbon1)"
-            strokeWidth="1.8"
+            d="M -50 178 C 180 215, 460 120, 710 135"
+            stroke="#F59E0B"
+            strokeWidth="8"
+            strokeOpacity="0.22"
           />
-          <path
-            d="M-50,240 C280,160 480,300 830,225 C1180,150 1380,260 1650,205"
-            stroke="url(#goldRibbon1)"
-            strokeWidth="1.2"
-            opacity="0.7"
-          />
-          <path
-            d="M-50,260 C310,180 510,310 860,240 C1210,165 1410,275 1650,220"
-            stroke="url(#goldRibbon2)"
-            strokeWidth="1"
-            opacity="0.5"
-          />
-          <path
-            d="M-50,200 C220,120 420,260 770,195 C1120,125 1320,225 1650,175"
-            stroke="url(#goldRibbon2)"
-            strokeWidth="0.8"
-            opacity="0.4"
-          />
+
+          {/* Parallel flowing pure-gold wave ribbons - gracefully dissolving before the right columns */}
+          <path d="M -50 180 C 180 218, 460 122, 710 136" stroke="url(#pureGoldRibbon1)" strokeWidth="2.0" strokeOpacity="0.95" />
+          <path d="M -50 177 C 185 215, 465 120, 715 134" stroke="url(#pureGoldRibbon1)" strokeWidth="1.8" strokeOpacity="0.90" />
+          <path d="M -50 174 C 190 212, 470 118, 720 132" stroke="url(#pureGoldRibbon2)" strokeWidth="1.6" strokeOpacity="0.85" />
+          <path d="M -50 171 C 195 209, 475 116, 725 130" stroke="url(#pureGoldRibbon1)" strokeWidth="1.5" strokeOpacity="0.80" />
+          <path d="M -50 168 C 200 206, 480 114, 730 128" stroke="url(#pureGoldRibbon2)" strokeWidth="1.4" strokeOpacity="0.75" />
+          <path d="M -50 165 C 205 203, 485 112, 735 126" stroke="url(#pureGoldRibbon1)" strokeWidth="1.3" strokeOpacity="0.70" />
+          <path d="M -50 162 C 210 200, 490 110, 740 124" stroke="url(#pureGoldRibbon2)" strokeWidth="1.2" strokeOpacity="0.65" />
+          <path d="M -50 159 C 215 197, 495 108, 745 122" stroke="url(#pureGoldRibbon1)" strokeWidth="1.1" strokeOpacity="0.60" />
+          <path d="M -50 156 C 220 194, 500 106, 750 120" stroke="url(#pureGoldRibbon2)" strokeWidth="1.0" strokeOpacity="0.55" />
+          <path d="M -50 153 C 225 191, 505 104, 755 118" stroke="url(#pureGoldRibbon1)" strokeWidth="0.9" strokeOpacity="0.50" />
+          <path d="M -50 150 C 230 188, 510 102, 760 116" stroke="url(#pureGoldRibbon2)" strokeWidth="0.8" strokeOpacity="0.45" />
+          <path d="M -50 147 C 235 185, 515 100, 765 114" stroke="url(#pureGoldRibbon1)" strokeWidth="0.8" strokeOpacity="0.40" />
+          <path d="M -50 144 C 240 182, 520 98,  770 112" stroke="url(#pureGoldRibbon2)" strokeWidth="0.7" strokeOpacity="0.35" />
+          <path d="M -50 141 C 245 179, 525 96,  775 110" stroke="url(#pureGoldRibbon1)" strokeWidth="0.6" strokeOpacity="0.30" />
+          <path d="M -50 138 C 250 176, 530 94,  780 108" stroke="url(#pureGoldRibbon2)" strokeWidth="0.5" strokeOpacity="0.25" />
+          <path d="M -50 135 C 255 173, 535 92,  785 106" stroke="url(#pureGoldRibbon1)" strokeWidth="0.5" strokeOpacity="0.20" />
         </svg>
       </div>
 
@@ -201,9 +215,9 @@ export function SiteFooter() {
           </div>
 
           {/* ---------------------------------------------------------------- */}
-          {/* COLUMN 2: Company Links (lg:col-span-1.5)                        */}
+          {/* COLUMN 2: Company Links (lg:col-span-2)                          */}
           {/* ---------------------------------------------------------------- */}
-          <div className="lg:col-span-1 xl:col-span-1 space-y-4">
+          <div className="lg:col-span-2 space-y-4">
             <h4 className="text-[15px] font-bold tracking-tight text-white">Company</h4>
             <ul className="space-y-2.5 text-[13px]">
               {[
@@ -255,40 +269,7 @@ export function SiteFooter() {
           </div>
 
           {/* ---------------------------------------------------------------- */}
-          {/* COLUMN 4: Technologies Links (lg:col-span-2)                      */}
-          {/* ---------------------------------------------------------------- */}
-          <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-[15px] font-bold tracking-tight text-white">Technologies</h4>
-            <ul className="space-y-2 text-[12.5px]">
-              {[
-                "Agile and DevOps",
-                "Big Data",
-                "Cloud Computing",
-                "Analytics",
-                "Cyber Security & Risk",
-                "IoT",
-                "Enterprise Mobility",
-                "Digital Process Automation",
-                "Blockchain",
-                "Open Source Development & Migration",
-                "Service Experience Transformation",
-                "Mainframe Modernisation",
-                "E- Commerce",
-              ].map((name) => (
-                <li key={name}>
-                  <Link
-                    to="/technologies"
-                    className="text-[#9CA3AF] hover:text-white transition-colors duration-150 block py-0.5 leading-tight"
-                  >
-                    {name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* ---------------------------------------------------------------- */}
-          {/* COLUMN 5: Careers Links (lg:col-span-1)                          */}
+          {/* COLUMN 4: Careers Links (lg:col-span-1)                          */}
           {/* ---------------------------------------------------------------- */}
           <div className="lg:col-span-1 space-y-4">
             <h4 className="text-[15px] font-bold tracking-tight text-white">Careers</h4>
@@ -312,9 +293,9 @@ export function SiteFooter() {
           </div>
 
           {/* ---------------------------------------------------------------- */}
-          {/* COLUMN 6: "Get in Touch" Floating Glass Card (lg:col-span-2)     */}
+          {/* COLUMN 5: "Get in Touch" Floating Glass Card (lg:col-span-3)     */}
           {/* ---------------------------------------------------------------- */}
-          <div className="lg:col-span-2 xl:col-span-2">
+          <div className="lg:col-span-3 xl:col-span-3">
             <div className="relative rounded-3xl border border-white/10 bg-[#0A131A]/90 p-5 sm:p-6 backdrop-blur-md shadow-2xl shadow-black/80 space-y-4 hover:border-emerald-500/40 transition-all">
               <div>
                 <h4 className="text-[17px] font-bold text-white tracking-tight">Get in Touch</h4>

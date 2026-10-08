@@ -39,14 +39,12 @@ const field =
 function Contact() {
   const { jobId, jobTitle } = Route.useSearch();
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
-  const [zipCode, setZipCode] = useState("");
   const [service, setService] = useState("");
   const [comments, setComments] = useState("");
   const [cvFile, setCvFile] = useState<File | null>(null);
@@ -59,12 +57,17 @@ function Contact() {
     setStatus("loading");
     setErrorMsg("");
 
+    const nameParts = fullName.trim().split(/\s+/);
+    const firstName = nameParts[0] || fullName.trim();
+    const lastName = nameParts.slice(1).join(" ") || "-";
+
     try {
       if (jobTitle && jobId) {
         if (!cvFile) {
           throw new Error("Please select a PDF CV/Resume file to upload.");
         }
         const formData = new FormData();
+        formData.append("full_name", fullName);
         formData.append("first_name", firstName);
         formData.append("last_name", lastName);
         formData.append("email", email);
@@ -88,6 +91,7 @@ function Contact() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            full_name: fullName,
             first_name: firstName,
             last_name: lastName,
             email,
@@ -95,7 +99,6 @@ function Contact() {
             city,
             state,
             country,
-            zip_code: zipCode,
             service,
             comments,
           }),
@@ -108,14 +111,12 @@ function Contact() {
       }
 
       setStatus("success");
-      setFirstName("");
-      setLastName("");
+      setFullName("");
       setEmail("");
       setMobile("");
       setCity("");
       setState("");
       setCountry("");
-      setZipCode("");
       setService("");
       setComments("");
       setCvFile(null);
@@ -137,11 +138,21 @@ function Contact() {
             : "No discovery-call funnel. Describe the problem and a senior engineer replies within one business day."
         }
       />
-      <Section>
-        <div className="grid gap-8 xl:grid-cols-[1.4fr_0.8fr]">
-          
-          {/* Vuesol Premium Form Layout */}
-          <form className="panel p-6 sm:p-8 space-y-5" onSubmit={handleSubmit}>
+      <Section className="w-full">
+        {/* Full Screen Width Contact Form */}
+        <div className="w-full space-y-12">
+          <form className="panel p-6 sm:p-10 lg:p-12 space-y-6 w-full shadow-lg border border-border/80 rounded-3xl bg-surface" onSubmit={handleSubmit}>
+            <div className="border-b border-border/60 pb-5 mb-2">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+                {jobTitle ? `Submit Application for ${jobTitle}` : "Send an Engineering Enquiry"}
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {jobTitle
+                  ? "Fill in your details below and upload your CV/Resume."
+                  : "Tell us about your system architecture, project scope, or enterprise technical requirements."}
+              </p>
+            </div>
+
             {status === "success" && (
               <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
                 {jobTitle
@@ -155,32 +166,20 @@ function Contact() {
               </div>
             )}
 
-            <div className="grid gap-5 sm:grid-cols-2">
+            {/* Row 1: Full Name & Email Address */}
+            <div className="grid gap-6 sm:grid-cols-2">
               <label className="block text-sm font-medium text-foreground">
-                First Name*
+                Full Name*
                 <input
                   className={field}
-                  placeholder="e.g. Priya"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="e.g. Priya Raman"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
                   required
                   disabled={status === "loading"}
                 />
               </label>
-              <label className="block text-sm font-medium text-foreground">
-                Last Name*
-                <input
-                  className={field}
-                  placeholder="e.g. Raman"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  required
-                  disabled={status === "loading"}
-                />
-              </label>
-            </div>
 
-            <div className="grid gap-5 sm:grid-cols-2">
               <label className="block text-sm font-medium text-foreground">
                 Email Address*
                 <input
@@ -193,43 +192,80 @@ function Contact() {
                   disabled={status === "loading"}
                 />
               </label>
-              <label className="block text-sm font-medium text-foreground">
-                Mobile*
-                <input
-                  className={field}
-                  placeholder="+91 98000 00000"
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
-                  required
-                  disabled={status === "loading"}
-                />
-              </label>
             </div>
 
             {jobTitle ? (
               /* CV upload field for jobs application */
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-1">
-                  Upload Resume / CV (PDF only, max 5MB)*
+              <div className="grid gap-6 sm:grid-cols-2">
+                <label className="block text-sm font-medium text-foreground">
+                  Mobile*
+                  <input
+                    className={field}
+                    placeholder="+91 98000 00000"
+                    value={mobile}
+                    onChange={(e) => setMobile(e.target.value)}
+                    required
+                    disabled={status === "loading"}
+                  />
                 </label>
-                <input
-                  type="file"
-                  accept=".pdf"
-                  onChange={(e) => setCvFile(e.target.files?.[0] || null)}
-                  required
-                  disabled={status === "loading"}
-                  className="w-full text-sm text-zinc-500
-                    file:mr-4 file:py-2 file:px-4
-                    file:rounded-xl file:border-0
-                    file:text-sm file:font-semibold
-                    file:bg-primary file:text-primary-foreground
-                    hover:file:opacity-90 file:cursor-pointer"
-                />
+
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1.5">
+                    Upload Resume / CV (PDF only, max 5MB)*
+                  </label>
+                  <input
+                    type="file"
+                    accept=".pdf"
+                    onChange={(e) => setCvFile(e.target.files?.[0] || null)}
+                    required
+                    disabled={status === "loading"}
+                    className="w-full text-sm text-zinc-500
+                      file:mr-4 file:py-2.5 file:px-4
+                      file:rounded-xl file:border-0
+                      file:text-sm file:font-semibold
+                      file:bg-primary file:text-primary-foreground
+                      hover:file:opacity-90 file:cursor-pointer"
+                  />
+                </div>
               </div>
             ) : (
               /* Standard enquiry address and comments field */
               <>
-                <div className="grid gap-5 sm:grid-cols-2">
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <label className="block text-sm font-medium text-foreground">
+                    Mobile*
+                    <input
+                      className={field}
+                      placeholder="+91 98000 00000"
+                      value={mobile}
+                      onChange={(e) => setMobile(e.target.value)}
+                      required
+                      disabled={status === "loading"}
+                    />
+                  </label>
+
+                  <label className="block text-sm font-medium text-foreground">
+                    How can we help you?*
+                    <select
+                      className={field}
+                      value={service}
+                      onChange={(e) => setService(e.target.value)}
+                      required
+                      disabled={status === "loading"}
+                    >
+                      <option value="">-- Select Service Area --</option>
+                      <option value="Enterprise Software">Enterprise Software</option>
+                      <option value="Cloud Migration">Cloud Migration</option>
+                      <option value="Data & Analytics">Data & Analytics</option>
+                      <option value="AI Automation">AI Automation</option>
+                      <option value="Cyber Security">Cyber Security</option>
+                      <option value="Managed Support">Managed Support</option>
+                    </select>
+                  </label>
+                </div>
+
+                {/* 3-column location row (Zip Code removed) */}
+                <div className="grid gap-6 sm:grid-cols-3">
                   <label className="block text-sm font-medium text-foreground">
                     City
                     <input
@@ -240,6 +276,7 @@ function Contact() {
                       disabled={status === "loading"}
                     />
                   </label>
+
                   <label className="block text-sm font-medium text-foreground">
                     Select State
                     <select
@@ -260,9 +297,7 @@ function Contact() {
                       <option value="Texas">Texas</option>
                     </select>
                   </label>
-                </div>
 
-                <div className="grid gap-5 sm:grid-cols-2">
                   <label className="block text-sm font-medium text-foreground">
                     Select Country
                     <select
@@ -279,43 +314,14 @@ function Contact() {
                       <option value="Australia">Australia</option>
                     </select>
                   </label>
-                  <label className="block text-sm font-medium text-foreground">
-                    Zip Code
-                    <input
-                      className={field}
-                      placeholder="e.g. 600001"
-                      value={zipCode}
-                      onChange={(e) => setZipCode(e.target.value)}
-                      disabled={status === "loading"}
-                    />
-                  </label>
                 </div>
-
-                <label className="block text-sm font-medium text-foreground">
-                  How can we help you?*
-                  <select
-                    className={field}
-                    value={service}
-                    onChange={(e) => setService(e.target.value)}
-                    required
-                    disabled={status === "loading"}
-                  >
-                    <option value="">-- Select Service Area --</option>
-                    <option value="Enterprise Software">Enterprise Software</option>
-                    <option value="Cloud Migration">Cloud Migration</option>
-                    <option value="Data & Analytics">Data & Analytics</option>
-                    <option value="AI Automation">AI Automation</option>
-                    <option value="Cyber Security">Cyber Security</option>
-                    <option value="Managed Support">Managed Support</option>
-                  </select>
-                </label>
 
                 <label className="block text-sm font-medium text-foreground">
                   Additional Comments*
                   <textarea
                     rows={5}
                     className={field}
-                    placeholder="A short description of the system, timeline, or key comments."
+                    placeholder="A short description of the system, timeline, or key technical challenges."
                     value={comments}
                     onChange={(e) => setComments(e.target.value)}
                     required
@@ -328,51 +334,72 @@ function Contact() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="mt-6 w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 cursor-pointer"
+              className="mt-6 w-full rounded-xl bg-primary px-6 py-3.5 text-base font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 cursor-pointer shadow-md shadow-primary/20 hover:shadow-lg"
             >
               {status === "loading" ? "Submitting..." : jobTitle ? "Submit Application" : "Send Enquiry"}
             </button>
           </form>
 
-          {/* Right Column: Office info */}
-          <div className="space-y-6">
-            <div className="panel p-6 bg-surface">
-              <h3 className="font-display text-base font-semibold">Office locations</h3>
-              <ul className="mt-4 space-y-4 text-xs text-muted-foreground">
-                <li className="flex items-start gap-2.5">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  <div>
-                    <strong className="text-foreground uppercase tracking-wider text-[10px]">USA Office</strong>
-                    <p className="mt-1 leading-relaxed">8 Chill Sean Street, Dunwoody, Atlanta, Georgia, USA</p>
+          {/* Office locations & Direct engineering contact: full-width 4-column cards below */}
+          <div>
+            <h3 className="text-xl font-bold tracking-tight text-foreground text-center mb-6">
+              Our Offices & Global Engineering Hubs
+            </h3>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="panel p-6 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 text-primary font-semibold text-sm">
+                    <MapPin className="h-4 w-4" />
+                    <span>USA Office</span>
                   </div>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  <div>
-                    <strong className="text-foreground uppercase tracking-wider text-[10px]">Hyderabad Office</strong>
-                    <p className="mt-1 leading-relaxed">Floor 1, MB3 Block, Raheja Mindspace, Hyderabad, Telangana</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  <div>
-                    <strong className="text-foreground uppercase tracking-wider text-[10px]">Warangal Office</strong>
-                    <p className="mt-1 leading-relaxed">H.No: 12-13, 1st Floor, Warangal, Telangana, 506002</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
+                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                    8 Chill Sean Street, Dunwoody, Atlanta, Georgia, USA
+                  </p>
+                </div>
+                <span className="mt-4 text-[10px] uppercase font-bold tracking-widest text-primary/80">North America HQ</span>
+              </div>
 
-            <div className="panel p-6 bg-surface">
-              <h3 className="font-display text-base font-semibold">Direct engineering contact</h3>
-              <ul className="mt-4 space-y-3.5 text-xs text-muted-foreground">
-                <li className="flex items-center gap-2.5">
-                  <Mail className="h-4 w-4 shrink-0 text-primary" />
-                  <a href="mailto:Info@regalops.com" className="hover:text-foreground">
+              <div className="panel p-6 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 text-primary font-semibold text-sm">
+                    <MapPin className="h-4 w-4" />
+                    <span>Hyderabad Office</span>
+                  </div>
+                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                    Floor 1, MB3 Block, Raheja Mindspace, Hyderabad, Telangana
+                  </p>
+                </div>
+                <span className="mt-4 text-[10px] uppercase font-bold tracking-widest text-primary/80">Delivery Center</span>
+              </div>
+
+              <div className="panel p-6 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 text-primary font-semibold text-sm">
+                    <MapPin className="h-4 w-4" />
+                    <span>Warangal Office</span>
+                  </div>
+                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                    H.No: 12-13, 1st Floor, Warangal, Telangana, 506002
+                  </p>
+                </div>
+                <span className="mt-4 text-[10px] uppercase font-bold tracking-widest text-primary/80">Innovation Lab</span>
+              </div>
+
+              <div className="panel p-6 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 text-primary font-semibold text-sm">
+                    <Mail className="h-4 w-4" />
+                    <span>Direct Engineering Contact</span>
+                  </div>
+                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                    For direct architecture reviews & inquiries:
+                  </p>
+                  <a href="mailto:Info@regalops.com" className="mt-1 block text-xs font-semibold text-primary hover:underline">
                     Info@regalops.com
                   </a>
-                </li>
-              </ul>
+                </div>
+                <span className="mt-4 text-[10px] uppercase font-bold tracking-widest text-emerald-600">24/7 Response SLA</span>
+              </div>
             </div>
           </div>
         </div>

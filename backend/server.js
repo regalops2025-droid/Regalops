@@ -15,8 +15,7 @@ const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.join(__dirname, ".env") });
 
-// Regalops Express API Server - 8 Core Services
-
+// Regalops Express API Server - Technologies with Category & Brands Config
 const app = express();
 const PORT = process.env.PORT || 5001;
 
@@ -126,7 +125,8 @@ class MockPool {
       jobs: [],
       blogs: [],
       job_applications: [],
-      industries: []
+      industries: [],
+      services: []
     };
     this.autoIncrement = {};
     this.load();
@@ -139,6 +139,9 @@ class MockPool {
         this.data = JSON.parse(fileContent);
         if (!this.data.industries) {
           this.data.industries = [];
+        }
+        if (!this.data.services) {
+          this.data.services = [];
         }
       }
     } catch (err) {
@@ -603,6 +606,19 @@ async function initDB() {
       )
     `);
     console.log('Table "job_applications" verified.');
+
+    // Create services table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS services (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        description TEXT NOT NULL,
+        icon VARCHAR(100) DEFAULT 'tech-consulting',
+        link VARCHAR(255) DEFAULT '/solutions',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    console.log('Table "services" verified.');
   } catch (error) {
     console.error("Database initialization failed:", error.message);
   }
@@ -620,16 +636,29 @@ app.post("/api/upload/image", imageUpload.single("image"), (req, res) => {
 });
 
 app.post("/api/contact", async (req, res) => {
-  const { first_name, last_name, email, mobile, city, state, country, zip_code, service, comments } = req.body;
+  const { first_name, last_name, full_name, name, email, mobile, city, state, country, zip_code, service, comments } = req.body;
 
-  if (!first_name || !last_name || !email || !mobile || !service || !comments) {
-    return res.status(400).json({ error: "First name, last name, email, mobile, service, and comments are required." });
+  let fName = (first_name || full_name || name || "").trim();
+  let lName = (last_name || "").trim();
+
+  if (!lName && fName) {
+    const parts = fName.split(/\s+/);
+    if (parts.length > 1) {
+      fName = parts[0];
+      lName = parts.slice(1).join(" ");
+    } else {
+      lName = "";
+    }
+  }
+
+  if (!fName || !email || !mobile || !service || !comments) {
+    return res.status(400).json({ error: "Full name, email, mobile, service, and comments are required." });
   }
 
   try {
     await pool.query(
       "INSERT INTO contact_enquiries (first_name, last_name, email, mobile, city, state, country, zip_code, service, comments) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      [first_name, last_name, email, mobile, city || null, state || null, country || null, zip_code || null, service, comments]
+      [fName, lName, email, mobile, city || null, state || null, country || null, zip_code || null, service, comments]
     );
     res.status(201).json({ message: "Enquiry received successfully." });
   } catch (error) {
@@ -725,14 +754,27 @@ app.delete("/api/enquiries/:id", verifyToken, async (req, res) => {
 // POST apply for a job with resume upload (PDF)
 app.post("/api/jobs/:id/apply", upload.single("cv"), async (req, res) => {
   const { id } = req.params;
-  const { first_name, last_name, email, mobile, job_title } = req.body;
+  const { first_name, last_name, full_name, name, email, mobile, job_title } = req.body;
 
-  if (!first_name || !last_name || !email || !mobile || !job_title) {
+  let fName = (first_name || full_name || name || "").trim();
+  let lName = (last_name || "").trim();
+
+  if (!lName && fName) {
+    const parts = fName.split(/\s+/);
+    if (parts.length > 1) {
+      fName = parts[0];
+      lName = parts.slice(1).join(" ");
+    } else {
+      lName = "";
+    }
+  }
+
+  if (!fName || !email || !mobile || !job_title) {
     // Clean up uploaded file if fields validation fails
     if (req.file) {
       fs.unlinkSync(req.file.path);
     }
-    return res.status(400).json({ error: "First name, last name, email, mobile, and job title are required." });
+    return res.status(400).json({ error: "Full name, email, mobile, and job title are required." });
   }
 
   if (!req.file) {
@@ -744,7 +786,7 @@ app.post("/api/jobs/:id/apply", upload.single("cv"), async (req, res) => {
   try {
     await pool.query(
       "INSERT INTO job_applications (job_id, job_title, first_name, last_name, email, mobile, cv_path) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [parseInt(id), job_title, first_name, last_name, email, mobile, cv_path]
+      [parseInt(id), job_title, fName, lName, email, mobile, cv_path]
     );
     res.status(201).json({ message: "Job application submitted successfully!" });
   } catch (error) {
@@ -894,7 +936,7 @@ app.get("/api/technologies", async (req, res) => {
 
 // POST a new technology
 app.post("/api/technologies", verifyToken, async (req, res) => {
-  const { name, description, keywords, how_to_work } = req.body;
+  const { name, description, keywords, how_to_work, category, status_badge, brands } = req.body;
 
   if (!name || !description) {
     return res.status(400).json({ error: "Name and description are required." });
@@ -902,10 +944,27 @@ app.post("/api/technologies", verifyToken, async (req, res) => {
 
   try {
     const [result] = await pool.query(
-      "INSERT INTO technologies (name, description, keywords, how_to_work) VALUES (?, ?, ?, ?)",
-      [name, description, keywords || null, how_to_work || null]
+      "INSERT INTO technologies (name, description, keywords, how_to_work, category, status_badge, brands) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [
+        name,
+        description,
+        keywords || null,
+        how_to_work || null,
+        category || null,
+        status_badge || null,
+        brands || null
+      ]
     );
-    res.status(201).json({ id: result.insertId, name, description, keywords: keywords || null, how_to_work: how_to_work || null });
+    res.status(201).json({
+      id: result.insertId,
+      name,
+      description,
+      keywords: keywords || null,
+      how_to_work: how_to_work || null,
+      category: category || null,
+      status_badge: status_badge || null,
+      brands: brands || null
+    });
   } catch (error) {
     console.error("Error creating technology:", error);
     res.status(500).json({ error: "Failed to create technology." });
@@ -915,7 +974,7 @@ app.post("/api/technologies", verifyToken, async (req, res) => {
 // PUT (update) a technology by ID
 app.put("/api/technologies/:id", verifyToken, async (req, res) => {
   const { id } = req.params;
-  const { name, description, keywords, how_to_work } = req.body;
+  const { name, description, keywords, how_to_work, category, status_badge, brands } = req.body;
 
   if (!name || !description) {
     return res.status(400).json({ error: "Name and description are required." });
@@ -923,10 +982,28 @@ app.put("/api/technologies/:id", verifyToken, async (req, res) => {
 
   try {
     await pool.query(
-      "UPDATE technologies SET name = ?, description = ?, keywords = ?, how_to_work = ? WHERE id = ?",
-      [name, description, keywords || null, how_to_work || null, id]
+      "UPDATE technologies SET name = ?, description = ?, keywords = ?, how_to_work = ?, category = ?, status_badge = ?, brands = ? WHERE id = ?",
+      [
+        name,
+        description,
+        keywords || null,
+        how_to_work || null,
+        category || null,
+        status_badge || null,
+        brands || null,
+        id
+      ]
     );
-    res.json({ id: parseInt(id), name, description, keywords: keywords || null, how_to_work: how_to_work || null });
+    res.json({
+      id: parseInt(id),
+      name,
+      description,
+      keywords: keywords || null,
+      how_to_work: how_to_work || null,
+      category: category || null,
+      status_badge: status_badge || null,
+      brands: brands || null
+    });
   } catch (error) {
     console.error("Error updating technology:", error);
     res.status(500).json({ error: "Failed to update technology." });
@@ -942,6 +1019,82 @@ app.delete("/api/technologies/:id", verifyToken, async (req, res) => {
   } catch (error) {
     console.error("Error deleting technology:", error);
     res.status(500).json({ error: "Failed to delete technology." });
+  }
+});
+
+// GET all services
+app.get("/api/services", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM services ORDER BY id ASC");
+    res.json(rows);
+  } catch (error) {
+    console.error("Error fetching services:", error);
+    res.status(500).json({ error: "Failed to fetch services." });
+  }
+});
+
+// POST a new service
+app.post("/api/services", verifyToken, async (req, res) => {
+  const { title, description, icon, link } = req.body;
+
+  if (!title || !description) {
+    return res.status(400).json({ error: "Title and description are required." });
+  }
+
+  try {
+    const [result] = await pool.query(
+      "INSERT INTO services (title, description, icon, link) VALUES (?, ?, ?, ?)",
+      [title, description, icon || "tech-consulting", link || "/solutions"]
+    );
+    res.status(201).json({
+      id: result.insertId,
+      title,
+      description,
+      icon: icon || "tech-consulting",
+      link: link || "/solutions"
+    });
+  } catch (error) {
+    console.error("Error creating service:", error);
+    res.status(500).json({ error: "Failed to create service." });
+  }
+});
+
+// PUT (update) a service by ID
+app.put("/api/services/:id", verifyToken, async (req, res) => {
+  const { id } = req.params;
+  const { title, description, icon, link } = req.body;
+
+  if (!title || !description) {
+    return res.status(400).json({ error: "Title and description are required." });
+  }
+
+  try {
+    await pool.query(
+      "UPDATE services SET title = ?, description = ?, icon = ?, link = ? WHERE id = ?",
+      [title, description, icon || "tech-consulting", link || "/solutions", id]
+    );
+    res.json({
+      id: parseInt(id),
+      title,
+      description,
+      icon: icon || "tech-consulting",
+      link: link || "/solutions"
+    });
+  } catch (error) {
+    console.error("Error updating service:", error);
+    res.status(500).json({ error: "Failed to update service." });
+  }
+});
+
+// DELETE a service by ID
+app.delete("/api/services/:id", verifyToken, async (req, res) => {
+  const { id } = req.params;
+  try {
+    await pool.query("DELETE FROM services WHERE id = ?", [id]);
+    res.json({ message: "Service deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting service:", error);
+    res.status(500).json({ error: "Failed to delete service." });
   }
 });
 
@@ -1220,6 +1373,83 @@ app.delete("/api/industries/:id", verifyToken, async (req, res) => {
   } catch (error) {
     console.error("Error deleting industry:", error);
     res.status(500).json({ error: "Failed to delete industry." });
+  }
+});
+
+// --- SERVICES ENDPOINTS ---
+
+// GET all services
+app.get("/api/services", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM services ORDER BY id ASC");
+    res.json(rows);
+  } catch (error) {
+    console.error("Error fetching services:", error);
+    res.status(500).json({ error: "Failed to fetch services." });
+  }
+});
+
+// POST (create) a new service
+app.post("/api/services", verifyToken, async (req, res) => {
+  const { title, description, icon, link } = req.body;
+  if (!title || !description) {
+    return res.status(400).json({ error: "Title and description are required." });
+  }
+
+  try {
+    const [result] = await pool.query(
+      "INSERT INTO services (title, description, icon, link) VALUES (?, ?, ?, ?)",
+      [title.trim(), description.trim(), (icon || "tech-consulting").trim(), (link || "/solutions").trim()]
+    );
+    res.status(201).json({
+      id: result.insertId,
+      title: title.trim(),
+      description: description.trim(),
+      icon: (icon || "tech-consulting").trim(),
+      link: (link || "/solutions").trim()
+    });
+  } catch (error) {
+    console.error("Error creating service:", error);
+    res.status(500).json({ error: "Failed to create service." });
+  }
+});
+
+// PUT (update) a service by ID
+app.put("/api/services/:id", verifyToken, async (req, res) => {
+  const { id } = req.params;
+  const { title, description, icon, link } = req.body;
+
+  if (!title || !description) {
+    return res.status(400).json({ error: "Title and description are required." });
+  }
+
+  try {
+    await pool.query(
+      "UPDATE services SET title = ?, description = ?, icon = ?, link = ? WHERE id = ?",
+      [title.trim(), description.trim(), (icon || "tech-consulting").trim(), (link || "/solutions").trim(), id]
+    );
+    res.json({
+      id: parseInt(id),
+      title: title.trim(),
+      description: description.trim(),
+      icon: (icon || "tech-consulting").trim(),
+      link: (link || "/solutions").trim()
+    });
+  } catch (error) {
+    console.error("Error updating service:", error);
+    res.status(500).json({ error: "Failed to update service." });
+  }
+});
+
+// DELETE a service by ID
+app.delete("/api/services/:id", verifyToken, async (req, res) => {
+  const { id } = req.params;
+  try {
+    await pool.query("DELETE FROM services WHERE id = ?", [id]);
+    res.json({ message: "Service deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting service:", error);
+    res.status(500).json({ error: "Failed to delete service." });
   }
 });
 

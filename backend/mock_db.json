@@ -12,7 +12,7 @@
       "id": 29,
       "created_at": "2026-08-19T07:05:39.333Z",
       "email": "regalops2025@gmail.com",
-      "password": "$2b$10$U6xe.4YLDeXzJfT9kKukjeatPav2Zs3Fk9s2Z95efVgGJ3EgVBGY6",
+      "password": "$2b$10$u4QRr8xnZMQ1foh.Zme9pOWDII.FHQ9dk8lfqvVXpMp2cvs9ePbA2",
       "name": "Shivakumar"
     }
   ],
@@ -20,90 +20,79 @@
     {
       "id": 1,
       "created_at": "2026-08-19T07:05:39.335Z",
-      "name": "Technology Consulting",
-      "image": "/hero-bg-1.png",
-      "description": "Uncovering technology blocks to business growth.",
-      "capabilities": "[\"Architecture advisory and tech stack rationalization\",\"Legacy modernization roadmaps\",\"Enterprise scalability assessment\",\"Digital strategy and technology due diligence\"]",
-      "methodology": "[\"Discovery and Technology Health Audit\",\"Bottleneck Identification\",\"Future-State Target Architecture\",\"Execution and Governance Framework\"]",
-      "deliverables": "[\"Enterprise Architecture Blueprint\",\"Tech Debt Remediation Roadmap\",\"ROI and Total Cost of Ownership (TCO) Model\",\"Executive Advisory Briefing\"]",
-      "technologies": "[\"Enterprise Architecture\",\"Cloud\",\"Microservices\",\"DevOps\",\"Security\"]"
+      "name": "Strategic Staffing",
+      "image": "/hero-bg-2.png",
+      "description": "Assembling specialized, elite engineering squads tailored to your tech stack and delivery roadmap.",
+      "capabilities": "[\"Dedicated senior-only engineering squads mobilized within 72 hours\",\"Specialized expertise across Cloud, DevOps, Full-Stack, and AI/ML\",\"Direct team integration into client Slack, Jira, and Agile ceremonies\",\"Flexible engagement models: team augmentation or managed delivery pods\"]",
+      "methodology": "[\"Skills Matrix & Technical Domain Assessment\",\"72-Hour Candidate Vetting & Live Coding Screen\",\"Frictionless Sprint Onboarding & Security Clearance\",\"Continuous Velocity, Delivery, and SLA Reviews\"]",
+      "deliverables": "[\"Principal Architects and Senior Engineers\",\"Zero recruitment overhead or onboarding delays\",\"Contractual delivery SLAs and performance guarantees\",\"100% Client ownership of all generated code and assets\"]",
+      "technologies": "[\"Full-Stack\",\"DevOps\",\"Cloud Architects\",\"AI/ML Engineers\",\"Agile Pods\"]"
     },
     {
       "id": 2,
       "created_at": "2026-08-19T07:05:39.336Z",
       "name": "Business Process Outsourcing",
-      "image": "/hero-bg-2.png",
-      "description": "Delivering industry-leading expertise, and supporting all delivery models.",
-      "capabilities": "[\"End-to-end IT service delivery operations\",\"Follow-the-sun global support pods\",\"SLA-backed tier 1 to tier 3 managed workflows\",\"Continuous process automation and optimization\"]",
-      "methodology": "[\"Process Discovery and Workstream Transition\",\"SLA and KPI Benchmarking\",\"Automated Workflow Integration\",\"Continuous Service Improvement\"]",
-      "deliverables": "[\"Standard Operating Procedures (SOPs)\",\"Real-time Telemetry Dashboard\",\"Monthly SLA Attainment Audits\",\"Risk and Continuity Runbooks\"]",
-      "technologies": "[\"ITIL\",\"ServiceNow\",\"Jira\",\"24/7 Operations\",\"Automation\"]"
+      "image": "/hero-bg-1.png",
+      "description": "Delivering industry-leading operational expertise, SLA-backed managed workflows, and process automation.",
+      "capabilities": "[\"End-to-end IT service delivery operations and enterprise helpdesk\",\"Follow-the-sun global support pods with 24/7/365 coverage\",\"SLA-backed Tier 1 to Tier 3 managed operational workflows\",\"Continuous robotic process automation (RPA) and optimization\"]",
+      "methodology": "[\"Process Discovery and Workstream Transition\",\"SLA and KPI Benchmarking\",\"Automated Workflow Integration\",\"Continuous Service Improvement (ITIL)\"]",
+      "deliverables": "[\"Standard Operating Procedures (SOPs)\",\"Real-time Telemetry Dashboard & Reporting\",\"Monthly SLA Attainment Audits\",\"Risk and Business Continuity Runbooks\"]",
+      "technologies": "[\"ITIL\",\"ServiceNow\",\"Jira Service Desk\",\"24/7 Operations\",\"Automation\"]"
     },
     {
       "id": 3,
       "created_at": "2026-08-19T07:05:39.337Z",
-      "name": "Custom Application Development",
+      "name": "Recruitment Process Outsourcing",
       "image": "/hero-bg-3.png",
-      "description": "Developing a robust and industrialized approach for both new and existing applications.",
-      "capabilities": "[\"Domain-Driven Design (DDD) & modular clean architecture\",\"High-throughput microservices and event streaming\",\"Full-stack web applications with modern frameworks\",\"Industrialized automated testing and CI/CD\"]",
-      "methodology": "[\"Domain Modeling and Sprint Blueprinting\",\"Incremental Modular Delivery\",\"Automated Contract and E2E Testing\",\"Zero-Downtime Deployment\"]",
-      "deliverables": "[\"Production-ready tested codebase with client IP ownership\",\"OpenAPI specifications & documentation\",\"Automated unit, integration, and load test suites\",\"Docker and Kubernetes deployment manifests\"]",
-      "technologies": "[\"React\",\"TypeScript\",\"Node.js\",\"Go\",\"PostgreSQL\",\"Docker\"]"
+      "description": "End-to-end talent acquisition partnerships streamlining high-volume hiring and technical vetting.",
+      "capabilities": "[\"End-to-end recruitment lifecycle management and talent pipelining\",\"AI-driven candidate screening, technical evaluation, and background checks\",\"Employer branding and candidate experience optimization\",\"Scalable on-demand hiring capacity with zero fixed recruitment overhead\"]",
+      "methodology": "[\"Workforce Planning & Hiring Needs Audit\",\"Omnichannel Talent Sourcing & Pipelining\",\"Rigorous Technical & Cultural Assessment\",\"Offer Management, Onboarding, and Retention Tracking\"]",
+      "deliverables": "[\"Dedicated RPO Talent Acquisition Squad\",\"Custom Applicant Tracking System (ATS) Integration\",\"Time-to-Hire and Quality-of-Hire KPI Reports\",\"Pre-screened Active Candidate Pipelines\"]",
+      "technologies": "[\"ATS Integration\",\"Talent Intelligence\",\"AI Sourcing\",\"Tech Vetting\",\"Global Hiring\"]"
     },
     {
       "id": 4,
-      "created_at": "2026-08-19T07:05:39.339Z",
-      "name": "Big Data Solutions",
+      "created_at": "2026-08-19T07:05:39.338Z",
+      "name": "Application Development",
       "image": "/hero-bg-1.png",
-      "description": "Applying smarter business acumen more extensively across the application life cycle.",
-      "capabilities": "[\"Petabyte-scale distributed data ingestion pipelines\",\"Cloud data warehousing and analytical lakehouses\",\"Real-time event streaming and analytical views\",\"Automated data quality assertions and governance\"]",
-      "methodology": "[\"Schema Auditing and Data Flow Mapping\",\"Warehouse Topology Design\",\"Distributed ETL/ELT Pipeline Engineering\",\"BI and Analytics Layer Verification\"]",
-      "deliverables": "[\"dbt transformation models with automated tests\",\"Apache Kafka and streaming topology\",\"Production Snowflake/BigQuery schemas\",\"Data lineage and dictionary runbooks\"]",
-      "technologies": "[\"Apache Kafka\",\"Snowflake\",\"dbt\",\"Python\",\"Airflow\",\"BigQuery\"]"
+      "description": "Developing robust, modern, industrialized enterprise applications across web, mobile, and cloud.",
+      "capabilities": "[\"Domain-Driven Design (DDD) & clean modular microservices architecture\",\"Full-stack cloud-native applications with React, Next.js, and Node.js\",\"High-throughput transactional APIs with gRPC, REST, and GraphQL\",\"Industrialized automated testing, security scanning, and CI/CD\"]",
+      "methodology": "[\"Domain Modeling & Sprint Blueprinting\",\"Incremental Modular Delivery\",\"Automated Contract and E2E Testing\",\"Zero-Downtime Blue/Green Deployment\"]",
+      "deliverables": "[\"Production-ready codebase with full client IP ownership\",\"OpenAPI specifications & comprehensive documentation\",\"Automated test suites and security scan reports\",\"Kubernetes deployment manifests and CI/CD pipelines\"]",
+      "technologies": "[\"React\",\"Next.js\",\"TypeScript\",\"Node.js\",\"Python\",\"PostgreSQL\",\"Docker\"]"
     },
     {
       "id": 5,
-      "created_at": "2026-08-19T07:05:39.341Z",
-      "name": "Mobile Solutions",
+      "created_at": "2026-08-19T07:05:39.339Z",
+      "name": "Quality Assurance",
       "image": "/hero-bg-2.png",
-      "description": "Driving businesses in motion, and doing business with anybody, anytime!",
-      "capabilities": "[\"Native iOS (Swift) and Android (Kotlin) development\",\"Cross-platform high-performance React Native & Flutter apps\",\"Offline-first data sync and push notification pipelines\",\"Enterprise MDM and secure mobile identity federation\"]",
-      "methodology": "[\"Mobile UX/UI Design and Prototyping\",\"Native Performance Optimization\",\"API Gateway and Offline Sync Integration\",\"Store Submission and MDM Rollout\"]",
-      "deliverables": "[\"iOS and Android production application binaries\",\"Comprehensive UI test suites and device compatibility matrix\",\"Automated App Store & Play Store deployment pipelines\",\"Mobile security and biometric authentication module\"]",
-      "technologies": "[\"React Native\",\"Swift\",\"Kotlin\",\"Flutter\",\"Firebase\",\"GraphQL\"]"
+      "description": "Comprehensive automated testing, performance engineering, and security verification ensuring zero-defect delivery.",
+      "capabilities": "[\"Full-suite automated end-to-end, regression, and integration testing\",\"High-concurrency load, stress, and performance benchmark testing\",\"API security, OWASP vulnerability scanning, and compliance testing\",\"Mobile device cloud testing across 100+ physical device configurations\"]",
+      "methodology": "[\"Test Strategy & Automation Architecture Definition\",\"Continuous Test Automation in CI/CD Pipelines\",\"Performance & Security Baseline Benchmarking\",\"Defect Prevention & Quality Gate Enforcement\"]",
+      "deliverables": "[\"Automated Playwright, Cypress, and Selenium Test Suites\",\"JMeter & k6 Load and Scalability Benchmark Reports\",\"Continuous Quality Gates integrated with GitHub Actions\",\"Real-time Test Coverage & Bug Density Dashboards\"]",
+      "technologies": "[\"Playwright\",\"Cypress\",\"Selenium\",\"k6\",\"JMeter\",\"Postman\",\"OWASP ZAP\"]"
     },
     {
       "id": 6,
-      "created_at": "2026-08-19T07:05:39.342Z",
-      "name": "Cloud Consulting",
+      "created_at": "2026-08-19T07:05:39.340Z",
+      "name": "Regal OPs Training Hub",
       "image": "/hero-bg-3.png",
-      "description": "Helping clients utilize the cloud for data storage and recovery, underpinning mobility, analytics, and social media.",
-      "capabilities": "[\"Cloud-native architecture on AWS, Azure, and Google Cloud\",\"Zero-downtime migration of stateful enterprise databases\",\"Multi-region high availability and disaster recovery runbooks\",\"Infrastructure as Code (IaC) and cloud financial management (FinOps)\"]",
-      "methodology": "[\"Cloud Readiness and Cost Audit\",\"Secure Landing Zone Setup\",\"Incremental Pilot Migration\",\"Cutover and Monolith Decommissioning\"]",
-      "deliverables": "[\"Terraform and CloudFormation IaC templates\",\"Disaster Recovery (DR) and automated failover runbooks\",\"FinOps cost breakdown and auto-scaling rules\",\"Security hardening and IAM audit certificates\"]",
-      "technologies": "[\"AWS\",\"Azure\",\"GCP\",\"Terraform\",\"Kubernetes\",\"Docker\"]"
+      "description": "Corporate technical upskilling, hands-on production engineering bootcamps, and continuous excellence programs.",
+      "capabilities": "[\"Role-based enterprise curriculum across Cloud, DevOps, AI, and Full-Stack\",\"Hands-on real-world production sandboxes and architectural labs\",\"Mentorship from veteran principal architects and technical leaders\",\"Custom corporate training cohorts with industry certification pathways\"]",
+      "methodology": "[\"Skills Gap Assessment & Corporate Needs Analysis\",\"Custom Curriculum & Hands-on Lab Design\",\"Live Interactive Training & Code Reviews\",\"Capstone Project Evaluation & Certification\"]",
+      "deliverables": "[\"Production-ready certified engineers\",\"Comprehensive course materials, lab guides, and video archives\",\"Individual capability benchmarks and progress dashboards\",\"Post-training mentorship and ongoing learning roadmaps\"]",
+      "technologies": "[\"Cloud Certifications\",\"DevOps Bootcamps\",\"AI/ML Workshops\",\"Hands-on Labs\",\"Architecture Mentorship\"]"
     },
     {
       "id": 7,
-      "created_at": "2026-08-19T07:05:39.343Z",
-      "name": "Project Implementation",
+      "created_at": "2026-08-19T07:05:39.341Z",
+      "name": "IT Strategy and Assessment",
       "image": "/hero-bg-1.png",
-      "description": "Turning vision and plans into reality.",
-      "capabilities": "[\"Agile sprint execution with 72-hour mobilization\",\"Enterprise software delivery governance and milestone tracking\",\"Technical program management (TPM) and risk mitigation\",\"Production rollout, canary validation, and stakeholder reporting\"]",
-      "methodology": "[\"Sprint 0 Architecture Alignment\",\"Bi-Weekly Agile Release Cycles\",\"Canary Deployment and Telemetry Verification\",\"Operational Handover and Training\"]",
-      "deliverables": "[\"Audited production code shipped in Sprint 1\",\"Executive milestone status and velocity dashboards\",\"Full operational runbooks and run-state telemetry\",\"Continuous integration and delivery (CI/CD) pipelines\"]",
-      "technologies": "[\"Agile Scrum\",\"CI/CD\",\"GitHub Actions\",\"Prometheus\",\"Kubernetes\"]"
-    },
-    {
-      "id": 8,
-      "created_at": "2026-08-19T07:05:39.344Z",
-      "name": "Staffing Solutions",
-      "image": "/hero-bg-2.png",
-      "description": "Assembling a customized solution to support your industry.",
-      "capabilities": "[\"Dedicated senior-only engineering squads (no trainees)\",\"Specialized technical expertise mobilized within 72 hours\",\"Direct collaboration embedded in your Slack and Jira\",\"Flexible delivery models: team augmentation or managed pods\"]",
-      "methodology": "[\"Skills Matrix and Engineering Assessment\",\"72-Hour Candidate Presentation and Vetting\",\"Seamless Team Onboarding and Sprint Integration\",\"Ongoing Performance and Quality Reviews\"]",
-      "deliverables": "[\"Principal Architects and Senior Technologists\",\"Zero recruitment overhead or onboarding delays\",\"Contractual delivery SLAs and performance guarantees\",\"100% Client ownership of all generated code and assets\"]",
-      "technologies": "[\"Principal Architects\",\"Senior Technologists\",\"Full-Stack\",\"DevOps\",\"AI/ML\"]"
+      "description": "Uncovering technology blocks to business growth and blueprinting future-state enterprise architecture.",
+      "capabilities": "[\"Comprehensive enterprise architecture audit and tech debt quantification\",\"Legacy modernization blueprints and cloud readiness assessments\",\"Cybersecurity posture, compliance, and risk assessments\",\"Technology due diligence for M&A and strategic capital allocation\"]",
+      "methodology": "[\"Discovery & Technology Health Audit\",\"Bottleneck & Architectural Risk Identification\",\"Future-State Target Architecture Modeling\",\"Execution Roadmap & Governance Framework Formulation\"]",
+      "deliverables": "[\"Executive Enterprise Architecture Blueprint\",\"Technical Debt Remediation & Modernization Roadmap\",\"ROI and Total Cost of Ownership (TCO) Model\",\"C-Suite Advisory Briefing and Implementation Milestones\"]",
+      "technologies": "[\"Enterprise Architecture\",\"Cloud Strategy\",\"FinOps\",\"Cybersecurity\",\"Legacy Modernization\"]"
     }
   ],
   "technologies": [
@@ -111,37 +100,78 @@
       "id": 1,
       "created_at": "2026-08-19T07:05:39.343Z",
       "name": "React & Next.js",
-      "description": "Fast, modern web interfaces"
+      "description": "Fast, modern web interfaces",
+      "keywords": "Components, Designing, SSR, TypeScript",
+      "how_to_work": "The react uses the react js",
+      "category": "ENTERPRISE WEB & FRONTEND",
+      "status_badge": "PRODUCTION READY",
+      "brands": "React, Next.js, TypeScript"
     },
     {
       "id": 2,
       "created_at": "2026-08-19T07:05:39.344Z",
       "name": "Node & Python",
-      "description": "APIs and backend services"
+      "description": "APIs and backend services",
+      "keywords": "Async, APIs, Microservices, Python",
+      "how_to_work": "High-throughput asynchronous microservices and event queues",
+      "category": "RUNTIMES & DISTRIBUTED APIS",
+      "status_badge": "PRODUCTION READY",
+      "brands": "Node.js, Python"
     },
     {
       "id": 3,
       "created_at": "2026-08-19T07:05:39.344Z",
       "name": "AWS / Azure / GCP",
-      "description": "Cloud native infrastructure"
+      "description": "Cloud native infrastructure",
+      "keywords": "Multi-Cloud, AWS, Azure, GCP, FinOps",
+      "how_to_work": "Resilient zero-trust multi-region cloud infrastructures and automated DR",
+      "category": "MULTI-CLOUD ARCHITECTURE",
+      "status_badge": "PRODUCTION READY",
+      "brands": "AWS, Azure, GCP"
     },
     {
       "id": 4,
       "created_at": "2026-08-19T07:05:39.345Z",
       "name": "Kubernetes & DevOps",
-      "description": "CI/CD and containerisation"
+      "description": "CI/CD and containerisation",
+      "keywords": "K8s, Docker, CI/CD, Terraform, GitOps",
+      "how_to_work": "Hardened K8s clusters with GitOps pipelines and automated canary deployments",
+      "category": "CONTAINER PLATFORMS & CI/CD",
+      "status_badge": "PRODUCTION READY",
+      "brands": "Kubernetes, Docker, Terraform"
     },
     {
       "id": 5,
       "created_at": "2026-08-19T07:05:39.346Z",
       "name": "Mobile — iOS & Android",
-      "description": "Native and cross-platform"
+      "description": "Native and cross-platform",
+      "keywords": "iOS, Android, Swift, Kotlin, Flutter",
+      "how_to_work": "Native and cross-platform mobile apps with biometric security and offline sync",
+      "category": "MOBILE & CROSS-PLATFORM",
+      "status_badge": "PRODUCTION READY",
+      "brands": "Apple iOS, Android, Flutter"
     },
     {
       "id": 6,
       "created_at": "2026-08-19T07:05:39.347Z",
       "name": "Machine Learning",
-      "description": "Models, MLOps, vision, NLP"
+      "description": "Models, MLOps, vision, NLP",
+      "keywords": "AI, ML, PyTorch, TensorFlow, OpenAI, RAG",
+      "how_to_work": "Production LLM agents, vector embeddings, and automated MLOps pipelines",
+      "category": "ENTERPRISE AI & MLOPS",
+      "status_badge": "PRODUCTION READY",
+      "brands": "PyTorch, TensorFlow, OpenAI"
+    },
+    {
+      "id": 7,
+      "created_at": "2026-10-08T11:48:10.918Z",
+      "name": "SAP",
+      "description": "Enterprise resource planning and systems modernization",
+      "keywords": "SAP Basis, S/4HANA, ABAP, Integration",
+      "how_to_work": "Enterprise SAP landscape migration, Basis administration, and hybrid cloud integration",
+      "category": "ERP & ENTERPRISE INTEGRATION",
+      "status_badge": "ENTERPRISE GRADE",
+      "brands": "SAP, Docker, Linux"
     }
   ],
   "clients": [
@@ -284,6 +314,72 @@
       "id": 8,
       "name": "Public sector",
       "created_at": "2026-08-20T04:40:04.694Z"
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "created_at": "2026-08-19T07:05:39.335Z",
+      "title": "Technology Consulting",
+      "description": "Uncovering technology blocks to business growth.",
+      "icon": "tech-consulting",
+      "link": "/solutions"
+    },
+    {
+      "id": 2,
+      "created_at": "2026-08-19T07:05:39.336Z",
+      "title": "Business Process Outsourcing",
+      "description": "Delivering industry-leading expertise, and supporting all delivery models.",
+      "icon": "bpo",
+      "link": "/solutions"
+    },
+    {
+      "id": 3,
+      "created_at": "2026-08-19T07:05:39.337Z",
+      "title": "Custom Application Development",
+      "description": "Developing a robust and industrialized approach for both new and existing applications.",
+      "icon": "custom-app",
+      "link": "/solutions"
+    },
+    {
+      "id": 4,
+      "created_at": "2026-08-19T07:05:39.338Z",
+      "title": "Big Data Solutions",
+      "description": "Applying smarter business acumen more extensively across the application life cycle.",
+      "icon": "big-data",
+      "link": "/solutions"
+    },
+    {
+      "id": 5,
+      "created_at": "2026-08-19T07:05:39.339Z",
+      "title": "Mobile Solutions",
+      "description": "Driving businesses in motion, and doing business with anybody, anytime!",
+      "icon": "mobile-solutions",
+      "link": "/solutions"
+    },
+    {
+      "id": 6,
+      "created_at": "2026-08-19T07:05:39.340Z",
+      "title": "Cloud Consulting",
+      "description": "Helping clients utilize the cloud for data storage and recovery, underpinning mobility, analytics, and social media.",
+      "icon": "cloud-consulting",
+      "link": "/solutions"
+    },
+    {
+      "id": 7,
+      "created_at": "2026-08-19T07:05:39.341Z",
+      "title": "Project Implementation",
+      "description": "Turning vision and plans into reality.",
+      "icon": "project-implementation",
+      "link": "/solutions"
+    },
+    {
+      "id": 8,
+      "created_at": "2026-08-19T07:05:39.342Z",
+      "title": "Staffing Solutions",
+      "description": "Assembling a customized solution to support your industry.",
+      "icon": "staffing-solutions",
+      "link": "/solutions"
     }
   ]
 }

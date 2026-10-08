@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2, Cpu, Database, Shield, Activity, HelpCircle, Briefcase } from "lucide-react";
+import { ArrowRight, CheckCircle2, Cpu, Database, Shield, Activity, HelpCircle, Briefcase, Users, UserCheck, GraduationCap, Compass, Layers } from "lucide-react";
 import { useState, useEffect } from "react";
 import { SiteLayout, PageHero, Section } from "@/components/site/site-layout";
 
@@ -22,136 +22,158 @@ const richMetadata: Record<string, {
   technologies: string[];
 }> = {
   "1": {
-    icon: Cpu,
+    icon: Users,
     capabilities: [
-      "Domain-Driven Development (DDD) & clean architecture",
-      "High-throughput event-driven microservices",
-      "Strangler-fig migration of legacy monoliths",
-      "Real-time transactional consistency at scale"
+      "Dedicated senior-only engineering squads mobilized within 72 hours",
+      "Specialized expertise across Cloud, DevOps, Full-Stack, and AI/ML",
+      "Direct team integration into client Slack, Jira, and Agile ceremonies",
+      "Flexible engagement models: team augmentation or managed delivery pods"
     ],
     methodology: [
-      "Event Storming & Domain Modeling",
-      "Target Architecture Blueprinting",
-      "Incremental Strangler Delivery",
-      "Load Testing & Performance Tuning"
+      "Skills Matrix & Technical Domain Assessment",
+      "72-Hour Candidate Vetting & Live Coding Screen",
+      "Frictionless Sprint Onboarding & Security Clearance",
+      "Continuous Velocity, Delivery, and SLA Reviews"
     ],
     deliverables: [
-      "Fully documented OpenAPI specifications",
-      "Automated unit, integration, and contract test suites",
-      "Structured JSON logging & Prometheus metrics",
-      "Operational runbooks for infrastructure teams"
+      "Principal Architects and Senior Engineers",
+      "Zero recruitment overhead or onboarding delays",
+      "Contractual delivery SLAs and performance guarantees",
+      "100% Client ownership of all generated code and assets"
     ],
-    technologies: ["Node.js", "TypeScript", "Go", "PostgreSQL", "Kafka", "Docker"]
+    technologies: ["Full-Stack", "DevOps", "Cloud Architects", "AI/ML Engineers", "Agile Pods"]
   },
   "2": {
     icon: Activity,
     capabilities: [
-      "Zero-downtime database and asset migrations",
-      "Multi-region high-availability configurations",
-      "Infrastructure as Code (IaC) templates",
-      "TCO analysis & cost optimization structures"
+      "End-to-end IT service delivery operations and enterprise helpdesk",
+      "Follow-the-sun global support pods with 24/7/365 coverage",
+      "SLA-backed Tier 1 to Tier 3 managed operational workflows",
+      "Continuous robotic process automation (RPA) and optimization"
     ],
     methodology: [
-      "TCO & Compliance Readiness Audit",
-      "Infrastructure Landing Zone Setup",
-      "Data Sync & Pilot Shift",
-      "DNS Cutover & Monolithic Decommission"
+      "Process Discovery and Workstream Transition",
+      "SLA and KPI Benchmarking",
+      "Automated Workflow Integration",
+      "Continuous Service Improvement (ITIL)"
     ],
     deliverables: [
-      "Terraform or CloudFormation scripts",
-      "Security audit & IAM compliance report",
-      "Cost breakdown & auto-scaling configuration",
-      "Disaster recovery runbook"
+      "Standard Operating Procedures (SOPs)",
+      "Real-time Telemetry Dashboard & Reporting",
+      "Monthly SLA Attainment Audits",
+      "Risk and Business Continuity Runbooks"
     ],
-    technologies: ["AWS", "Azure", "Terraform", "Kubernetes", "Docker", "Linux"]
+    technologies: ["ITIL", "ServiceNow", "Jira Service Desk", "24/7 Operations", "Automation"]
   },
   "3": {
-    icon: Database,
+    icon: UserCheck,
     capabilities: [
-      "Five-minute batch ETL pipelines at 1/10th streaming costs",
-      "Real-time analytics warehousing & views",
-      "Centralized metrics schema definition (dbt)",
-      "Strict data sanitization & PII separation"
+      "End-to-end recruitment lifecycle management and talent pipelining",
+      "AI-driven candidate screening, technical evaluation, and background checks",
+      "Employer branding and candidate experience optimization",
+      "Scalable on-demand hiring capacity with zero fixed recruitment overhead"
     ],
     methodology: [
-      "Source System Schema Auditing",
-      "Warehouse Model Design",
-      "ETL Pipeline Engineering",
-      "BI Integration & Verification"
+      "Workforce Planning & Hiring Needs Audit",
+      "Omnichannel Talent Sourcing & Pipelining",
+      "Rigorous Technical & Cultural Assessment",
+      "Offer Management, Onboarding, and Retention Tracking"
     ],
     deliverables: [
-      "dbt models with automated schema assertions",
-      "Optimized warehouse queries & indexing",
-      "Data lineage documentation",
-      "Airflow/Prefect orchestration DAGs"
+      "Dedicated RPO Talent Acquisition Squad",
+      "Custom Applicant Tracking System (ATS) Integration",
+      "Time-to-Hire and Quality-of-Hire KPI Reports",
+      "Pre-screened Active Candidate Pipelines"
     ],
-    technologies: ["Snowflake", "PostgreSQL", "Python", "dbt", "Airflow", "Kafka"]
+    technologies: ["ATS Integration", "Talent Intelligence", "AI Sourcing", "Tech Vetting", "Global Hiring"]
   },
   "4": {
     icon: Cpu,
     capabilities: [
-      "Intelligent workflows & agentic copilots",
-      "Human-in-the-loop validation checkpoints",
-      "Private Large Language Model (LLM) fine-tuning",
-      "Audit logs of all autonomous decisions"
+      "Domain-Driven Design (DDD) & clean modular microservices architecture",
+      "Full-stack cloud-native applications with React, Next.js, and Node.js",
+      "High-throughput transactional APIs with gRPC, REST, and GraphQL",
+      "Industrialized automated testing, security scanning, and CI/CD"
     ],
     methodology: [
-      "Workflow Observability Mapping",
-      "Model Selection & Context Prompting",
-      "Security & Guardrail Integration",
-      "Production Evaluation & Tuning"
+      "Domain Modeling & Sprint Blueprinting",
+      "Incremental Modular Delivery",
+      "Automated Contract and E2E Testing",
+      "Zero-Downtime Blue/Green Deployment"
     ],
     deliverables: [
-      "Fully versioned model prompts & weights",
-      "Observability dashboard tracking LLM drift",
-      "Safety filter configurations",
-      "Developer API wrapper code"
+      "Production-ready codebase with full client IP ownership",
+      "OpenAPI specifications & comprehensive documentation",
+      "Automated test suites and security scan reports",
+      "Kubernetes deployment manifests and CI/CD pipelines"
     ],
-    technologies: ["Python", "PyTorch", "HuggingFace", "AWS Bedrock", "FastAPI"]
+    technologies: ["React", "Next.js", "TypeScript", "Node.js", "Python", "PostgreSQL", "Docker"]
   },
   "5": {
     icon: Shield,
     capabilities: [
-      "Threat modeling & threat vector assessment",
-      "SOC2, ISO27001, and HIPAA compliance readiness",
-      "Identity and Access Management (IAM) hardening",
-      "Automated vulnerability scanning pipelines"
+      "Full-suite automated end-to-end, regression, and integration testing",
+      "High-concurrency load, stress, and performance benchmark testing",
+      "API security, OWASP vulnerability scanning, and compliance testing",
+      "Mobile device cloud testing across 100+ physical device configurations"
     ],
     methodology: [
-      "Threat Vectors Assessment",
-      "System Hardening & Config Fixes",
-      "Compliance Assertions Mapping",
-      "Penetration Test & Correction"
+      "Test Strategy & Automation Architecture Definition",
+      "Continuous Test Automation in CI/CD Pipelines",
+      "Performance & Security Baseline Benchmarking",
+      "Defect Prevention & Quality Gate Enforcement"
     ],
     deliverables: [
-      "Vulnerability scan reports & remediation logs",
-      "IAM architecture diagrams",
-      "SOC2-ready system control definitions",
-      "Incident response policy files"
+      "Automated Playwright, Cypress, and Selenium Test Suites",
+      "JMeter & k6 Load and Scalability Benchmark Reports",
+      "Continuous Quality Gates integrated with GitHub Actions",
+      "Real-time Test Coverage & Bug Density Dashboards"
     ],
-    technologies: ["Vault", "SSL/TLS", "IAM", "OWASP", "SIEM", "Kubernetes NetworkPolicies"]
+    technologies: ["Playwright", "Cypress", "Selenium", "k6", "JMeter", "Postman", "OWASP ZAP"]
   },
   "6": {
-    icon: Briefcase,
+    icon: GraduationCap,
     capabilities: [
-      "24/7 incident response by senior practitioners",
-      "Custom SLAs built around core business metrics",
-      "Blameless post-mortem analysis reports",
-      "Continuous runtime optimization and patching"
+      "Role-based enterprise curriculum across Cloud, DevOps, AI, and Full-Stack",
+      "Hands-on real-world production sandboxes and architectural labs",
+      "Mentorship from veteran principal architects and technical leaders",
+      "Custom corporate training cohorts with industry certification pathways"
     ],
     methodology: [
-      "Telemetry Integration",
-      "Runbook Consolidation",
-      "Alarm Threshold Calibration",
-      "Continuous Optimization Iteration"
+      "Skills Gap Assessment & Corporate Needs Analysis",
+      "Custom Curriculum & Hands-on Lab Design",
+      "Live Interactive Training & Code Reviews",
+      "Capstone Project Evaluation & Certification"
     ],
     deliverables: [
-      "Structured alert logs & notification settings",
-      "Standard operating procedures (SOPs)",
-      "Monthly SLA attainment reports",
-      "Resource allocation suggestions"
+      "Production-ready certified engineers",
+      "Comprehensive course materials, lab guides, and video archives",
+      "Individual capability benchmarks and progress dashboards",
+      "Post-training mentorship and ongoing learning roadmaps"
     ],
-    technologies: ["Prometheus", "Grafana", "Datadog", "PagerDuty", "Terraform"]
+    technologies: ["Cloud Certifications", "DevOps Bootcamps", "AI/ML Workshops", "Hands-on Labs", "Architecture Mentorship"]
+  },
+  "7": {
+    icon: Compass,
+    capabilities: [
+      "Comprehensive enterprise architecture audit and tech debt quantification",
+      "Legacy modernization blueprints and cloud readiness assessments",
+      "Cybersecurity posture, compliance, and risk assessments",
+      "Technology due diligence for M&A and strategic capital allocation"
+    ],
+    methodology: [
+      "Discovery & Technology Health Audit",
+      "Bottleneck & Architectural Risk Identification",
+      "Future-State Target Architecture Modeling",
+      "Execution Roadmap & Governance Framework Formulation"
+    ],
+    deliverables: [
+      "Executive Enterprise Architecture Blueprint",
+      "Technical Debt Remediation & Modernization Roadmap",
+      "ROI and Total Cost of Ownership (TCO) Model",
+      "C-Suite Advisory Briefing and Implementation Milestones"
+    ],
+    technologies: ["Enterprise Architecture", "Cloud Strategy", "FinOps", "Cybersecurity", "Legacy Modernization"]
   }
 };
 

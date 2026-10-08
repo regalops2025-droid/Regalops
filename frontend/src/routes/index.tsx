@@ -226,6 +226,152 @@ const coreServices = [
   },
 ];
 
+export function renderServiceIcon(iconKey?: string, title?: string) {
+  const key = `${iconKey || ""} ${title || ""}`.toLowerCase();
+  if (key.includes("tech") || key.includes("consult")) {
+    return (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="16" width="44" height="32" rx="4" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="#f8fafc" />
+        <path d="M26 48L24 54H40L38 48" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="20" y1="54" x2="44" y2="54" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M32 20C32 20 38 23 38 31L35 34L32 32L29 34L26 31C26 23 32 20 32 20Z" stroke="#334155" strokeWidth="2.2" strokeLinejoin="round" fill="#ffffff" />
+        <circle cx="32" cy="27" r="2.5" fill="#f97316" />
+        <path d="M30 35L32 39L34 35" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M44 24L45 22L46 24L48 25L46 26L45 28L44 26L42 25Z" fill="#0284c7" />
+      </svg>
+    );
+  }
+  if (key.includes("bpo") || key.includes("process") || key.includes("outsource")) {
+    return (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M34 16H46C48.2 16 50 17.8 50 20V28C50 30.2 48.2 32 46 32H42L38 36V32H34C31.8 32 30 30.2 30 28V20C30 17.8 31.8 16 34 16Z" stroke="#f97316" strokeWidth="2.2" strokeLinejoin="round" fill="#fff7ed" />
+        <circle cx="36" cy="24" r="1.5" fill="#f97316" />
+        <circle cx="40" cy="24" r="1.5" fill="#f97316" />
+        <circle cx="44" cy="24" r="1.5" fill="#f97316" />
+        <circle cx="22" cy="28" r="4.5" stroke="#334155" strokeWidth="2.2" fill="#ffffff" />
+        <path d="M14 44C14 38.5 17.5 37 22 37C26.5 37 30 38.5 30 44" stroke="#334155" strokeWidth="2.2" strokeLinecap="round" />
+        <circle cx="36" cy="40" r="4" stroke="#334155" strokeWidth="2.2" fill="#ffffff" />
+        <path d="M29 52C29 48 32 47 36 47C40 47 43 48 43 52" stroke="#334155" strokeWidth="2.2" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  if (key.includes("custom") || key.includes("app") || key.includes("develop")) {
+    return (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="12" width="24" height="40" rx="5" stroke="#334155" strokeWidth="2.5" fill="#f8fafc" />
+        <circle cx="32" cy="46" r="1.5" fill="#334155" />
+        <line x1="28" y1="16" x2="36" y2="16" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="32" cy="30" r="8.5" fill="#fff7ed" stroke="#f97316" strokeWidth="2" />
+        <path d="M32 25C32 25 35 27 35 31L33.5 32.5L32 31.5L30.5 32.5L29 31C29 27 32 25 32 25Z" fill="#f97316" />
+        <path d="M31 33L32 35.5L33 33" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="15" cy="22" r="1.5" fill="#0284c7" />
+        <path d="M48 20L49 18L50 20L52 21L50 22L49 24L48 22L46 21Z" fill="#f97316" />
+      </svg>
+    );
+  }
+  if (key.includes("data") || key.includes("big") || key.includes("analytic")) {
+    return (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="32" y1="32" x2="18" y2="22" stroke="#94a3b8" strokeWidth="2" />
+        <line x1="32" y1="32" x2="46" y2="20" stroke="#94a3b8" strokeWidth="2" />
+        <line x1="32" y1="32" x2="48" y2="42" stroke="#94a3b8" strokeWidth="2" />
+        <line x1="32" y1="32" x2="20" y2="44" stroke="#94a3b8" strokeWidth="2" />
+        <line x1="32" y1="32" x2="32" y2="14" stroke="#f97316" strokeWidth="1.8" strokeDasharray="2 2" />
+        <line x1="32" y1="32" x2="32" y2="50" stroke="#94a3b8" strokeWidth="2" />
+        <circle cx="32" cy="32" r="4.5" fill="#f97316" stroke="#ea580c" strokeWidth="2" />
+        <circle cx="18" cy="22" r="3" fill="#334155" />
+        <circle cx="46" cy="20" r="3.5" fill="#334155" />
+        <circle cx="48" cy="42" r="3" fill="#334155" />
+        <circle cx="20" cy="44" r="3.5" fill="#334155" />
+        <circle cx="32" cy="14" r="2.5" fill="#f97316" />
+        <circle cx="32" cy="50" r="2.5" fill="#0284c7" />
+        <circle cx="44" cy="30" r="2" fill="#f97316" />
+        <circle cx="18" cy="34" r="2" fill="#0284c7" />
+      </svg>
+    );
+  }
+  if (key.includes("mobile") || key.includes("ios") || key.includes("android")) {
+    return (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="14" width="24" height="40" rx="5" stroke="#334155" strokeWidth="2.5" fill="#f8fafc" />
+        <line x1="28" y1="18" x2="36" y2="18" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="32" cy="48" r="1.5" fill="#334155" />
+        <g transform="translate(32, 32)">
+          <circle cx="0" cy="0" r="7.5" stroke="#0284c7" strokeWidth="2" strokeDasharray="3 2" fill="#f0f9ff" />
+          <circle cx="0" cy="0" r="3.5" fill="#0284c7" />
+        </g>
+        <line x1="48" y1="28" x2="52" y2="28" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+        <line x1="48" y1="32" x2="55" y2="32" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+        <line x1="48" y1="36" x2="51" y2="36" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  if (key.includes("cloud")) {
+    return (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 36C18.7 36 16 33.3 16 30C16 27.1 18 24.6 20.8 24.1C21.6 19.5 25.6 16 30.5 16C34.6 16 38.1 18.6 39.4 22.4C40.2 22.1 41.1 22 42 22C45.3 22 48 24.7 48 28C48 28.5 47.9 29 47.8 29.5C49.7 30.7 51 32.7 51 35C51 38.3 48.3 41 45 41H22" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="#f8fafc" />
+        <path d="M24 41V46" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="24" cy="48" r="2" fill="#f97316" />
+        <path d="M32 41V48" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="32" cy="50" r="2" fill="#0284c7" />
+        <path d="M40 41V45" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="40" cy="47" r="2" fill="#f97316" />
+        <path d="M46 41V49" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="46" cy="51" r="2" fill="#334155" />
+      </svg>
+    );
+  }
+  if (key.includes("project") || key.includes("implement")) {
+    return (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 22H38C42 22 45 25 45 29C45 33 42 36 38 36H24C20 36 17 39 17 43C17 47 20 50 24 50H46" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="16" cy="22" r="3" fill="#334155" />
+        <circle cx="32" cy="22" r="2.5" fill="#f97316" />
+        <circle cx="45" cy="29" r="2.5" fill="#0284c7" />
+        <circle cx="28" cy="36" r="3" fill="#f97316" />
+        <circle cx="36" cy="50" r="2.5" fill="#0284c7" />
+        <circle cx="48" cy="50" r="3.5" fill="#f97316" />
+        <path d="M35 19L38 22L35 25" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M27 33L24 36L27 39" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M43 47L46 50L43 53" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+  if (key.includes("ai") || key.includes("ml") || key.includes("intel")) {
+    return (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="18" width="28" height="28" rx="6" stroke="#334155" strokeWidth="2.5" fill="#f8fafc" />
+        <circle cx="32" cy="32" r="6" fill="#f97316" />
+        <line x1="32" y1="12" x2="32" y2="18" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
+        <line x1="32" y1="46" x2="32" y2="52" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
+        <line x1="12" y1="32" x2="18" y2="32" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
+        <line x1="46" y1="32" x2="52" y2="32" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  if (key.includes("secur") || key.includes("cyber") || key.includes("lock")) {
+    return (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 14L48 20V32C48 42 41 50 32 54C23 50 16 42 16 32V20L32 14Z" stroke="#334155" strokeWidth="2.5" fill="#f8fafc" />
+        <circle cx="32" cy="32" r="3" fill="#f97316" />
+        <path d="M32 35V40" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  return (
+    <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="22" r="4.5" stroke="#334155" strokeWidth="2.2" fill="#ffffff" />
+      <path d="M25 38C25 33 28 31 32 31C36 31 39 33 39 38" stroke="#334155" strokeWidth="2.2" strokeLinecap="round" />
+      <circle cx="21" cy="26" r="3.8" stroke="#334155" strokeWidth="2" fill="#ffffff" />
+      <path d="M15 41C15 37 17.5 35 21 35C22.8 35 24.3 35.5 25.2 36.5" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="43" cy="26" r="3.8" stroke="#334155" strokeWidth="2" fill="#ffffff" />
+      <path d="M38.8 36.5C39.7 35.5 41.2 35 43 35C46.5 35 49 37 49 41" stroke="#334155" strokeWidth="2.2" strokeLinecap="round" />
+      <path d="M12 44C18 49 46 49 52 44" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M16 48C22 52 42 52 48 48" stroke="#0284c7" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 const ourServices = [
   {
     id: "tech-consulting",
@@ -557,6 +703,7 @@ function Home() {
   const [activeArchLayer, setActiveArchLayer] = useState("edge");
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [solutions, setSolutions] = useState<any[]>([]);
+  const [servicesList, setServicesList] = useState<any[]>([]);
 
   // Auto-play background carousel rotation every 5.5 seconds
   useEffect(() => {
@@ -577,7 +724,19 @@ function Home() {
       .catch((err) => console.error("Failed to fetch solutions", err));
   }, []);
 
+  useEffect(() => {
+    fetch("/api/services")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setServicesList(data);
+        }
+      })
+      .catch((err) => console.error("Failed to fetch services", err));
+  }, []);
+
   const displaySolutions = solutions.length > 0 ? solutions : coreServices;
+  const displayServices = servicesList.length > 0 ? servicesList : ourServices;
 
   const filteredSolutions =
     selectedPracticeCategory === "All"
@@ -906,9 +1065,9 @@ function Home() {
       </section>
 
       {/* ==================================================================== */}
-      {/* 4. OUR SERVICES SECTION (Vuesol Reference Match)                      */}
+      {/* 4. OUR SERVICES SECTION (Infinite Scrolling Marquee + Grid Toggle)   */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] pt-8 pb-16 sm:pb-20 lg:pb-24">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] pt-8 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Header */}
@@ -920,43 +1079,65 @@ function Home() {
               Accelerate your journey to success with our expertise, insights, innovation and vision
             </p>
           </div>
+        </div>
 
-          {/* 8-Card Grid (4 Columns on Desktop, 2 on Tablet, 1 on Mobile) */}
-          <div className="mt-12 sm:mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {ourServices.map((service) => (
-              <Link
-                key={service.id}
-                to={service.link}
-                className="group flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-7 sm:p-8 transition-all duration-300 hover:-translate-y-2 hover:border-sky-400/50 hover:shadow-[0_16px_35px_rgba(2,132,199,0.08)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer"
-              >
-                {/* Vector Icon */}
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50/80 group-hover:bg-sky-50 transition-colors duration-300">
-                  {service.icon}
-                </div>
+        {/* AUTO-SCROLLING MARQUEE FLOW */}
+        <div className="mt-10 sm:mt-12 relative w-full overflow-hidden group py-3">
+          {/* Subtle Gradient Fade Masks on Edges */}
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
 
-                {/* Title */}
-                <h3 className="mt-6 text-lg sm:text-[18px] font-bold text-neutral-900 group-hover:text-sky-700 transition-colors leading-snug">
-                  {service.title}
-                </h3>
+          {/* Seamless Infinite Marquee Track with Pause on Hover */}
+          <div className="flex gap-6 w-max py-4 px-4 transition-all duration-300 animate-marquee-services hover:[animation-play-state:paused]">
+            {[...displayServices, ...displayServices].map((service, idx) => {
+              const iconElement =
+                service.icon && typeof service.icon !== "string"
+                  ? service.icon
+                  : renderServiceIcon(service.icon, service.title);
+              const title = service.title;
+              const desc = service.description || service.desc;
+              const link = service.link || "/solutions";
 
-                {/* Description */}
-                <p className="mt-3 text-xs sm:text-[13.5px] leading-relaxed text-neutral-500">
-                  {service.desc}
-                </p>
-              </Link>
-            ))}
+              return (
+                <Link
+                  key={`${service.id || "srv"}-${idx}`}
+                  to={link}
+                  className="group/card flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-7 sm:p-8 w-[285px] sm:w-[320px] shrink-0 transition-all duration-300 hover:-translate-y-2 hover:border-sky-400/60 hover:shadow-[0_16px_35px_rgba(2,132,199,0.12)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer select-none"
+                >
+                  {/* Vector Icon */}
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50/80 group-hover/card:bg-sky-50 transition-colors duration-300">
+                    {iconElement}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="mt-6 text-lg sm:text-[18px] font-bold text-neutral-900 group-hover/card:text-sky-700 transition-colors leading-snug">
+                    {title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="mt-3 text-xs sm:text-[13.5px] leading-relaxed text-neutral-500 line-clamp-3">
+                    {desc}
+                  </p>
+
+                  {/* Bottom Explore Link */}
+                  <div className="mt-auto pt-6 flex items-center gap-1.5 text-xs font-semibold text-sky-600 group-hover/card:text-sky-700">
+                    <span>Explore Practice</span>
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/card:translate-x-1" />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
+        </div>
 
-          {/* Bottom Explore CTA Bar */}
-          <div className="mt-12 text-center">
-            <Link
-              to="/solutions"
-              className="inline-flex items-center gap-2 rounded-full bg-[#0091d5] hover:bg-[#007cb8] px-6 py-3 text-xs sm:text-sm font-semibold text-white shadow-md shadow-sky-900/15 hover:shadow-lg transition-all cursor-pointer"
-            >
-              Explore detailed practice architectures <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
+        {/* Bottom Explore CTA Bar */}
+        <div className="mt-12 text-center">
+          <Link
+            to="/solutions"
+            className="inline-flex items-center gap-2 rounded-full bg-[#0091d5] hover:bg-[#007cb8] px-6 py-3 text-xs sm:text-sm font-semibold text-white shadow-md shadow-sky-900/15 hover:shadow-lg transition-all cursor-pointer"
+          >
+            Explore detailed practice architectures <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
 

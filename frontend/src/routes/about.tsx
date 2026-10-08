@@ -18,11 +18,6 @@ import {
   Zap,
   ChevronLeft,
   ChevronRight,
-  Globe,
-  Cloud,
-  Settings,
-  Box,
-  BarChart3,
 } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
@@ -231,7 +226,7 @@ function About() {
       {/* ==================================================================== */}
       <section className="relative w-full overflow-hidden bg-[#07192F]">
         {/* Main Banner Container */}
-        <div className="relative min-h-[580px] sm:min-h-[640px] lg:min-h-[690px] flex flex-col justify-between">
+        <div className="relative min-h-[460px] sm:min-h-[500px] lg:min-h-[540px] flex flex-col justify-between">
           
           {/* Background Right Side Image: Twilight Skyline & Highway Trails */}
           <div className="absolute top-0 right-0 bottom-0 w-full lg:w-[60%] select-none pointer-events-none overflow-hidden">
@@ -269,7 +264,7 @@ function About() {
           </div>
 
           {/* Left Column Content Container */}
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full pt-12 sm:pt-16 lg:pt-20 pb-36 lg:pb-32">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-20 lg:pb-24">
             <div className="max-w-2xl text-left space-y-6">
               
               {/* Top Tagline / Eyebrow */}
@@ -305,102 +300,6 @@ function About() {
                 </Link>
               </div>
 
-              {/* 4 Metric / Trust Stat Badges in a Horizontal Row */}
-              <div className="pt-4 flex flex-wrap sm:flex-nowrap items-center gap-5 sm:gap-7 border-t border-white/10 max-w-xl">
-                {/* Metric 1 */}
-                <div className="space-y-0.5">
-                  <div className="flex items-center gap-1.5 text-amber-400">
-                    <Users className="h-4 w-4 stroke-[2.2]" />
-                  </div>
-                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">500+</div>
-                  <div className="text-[11px] text-neutral-300 font-medium">Projects Delivered</div>
-                </div>
-
-                {/* Metric 2 */}
-                <div className="space-y-0.5">
-                  <div className="flex items-center gap-1.5 text-amber-400">
-                    <ShieldCheck className="h-4 w-4 stroke-[2.2]" />
-                  </div>
-                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">99.98%</div>
-                  <div className="text-[11px] text-neutral-300 font-medium">SLA Uptime</div>
-                </div>
-
-                {/* Metric 3 */}
-                <div className="space-y-0.5">
-                  <div className="flex items-center gap-1.5 text-amber-400">
-                    <Globe className="h-4 w-4 stroke-[2.2]" />
-                  </div>
-                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">220+</div>
-                  <div className="text-[11px] text-neutral-300 font-medium">Global Clients</div>
-                </div>
-
-                {/* Metric 4 */}
-                <div className="space-y-0.5">
-                  <div className="flex items-center gap-1.5 text-amber-400">
-                    <TrendingUp className="h-4 w-4 stroke-[2.2]" />
-                  </div>
-                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">14+</div>
-                  <div className="text-[11px] text-neutral-300 font-medium">Countries Served</div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          {/* Floating White Card: 4 Core Capabilities Pillars (Right / Center overlap) */}
-          <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full -mt-24 sm:-mt-16 lg:-mt-14 mb-4">
-            <div className="lg:ml-auto lg:max-w-2xl xl:max-w-3xl">
-              <div className="rounded-2xl bg-white/95 backdrop-blur-md p-3.5 sm:p-4.5 shadow-2xl border border-white/80 shadow-black/30">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-neutral-200/70">
-                  {/* Pillar 1 */}
-                  <div className="flex items-center gap-2.5 px-2 sm:px-3 pt-2 sm:pt-0">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-sky-600">
-                      <Cloud className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <span className="block text-xs font-bold text-neutral-900 leading-tight">
-                        Cloud Modernization
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Pillar 2 */}
-                  <div className="flex items-center gap-2.5 px-2 sm:px-3 pt-2 sm:pt-0">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                      <Settings className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <span className="block text-xs font-bold text-neutral-900 leading-tight">
-                        Digital Transformation
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Pillar 3 */}
-                  <div className="flex items-center gap-2.5 px-2 sm:px-3 pt-2 sm:pt-0">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600">
-                      <Box className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <span className="block text-xs font-bold text-neutral-900 leading-tight">
-                        Managed Services
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Pillar 4 */}
-                  <div className="flex items-center gap-2.5 px-2 sm:px-3 pt-2 sm:pt-0">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
-                      <BarChart3 className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <span className="block text-xs font-bold text-neutral-900 leading-tight">
-                        Strategic IT Consulting
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
 

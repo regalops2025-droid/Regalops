@@ -848,200 +848,158 @@ function Home() {
       </section>
 
       {/* ==================================================================== */}
-      {/* 4. ABOUT REGAL OPS — "SENIOR ENGINEERING, QUIETLY DELIVERED"         */}
+      {/* 4. ABOUT REGAL OPS — "WHO WE ARE & WHAT WE DO" (Vuesol Reference)    */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-white py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section id="about" className="relative bg-white pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 overflow-hidden">
+        {/* Ambient background soft glow */}
+        <div className="absolute top-1/2 right-12 -translate-y-1/2 w-96 h-96 rounded-full bg-gradient-to-tr from-sky-400/10 via-orange-400/10 to-amber-300/10 blur-3xl pointer-events-none" />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             
-            {/* Left Content */}
-            <div className="lg:col-span-7">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
+            {/* Left Content Column (Exact Text & Layout from Reference) */}
+            <div className="lg:col-span-6 xl:col-span-6">
+              
+              {/* Category Pill */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-sky-200/80 bg-sky-50/70 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#007cb8]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#0091d5]" />
+                Who We Are &amp; What We Do
+              </div>
+
+              {/* Main Heading matching Reference */}
+              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight leading-[1.15]">
                 About Regal OPs
-              </span>
-              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-neutral-900 leading-tight">
-                Senior Engineering, Quietly Delivered
               </h2>
-              <p className="mt-5 text-base sm:text-lg leading-relaxed text-neutral-600">
-                Regal OPs is a specialized engineering practice and technology consultancy. Since 2011, we have partnered with enterprises across financial services, healthcare, and industrial manufacturing to solve high-stakes architecture and scalability challenges.
+
+              {/* Subheading in Italicized Font matching Reference */}
+              <p className="mt-2 text-lg sm:text-xl font-normal italic font-serif text-neutral-600 tracking-wide">
+                Who We Are &amp; What We Do
               </p>
 
-              {/* Key Pillars */}
-              <div className="mt-8 space-y-4">
-                <div className="flex items-start gap-3.5">
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-100/70 text-emerald-800 mt-0.5">
-                    <CheckCircle2 className="h-4 w-4" />
+              {/* Paragraph 1 matching Reference */}
+              <p className="mt-6 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
+                We empower companies by helping them utilize and integrate the most recent technological advances. This allows businesses to respond more quickly and intuitively to changing market dynamics. At Regal OPs, we have a long track record of transforming organizations into high-performing businesses that can tap into new, high-profit opportunities.
+              </p>
+
+              {/* Paragraph 2 matching Reference */}
+              <p className="mt-4 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
+                By utilizing our technical expertise, industry insight, technological vision, and innovative thinking we can help you identify new opportunities for growth and innovation. We enable organizations to reach their full potential and accelerate their business. Don’t just keep up with the competition, get ahead. The market can be crowded, but we will make you stand out.
+              </p>
+
+              {/* Three Value Highlights / Trust Markers */}
+              <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="rounded-xl border border-neutral-200/80 bg-neutral-50/60 p-3 hover:border-sky-300 hover:bg-sky-50/40 transition-colors">
+                  <div className="text-xs font-bold text-neutral-900 flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-orange-500" />
+                    Technical Expertise
                   </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-neutral-900">Zero Technical Debt Delivery</h3>
-                    <p className="mt-0.5 text-xs sm:text-sm text-neutral-500 leading-relaxed">
-                      Every engagement delivers audited code, automated tests, full documentation, and operational runbooks.
-                    </p>
+                  <div className="text-[11px] text-neutral-500 mt-1 leading-tight">
+                    Cloud, AI &amp; modern architectures
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3.5">
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-100/70 text-emerald-800 mt-0.5">
-                    <CheckCircle2 className="h-4 w-4" />
+                <div className="rounded-xl border border-neutral-200/80 bg-neutral-50/60 p-3 hover:border-sky-300 hover:bg-sky-50/40 transition-colors">
+                  <div className="text-xs font-bold text-neutral-900 flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-[#0091d5]" />
+                    Industry Insight
                   </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-neutral-900">Senior-Only Engineering Squads</h3>
-                    <p className="mt-0.5 text-xs sm:text-sm text-neutral-500 leading-relaxed">
-                      No junior trainees on retainer. You collaborate directly with principal architects and seasoned practitioners.
-                    </p>
+                  <div className="text-[11px] text-neutral-500 mt-1 leading-tight">
+                    Deep domain &amp; operational wisdom
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3.5">
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-100/70 text-emerald-800 mt-0.5">
-                    <CheckCircle2 className="h-4 w-4" />
+                <div className="rounded-xl border border-neutral-200/80 bg-neutral-50/60 p-3 hover:border-sky-300 hover:bg-sky-50/40 transition-colors">
+                  <div className="text-xs font-bold text-neutral-900 flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-amber-500" />
+                    Accelerated Growth
                   </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-neutral-900">Follow-The-Sun Global Delivery</h3>
-                    <p className="mt-0.5 text-xs sm:text-sm text-neutral-500 leading-relaxed">
-                      Continuous 24/7 delivery across North America and international tech hubs ensuring rapid deployment velocity.
-                    </p>
+                  <div className="text-[11px] text-neutral-500 mt-1 leading-tight">
+                    Transforming vision into high ROI
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 flex items-center gap-4">
+              {/* CTAs matching reference button style */}
+              <div className="mt-8 flex flex-wrap items-center gap-3.5">
                 <Link
                   to="/about"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#13502c] hover:bg-[#0e3f22] px-6 py-3 text-sm font-semibold text-white shadow-md shadow-emerald-950/15 hover:shadow-lg transition-all"
+                  className="inline-flex items-center gap-2 rounded bg-[#0091d5] hover:bg-[#007cb8] px-6 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
                 >
-                  Learn more about us <ArrowRight className="h-4 w-4" />
+                  <span className="font-bold">&mdash;</span> Know more
                 </Link>
+
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full border border-neutral-300 px-6 py-3 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 transition-colors"
+                  className="inline-flex items-center gap-2 rounded border border-neutral-300 hover:border-neutral-400 bg-white hover:bg-neutral-50 px-5 py-2.5 text-xs sm:text-sm font-semibold text-neutral-800 shadow-2xs transition-all duration-200 cursor-pointer"
                 >
-                  Meet our leadership
+                  Get in Touch <ArrowRight className="h-3.5 w-3.5 text-neutral-500" />
                 </Link>
               </div>
+
             </div>
 
-            {/* Right Architecture Metrics Showcase */}
-            <div className="lg:col-span-5">
-              <div className="rounded-3xl border border-neutral-200/80 bg-white p-6 sm:p-8 shadow-xl shadow-neutral-950/5 relative overflow-hidden">
-                <div className="absolute top-0 right-0 h-40 w-40 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
+            {/* Right Graphic Showcase (Exact Geometric Artwork from Reference) */}
+            <div className="lg:col-span-6 xl:col-span-6 flex justify-center items-center">
+              <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
                 
-                <div className="flex items-center justify-between border-b border-neutral-100 pb-5">
-                  <div>
-                    <div className="text-xs font-bold uppercase tracking-wider text-emerald-800">Operational SLA</div>
-                    <div className="text-2xl font-extrabold text-neutral-900">99.98% High Availability</div>
-                  </div>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
-                    <Activity className="h-5 w-5" />
-                  </div>
+                {/* Backlight Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-sky-100 via-orange-100 to-amber-50 rounded-full blur-3xl opacity-60 pointer-events-none transform scale-90" />
+                
+                {/* Main Graphic with subtle floating animation */}
+                <div className="relative z-10 transition-transform duration-500 hover:scale-[1.02]">
+                  <img
+                    src="/about-graphic.png"
+                    alt="About Regal OPs — Who We Are & What We Do"
+                    className="w-full h-auto max-h-[460px] object-contain mx-auto drop-shadow-md select-none animate-float"
+                  />
                 </div>
 
-                <div className="mt-6 grid grid-cols-2 gap-4">
-                  <div className="rounded-2xl border border-neutral-100 bg-neutral-50/70 p-4 hover:border-emerald-600/30 transition-colors">
-                    <div className="font-display text-3xl font-extrabold text-emerald-800">15+</div>
-                    <div className="mt-1 text-xs font-bold text-neutral-900">Years Experience</div>
-                    <div className="mt-0.5 text-[11px] text-neutral-500">Battle-tested since 2011</div>
-                  </div>
-
-                  <div className="rounded-2xl border border-neutral-100 bg-neutral-50/70 p-4 hover:border-emerald-600/30 transition-colors">
-                    <div className="font-display text-3xl font-extrabold text-emerald-800">0</div>
-                    <div className="mt-1 text-xs font-bold text-neutral-900">Customer Outages</div>
-                    <div className="mt-0.5 text-[11px] text-neutral-500">Across 14 core migrations</div>
-                  </div>
-
-                  <div className="rounded-2xl border border-neutral-100 bg-neutral-50/70 p-4 hover:border-emerald-600/30 transition-colors">
-                    <div className="font-display text-3xl font-extrabold text-emerald-800">220+</div>
-                    <div className="mt-1 text-xs font-bold text-neutral-900">Senior Technologists</div>
-                    <div className="mt-0.5 text-[11px] text-neutral-500">Full-time experts on staff</div>
-                  </div>
-
-                  <div className="rounded-2xl border border-neutral-100 bg-neutral-50/70 p-4 hover:border-emerald-600/30 transition-colors">
-                    <div className="font-display text-3xl font-extrabold text-emerald-800">100%</div>
-                    <div className="mt-1 text-xs font-bold text-neutral-900">Audit Compliance</div>
-                    <div className="mt-0.5 text-[11px] text-neutral-500">SOC-2 & ISO standards</div>
-                  </div>
-                </div>
-
-                <div className="mt-6 rounded-2xl bg-neutral-900 p-4 text-white flex items-center justify-between">
+                {/* Overlaid Floating Badge */}
+                <div className="absolute -bottom-2 -left-2 sm:bottom-4 sm:left-4 z-20 rounded-2xl border border-neutral-200/90 bg-white/95 backdrop-blur-md p-3.5 sm:p-4 shadow-xl shadow-neutral-900/8 max-w-[240px] sm:max-w-[270px]">
                   <div className="flex items-center gap-3">
-                    <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-xs font-mono text-neutral-300">SYSTEMS HEALTH: OPTIMAL</span>
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-orange-600 border border-orange-100 shadow-xs">
+                      <Sparkles className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs sm:text-sm font-bold text-neutral-900 leading-tight">
+                        Proven Track Record
+                      </div>
+                      <div className="text-[10px] sm:text-[11px] text-neutral-500 mt-0.5 leading-tight">
+                        Transforming high-performing organizations
+                      </div>
+                    </div>
                   </div>
-                  <span className="text-[11px] font-mono text-emerald-400">LATENCY: 1.2ms</span>
                 </div>
+
+                {/* Overlaid Top-Right Accent Tag */}
+                <div className="absolute top-2 -right-2 sm:top-6 sm:right-2 z-20 rounded-full border border-sky-200/90 bg-white/90 backdrop-blur-md px-3.5 py-1 text-[11px] font-bold text-[#007cb8] shadow-md shadow-sky-900/5">
+                  Next-Gen Innovation &bull; 99.98% SLA
+                </div>
+
               </div>
             </div>
 
           </div>
         </div>
-      </section>
 
-      {/* ==================================================================== */}
-      {/* 5. WHY REGAL OPS — EXECUTIVE COMPARISON MATRIX                        */}
-      {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
-              The Engineering Difference
-            </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900">
-              Why Enterprise Leaders Choose Regal OPs
-            </h2>
-            <p className="mt-3 text-base text-neutral-600">
-              A direct comparison between traditional Big-4 IT staff augmentation and our dedicated, senior-only engineering squads.
-            </p>
-          </div>
-
-          <div className="mt-12 overflow-hidden rounded-3xl border border-neutral-200/80 bg-white shadow-xl shadow-neutral-950/5">
-            <div className="grid grid-cols-1 md:grid-cols-12 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80">
-              
-              {/* Header Titles */}
-              <div className="col-span-12 grid grid-cols-1 md:grid-cols-12 bg-neutral-50/80 p-4 sm:p-5 border-b border-neutral-200/80 text-xs font-bold uppercase tracking-wider text-neutral-500">
-                <div className="md:col-span-3">Strategic Criteria</div>
-                <div className="hidden md:block md:col-span-4 text-neutral-500">Traditional IT / Big 4 Staffing</div>
-                <div className="hidden md:block md:col-span-5 text-emerald-800 flex items-center gap-1.5">
-                  <Sparkles className="h-3.5 w-3.5 text-emerald-600" /> Regal OPs Dedicated Pods
-                </div>
-              </div>
-
-              {/* Rows */}
-              {comparisonMatrix.map((item, idx) => (
-                <div
-                  key={item.factor}
-                  className={`col-span-12 grid grid-cols-1 md:grid-cols-12 p-5 sm:p-6 items-center gap-3 md:gap-4 transition-colors hover:bg-neutral-50/40 ${
-                    idx !== comparisonMatrix.length - 1 ? "border-b border-neutral-100" : ""
-                  }`}
-                >
-                  <div className="md:col-span-3">
-                    <span className="text-sm font-bold text-neutral-900">{item.factor}</span>
-                  </div>
-                  
-                  <div className="md:col-span-4 flex items-start gap-2.5 text-xs text-neutral-500 leading-relaxed">
-                    <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-neutral-200 text-neutral-600 font-bold text-[10px]">
-                      ✕
-                    </div>
-                    <span>{item.traditional}</span>
-                  </div>
-
-                  <div className="md:col-span-5 flex items-start gap-2.5 text-xs font-medium text-emerald-950 leading-relaxed bg-emerald-50/50 p-2.5 rounded-xl border border-emerald-100/60">
-                    <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white font-bold text-[10px]">
-                      ✓
-                    </div>
-                    <span>{item.regalops}</span>
-                  </div>
-                </div>
-              ))}
-
-            </div>
-          </div>
+        {/* Seamless Soft Curve Transition into Our Services */}
+        <div className="w-full overflow-hidden leading-none mt-12 sm:mt-16 -mb-1">
+          <svg
+            className="relative block w-full h-8 sm:h-12 lg:h-16 text-[#fafcfb]"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+            fill="currentColor"
+          >
+            <path d="M0,0 C300,90 900,90 1200,0 L1200,120 L0,120 Z" />
+          </svg>
         </div>
+
       </section>
 
       {/* ==================================================================== */}
-      {/* 6. OUR SERVICES SECTION (Vuesol Reference Match)                      */}
+      {/* 5. OUR SERVICES SECTION (Vuesol Reference Match)                      */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-16 sm:py-20 lg:py-24">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] pt-8 pb-16 sm:pb-20 lg:pb-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Header */}
@@ -1084,12 +1042,74 @@ function Home() {
           <div className="mt-12 text-center">
             <Link
               to="/solutions"
-              className="inline-flex items-center gap-2 rounded-full bg-[#13502c] hover:bg-[#0e3f22] px-6 py-3 text-xs sm:text-sm font-semibold text-white shadow-md shadow-emerald-950/15 hover:shadow-lg transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0091d5] hover:bg-[#007cb8] px-6 py-3 text-xs sm:text-sm font-semibold text-white shadow-md shadow-sky-900/15 hover:shadow-lg transition-all cursor-pointer"
             >
               Explore detailed practice architectures <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
+        </div>
+      </section>
+
+      {/* ==================================================================== */}
+      {/* 6. WHY REGAL OPS — EXECUTIVE COMPARISON MATRIX                        */}
+      {/* ==================================================================== */}
+      <section className="border-b border-neutral-200/70 bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
+              The Engineering Difference
+            </span>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900">
+              Why Enterprise Leaders Choose Regal OPs
+            </h2>
+            <p className="mt-3 text-base text-neutral-600">
+              A direct comparison between traditional Big-4 IT staff augmentation and our dedicated, senior-only engineering squads.
+            </p>
+          </div>
+
+          <div className="mt-12 overflow-hidden rounded-3xl border border-neutral-200/80 bg-neutral-50/50 shadow-xl shadow-neutral-950/5">
+            <div className="grid grid-cols-1 md:grid-cols-12 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80">
+              
+              {/* Header Titles */}
+              <div className="col-span-12 grid grid-cols-1 md:grid-cols-12 bg-neutral-100/70 p-4 sm:p-5 border-b border-neutral-200/80 text-xs font-bold uppercase tracking-wider text-neutral-500">
+                <div className="md:col-span-3">Strategic Criteria</div>
+                <div className="hidden md:block md:col-span-4 text-neutral-500">Traditional IT / Big 4 Staffing</div>
+                <div className="hidden md:block md:col-span-5 text-emerald-800 flex items-center gap-1.5">
+                  <Sparkles className="h-3.5 w-3.5 text-emerald-600" /> Regal OPs Dedicated Pods
+                </div>
+              </div>
+
+              {/* Rows */}
+              {comparisonMatrix.map((item, idx) => (
+                <div
+                  key={item.factor}
+                  className={`col-span-12 grid grid-cols-1 md:grid-cols-12 p-5 sm:p-6 items-center gap-3 md:gap-4 transition-colors hover:bg-white/80 ${
+                    idx !== comparisonMatrix.length - 1 ? "border-b border-neutral-100" : ""
+                  }`}
+                >
+                  <div className="md:col-span-3">
+                    <span className="text-sm font-bold text-neutral-900">{item.factor}</span>
+                  </div>
+                  
+                  <div className="md:col-span-4 flex items-start gap-2.5 text-xs text-neutral-500 leading-relaxed">
+                    <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-neutral-200 text-neutral-600 font-bold text-[10px]">
+                      ✕
+                    </div>
+                    <span>{item.traditional}</span>
+                  </div>
+
+                  <div className="md:col-span-5 flex items-start gap-2.5 text-xs font-medium text-emerald-950 leading-relaxed bg-emerald-50/50 p-2.5 rounded-xl border border-emerald-100/60">
+                    <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white font-bold text-[10px]">
+                      ✓
+                    </div>
+                    <span>{item.regalops}</span>
+                  </div>
+                </div>
+              ))}
+
+            </div>
+          </div>
         </div>
       </section>
 

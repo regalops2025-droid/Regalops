@@ -18,6 +18,11 @@ import {
   Zap,
   ChevronLeft,
   ChevronRight,
+  Globe,
+  Cloud,
+  Settings,
+  Box,
+  BarChart3,
 } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
@@ -221,53 +226,230 @@ function About() {
       {/* ==================================================================== */}
       {/* 1. HERO BANNER (Vuesol Exact Reference with Skyline & Wave Ribbon)    */}
       {/* ==================================================================== */}
-      <section className="relative w-full overflow-hidden bg-white">
-        {/* Banner with Atlanta Skyline & Signature Sweeping Wave Ribbon */}
-        <div
-          className="relative w-full bg-cover bg-right md:bg-center min-h-[380px] sm:min-h-[440px] lg:min-h-[490px] flex items-center"
-          style={{
-            backgroundImage: "url('/about-header.jpg')",
-          }}
-        >
-          {/* Subtle responsive contrast gradient over the left text area */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#003b6d]/90 via-[#004b87]/65 to-transparent md:max-w-2xl lg:max-w-3xl pointer-events-none" />
+      {/* ==================================================================== */}
+      {/* 1. HERO BANNER (Executive Skyline & Multi-Layer Wave Ribbon)          */}
+      {/* ==================================================================== */}
+      <section className="relative w-full overflow-hidden bg-[#07192F]">
+        {/* Main Banner Container */}
+        <div className="relative min-h-[580px] sm:min-h-[640px] lg:min-h-[690px] flex flex-col justify-between">
+          
+          {/* Background Right Side Image: Twilight Skyline & Highway Trails */}
+          <div className="absolute top-0 right-0 bottom-0 w-full lg:w-[60%] select-none pointer-events-none overflow-hidden">
+            <img
+              src="/about-banner-city.jpg"
+              alt="Metropolitan Skyline & Highway Trails"
+              className="h-full w-full object-cover object-center scale-105"
+            />
+            {/* Smooth gradient blend between dark navy left zone and right skyline */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#07192F] via-[#07192F]/70 to-transparent lg:w-[48%]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#07192F]/90 via-transparent to-black/25" />
+            <div className="absolute inset-0 bg-sky-950/20 mix-blend-multiply" />
+          </div>
 
-          <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 w-full">
-            <div className="max-w-2xl text-left">
-              {/* Category Pill */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/40 bg-white/10 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-sky-100 backdrop-blur-xs mb-3">
-                <span className="h-1.5 w-1.5 rounded-full bg-sky-300 animate-pulse" />
-                Enterprise IT Consulting &amp; Managed Services
+          {/* Background Left Side Tech Dot Grid Pattern */}
+          <div
+            className="absolute top-0 left-0 w-full lg:w-[50%] bottom-0 pointer-events-none select-none opacity-25"
+            style={{
+              backgroundImage: "radial-gradient(rgba(217, 168, 62, 0.45) 1px, transparent 1px)",
+              backgroundSize: "22px 22px",
+              maskImage: "radial-gradient(circle at 20% 40%, black 50%, transparent 100%)",
+              WebkitMaskImage: "radial-gradient(circle at 20% 40%, black 50%, transparent 100%)",
+            }}
+          />
+
+          {/* Floating script text in the sky (top right) */}
+          <div className="absolute top-8 right-6 lg:right-14 z-10 pointer-events-none select-none text-right hidden sm:block">
+            <span
+              className="text-xl sm:text-2xl lg:text-[28px] text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] block font-light tracking-wide"
+              style={{ fontFamily: "'Caveat', cursive, sans-serif" }}
+            >
+              Transforming Businesses Through Technology
+            </span>
+            <div className="w-24 h-[2.5px] bg-[#E5A93C] ml-auto mt-0.5 rounded-full shadow-sm" />
+          </div>
+
+          {/* Left Column Content Container */}
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full pt-12 sm:pt-16 lg:pt-20 pb-36 lg:pb-32">
+            <div className="max-w-2xl text-left space-y-6">
+              
+              {/* Top Tagline / Eyebrow */}
+              <div className="flex items-center gap-2.5 text-[#E5A93C] text-[11px] sm:text-xs font-bold tracking-[0.22em] uppercase">
+                <span className="w-6 h-[2px] bg-[#E5A93C]" />
+                <span>Enterprise IT Consulting &amp; Managed Services</span>
               </div>
 
-              {/* Main Headline */}
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.15] drop-shadow-sm">
-                About Regal OPs
+              {/* Headline */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.08] drop-shadow-md">
+                About <br />
+                <span className="text-[#E5A93C]">Regal OPs</span>
               </h1>
 
-              {/* Subheading / Lifecycle Statement from Vuesol */}
-              <p className="mt-4 text-sm sm:text-base lg:text-[17px] leading-relaxed text-white/95 font-normal drop-shadow-xs max-w-xl">
-                Regal OPs offers complete end-to-end lifecycle delivery of Technology
-                services to transform organizations into high-performing businesses
-                through our expertise, insights, vision and innovative solutions.
+              {/* Subheading / Lifecycle Statement */}
+              <p className="text-sm sm:text-base lg:text-[16px] leading-relaxed text-white/90 font-normal max-w-xl">
+                Regal OPs offers complete end-to-end lifecycle delivery of technology services to transform organizations into high-performing businesses through our expertise, insights, vision and innovative solutions.
               </p>
 
               {/* Call to Action Buttons */}
-              <div className="mt-6 sm:mt-7 flex flex-wrap items-center gap-3.5">
+              <div className="flex flex-wrap items-center gap-3.5 pt-1">
                 <Link
                   to="/solutions"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#0091d5] hover:bg-[#007cb8] px-6 py-2.5 text-xs sm:text-sm font-bold text-white shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#059669] hover:bg-[#10B981] px-6 sm:px-7 py-3 text-xs sm:text-sm font-bold text-white shadow-lg shadow-emerald-950/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                 >
-                  Explore Solutions <ArrowRight className="h-4 w-4" />
+                  Explore Our Solutions <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/40 hover:border-white bg-white/15 hover:bg-white/25 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white backdrop-blur-xs transition-all duration-200 cursor-pointer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/40 hover:border-white bg-white/10 hover:bg-white/20 px-5 sm:px-6 py-3 text-xs sm:text-sm font-semibold text-white backdrop-blur-xs transition-all cursor-pointer"
                 >
-                  Contact Leadership
+                  Contact Leadership <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
+
+              {/* 4 Metric / Trust Stat Badges in a Horizontal Row */}
+              <div className="pt-4 flex flex-wrap sm:flex-nowrap items-center gap-5 sm:gap-7 border-t border-white/10 max-w-xl">
+                {/* Metric 1 */}
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-1.5 text-amber-400">
+                    <Users className="h-4 w-4 stroke-[2.2]" />
+                  </div>
+                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">500+</div>
+                  <div className="text-[11px] text-neutral-300 font-medium">Projects Delivered</div>
+                </div>
+
+                {/* Metric 2 */}
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-1.5 text-amber-400">
+                    <ShieldCheck className="h-4 w-4 stroke-[2.2]" />
+                  </div>
+                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">99.98%</div>
+                  <div className="text-[11px] text-neutral-300 font-medium">SLA Uptime</div>
+                </div>
+
+                {/* Metric 3 */}
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-1.5 text-amber-400">
+                    <Globe className="h-4 w-4 stroke-[2.2]" />
+                  </div>
+                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">220+</div>
+                  <div className="text-[11px] text-neutral-300 font-medium">Global Clients</div>
+                </div>
+
+                {/* Metric 4 */}
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-1.5 text-amber-400">
+                    <TrendingUp className="h-4 w-4 stroke-[2.2]" />
+                  </div>
+                  <div className="text-xl sm:text-2xl font-black text-white tracking-tight">14+</div>
+                  <div className="text-[11px] text-neutral-300 font-medium">Countries Served</div>
+                </div>
+              </div>
+
             </div>
+          </div>
+
+          {/* Floating White Card: 4 Core Capabilities Pillars (Right / Center overlap) */}
+          <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full -mt-24 sm:-mt-16 lg:-mt-14 mb-4">
+            <div className="lg:ml-auto lg:max-w-2xl xl:max-w-3xl">
+              <div className="rounded-2xl bg-white/95 backdrop-blur-md p-3.5 sm:p-4.5 shadow-2xl border border-white/80 shadow-black/30">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-neutral-200/70">
+                  {/* Pillar 1 */}
+                  <div className="flex items-center gap-2.5 px-2 sm:px-3 pt-2 sm:pt-0">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-sky-600">
+                      <Cloud className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <span className="block text-xs font-bold text-neutral-900 leading-tight">
+                        Cloud Modernization
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Pillar 2 */}
+                  <div className="flex items-center gap-2.5 px-2 sm:px-3 pt-2 sm:pt-0">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                      <Settings className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <span className="block text-xs font-bold text-neutral-900 leading-tight">
+                        Digital Transformation
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Pillar 3 */}
+                  <div className="flex items-center gap-2.5 px-2 sm:px-3 pt-2 sm:pt-0">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600">
+                      <Box className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <span className="block text-xs font-bold text-neutral-900 leading-tight">
+                        Managed Services
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Pillar 4 */}
+                  <div className="flex items-center gap-2.5 px-2 sm:px-3 pt-2 sm:pt-0">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
+                      <BarChart3 className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <span className="block text-xs font-bold text-neutral-900 leading-tight">
+                        Strategic IT Consulting
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Multi-Layer Wave Transition SVG with Golden Metallic Ribbon Trim */}
+          <div className="relative w-full overflow-hidden leading-none select-none pointer-events-none -mb-[1px]">
+            <svg
+              className="w-full h-16 sm:h-24 lg:h-32 block"
+              viewBox="0 0 1440 180"
+              preserveAspectRatio="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="goldWaveRibbon" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#D4AF37" />
+                  <stop offset="35%" stopColor="#F59E0B" />
+                  <stop offset="70%" stopColor="#E5A93C" />
+                  <stop offset="100%" stopColor="#D4AF37" />
+                </linearGradient>
+              </defs>
+              {/* Golden metallic wave ribbon accent layer */}
+              <path
+                d="M0,60 C320,165 650,140 980,50 C1200,-10 1350,35 1440,60 L1440,180 L0,180 Z"
+                fill="url(#goldWaveRibbon)"
+              />
+              {/* White wave base smoothly flowing into page */}
+              <path
+                d="M0,76 C320,180 650,155 980,66 C1200,6 1350,50 1440,75 L1440,180 L0,180 Z"
+                fill="#FFFFFF"
+              />
+            </svg>
+          </div>
+
+        </div>
+
+        {/* Section Intro: "OUR PURPOSE" (Directly under the wave) */}
+        <div className="relative bg-white pt-10 pb-4 text-center">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6">
+            <div className="flex items-center justify-center gap-2.5 text-emerald-600 text-xs font-bold tracking-[0.22em] uppercase mb-3">
+              <span className="w-5 h-[2px] bg-emerald-500" />
+              <span>OUR PURPOSE</span>
+              <span className="w-5 h-[2px] bg-emerald-500" />
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight">
+              Building Smarter, Stronger{" "}
+              <span className="text-[#0F172A]">and More Resilient Businesses</span>
+            </h2>
+            <p className="mt-3.5 text-sm sm:text-base text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+              We combine deep industry knowledge, advanced technologies and a client-first approach to create sustainable value for organizations across the globe.
+            </p>
           </div>
         </div>
       </section>

@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
 import {
   ShieldCheck,
   Users,
@@ -9,7 +8,6 @@ import {
   MapPin,
   ArrowRight,
   ArrowUp,
-  Check,
   Linkedin,
   Instagram,
   Youtube,
@@ -17,19 +15,6 @@ import {
 } from "lucide-react";
 
 export function SiteFooter() {
-  const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newsletterEmail || !newsletterEmail.includes("@")) return;
-    setSubscribed(true);
-    setTimeout(() => {
-      setNewsletterEmail("");
-      setSubscribed(false);
-    }, 4000);
-  };
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -400,157 +385,9 @@ export function SiteFooter() {
         </div>
 
         {/* ================================================================== */}
-        {/* 3. NEWSLETTER BANNER ("Stay Updated")                              */}
+        {/* 3. BOTTOM BAR: Copyright, Legal, Social Icons, Scroll to Top       */}
         {/* ================================================================== */}
-        <div className="mt-12 rounded-2xl border border-white/10 bg-[#0A131A]/85 p-4 sm:p-5 backdrop-blur-md">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-5">
-            {/* Left: Icon & Copy */}
-            <div className="flex items-center gap-3.5 w-full lg:w-auto">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 shadow-xs">
-                <Mail className="h-5 w-5" />
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-white tracking-tight">Stay Updated</h4>
-                <p className="text-xs text-neutral-400">
-                  Get the latest insights on technology, industry trends and career opportunities.
-                </p>
-              </div>
-            </div>
-
-            {/* Right: Email Input + Subscribe Button */}
-            <form onSubmit={handleSubscribe} className="w-full lg:w-auto flex-1 max-w-md">
-              <div className="relative flex items-center">
-                <input
-                  type="email"
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder="Enter your email address"
-                  required
-                  className="w-full rounded-full border border-white/15 bg-[#060D12] py-2.5 pl-4 pr-32 text-xs text-white placeholder:text-neutral-500 outline-none transition-all focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30"
-                />
-                <button
-                  type="submit"
-                  disabled={subscribed}
-                  className="absolute right-1 top-1 bottom-1 inline-flex items-center gap-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 px-4 text-xs font-bold text-white transition-all shadow-xs cursor-pointer disabled:opacity-75"
-                >
-                  {subscribed ? (
-                    <>
-                      <Check className="h-3.5 w-3.5" /> Subscribed
-                    </>
-                  ) : (
-                    <>
-                      Subscribe <ArrowRight className="h-3 w-3" />
-                    </>
-                  )}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        {/* ================================================================== */}
-        {/* 4. ACCREDITATION & ENTERPRISE PARTNER LOGOS RIBBON                 */}
-        {/* ================================================================== */}
-        <div className="mt-10 pt-8 border-t border-white/[0.08]">
-          <div className="flex flex-wrap items-center justify-between gap-y-6 gap-x-8 text-neutral-400 opacity-90">
-            {/* ISO 9001:2015 */}
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-7 w-7 items-center justify-center rounded-full border border-white/20 text-[10px] font-black text-white">
-                ISO
-              </div>
-              <div className="text-[10px] leading-tight">
-                <span className="block font-bold text-white">9001:2015</span>
-                <span className="text-neutral-400">Certified</span>
-              </div>
-            </div>
-
-            {/* Inc. 5000 */}
-            <div className="flex items-center gap-2">
-              <div className="px-2 py-0.5 rounded bg-white text-black font-black text-[11px] tracking-tight">
-                Inc. <span className="font-bold">5000</span>
-              </div>
-              <span className="text-[10px] text-neutral-400 leading-tight">
-                Recognized<br />Enterprise Partner
-              </span>
-            </div>
-
-            {/* CIOReview */}
-            <div className="flex items-center gap-2">
-              <div className="text-[14px] font-black tracking-tight">
-                <span className="text-rose-500">CIO</span>
-                <span className="text-white">Review</span>
-              </div>
-              <span className="text-[10px] text-neutral-400 leading-tight">
-                Most Promising<br />IT Services
-              </span>
-            </div>
-
-            {/* Clutch */}
-            <div className="flex items-center gap-2">
-              <div className="text-[13px] font-black text-white tracking-wider flex items-center gap-1">
-                <span className="inline-block h-3 w-3 rounded-full bg-rose-500" />
-                Clutch
-              </div>
-              <span className="text-[10px] text-neutral-400 leading-tight">
-                Top IT Services<br />Firm
-              </span>
-            </div>
-
-            {/* GoodFirms */}
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1 text-[13px] font-black text-white">
-                <span className="inline-block h-3.5 w-3.5 rounded bg-blue-500 text-[9px] text-center font-black text-white leading-3.5">
-                  G
-                </span>
-                GoodFirms
-              </div>
-              <span className="text-[10px] text-neutral-400 leading-tight">
-                Top Software<br />Development Company
-              </span>
-            </div>
-
-            {/* Microsoft Solutions Partner */}
-            <div className="flex items-center gap-2">
-              <div className="grid grid-cols-2 gap-0.5 h-3.5 w-3.5">
-                <div className="bg-[#f25022]" />
-                <div className="bg-[#7fba00]" />
-                <div className="bg-[#00a4ef]" />
-                <div className="bg-[#ffb900]" />
-              </div>
-              <div className="text-[11px] leading-tight">
-                <span className="block font-bold text-white">Microsoft</span>
-                <span className="text-[9px] text-neutral-400">Solutions Partner</span>
-              </div>
-            </div>
-
-            {/* AWS Partner Network */}
-            <div className="flex items-center gap-2">
-              <div className="text-[13px] font-black text-[#FF9900] tracking-tight">
-                aws
-              </div>
-              <div className="text-[10px] text-neutral-400 leading-tight">
-                Partner<br />Network
-              </div>
-            </div>
-
-            {/* Google Cloud Partner */}
-            <div className="flex items-center gap-2">
-              {/* Google Cloud 4-color cloud icon */}
-              <svg className="h-4 w-5" viewBox="0 0 24 24" fill="none">
-                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" fill="#4285F4"/>
-              </svg>
-              <div className="text-[11px] leading-tight">
-                <span className="block font-bold text-white">Google Cloud</span>
-                <span className="text-[9px] text-neutral-400">Partner</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ================================================================== */}
-        {/* 5. BOTTOM BAR: Copyright, Legal, Social Icons, Scroll to Top       */}
-        {/* ================================================================== */}
-        <div className="mt-10 pt-6 border-t border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-5">
+        <div className="mt-12 pt-6 border-t border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-5">
           {/* Copyright */}
           <div className="text-xs text-neutral-400">
             &copy; {new Date().getFullYear()} Regal OPs. All rights reserved.

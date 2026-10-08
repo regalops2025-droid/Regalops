@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, useEffect, useRef } from "react";
 import { SiteLayout } from "@/components/site/site-layout";
 import {
   ArrowRight,
@@ -15,6 +16,8 @@ import {
   HeartHandshake,
   CheckCircle2,
   Zap,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
@@ -151,6 +154,68 @@ const timeline = [
 ];
 
 function About() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Auto-scroll loop every 3.5 seconds when user is not hovering
+  useEffect(() => {
+    if (isHovered) return;
+    const interval = setInterval(() => {
+      const container = scrollRef.current;
+      if (!container) return;
+      const firstChild = container.firstElementChild as HTMLElement | null;
+      const cardWidth = firstChild?.clientWidth || 360;
+      const gap = 24;
+      const scrollAmount = cardWidth + gap;
+
+      // When reaching or nearing the end, smoothly loop back to start
+      if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 30) {
+        container.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      }
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [isHovered]);
+
+  const handleScroll = () => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const firstChild = container.firstElementChild as HTMLElement | null;
+    const cardWidth = firstChild?.clientWidth || 360;
+    const gap = 24;
+    const index = Math.round(container.scrollLeft / (cardWidth + gap));
+    setActiveIndex(Math.min(Math.max(index, 0), keyBenefits.length - 1));
+  };
+
+  const scroll = (direction: "left" | "right") => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const firstChild = container.firstElementChild as HTMLElement | null;
+    const cardWidth = firstChild?.clientWidth || 360;
+    const gap = 24;
+    const scrollAmount = cardWidth + gap;
+    container.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    });
+  };
+
+  const scrollTo = (index: number) => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const firstChild = container.firstElementChild as HTMLElement | null;
+    const cardWidth = firstChild?.clientWidth || 360;
+    const gap = 24;
+    container.scrollTo({
+      left: index * (cardWidth + gap),
+      behavior: "smooth",
+    });
+    setActiveIndex(index);
+  };
+
   return (
     <SiteLayout>
       {/* ==================================================================== */}
@@ -208,33 +273,74 @@ function About() {
       </section>
 
       {/* ==================================================================== */}
-      {/* 2. OUR KEY BENEFITS (Vuesol 6 Pillars in Premium Grid)                */}
+      {/* 2. OUR KEY BENEFITS (Horizontal Auto-Scrolling Carousel)             */}
       {/* ==================================================================== */}
-      <section id="our-key-benefits" className="relative bg-white pt-14 pb-16 sm:pt-18 sm:pb-20 border-b border-neutral-200/70">
+      <section id="our-key-benefits" className="relative bg-white pt-14 pb-16 sm:pt-18 sm:pb-20 border-b border-neutral-200/70 overflow-hidden">
         <div id="benefits" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="text-center max-w-2xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#007cb8]">
-              Why Leading Enterprises Choose Us
-            </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">
-              Our Key Benefits
-            </h2>
-            <div className="w-12 h-1 bg-[#0091d5] rounded-full mx-auto mt-3 mb-4" />
-            <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
-              We empower organizations to reach their full potential and accelerate
-              their technological transformation with battle-tested rigor.
-            </p>
-          </div>
+          {/* Section Header with Carousel Navigation Controls */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div className="max-w-2xl text-left">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#007cb8]">
+                Why Leading Enterprises Choose Us
+              </span>
+              <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">
+                Our Key Benefits
+              </h2>
+              <div className="w-12 h-1 bg-[#0091d5] rounded-full mt-3 mb-4" />
+              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+                We empower organizations to reach their full potential and accelerate
+                their technological transformation with battle-tested rigor.
+              </p>
+            </div>
 
-          {/* 6 Key Benefits Cards (3x2 Grid) */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+            {/* Navigation Buttons & Auto-scroll indicator */}
+            <div className="flex items-center gap-3 shrink-0 self-start md:self-end">
+              <span className="text-[11px] font-medium text-neutral-500 hidden sm:inline-flex items-center gap-1.5 bg-neutral-100/80 px-3 py-1.5 rounded-full border border-neutral-200/60">
+                <span className={`h-2 w-2 rounded-full ${isHovered ? "bg-amber-400" : "bg-emerald-500 animate-pulse"}`} />
+                {isHovered ? "Paused on hover" : "Auto-scrolling"}
+              </span>
+              <button
+                type="button"
+                onClick={() => scroll("left")}
+                aria-label="Scroll left"
+                className="h-10 w-10 rounded-full border border-neutral-200/80 bg-white text-neutral-700 hover:bg-[#0091d5] hover:text-white hover:border-[#0091d5] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scroll("right")}
+                aria-label="Scroll right"
+                className="h-10 w-10 rounded-full border border-neutral-200/80 bg-white text-neutral-700 hover:bg-[#0091d5] hover:text-white hover:border-[#0091d5] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Carousel Container with Side Gradient Mask Fades */}
+        <div
+          className="relative w-full"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {/* Subtle Left & Right Edge Fades */}
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-6 sm:w-16 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 sm:w-16 bg-gradient-to-l from-white to-transparent z-10" />
+
+          {/* Horizontally Scrollable Cards Row */}
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            className="flex gap-6 overflow-x-auto scroll-smooth py-4 px-4 sm:px-6 lg:px-8 snap-x snap-mandatory mx-auto max-w-7xl [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          >
             {keyBenefits.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
                   key={item.title}
-                  className="group relative rounded-2xl border border-neutral-200/80 bg-white p-7 shadow-xs hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
+                  className="group relative w-[85vw] sm:w-[360px] lg:w-[380px] shrink-0 snap-start rounded-2xl border border-neutral-200/80 bg-white p-7 shadow-xs hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 select-none"
                 >
                   <div>
                     {/* Top Icon & Tag */}
@@ -255,13 +361,35 @@ function About() {
                     </p>
                   </div>
 
-                  <div className="mt-5 pt-4 border-t border-neutral-100 flex items-center justify-between text-xs font-semibold text-[#0091d5]">
+                  <div className="mt-6 pt-4 border-t border-neutral-100 flex items-center justify-between text-xs font-semibold text-[#0091d5]">
                     <span>Standard in every engagement</span>
                     <span className="text-neutral-400 font-mono text-[11px]">0{idx + 1}</span>
                   </div>
                 </div>
               );
             })}
+          </div>
+        </div>
+
+        {/* Pagination Dots & Position Tracker */}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mt-8 flex items-center justify-center gap-2">
+            {keyBenefits.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => scrollTo(idx)}
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                  idx === activeIndex
+                    ? "w-8 bg-[#0091d5] shadow-[0_0_8px_rgba(0,145,213,0.4)]"
+                    : "w-2 bg-neutral-300 hover:bg-neutral-400"
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+            <span className="text-xs font-bold font-mono text-neutral-500 ml-2">
+              0{activeIndex + 1} / 0{keyBenefits.length}
+            </span>
           </div>
         </div>
       </section>

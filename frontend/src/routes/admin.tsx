@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { LogOut, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen } from "lucide-react";
+import { ImageUploadField } from "@/components/admin/image-upload-field";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -37,7 +38,7 @@ function AdminDashboard() {
 
   // Form State for new/editing solution
   const [solName, setSolName] = useState("");
-  const [solImage, setSolImage] = useState("/hero-bg-1.png");
+  const [solImage, setSolImage] = useState("");
   const [solDesc, setSolDesc] = useState("");
   const [solCapabilities, setSolCapabilities] = useState("");
   const [solMethodology, setSolMethodology] = useState("");
@@ -77,7 +78,7 @@ function AdminDashboard() {
   // Form State for new/editing client
   const [clientName, setClientName] = useState("");
   const [clientSector, setClientSector] = useState("Banking");
-  const [clientImage, setClientImage] = useState("/hero-bg-1.png");
+  const [clientImage, setClientImage] = useState("");
   const [clientDesc, setClientDesc] = useState("");
   const [clientFormLoading, setClientFormLoading] = useState(false);
   const [clientFormSuccess, setClientFormSuccess] = useState(false);
@@ -118,7 +119,7 @@ function AdminDashboard() {
   // Form State for new/editing blog
   const [blogTitle, setBlogTitle] = useState("");
   const [blogTag, setBlogTag] = useState("Architecture");
-  const [blogImage, setBlogImage] = useState("/hero-bg-1.png");
+  const [blogImage, setBlogImage] = useState("");
   const [blogDesc, setBlogDesc] = useState("");
   const [blogSections, setBlogSections] = useState<any[]>([{ heading: "", image: "", story: "" }]);
   const [blogFormLoading, setBlogFormLoading] = useState(false);
@@ -500,7 +501,7 @@ function AdminDashboard() {
   const handleCancelEdit = () => {
     setEditingSolId(null);
     setSolName("");
-    setSolImage("/hero-bg-1.png");
+    setSolImage("");
     setSolDesc("");
     setSolCapabilities("");
     setSolMethodology("");
@@ -688,7 +689,7 @@ function AdminDashboard() {
     setEditingClientId(null);
     setClientName("");
     setClientSector("Banking");
-    setClientImage("/hero-bg-1.png");
+    setClientImage("");
     setClientDesc("");
     setClientFormSuccess(false);
     setClientFormError("");
@@ -742,7 +743,7 @@ function AdminDashboard() {
         setClientName("");
         setClientSector("Banking");
         setClientDesc("");
-        setClientImage("/hero-bg-1.png");
+        setClientImage("");
         setClientFormSuccess(true);
         setTimeout(() => setClientFormSuccess(false), 3000);
       }
@@ -967,7 +968,7 @@ function AdminDashboard() {
     setEditingBlogId(null);
     setBlogTitle("");
     setBlogTag("Architecture");
-    setBlogImage("/hero-bg-1.png");
+    setBlogImage("");
     setBlogDesc("");
     setBlogSections([{ heading: "", image: "", story: "" }]);
     setBlogFormSuccess(false);
@@ -1605,38 +1606,12 @@ function AdminDashboard() {
                       />
                     </label>
 
-                    <div>
-                      <label className="block text-sm font-medium">
-                        Image URL / Path
-                        <input
-                          type="text"
-                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                          placeholder="e.g. /hero-bg-1.png or external link"
-                          value={solImage}
-                          onChange={(e) => setSolImage(e.target.value)}
-                          disabled={formLoading}
-                        />
-                      </label>
-                      <div className="mt-2.5">
-                        <span className="text-xs text-muted-foreground block mb-1">Preset Abstract Images:</span>
-                        <div className="flex gap-2">
-                          {["/hero-bg-1.png", "/hero-bg-2.png", "/hero-bg-3.png"].map((img, idx) => (
-                            <button
-                              key={img}
-                              type="button"
-                              onClick={() => setSolImage(img)}
-                              className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
-                                solImage === img
-                                  ? "bg-primary border-primary text-primary-foreground"
-                                  : "bg-background border-border text-muted-foreground hover:text-foreground"
-                              }`}
-                            >
-                              Image {idx + 1}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
+                    <ImageUploadField
+                      label="Solution Image"
+                      value={solImage}
+                      onChange={setSolImage}
+                      disabled={formLoading}
+                    />
 
                     <label className="block text-sm font-medium">
                       Description
@@ -2082,38 +2057,12 @@ function AdminDashboard() {
                           </select>
                         </label>
 
-                        <div>
-                          <label className="block text-sm font-medium">
-                            Cover Image URL
-                            <input
-                              type="text"
-                              className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                              placeholder="e.g. /hero-bg-1.png or external link"
-                              value={clientImage}
-                              onChange={(e) => setClientImage(e.target.value)}
-                              disabled={clientFormLoading}
-                            />
-                          </label>
-                          <div className="mt-2.5">
-                            <span className="text-xs text-muted-foreground block mb-1">Preset Abstract Images:</span>
-                            <div className="flex gap-2">
-                              {["/hero-bg-1.png", "/hero-bg-2.png", "/hero-bg-3.png"].map((img, idx) => (
-                                <button
-                                  key={img}
-                                  type="button"
-                                  onClick={() => setClientImage(img)}
-                                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
-                                    clientImage === img
-                                      ? "bg-primary border-primary text-primary-foreground"
-                                      : "bg-background border-border text-muted-foreground hover:text-foreground"
-                                  }`}
-                                >
-                                  Image {idx + 1}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
+                        <ImageUploadField
+                          label="Cover Image"
+                          value={clientImage}
+                          onChange={setClientImage}
+                          disabled={clientFormLoading}
+                        />
 
                         <label className="block text-sm font-medium">
                           Description / Results Summary
@@ -2610,38 +2559,12 @@ function AdminDashboard() {
                       />
                     </label>
 
-                    <div>
-                      <label className="block text-sm font-medium">
-                        Cover Image URL
-                        <input
-                          type="text"
-                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                          placeholder="e.g. /hero-bg-1.png or external link"
-                          value={blogImage}
-                          onChange={(e) => setBlogImage(e.target.value)}
-                          disabled={blogFormLoading}
-                        />
-                      </label>
-                      <div className="mt-2.5">
-                        <span className="text-xs text-muted-foreground block mb-1">Preset Abstract Images:</span>
-                        <div className="flex gap-2">
-                          {["/hero-bg-1.png", "/hero-bg-2.png", "/hero-bg-3.png"].map((img, idx) => (
-                            <button
-                              key={img}
-                              type="button"
-                              onClick={() => setBlogImage(img)}
-                              className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
-                                blogImage === img
-                                  ? "bg-primary border-primary text-primary-foreground"
-                                  : "bg-background border-border text-muted-foreground hover:text-foreground"
-                              }`}
-                            >
-                              Image {idx + 1}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
+                    <ImageUploadField
+                      label="Cover Image"
+                      value={blogImage}
+                      onChange={setBlogImage}
+                      disabled={blogFormLoading}
+                    />
 
                     <label className="block text-sm font-medium">
                       Excerpt / Short Description
@@ -2700,35 +2623,12 @@ function AdminDashboard() {
                               />
                             </label>
 
-                            <div>
-                              <label className="block text-xs font-medium">
-                                Section Image URL (Optional)
-                                <input
-                                  type="text"
-                                  className="mt-1 w-full rounded-lg border border-input bg-background px-3 py-2 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                                  placeholder="Cover image for this block..."
-                                  value={sec.image}
-                                  onChange={(e) => handleUpdateBlogSection(idx, "image", e.target.value)}
-                                  disabled={blogFormLoading}
-                                />
-                              </label>
-                              <div className="mt-1.5 flex gap-1.5">
-                                {["/hero-bg-1.png", "/hero-bg-2.png", "/hero-bg-3.png"].map((img, i) => (
-                                  <button
-                                    key={img}
-                                    type="button"
-                                    onClick={() => handleUpdateBlogSection(idx, "image", img)}
-                                    className={`px-2 py-1 text-[10px] rounded border transition-all cursor-pointer ${
-                                      sec.image === img
-                                        ? "bg-primary border-primary text-primary-foreground"
-                                        : "bg-background border-border text-muted-foreground hover:text-foreground"
-                                    }`}
-                                  >
-                                    Img {i + 1}
-                                  </button>
-                                ))}
-                              </div>
-                            </div>
+                            <ImageUploadField
+                              label="Section Image (Optional)"
+                              value={sec.image}
+                              onChange={(val) => handleUpdateBlogSection(idx, "image", val)}
+                              disabled={blogFormLoading}
+                            />
 
                             <label className="block text-xs font-medium">
                               Story / Story Text

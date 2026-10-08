@@ -58,14 +58,47 @@ export const Route = createFileRoute("/")({
 /* Static Data & Constants                                                    */
 /* -------------------------------------------------------------------------- */
 
-const clientLogos = [
-  { name: "Vanguard Capital", sector: "FinTech", glyph: "VC" },
-  { name: "Apollo Health Systems", sector: "Healthcare", glyph: "AH" },
-  { name: "Stratos Global Logistics", sector: "Supply Chain", glyph: "SG" },
-  { name: "Nexus Energy Grids", sector: "Utilities", glyph: "NE" },
-  { name: "Horizon Cloud AI", sector: "Enterprise SaaS", glyph: "HC" },
-  { name: "Precision Industrial", sector: "Manufacturing", glyph: "PI" },
+const row1Logos = [
+  { name: "Apple", logo: "/clients/apple.jpg" },
+  { name: "AGCO", logo: "/clients/agco.jpg" },
+  { name: "ADT", logo: "/clients/adt.jpg" },
+  { name: "Assurant", logo: "/clients/assurant.jpg" },
+  { name: "AT&T", logo: "/clients/at-t.jpg" },
+  { name: "Capital One", logo: "/clients/capital-one.jpg" },
+  { name: "Credit Suisse", logo: "/clients/credit-suisse.jpg" },
+  { name: "Cricket Wireless", logo: "/clients/cricket-wireless.jpg" },
 ];
+
+const midLeftLogos = [
+  { name: "US DOT", logo: "/clients/dot-usa.jpg" },
+  { name: "DTCC", logo: "/clients/dtcc.jpg" },
+  { name: "FedEx", logo: "/clients/fedex.jpg" },
+  { name: "FIS", logo: "/clients/fis.jpg" },
+  { name: "Highpoint Solutions", logo: "/clients/highpoint-solutions.jpg" },
+  { name: "Infosys", logo: "/clients/infosys.jpg" },
+];
+
+const midRightLogos = [
+  { name: "iVEDiX", logo: "/clients/ivedix.jpg" },
+  { name: "Mphasis", logo: "/clients/mphasis.jpg" },
+  { name: "Premier", logo: "/clients/premier.jpg" },
+  { name: "Socket Mobile", logo: "/clients/socket.jpg" },
+  { name: "Synchronoss", logo: "/clients/synchronious.jpg" },
+  { name: "Synovus Bank", logo: "/clients/synovus-bank.jpg" },
+];
+
+const row4Logos = [
+  { name: "TATA Consultancy Services", logo: "/clients/tcs.jpg" },
+  { name: "The Economist", logo: "/clients/the-economist.jpg" },
+  { name: "T-Mobile", logo: "/clients/tmobile.jpg" },
+  { name: "Turner", logo: "/clients/turner.jpg" },
+  { name: "VISA", logo: "/clients/visa.jpg" },
+  { name: "Wells Fargo", logo: "/clients/wellsfargo.jpg" },
+  { name: "Zions Bank", logo: "/clients/zions-bank.jpg" },
+  { name: "DTCC", logo: "/clients/dtcc.jpg" },
+];
+
+const allClientLogos = [...row1Logos, ...midLeftLogos, ...midRightLogos, ...row4Logos];
 
 const techStackMarquee = [
   { name: "Amazon Web Services", category: "Cloud Infrastructure" },
@@ -790,37 +823,137 @@ function Home() {
       </div>
 
       {/* ==================================================================== */}
-      {/* 2. ENTERPRISE CLIENT TRUST STRIP                                     */}
+      {/* 2. OUR CLIENTS — "WHO WE WORK WITH" (Vuesol Reference Match)         */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/60 bg-white py-6">
+      <section className="border-b border-neutral-200/70 bg-[#fbfcfd] py-12 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="shrink-0">
-              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-neutral-400">
-                Trusted by Engineering Leaders at
+          
+          {/* Desktop Layout: Exact center-callout 4-row layout matching reference */}
+          <div className="hidden lg:flex flex-col gap-3.5 xl:gap-4">
+            
+            {/* Row 1 (8 cards) */}
+            <div className="grid grid-cols-8 gap-3 xl:gap-3.5">
+              {row1Logos.map((client, idx) => (
+                <div
+                  key={`r1-${idx}`}
+                  className="bg-white rounded-md border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-sky-300 transition-all duration-200 flex items-center justify-center p-3 h-20 xl:h-22"
+                >
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="max-h-11 xl:max-h-12 w-auto object-contain filter contrast-[1.03] select-none"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Middle Section: Left 6 cards (3x2), Center Title Box, Right 6 cards (3x2) */}
+            <div className="flex items-center gap-3.5 xl:gap-4">
+              
+              {/* Left 6 cards (3 columns x 2 rows) */}
+              <div className="flex-1 grid grid-cols-3 gap-3 xl:gap-3.5">
+                {midLeftLogos.map((client, idx) => (
+                  <div
+                    key={`ml-${idx}`}
+                    className="bg-white rounded-md border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-sky-300 transition-all duration-200 flex items-center justify-center p-3 h-20 xl:h-22"
+                  >
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      className="max-h-11 xl:max-h-12 w-auto object-contain filter contrast-[1.03] select-none"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Center Callout Title Box */}
+              <div className="w-64 xl:w-72 shrink-0 flex flex-col items-center justify-center text-center px-4 py-2">
+                <h2 className="text-3xl xl:text-4xl font-bold text-neutral-900 tracking-tight leading-none">
+                  Our Clients
+                </h2>
+                <p className="mt-2.5 text-base xl:text-lg italic font-serif text-neutral-600 tracking-wide">
+                  Who We Work With
+                </p>
+              </div>
+
+              {/* Right 6 cards (3 columns x 2 rows) */}
+              <div className="flex-1 grid grid-cols-3 gap-3 xl:gap-3.5">
+                {midRightLogos.map((client, idx) => (
+                  <div
+                    key={`mr-${idx}`}
+                    className="bg-white rounded-md border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-sky-300 transition-all duration-200 flex items-center justify-center p-3 h-20 xl:h-22"
+                  >
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      className="max-h-11 xl:max-h-12 w-auto object-contain filter contrast-[1.03] select-none"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+
+            </div>
+
+            {/* Row 4 (8 cards) */}
+            <div className="grid grid-cols-8 gap-3 xl:gap-3.5">
+              {row4Logos.map((client, idx) => (
+                <div
+                  key={`r4-${idx}`}
+                  className="bg-white rounded-md border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-sky-300 transition-all duration-200 flex items-center justify-center p-3 h-20 xl:h-22"
+                >
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="max-h-11 xl:max-h-12 w-auto object-contain filter contrast-[1.03] select-none"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+          {/* Mobile / Tablet Layout */}
+          <div className="lg:hidden flex flex-col gap-6">
+            <div className="text-center">
+              <h2 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight">
+                Our Clients
+              </h2>
+              <p className="mt-1.5 text-sm sm:text-base italic font-serif text-neutral-600">
+                Who We Work With
               </p>
             </div>
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-6 items-center w-full">
-              {clientLogos.map((client) => (
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+              {allClientLogos.map((client, idx) => (
                 <div
-                  key={client.name}
-                  className="flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-200 hover:bg-neutral-50 group"
+                  key={`mob-${idx}`}
+                  className="bg-white rounded-md border border-neutral-200/80 shadow-2xs flex items-center justify-center p-2.5 h-16 sm:h-20"
                 >
-                  <div className="flex items-center gap-1.5">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-md bg-neutral-900 text-white font-mono text-[9px] font-bold group-hover:bg-emerald-700 transition-colors">
-                      {client.glyph}
-                    </span>
-                    <span className="text-xs font-bold text-neutral-800 tracking-tight whitespace-nowrap group-hover:text-emerald-900 transition-colors">
-                      {client.name}
-                    </span>
-                  </div>
-                  <span className="text-[9px] font-medium text-neutral-400 uppercase tracking-wider mt-0.5">
-                    {client.sector}
-                  </span>
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="max-h-9 sm:max-h-10 w-auto object-contain"
+                    loading="lazy"
+                  />
                 </div>
               ))}
             </div>
           </div>
+
+          {/* "More Clients" Centered Button */}
+          <div className="mt-8 sm:mt-10 lg:mt-12 text-center">
+            <Link
+              to="/clients"
+              className="inline-flex items-center justify-center rounded border border-[#0091d5] text-[#0091d5] hover:bg-[#0091d5] hover:text-white px-8 py-2 text-xs sm:text-sm font-semibold shadow-2xs hover:shadow transition-all duration-200 cursor-pointer"
+            >
+              More Clients
+            </Link>
+          </div>
+
         </div>
       </section>
 

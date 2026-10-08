@@ -601,7 +601,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 1. HERO SECTION WITH BACKGROUND CAROUSEL & ROTATION EFFECTS           */}
       {/* ==================================================================== */}
-      <section className="relative overflow-hidden bg-white border-b border-neutral-200/70 min-h-[580px] lg:min-h-[620px] flex flex-col justify-between">
+      <section className="relative overflow-hidden bg-white border-b border-neutral-200/70 min-h-[400px] sm:min-h-[430px] lg:min-h-[460px] flex items-center justify-between">
         
         {/* Full-bleed Background Slide Images */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -636,30 +636,30 @@ function Home() {
         <button
           type="button"
           onClick={() => setActiveSlide((prev) => (prev - 1 + showcaseSlides.length) % showcaseSlides.length)}
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 flex h-11 w-9 sm:h-12 sm:w-10 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 flex h-10 w-8 sm:h-11 sm:w-9 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="h-6 w-6" />
+          <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
         </button>
 
         <button
           type="button"
           onClick={() => setActiveSlide((prev) => (prev + 1) % showcaseSlides.length)}
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 flex h-11 w-9 sm:h-12 sm:w-10 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 flex h-10 w-8 sm:h-11 sm:w-9 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
           aria-label="Next slide"
         >
-          <ChevronRight className="h-6 w-6" />
+          <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
         </button>
 
         {/* Foreground Content for Active Slide */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-8 sm:px-12 lg:px-16 pt-8 sm:pt-12 lg:pt-14 pb-4">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-8 sm:px-12 lg:px-16 py-8 sm:py-10 lg:py-12">
           <div className="max-w-2xl xl:max-w-3xl">
             {showcaseSlides.map((slide, idx) => {
               if (idx !== activeSlide) return null;
               return (
                 <div key={slide.id} className="transition-all duration-500">
                   {/* Slide Category Badge */}
-                  <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/90 px-3.5 py-1 text-[11px] font-bold tracking-[0.14em] text-neutral-800 uppercase shadow-xs backdrop-blur-sm">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/90 px-3 py-0.5 text-[10px] sm:text-[11px] font-bold tracking-[0.14em] text-neutral-800 uppercase shadow-xs backdrop-blur-sm">
                     <span className="relative flex h-2 w-2 items-center justify-center">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75" />
                       <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#0091d5]" />
@@ -668,7 +668,7 @@ function Home() {
                   </div>
 
                   {/* Main Headline */}
-                  <h1 className="mt-4 text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.15rem] font-medium tracking-tight text-neutral-800 leading-[1.15]">
+                  <h1 className="mt-2.5 sm:mt-3 text-2xl sm:text-3xl lg:text-[2.4rem] xl:text-[2.75rem] font-medium tracking-tight text-neutral-800 leading-[1.14]">
                     {slide.titlePrefix}
                     <span className="font-extrabold text-neutral-950">
                       {slide.titleHighlight}
@@ -678,28 +678,28 @@ function Home() {
 
                   {/* Subtitle / Eyebrow text */}
                   {slide.subtitle && (
-                    <p className="mt-2 text-xs sm:text-[13px] font-bold tracking-wider text-neutral-500 uppercase">
+                    <p className="mt-1.5 text-[11px] sm:text-xs font-bold tracking-wider text-neutral-500 uppercase">
                       {slide.subtitle}
                     </p>
                   )}
 
                   {/* Paragraph Description */}
-                  <p className="mt-3.5 max-w-xl text-sm sm:text-[15px] leading-relaxed text-neutral-600">
+                  <p className="mt-2.5 max-w-xl text-xs sm:text-sm leading-relaxed text-neutral-600">
                     {slide.desc}
                   </p>
 
                   {/* Accreditation Badges for Slide 1 */}
                   {slide.isAwardsSlide && slide.accreditations && (
-                    <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-w-xl">
+                    <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-lg">
                       {slide.accreditations.map((acc) => (
                         <div
                           key={acc.name}
-                          className="rounded-lg border border-neutral-200/80 bg-white/90 p-2 shadow-xs backdrop-blur-xs flex flex-col justify-center"
+                          className="rounded-lg border border-neutral-200/80 bg-white/90 p-1.5 shadow-xs backdrop-blur-xs flex flex-col justify-center"
                         >
-                          <div className={`text-xs font-black tracking-tight ${acc.color}`}>
+                          <div className={`text-[11px] font-black tracking-tight ${acc.color}`}>
                             {acc.name}
                           </div>
-                          <div className="text-[10px] text-neutral-600 leading-tight mt-0.5 font-medium">
+                          <div className="text-[9px] text-neutral-600 leading-tight mt-0.5 font-medium">
                             {acc.label}
                           </div>
                         </div>
@@ -708,26 +708,26 @@ function Home() {
                   )}
 
                   {/* Action Buttons (featuring "— Know more" in reference style) */}
-                  <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-3">
+                  <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-3">
                     <Link
                       to={slide.primaryCta.link}
-                      className="inline-flex items-center gap-2 rounded bg-[#0091d5] hover:bg-[#007cb8] px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-white shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded bg-[#0091d5] hover:bg-[#007cb8] px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
                     >
                       <span className="font-bold">&mdash;</span> {slide.primaryCta.text}
                     </Link>
 
                     <Link
                       to={slide.secondaryCta.link}
-                      className="inline-flex items-center gap-2 rounded border border-neutral-300 hover:border-neutral-400 bg-white/90 hover:bg-white px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-neutral-800 shadow-xs hover:shadow-sm transition-all duration-200 cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded border border-neutral-300 hover:border-neutral-400 bg-white/90 hover:bg-white px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-neutral-800 shadow-xs hover:shadow-sm transition-all duration-200 cursor-pointer"
                     >
                       {slide.secondaryCta.text} <ArrowRight className="h-3.5 w-3.5 text-neutral-500" />
                     </Link>
                   </div>
 
                   {/* Trust guarantees bar */}
-                  <div className="mt-4 flex flex-wrap items-center gap-4 text-[11px] font-medium text-neutral-500">
+                  <div className="mt-3.5 flex flex-wrap items-center gap-3.5 text-[10px] sm:text-[11px] font-medium text-neutral-500">
                     <span className="flex items-center gap-1">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> 99.98% High Availability SLA
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> 99.98% SLA Uptime
                     </span>
                     <span className="flex items-center gap-1">
                       <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> Zero-Outage Migrations
@@ -740,56 +740,54 @@ function Home() {
               );
             })}
           </div>
-        </div>
 
-        {/* Carousel Indicators / Navigation Dots */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-8 sm:px-12 lg:px-16 pb-2 flex items-center justify-between">
-          <div className="flex items-center gap-2 bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-neutral-200/80 shadow-xs">
+          {/* Carousel Indicators / Navigation Dots anchored inside */}
+          <div className="mt-5 flex items-center gap-2 bg-white/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-neutral-200/80 shadow-xs w-fit">
             {showcaseSlides.map((slide, i) => (
               <button
                 key={slide.id}
                 type="button"
                 onClick={() => setActiveSlide(i)}
-                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   i === activeSlide
-                    ? "w-7 bg-[#0091d5] shadow-[0_0_8px_rgba(0,145,213,0.4)]"
-                    : "w-2.5 bg-neutral-300 hover:bg-neutral-400"
+                    ? "w-6 bg-[#0091d5] shadow-[0_0_8px_rgba(0,145,213,0.4)]"
+                    : "w-2 bg-neutral-300 hover:bg-neutral-400"
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
             ))}
-            <span className="text-[11px] font-bold text-neutral-600 ml-1">
+            <span className="text-[10px] font-bold text-neutral-600 ml-1">
               0{activeSlide + 1} / 0{showcaseSlides.length}
             </span>
           </div>
         </div>
+      </section>
 
-        {/* Bottom Overlapping Frosted Glass Stats Card */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-8 sm:px-12 lg:px-16 pb-8 pt-2">
-          <div className="rounded-2xl border border-neutral-200/80 bg-white/85 p-3.5 sm:p-4 shadow-[0_8px_25px_rgba(0,0,0,0.04)] backdrop-blur-md max-w-4xl">
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:divide-x sm:divide-neutral-200/70">
-              {stats.map((s) => {
-                const Icon = s.icon;
-                return (
-                  <div key={s.label} className="flex items-center gap-2.5 sm:px-3 first:sm:pl-1">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sky-50 text-[#0091d5] border border-sky-100">
-                      <Icon className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+      {/* Trust Stats Strip (Positioned directly below the compact hero slider) */}
+      <div className="border-b border-neutral-200/70 bg-[#fafcfb] py-3.5 sm:py-4">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:divide-x sm:divide-neutral-200/70">
+            {stats.map((s) => {
+              const Icon = s.icon;
+              return (
+                <div key={s.label} className="flex items-center gap-2.5 sm:px-4 first:sm:pl-0">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sky-50 text-[#0091d5] border border-sky-100">
+                    <Icon className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <div className="font-display text-base sm:text-lg font-extrabold text-neutral-900 tracking-tight leading-none">
+                      {s.value}
                     </div>
-                    <div>
-                      <div className="font-display text-lg sm:text-xl font-extrabold text-neutral-900 tracking-tight leading-none">
-                        {s.value}
-                      </div>
-                      <div className="mt-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-neutral-500 leading-tight">
-                        {s.label}
-                      </div>
+                    <div className="mt-0.5 text-[9px] font-bold uppercase tracking-wider text-neutral-500 leading-tight">
+                      {s.label}
                     </div>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </section>
+      </div>
 
       {/* ==================================================================== */}
       {/* 2. ENTERPRISE CLIENT TRUST STRIP                                     */}

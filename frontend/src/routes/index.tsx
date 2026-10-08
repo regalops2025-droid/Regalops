@@ -823,9 +823,203 @@ function Home() {
       </div>
 
       {/* ==================================================================== */}
-      {/* 2. OUR CLIENTS — "WHO WE WORK WITH" (Vuesol Reference Match)         */}
+      {/* 2. ENTERPRISE TECH STACK INFINITE MARQUEE                             */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fbfcfd] py-12 sm:py-16 lg:py-20">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-5 overflow-hidden">
+        <div className="relative w-full overflow-hidden flex items-center">
+          <div className="flex items-center gap-4 whitespace-nowrap animate-marquee">
+            {[...techStackMarquee, ...techStackMarquee].map((tech, idx) => (
+              <div
+                key={idx}
+                className="inline-flex items-center gap-2.5 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-xs font-semibold text-neutral-700 hover:border-emerald-600/40 hover:bg-emerald-50/40 hover:text-emerald-900 transition-colors shadow-2xs"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                <span>{tech.name}</span>
+                <span className="text-[10px] font-medium text-neutral-400">({tech.category})</span>
+              </div>
+            ))}
+          </div>
+          {/* Subtle gradient fades on edges */}
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#fafcfb] to-transparent" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#fafcfb] to-transparent" />
+        </div>
+      </section>
+
+      {/* ==================================================================== */}
+      {/* 3. ABOUT REGAL OPS — "WHO WE ARE & WHAT WE DO" (Vuesol Reference)    */}
+      {/* ==================================================================== */}
+      <section id="about" className="relative bg-white pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 overflow-hidden">
+        {/* Ambient background soft glow */}
+        <div className="absolute top-1/2 right-12 -translate-y-1/2 w-96 h-96 rounded-full bg-gradient-to-tr from-sky-400/10 via-orange-400/10 to-amber-300/10 blur-3xl pointer-events-none" />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+            
+            {/* Left Content Column (Exact Text & Layout from Reference) */}
+            <div className="lg:col-span-6 xl:col-span-6">
+              
+              {/* Category Pill */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-sky-200/80 bg-sky-50/70 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#007cb8]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#0091d5]" />
+                Who We Are &amp; What We Do
+              </div>
+
+              {/* Main Heading matching Reference */}
+              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight leading-[1.15]">
+                About Regal OPs
+              </h2>
+
+              {/* Subheading in Italicized Font matching Reference */}
+              <p className="mt-2 text-lg sm:text-xl font-normal italic font-serif text-neutral-600 tracking-wide">
+                Who We Are &amp; What We Do
+              </p>
+
+              {/* Paragraph 1 matching Reference */}
+              <p className="mt-6 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
+                We empower companies by helping them utilize and integrate the most recent technological advances. This allows businesses to respond more quickly and intuitively to changing market dynamics. At Regal OPs, we have a long track record of transforming organizations into high-performing businesses that can tap into new, high-profit opportunities.
+              </p>
+
+              {/* Paragraph 2 matching Reference */}
+              <p className="mt-4 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
+                By utilizing our technical expertise, industry insight, technological vision, and innovative thinking we can help you identify new opportunities for growth and innovation. We enable organizations to reach their full potential and accelerate their business. Don’t just keep up with the competition, get ahead. The market can be crowded, but we will make you stand out.
+              </p>
+
+              {/* CTAs matching reference button style */}
+              <div className="mt-8 flex flex-wrap items-center gap-3.5">
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-2 rounded bg-[#0091d5] hover:bg-[#007cb8] px-6 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
+                >
+                  <span className="font-bold">&mdash;</span> Know more
+                </Link>
+
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 rounded border border-neutral-300 hover:border-neutral-400 bg-white hover:bg-neutral-50 px-5 py-2.5 text-xs sm:text-sm font-semibold text-neutral-800 shadow-2xs transition-all duration-200 cursor-pointer"
+                >
+                  Get in Touch <ArrowRight className="h-3.5 w-3.5 text-neutral-500" />
+                </Link>
+              </div>
+
+            </div>
+
+            {/* Right Graphic Showcase (Exact Geometric Artwork from Reference) */}
+            <div className="lg:col-span-6 xl:col-span-6 flex justify-center items-center">
+              <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
+                
+                {/* Backlight Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-sky-100 via-orange-100 to-amber-50 rounded-full blur-3xl opacity-60 pointer-events-none transform scale-90" />
+                
+                {/* Main Graphic with subtle floating animation */}
+                <div className="relative z-10 transition-transform duration-500 hover:scale-[1.02]">
+                  <img
+                    src="/about-graphic.png"
+                    alt="About Regal OPs — Who We Are & What We Do"
+                    className="w-full h-auto max-h-[460px] object-contain mx-auto drop-shadow-md select-none animate-float"
+                  />
+                </div>
+
+                {/* Overlaid Floating Badge */}
+                <div className="absolute -bottom-2 -left-2 sm:bottom-4 sm:left-4 z-20 rounded-2xl border border-neutral-200/90 bg-white/95 backdrop-blur-md p-3.5 sm:p-4 shadow-xl shadow-neutral-900/8 max-w-[240px] sm:max-w-[270px]">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-orange-600 border border-orange-100 shadow-xs">
+                      <Sparkles className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs sm:text-sm font-bold text-neutral-900 leading-tight">
+                        Proven Track Record
+                      </div>
+                      <div className="text-[10px] sm:text-[11px] text-neutral-500 mt-0.5 leading-tight">
+                        Transforming high-performing organizations
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Overlaid Top-Right Accent Tag */}
+                <div className="absolute top-2 -right-2 sm:top-6 sm:right-2 z-20 rounded-full border border-sky-200/90 bg-white/90 backdrop-blur-md px-3.5 py-1 text-[11px] font-bold text-[#007cb8] shadow-md shadow-sky-900/5">
+                  Next-Gen Innovation &bull; 99.98% SLA
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Seamless Soft Curve Transition into Our Services */}
+        <div className="w-full overflow-hidden leading-none mt-12 sm:mt-16 -mb-1">
+          <svg
+            className="relative block w-full h-8 sm:h-12 lg:h-16 text-[#fafcfb]"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+            fill="currentColor"
+          >
+            <path d="M0,0 C300,90 900,90 1200,0 L1200,120 L0,120 Z" />
+          </svg>
+        </div>
+
+      </section>
+
+      {/* ==================================================================== */}
+      {/* 4. OUR SERVICES SECTION (Vuesol Reference Match)                      */}
+      {/* ==================================================================== */}
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] pt-8 pb-16 sm:pb-20 lg:pb-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight">
+              Our Services
+            </h2>
+            <p className="mt-3.5 text-base sm:text-lg text-neutral-600 italic font-serif sm:font-normal">
+              Accelerate your journey to success with our expertise, insights, innovation and vision
+            </p>
+          </div>
+
+          {/* 8-Card Grid (4 Columns on Desktop, 2 on Tablet, 1 on Mobile) */}
+          <div className="mt-12 sm:mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {ourServices.map((service) => (
+              <Link
+                key={service.id}
+                to={service.link}
+                className="group flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-7 sm:p-8 transition-all duration-300 hover:-translate-y-2 hover:border-sky-400/50 hover:shadow-[0_16px_35px_rgba(2,132,199,0.08)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer"
+              >
+                {/* Vector Icon */}
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50/80 group-hover:bg-sky-50 transition-colors duration-300">
+                  {service.icon}
+                </div>
+
+                {/* Title */}
+                <h3 className="mt-6 text-lg sm:text-[18px] font-bold text-neutral-900 group-hover:text-sky-700 transition-colors leading-snug">
+                  {service.title}
+                </h3>
+
+                {/* Description */}
+                <p className="mt-3 text-xs sm:text-[13.5px] leading-relaxed text-neutral-500">
+                  {service.desc}
+                </p>
+              </Link>
+            ))}
+          </div>
+
+          {/* Bottom Explore CTA Bar */}
+          <div className="mt-12 text-center">
+            <Link
+              to="/solutions"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0091d5] hover:bg-[#007cb8] px-6 py-3 text-xs sm:text-sm font-semibold text-white shadow-md shadow-sky-900/15 hover:shadow-lg transition-all cursor-pointer"
+            >
+              Explore detailed practice architectures <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ==================================================================== */}
+      {/* 5. OUR CLIENTS — "WHO WE WORK WITH" (Vuesol Reference Match)         */}
+      {/* ==================================================================== */}
+      <section className="border-b border-neutral-200/70 bg-[#fbfcfd] py-14 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Desktop Layout: Exact center-callout 4-row layout matching reference */}
@@ -951,200 +1145,6 @@ function Home() {
               className="inline-flex items-center justify-center rounded border border-[#0091d5] text-[#0091d5] hover:bg-[#0091d5] hover:text-white px-8 py-2 text-xs sm:text-sm font-semibold shadow-2xs hover:shadow transition-all duration-200 cursor-pointer"
             >
               More Clients
-            </Link>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ==================================================================== */}
-      {/* 3. ENTERPRISE TECH STACK INFINITE MARQUEE                             */}
-      {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-5 overflow-hidden">
-        <div className="relative w-full overflow-hidden flex items-center">
-          <div className="flex items-center gap-4 whitespace-nowrap animate-marquee">
-            {[...techStackMarquee, ...techStackMarquee].map((tech, idx) => (
-              <div
-                key={idx}
-                className="inline-flex items-center gap-2.5 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-xs font-semibold text-neutral-700 hover:border-emerald-600/40 hover:bg-emerald-50/40 hover:text-emerald-900 transition-colors shadow-2xs"
-              >
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                <span>{tech.name}</span>
-                <span className="text-[10px] font-medium text-neutral-400">({tech.category})</span>
-              </div>
-            ))}
-          </div>
-          {/* Subtle gradient fades on edges */}
-          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#fafcfb] to-transparent" />
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#fafcfb] to-transparent" />
-        </div>
-      </section>
-
-      {/* ==================================================================== */}
-      {/* 4. ABOUT REGAL OPS — "WHO WE ARE & WHAT WE DO" (Vuesol Reference)    */}
-      {/* ==================================================================== */}
-      <section id="about" className="relative bg-white pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 overflow-hidden">
-        {/* Ambient background soft glow */}
-        <div className="absolute top-1/2 right-12 -translate-y-1/2 w-96 h-96 rounded-full bg-gradient-to-tr from-sky-400/10 via-orange-400/10 to-amber-300/10 blur-3xl pointer-events-none" />
-
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-            
-            {/* Left Content Column (Exact Text & Layout from Reference) */}
-            <div className="lg:col-span-6 xl:col-span-6">
-              
-              {/* Category Pill */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-sky-200/80 bg-sky-50/70 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#007cb8]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#0091d5]" />
-                Who We Are &amp; What We Do
-              </div>
-
-              {/* Main Heading matching Reference */}
-              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight leading-[1.15]">
-                About Regal OPs
-              </h2>
-
-              {/* Subheading in Italicized Font matching Reference */}
-              <p className="mt-2 text-lg sm:text-xl font-normal italic font-serif text-neutral-600 tracking-wide">
-                Who We Are &amp; What We Do
-              </p>
-
-              {/* Paragraph 1 matching Reference */}
-              <p className="mt-6 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
-                We empower companies by helping them utilize and integrate the most recent technological advances. This allows businesses to respond more quickly and intuitively to changing market dynamics. At Regal OPs, we have a long track record of transforming organizations into high-performing businesses that can tap into new, high-profit opportunities.
-              </p>
-
-              {/* Paragraph 2 matching Reference */}
-              <p className="mt-4 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
-                By utilizing our technical expertise, industry insight, technological vision, and innovative thinking we can help you identify new opportunities for growth and innovation. We enable organizations to reach their full potential and accelerate their business. Don’t just keep up with the competition, get ahead. The market can be crowded, but we will make you stand out.
-              </p>
-
-              {/* CTAs matching reference button style */}
-              <div className="mt-8 flex flex-wrap items-center gap-3.5">
-                <Link
-                  to="/about"
-                  className="inline-flex items-center gap-2 rounded bg-[#0091d5] hover:bg-[#007cb8] px-6 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
-                >
-                  <span className="font-bold">&mdash;</span> Know more
-                </Link>
-
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-2 rounded border border-neutral-300 hover:border-neutral-400 bg-white hover:bg-neutral-50 px-5 py-2.5 text-xs sm:text-sm font-semibold text-neutral-800 shadow-2xs transition-all duration-200 cursor-pointer"
-                >
-                  Get in Touch <ArrowRight className="h-3.5 w-3.5 text-neutral-500" />
-                </Link>
-              </div>
-
-            </div>
-
-            {/* Right Graphic Showcase (Exact Geometric Artwork from Reference) */}
-            <div className="lg:col-span-6 xl:col-span-6 flex justify-center items-center">
-              <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
-                
-                {/* Backlight Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-sky-100 via-orange-100 to-amber-50 rounded-full blur-3xl opacity-60 pointer-events-none transform scale-90" />
-                
-                {/* Main Graphic with subtle floating animation */}
-                <div className="relative z-10 transition-transform duration-500 hover:scale-[1.02]">
-                  <img
-                    src="/about-graphic.png"
-                    alt="About Regal OPs — Who We Are & What We Do"
-                    className="w-full h-auto max-h-[460px] object-contain mx-auto drop-shadow-md select-none animate-float"
-                  />
-                </div>
-
-                {/* Overlaid Floating Badge */}
-                <div className="absolute -bottom-2 -left-2 sm:bottom-4 sm:left-4 z-20 rounded-2xl border border-neutral-200/90 bg-white/95 backdrop-blur-md p-3.5 sm:p-4 shadow-xl shadow-neutral-900/8 max-w-[240px] sm:max-w-[270px]">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-orange-600 border border-orange-100 shadow-xs">
-                      <Sparkles className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <div className="text-xs sm:text-sm font-bold text-neutral-900 leading-tight">
-                        Proven Track Record
-                      </div>
-                      <div className="text-[10px] sm:text-[11px] text-neutral-500 mt-0.5 leading-tight">
-                        Transforming high-performing organizations
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Overlaid Top-Right Accent Tag */}
-                <div className="absolute top-2 -right-2 sm:top-6 sm:right-2 z-20 rounded-full border border-sky-200/90 bg-white/90 backdrop-blur-md px-3.5 py-1 text-[11px] font-bold text-[#007cb8] shadow-md shadow-sky-900/5">
-                  Next-Gen Innovation &bull; 99.98% SLA
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        {/* Seamless Soft Curve Transition into Our Services */}
-        <div className="w-full overflow-hidden leading-none mt-12 sm:mt-16 -mb-1">
-          <svg
-            className="relative block w-full h-8 sm:h-12 lg:h-16 text-[#fafcfb]"
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-            fill="currentColor"
-          >
-            <path d="M0,0 C300,90 900,90 1200,0 L1200,120 L0,120 Z" />
-          </svg>
-        </div>
-
-      </section>
-
-      {/* ==================================================================== */}
-      {/* 5. OUR SERVICES SECTION (Vuesol Reference Match)                      */}
-      {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] pt-8 pb-16 sm:pb-20 lg:pb-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          
-          {/* Header */}
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight">
-              Our Services
-            </h2>
-            <p className="mt-3.5 text-base sm:text-lg text-neutral-600 italic font-serif sm:font-normal">
-              Accelerate your journey to success with our expertise, insights, innovation and vision
-            </p>
-          </div>
-
-          {/* 8-Card Grid (4 Columns on Desktop, 2 on Tablet, 1 on Mobile) */}
-          <div className="mt-12 sm:mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {ourServices.map((service) => (
-              <Link
-                key={service.id}
-                to={service.link}
-                className="group flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-7 sm:p-8 transition-all duration-300 hover:-translate-y-2 hover:border-sky-400/50 hover:shadow-[0_16px_35px_rgba(2,132,199,0.08)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer"
-              >
-                {/* Vector Icon */}
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50/80 group-hover:bg-sky-50 transition-colors duration-300">
-                  {service.icon}
-                </div>
-
-                {/* Title */}
-                <h3 className="mt-6 text-lg sm:text-[18px] font-bold text-neutral-900 group-hover:text-sky-700 transition-colors leading-snug">
-                  {service.title}
-                </h3>
-
-                {/* Description */}
-                <p className="mt-3 text-xs sm:text-[13.5px] leading-relaxed text-neutral-500">
-                  {service.desc}
-                </p>
-              </Link>
-            ))}
-          </div>
-
-          {/* Bottom Explore CTA Bar */}
-          <div className="mt-12 text-center">
-            <Link
-              to="/solutions"
-              className="inline-flex items-center gap-2 rounded-full bg-[#0091d5] hover:bg-[#007cb8] px-6 py-3 text-xs sm:text-sm font-semibold text-white shadow-md shadow-sky-900/15 hover:shadow-lg transition-all cursor-pointer"
-            >
-              Explore detailed practice architectures <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 

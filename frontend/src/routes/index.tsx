@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { SiteLayout } from "@/components/site/site-layout";
+import { AnimatedCounter } from "@/components/ui/animated-counter";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -136,13 +137,6 @@ const showcaseSlides = [
     titleSuffix: "",
     subtitle: "INC 5000 HONOREE. THE MOST SUCCESSFUL ENTERPRISE CLOUD & AI PRACTICES",
     desc: "Recognized by industry authorities for engineering resilient digital platforms, 99.98% SLA high availability, and transformative AI systems.",
-    isAwardsSlide: true,
-    accreditations: [
-      { name: "CIOReview", label: "Most Promising IT Services", color: "text-red-600" },
-      { name: "Entrepreneur", label: "Top Company Cultures", color: "text-amber-600" },
-      { name: "Outsourcing Gazette", label: "Top 25 IT Providers", color: "text-blue-600" },
-      { name: "Inc. 5000", label: "America's Fastest Growing", color: "text-amber-500" },
-    ],
     primaryCta: { text: "Know more", link: "/solutions" },
     secondaryCta: { text: "View Accreditations", link: "/about" },
   },
@@ -156,8 +150,6 @@ const showcaseSlides = [
     titleSuffix: " to accelerate your business",
     subtitle: "BESPOKE ENTERPRISE ARCHITECTURE & HIGH-VELOCITY SQUADS",
     desc: "We engineer resilient multi-region infrastructure, autonomous intelligence pipelines, and custom enterprise software delivered by senior engineers.",
-    isAwardsSlide: false,
-    accreditations: [],
     primaryCta: { text: "Know more", link: "/solutions" },
     secondaryCta: { text: "Talk to an engineer", link: "/contact" },
   },
@@ -171,40 +163,11 @@ const showcaseSlides = [
     titleSuffix: "",
     subtitle: "TURN TECHNOLOGY EXPENDITURES INTO COMPOUNDING BUSINESS VALUE",
     desc: "Eliminate cloud waste, streamline operations with automated workflows, and build high-ROI digital assets that drive measurable bottom-line growth.",
-    isAwardsSlide: false,
-    accreditations: [],
     primaryCta: { text: "Know more", link: "/solutions" },
     secondaryCta: { text: "Calculate IT ROI", link: "/contact" },
   },
 ];
 
-const comparisonMatrix = [
-  {
-    factor: "Engineering Seniority",
-    traditional: "Junior trainees on retainer, billing high hourly blended rates",
-    regalops: "100% Senior & Principal practitioners with 8+ years enterprise battle-testing",
-  },
-  {
-    factor: "Time to First Production Code",
-    traditional: "8 to 12 weeks of discovery decks, workshops, and bloated requirements docs",
-    regalops: "Audited production code and IaC staging deployed in Sprint 1 (within 72 hours)",
-  },
-  {
-    factor: "Architecture & Vendor Lock-in",
-    traditional: "Proprietary toolchains that mandate perpetual multi-year consultant dependencies",
-    regalops: "Cloud-agnostic, open-standard IaC (Terraform, K8s, Kafka) completely client-owned",
-  },
-  {
-    factor: "Code & IP Ownership",
-    traditional: "Ambiguous IP terms and locked custom modules requiring expensive licensing",
-    regalops: "100% Client IP ownership from day one, delivered with full tests and operational runbooks",
-  },
-  {
-    factor: "Uptime & Operational SLA",
-    traditional: "Best-effort advisory recommendations with zero contractual availability risk",
-    regalops: "Contractually backed 99.98% High Availability SLA with 24/7 incident response runbooks",
-  },
-];
 
 const coreServices = [
   {
@@ -721,25 +684,6 @@ function Home() {
                     {slide.desc}
                   </p>
 
-                  {/* Accreditation Badges for Slide 1 */}
-                  {slide.isAwardsSlide && slide.accreditations && (
-                    <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-lg">
-                      {slide.accreditations.map((acc) => (
-                        <div
-                          key={acc.name}
-                          className="rounded-lg border border-neutral-200/80 bg-white/90 p-1.5 shadow-xs backdrop-blur-xs flex flex-col justify-center"
-                        >
-                          <div className={`text-[11px] font-black tracking-tight ${acc.color}`}>
-                            {acc.name}
-                          </div>
-                          <div className="text-[9px] text-neutral-600 leading-tight mt-0.5 font-medium">
-                            {acc.label}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
                   {/* Action Buttons (featuring "— Know more" in reference style) */}
                   <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-3">
                     <Link
@@ -809,7 +753,7 @@ function Home() {
                   </div>
                   <div>
                     <div className="font-display text-base sm:text-lg font-extrabold text-neutral-900 tracking-tight leading-none">
-                      {s.value}
+                      <AnimatedCounter value={s.value} />
                     </div>
                     <div className="mt-0.5 text-[9px] font-bold uppercase tracking-wider text-neutral-500 leading-tight">
                       {s.label}
@@ -1151,67 +1095,6 @@ function Home() {
         </div>
       </section>
 
-      {/* ==================================================================== */}
-      {/* 6. WHY REGAL OPS — EXECUTIVE COMPARISON MATRIX                        */}
-      {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-white py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
-              The Engineering Difference
-            </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900">
-              Why Enterprise Leaders Choose Regal OPs
-            </h2>
-            <p className="mt-3 text-base text-neutral-600">
-              A direct comparison between traditional Big-4 IT staff augmentation and our dedicated, senior-only engineering squads.
-            </p>
-          </div>
-
-          <div className="mt-12 overflow-hidden rounded-3xl border border-neutral-200/80 bg-neutral-50/50 shadow-xl shadow-neutral-950/5">
-            <div className="grid grid-cols-1 md:grid-cols-12 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80">
-              
-              {/* Header Titles */}
-              <div className="col-span-12 grid grid-cols-1 md:grid-cols-12 bg-neutral-100/70 p-4 sm:p-5 border-b border-neutral-200/80 text-xs font-bold uppercase tracking-wider text-neutral-500">
-                <div className="md:col-span-3">Strategic Criteria</div>
-                <div className="hidden md:block md:col-span-4 text-neutral-500">Traditional IT / Big 4 Staffing</div>
-                <div className="hidden md:block md:col-span-5 text-emerald-800 flex items-center gap-1.5">
-                  <Sparkles className="h-3.5 w-3.5 text-emerald-600" /> Regal OPs Dedicated Pods
-                </div>
-              </div>
-
-              {/* Rows */}
-              {comparisonMatrix.map((item, idx) => (
-                <div
-                  key={item.factor}
-                  className={`col-span-12 grid grid-cols-1 md:grid-cols-12 p-5 sm:p-6 items-center gap-3 md:gap-4 transition-colors hover:bg-white/80 ${
-                    idx !== comparisonMatrix.length - 1 ? "border-b border-neutral-100" : ""
-                  }`}
-                >
-                  <div className="md:col-span-3">
-                    <span className="text-sm font-bold text-neutral-900">{item.factor}</span>
-                  </div>
-                  
-                  <div className="md:col-span-4 flex items-start gap-2.5 text-xs text-neutral-500 leading-relaxed">
-                    <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-neutral-200 text-neutral-600 font-bold text-[10px]">
-                      ✕
-                    </div>
-                    <span>{item.traditional}</span>
-                  </div>
-
-                  <div className="md:col-span-5 flex items-start gap-2.5 text-xs font-medium text-emerald-950 leading-relaxed bg-emerald-50/50 p-2.5 rounded-xl border border-emerald-100/60">
-                    <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white font-bold text-[10px]">
-                      ✓
-                    </div>
-                    <span>{item.regalops}</span>
-                  </div>
-                </div>
-              ))}
-
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ==================================================================== */}
       {/* 7. INTERACTIVE ARCHITECTURE BLUEPRINT & TOPOLOGY SHOWCASE            */}

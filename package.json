@@ -33,8 +33,5 @@
     "seroval": "^1.6.3",
     "shell-quote": "^1.11.0",
     "source-map-js": "^1.2.2"
-  },
-  "devDependencies": {
-    "@rolldown/binding-win32-x64-msvc": "^1.2.3"
   }
 }

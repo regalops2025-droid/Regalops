@@ -94,31 +94,54 @@ const stats = [
 
 const showcaseSlides = [
   {
-    id: "globe",
-    image: "/hero-globe-glow.jpg",
-    alt: "Digital Global Infrastructure Network",
-    isGlobe: true,
-    title: "Global Cloud Mesh",
-    subtitle: "High-Availability Multi-Region Network",
-    metric: "14 Countries • 99.98% SLA",
+    id: "awards",
+    image: "/hero-slide-1.jpg",
+    alt: "Ranked Enterprise Leader - INC 5000 and Industry Recognitions",
+    tag: "Recognized Excellence • Inc 5000",
+    titlePrefix: "Ranked ",
+    titleHighlight: "Top 500 Enterprise Partner",
+    titleSuffix: "",
+    subtitle: "INC 5000 HONOREE. THE MOST SUCCESSFUL ENTERPRISE CLOUD & AI PRACTICES",
+    desc: "Recognized by industry authorities for engineering resilient digital platforms, 99.98% SLA high availability, and transformative AI systems.",
+    isAwardsSlide: true,
+    accreditations: [
+      { name: "CIOReview", label: "Most Promising IT Services", color: "text-red-600" },
+      { name: "Entrepreneur", label: "Top Company Cultures", color: "text-amber-600" },
+      { name: "Outsourcing Gazette", label: "Top 25 IT Providers", color: "text-blue-600" },
+      { name: "Inc. 5000", label: "America's Fastest Growing", color: "text-amber-500" },
+    ],
+    primaryCta: { text: "Know more", link: "/solutions" },
+    secondaryCta: { text: "View Accreditations", link: "/about" },
   },
   {
-    id: "ai-ops",
-    image: "/hero-slide-ai.jpg",
-    alt: "Enterprise AI Neural Engine & Autonomous Pipeline",
-    isGlobe: false,
-    title: "Autonomous AI Engine",
-    subtitle: "Production LLM & Agent Pipelines",
-    metric: "4.8M ops/sec • Sub-12ms Latency",
+    id: "engineering",
+    image: "/hero-slide-2.jpg",
+    alt: "Cutting-edge customised cloud and application solutions to accelerate your business",
+    tag: "Custom Cloud & Digital Engineering",
+    titlePrefix: "Cutting-edge customised ",
+    titleHighlight: "cloud & application solutions",
+    titleSuffix: " to accelerate your business",
+    subtitle: "BESPOKE ENTERPRISE ARCHITECTURE & HIGH-VELOCITY SQUADS",
+    desc: "We engineer resilient multi-region infrastructure, autonomous intelligence pipelines, and custom enterprise software delivered by senior engineers.",
+    isAwardsSlide: false,
+    accreditations: [],
+    primaryCta: { text: "Know more", link: "/solutions" },
+    secondaryCta: { text: "Talk to an engineer", link: "/contact" },
   },
   {
-    id: "cyber-mesh",
-    image: "/hero-slide-cyber.jpg",
-    alt: "Data Citadel & Cloud Server Mesh Architecture",
-    isGlobe: false,
-    title: "Zero-Trust Citadel",
-    subtitle: "SOC-2 Audited Cloud Security Mesh",
-    metric: "100% Audit Compliance",
+    id: "roi",
+    image: "/hero-slide-3.jpg",
+    alt: "Are you Investing or Just Spending on IT",
+    tag: "Strategic Technology ROI & Growth",
+    titlePrefix: "Are you Investing or ",
+    titleHighlight: "Just Spending on IT?",
+    titleSuffix: "",
+    subtitle: "TURN TECHNOLOGY EXPENDITURES INTO COMPOUNDING BUSINESS VALUE",
+    desc: "Eliminate cloud waste, streamline operations with automated workflows, and build high-ROI digital assets that drive measurable bottom-line growth.",
+    isAwardsSlide: false,
+    accreditations: [],
+    primaryCta: { text: "Know more", link: "/solutions" },
+    secondaryCta: { text: "Calculate IT ROI", link: "/contact" },
   },
 ];
 
@@ -204,6 +227,164 @@ const coreServices = [
     icon: Users,
     tags: ["Full-Time Staff", "Staff Augmentation", "SLA Backed"],
     deliverables: ["Embedded in your Slack/Teams", "Daily async updates", "Zero recruitment overhead"],
+  },
+];
+
+const ourServices = [
+  {
+    id: "tech-consulting",
+    title: "Technology Consulting",
+    desc: "Uncovering technology blocks to business growth.",
+    icon: (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="16" width="44" height="32" rx="4" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="#f8fafc" />
+        <path d="M26 48L24 54H40L38 48" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="20" y1="54" x2="44" y2="54" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M32 20C32 20 38 23 38 31L35 34L32 32L29 34L26 31C26 23 32 20 32 20Z" stroke="#334155" strokeWidth="2.2" strokeLinejoin="round" fill="#ffffff" />
+        <circle cx="32" cy="27" r="2.5" fill="#f97316" />
+        <path d="M30 35L32 39L34 35" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M44 24L45 22L46 24L48 25L46 26L45 28L44 26L42 25Z" fill="#0284c7" />
+      </svg>
+    ),
+    link: "/solutions",
+  },
+  {
+    id: "bpo",
+    title: "Business Process Outsourcing",
+    desc: "Delivering industry-leading expertise, and supporting all delivery models.",
+    icon: (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M34 16H46C48.2 16 50 17.8 50 20V28C50 30.2 48.2 32 46 32H42L38 36V32H34C31.8 32 30 30.2 30 28V20C30 17.8 31.8 16 34 16Z" stroke="#f97316" strokeWidth="2.2" strokeLinejoin="round" fill="#fff7ed" />
+        <circle cx="36" cy="24" r="1.5" fill="#f97316" />
+        <circle cx="40" cy="24" r="1.5" fill="#f97316" />
+        <circle cx="44" cy="24" r="1.5" fill="#f97316" />
+        <circle cx="22" cy="28" r="4.5" stroke="#334155" strokeWidth="2.2" fill="#ffffff" />
+        <path d="M14 44C14 38.5 17.5 37 22 37C26.5 37 30 38.5 30 44" stroke="#334155" strokeWidth="2.2" strokeLinecap="round" />
+        <circle cx="36" cy="40" r="4" stroke="#334155" strokeWidth="2.2" fill="#ffffff" />
+        <path d="M29 52C29 48 32 47 36 47C40 47 43 48 43 52" stroke="#334155" strokeWidth="2.2" strokeLinecap="round" />
+      </svg>
+    ),
+    link: "/solutions",
+  },
+  {
+    id: "custom-app",
+    title: "Custom Application Development",
+    desc: "Developing a robust and industrialized approach for both new and existing applications.",
+    icon: (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="12" width="24" height="40" rx="5" stroke="#334155" strokeWidth="2.5" fill="#f8fafc" />
+        <circle cx="32" cy="46" r="1.5" fill="#334155" />
+        <line x1="28" y1="16" x2="36" y2="16" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="32" cy="30" r="8.5" fill="#fff7ed" stroke="#f97316" strokeWidth="2" />
+        <path d="M32 25C32 25 35 27 35 31L33.5 32.5L32 31.5L30.5 32.5L29 31C29 27 32 25 32 25Z" fill="#f97316" />
+        <path d="M31 33L32 35.5L33 33" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="15" cy="22" r="1.5" fill="#0284c7" />
+        <path d="M48 20L49 18L50 20L52 21L50 22L49 24L48 22L46 21Z" fill="#f97316" />
+      </svg>
+    ),
+    link: "/solutions",
+  },
+  {
+    id: "big-data",
+    title: "Big Data Solutions",
+    desc: "Applying smarter business acumen more extensively across the application life cycle.",
+    icon: (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="32" y1="32" x2="18" y2="22" stroke="#94a3b8" strokeWidth="2" />
+        <line x1="32" y1="32" x2="46" y2="20" stroke="#94a3b8" strokeWidth="2" />
+        <line x1="32" y1="32" x2="48" y2="42" stroke="#94a3b8" strokeWidth="2" />
+        <line x1="32" y1="32" x2="20" y2="44" stroke="#94a3b8" strokeWidth="2" />
+        <line x1="32" y1="32" x2="32" y2="14" stroke="#f97316" strokeWidth="1.8" strokeDasharray="2 2" />
+        <line x1="32" y1="32" x2="32" y2="50" stroke="#94a3b8" strokeWidth="2" />
+        <circle cx="32" cy="32" r="4.5" fill="#f97316" stroke="#ea580c" strokeWidth="2" />
+        <circle cx="18" cy="22" r="3" fill="#334155" />
+        <circle cx="46" cy="20" r="3.5" fill="#334155" />
+        <circle cx="48" cy="42" r="3" fill="#334155" />
+        <circle cx="20" cy="44" r="3.5" fill="#334155" />
+        <circle cx="32" cy="14" r="2.5" fill="#f97316" />
+        <circle cx="32" cy="50" r="2.5" fill="#0284c7" />
+        <circle cx="44" cy="30" r="2" fill="#f97316" />
+        <circle cx="18" cy="34" r="2" fill="#0284c7" />
+      </svg>
+    ),
+    link: "/solutions",
+  },
+  {
+    id: "mobile-solutions",
+    title: "Mobile Solutions",
+    desc: "Driving businesses in motion, and doing business with anybody, anytime!",
+    icon: (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="14" width="24" height="40" rx="5" stroke="#334155" strokeWidth="2.5" fill="#f8fafc" />
+        <line x1="28" y1="18" x2="36" y2="18" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="32" cy="48" r="1.5" fill="#334155" />
+        <g transform="translate(32, 32)">
+          <circle cx="0" cy="0" r="7.5" stroke="#0284c7" strokeWidth="2" strokeDasharray="3 2" fill="#f0f9ff" />
+          <circle cx="0" cy="0" r="3.5" fill="#0284c7" />
+        </g>
+        <line x1="48" y1="28" x2="52" y2="28" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+        <line x1="48" y1="32" x2="55" y2="32" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+        <line x1="48" y1="36" x2="51" y2="36" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    ),
+    link: "/solutions",
+  },
+  {
+    id: "cloud-consulting",
+    title: "Cloud Consulting",
+    desc: "Helping clients utilize the cloud for data storage and recovery, underpinning mobility, analytics, and social media.",
+    icon: (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 36C18.7 36 16 33.3 16 30C16 27.1 18 24.6 20.8 24.1C21.6 19.5 25.6 16 30.5 16C34.6 16 38.1 18.6 39.4 22.4C40.2 22.1 41.1 22 42 22C45.3 22 48 24.7 48 28C48 28.5 47.9 29 47.8 29.5C49.7 30.7 51 32.7 51 35C51 38.3 48.3 41 45 41H22" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="#f8fafc" />
+        <path d="M24 41V46" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="24" cy="48" r="2" fill="#f97316" />
+        <path d="M32 41V48" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="32" cy="50" r="2" fill="#0284c7" />
+        <path d="M40 41V45" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="40" cy="47" r="2" fill="#f97316" />
+        <path d="M46 41V49" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="46" cy="51" r="2" fill="#334155" />
+      </svg>
+    ),
+    link: "/solutions",
+  },
+  {
+    id: "project-implementation",
+    title: "Project Implementation",
+    desc: "Turning vision and plans into reality.",
+    icon: (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 22H38C42 22 45 25 45 29C45 33 42 36 38 36H24C20 36 17 39 17 43C17 47 20 50 24 50H46" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="16" cy="22" r="3" fill="#334155" />
+        <circle cx="32" cy="22" r="2.5" fill="#f97316" />
+        <circle cx="45" cy="29" r="2.5" fill="#0284c7" />
+        <circle cx="28" cy="36" r="3" fill="#f97316" />
+        <circle cx="36" cy="50" r="2.5" fill="#0284c7" />
+        <circle cx="48" cy="50" r="3.5" fill="#f97316" />
+        <path d="M35 19L38 22L35 25" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M27 33L24 36L27 39" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M43 47L46 50L43 53" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+    link: "/solutions",
+  },
+  {
+    id: "staffing-solutions",
+    title: "Staffing Solutions",
+    desc: "Assembling a customized solution to support your industry.",
+    icon: (
+      <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="22" r="4.5" stroke="#334155" strokeWidth="2.2" fill="#ffffff" />
+        <path d="M25 38C25 33 28 31 32 31C36 31 39 33 39 38" stroke="#334155" strokeWidth="2.2" strokeLinecap="round" />
+        <circle cx="21" cy="26" r="3.8" stroke="#334155" strokeWidth="2" fill="#ffffff" />
+        <path d="M15 41C15 37 17.5 35 21 35C22.8 35 24.3 35.5 25.2 36.5" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="43" cy="26" r="3.8" stroke="#334155" strokeWidth="2" fill="#ffffff" />
+        <path d="M38.8 36.5C39.7 35.5 41.2 35 43 35C46.5 35 49 37 49 41" stroke="#334155" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M12 44C18 49 46 49 52 44" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M16 48C22 52 42 52 48 48" stroke="#0284c7" strokeWidth="1.8" strokeLinecap="round" />
+      </svg>
+    ),
+    link: "/solutions",
   },
 ];
 
@@ -420,9 +601,9 @@ function Home() {
       {/* ==================================================================== */}
       {/* 1. HERO SECTION WITH BACKGROUND CAROUSEL & ROTATION EFFECTS           */}
       {/* ==================================================================== */}
-      <section className="relative overflow-hidden bg-[#fafcfb] border-b border-neutral-200/60 pt-4 pb-8 sm:pt-6 sm:pb-10 lg:pt-8 lg:pb-12 min-h-[580px] lg:min-h-[620px] flex flex-col justify-between">
+      <section className="relative overflow-hidden bg-white border-b border-neutral-200/70 min-h-[580px] lg:min-h-[620px] flex flex-col justify-between">
         
-        {/* Full-bleed Background Carousel Layer */}
+        {/* Full-bleed Background Slide Images */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           {showcaseSlides.map((slide, idx) => {
             const isActive = idx === activeSlide;
@@ -433,192 +614,180 @@ function Home() {
                   isActive ? "opacity-100" : "opacity-0"
                 }`}
               >
-                {/* Visual positioned seamlessly on the right side of the background */}
-                <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[60%] xl:w-[55%] overflow-hidden">
+                {/* Visual positioned on the right half on desktop */}
+                <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[62%] xl:w-[58%] overflow-hidden">
                   <img
                     src={slide.image}
                     alt={slide.alt}
-                    className={`h-full w-full object-cover object-center ${
-                      slide.isGlobe ? "animate-globe-pulse" : "scale-100"
-                    }`}
+                    className="h-full w-full object-cover object-center lg:object-right transition-transform duration-1000 ease-out"
                   />
-
-                  {/* Rotating 3D Orbital Rings & Radar Scanner when globe slide is active */}
-                  {slide.isGlobe && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      {/* Outer spinning dashed ring */}
-                      <div className="h-[80%] w-[80%] max-h-[520px] max-w-[520px] rounded-full border border-cyan-400/30 border-dashed animate-spin-slow" />
-                      {/* Inner counter-rotating ring with glowing satellite nodes */}
-                      <div className="absolute h-[66%] w-[66%] max-h-[430px] max-w-[430px] rounded-full border border-emerald-400/25 border-dotted animate-spin-reverse-slow">
-                        <div className="absolute -top-1.5 left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]" />
-                        <div className="absolute -bottom-1.5 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-emerald-300 shadow-[0_0_8px_#6ee7b7]" />
-                      </div>
-                      {/* Rotating radar scan sweep */}
-                      <div className="absolute h-[58%] w-[58%] max-h-[380px] max-w-[380px] rounded-full bg-gradient-to-tr from-cyan-400/15 via-transparent to-transparent animate-spin-slow opacity-60" />
-                    </div>
-                  )}
-
-                  {/* Soft edge fade for natural blending with background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#fafcfb] via-transparent to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#fafcfb] via-transparent to-transparent opacity-50" />
+                  {/* Soft edge blend gradient for smooth falloff */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-white via-white/30 to-transparent lg:via-transparent" />
                 </div>
+
+                {/* Left gradient mask to ensure pure legibility of foreground text */}
+                <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-transparent w-full lg:w-[55%]" />
               </div>
             );
           })}
-
-          {/* Organic Emerald Ribbon layer along bottom right */}
-          <img
-            src="/hero-ribbon-bg.jpg"
-            alt="Fluid emerald waves"
-            className="absolute -right-10 bottom-0 h-full w-[80%] max-w-[1000px] object-cover object-right-bottom opacity-70 mix-blend-multiply pointer-events-none"
-          />
-
-          {/* High contrast gradient mask for foreground content readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#fafcfb] via-[#fafcfb]/95 via-45% to-transparent lg:w-[65%]" />
-          <div className="absolute -top-24 left-1/4 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
         </div>
 
-        {/* Foreground Content */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-            
-            {/* Left Content Column */}
-            <div className="lg:col-span-8 xl:col-span-7">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-700/20 bg-emerald-50/80 px-3 py-1 text-[10px] sm:text-[11px] font-bold tracking-[0.14em] text-emerald-800 uppercase backdrop-blur-sm shadow-xs">
-                <span className="relative flex h-2 w-2 items-center justify-center">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-600" />
-                </span>
-                Engineering partner since 2011
-              </div>
+        {/* Side Navigation Buttons (Pinned to Left and Right edges like in reference) */}
+        <button
+          type="button"
+          onClick={() => setActiveSlide((prev) => (prev - 1 + showcaseSlides.length) % showcaseSlides.length)}
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 flex h-11 w-9 sm:h-12 sm:w-10 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </button>
 
-              {/* Main Headline */}
-              <h1 className="mt-3.5 text-3xl sm:text-4xl lg:text-[2.85rem] xl:text-[3.25rem] font-bold tracking-tight text-neutral-900 leading-[1.08]">
-                Systems that stay<br />
-                up when<br />
-                <span className="bg-gradient-to-r from-[#115e34] via-[#2f6f32] to-[#738228] bg-clip-text text-transparent">
-                  everything scales
-                </span>
-              </h1>
+        <button
+          type="button"
+          onClick={() => setActiveSlide((prev) => (prev + 1) % showcaseSlides.length)}
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 flex h-11 w-9 sm:h-12 sm:w-10 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="h-6 w-6" />
+        </button>
 
-              {/* Paragraph */}
-              <p className="mt-3 sm:mt-3.5 max-w-xl text-sm sm:text-[15px] leading-relaxed text-neutral-600">
-                At Regal OPs, we help organizations accelerate digital transformation through innovative IT solutions, AI-driven automation, and specialized technology staffing across North America and global markets.
-              </p>
-
-              {/* Action Buttons */}
-              <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-3">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#13502c] hover:bg-[#0e3f22] px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-white shadow-md shadow-emerald-950/15 hover:shadow-lg hover:shadow-emerald-950/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
-                >
-                  Talk to an engineer <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  to="/solutions"
-                  className="inline-flex items-center gap-2 rounded-full border border-neutral-300 hover:border-emerald-700/50 bg-white/80 hover:bg-white px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-neutral-800 shadow-xs hover:shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
-                >
-                  Explore solutions <ArrowRight className="h-4 w-4 text-neutral-500" />
-                </Link>
-              </div>
-
-              {/* Trust Sub-guarantees */}
-              <div className="mt-4 flex flex-wrap items-center gap-4 text-[11px] font-medium text-neutral-500">
-                <span className="flex items-center gap-1">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> 99.98% High Availability SLA
-                </span>
-                <span className="flex items-center gap-1">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> Zero-Outage Migrations
-                </span>
-                <span className="flex items-center gap-1">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> 72-Hour Pod Mobilization
-                </span>
-              </div>
-            </div>
-
-            {/* Right Side: Seamless Background Carousel Controller */}
-            <div className="lg:col-span-4 xl:col-span-5 flex flex-col items-start lg:items-end justify-center">
-              {/* Carousel Navigation Pill */}
-              <div className="flex flex-col items-end gap-2">
-                <div className="flex items-center gap-3 rounded-full bg-white/85 backdrop-blur-md px-4 py-2 border border-white/90 shadow-[0_8px_25px_rgba(16,80,45,0.08)]">
-                  <button
-                    type="button"
-                    onClick={() => setActiveSlide((prev) => (prev - 1 + showcaseSlides.length) % showcaseSlides.length)}
-                    className="p-1 text-neutral-600 hover:text-emerald-700 transition-colors cursor-pointer"
-                    aria-label="Previous slide"
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </button>
-
-                  <div className="flex items-center gap-1.5">
-                    {showcaseSlides.map((slide, i) => (
-                      <button
-                        key={slide.id}
-                        type="button"
-                        onClick={() => setActiveSlide(i)}
-                        className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                          i === activeSlide
-                            ? "w-6 bg-emerald-600 shadow-[0_0_8px_rgba(5,150,105,0.4)]"
-                            : "w-2 bg-neutral-300 hover:bg-neutral-400"
-                        }`}
-                        aria-label={`Go to slide ${i + 1}`}
-                      />
-                    ))}
+        {/* Foreground Content for Active Slide */}
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-8 sm:px-12 lg:px-16 pt-8 sm:pt-12 lg:pt-14 pb-4">
+          <div className="max-w-2xl xl:max-w-3xl">
+            {showcaseSlides.map((slide, idx) => {
+              if (idx !== activeSlide) return null;
+              return (
+                <div key={slide.id} className="transition-all duration-500">
+                  {/* Slide Category Badge */}
+                  <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/90 px-3.5 py-1 text-[11px] font-bold tracking-[0.14em] text-neutral-800 uppercase shadow-xs backdrop-blur-sm">
+                    <span className="relative flex h-2 w-2 items-center justify-center">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#0091d5]" />
+                    </span>
+                    {slide.tag}
                   </div>
 
-                  <span className="text-[11px] font-bold text-neutral-700 tracking-wider">
-                    0{activeSlide + 1} / 0{showcaseSlides.length}
-                  </span>
+                  {/* Main Headline */}
+                  <h1 className="mt-4 text-3xl sm:text-4xl lg:text-[2.75rem] xl:text-[3.15rem] font-medium tracking-tight text-neutral-800 leading-[1.15]">
+                    {slide.titlePrefix}
+                    <span className="font-extrabold text-neutral-950">
+                      {slide.titleHighlight}
+                    </span>
+                    {slide.titleSuffix}
+                  </h1>
 
-                  <button
-                    type="button"
-                    onClick={() => setActiveSlide((prev) => (prev + 1) % showcaseSlides.length)}
-                    className="p-1 text-neutral-600 hover:text-emerald-700 transition-colors cursor-pointer"
-                    aria-label="Next slide"
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </button>
+                  {/* Subtitle / Eyebrow text */}
+                  {slide.subtitle && (
+                    <p className="mt-2 text-xs sm:text-[13px] font-bold tracking-wider text-neutral-500 uppercase">
+                      {slide.subtitle}
+                    </p>
+                  )}
+
+                  {/* Paragraph Description */}
+                  <p className="mt-3.5 max-w-xl text-sm sm:text-[15px] leading-relaxed text-neutral-600">
+                    {slide.desc}
+                  </p>
+
+                  {/* Accreditation Badges for Slide 1 */}
+                  {slide.isAwardsSlide && slide.accreditations && (
+                    <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-w-xl">
+                      {slide.accreditations.map((acc) => (
+                        <div
+                          key={acc.name}
+                          className="rounded-lg border border-neutral-200/80 bg-white/90 p-2 shadow-xs backdrop-blur-xs flex flex-col justify-center"
+                        >
+                          <div className={`text-xs font-black tracking-tight ${acc.color}`}>
+                            {acc.name}
+                          </div>
+                          <div className="text-[10px] text-neutral-600 leading-tight mt-0.5 font-medium">
+                            {acc.label}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Action Buttons (featuring "— Know more" in reference style) */}
+                  <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-3">
+                    <Link
+                      to={slide.primaryCta.link}
+                      className="inline-flex items-center gap-2 rounded bg-[#0091d5] hover:bg-[#007cb8] px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-white shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
+                    >
+                      <span className="font-bold">&mdash;</span> {slide.primaryCta.text}
+                    </Link>
+
+                    <Link
+                      to={slide.secondaryCta.link}
+                      className="inline-flex items-center gap-2 rounded border border-neutral-300 hover:border-neutral-400 bg-white/90 hover:bg-white px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-neutral-800 shadow-xs hover:shadow-sm transition-all duration-200 cursor-pointer"
+                    >
+                      {slide.secondaryCta.text} <ArrowRight className="h-3.5 w-3.5 text-neutral-500" />
+                    </Link>
+                  </div>
+
+                  {/* Trust guarantees bar */}
+                  <div className="mt-4 flex flex-wrap items-center gap-4 text-[11px] font-medium text-neutral-500">
+                    <span className="flex items-center gap-1">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> 99.98% High Availability SLA
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> Zero-Outage Migrations
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> 72-Hour Mobilization
+                    </span>
+                  </div>
                 </div>
-
-                {/* Active Slide Label Micro-pill */}
-                <div className="hidden sm:inline-flex items-center gap-2 rounded-full bg-white/70 backdrop-blur-sm px-3 py-1 border border-white/80 shadow-xs text-[10px] text-neutral-600">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="font-bold text-neutral-900">{showcaseSlides[activeSlide].title}</span>
-                  <span className="text-neutral-400">•</span>
-                  <span>{showcaseSlides[activeSlide].metric}</span>
-                </div>
-              </div>
-            </div>
-
+              );
+            })}
           </div>
+        </div>
 
-          {/* Bottom Overlapping Frosted Glass Stats Card */}
-          <div className="mt-8 sm:mt-10">
-            <div className="rounded-2xl border border-white/80 bg-white/80 p-3.5 sm:p-4.5 shadow-[0_12px_30px_rgba(16,80,45,0.06)] backdrop-blur-xl max-w-4xl">
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:divide-x sm:divide-neutral-200/70">
-                {stats.map((s) => {
-                  const Icon = s.icon;
-                  return (
-                    <div key={s.label} className="flex items-center gap-2.5 sm:px-3 first:sm:pl-1">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100/60">
-                        <Icon className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+        {/* Carousel Indicators / Navigation Dots */}
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-8 sm:px-12 lg:px-16 pb-2 flex items-center justify-between">
+          <div className="flex items-center gap-2 bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-neutral-200/80 shadow-xs">
+            {showcaseSlides.map((slide, i) => (
+              <button
+                key={slide.id}
+                type="button"
+                onClick={() => setActiveSlide(i)}
+                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  i === activeSlide
+                    ? "w-7 bg-[#0091d5] shadow-[0_0_8px_rgba(0,145,213,0.4)]"
+                    : "w-2.5 bg-neutral-300 hover:bg-neutral-400"
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+            <span className="text-[11px] font-bold text-neutral-600 ml-1">
+              0{activeSlide + 1} / 0{showcaseSlides.length}
+            </span>
+          </div>
+        </div>
+
+        {/* Bottom Overlapping Frosted Glass Stats Card */}
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-8 sm:px-12 lg:px-16 pb-8 pt-2">
+          <div className="rounded-2xl border border-neutral-200/80 bg-white/85 p-3.5 sm:p-4 shadow-[0_8px_25px_rgba(0,0,0,0.04)] backdrop-blur-md max-w-4xl">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:divide-x sm:divide-neutral-200/70">
+              {stats.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <div key={s.label} className="flex items-center gap-2.5 sm:px-3 first:sm:pl-1">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sky-50 text-[#0091d5] border border-sky-100">
+                      <Icon className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+                    </div>
+                    <div>
+                      <div className="font-display text-lg sm:text-xl font-extrabold text-neutral-900 tracking-tight leading-none">
+                        {s.value}
                       </div>
-                      <div>
-                        <div className="font-display text-lg sm:text-xl font-extrabold text-neutral-900 tracking-tight leading-none">
-                          {s.value}
-                        </div>
-                        <div className="mt-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-neutral-500 leading-tight">
-                          {s.label}
-                        </div>
+                      <div className="mt-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-neutral-500 leading-tight">
+                        {s.label}
                       </div>
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
-
         </div>
       </section>
 
@@ -872,114 +1041,57 @@ function Home() {
       </section>
 
       {/* ==================================================================== */}
-      {/* 6. CORE PRACTICES & CAPABILITIES GRID WITH CATEGORY FILTER           */}
+      {/* 6. OUR SERVICES SECTION (Vuesol Reference Match)                      */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-white py-16 sm:py-20">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 max-w-7xl">
-            <div>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
-                Core Capabilities
-              </span>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900">
-                Solutions Built for Mission-Critical Scale
-              </h2>
-              <p className="mt-3 text-base text-neutral-600 max-w-2xl">
-                Six core practices, one unified delivery standard. Every engagement ships with production runbooks, automated test suites, and strict SLA commitments.
-              </p>
-            </div>
-
-            {/* Filter Pills */}
-            <div className="flex flex-wrap items-center gap-1.5 p-1 bg-neutral-100/80 rounded-full border border-neutral-200/80 self-start md:self-auto">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setSelectedPracticeCategory(cat)}
-                  className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
-                    selectedPracticeCategory === cat
-                      ? "bg-white text-emerald-900 shadow-xs"
-                      : "text-neutral-600 hover:text-neutral-900"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
+          
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight">
+              Our Services
+            </h2>
+            <p className="mt-3.5 text-base sm:text-lg text-neutral-600 italic font-serif sm:font-normal">
+              Accelerate your journey to success with our expertise, insights, innovation and vision
+            </p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredSolutions.map((item, idx) => {
-              const defaultIcons = [Cloud, Cpu, Database, Lock, Terminal, Users];
-              const ServiceIcon = item.icon || defaultIcons[idx % defaultIcons.length];
-              return (
-                <Link
-                  key={item.id || idx}
-                  to="/solutions"
-                  className="group relative flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-white p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-emerald-600/40 hover:shadow-xl hover:shadow-emerald-950/5 cursor-pointer overflow-hidden"
-                >
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-800 border border-emerald-100 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
-                        <ServiceIcon className="h-6 w-6" />
-                      </div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
-                        {item.category || "Practice Area"}
-                      </span>
-                    </div>
+          {/* 8-Card Grid (4 Columns on Desktop, 2 on Tablet, 1 on Mobile) */}
+          <div className="mt-12 sm:mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {ourServices.map((service) => (
+              <Link
+                key={service.id}
+                to={service.link}
+                className="group flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-7 sm:p-8 transition-all duration-300 hover:-translate-y-2 hover:border-sky-400/50 hover:shadow-[0_16px_35px_rgba(2,132,199,0.08)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer"
+              >
+                {/* Vector Icon */}
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50/80 group-hover:bg-sky-50 transition-colors duration-300">
+                  {service.icon}
+                </div>
 
-                    <h3 className="mt-5 text-lg font-bold text-neutral-900 group-hover:text-emerald-800 transition-colors">
-                      {item.title || item.name}
-                    </h3>
-                    <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-neutral-500">
-                      {item.desc || item.description}
-                    </p>
+                {/* Title */}
+                <h3 className="mt-6 text-lg sm:text-[18px] font-bold text-neutral-900 group-hover:text-sky-700 transition-colors leading-snug">
+                  {service.title}
+                </h3>
 
-                    {/* Specific Deliverables with Checkmarks */}
-                    {(() => {
-                      const deliverablesList = parseArrayField(item.deliverables);
-                      if (deliverablesList.length === 0) return null;
-                      return (
-                        <div className="mt-4 space-y-1.5 pt-3 border-t border-neutral-100">
-                          {deliverablesList.slice(0, 3).map((del: string) => (
-                            <div key={del} className="flex items-center gap-2 text-[11px] text-neutral-600">
-                              <Check className="h-3 w-3 text-emerald-600 shrink-0" />
-                              <span>{del}</span>
-                            </div>
-                          ))}
-                        </div>
-                      );
-                    })()}
-
-                    {(() => {
-                      const tagsList = parseArrayField(item.tags || item.technologies);
-                      if (tagsList.length === 0) return null;
-                      return (
-                        <div className="mt-4 flex flex-wrap gap-1.5">
-                          {tagsList.slice(0, 4).map((tag: string) => (
-                            <span
-                              key={tag}
-                              className="rounded-md bg-neutral-100 px-2 py-0.5 text-[10px] font-semibold text-neutral-600 group-hover:bg-emerald-50 group-hover:text-emerald-800 transition-colors"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      );
-                    })()}
-                  </div>
-
-                  <div className="mt-6 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-emerald-700 transition-colors pt-4 border-t border-neutral-100">
-                    <span>Explore practice</span>
-                    <ArrowRight className="h-3.5 w-3.5 -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-200" />
-                  </div>
-
-                  {/* Hover bottom accent highlight line */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-600 to-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </Link>
-              );
-            })}
+                {/* Description */}
+                <p className="mt-3 text-xs sm:text-[13.5px] leading-relaxed text-neutral-500">
+                  {service.desc}
+                </p>
+              </Link>
+            ))}
           </div>
+
+          {/* Bottom Explore CTA Bar */}
+          <div className="mt-12 text-center">
+            <Link
+              to="/solutions"
+              className="inline-flex items-center gap-2 rounded-full bg-[#13502c] hover:bg-[#0e3f22] px-6 py-3 text-xs sm:text-sm font-semibold text-white shadow-md shadow-emerald-950/15 hover:shadow-lg transition-all cursor-pointer"
+            >
+              Explore detailed practice architectures <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
         </div>
       </section>
 

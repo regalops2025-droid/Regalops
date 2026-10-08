@@ -12,7 +12,7 @@
       "id": 29,
       "created_at": "2026-08-19T07:05:39.333Z",
       "email": "regalops2025@gmail.com",
-      "password": "$2b$10$hTym6KfzygWvZIIL88T0DO1udwPT/ENC697/mgyAxruHbq1si7HnO",
+      "password": "$2b$10$nopko/WnbpxDqB0Pu.CLZ.HmR.e/sbbOI.SEEQ/jkPueFwJoVvnRO",
       "name": "Shivakumar"
     }
   ],
@@ -20,68 +20,90 @@
     {
       "id": 1,
       "created_at": "2026-08-19T07:05:39.335Z",
-      "name": "Enterprise Software",
+      "name": "Technology Consulting",
       "image": "/hero-bg-1.png",
-      "description": "Modular platforms designed around your operating model, not a template.",
-      "capabilities": "[\"Domain-Driven Development (DDD) & clean architecture\",\"High-throughput event-driven microservices\",\"Strangler-fig migration of legacy monoliths\",\"Real-time transactional consistency at scale\"]",
-      "methodology": "[\"Event Storming & Domain Modeling\",\"Target Architecture Blueprinting\",\"Incremental Strangler Delivery\",\"Load Testing & Performance Tuning\"]",
-      "deliverables": "[\"Fully documented OpenAPI specifications\",\"Automated unit, integration, and contract test suites\",\"Structured JSON logging & Prometheus metrics\",\"Operational runbooks for infrastructure teams\"]",
-      "technologies": "[\"Node.js\",\"TypeScript\",\"Go\",\"PostgreSQL\",\"Kafka\",\"Docker\"]"
+      "description": "Uncovering technology blocks to business growth.",
+      "capabilities": "[\"Architecture advisory and tech stack rationalization\",\"Legacy modernization roadmaps\",\"Enterprise scalability assessment\",\"Digital strategy and technology due diligence\"]",
+      "methodology": "[\"Discovery and Technology Health Audit\",\"Bottleneck Identification\",\"Future-State Target Architecture\",\"Execution and Governance Framework\"]",
+      "deliverables": "[\"Enterprise Architecture Blueprint\",\"Tech Debt Remediation Roadmap\",\"ROI and Total Cost of Ownership (TCO) Model\",\"Executive Advisory Briefing\"]",
+      "technologies": "[\"Enterprise Architecture\",\"Cloud\",\"Microservices\",\"DevOps\",\"Security\"]"
     },
     {
       "id": 2,
       "created_at": "2026-08-19T07:05:39.336Z",
-      "name": "Cloud Migration",
+      "name": "Business Process Outsourcing",
       "image": "/hero-bg-2.png",
-      "description": "Zero-drama moves to AWS, Azure or GCP with measurable cost reduction.",
-      "capabilities": "[\"Zero-downtime database and asset migrations\",\"Multi-region high-availability configurations\",\"Infrastructure as Code (IaC) templates\",\"TCO analysis & cost optimization structures\"]",
-      "methodology": "[\"TCO & Compliance Readiness Audit\",\"Infrastructure Landing Zone Setup\",\"Data Sync & Pilot Shift\",\"DNS Cutover & Monolithic Decommission\"]",
-      "deliverables": "[\"Terraform or CloudFormation scripts\",\"Security audit & IAM compliance report\",\"Cost breakdown & auto-scaling configuration\",\"Disaster recovery runbook\"]",
-      "technologies": "[\"AWS\",\"Azure\",\"Terraform\",\"Kubernetes\",\"Docker\",\"Linux\"]"
+      "description": "Delivering industry-leading expertise, and supporting all delivery models.",
+      "capabilities": "[\"End-to-end IT service delivery operations\",\"Follow-the-sun global support pods\",\"SLA-backed tier 1 to tier 3 managed workflows\",\"Continuous process automation and optimization\"]",
+      "methodology": "[\"Process Discovery and Workstream Transition\",\"SLA and KPI Benchmarking\",\"Automated Workflow Integration\",\"Continuous Service Improvement\"]",
+      "deliverables": "[\"Standard Operating Procedures (SOPs)\",\"Real-time Telemetry Dashboard\",\"Monthly SLA Attainment Audits\",\"Risk and Continuity Runbooks\"]",
+      "technologies": "[\"ITIL\",\"ServiceNow\",\"Jira\",\"24/7 Operations\",\"Automation\"]"
     },
     {
       "id": 3,
       "created_at": "2026-08-19T07:05:39.337Z",
-      "name": "Data & Analytics",
+      "name": "Custom Application Development",
       "image": "/hero-bg-3.png",
-      "description": "Warehouses, streaming pipelines and decision dashboards leaders trust.",
-      "capabilities": "[\"Five-minute batch ETL pipelines at 1/10th streaming costs\",\"Real-time analytics warehousing & views\",\"Centralized metrics schema definition (dbt)\",\"Strict data sanitization & PII separation\"]",
-      "methodology": "[\"Source System Schema Auditing\",\"Warehouse Model Design\",\"ETL Pipeline Engineering\",\"BI Integration & Verification\"]",
-      "deliverables": "[\"dbt models with automated schema assertions\",\"Optimized warehouse queries & indexing\",\"Data lineage documentation\",\"Airflow/Prefect orchestration DAGs\"]",
-      "technologies": "[\"Snowflake\",\"PostgreSQL\",\"Python\",\"dbt\",\"Airflow\",\"Kafka\"]"
+      "description": "Developing a robust and industrialized approach for both new and existing applications.",
+      "capabilities": "[\"Domain-Driven Design (DDD) & modular clean architecture\",\"High-throughput microservices and event streaming\",\"Full-stack web applications with modern frameworks\",\"Industrialized automated testing and CI/CD\"]",
+      "methodology": "[\"Domain Modeling and Sprint Blueprinting\",\"Incremental Modular Delivery\",\"Automated Contract and E2E Testing\",\"Zero-Downtime Deployment\"]",
+      "deliverables": "[\"Production-ready tested codebase with client IP ownership\",\"OpenAPI specifications & documentation\",\"Automated unit, integration, and load test suites\",\"Docker and Kubernetes deployment manifests\"]",
+      "technologies": "[\"React\",\"TypeScript\",\"Node.js\",\"Go\",\"PostgreSQL\",\"Docker\"]"
     },
     {
       "id": 4,
       "created_at": "2026-08-19T07:05:39.339Z",
-      "name": "AI Automation",
+      "name": "Big Data Solutions",
       "image": "/hero-bg-1.png",
-      "description": "Agents and copilots wired into real workflows with human oversight.",
-      "capabilities": "[\"Intelligent workflows & agentic copilots\",\"Human-in-the-loop validation checkpoints\",\"Private Large Language Model (LLM) fine-tuning\",\"Audit logs of all autonomous decisions\"]",
-      "methodology": "[\"Workflow Observability Mapping\",\"Model Selection & Context Prompting\",\"Security & Guardrail Integration\",\"Production Evaluation & Tuning\"]",
-      "deliverables": "[\"Fully versioned model prompts & weights\",\"Observability dashboard tracking LLM drift\",\"Safety filter configurations\",\"Developer API wrapper code\"]",
-      "technologies": "[\"Python\",\"PyTorch\",\"HuggingFace\",\"AWS Bedrock\",\"FastAPI\"]"
+      "description": "Applying smarter business acumen more extensively across the application life cycle.",
+      "capabilities": "[\"Petabyte-scale distributed data ingestion pipelines\",\"Cloud data warehousing and analytical lakehouses\",\"Real-time event streaming and analytical views\",\"Automated data quality assertions and governance\"]",
+      "methodology": "[\"Schema Auditing and Data Flow Mapping\",\"Warehouse Topology Design\",\"Distributed ETL/ELT Pipeline Engineering\",\"BI and Analytics Layer Verification\"]",
+      "deliverables": "[\"dbt transformation models with automated tests\",\"Apache Kafka and streaming topology\",\"Production Snowflake/BigQuery schemas\",\"Data lineage and dictionary runbooks\"]",
+      "technologies": "[\"Apache Kafka\",\"Snowflake\",\"dbt\",\"Python\",\"Airflow\",\"BigQuery\"]"
     },
     {
       "id": 5,
       "created_at": "2026-08-19T07:05:39.341Z",
-      "name": "Cyber Security",
+      "name": "Mobile Solutions",
       "image": "/hero-bg-2.png",
-      "description": "Threat modelling, hardening and audit-ready compliance programmes.",
-      "capabilities": "[\"Threat modeling & threat vector assessment\",\"SOC2, ISO27001, and HIPAA compliance readiness\",\"Identity and Access Management (IAM) hardening\",\"Automated vulnerability scanning pipelines\"]",
-      "methodology": "[\"Threat Vectors Assessment\",\"System Hardening & Config Fixes\",\"Compliance Assertions Mapping\",\"Penetration Test & Correction\"]",
-      "deliverables": "[\"Vulnerability scan reports & remediation logs\",\"IAM architecture diagrams\",\"SOC2-ready system control definitions\",\"Incident response policy files\"]",
-      "technologies": "[\"Vault\",\"SSL/TLS\",\"IAM\",\"OWASP\",\"SIEM\",\"Kubernetes NetworkPolicies\"]"
+      "description": "Driving businesses in motion, and doing business with anybody, anytime!",
+      "capabilities": "[\"Native iOS (Swift) and Android (Kotlin) development\",\"Cross-platform high-performance React Native & Flutter apps\",\"Offline-first data sync and push notification pipelines\",\"Enterprise MDM and secure mobile identity federation\"]",
+      "methodology": "[\"Mobile UX/UI Design and Prototyping\",\"Native Performance Optimization\",\"API Gateway and Offline Sync Integration\",\"Store Submission and MDM Rollout\"]",
+      "deliverables": "[\"iOS and Android production application binaries\",\"Comprehensive UI test suites and device compatibility matrix\",\"Automated App Store & Play Store deployment pipelines\",\"Mobile security and biometric authentication module\"]",
+      "technologies": "[\"React Native\",\"Swift\",\"Kotlin\",\"Flutter\",\"Firebase\",\"GraphQL\"]"
     },
     {
       "id": 6,
       "created_at": "2026-08-19T07:05:39.342Z",
-      "name": "Managed Support",
+      "name": "Cloud Consulting",
       "image": "/hero-bg-3.png",
-      "description": "24/7 monitoring, incident response and SLAs you can hold us to.",
-      "capabilities": "[\"24/7 incident response by senior practitioners\",\"Custom SLAs built around core business metrics\",\"Blameless post-mortem analysis reports\",\"Continuous runtime optimization and patching\"]",
-      "methodology": "[\"Telemetry Integration\",\"Runbook Consolidation\",\"Alarm Threshold Calibration\",\"Continuous Optimization Iteration\"]",
-      "deliverables": "[\"Structured alert logs & notification settings\",\"Standard operating procedures (SOPs)\",\"Monthly SLA attainment reports\",\"Resource allocation suggestions\"]",
-      "technologies": "[\"Prometheus\",\"Grafana\",\"Datadog\",\"PagerDuty\",\"Terraform\"]"
+      "description": "Helping clients utilize the cloud for data storage and recovery, underpinning mobility, analytics, and social media.",
+      "capabilities": "[\"Cloud-native architecture on AWS, Azure, and Google Cloud\",\"Zero-downtime migration of stateful enterprise databases\",\"Multi-region high availability and disaster recovery runbooks\",\"Infrastructure as Code (IaC) and cloud financial management (FinOps)\"]",
+      "methodology": "[\"Cloud Readiness and Cost Audit\",\"Secure Landing Zone Setup\",\"Incremental Pilot Migration\",\"Cutover and Monolith Decommissioning\"]",
+      "deliverables": "[\"Terraform and CloudFormation IaC templates\",\"Disaster Recovery (DR) and automated failover runbooks\",\"FinOps cost breakdown and auto-scaling rules\",\"Security hardening and IAM audit certificates\"]",
+      "technologies": "[\"AWS\",\"Azure\",\"GCP\",\"Terraform\",\"Kubernetes\",\"Docker\"]"
+    },
+    {
+      "id": 7,
+      "created_at": "2026-08-19T07:05:39.343Z",
+      "name": "Project Implementation",
+      "image": "/hero-bg-1.png",
+      "description": "Turning vision and plans into reality.",
+      "capabilities": "[\"Agile sprint execution with 72-hour mobilization\",\"Enterprise software delivery governance and milestone tracking\",\"Technical program management (TPM) and risk mitigation\",\"Production rollout, canary validation, and stakeholder reporting\"]",
+      "methodology": "[\"Sprint 0 Architecture Alignment\",\"Bi-Weekly Agile Release Cycles\",\"Canary Deployment and Telemetry Verification\",\"Operational Handover and Training\"]",
+      "deliverables": "[\"Audited production code shipped in Sprint 1\",\"Executive milestone status and velocity dashboards\",\"Full operational runbooks and run-state telemetry\",\"Continuous integration and delivery (CI/CD) pipelines\"]",
+      "technologies": "[\"Agile Scrum\",\"CI/CD\",\"GitHub Actions\",\"Prometheus\",\"Kubernetes\"]"
+    },
+    {
+      "id": 8,
+      "created_at": "2026-08-19T07:05:39.344Z",
+      "name": "Staffing Solutions",
+      "image": "/hero-bg-2.png",
+      "description": "Assembling a customized solution to support your industry.",
+      "capabilities": "[\"Dedicated senior-only engineering squads (no trainees)\",\"Specialized technical expertise mobilized within 72 hours\",\"Direct collaboration embedded in your Slack and Jira\",\"Flexible delivery models: team augmentation or managed pods\"]",
+      "methodology": "[\"Skills Matrix and Engineering Assessment\",\"72-Hour Candidate Presentation and Vetting\",\"Seamless Team Onboarding and Sprint Integration\",\"Ongoing Performance and Quality Reviews\"]",
+      "deliverables": "[\"Principal Architects and Senior Technologists\",\"Zero recruitment overhead or onboarding delays\",\"Contractual delivery SLAs and performance guarantees\",\"100% Client ownership of all generated code and assets\"]",
+      "technologies": "[\"Principal Architects\",\"Senior Technologists\",\"Full-Stack\",\"DevOps\",\"AI/ML\"]"
     }
   ],
   "technologies": [

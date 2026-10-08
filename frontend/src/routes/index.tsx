@@ -886,39 +886,6 @@ function Home() {
                 By utilizing our technical expertise, industry insight, technological vision, and innovative thinking we can help you identify new opportunities for growth and innovation. We enable organizations to reach their full potential and accelerate their business. Don’t just keep up with the competition, get ahead. The market can be crowded, but we will make you stand out.
               </p>
 
-              {/* Three Value Highlights / Trust Markers */}
-              <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="rounded-xl border border-neutral-200/80 bg-neutral-50/60 p-3 hover:border-sky-300 hover:bg-sky-50/40 transition-colors">
-                  <div className="text-xs font-bold text-neutral-900 flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-orange-500" />
-                    Technical Expertise
-                  </div>
-                  <div className="text-[11px] text-neutral-500 mt-1 leading-tight">
-                    Cloud, AI &amp; modern architectures
-                  </div>
-                </div>
-
-                <div className="rounded-xl border border-neutral-200/80 bg-neutral-50/60 p-3 hover:border-sky-300 hover:bg-sky-50/40 transition-colors">
-                  <div className="text-xs font-bold text-neutral-900 flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-[#0091d5]" />
-                    Industry Insight
-                  </div>
-                  <div className="text-[11px] text-neutral-500 mt-1 leading-tight">
-                    Deep domain &amp; operational wisdom
-                  </div>
-                </div>
-
-                <div className="rounded-xl border border-neutral-200/80 bg-neutral-50/60 p-3 hover:border-sky-300 hover:bg-sky-50/40 transition-colors">
-                  <div className="text-xs font-bold text-neutral-900 flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-amber-500" />
-                    Accelerated Growth
-                  </div>
-                  <div className="text-[11px] text-neutral-500 mt-1 leading-tight">
-                    Transforming vision into high ROI
-                  </div>
-                </div>
-              </div>
-
               {/* CTAs matching reference button style */}
               <div className="mt-8 flex flex-wrap items-center gap-3.5">
                 <Link

@@ -1,5 +1,34 @@
 {
-  "contact_enquiries": [],
+  "contact_enquiries": [
+    {
+      "id": 1,
+      "created_at": "2026-10-08T13:01:35.386Z",
+      "first_name": "Priya",
+      "last_name": "Raman",
+      "email": "priya.raman@example.com",
+      "mobile": "+91 98765 43210",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "country": "India",
+      "zip_code": null,
+      "service": "Enterprise Software",
+      "comments": "Looking for a microservices architecture consultation."
+    },
+    {
+      "id": 2,
+      "created_at": "2026-10-09T05:15:37.303Z",
+      "first_name": "Pachipulusu",
+      "last_name": "Kameswari",
+      "email": "kameswarip98@gmail.com",
+      "mobile": "+918522901998",
+      "city": "Visakhapatnam",
+      "state": "Telangana",
+      "country": "India",
+      "zip_code": null,
+      "service": "AI Automation",
+      "comments": "hellp"
+    }
+  ],
   "users": [
     {
       "id": 28,
@@ -12,7 +41,7 @@
       "id": 29,
       "created_at": "2026-08-19T07:05:39.333Z",
       "email": "regalops2025@gmail.com",
-      "password": "$2b$10$u4QRr8xnZMQ1foh.Zme9pOWDII.FHQ9dk8lfqvVXpMp2cvs9ePbA2",
+      "password": "$2b$10$8QL/uwLCYen7ik6F6C5hsO6gpH8xyg7sKlXBvu7.Yow5Fvcpy4cAa",
       "name": "Shivakumar"
     }
   ],
@@ -21,8 +50,8 @@
       "id": 1,
       "created_at": "2026-08-19T07:05:39.335Z",
       "name": "Strategic Staffing",
-      "image": "/hero-bg-2.png",
-      "description": "Assembling specialized, elite engineering squads tailored to your tech stack and delivery roadmap.",
+      "image": "/solutions-team.jpg",
+      "description": "As part of our commitment to innovate best practices, our dedicated Centers of Expertise (COEs) provide whatever you need – be it a single resource or a team of resources.",
       "capabilities": "[\"Dedicated senior-only engineering squads mobilized within 72 hours\",\"Specialized expertise across Cloud, DevOps, Full-Stack, and AI/ML\",\"Direct team integration into client Slack, Jira, and Agile ceremonies\",\"Flexible engagement models: team augmentation or managed delivery pods\"]",
       "methodology": "[\"Skills Matrix & Technical Domain Assessment\",\"72-Hour Candidate Vetting & Live Coding Screen\",\"Frictionless Sprint Onboarding & Security Clearance\",\"Continuous Velocity, Delivery, and SLA Reviews\"]",
       "deliverables": "[\"Principal Architects and Senior Engineers\",\"Zero recruitment overhead or onboarding delays\",\"Contractual delivery SLAs and performance guarantees\",\"100% Client ownership of all generated code and assets\"]",
@@ -32,8 +61,8 @@
       "id": 2,
       "created_at": "2026-08-19T07:05:39.336Z",
       "name": "Business Process Outsourcing",
-      "image": "/hero-bg-1.png",
-      "description": "Delivering industry-leading operational expertise, SLA-backed managed workflows, and process automation.",
+      "image": "/solutions-bpo.jpg",
+      "description": "The next generation of BPO is here, and Regal OPs is leading the way. We offer a full spectrum of BPO services, and our success is rooted in industry-leading expertise and support of all delivery models.",
       "capabilities": "[\"End-to-end IT service delivery operations and enterprise helpdesk\",\"Follow-the-sun global support pods with 24/7/365 coverage\",\"SLA-backed Tier 1 to Tier 3 managed operational workflows\",\"Continuous robotic process automation (RPA) and optimization\"]",
       "methodology": "[\"Process Discovery and Workstream Transition\",\"SLA and KPI Benchmarking\",\"Automated Workflow Integration\",\"Continuous Service Improvement (ITIL)\"]",
       "deliverables": "[\"Standard Operating Procedures (SOPs)\",\"Real-time Telemetry Dashboard & Reporting\",\"Monthly SLA Attainment Audits\",\"Risk and Business Continuity Runbooks\"]",
@@ -43,7 +72,7 @@
       "id": 3,
       "created_at": "2026-08-19T07:05:39.337Z",
       "name": "Recruitment Process Outsourcing",
-      "image": "/hero-bg-3.png",
+      "image": "/solutions-rpo.jpg",
       "description": "End-to-end talent acquisition partnerships streamlining high-volume hiring and technical vetting.",
       "capabilities": "[\"End-to-end recruitment lifecycle management and talent pipelining\",\"AI-driven candidate screening, technical evaluation, and background checks\",\"Employer branding and candidate experience optimization\",\"Scalable on-demand hiring capacity with zero fixed recruitment overhead\"]",
       "methodology": "[\"Workforce Planning & Hiring Needs Audit\",\"Omnichannel Talent Sourcing & Pipelining\",\"Rigorous Technical & Cultural Assessment\",\"Offer Management, Onboarding, and Retention Tracking\"]",
@@ -54,7 +83,7 @@
       "id": 4,
       "created_at": "2026-08-19T07:05:39.338Z",
       "name": "Application Development",
-      "image": "/hero-bg-1.png",
+      "image": "/solutions-app-dev.jpg",
       "description": "Developing robust, modern, industrialized enterprise applications across web, mobile, and cloud.",
       "capabilities": "[\"Domain-Driven Design (DDD) & clean modular microservices architecture\",\"Full-stack cloud-native applications with React, Next.js, and Node.js\",\"High-throughput transactional APIs with gRPC, REST, and GraphQL\",\"Industrialized automated testing, security scanning, and CI/CD\"]",
       "methodology": "[\"Domain Modeling & Sprint Blueprinting\",\"Incremental Modular Delivery\",\"Automated Contract and E2E Testing\",\"Zero-Downtime Blue/Green Deployment\"]",
@@ -65,7 +94,7 @@
       "id": 5,
       "created_at": "2026-08-19T07:05:39.339Z",
       "name": "Quality Assurance",
-      "image": "/hero-bg-2.png",
+      "image": "/solutions-qa.jpg",
       "description": "Comprehensive automated testing, performance engineering, and security verification ensuring zero-defect delivery.",
       "capabilities": "[\"Full-suite automated end-to-end, regression, and integration testing\",\"High-concurrency load, stress, and performance benchmark testing\",\"API security, OWASP vulnerability scanning, and compliance testing\",\"Mobile device cloud testing across 100+ physical device configurations\"]",
       "methodology": "[\"Test Strategy & Automation Architecture Definition\",\"Continuous Test Automation in CI/CD Pipelines\",\"Performance & Security Baseline Benchmarking\",\"Defect Prevention & Quality Gate Enforcement\"]",
@@ -76,7 +105,7 @@
       "id": 6,
       "created_at": "2026-08-19T07:05:39.340Z",
       "name": "Regal OPs Training Hub",
-      "image": "/hero-bg-3.png",
+      "image": "/solutions-training.jpg",
       "description": "Corporate technical upskilling, hands-on production engineering bootcamps, and continuous excellence programs.",
       "capabilities": "[\"Role-based enterprise curriculum across Cloud, DevOps, AI, and Full-Stack\",\"Hands-on real-world production sandboxes and architectural labs\",\"Mentorship from veteran principal architects and technical leaders\",\"Custom corporate training cohorts with industry certification pathways\"]",
       "methodology": "[\"Skills Gap Assessment & Corporate Needs Analysis\",\"Custom Curriculum & Hands-on Lab Design\",\"Live Interactive Training & Code Reviews\",\"Capstone Project Evaluation & Certification\"]",
@@ -87,12 +116,23 @@
       "id": 7,
       "created_at": "2026-08-19T07:05:39.341Z",
       "name": "IT Strategy and Assessment",
-      "image": "/hero-bg-1.png",
+      "image": "/solutions-strategy.jpg",
       "description": "Uncovering technology blocks to business growth and blueprinting future-state enterprise architecture.",
       "capabilities": "[\"Comprehensive enterprise architecture audit and tech debt quantification\",\"Legacy modernization blueprints and cloud readiness assessments\",\"Cybersecurity posture, compliance, and risk assessments\",\"Technology due diligence for M&A and strategic capital allocation\"]",
       "methodology": "[\"Discovery & Technology Health Audit\",\"Bottleneck & Architectural Risk Identification\",\"Future-State Target Architecture Modeling\",\"Execution Roadmap & Governance Framework Formulation\"]",
       "deliverables": "[\"Executive Enterprise Architecture Blueprint\",\"Technical Debt Remediation & Modernization Roadmap\",\"ROI and Total Cost of Ownership (TCO) Model\",\"C-Suite Advisory Briefing and Implementation Milestones\"]",
       "technologies": "[\"Enterprise Architecture\",\"Cloud Strategy\",\"FinOps\",\"Cybersecurity\",\"Legacy Modernization\"]"
+    },
+    {
+      "id": 8,
+      "created_at": "2026-10-09T06:43:43.485Z",
+      "name": "Customer solutions",
+      "image": "/uploads/img-1791527991992-506477761.webp",
+      "description": "We support solutions for business through our agencies and solving the quires contacting them ",
+      "capabilities": "[\"Higher customer satisfaction\",\"Improved retention,\"]",
+      "methodology": "[\"Customer service software\",\"Customer care tools\"]",
+      "deliverables": "[\"Live Chat\",\"AI chatbots\",\"Tidio\",\"Email Support\",\"AI Customer Service\"]",
+      "technologies": "[\"AI\",\"Chatbots\"]"
     }
   ],
   "technologies": [
@@ -198,6 +238,14 @@
       "sector": "Manufacturing",
       "image": "/hero-bg-3.png",
       "description": "Unplanned line stoppages reduced 27% in the first operating year."
+    },
+    {
+      "id": 4,
+      "created_at": "2026-10-09T09:21:43.295Z",
+      "name": "ascend media labs",
+      "sector": "Technology",
+      "image": "/uploads/img-1791537701444-978893468.png",
+      "description": "Strategic enterprise client partnership & technology collaboration."
     }
   ],
   "jobs": [
@@ -242,6 +290,13 @@
       "title": "Engineering Manager",
       "location": "Chennai / Hybrid",
       "type": "Full-time"
+    },
+    {
+      "id": 7,
+      "created_at": "2026-10-09T09:24:18.658Z",
+      "title": "developer",
+      "location": "vizag",
+      "type": "Part-time"
     }
   ],
   "blogs": [
@@ -250,69 +305,143 @@
       "created_at": "2026-08-19T07:05:39.357Z",
       "title": "Strangler-fig migrations that actually finish",
       "tag": "Architecture",
-      "image": "/hero-bg-1.png",
+      "image": "/solutions-strategy.jpg",
       "description": "Most incremental rewrites stall at 60%. The fix is a decommission deadline written into the contract.",
-      "content": "[{\"heading\":\"The 60% Trap\",\"image\":\"/hero-bg-2.png\",\"story\":\"Incremental strangler-fig migration patterns are highly popular, but they commonly hit a wall at 60%. The legacy system remains running because the remaining services are complex, causing double overhead costs.\"},{\"heading\":\"Decommission Deadline Contract\",\"image\":\"/hero-bg-3.png\",\"story\":\"To prevent project drift, define an absolute decommission deadline within the software development agreement. This forces engineering teams to focus on full migration rather than leaving legacy subsystems dangling.\"}]"
+      "content": "[{\"heading\":\"The 60% Trap in Legacy Modernization\",\"image\":\"/solutions-app-dev.jpg\",\"story\":\"Incremental strangler-fig migration patterns are highly popular, but they commonly hit a wall at 60%. The legacy system remains running because the remaining services are complex, causing double overhead costs and dual maintenance cycles.\"},{\"heading\":\"Decommission Deadline Contract\",\"image\":\"/solutions-qa.jpg\",\"story\":\"To prevent project drift, define an absolute decommission deadline within the software development agreement. This forces engineering teams to focus on full migration rather than leaving legacy subsystems dangling indefinitely.\"}]"
     },
     {
       "id": 2,
       "created_at": "2026-08-19T07:05:39.359Z",
       "title": "Your warehouse does not need real-time",
       "tag": "Data",
-      "image": "/hero-bg-2.png",
+      "image": "/hero-slide-2.jpg",
       "description": "A five-minute batch answers 94% of enterprise questions at a fraction of streaming cost.",
-      "content": "[{\"heading\":\"The Overhead of Streaming Pipelines\",\"image\":\"/hero-bg-1.png\",\"story\":\"Many enterprises install Kafka or other real-time streaming tools blindly, underestimating the maintenance and query cost. Real-time streaming demands massive memory buffers and constant socket maintenance.\"},{\"heading\":\"Why 5-Minute Batches are Enough\",\"image\":\"/hero-bg-3.png\",\"story\":\"Most corporate dashboards are reviewed weekly or daily. Splitting workloads into a 5-minute micro-batch provides virtually instantaneous answers at a tenth of the operational cost.\"}]"
+      "content": "[{\"heading\":\"The Overhead of Streaming Pipelines\",\"image\":\"/hero-globe-glow.jpg\",\"story\":\"Many enterprises install Kafka or other real-time streaming tools blindly, underestimating the maintenance and query cost. Real-time streaming demands massive memory buffers, distributed coordination, and constant socket maintenance.\"},{\"heading\":\"Why 5-Minute Batches are Enough\",\"image\":\"/solutions-team.jpg\",\"story\":\"Most corporate dashboards are reviewed weekly or daily. Splitting workloads into a 5-minute micro-batch provides virtually instantaneous answers at a tenth of the operational compute cost.\"}]"
     },
     {
       "id": 3,
       "created_at": "2026-08-19T07:05:39.360Z",
       "title": "Agents need audit trails before autonomy",
       "tag": "AI",
-      "image": "/hero-bg-3.png",
+      "image": "/hero-slide-ai.jpg",
       "description": "In regulated environments, observability is the feature that makes automation approvable.",
-      "content": "[{\"heading\":\"Autonomy Without Visibility\",\"image\":\"/hero-bg-1.png\",\"story\":\"Giving AI agents write access to transaction logs or CRM databases without strict log trails is a major compliance risk. Regulated institutions will never approve autonomous workflows unless every action can be fully audited.\"}]"
+      "content": "[{\"heading\":\"Autonomy Without Visibility\",\"image\":\"/hero-slide-cyber.jpg\",\"story\":\"Giving AI agents write access to transaction logs or CRM databases without strict log trails is a major compliance risk. Regulated institutions will never approve autonomous workflows unless every action can be fully audited and reproduced.\"},{\"heading\":\"Deterministic Guardrails & Audit Logging\",\"image\":\"/solutions-qa.jpg\",\"story\":\"Every tool call made by an LLM agent should be recorded in an immutable ledger with input prompts, tool schema calls, return codes, and latency telemetry for complete forensic accountability.\"}]"
+    },
+    {
+      "id": 4,
+      "created_at": "2026-10-06T09:33:51.470Z",
+      "title": "Zero-Downtime Multi-Region Failover on Kubernetes: Field Notes from 10M Daily Transactions",
+      "tag": "Cloud & DevOps",
+      "image": "/hero-slide-3.jpg",
+      "description": "Designing active-passive database topologies and sub-second DNS traffic shifting for high-throughput enterprise systems that cannot afford a single minute of downtime.",
+      "content": "[{\"heading\":\"The Architecture of Geographic Resilience\",\"image\":\"/hero-globe-glow.jpg\",\"story\":\"When a Tier-1 retail banking core or healthcare network operates across multiple cloud availability zones and regions, failure is not an abstract possibility—it is an inevitability. We designed an automated multi-cluster ingress using Cilium mesh and Anycast BGP routing that probes service health at 50ms intervals, executing seamless traffic cutovers without dropping in-flight TCP sessions.\"},{\"heading\":\"Solving Cross-Region Database Latency\",\"image\":\"/hero-slide-1.jpg\",\"story\":\"The true obstacle in multi-region deployments is the speed of light. Synchronous replication across 2,000 miles adds 45-60ms of round-trip penalty to every commit. By employing read-replicas with bounded staleness vectors and idempotent transactional messaging, write workloads execute locally with eventual consistency guarantees within 250 milliseconds.\"},{\"heading\":\"Automated Chaos Engineering in Production\",\"image\":\"/solutions-strategy.jpg\",\"story\":\"Resilience cannot be validated on paper. We integrate scheduled chaos engineering drills into our staging and canary release pipelines using Chaos Mesh. By simulating simulated fiber cuts and cloud region outages, our squads continuously verify that self-healing controllers execute recovery within our 99.98% contractual SLA.\"}]"
+    },
+    {
+      "id": 5,
+      "created_at": "2026-10-03T09:33:51.485Z",
+      "title": "Zero-Trust Security in Enterprise Banking: Moving Beyond VPNs & Static Perimeters",
+      "tag": "Cybersecurity",
+      "image": "/hero-slide-cyber.jpg",
+      "description": "How modern financial institutions implement microsegmentation, mutual TLS, and continuous ephemeral credential rotation without degrading engineer velocity.",
+      "content": "[{\"heading\":\"The Deceptive Fallacy of the Perimeter\",\"image\":\"/hero-slide-1.jpg\",\"story\":\"Legacy enterprise security treats internal subnets like castle grounds: once an attacker traverses the corporate VPN or compromised credential barrier, lateral movement is trivial. A modern Zero-Trust architecture assumes the internal network is already adversarial. Every service-to-service call must explicitly authenticate and authorize.\"},{\"heading\":\"SPIFFE/SPIRE & Ephemeral Cryptographic Identities\",\"image\":\"/hero-slide-cyber.jpg\",\"story\":\"Rather than relying on long-lived API tokens stored in environment secrets, our platforms utilize SPIFFE/SPIRE to issue short-lived cryptographic X.509 certificates with 1-hour lifespans. Certificates rotate continuously in background daemons, neutralizing credential theft and automating SOC-2 Type II audit compliance.\"},{\"heading\":\"Continuous Microsegmentation & Policy as Code\",\"image\":\"/solutions-qa.jpg\",\"story\":\"Using Open Policy Agent (OPA) and declarative Kubernetes NetworkPolicies, network traffic between banking pods is restricted to explicitly whitelisted endpoints. If a pod in the analytics tier is compromised, kernel-level eBPF firewalls prevent it from initiating any connection to the payment ledger.\"}]"
+    },
+    {
+      "id": 7,
+      "created_at": "2026-09-27T09:33:51.485Z",
+      "title": "Breaking Legacy Monoliths: Practical Strangler-Fig Patterns Without Distributed Chaos",
+      "tag": "Architecture",
+      "image": "/solutions-app-dev.jpg",
+      "description": "Domain-Driven Design, event-driven streaming, and pragmatic service boundaries that keep engineering teams decoupled and shipping with velocity.",
+      "content": "[{\"heading\":\"Event Storming & Defining Bounded Contexts\",\"image\":\"/solutions-team.jpg\",\"story\":\"Microservice migrations frequently devolve into distributed monoliths when teams carve up code along database tables rather than business domain boundaries. By holding rigorous Event Storming workshops with domain experts, we identify autonomous business aggregates that can be safely sliced without distributed two-phase commits.\"},{\"heading\":\"Change Data Capture (CDC) with Debezium\",\"image\":\"/hero-slide-1.jpg\",\"story\":\"Rather than attempting a high-risk big-bang database migration, we attach Debezium change-data-capture connectors directly to legacy database transaction logs. Every database insert or update streams as an Apache Kafka event, populating the new event-driven microservices in real-time with zero downtime.\"},{\"heading\":\"Contract-Driven API Design & Pact Testing\",\"image\":\"/solutions-strategy.jpg\",\"story\":\"To prevent breaking cross-team dependencies, consumer-driven contract testing with Pact verifies that provider microservices uphold payload schemas before any merge to main. Decoupled teams deploy dozens of micro-releases weekly with complete autonomy.\"}]"
+    },
+    {
+      "id": 8,
+      "created_at": "2026-09-24T09:33:51.485Z",
+      "title": "Petabyte-Scale Lakehouse Architectures: Apache Iceberg & Trino for Fast Telemetry",
+      "tag": "Data Platforms",
+      "image": "/hero-slide-2.jpg",
+      "description": "Moving from fragmented data silos to unified open table formats that slash cloud compute bills by 45% while enabling interactive sub-second queries.",
+      "content": "[{\"heading\":\"Overcoming Hive Metastore Partition Bottlenecks\",\"image\":\"/hero-slide-2.jpg\",\"story\":\"Traditional cloud data lakes on S3 or GCS suffer severe metadata latency when tables grow past tens of thousands of partitions. Directory listing operations stall analytic queries for minutes. Apache Iceberg solves this by tracking files in hierarchical metadata trees, executing partition prunes in milliseconds.\"},{\"heading\":\"Interactive Querying with Trino & MinIO\",\"image\":\"/solutions-qa.jpg\",\"story\":\"By decoupling storage and compute, distributed Trino query clusters execute federated analytical SQL directly over object storage without requiring expensive proprietary data warehouses. The result is a single pane of glass for real-time telemetry, compliance reporting, and business intelligence.\"},{\"heading\":\"Unified Governance & Data Lineage\",\"image\":\"/footer-skyline.jpg\",\"story\":\"With Apache Ranger and OpenLineage integrated into the catalog layer, compliance teams audit column-level access permissions and data provenance from ingestion down to executive dashboards.\"}]"
+    },
+    {
+      "id": 9,
+      "created_at": "2026-09-21T09:33:51.485Z",
+      "title": "HIPAA-Compliant FHIR Interoperability: Integrating 40+ Legacy Hospital Feeds",
+      "tag": "Healthcare Tech",
+      "image": "/about-header.jpg",
+      "description": "Ingesting fragmented HL7 v2 and CCDA records into unified HL7 FHIR REST endpoints with end-to-end encryption and audit logging.",
+      "content": "[{\"heading\":\"The Hospital Data Fragmentation Crisis\",\"image\":\"/about-header.jpg\",\"story\":\"Modern healthcare providers operate across dozens of disparate Electronic Health Record (EHR) systems, radiology databases, and billing platforms. Most still emit archaic pipe-delimited HL7 v2 messages that crash modern API gateways and leave physicians waiting minutes for patient histories.\"},{\"heading\":\"High-Throughput Streaming & Schema Validation\",\"image\":\"/solutions-strategy.jpg\",\"story\":\"Our healthcare data ingestion platform converts raw HL7 streams into validated FHIR Resource models in sub-second pipeline stages. With automated HIPAA audit logs, field-level AES-256 encryption, and Redis cluster caching, clinician dashboard latency dropped from 9 hours to under 4 minutes across 41 regional facilities.\"},{\"heading\":\"Zero-Trust Patient Consent Management\",\"image\":\"/hero-slide-cyber.jpg\",\"story\":\"Patient privacy rights under HIPAA require granular consent enforcement. Our platform enforces attribute-based access control (ABAC) at the proxy level, ensuring physicians only access records relevant to active clinical care episodes.\"}]"
+    },
+    {
+      "id": 10,
+      "created_at": "2026-09-18T09:33:51.485Z",
+      "title": "FinOps at Scale: Cutting Cloud Infrastructure Spend by 40% Without Sacrificing Reliability",
+      "tag": "FinOps & Cloud",
+      "image": "/solutions-strategy.jpg",
+      "description": "Strategic spot instance orchestration, automated Karpenter pod autoscaling, and storage tier lifecycle policies for enterprise AWS and Azure estates.",
+      "content": "[{\"heading\":\"The Silent Drain of Over-Provisioned Clusters\",\"image\":\"/solutions-strategy.jpg\",\"story\":\"Enterprise engineering teams routinely over-provision Kubernetes nodes by 300% to protect against hypothetical traffic spikes. Implementing Karpenter with intelligent multi-architecture spot instance selection automatically consolidates underutilized workloads, dropping compute bills by 35-45% in the first billing cycle.\"},{\"heading\":\"Continuous FinOps Observability & Culture\",\"image\":\"/footer-skyline.jpg\",\"story\":\"Effective cloud cost management is not a quarterly accounting exercise; it is an active engineering discipline. By tagging every pod with business cost-centers and streaming OpenCost metrics directly into Slack, teams receive instant feedback on the fiscal impact of every architectural choice.\"}]"
     }
   ],
-  "job_applications": [],
+  "job_applications": [
+    {
+      "id": 1,
+      "created_at": "2026-10-09T09:23:33.263Z",
+      "job_id": 1,
+      "job_title": "Senior Platform Engineer",
+      "first_name": "sravani",
+      "last_name": "-",
+      "email": "sravani@gmai.com",
+      "mobile": "+919032711108",
+      "cv_path": "/uploads/cv-1791537813231-112517644.pdf"
+    }
+  ],
   "industries": [
     {
       "id": 1,
-      "name": "Banking",
+      "name": "Automotive",
+      "description": "We offer services that enable automakers and dealers to streamline processes and meet customer demands.",
       "created_at": "2026-08-20T04:40:04.693Z"
     },
     {
       "id": 2,
-      "name": "Insurance",
+      "name": "Banking & Financial",
+      "description": "Our banking-focused solutions and services help banking and capital-markets clients achieve their business goals.",
       "created_at": "2026-08-20T04:40:04.694Z"
     },
     {
       "id": 3,
-      "name": "Healthcare",
+      "name": "Higher Education",
+      "description": "Whether you're running an online training course or a campus-based school, we increase student enrollments right away.",
       "created_at": "2026-08-20T04:40:04.694Z"
     },
     {
       "id": 4,
-      "name": "Logistics",
+      "name": "Insurance",
+      "description": "We simplify and support enriched interactions between the insurance provider and its policyholders, brokers, agents, and all other customer-facing personnel.",
       "created_at": "2026-08-20T04:40:04.694Z"
     },
     {
       "id": 5,
-      "name": "Manufacturing",
+      "name": "Social Media",
+      "description": "We have expertise in developing successful marketing programs to market technology-specific brands and engage active digital audiences.",
       "created_at": "2026-08-20T04:40:04.694Z"
     },
     {
       "id": 6,
-      "name": "Energy",
+      "name": "Oil & Gas",
+      "description": "Our capabilities include mission-critical industry expertise, technology best practices, and operational safety solutions.",
       "created_at": "2026-08-20T04:40:04.694Z"
     },
     {
       "id": 7,
-      "name": "Retail",
+      "name": "Telecom",
+      "description": "Global telecom companies unify financials with SAP in the Cloud and scalable next-gen network architectures.",
       "created_at": "2026-08-20T04:40:04.694Z"
     },
     {
       "id": 8,
-      "name": "Public sector",
+      "name": "Health Care",
+      "description": "Our team explains the strategies that help to transform your health information technology to achieve high compliance and patient care.",
       "created_at": "2026-08-20T04:40:04.694Z"
     }
   ],
@@ -379,6 +508,14 @@
       "title": "Staffing Solutions",
       "description": "Assembling a customized solution to support your industry.",
       "icon": "staffing-solutions",
+      "link": "/solutions"
+    },
+    {
+      "id": 9,
+      "created_at": "2026-10-08T13:04:55.965Z",
+      "title": "Teaching",
+      "description": "Teachiong slutions",
+      "icon": "tech-consulting",
       "link": "/solutions"
     }
   ]

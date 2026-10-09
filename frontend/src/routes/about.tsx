@@ -476,41 +476,65 @@ function About() {
       </section>
 
       {/* ==================================================================== */}
-      {/* 3. OUR PEOPLE (Vuesol 3 Pillars Section)                              */}
+      {/* 3. OUR PEOPLE (Architectural Card-Free Editorial Pillars - COMPACT)  */}
       {/* ==================================================================== */}
-      <section className="bg-[#fafcfb] py-16 sm:py-20 border-b border-neutral-200/70">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#007cb8]">
-              Culture &amp; Talent Excellence
+      <section className="relative bg-white dark:bg-slate-950 py-10 sm:py-14 border-b border-neutral-200/70 dark:border-slate-800/80 overflow-hidden">
+        {/* Ambient subtle light glow behind the pillars */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[220px] bg-emerald-500/5 dark:bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none" />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 dark:border-emerald-800/60 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#136a3e] dark:text-emerald-400">
+              <Sparkles className="h-3 w-3" /> Culture &amp; Talent Excellence
             </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-900 dark:text-white tracking-tight">
               Our People
             </h2>
-            <div className="w-12 h-1 bg-[#0091d5] rounded-full mx-auto mt-3 mb-4" />
-            <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+            <div className="w-10 h-0.5 bg-gradient-to-r from-[#136a3e] to-amber-500 rounded-full mx-auto mt-2.5 mb-2.5" />
+            <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl mx-auto">
               We nurture a truly diverse and talented pool of people who work with a
               customer-centric attitude to deliver phenomenal results.
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-7">
-            {peoplePillars.map((p) => {
+          {/* Open Architectural 3-Column Pillar Presentation (NO CARDS - COMPACT HEIGHT) */}
+          <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80 dark:divide-slate-800">
+            {peoplePillars.map((p, idx) => {
               const Icon = p.icon;
               return (
                 <div
                   key={p.title}
-                  className="rounded-2xl border border-neutral-200/80 bg-white p-8 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center group hover:-translate-y-1"
+                  className="group relative py-5 sm:py-6 px-5 lg:px-8 flex flex-col justify-between transition-colors duration-300"
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-sky-50 text-[#0091d5] border border-sky-100 group-hover:scale-110 group-hover:bg-[#0091d5] group-hover:text-white transition-all duration-300 mb-6">
-                    <Icon className="h-7 w-7" />
+                  <div>
+                    {/* Top row: Floating luminous icon + sleek mono index */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/10 via-teal-500/10 to-amber-500/10 text-[#136a3e] dark:text-emerald-400 border border-emerald-500/20 shadow-xs group-hover:scale-105 group-hover:bg-[#136a3e] group-hover:text-white transition-all duration-300">
+                        <Icon className="h-5 w-5 transition-colors" />
+                      </div>
+                      <span className="text-2xl sm:text-3xl font-mono font-black text-slate-200 dark:text-slate-800 group-hover:text-emerald-600/30 dark:group-hover:text-emerald-400/30 transition-colors select-none">
+                        0{idx + 1}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-lg sm:text-xl font-extrabold text-neutral-900 dark:text-white tracking-tight group-hover:text-[#136a3e] dark:group-hover:text-emerald-400 transition-colors">
+                      {p.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="mt-2 text-xs sm:text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+                      {p.desc}
+                    </p>
                   </div>
-                  <h3 className="text-lg font-bold text-neutral-900 group-hover:text-[#0091d5] transition-colors">
-                    {p.title}
-                  </h3>
-                  <p className="mt-3 text-xs sm:text-sm text-neutral-600 leading-relaxed">
-                    {p.desc}
-                  </p>
+
+                  {/* Bottom expanding gradient accent line */}
+                  <div className="mt-5 pt-3.5 border-t border-neutral-100 dark:border-slate-800/60 flex items-center gap-2.5">
+                    <div className="h-0.5 w-6 rounded-full bg-gradient-to-r from-[#136a3e] to-amber-500 group-hover:w-16 transition-all duration-300" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 group-hover:text-[#136a3e] dark:group-hover:text-emerald-400 transition-colors">
+                      Core Pillar
+                    </span>
+                  </div>
                 </div>
               );
             })}
@@ -519,45 +543,51 @@ function About() {
       </section>
 
       {/* ==================================================================== */}
-      {/* 4. OUR CORE VALUES (Vuesol Exact Values)                              */}
+      {/* 4. OUR CORE VALUES (Open Architectural Feature Layout - COMPACT)     */}
       {/* ==================================================================== */}
-      <section id="our-core-values" className="bg-white py-16 sm:py-20 border-b border-neutral-200/70">
+      <section id="our-core-values" className="bg-[#fafcfb] dark:bg-slate-900/60 py-10 sm:py-14 border-b border-neutral-200/70 dark:border-slate-800/80">
         <div id="values" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#007cb8]">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-950/50 px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#007cb8] dark:text-sky-400">
               Ethical Standards &amp; Principles
             </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-900 dark:text-white tracking-tight">
               Our Core Values
             </h2>
-            <div className="w-12 h-1 bg-[#0091d5] rounded-full mx-auto mt-3 mb-4" />
-            <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+            <div className="w-10 h-0.5 bg-[#0091d5] rounded-full mx-auto mt-2.5 mb-2.5" />
+            <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl mx-auto">
               We have embedded the highest ethical standards across our organization,
-              and it is reflected in how we conduct our business and collaborate with
-              all our stakeholders.
+              reflected in how we conduct our business and collaborate with all stakeholders.
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-7">
-            {coreValues.map((v) => {
+          <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80 dark:divide-slate-800">
+            {coreValues.map((v, idx) => {
               const Icon = v.icon;
               return (
                 <div
                   key={v.title}
-                  className="rounded-2xl border border-neutral-200/80 bg-[#fafcfb] p-8 shadow-xs hover:shadow-lg hover:border-sky-300 transition-all duration-300 flex flex-col justify-between group"
+                  className="group relative py-5 sm:py-6 px-5 lg:px-8 flex flex-col justify-between transition-colors duration-300"
                 >
                   <div>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-50 text-[#0091d5] border border-sky-100 group-hover:bg-[#0091d5] group-hover:text-white transition-colors duration-300 mb-5">
-                      <Icon className="h-6 w-6" />
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-50 dark:bg-sky-950/60 text-[#0091d5] dark:text-sky-400 border border-sky-200/50 dark:border-sky-800/50 group-hover:scale-105 group-hover:bg-[#0091d5] group-hover:text-white transition-all duration-300 shadow-xs">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <span className="text-2xl sm:text-3xl font-mono font-black text-slate-200 dark:text-slate-800 group-hover:text-sky-500/30 transition-colors select-none">
+                        0{idx + 1}
+                      </span>
                     </div>
-                    <h3 className="text-base sm:text-lg font-bold text-neutral-900">
+
+                    <h3 className="text-lg sm:text-xl font-extrabold text-neutral-900 dark:text-white tracking-tight group-hover:text-[#0091d5] transition-colors">
                       {v.title}
                     </h3>
-                    <p className="mt-2.5 text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                    <p className="mt-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
                       {v.desc}
                     </p>
                   </div>
-                  <div className="mt-6 pt-4 border-t border-neutral-200/60 flex items-center gap-2 text-xs font-semibold text-emerald-600">
+
+                  <div className="mt-5 pt-3.5 border-t border-neutral-200/60 dark:border-slate-800 flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400">
                     <CheckCircle2 className="h-4 w-4" /> Contractually Respected
                   </div>
                 </div>

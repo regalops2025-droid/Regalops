@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Upload, Image as ImageIcon, X, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 
 interface ImageUploadFieldProps {
@@ -8,6 +8,7 @@ interface ImageUploadFieldProps {
   disabled?: boolean;
   required?: boolean;
   helperText?: string;
+  recommendedDimensions?: string;
 }
 
 export function ImageUploadField({
@@ -17,12 +18,26 @@ export function ImageUploadField({
   disabled = false,
   required = false,
   helperText,
+  recommendedDimensions,
 }: ImageUploadFieldProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const [showUrlInput, setShowUrlInput] = useState(false);
+  const [imageDim, setImageDim] = useState<{ width: number; height: number } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!value) {
+      setImageDim(null);
+      return;
+    }
+    const img = new Image();
+    img.src = value;
+    img.onload = () => {
+      setImageDim({ width: img.naturalWidth, height: img.naturalHeight });
+    };
+  }, [value]);
 
   const handleFileSelect = async (file: File) => {
     if (!file) return;
@@ -161,12 +176,27 @@ export function ImageUploadField({
             </div>
 
             <div className="min-w-0 flex-1 space-y-2">
-              <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                <CheckCircle2 className="h-4 w-4 shrink-0" />
-                <span>Image selected</span>
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                  <CheckCircle2 className="h-4 w-4 shrink-0" />
+                  <span>Image uploaded</span>
+                </div>
+                {imageDim && (
+                  <span className="text-[10px] px-2 py-0.5 rounded-md bg-surface-2 border border-border/80 text-foreground font-mono font-medium">
+                    {imageDim.width} × {imageDim.height} px
+                  </span>
+                )}
+                {recommendedDimensions && (
+                  <span className="text-[11px] text-muted-foreground">
+                    (Target: {recommendedDimensions})
+                  </span>
+                )}
               </div>
               <p className="truncate text-xs text-muted-foreground font-mono" title={value}>
                 {value.startsWith("data:") ? "Local upload (embedded)" : value}
+              </p>
+              <p className="text-[11px] text-emerald-600/90 dark:text-emerald-400/90 font-medium">
+                ✓ Auto-scaled &amp; centered to uniform card height on website
               </p>
 
               <div className="flex items-center gap-2 pt-1">
@@ -181,7 +211,7 @@ export function ImageUploadField({
                   ) : (
                     <Upload className="h-3.5 w-3.5" />
                   )}
-                  {isUploading ? "Uploading..." : "Upload from device"}
+                  {isUploading ? "Uploading..." : "Replace image"}
                 </button>
                 <button
                   type="button"
@@ -248,8 +278,14 @@ export function ImageUploadField({
                 </p>
               </div>
 
+              {recommendedDimensions && (
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400 border border-emerald-500/25">
+                  <span>📐 Recommended: {recommendedDimensions}</span>
+                </div>
+              )}
+
               <p className="text-[11px] text-muted-foreground/80">
-                PNG, JPG, WEBP or GIF (up to 10MB)
+                PNG, JPG, WEBP or GIF (All aspect ratios auto-scale &amp; crop uniformly)
               </p>
             </div>
           )}

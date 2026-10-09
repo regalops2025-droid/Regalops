@@ -100,11 +100,11 @@ function Blog() {
 
             {/* Main Cover Image */}
             {selectedPost.image && (
-              <div className="mt-8 rounded-2xl overflow-hidden border border-border/80 shadow-lg">
+              <div className="mt-8 rounded-2xl overflow-hidden border border-border/80 shadow-xl bg-slate-900/10 dark:bg-slate-900/60 aspect-[16/9] sm:aspect-[21/9] max-h-[460px] flex items-center justify-center">
                 <img
                   src={selectedPost.image}
                   alt={selectedPost.title}
-                  className="w-full h-72 sm:h-96 object-cover"
+                  className="w-full h-full object-cover object-center"
                 />
               </div>
             )}
@@ -126,11 +126,12 @@ function Blog() {
                       )}
                       
                       {sec.image && (
-                        <div className="rounded-2xl overflow-hidden border border-border/70 my-6 max-h-[350px]">
+                        <div className="rounded-2xl overflow-hidden border border-border/80 my-6 bg-slate-900/5 dark:bg-slate-900/40 shadow-md aspect-[16/9] max-h-[420px] flex items-center justify-center">
                           <img
                             src={sec.image}
                             alt={sec.heading || "Illustration"}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover object-center"
+                            loading="lazy"
                           />
                         </div>
                       )}
@@ -183,11 +184,11 @@ function Blog() {
                   >
                     <div>
                       {p.image && (
-                        <div className="h-48 overflow-hidden border-b border-border/80">
+                        <div className="aspect-[16/9] w-full overflow-hidden border-b border-border/80 bg-slate-900/10 relative">
                           <img
                             src={p.image}
                             alt={p.title}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
+                            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                           />
                         </div>
                       )}

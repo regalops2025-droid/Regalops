@@ -242,5 +242,32 @@
   box-shadow: 0 15px 35px -10px rgba(16, 80, 45, 0.07);
 }
 
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@utility animate-marquee-reverse {
+  animation: marquee-reverse 32s linear infinite;
+}
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@utility animate-marquee-vertical {
+  animation: marquee-vertical 24s linear infinite;
+}
+
+
 
 

@@ -137,6 +137,7 @@ function Contact() {
             ? "Submit your details and CV/Resume below to apply. Our engineering leads will review it shortly."
             : "No discovery-call funnel. Describe the problem and a senior engineer replies within one business day."
         }
+        descriptionClassName="max-w-none md:whitespace-nowrap"
       />
       <Section className="w-full">
         {/* Full Screen Width Contact Form */}

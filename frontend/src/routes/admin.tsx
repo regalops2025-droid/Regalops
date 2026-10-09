@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { LogOut, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen, Compass } from "lucide-react";
+import { LogOut, ExternalLink, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen, Compass } from "lucide-react";
 import { ImageUploadField } from "@/components/admin/image-upload-field";
 
 export const Route = createFileRoute("/admin")({
@@ -863,7 +863,8 @@ function AdminDashboard() {
   // Submit Client (Create or Update)
   const handleSubmitClient = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!clientName || !clientSector || !clientDesc) return;
+    if (!clientName || !clientSector) return;
+    const finalDesc = clientDesc.trim() || "Strategic enterprise client partnership & technology collaboration.";
     
     setClientFormLoading(true);
     setClientFormError("");
@@ -876,7 +877,7 @@ function AdminDashboard() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name: clientName, sector: clientSector, image: clientImage, description: clientDesc }),
+          body: JSON.stringify({ name: clientName, sector: clientSector, image: clientImage, description: finalDesc }),
         });
 
         if (!response.ok) {
@@ -895,7 +896,7 @@ function AdminDashboard() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name: clientName, sector: clientSector, image: clientImage, description: clientDesc }),
+          body: JSON.stringify({ name: clientName, sector: clientSector, image: clientImage, description: finalDesc }),
         });
 
         if (!response.ok) {
@@ -1259,166 +1260,44 @@ function AdminDashboard() {
         </div>
 
         {/* Navigation Items */}
-        <nav className="p-4 space-y-1">
-          <button
-            onClick={() => {
-              setActiveTab("enquiries");
-              setMobileSidebarOpen(false);
-            }}
-            className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all cursor-pointer ${
-              activeTab === "enquiries"
-                ? "bg-primary text-primary-foreground shadow-md"
-                : "hover:bg-zinc-800/60 hover:text-white text-zinc-400"
-            }`}
-          >
-            <Inbox className="h-4.5 w-4.5" />
-            Enquiries
-            <span className={`ml-auto rounded-full px-2 py-0.5 text-xs font-semibold ${
-              activeTab === "enquiries" ? "bg-white/20 text-white" : "bg-zinc-800 text-zinc-400"
-            }`}>
-              {enquiries.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab("solutions");
-              setMobileSidebarOpen(false);
-            }}
-            className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all cursor-pointer ${
-              activeTab === "solutions"
-                ? "bg-primary text-primary-foreground shadow-md"
-                : "hover:bg-zinc-800/60 hover:text-white text-zinc-400"
-            }`}
-          >
-            <Layers className="h-4.5 w-4.5" />
-            Manage Solutions
-            <span className={`ml-auto rounded-full px-2 py-0.5 text-xs font-semibold ${
-              activeTab === "solutions" ? "bg-white/20 text-white" : "bg-zinc-800 text-zinc-400"
-            }`}>
-              {solutions.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab("technologies");
-              setMobileSidebarOpen(false);
-            }}
-            className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all cursor-pointer ${
-              activeTab === "technologies"
-                ? "bg-primary text-primary-foreground shadow-md"
-                : "hover:bg-zinc-800/60 hover:text-white text-zinc-400"
-            }`}
-          >
-            <Cpu className="h-4.5 w-4.5" />
-            Manage Technologies
-            <span className={`ml-auto rounded-full px-2 py-0.5 text-xs font-semibold ${
-              activeTab === "technologies" ? "bg-white/20 text-white" : "bg-zinc-800 text-zinc-400"
-            }`}>
-              {techList.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab("services");
-              setMobileSidebarOpen(false);
-            }}
-            className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all cursor-pointer ${
-              activeTab === "services"
-                ? "bg-primary text-primary-foreground shadow-md"
-                : "hover:bg-zinc-800/60 hover:text-white text-zinc-400"
-            }`}
-          >
-            <Compass className="h-4.5 w-4.5" />
-            Manage Services
-            <span className={`ml-auto rounded-full px-2 py-0.5 text-xs font-semibold ${
-              activeTab === "services" ? "bg-white/20 text-white" : "bg-zinc-800 text-zinc-400"
-            }`}>
-              {serviceList.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab("clients");
-              setMobileSidebarOpen(false);
-            }}
-            className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all cursor-pointer ${
-              activeTab === "clients"
-                ? "bg-primary text-primary-foreground shadow-md"
-                : "hover:bg-zinc-800/60 hover:text-white text-zinc-400"
-            }`}
-          >
-            <User className="h-4.5 w-4.5" />
-            Manage Clients
-            <span className={`ml-auto rounded-full px-2 py-0.5 text-xs font-semibold ${
-              activeTab === "clients" ? "bg-white/20 text-white" : "bg-zinc-800 text-zinc-400"
-            }`}>
-              {clientList.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab("careers");
-              setMobileSidebarOpen(false);
-            }}
-            className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all cursor-pointer ${
-              activeTab === "careers"
-                ? "bg-primary text-primary-foreground shadow-md"
-                : "hover:bg-zinc-800/60 hover:text-white text-zinc-400"
-            }`}
-          >
-            <Briefcase className="h-4.5 w-4.5" />
-            Manage Careers
-            <span className={`ml-auto rounded-full px-2 py-0.5 text-xs font-semibold ${
-              activeTab === "careers" ? "bg-white/20 text-white" : "bg-zinc-800 text-zinc-400"
-            }`}>
-              {jobList.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab("blogs");
-              setMobileSidebarOpen(false);
-            }}
-            className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all cursor-pointer ${
-              activeTab === "blogs"
-                ? "bg-primary text-primary-foreground shadow-md"
-                : "hover:bg-zinc-800/60 hover:text-white text-zinc-400"
-            }`}
-          >
-            <BookOpen className="h-4.5 w-4.5" />
-            Manage Blogs
-            <span className={`ml-auto rounded-full px-2 py-0.5 text-xs font-semibold ${
-              activeTab === "blogs" ? "bg-white/20 text-white" : "bg-zinc-800 text-zinc-400"
-            }`}>
-              {blogList.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab("applications");
-              setMobileSidebarOpen(false);
-            }}
-            className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all cursor-pointer ${
-              activeTab === "applications"
-                ? "bg-primary text-primary-foreground shadow-md"
-                : "hover:bg-zinc-800/60 hover:text-white text-zinc-400"
-            }`}
-          >
-            <Inbox className="h-4.5 w-4.5" />
-            Applications
-            <span className={`ml-auto rounded-full px-2 py-0.5 text-xs font-semibold ${
-              activeTab === "applications" ? "bg-white/20 text-white" : "bg-zinc-800 text-zinc-400"
-            }`}>
-              {applications.length}
-            </span>
-          </button>
+        <nav className="p-3 space-y-1">
+          {[
+            { id: "enquiries" as const, label: "Enquiries", icon: Inbox, count: enquiries.length },
+            { id: "solutions" as const, label: "Manage Solutions", icon: Layers, count: solutions.length },
+            { id: "technologies" as const, label: "Manage Technologies", icon: Cpu, count: techList.length },
+            { id: "services" as const, label: "Manage Services", icon: Compass, count: serviceList.length },
+            { id: "clients" as const, label: "Manage Clients", icon: User, count: clientList.length },
+            { id: "careers" as const, label: "Manage Careers", icon: Briefcase, count: jobList.length },
+            { id: "blogs" as const, label: "Manage Blogs", icon: BookOpen, count: blogList.length },
+            { id: "applications" as const, label: "Applications", icon: Inbox, count: applications.length },
+          ].map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setActiveTab(item.id);
+                  setMobileSidebarOpen(false);
+                }}
+                className={`flex w-full items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-all cursor-pointer whitespace-nowrap ${
+                  isActive
+                    ? "bg-primary text-primary-foreground shadow-md"
+                    : "hover:bg-zinc-800/60 hover:text-white text-zinc-400"
+                }`}
+              >
+                <Icon className="h-4.5 w-4.5 shrink-0" />
+                <span className="whitespace-nowrap tracking-tight">{item.label}</span>
+                <span
+                  className={`ml-auto shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${
+                    isActive ? "bg-white/20 text-white" : "bg-zinc-800 text-zinc-400"
+                  }`}
+                >
+                  {item.count}
+                </span>
+              </button>
+            );
+          })}
         </nav>
       </div>
 
@@ -1439,7 +1318,7 @@ function AdminDashboard() {
     <div className="flex min-h-screen bg-background">
       
       {/* 1. Desktop Sidebar (Left) */}
-      <aside className="hidden w-64 shrink-0 border-r border-border/70 xl:block sticky top-0 h-screen z-30">
+      <aside className="hidden w-72 shrink-0 border-r border-border/70 xl:block sticky top-0 h-screen z-30">
         <SidebarContent />
       </aside>
 
@@ -1450,7 +1329,7 @@ function AdminDashboard() {
             className="fixed inset-0 bg-background/80 backdrop-blur-sm"
             onClick={() => setMobileSidebarOpen(false)}
           />
-          <div className="relative flex w-64 max-w-xs flex-col border-r border-border bg-background animate-in slide-in-from-left duration-200">
+          <div className="relative flex w-72 max-w-xs flex-col border-r border-border bg-background animate-in slide-in-from-left duration-200">
             <button
               onClick={() => setMobileSidebarOpen(false)}
               className="absolute right-4 top-4 rounded-xl border border-border p-1.5 text-muted-foreground bg-background"
@@ -1496,6 +1375,31 @@ function AdminDashboard() {
           </div>
 
           <div className="flex items-center gap-2">
+            <a
+              href={
+                activeTab === "clients"
+                  ? "/clients"
+                  : activeTab === "solutions"
+                    ? "/solutions"
+                    : activeTab === "technologies"
+                      ? "/technologies"
+                      : activeTab === "careers"
+                        ? "/career"
+                        : activeTab === "blogs"
+                          ? "/blog"
+                          : "/clients"
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-primary/30 bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-2 text-xs font-semibold transition-all shadow-sm"
+              title="Open live public page in new tab"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">
+                {activeTab === "clients" ? "View Clients Page" : "View Live Page"}
+              </span>
+            </a>
+
             <button
               onClick={() => {
                 fetchEnquiries();
@@ -1519,65 +1423,65 @@ function AdminDashboard() {
         {/* Main Panel Content Area */}
         <main className="flex-1 p-6 md:p-8 max-w-7xl w-full mx-auto">
           
-          {/* Stat Metrics Grid */}
-          <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 mb-8">
-            <div className="panel p-4 bg-surface border border-border/70">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-primary">
-                Enquiries
-              </p>
-              <h3 className="mt-1 font-display text-2xl font-bold text-foreground">
-                {enquiriesLoading ? "..." : enquiries.length}
-              </h3>
-            </div>
-            <div className="panel p-4 bg-surface border border-border/70">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-primary">
-                Solutions
-              </p>
-              <h3 className="mt-1 font-display text-2xl font-bold text-foreground">
-                {solutionsLoading ? "..." : solutions.length}
-              </h3>
-            </div>
-            <div className="panel p-4 bg-surface border border-border/70">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-primary">
-                Tech Stack
-              </p>
-              <h3 className="mt-1 font-display text-2xl font-bold text-foreground">
-                {techLoading ? "..." : techList.length}
-              </h3>
-            </div>
-            <div className="panel p-4 bg-surface border border-border/70">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-primary">
-                Services
-              </p>
-              <h3 className="mt-1 font-display text-2xl font-bold text-foreground">
-                {serviceLoading ? "..." : serviceList.length}
-              </h3>
-            </div>
-            <div className="panel p-4 bg-surface border border-border/70">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-primary">
-                Clients
-              </p>
-              <h3 className="mt-1 font-display text-2xl font-bold text-foreground">
-                {clientLoading ? "..." : clientList.length}
-              </h3>
-            </div>
-            <div className="panel p-4 bg-surface border border-border/70">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-primary">
-                Careers
-              </p>
-              <h3 className="mt-1 font-display text-2xl font-bold text-foreground">
-                {jobLoading ? "..." : jobList.length}
-              </h3>
-            </div>
-            <div className="panel p-4 bg-surface border border-border/70">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-primary">
-                Blogs
-              </p>
-              <h3 className="mt-1 font-display text-2xl font-bold text-foreground">
-                {blogLoading ? "..." : blogList.length}
-              </h3>
-            </div>
+          {/* Stat Metrics Grid (Interactive Tabs) */}
+          <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 mb-8">
+            {[
+              { id: "enquiries" as const, label: "Enquiries", count: enquiries.length, loading: enquiriesLoading },
+              { id: "solutions" as const, label: "Solutions", count: solutions.length, loading: solutionsLoading },
+              { id: "technologies" as const, label: "Tech Stack", count: techList.length, loading: techLoading },
+              { id: "services" as const, label: "Services", count: serviceList.length, loading: serviceLoading },
+              { id: "clients" as const, label: "Clients", count: clientList.length, loading: clientLoading },
+              { id: "careers" as const, label: "Careers", count: jobList.length, loading: jobLoading },
+              { id: "blogs" as const, label: "Blogs", count: blogList.length, loading: blogLoading },
+            ].map((metric) => {
+              const isActive = activeTab === metric.id;
+              return (
+                <button
+                  key={metric.id}
+                  type="button"
+                  onClick={() => {
+                    setActiveTab(metric.id);
+                    const panelEl = document.getElementById("admin-tab-content");
+                    if (panelEl) {
+                      panelEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                    }
+                  }}
+                  title={`Switch to ${metric.label}`}
+                  className={`panel p-4 bg-surface text-left transition-all duration-200 cursor-pointer rounded-2xl relative overflow-hidden group select-none ${
+                    isActive
+                      ? "border-primary bg-primary/10 shadow-md ring-2 ring-primary/30 -translate-y-0.5"
+                      : "border-border/70 hover:border-primary/50 hover:bg-surface-2 hover:-translate-y-0.5 hover:shadow-sm"
+                  }`}
+                >
+                  {/* Active Indicator Top Accent Bar */}
+                  {isActive && (
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-primary rounded-t-full" />
+                  )}
+                  <div className="flex items-center justify-between">
+                    <p
+                      className={`text-[10px] font-semibold uppercase tracking-wider transition-colors ${
+                        isActive ? "text-primary font-bold" : "text-primary/75 group-hover:text-primary"
+                      }`}
+                    >
+                      {metric.label}
+                    </p>
+                    {isActive && (
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                    )}
+                  </div>
+                  <h3
+                    className={`mt-1 font-display text-2xl font-bold transition-colors ${
+                      isActive ? "text-primary dark:text-white" : "text-foreground"
+                    }`}
+                  >
+                    {metric.loading ? "..." : metric.count}
+                  </h3>
+                </button>
+              );
+            })}
           </div>
+
+          <div id="admin-tab-content" className="scroll-mt-6" />
 
           {/* Active Tab Panel Rendering */}
           {activeTab === "enquiries" && (
@@ -1810,6 +1714,8 @@ function AdminDashboard() {
                       value={solImage}
                       onChange={setSolImage}
                       disabled={formLoading}
+                      recommendedDimensions="1200 × 700 px (16:9 Landscape)"
+                      helperText="Recommended size: 1200 × 700 px (16:9 landscape aspect ratio). Images of any resolution or ratio are accepted and will automatically be scaled & cropped to match the exact same height and width of all solution cards on the website."
                     />
 
                     <label className="block text-sm font-medium">
@@ -2472,7 +2378,7 @@ function AdminDashboard() {
                       : "border-transparent text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  Case Studies
+                  Clients & Brand Logos
                 </button>
                 <button
                   onClick={() => setClientSubTab("industries")}
@@ -2490,7 +2396,10 @@ function AdminDashboard() {
                 <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
                   {/* Left Column: Clients List */}
                   <div>
-                    <h2 className="text-lg font-bold text-foreground mb-4">Current Clients & Case Studies</h2>
+                    <div>
+                      <h2 className="text-lg font-bold text-foreground">Current Clients & Brand Logos</h2>
+                      <p className="text-xs text-muted-foreground mb-4">Manage brand logos and client names displayed in the Our Clients section on the website.</p>
+                    </div>
 
                     {clientLoading && clientList.length === 0 ? (
                       <div className="space-y-4 animate-pulse">
@@ -2507,9 +2416,9 @@ function AdminDashboard() {
                         <div className="rounded-full bg-secondary p-3 text-muted-foreground">
                           <User className="h-8 w-8" />
                         </div>
-                        <h3 className="mt-4 text-base font-semibold text-foreground">No case studies yet</h3>
+                        <h3 className="mt-4 text-base font-semibold text-foreground">No client brands yet</h3>
                         <p className="mt-1 text-sm text-muted-foreground">
-                          Create your first client record using the form on the right.
+                          Add your first client brand name and logo using the form on the right.
                         </p>
                       </div>
                     ) : (
@@ -2524,17 +2433,17 @@ function AdminDashboard() {
                             }`}
                           >
                             <div className="flex gap-4 items-center min-w-0">
-                              {item.image ? (
-                                <img
-                                  src={item.image}
-                                  alt={item.name}
-                                  className="h-16 w-16 rounded-xl object-cover border border-border/80 shrink-0"
-                                />
-                              ) : (
-                                <div className="h-16 w-16 rounded-xl bg-secondary flex items-center justify-center text-primary shrink-0">
-                                  <ImageIcon className="h-6 w-6" />
-                                </div>
-                              )}
+                              <div className="h-16 w-24 rounded-xl bg-white dark:bg-white border border-slate-200 dark:border-slate-700 p-2 flex items-center justify-center shrink-0 shadow-sm overflow-hidden">
+                                {item.image ? (
+                                  <img
+                                    src={item.image}
+                                    alt={item.name}
+                                    className="max-h-12 max-w-full object-contain"
+                                  />
+                                ) : (
+                                  <Building2 className="h-6 w-6 text-slate-400" />
+                                )}
+                              </div>
                               <div className="min-w-0">
                                 <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold text-primary uppercase tracking-wider">
                                   {item.sector}
@@ -2552,7 +2461,7 @@ function AdminDashboard() {
                                     ? "border-primary bg-primary text-primary-foreground" 
                                     : "border-border bg-background text-foreground hover:bg-secondary"
                                 }`}
-                                title="Edit Client Case Study"
+                                title="Edit Client Brand"
                                 disabled={clientFormLoading}
                               >
                                 <Pencil className="h-4 w-4" />
@@ -2580,13 +2489,13 @@ function AdminDashboard() {
                           {editingClientId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
                         </div>
                         <h2 className="text-xl font-bold text-foreground">
-                          {editingClientId !== null ? "Edit Client Study" : "Add Client Study"}
+                          {editingClientId !== null ? "Edit Client Brand" : "Add Client Brand"}
                         </h2>
                       </div>
 
                       {clientFormSuccess && (
                         <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
-                          Client case study {editingClientId !== null ? "updated" : "created"} successfully!
+                          Client brand {editingClientId !== null ? "updated" : "added"} successfully!
                         </div>
                       )}
 
@@ -2598,11 +2507,11 @@ function AdminDashboard() {
 
                       <form onSubmit={handleSubmitClient} className="space-y-5">
                         <label className="block text-sm font-medium">
-                          Case Title / Client Name
+                          Client / Company Name *
                           <input
                             type="text"
                             className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                            placeholder="e.g. Core replatform, zero customer outage"
+                            placeholder="e.g. Visa, Capital One, Apple, Infosys"
                             value={clientName}
                             onChange={(e) => setClientName(e.target.value)}
                             required
@@ -2611,7 +2520,7 @@ function AdminDashboard() {
                         </label>
 
                         <label className="block text-sm font-medium">
-                          Sector / Industry
+                          Industry / Category *
                           <select
                             className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary cursor-pointer"
                             value={clientSector}
@@ -2619,8 +2528,15 @@ function AdminDashboard() {
                             required
                             disabled={clientFormLoading}
                           >
-                            <option value="">Select an industry...</option>
-                            {industriesList.map((ind) => (
+                            <option value="Banking">Banking &amp; Financial</option>
+                            <option value="Technology">Technology &amp; Software</option>
+                            <option value="Telecom">Telecom &amp; Networks</option>
+                            <option value="Enterprise">Enterprise &amp; Logistics</option>
+                            <option value="Healthcare">Healthcare &amp; Life Sciences</option>
+                            <option value="Automotive">Automotive</option>
+                            <option value="Insurance">Insurance</option>
+                            <option value="Education">Higher Education</option>
+                            {industriesList.filter(ind => !["Banking", "Technology", "Telecom", "Enterprise", "Healthcare", "Automotive", "Insurance", "Education"].includes(ind.name)).map((ind) => (
                               <option key={ind.id} value={ind.name}>
                                 {ind.name}
                               </option>
@@ -2629,21 +2545,22 @@ function AdminDashboard() {
                         </label>
 
                         <ImageUploadField
-                          label="Cover Image"
+                          label="Brand Logo"
                           value={clientImage}
                           onChange={setClientImage}
                           disabled={clientFormLoading}
+                          recommendedDimensions="400 × 200 px (SVG, Transparent PNG)"
+                          helperText="Upload official brand logo. Transparent PNG, SVG, or high-res JPG recommended. Rendered cleanly on the website's client grid."
                         />
 
                         <label className="block text-sm font-medium">
-                          Description / Results Summary
+                          Partnership Notes / Summary (Optional)
                           <textarea
-                            rows={4}
+                            rows={2}
                             className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
-                            placeholder="Detail the case results, e.g. 14-year-old monolith split into..."
+                            placeholder="e.g. Enterprise technology partnership & cloud modernization collaboration."
                             value={clientDesc}
                             onChange={(e) => setClientDesc(e.target.value)}
-                            required
                             disabled={clientFormLoading}
                           />
                         </label>
@@ -2651,14 +2568,14 @@ function AdminDashboard() {
                         <div className="space-y-2">
                           <button
                             type="submit"
-                            disabled={clientFormLoading || !clientName || !clientSector || !clientDesc}
+                            disabled={clientFormLoading || !clientName.trim() || !clientSector}
                             className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
                           >
                             {clientFormLoading 
                               ? "Saving..." 
                               : editingClientId !== null 
-                                ? "Update Case Study" 
-                                : "Publish Case Study"}
+                                ? "Update Client Brand" 
+                                : "Add Client Brand"}
                           </button>
                           {editingClientId !== null && (
                             <button
@@ -3135,6 +3052,8 @@ function AdminDashboard() {
                       value={blogImage}
                       onChange={setBlogImage}
                       disabled={blogFormLoading}
+                      recommendedDimensions="1200 × 675 px (16:9 Landscape)"
+                      helperText="Recommended size: 1200 × 675 px (16:9 aspect ratio). Auto-scaled & cropped for card feeds and article headers."
                     />
 
                     <label className="block text-sm font-medium">

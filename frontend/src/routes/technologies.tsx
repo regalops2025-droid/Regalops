@@ -577,21 +577,9 @@ function Technologies() {
                     </div>
                   </div>
 
-                  {/* Bottom Footer: SLA Metric & Keywords Badges */}
-                  <div className="mt-6 pt-4 border-t border-border/50">
-                    {/* Live Enterprise SLA Pill */}
-                    <div className="flex items-center justify-between text-xs py-1.5 px-3 rounded-lg bg-surface/90 border border-border/40 mb-3">
-                      <span className="text-[11px] font-medium text-muted-foreground flex items-center gap-1.5">
-                        <Activity className="h-3 w-3 text-emerald-500" />
-                        {meta.metric.label}
-                      </span>
-                      <span className="text-xs font-black text-foreground">
-                        {meta.metric.value}
-                      </span>
-                    </div>
-
-                    {/* Keywords / Tooling Tags */}
-                    {item.keywords && (
+                  {/* Bottom Footer: Keywords Badges */}
+                  {item.keywords && (
+                    <div className="mt-6 pt-4 border-t border-border/50">
                       <div className="flex flex-wrap gap-1.5">
                         {item.keywords
                           .split(",")
@@ -605,8 +593,8 @@ function Technologies() {
                             </span>
                           ))}
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </article>
               );
             })}

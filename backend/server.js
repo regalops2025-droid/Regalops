@@ -170,6 +170,7 @@ class MockPool {
   }
 
   async query(sql, params = []) {
+    this.load();
     const queryStr = sql.trim().replace(/\s+/g, ' ');
     const upperSQL = queryStr.toUpperCase();
 

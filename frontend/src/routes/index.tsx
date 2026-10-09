@@ -137,7 +137,7 @@ const showcaseSlides = [
     titleSuffix: "",
     subtitle: "INC 5000 HONOREE. THE MOST SUCCESSFUL ENTERPRISE CLOUD & AI PRACTICES",
     desc: "Recognized by industry authorities for engineering resilient digital platforms, 99.98% SLA high availability, and transformative AI systems.",
-    primaryCta: { text: "Know more", link: "/solutions" },
+    primaryCta: { text: "Explore Solutions", link: "/solutions" },
     secondaryCta: { text: "View Accreditations", link: "/about" },
   },
   {
@@ -150,7 +150,7 @@ const showcaseSlides = [
     titleSuffix: " to accelerate your business",
     subtitle: "BESPOKE ENTERPRISE ARCHITECTURE & HIGH-VELOCITY SQUADS",
     desc: "We engineer resilient multi-region infrastructure, autonomous intelligence pipelines, and custom enterprise software delivered by senior engineers.",
-    primaryCta: { text: "Know more", link: "/solutions" },
+    primaryCta: { text: "Explore Solutions", link: "/solutions" },
     secondaryCta: { text: "Talk to an engineer", link: "/contact" },
   },
   {
@@ -163,7 +163,7 @@ const showcaseSlides = [
     titleSuffix: "",
     subtitle: "TURN TECHNOLOGY EXPENDITURES INTO COMPOUNDING BUSINESS VALUE",
     desc: "Eliminate cloud waste, streamline operations with automated workflows, and build high-ROI digital assets that drive measurable bottom-line growth.",
-    primaryCta: { text: "Know more", link: "/solutions" },
+    primaryCta: { text: "Explore Solutions", link: "/solutions" },
     secondaryCta: { text: "Calculate IT ROI", link: "/contact" },
   },
 ];
@@ -843,20 +843,22 @@ function Home() {
                     {slide.desc}
                   </p>
 
-                  {/* Action Buttons (featuring "— Know more" in reference style) */}
+                  {/* Action Buttons */}
                   <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-3">
                     <Link
                       to={slide.primaryCta.link}
-                      className="inline-flex items-center gap-2 rounded bg-[#0091d5] hover:bg-[#007cb8] px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded-full bg-[#136a3e] hover:bg-[#0e5230] px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#136a3e]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer group"
                     >
-                      <span className="font-bold">&mdash;</span> {slide.primaryCta.text}
+                      <span>{slide.primaryCta.text}</span>
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
                     </Link>
 
                     <Link
                       to={slide.secondaryCta.link}
-                      className="inline-flex items-center gap-2 rounded border border-neutral-300 hover:border-neutral-400 bg-white/90 hover:bg-white px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-neutral-800 shadow-xs hover:shadow-sm transition-all duration-200 cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded-full border border-neutral-300 hover:border-neutral-400 bg-white/90 hover:bg-white px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-neutral-800 shadow-xs hover:shadow-sm transition-all duration-200 cursor-pointer"
                     >
-                      {slide.secondaryCta.text} <ArrowRight className="h-3.5 w-3.5 text-neutral-500" />
+                      <span>{slide.secondaryCta.text}</span>
+                      <ArrowRight className="h-3.5 w-3.5 text-neutral-500" />
                     </Link>
                   </div>
 
@@ -886,7 +888,7 @@ function Home() {
                 onClick={() => setActiveSlide(i)}
                 className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   i === activeSlide
-                    ? "w-6 bg-[#0091d5] shadow-[0_0_8px_rgba(0,145,213,0.4)]"
+                    ? "w-6 bg-[#136a3e] shadow-[0_0_8px_rgba(19,106,62,0.4)]"
                     : "w-2 bg-neutral-300 hover:bg-neutral-400"
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
@@ -907,7 +909,7 @@ function Home() {
               const Icon = s.icon;
               return (
                 <div key={s.label} className="flex items-center gap-2.5 sm:px-4 first:sm:pl-0">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sky-50 text-[#0091d5] border border-sky-100">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-[#136a3e] border border-emerald-100">
                     <Icon className="h-4 w-4" />
                   </div>
                   <div>
@@ -1120,7 +1122,7 @@ function Home() {
                   </p>
 
                   {/* Bottom Explore Link */}
-                  <div className="mt-auto pt-6 flex items-center gap-1.5 text-xs font-semibold text-sky-600 group-hover/card:text-sky-700">
+                  <div className="mt-auto pt-6 flex items-center gap-1.5 text-xs font-semibold text-[#136a3e] group-hover/card:text-[#0e5230]">
                     <span>Explore Practice</span>
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/card:translate-x-1" />
                   </div>
@@ -1134,9 +1136,10 @@ function Home() {
         <div className="mt-12 text-center">
           <Link
             to="/solutions"
-            className="inline-flex items-center gap-2 rounded-full bg-[#0091d5] hover:bg-[#007cb8] px-6 py-3 text-xs sm:text-sm font-semibold text-white shadow-md shadow-sky-900/15 hover:shadow-lg transition-all cursor-pointer"
+            className="inline-flex items-center gap-2.5 rounded-full bg-[#136a3e] hover:bg-[#0e5230] px-7 py-3.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#136a3e]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
           >
-            Explore detailed practice architectures <ArrowRight className="h-4 w-4" />
+            <span>Explore Solutions</span>
+            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
         </div>
       </section>
@@ -1623,9 +1626,10 @@ function Home() {
                 </Link>
                 <Link
                   to="/solutions"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 px-6 py-3.5 text-sm font-semibold text-white transition-all backdrop-blur-sm"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 hover:bg-white/20 hover:border-white px-7 py-3.5 text-sm font-semibold text-white shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all backdrop-blur-sm group"
                 >
-                  Explore Solutions Catalog
+                  <span>Explore Solutions</span>
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </Link>
               </div>
 

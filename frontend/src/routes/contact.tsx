@@ -141,9 +141,9 @@ function Contact() {
       />
       <Section className="w-full">
         {/* Full Screen Width Contact Form */}
-        <div className="w-full space-y-12">
-          <form className="panel p-6 sm:p-10 lg:p-12 space-y-6 w-full shadow-lg border border-border/80 rounded-3xl bg-surface" onSubmit={handleSubmit}>
-            <div className="border-b border-border/60 pb-5 mb-2">
+        <div className="w-full space-y-5">
+          <form className="panel p-5 sm:p-7 lg:p-8 space-y-4 w-full shadow-lg border border-border/80 rounded-3xl bg-surface" onSubmit={handleSubmit}>
+            <div className="border-b border-border/60 pb-3.5 mb-1.5">
               <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
                 {jobTitle ? `Submit Application for ${jobTitle}` : "Send an Engineering Enquiry"}
               </h2>

@@ -57,11 +57,11 @@ function Blog() {
       {selectedPost ? (
         // Detailed Post View
         <div>
-          <div className="relative border-b border-border bg-surface py-6">
-            <Section className="py-2">
+          <div className="relative border-b border-border bg-surface py-2.5">
+            <Section className="py-1">
               <button
                 onClick={handleBackToList}
-                className="inline-flex items-center gap-2 rounded-xl border border-border bg-background px-4 py-2 text-sm font-semibold text-foreground transition-all hover:bg-secondary cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-xl border border-border bg-background px-4 py-1.5 text-sm font-semibold text-foreground transition-all hover:bg-secondary cursor-pointer"
               >
                 <ArrowLeft className="h-4 w-4" />
                 Back to Articles
@@ -69,7 +69,7 @@ function Blog() {
             </Section>
           </div>
 
-          <Section className="py-8 max-w-3xl">
+          <Section className="py-5 max-w-3xl">
             {/* Header / Meta */}
             <div className="space-y-4">
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
@@ -100,7 +100,7 @@ function Blog() {
 
             {/* Main Cover Image */}
             {selectedPost.image && (
-              <div className="mt-8 rounded-2xl overflow-hidden border border-border/80 shadow-xl bg-slate-900/10 dark:bg-slate-900/60 aspect-[16/9] sm:aspect-[21/9] max-h-[460px] flex items-center justify-center">
+              <div className="mt-4 rounded-2xl overflow-hidden border border-border/80 shadow-xl bg-slate-900/10 dark:bg-slate-900/60 aspect-[16/9] sm:aspect-[21/9] max-h-[460px] flex items-center justify-center">
                 <img
                   src={selectedPost.image}
                   alt={selectedPost.title}
@@ -110,7 +110,7 @@ function Blog() {
             )}
 
             {/* Structured Content Sections */}
-            <div className="mt-10 space-y-8">
+            <div className="mt-5 space-y-4">
               {(() => {
                 try {
                   const sections = typeof selectedPost.content === "string" 
@@ -118,7 +118,7 @@ function Blog() {
                     : selectedPost.content;
                   
                   return sections.map((sec: any, index: number) => (
-                    <div key={index} className="space-y-4 border-t border-border/40 pt-8 first:border-0 first:pt-0">
+                    <div key={index} className="space-y-3 border-t border-border/40 pt-4 first:border-0 first:pt-0">
                       {sec.heading && (
                         <h2 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl mt-6">
                           {sec.heading}

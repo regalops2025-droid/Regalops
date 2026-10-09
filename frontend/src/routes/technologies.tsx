@@ -371,7 +371,7 @@ function Technologies() {
       {/* ==================================================================== */}
       {/* 1. HERO SECTION: Sleek High-Tech Header with Live Metrics            */}
       {/* ==================================================================== */}
-      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-background via-surface to-background pt-16 pb-14">
+      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-background via-surface to-background py-6 sm:py-8">
         {/* Ambient background glow dots */}
         <div className="absolute top-0 left-1/4 -z-10 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
         <div className="absolute top-10 right-1/4 -z-10 h-96 w-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
@@ -388,7 +388,7 @@ function Technologies() {
             </div>
 
             {/* Main Headline */}
-            <h1 className="mt-6 max-w-4xl font-display text-4xl font-black tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            <h1 className="mt-3.5 max-w-4xl font-display text-3xl font-black tracking-tight text-foreground sm:text-4xl lg:text-5xl">
               Production-proven, <br className="hidden sm:inline" />
               <span className="bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent">
                 never experimental.
@@ -396,12 +396,12 @@ function Technologies() {
             </h1>
 
             {/* Subtitle */}
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p className="mt-2.5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
               We standardise on technologies our teams have operated at scale for years — backed by official partner ecosystems, zero vendor lock-in, and guaranteed SLAs.
             </p>
 
             {/* Live Trust Metrics Ribbon */}
-            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-6 border-y border-border/60 py-4 max-w-3xl w-full">
+            <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-4 sm:gap-4 border-y border-border/60 py-2.5 max-w-3xl w-full">
               <div className="text-center">
                 <div className="text-xl sm:text-2xl font-black text-foreground">99.98%</div>
                 <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Target Uptime</div>
@@ -472,7 +472,7 @@ function Technologies() {
       {/* ==================================================================== */}
       {/* 3. PREMIUM TECHNOLOGY CARDS WITH BRAND LOGOS                         */}
       {/* ==================================================================== */}
-      <Section className="py-12 sm:py-16">
+      <Section className="py-6 sm:py-8">
         {loading ? (
           <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -605,9 +605,9 @@ function Technologies() {
       {/* ==================================================================== */}
       {/* 4. "FULL TOOLCHAIN" SECTION (Re-architected as Brand Logo Matrix)     */}
       {/* ==================================================================== */}
-      <section className="border-t border-border bg-gradient-to-b from-surface via-background to-surface py-16 sm:py-20">
+      <section className="border-t border-border bg-gradient-to-b from-surface via-background to-surface py-6 sm:py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-primary">
                 <Layers className="h-3.5 w-3.5" />
@@ -665,7 +665,7 @@ function Technologies() {
           </div>
 
           {/* Database Driven Toolchain Pills */}
-          <div className="mt-10 rounded-2xl border border-border/60 bg-surface/60 p-6">
+          <div className="mt-5 rounded-2xl border border-border/60 bg-surface/60 p-4 sm:p-5">
             <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3">
               Registered Architecture Modules ({techList.length})
             </div>

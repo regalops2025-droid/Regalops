@@ -113,14 +113,14 @@ export function SiteFooter() {
       {/* ==================================================================== */}
       {/* 2. MAIN FOOTER CONTENT WRAPPER                                       */}
       {/* ==================================================================== */}
-      <div className="relative mx-auto max-w-[1480px] px-5 sm:px-8 lg:px-12 pt-14 pb-8">
+      <div className="relative mx-auto max-w-[1480px] px-5 sm:px-8 lg:px-12 pt-7 sm:pt-8 pb-5">
         {/* Top Main Section: Brand + Links Columns + Get in Touch Card */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-10 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 lg:gap-6 xl:gap-7 items-start">
           
           {/* ---------------------------------------------------------------- */}
           {/* COLUMN 1: Brand Identity, Mission, & Stat Metrics (lg:col-span-4)*/}
           {/* ---------------------------------------------------------------- */}
-          <div className="lg:col-span-4 space-y-6">
+          <div className="lg:col-span-4 space-y-4">
             {/* Geometric Golden Logo */}
             <Link to="/" className="inline-flex items-center gap-3.5 group">
               <div className="relative flex h-14 w-14 shrink-0 items-center justify-center">
@@ -368,7 +368,7 @@ export function SiteFooter() {
         {/* ================================================================== */}
         {/* 3. BOTTOM BAR: Copyright, Legal, Social Icons, Scroll to Top       */}
         {/* ================================================================== */}
-        <div className="mt-12 pt-6 border-t border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-5">
+        <div className="mt-6 pt-4 border-t border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Copyright */}
           <div className="text-xs text-neutral-400">
             &copy; {new Date().getFullYear()} Regal OPs. All rights reserved.

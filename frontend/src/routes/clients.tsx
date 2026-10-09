@@ -496,20 +496,20 @@ function Clients() {
       {/* ==================================================================== */}
       {/* OUR CLIENTS GALLERY (Matches User Reference Mosaic & Scrolling Logos)*/}
       {/* ==================================================================== */}
-      <section className="bg-white dark:bg-slate-950 pt-6 pb-12 sm:pt-8 sm:pb-16">
+      <section className="bg-white dark:bg-slate-950 py-5 sm:py-6">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
+          <div className="text-center max-w-3xl mx-auto mb-3.5 sm:mb-4">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-slate-900 dark:text-white">
               Our Clients
             </h1>
-            <p className="mt-3 text-sm sm:text-base text-slate-500 dark:text-slate-400 font-medium">
+            <p className="mt-2 text-sm sm:text-base text-slate-500 dark:text-slate-400 font-medium">
               Trusted by industry leaders and high-growth organizations worldwide
             </p>
           </div>
 
           {/* Category Tabs Bar with Icons (Matching Reference Image) */}
-          <div className="border-b border-border/80 mb-6 sm:mb-8 overflow-x-auto no-scrollbar">
+          <div className="border-b border-border/80 mb-3.5 sm:mb-4 overflow-x-auto no-scrollbar">
             <div className="flex items-center justify-center gap-2 sm:gap-6 min-w-max px-4">
               {CLIENT_CATEGORIES.map((cat) => {
                 const IconComponent = cat.icon;
@@ -740,10 +740,10 @@ function Clients() {
 
           {/* Load More Pill Button (Matching Reference Image) */}
           {extendedBrands.length > 0 && (
-            <div className="mt-12 sm:mt-16 text-center">
+            <div className="mt-4 sm:mt-5 text-center">
               <button
                 onClick={() => setShowAll(!showAll)}
-                className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#136a3e] to-[#0f5431] hover:from-[#0f5431] hover:to-[#0a3b22] text-white px-9 py-3.5 text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#136a3e] to-[#0f5431] hover:from-[#0f5431] hover:to-[#0a3b22] text-white px-9 py-3 text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
               >
                 <span>{showAll ? "Show Less" : "Load More"}</span>
                 <ArrowRight className={`h-4 w-4 transition-transform duration-300 ${showAll ? "-rotate-90" : ""}`} />
@@ -756,9 +756,9 @@ function Clients() {
       {/* ==================================================================== */}
       {/* CLIENT CASE STUDIES & OUTCOMES (Synced Live with Admin Panel)        */}
       {/* ==================================================================== */}
-      <section className="border-t border-border/80 bg-slate-50/70 dark:bg-slate-900/40 py-16 sm:py-24">
+      <section className="border-t border-border/80 bg-slate-50/70 dark:bg-slate-900/40 py-5 sm:py-6">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 sm:mb-5 gap-3">
             <div>
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#136a3e] dark:text-emerald-400">
                 Enterprise Case Studies
@@ -774,17 +774,17 @@ function Clients() {
           </div>
 
           {studiesLoading && adminClientStudies.length === 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 animate-pulse">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 animate-pulse">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="h-80 rounded-3xl bg-slate-200 dark:bg-slate-800" />
               ))}
             </div>
           ) : filteredCaseStudies.length === 0 ? (
-            <div className="rounded-3xl border border-dashed border-border/80 p-12 text-center">
+            <div className="rounded-3xl border border-dashed border-border/80 p-8 text-center">
               <p className="text-sm text-slate-500">No client studies published yet.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {filteredCaseStudies.map((study) => (
                 <div
                   key={study.id}
@@ -836,25 +836,25 @@ function Clients() {
       {/* ==================================================================== */}
       {/* INDUSTRIES WE SERVE (Matches User Reference Image Layout & SVGs)     */}
       {/* ==================================================================== */}
-      <section className="border-t border-border/80 bg-white dark:bg-slate-950 py-16 sm:py-24">
+      <section className="border-t border-border/80 bg-white dark:bg-slate-950 py-5 sm:py-6">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 sm:mb-16">
+          <div className="mb-4 sm:mb-5">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#136a3e] dark:text-emerald-400">
               Domains &amp; Verticals
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
               Industries We Serve
             </h2>
-            <div className="w-12 h-1 bg-[#136a3e] rounded-full mt-3" />
+            <div className="w-12 h-1 bg-[#136a3e] rounded-full mt-2" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-x-12 gap-y-12 sm:gap-y-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-x-8 gap-y-5 sm:gap-y-6">
             {displayIndustries.map((ind, idx) => {
               const BadgeComponent = ind.Badge || DefaultIndustryBadge;
               return (
                 <div key={idx} className="group flex flex-col items-start text-left">
                   {/* Flat Circular Illustration Badge */}
-                  <div className="w-20 h-20 sm:w-22 sm:h-22 mb-6 transition-transform duration-300 ease-out group-hover:scale-105 group-hover:-translate-y-1">
+                  <div className="w-16 h-16 sm:w-18 sm:h-18 mb-2.5 sm:mb-3 transition-transform duration-300 ease-out group-hover:scale-105 group-hover:-translate-y-1">
                     <BadgeComponent className="w-full h-full drop-shadow-sm" />
                   </div>
 

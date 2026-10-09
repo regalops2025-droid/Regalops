@@ -226,7 +226,7 @@ function About() {
       {/* ==================================================================== */}
       <section className="relative w-full overflow-hidden bg-[#07192F]">
         {/* Main Banner Container */}
-        <div className="relative min-h-[460px] sm:min-h-[500px] lg:min-h-[540px] flex flex-col justify-between">
+        <div className="relative min-h-[380px] sm:min-h-[420px] lg:min-h-[460px] flex flex-col justify-between">
           
           {/* Background Right Side Image: Twilight Skyline & Highway Trails */}
           <div className="absolute top-0 right-0 bottom-0 w-full lg:w-[60%] select-none pointer-events-none overflow-hidden">
@@ -253,18 +253,18 @@ function About() {
           />
 
           {/* Floating script text in the sky (top right) */}
-          <div className="absolute top-8 right-6 lg:right-14 z-10 pointer-events-none select-none text-right hidden sm:block">
+          <div className="absolute top-6 right-6 lg:right-14 z-10 pointer-events-none select-none text-right hidden sm:block">
             <span
-              className="text-xl sm:text-2xl lg:text-[28px] text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] block font-light tracking-wide"
+              className="text-lg sm:text-xl lg:text-[24px] text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] block font-light tracking-wide"
               style={{ fontFamily: "'Caveat', cursive, sans-serif" }}
             >
               Transforming Businesses Through Technology
             </span>
-            <div className="w-24 h-[2.5px] bg-[#E5A93C] ml-auto mt-0.5 rounded-full shadow-sm" />
+            <div className="w-20 h-[2px] bg-[#E5A93C] ml-auto mt-0.5 rounded-full shadow-sm" />
           </div>
 
           {/* Left Column Content Container */}
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-20 lg:pb-24">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-8 sm:py-10 lg:py-12">
             <div className="max-w-2xl text-left space-y-6">
               
               {/* Top Tagline / Eyebrow */}
@@ -356,10 +356,10 @@ function About() {
       {/* ==================================================================== */}
       {/* 2. OUR KEY BENEFITS (Horizontal Auto-Scrolling Carousel)             */}
       {/* ==================================================================== */}
-      <section id="our-key-benefits" className="relative bg-white pt-14 pb-16 sm:pt-18 sm:pb-20 border-b border-neutral-200/70 overflow-hidden">
+      <section id="our-key-benefits" className="relative bg-white py-6 sm:py-8 border-b border-neutral-200/70 overflow-hidden">
         <div id="benefits" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header with Carousel Navigation Controls */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5">
             <div className="max-w-2xl text-left">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#007cb8]">
                 Why Leading Enterprises Choose Us
@@ -478,7 +478,7 @@ function About() {
       {/* ==================================================================== */}
       {/* 3. OUR PEOPLE (Architectural Card-Free Editorial Pillars - COMPACT)  */}
       {/* ==================================================================== */}
-      <section className="relative bg-white dark:bg-slate-950 py-10 sm:py-14 border-b border-neutral-200/70 dark:border-slate-800/80 overflow-hidden">
+      <section className="relative bg-white dark:bg-slate-950 py-6 sm:py-8 border-b border-neutral-200/70 dark:border-slate-800/80 overflow-hidden">
         {/* Ambient subtle light glow behind the pillars */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[220px] bg-emerald-500/5 dark:bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none" />
 
@@ -487,10 +487,10 @@ function About() {
             <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 dark:border-emerald-800/60 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#136a3e] dark:text-emerald-400">
               <Sparkles className="h-3 w-3" /> Culture &amp; Talent Excellence
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-900 dark:text-white tracking-tight">
+            <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-900 dark:text-white tracking-tight">
               Our People
             </h2>
-            <div className="w-10 h-0.5 bg-gradient-to-r from-[#136a3e] to-amber-500 rounded-full mx-auto mt-2.5 mb-2.5" />
+            <div className="w-10 h-0.5 bg-gradient-to-r from-[#136a3e] to-amber-500 rounded-full mx-auto mt-2 mb-2" />
             <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl mx-auto">
               We nurture a truly diverse and talented pool of people who work with a
               customer-centric attitude to deliver phenomenal results.
@@ -498,7 +498,7 @@ function About() {
           </div>
 
           {/* Open Architectural 3-Column Pillar Presentation (NO CARDS - COMPACT HEIGHT) */}
-          <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80 dark:divide-slate-800">
+          <div className="mt-5 sm:mt-6 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80 dark:divide-slate-800">
             {peoplePillars.map((p, idx) => {
               const Icon = p.icon;
               return (
@@ -545,23 +545,23 @@ function About() {
       {/* ==================================================================== */}
       {/* 4. OUR CORE VALUES (Open Architectural Feature Layout - COMPACT)     */}
       {/* ==================================================================== */}
-      <section id="our-core-values" className="bg-[#fafcfb] dark:bg-slate-900/60 py-10 sm:py-14 border-b border-neutral-200/70 dark:border-slate-800/80">
+      <section id="our-core-values" className="bg-[#fafcfb] dark:bg-slate-900/60 py-6 sm:py-8 border-b border-neutral-200/70 dark:border-slate-800/80">
         <div id="values" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-950/50 px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#007cb8] dark:text-sky-400">
               Ethical Standards &amp; Principles
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-900 dark:text-white tracking-tight">
+            <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-900 dark:text-white tracking-tight">
               Our Core Values
             </h2>
-            <div className="w-10 h-0.5 bg-[#0091d5] rounded-full mx-auto mt-2.5 mb-2.5" />
+            <div className="w-10 h-0.5 bg-[#0091d5] rounded-full mx-auto mt-2 mb-2" />
             <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl mx-auto">
               We have embedded the highest ethical standards across our organization,
               reflected in how we conduct our business and collaborate with all stakeholders.
             </p>
           </div>
 
-          <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80 dark:divide-slate-800">
+          <div className="mt-5 sm:mt-6 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80 dark:divide-slate-800">
             {coreValues.map((v, idx) => {
               const Icon = v.icon;
               return (
@@ -600,32 +600,32 @@ function About() {
       {/* ==================================================================== */}
       {/* 5. JOURNEY & MILESTONES TIMELINE                                     */}
       {/* ==================================================================== */}
-      <section className="bg-[#fafcfb] py-16 sm:py-20 border-b border-neutral-200/70">
+      <section className="bg-[#fafcfb] py-6 sm:py-8 border-b border-neutral-200/70">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#007cb8]">
               Fifteen Years of Impact
             </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-900">
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-900">
               Our Journey &amp; Milestones
             </h2>
-            <div className="w-12 h-1 bg-[#0091d5] rounded-full mt-3 mb-4" />
+            <div className="w-12 h-1 bg-[#0091d5] rounded-full mt-2 mb-3" />
             <p className="text-sm sm:text-base text-neutral-600">
               From an agile architecture squad to a global practice serving Fortune 500 institutions.
             </p>
           </div>
 
-          <div className="mt-12 relative border-l-2 border-sky-200 ml-4 sm:ml-6 space-y-10 pl-6 sm:pl-8">
+          <div className="mt-5 sm:mt-6 relative border-l-2 border-sky-200 ml-4 sm:ml-6 space-y-5 pl-6 sm:pl-8">
             {timeline.map((item) => (
               <div key={item.year} className="relative group">
                 <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 h-4 w-4 rounded-full border-2 border-white bg-[#0091d5] shadow-xs group-hover:scale-125 transition-transform" />
                 <div className="inline-block rounded-full bg-sky-100 text-[#007cb8] px-3 py-0.5 text-xs font-bold font-mono">
                   {item.year}
                 </div>
-                <h3 className="mt-2 text-base sm:text-lg font-bold text-neutral-900">
+                <h3 className="mt-1 text-base sm:text-lg font-bold text-neutral-900">
                   {item.title}
                 </h3>
-                <p className="mt-1 text-xs sm:text-sm leading-relaxed text-neutral-600 max-w-2xl">
+                <p className="mt-0.5 text-xs sm:text-sm leading-relaxed text-neutral-600 max-w-2xl">
                   {item.text}
                 </p>
               </div>
@@ -637,9 +637,9 @@ function About() {
       {/* ==================================================================== */}
       {/* 6. EXECUTIVE CTA BANNER                                               */}
       {/* ==================================================================== */}
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-white py-6 sm:py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-neutral-900 via-neutral-950 to-neutral-900 p-8 sm:p-12 lg:p-14 shadow-2xl border border-neutral-800 text-center">
+          <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-neutral-900 via-neutral-950 to-neutral-900 p-6 sm:p-8 lg:p-10 shadow-2xl border border-neutral-800 text-center">
             <div className="pointer-events-none absolute -right-20 -bottom-20 h-80 w-80 rounded-full bg-sky-500/10 blur-3xl" />
             <div className="pointer-events-none absolute -left-20 -top-20 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
 
@@ -647,13 +647,13 @@ function About() {
               <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-400/30 bg-sky-500/10 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-sky-300">
                 Accelerate With Confidence
               </span>
-              <h2 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+              <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
                 Ready to Transform Your Technology Landscape?
               </h2>
-              <p className="mt-3 text-sm sm:text-base text-neutral-300 leading-relaxed max-w-xl mx-auto">
+              <p className="mt-2 text-sm sm:text-base text-neutral-300 leading-relaxed max-w-xl mx-auto">
                 Schedule an executive architectural consultation with our principal engineering team.
               </p>
-              <div className="mt-8 flex flex-wrap justify-center items-center gap-4">
+              <div className="mt-5 flex flex-wrap justify-center items-center gap-3.5">
                 <Link
                   to="/contact"
                   className="inline-flex items-center gap-2 rounded-full bg-[#0091d5] hover:bg-[#007cb8] px-7 py-3 text-sm font-bold text-white shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"

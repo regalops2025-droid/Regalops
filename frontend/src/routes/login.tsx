@@ -89,8 +89,8 @@ function Login() {
 
   return (
     <SiteLayout>
-      <section className="hero-glow flex min-h-[70vh] items-center px-4 py-8 sm:px-6">
-        <div className="panel mx-auto w-full max-w-md p-6 sm:p-8">
+      <section className="hero-glow flex min-h-[70vh] items-center px-4 py-6 sm:px-6">
+        <div className="panel mx-auto w-full max-w-md p-5 sm:p-7">
           <h1 className="text-2xl font-semibold">Client portal login</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Delivery dashboards, runbooks and support tickets in one place.

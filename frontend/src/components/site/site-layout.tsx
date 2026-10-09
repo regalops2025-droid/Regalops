@@ -63,14 +63,14 @@ export function PageHero({
 }) {
   return (
     <section className={`hero-glow border-b border-border ${className}`}>
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
         <span className="inline-flex items-center rounded-full border border-border bg-surface px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
           {eyebrow}
         </span>
-        <h1 className="mt-5 max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl">
+        <h1 className="mt-2.5 sm:mt-3 max-w-3xl text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
           {title}
         </h1>
-        <p className={`mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg ${descriptionClassName || "max-w-2xl"}`}>
+        <p className={`mt-2 sm:mt-2.5 text-base leading-relaxed text-muted-foreground sm:text-lg ${descriptionClassName || "max-w-2xl"}`}>
           {description}
         </p>
       </div>
@@ -86,7 +86,7 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section className={`mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8 ${className}`}>
+    <section className={`mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-6 lg:px-8 ${className}`}>
       {children}
     </section>
   );

@@ -103,7 +103,7 @@ function Career() {
       <section className="border-t border-border bg-surface">
         <Section>
           <h2 className="text-2xl font-semibold sm:text-3xl">What you get</h2>
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2">
             {perks.map((p) => (
               <li
                 key={p}

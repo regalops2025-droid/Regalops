@@ -275,8 +275,8 @@ function SolutionDetail() {
       />
 
       <Section>
-        <div className="grid gap-12 lg:grid-cols-[1fr_380px] items-start">
-          <div className="space-y-12">
+        <div className="grid gap-6 lg:grid-cols-[1fr_380px] items-start">
+          <div className="space-y-6">
             {solution.image && (
               <div className="rounded-3xl overflow-hidden border border-border/80 shadow-md">
                 <img

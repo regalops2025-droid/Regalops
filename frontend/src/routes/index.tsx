@@ -807,7 +807,7 @@ function Home() {
         </button>
 
         {/* Foreground Content for Active Slide */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-8 sm:px-12 lg:px-16 py-8 sm:py-10 lg:py-12">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12 py-5 sm:py-6 lg:py-7">
           <div className="max-w-2xl xl:max-w-3xl">
             {showcaseSlides.map((slide, idx) => {
               if (idx !== activeSlide) return null;
@@ -930,7 +930,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 2. ENTERPRISE TECH STACK INFINITE MARQUEE                             */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-5 overflow-hidden">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-3 overflow-hidden">
         <div className="relative w-full overflow-hidden flex items-center">
           <div className="flex items-center gap-4 whitespace-nowrap animate-marquee">
             {[...techStackMarquee, ...techStackMarquee].map((tech, idx) => (
@@ -953,12 +953,12 @@ function Home() {
       {/* ==================================================================== */}
       {/* 3. ABOUT REGAL OPS — "WHO WE ARE & WHAT WE DO" (Vuesol Reference)    */}
       {/* ==================================================================== */}
-      <section id="about" className="relative bg-white pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 overflow-hidden">
+      <section id="about" className="relative bg-white py-6 sm:py-8 overflow-hidden">
         {/* Ambient background soft glow */}
         <div className="absolute top-1/2 right-12 -translate-y-1/2 w-96 h-96 rounded-full bg-gradient-to-tr from-sky-400/10 via-orange-400/10 to-amber-300/10 blur-3xl pointer-events-none" />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-center">
             
             {/* Left Content Column (Exact Text & Layout from Reference) */}
             <div className="lg:col-span-6 xl:col-span-6">
@@ -980,17 +980,17 @@ function Home() {
               </p>
 
               {/* Paragraph 1 matching Reference */}
-              <p className="mt-6 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
+              <p className="mt-3.5 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
                 We empower companies by helping them utilize and integrate the most recent technological advances. This allows businesses to respond more quickly and intuitively to changing market dynamics. At Regal OPs, we have a long track record of transforming organizations into high-performing businesses that can tap into new, high-profit opportunities.
               </p>
 
               {/* Paragraph 2 matching Reference */}
-              <p className="mt-4 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
+              <p className="mt-2.5 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
                 By utilizing our technical expertise, industry insight, technological vision, and innovative thinking we can help you identify new opportunities for growth and innovation. We enable organizations to reach their full potential and accelerate their business. Don’t just keep up with the competition, get ahead. The market can be crowded, but we will make you stand out.
               </p>
 
               {/* CTAs matching reference button style */}
-              <div className="mt-8 flex flex-wrap items-center gap-3.5">
+              <div className="mt-5 flex flex-wrap items-center gap-3.5">
                 <Link
                   to="/about"
                   className="inline-flex items-center gap-2 rounded bg-[#0091d5] hover:bg-[#007cb8] px-6 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
@@ -1069,7 +1069,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 4. OUR SERVICES SECTION (Infinite Scrolling Marquee + Grid Toggle)   */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] pt-8 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-6 sm:py-8 overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Header */}
@@ -1077,20 +1077,20 @@ function Home() {
             <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight">
               Our Services
             </h2>
-            <p className="mt-3.5 text-base sm:text-lg text-neutral-600 italic font-serif sm:font-normal">
+            <p className="mt-2 text-base sm:text-lg text-neutral-600 italic font-serif sm:font-normal">
               Accelerate your journey to success with our expertise, insights, innovation and vision
             </p>
           </div>
         </div>
 
         {/* AUTO-SCROLLING MARQUEE FLOW */}
-        <div className="mt-10 sm:mt-12 relative w-full overflow-hidden group py-3">
+        <div className="mt-5 sm:mt-6 relative w-full overflow-hidden group py-1.5">
           {/* Subtle Gradient Fade Masks on Edges */}
           <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
           <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
 
           {/* Seamless Infinite Marquee Track with Pause on Hover */}
-          <div className="flex gap-6 w-max py-4 px-4 transition-all duration-300 animate-marquee-services hover:[animation-play-state:paused]">
+          <div className="flex gap-5 w-max py-3 px-4 transition-all duration-300 animate-marquee-services hover:[animation-play-state:paused]">
             {[...displayServices, ...displayServices].map((service, idx) => {
               const iconElement =
                 service.icon && typeof service.icon !== "string"
@@ -1133,10 +1133,10 @@ function Home() {
         </div>
 
         {/* Bottom Explore CTA Bar */}
-        <div className="mt-12 text-center">
+        <div className="mt-5 sm:mt-6 text-center">
           <Link
             to="/solutions"
-            className="inline-flex items-center gap-2.5 rounded-full bg-[#136a3e] hover:bg-[#0e5230] px-7 py-3.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#136a3e]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
+            className="inline-flex items-center gap-2.5 rounded-full bg-[#136a3e] hover:bg-[#0e5230] px-7 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#136a3e]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
           >
             <span>Explore Solutions</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -1147,7 +1147,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 5. OUR CLIENTS — "WHO WE WORK WITH" (Vuesol Reference Match)         */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fbfcfd] py-14 sm:py-16 lg:py-20">
+      <section className="border-b border-neutral-200/70 bg-[#fbfcfd] py-6 sm:py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Desktop Layout: Exact center-callout 4-row layout matching reference */}
@@ -1283,21 +1283,21 @@ function Home() {
       {/* ==================================================================== */}
       {/* 7. INTERACTIVE ARCHITECTURE BLUEPRINT & TOPOLOGY SHOWCASE            */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-16 sm:py-20">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-6 sm:py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
               Interactive Blueprint
             </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               The Regal OPs Production Topology
             </h2>
-            <p className="mt-3 text-base text-neutral-600">
+            <p className="mt-2 text-sm sm:text-base text-neutral-600">
               Click through the architectural layers of our resilient, audited enterprise platform foundation.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-8 lg:grid-cols-12 items-start">
+          <div className="mt-5 sm:mt-6 grid gap-5 lg:grid-cols-12 items-start">
             
             {/* Left Layer Selectors */}
             <div className="lg:col-span-5 space-y-3">
@@ -1390,21 +1390,21 @@ function Home() {
       {/* ==================================================================== */}
       {/* 8. DELIVERY METHODOLOGY (4-PHASE FRAMEWORK)                           */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-white py-16 sm:py-20">
+      <section className="border-b border-neutral-200/70 bg-white py-6 sm:py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
               Delivery Methodology
             </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               Predictable, Audited, Repeatable
             </h2>
-            <p className="mt-3 text-base text-neutral-600">
+            <p className="mt-2 text-sm sm:text-base text-neutral-600">
               Our 4-phase framework takes complex enterprise platforms from architecture review to resilient, audited production operations.
             </p>
           </div>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 sm:mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {methodologySteps.map((step) => (
               <div
                 key={step.number}
@@ -1438,27 +1438,27 @@ function Home() {
       {/* ==================================================================== */}
       {/* 9. AUDITED CASE STUDIES & CLIENT OUTCOMES                             */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-16 sm:py-20">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-6 sm:py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 max-w-2xl">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 max-w-2xl">
             <div>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
                 Case Studies
               </span>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900">
+              <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
                 Work That Holds Up Under Audit
               </h2>
             </div>
             <Link
               to="/clients"
-              className="text-sm font-bold text-emerald-800 hover:text-emerald-700 flex items-center gap-1.5 group shrink-0"
+              className="text-xs sm:text-sm font-bold text-emerald-800 hover:text-emerald-700 flex items-center gap-1.5 group shrink-0"
             >
               <span>View all client outcomes</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
 
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          <div className="mt-5 sm:mt-6 grid gap-4 lg:grid-cols-3">
             {cases.map((c) => (
               <Link
                 key={c.title}
@@ -1505,18 +1505,18 @@ function Home() {
       {/* ==================================================================== */}
       {/* 10. EXECUTIVE TESTIMONIALS                                            */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-white py-16 sm:py-20">
+      <section className="border-b border-neutral-200/70 bg-white py-6 sm:py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
               Executive Validation
             </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               Trusted by Engineering Leaders
             </h2>
           </div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="mt-5 sm:mt-6 grid gap-4 md:grid-cols-3">
             {testimonials.map((t, idx) => (
               <figure
                 key={idx}
@@ -1549,21 +1549,21 @@ function Home() {
       {/* ==================================================================== */}
       {/* 11. FREQUENTLY ASKED QUESTIONS (C-SUITE ACCORDION)                   */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-16 sm:py-20">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-6 sm:py-8">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
               Executive FAQ
             </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               Clear Answers for Leadership
             </h2>
-            <p className="mt-3 text-base text-neutral-600">
+            <p className="mt-2 text-sm sm:text-base text-neutral-600">
               Everything you need to know about our engagement models, IP security, and SLA guarantees.
             </p>
           </div>
 
-          <div className="mt-12 space-y-4">
+          <div className="mt-5 sm:mt-6 space-y-3">
             {faqs.map((faq, idx) => {
               const isOpen = openFaqIndex === idx;
               return (
@@ -1599,9 +1599,9 @@ function Home() {
       {/* ==================================================================== */}
       {/* 12. HIGH-IMPACT CALL TO ACTION BANNER                                 */}
       {/* ==================================================================== */}
-      <section className="py-16 sm:py-20 bg-white">
+      <section className="py-6 sm:py-8 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-neutral-900 via-[#0a311b] to-neutral-950 p-8 sm:p-14 text-white shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-900 via-[#0a311b] to-neutral-950 p-6 sm:p-10 text-white shadow-2xl">
             {/* Ambient Background Glow */}
             <div className="pointer-events-none absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-emerald-500/20 blur-3xl" />
             <div className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
@@ -1610,30 +1610,30 @@ function Home() {
               <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-300">
                 Ready to Scale?
               </span>
-              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-white leading-tight">
+              <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
                 Start with a High-Impact Technical Conversation
               </h2>
-              <p className="mt-4 text-base text-neutral-300 leading-relaxed max-w-2xl">
+              <p className="mt-2.5 text-sm sm:text-base text-neutral-300 leading-relaxed max-w-2xl">
                 Bring your architecture. We will review your topology and tell you candidly what to optimize first — no sales decks required.
               </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-4">
+              <div className="mt-5 flex flex-wrap items-center gap-3.5">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-emerald-500 hover:bg-emerald-400 px-7 py-3.5 text-sm font-bold text-neutral-950 shadow-lg shadow-emerald-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                  className="inline-flex items-center gap-2 rounded-full bg-emerald-500 hover:bg-emerald-400 px-6 py-3 text-xs sm:text-sm font-bold text-neutral-950 shadow-lg shadow-emerald-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all"
                 >
                   Book an Architecture Consultation <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   to="/solutions"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 hover:bg-white/20 hover:border-white px-7 py-3.5 text-sm font-semibold text-white shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all backdrop-blur-sm group"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 hover:bg-white/20 hover:border-white px-6 py-3 text-xs sm:text-sm font-semibold text-white shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all backdrop-blur-sm group"
                 >
                   <span>Explore Solutions</span>
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </Link>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center gap-6 text-xs text-neutral-400">
+              <div className="mt-5 pt-4 border-t border-white/10 flex flex-wrap items-center gap-5 text-xs text-neutral-400">
                 <span className="flex items-center gap-1.5">
                   <Check className="h-4 w-4 text-emerald-400" /> NDAs Respected
                 </span>

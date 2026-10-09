@@ -145,24 +145,24 @@ export function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-50 w-full select-none bg-transparent">
-        {/* Top Micro-Bar (Enterprise Utility Strip matching Image 2) */}
-        <div className="w-full border-b border-[#EBEAE5] bg-[#FAF9F5] text-xs text-neutral-600 transition-all duration-300">
+        {/* Top Micro-Bar (Enterprise Utility Strip matching Brand Green) */}
+        <div className="w-full border-b border-[#0f4e2e] bg-[#136a3e] text-xs text-white/90 transition-all duration-300 shadow-xs">
           <div className="mx-auto flex max-w-[1400px] items-center justify-between px-3 sm:px-6 lg:px-8 py-1.5">
             {/* Left Badges */}
             <div className="flex items-center gap-2.5 sm:gap-4 overflow-x-auto no-scrollbar">
               <div className="flex items-center gap-1.5 whitespace-nowrap">
-                <Crown className="h-3.5 w-3.5 text-[#b4883b] shrink-0" />
-                <span className="font-medium text-neutral-700">Top 500 Enterprise Partner</span>
+                <Crown className="h-3.5 w-3.5 text-[#fbbf24] shrink-0" />
+                <span className="font-medium text-white/95">Top 500 Enterprise Partner</span>
               </div>
-              <span className="text-neutral-300">|</span>
+              <span className="text-white/30">|</span>
               <div className="flex items-center gap-1.5 whitespace-nowrap">
-                <ShieldCheck className="h-3.5 w-3.5 text-[#2d6a4f] shrink-0" />
-                <span className="font-medium text-neutral-700">99.98% SLA Uptime</span>
+                <ShieldCheck className="h-3.5 w-3.5 text-[#6ee7b7] shrink-0" />
+                <span className="font-medium text-white/95">99.98% SLA Uptime</span>
               </div>
-              <span className="hidden sm:inline text-neutral-300">|</span>
+              <span className="hidden sm:inline text-white/30">|</span>
               <div className="hidden sm:flex items-center gap-1.5 whitespace-nowrap">
-                <Globe className="h-3.5 w-3.5 text-[#2d6a4f] shrink-0" />
-                <span className="font-medium text-neutral-700">Serving 14+ Countries</span>
+                <Globe className="h-3.5 w-3.5 text-[#6ee7b7] shrink-0" />
+                <span className="font-medium text-white/95">Serving 14+ Countries</span>
               </div>
             </div>
 
@@ -174,7 +174,7 @@ export function SiteHeader() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="text-neutral-500 hover:text-[#136a3e] transition-colors"
+                  className="text-white/75 hover:text-white transition-colors"
                 >
                   <Linkedin className="h-3.5 w-3.5" />
                 </a>
@@ -183,7 +183,7 @@ export function SiteHeader() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="YouTube"
-                  className="text-neutral-500 hover:text-[#136a3e] transition-colors"
+                  className="text-white/75 hover:text-white transition-colors"
                 >
                   <Youtube className="h-3.5 w-3.5" />
                 </a>
@@ -192,22 +192,22 @@ export function SiteHeader() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="X"
-                  className="text-neutral-500 hover:text-[#136a3e] transition-colors"
+                  className="text-white/75 hover:text-white transition-colors"
                 >
                   <XIcon className="h-3 w-3" />
                 </a>
               </div>
-              <span className="text-neutral-300">|</span>
+              <span className="text-white/30">|</span>
               <Link
                 to="/login"
-                className="font-medium text-neutral-600 hover:text-[#136a3e] transition-colors whitespace-nowrap text-xs"
+                className="font-medium text-white/90 hover:text-amber-300 transition-colors whitespace-nowrap text-xs"
               >
                 Client Portal
               </Link>
-              <span className="text-neutral-300">|</span>
+              <span className="text-white/30">|</span>
               <Link
                 to="/career"
-                className="font-medium text-neutral-600 hover:text-[#136a3e] transition-colors whitespace-nowrap text-xs"
+                className="font-medium text-white/90 hover:text-amber-300 transition-colors whitespace-nowrap text-xs"
               >
                 Careers
               </Link>
@@ -218,24 +218,24 @@ export function SiteHeader() {
         {/* Floating Pill Main Navigation Bar (Calculated with ample internal clearance to NEVER overflow) */}
         <div className="w-full px-2.5 sm:px-5 lg:px-7 py-2 sm:py-2.5 transition-all duration-300">
           <div
-            className={`mx-auto max-w-[1400px] rounded-full border border-neutral-200/90 bg-white/95 backdrop-blur-md px-3.5 sm:px-5 xl:px-6 2xl:px-7 py-2 sm:py-2.5 flex items-center justify-between gap-2 xl:gap-4 transition-all duration-300 ${
+            className={`mx-auto max-w-[1400px] rounded-full border border-neutral-200/90 bg-white/95 backdrop-blur-md px-4 sm:px-6 xl:px-7 2xl:px-8 py-2 sm:py-2.5 flex items-center justify-between gap-2 xl:gap-4 transition-all duration-300 min-h-[74px] sm:min-h-[82px] ${
               scrolled
                 ? "shadow-[0_8px_30px_rgba(0,0,0,0.08)] border-neutral-300/80"
                 : "shadow-[0_4px_22px_rgba(0,0,0,0.04)]"
             }`}
           >
             {/* Logo Section */}
-            <Link to="/" className="flex items-center gap-2 sm:gap-2.5 shrink-0 group">
+            <Link to="/" className="flex items-center gap-3 sm:gap-3.5 shrink-0 group">
               <img
                 src="/logo.png"
                 alt="Regal OPs Logo"
-                className="h-8 sm:h-9 w-auto object-contain shrink-0 transition-transform duration-200 group-hover:scale-105"
+                className="h-13 sm:h-15 xl:h-16 2xl:h-[68px] w-auto object-contain shrink-0 transition-transform duration-200 group-hover:scale-105"
               />
               <div className="flex flex-col shrink-0 justify-center">
-                <span className="font-display text-[16px] sm:text-[18px] 2xl:text-[19px] font-bold tracking-tight text-neutral-900 leading-none whitespace-nowrap">
+                <span className="font-display text-[22px] sm:text-[24px] xl:text-[26px] font-bold tracking-tight text-neutral-900 leading-none whitespace-nowrap">
                   Regal OPs
                 </span>
-                <span className="text-[7.5px] sm:text-[8px] 2xl:text-[8.5px] font-bold uppercase tracking-[0.18em] text-neutral-400 mt-0.5 leading-none whitespace-nowrap">
+                <span className="text-[9px] sm:text-[10px] xl:text-[11px] font-bold uppercase tracking-[0.22em] text-neutral-500 mt-1 leading-none whitespace-nowrap">
                   CONSULT | BUILD | DEPLOY
                 </span>
               </div>
@@ -379,22 +379,17 @@ export function SiteHeader() {
                 Clients
               </Link>
 
-              {/* Career with HIRING badge cleanly placed inline */}
-              <div className="flex items-center py-1">
-                <Link
-                  to="/career"
-                  className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors ${
-                    isActive("/career")
-                      ? "text-[#136a3e] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#136a3e] after:rounded-full"
-                      : "text-neutral-700 hover:text-neutral-950"
-                  }`}
-                >
-                  Career
-                </Link>
-                <span className="ml-1 rounded-full bg-[#dcfce7] px-1.5 py-0.2 text-[8px] font-bold uppercase tracking-wider text-[#15803d] pointer-events-none shadow-2xs">
-                  HIRING
-                </span>
-              </div>
+              {/* Career */}
+              <Link
+                to="/career"
+                className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
+                  isActive("/career")
+                    ? "text-[#136a3e] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#136a3e] after:rounded-full"
+                    : "text-neutral-700 hover:text-neutral-950"
+                }`}
+              >
+                Career
+              </Link>
 
               {/* Blog */}
               <Link
@@ -429,7 +424,7 @@ export function SiteHeader() {
                 id="header-search-trigger"
                 onClick={() => setSearchOpen(true)}
                 aria-label="Search"
-                className="flex items-center gap-1.5 rounded-full border border-neutral-200/90 bg-[#F9FAFB] hover:bg-neutral-100/90 px-2.5 sm:px-3 py-1.5 text-xs text-neutral-400 hover:text-neutral-600 transition-colors shadow-2xs cursor-pointer"
+                className="flex items-center gap-1.5 rounded-full border border-neutral-200/90 bg-[#F9FAFB] hover:bg-neutral-100/90 px-3 sm:px-3.5 py-2 text-xs text-neutral-400 hover:text-neutral-600 transition-colors shadow-2xs cursor-pointer"
               >
                 <Search className="h-3.5 w-3.5 text-[#b4883b]" />
                 <span className="hidden sm:inline font-normal text-neutral-500">Search...</span>
@@ -445,7 +440,7 @@ export function SiteHeader() {
               <Link
                 to="/login"
                 id="header-client-portal"
-                className="hidden xl:flex items-center gap-1 rounded-full border border-neutral-200 bg-white hover:bg-neutral-50 px-2.5 2xl:px-3 py-1.5 text-xs font-semibold text-neutral-700 hover:text-neutral-900 shadow-2xs transition-all hover:border-neutral-300 whitespace-nowrap"
+                className="hidden xl:flex items-center gap-1 rounded-full border border-neutral-200 bg-white hover:bg-neutral-50 px-3 2xl:px-3.5 py-2 text-xs font-semibold text-neutral-700 hover:text-neutral-900 shadow-2xs transition-all hover:border-neutral-300 whitespace-nowrap"
               >
                 <Lock className="h-3 w-3 text-[#854d0e]" />
                 <span>Portal</span>
@@ -455,7 +450,7 @@ export function SiteHeader() {
               <Link
                 to="/contact"
                 id="header-cta-button"
-                className="flex items-center gap-1.5 rounded-full bg-[#136a3e] hover:bg-[#0e5230] text-white text-xs font-semibold px-3.5 sm:px-4 py-1.5 sm:py-2 shadow-sm shadow-[#136a3e]/25 hover:shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap group"
+                className="flex items-center gap-1.5 rounded-full bg-[#136a3e] hover:bg-[#0e5230] text-white text-xs sm:text-[13px] font-semibold px-4 sm:px-5 py-2 sm:py-2.5 shadow-sm shadow-[#136a3e]/25 hover:shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap group"
               >
                 <span>Book Consultation</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -467,7 +462,7 @@ export function SiteHeader() {
                 aria-label="Toggle navigation menu"
                 aria-expanded={open}
                 onClick={() => setOpen((v) => !v)}
-                className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full border border-neutral-200 xl:hidden hover:bg-neutral-100 transition-colors text-neutral-700 cursor-pointer shrink-0"
+                className="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-full border border-neutral-200 xl:hidden hover:bg-neutral-100 transition-colors text-neutral-700 cursor-pointer shrink-0"
               >
                 {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
               </button>

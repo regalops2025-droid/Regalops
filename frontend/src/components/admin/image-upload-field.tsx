@@ -164,11 +164,11 @@ export function ImageUploadField({
       {value ? (
         <div className="group relative overflow-hidden rounded-2xl border border-border bg-surface/50 p-3 transition-all hover:border-primary/40">
           <div className="flex items-center gap-4">
-            <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-xl border border-border/80 bg-surface-2 shadow-xs">
+            <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-xl border border-border/80 bg-surface-2 shadow-xs flex items-center justify-center">
               <img
                 src={value}
                 alt={label}
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                className="max-h-full max-w-full object-contain p-1 transition-transform duration-300 group-hover:scale-105"
                 onError={(e) => {
                   (e.target as HTMLElement).style.display = "none";
                 }}
@@ -196,7 +196,7 @@ export function ImageUploadField({
                 {value.startsWith("data:") ? "Local upload (embedded)" : value}
               </p>
               <p className="text-[11px] text-emerald-600/90 dark:text-emerald-400/90 font-medium">
-                ✓ Auto-scaled &amp; centered to uniform card height on website
+                ✓ Full image preserved naturally without cutting or blocking
               </p>
 
               <div className="flex items-center gap-2 pt-1">
@@ -285,7 +285,7 @@ export function ImageUploadField({
               )}
 
               <p className="text-[11px] text-muted-foreground/80">
-                PNG, JPG, WEBP or GIF (All aspect ratios auto-scale &amp; crop uniformly)
+                PNG, JPG, WEBP or GIF (All aspect ratios supported cleanly)
               </p>
             </div>
           )}

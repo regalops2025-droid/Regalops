@@ -310,15 +310,6 @@
       "content": "[{\"heading\":\"The 60% Trap in Legacy Modernization\",\"image\":\"/solutions-app-dev.jpg\",\"story\":\"Incremental strangler-fig migration patterns are highly popular, but they commonly hit a wall at 60%. The legacy system remains running because the remaining services are complex, causing double overhead costs and dual maintenance cycles.\"},{\"heading\":\"Decommission Deadline Contract\",\"image\":\"/solutions-qa.jpg\",\"story\":\"To prevent project drift, define an absolute decommission deadline within the software development agreement. This forces engineering teams to focus on full migration rather than leaving legacy subsystems dangling indefinitely.\"}]"
     },
     {
-      "id": 2,
-      "created_at": "2026-08-19T07:05:39.359Z",
-      "title": "Your warehouse does not need real-time",
-      "tag": "Data",
-      "image": "/hero-slide-2.jpg",
-      "description": "A five-minute batch answers 94% of enterprise questions at a fraction of streaming cost.",
-      "content": "[{\"heading\":\"The Overhead of Streaming Pipelines\",\"image\":\"/hero-globe-glow.jpg\",\"story\":\"Many enterprises install Kafka or other real-time streaming tools blindly, underestimating the maintenance and query cost. Real-time streaming demands massive memory buffers, distributed coordination, and constant socket maintenance.\"},{\"heading\":\"Why 5-Minute Batches are Enough\",\"image\":\"/solutions-team.jpg\",\"story\":\"Most corporate dashboards are reviewed weekly or daily. Splitting workloads into a 5-minute micro-batch provides virtually instantaneous answers at a tenth of the operational compute cost.\"}]"
-    },
-    {
       "id": 3,
       "created_at": "2026-08-19T07:05:39.360Z",
       "title": "Agents need audit trails before autonomy",
@@ -326,15 +317,6 @@
       "image": "/hero-slide-ai.jpg",
       "description": "In regulated environments, observability is the feature that makes automation approvable.",
       "content": "[{\"heading\":\"Autonomy Without Visibility\",\"image\":\"/hero-slide-cyber.jpg\",\"story\":\"Giving AI agents write access to transaction logs or CRM databases without strict log trails is a major compliance risk. Regulated institutions will never approve autonomous workflows unless every action can be fully audited and reproduced.\"},{\"heading\":\"Deterministic Guardrails & Audit Logging\",\"image\":\"/solutions-qa.jpg\",\"story\":\"Every tool call made by an LLM agent should be recorded in an immutable ledger with input prompts, tool schema calls, return codes, and latency telemetry for complete forensic accountability.\"}]"
-    },
-    {
-      "id": 4,
-      "created_at": "2026-10-06T09:33:51.470Z",
-      "title": "Zero-Downtime Multi-Region Failover on Kubernetes: Field Notes from 10M Daily Transactions",
-      "tag": "Cloud & DevOps",
-      "image": "/hero-slide-3.jpg",
-      "description": "Designing active-passive database topologies and sub-second DNS traffic shifting for high-throughput enterprise systems that cannot afford a single minute of downtime.",
-      "content": "[{\"heading\":\"The Architecture of Geographic Resilience\",\"image\":\"/hero-globe-glow.jpg\",\"story\":\"When a Tier-1 retail banking core or healthcare network operates across multiple cloud availability zones and regions, failure is not an abstract possibility—it is an inevitability. We designed an automated multi-cluster ingress using Cilium mesh and Anycast BGP routing that probes service health at 50ms intervals, executing seamless traffic cutovers without dropping in-flight TCP sessions.\"},{\"heading\":\"Solving Cross-Region Database Latency\",\"image\":\"/hero-slide-1.jpg\",\"story\":\"The true obstacle in multi-region deployments is the speed of light. Synchronous replication across 2,000 miles adds 45-60ms of round-trip penalty to every commit. By employing read-replicas with bounded staleness vectors and idempotent transactional messaging, write workloads execute locally with eventual consistency guarantees within 250 milliseconds.\"},{\"heading\":\"Automated Chaos Engineering in Production\",\"image\":\"/solutions-strategy.jpg\",\"story\":\"Resilience cannot be validated on paper. We integrate scheduled chaos engineering drills into our staging and canary release pipelines using Chaos Mesh. By simulating simulated fiber cuts and cloud region outages, our squads continuously verify that self-healing controllers execute recovery within our 99.98% contractual SLA.\"}]"
     },
     {
       "id": 5,
@@ -355,15 +337,6 @@
       "content": "[{\"heading\":\"Event Storming & Defining Bounded Contexts\",\"image\":\"/solutions-team.jpg\",\"story\":\"Microservice migrations frequently devolve into distributed monoliths when teams carve up code along database tables rather than business domain boundaries. By holding rigorous Event Storming workshops with domain experts, we identify autonomous business aggregates that can be safely sliced without distributed two-phase commits.\"},{\"heading\":\"Change Data Capture (CDC) with Debezium\",\"image\":\"/hero-slide-1.jpg\",\"story\":\"Rather than attempting a high-risk big-bang database migration, we attach Debezium change-data-capture connectors directly to legacy database transaction logs. Every database insert or update streams as an Apache Kafka event, populating the new event-driven microservices in real-time with zero downtime.\"},{\"heading\":\"Contract-Driven API Design & Pact Testing\",\"image\":\"/solutions-strategy.jpg\",\"story\":\"To prevent breaking cross-team dependencies, consumer-driven contract testing with Pact verifies that provider microservices uphold payload schemas before any merge to main. Decoupled teams deploy dozens of micro-releases weekly with complete autonomy.\"}]"
     },
     {
-      "id": 8,
-      "created_at": "2026-09-24T09:33:51.485Z",
-      "title": "Petabyte-Scale Lakehouse Architectures: Apache Iceberg & Trino for Fast Telemetry",
-      "tag": "Data Platforms",
-      "image": "/hero-slide-2.jpg",
-      "description": "Moving from fragmented data silos to unified open table formats that slash cloud compute bills by 45% while enabling interactive sub-second queries.",
-      "content": "[{\"heading\":\"Overcoming Hive Metastore Partition Bottlenecks\",\"image\":\"/hero-slide-2.jpg\",\"story\":\"Traditional cloud data lakes on S3 or GCS suffer severe metadata latency when tables grow past tens of thousands of partitions. Directory listing operations stall analytic queries for minutes. Apache Iceberg solves this by tracking files in hierarchical metadata trees, executing partition prunes in milliseconds.\"},{\"heading\":\"Interactive Querying with Trino & MinIO\",\"image\":\"/solutions-qa.jpg\",\"story\":\"By decoupling storage and compute, distributed Trino query clusters execute federated analytical SQL directly over object storage without requiring expensive proprietary data warehouses. The result is a single pane of glass for real-time telemetry, compliance reporting, and business intelligence.\"},{\"heading\":\"Unified Governance & Data Lineage\",\"image\":\"/footer-skyline.jpg\",\"story\":\"With Apache Ranger and OpenLineage integrated into the catalog layer, compliance teams audit column-level access permissions and data provenance from ingestion down to executive dashboards.\"}]"
-    },
-    {
       "id": 9,
       "created_at": "2026-09-21T09:33:51.485Z",
       "title": "HIPAA-Compliant FHIR Interoperability: Integrating 40+ Legacy Hospital Feeds",
@@ -380,6 +353,15 @@
       "image": "/solutions-strategy.jpg",
       "description": "Strategic spot instance orchestration, automated Karpenter pod autoscaling, and storage tier lifecycle policies for enterprise AWS and Azure estates.",
       "content": "[{\"heading\":\"The Silent Drain of Over-Provisioned Clusters\",\"image\":\"/solutions-strategy.jpg\",\"story\":\"Enterprise engineering teams routinely over-provision Kubernetes nodes by 300% to protect against hypothetical traffic spikes. Implementing Karpenter with intelligent multi-architecture spot instance selection automatically consolidates underutilized workloads, dropping compute bills by 35-45% in the first billing cycle.\"},{\"heading\":\"Continuous FinOps Observability & Culture\",\"image\":\"/footer-skyline.jpg\",\"story\":\"Effective cloud cost management is not a quarterly accounting exercise; it is an active engineering discipline. By tagging every pod with business cost-centers and streaming OpenCost metrics directly into Slack, teams receive instant feedback on the fiscal impact of every architectural choice.\"}]"
+    },
+    {
+      "id": 11,
+      "created_at": "2026-10-09T10:18:13.599Z",
+      "title": "testing ",
+      "tag": "technology",
+      "image": "/uploads/img-1791540973722-153871512.png",
+      "description": "Recommended size: 1200 × 675 px (16:9 aspect ratio). Auto-scaled & cropped for card feeds and article headers.",
+      "content": "[{\"heading\":\"section 1\",\"image\":\"https://www.jrecmep.com/jr-logo.png\",\"story\":\"story \"}]"
     }
   ],
   "job_applications": [

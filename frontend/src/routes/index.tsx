@@ -158,7 +158,8 @@ const showcaseSlides = [
     image: "/hero-slide-3.jpg",
     alt: "Are you Investing or Just Spending on IT",
     tag: "Strategic Technology ROI & Growth",
-    titlePrefix: "Are you Investing or ",
+    titlePrefix: "Are you Investing or",
+    titleBreak: true,
     titleHighlight: "Just Spending on IT?",
     titleSuffix: "",
     subtitle: "TURN TECHNOLOGY EXPENDITURES INTO COMPOUNDING BUSINESS VALUE",
@@ -756,7 +757,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 1. HERO SECTION WITH BACKGROUND CAROUSEL & ROTATION EFFECTS           */}
       {/* ==================================================================== */}
-      <section className="relative overflow-hidden bg-white border-b border-neutral-200/70 min-h-[400px] sm:min-h-[430px] lg:min-h-[460px] flex items-center justify-between">
+      <section className="relative overflow-hidden bg-white border-b border-neutral-200/70">
         
         {/* Full-bleed Background Slide Images */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -769,19 +770,16 @@ function Home() {
                   isActive ? "opacity-100" : "opacity-0"
                 }`}
               >
-                {/* Visual positioned on the right half on desktop */}
-                <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[62%] xl:w-[58%] overflow-hidden">
+                {/* Full-bleed visual across entire banner */}
+                <div className="absolute inset-0 overflow-hidden">
                   <img
                     src={slide.image}
                     alt={slide.alt}
-                    className="h-full w-full object-cover object-center lg:object-right transition-transform duration-1000 ease-out"
+                    className="h-full w-full object-cover object-right transition-transform duration-1000 ease-out"
                   />
-                  {/* Soft edge blend gradient for smooth falloff */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-white via-white/30 to-transparent lg:via-transparent" />
+                  {/* Soft readable gradient mask across text area */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent w-full lg:w-[65%]" />
                 </div>
-
-                {/* Left gradient mask to ensure pure legibility of foreground text */}
-                <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-transparent w-full lg:w-[55%]" />
               </div>
             );
           })}
@@ -791,24 +789,24 @@ function Home() {
         <button
           type="button"
           onClick={() => setActiveSlide((prev) => (prev - 1 + showcaseSlides.length) % showcaseSlides.length)}
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 flex h-10 w-8 sm:h-11 sm:w-9 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
+          className="absolute left-1.5 sm:left-2.5 top-1/2 -translate-y-1/2 z-20 flex h-9 w-7 sm:h-10 sm:w-8 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
+          <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
         </button>
 
         <button
           type="button"
           onClick={() => setActiveSlide((prev) => (prev + 1) % showcaseSlides.length)}
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 flex h-10 w-8 sm:h-11 sm:w-9 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
+          className="absolute right-1.5 sm:right-2.5 top-1/2 -translate-y-1/2 z-20 flex h-9 w-7 sm:h-10 sm:w-8 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
           aria-label="Next slide"
         >
-          <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
+          <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
         </button>
 
         {/* Foreground Content for Active Slide */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12 py-5 sm:py-6 lg:py-7">
-          <div className="max-w-2xl xl:max-w-3xl">
+        <div className="relative z-10 w-full pl-8 sm:pl-10 lg:pl-12 pr-4 sm:pr-8 py-3 sm:py-3.5 lg:py-4">
+          <div className="max-w-2xl lg:max-w-3xl xl:max-w-4xl">
             {showcaseSlides.map((slide, idx) => {
               if (idx !== activeSlide) return null;
               return (
@@ -823,8 +821,9 @@ function Home() {
                   </div>
 
                   {/* Main Headline */}
-                  <h1 className="mt-2.5 sm:mt-3 text-2xl sm:text-3xl lg:text-[2.4rem] xl:text-[2.75rem] font-medium tracking-tight text-neutral-800 leading-[1.14]">
+                  <h1 className="mt-2 text-2xl sm:text-3xl lg:text-[2.25rem] xl:text-[2.5rem] font-medium tracking-tight text-neutral-800 leading-[1.14]">
                     {slide.titlePrefix}
+                    {slide.titleBreak && <br />}
                     <span className="font-extrabold text-neutral-950">
                       {slide.titleHighlight}
                     </span>
@@ -833,21 +832,21 @@ function Home() {
 
                   {/* Subtitle / Eyebrow text */}
                   {slide.subtitle && (
-                    <p className="mt-1.5 text-[11px] sm:text-xs font-bold tracking-wider text-neutral-500 uppercase">
+                    <p className="mt-1 text-[10px] sm:text-[11px] font-bold tracking-wider text-neutral-500 uppercase">
                       {slide.subtitle}
                     </p>
                   )}
 
                   {/* Paragraph Description */}
-                  <p className="mt-2.5 max-w-xl text-xs sm:text-sm leading-relaxed text-neutral-600">
+                  <p className="mt-2 max-w-xl text-xs sm:text-sm leading-relaxed text-neutral-600">
                     {slide.desc}
                   </p>
 
                   {/* Action Buttons */}
-                  <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-3">
+                  <div className="mt-3.5 sm:mt-4 flex flex-wrap items-center gap-3">
                     <Link
                       to={slide.primaryCta.link}
-                      className="inline-flex items-center gap-2 rounded-full bg-[#136a3e] hover:bg-[#0e5230] px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#136a3e]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer group"
+                      className="inline-flex items-center gap-2 rounded-full bg-[#136a3e] hover:bg-[#0e5230] px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#136a3e]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer group"
                     >
                       <span>{slide.primaryCta.text}</span>
                       <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -855,7 +854,7 @@ function Home() {
 
                     <Link
                       to={slide.secondaryCta.link}
-                      className="inline-flex items-center gap-2 rounded-full border border-neutral-300 hover:border-neutral-400 bg-white/90 hover:bg-white px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-neutral-800 shadow-xs hover:shadow-sm transition-all duration-200 cursor-pointer"
+                      className="inline-flex items-center gap-2 rounded-full border border-neutral-300 hover:border-neutral-400 bg-white/90 hover:bg-white px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-neutral-800 shadow-xs hover:shadow-sm transition-all duration-200 cursor-pointer"
                     >
                       <span>{slide.secondaryCta.text}</span>
                       <ArrowRight className="h-3.5 w-3.5 text-neutral-500" />
@@ -863,7 +862,7 @@ function Home() {
                   </div>
 
                   {/* Trust guarantees bar */}
-                  <div className="mt-3.5 flex flex-wrap items-center gap-3.5 text-[10px] sm:text-[11px] font-medium text-neutral-500">
+                  <div className="mt-3 flex flex-wrap items-center gap-3.5 text-[10px] sm:text-[11px] font-medium text-neutral-500">
                     <span className="flex items-center gap-1">
                       <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> 99.98% SLA Uptime
                     </span>
@@ -880,7 +879,7 @@ function Home() {
           </div>
 
           {/* Carousel Indicators / Navigation Dots anchored inside */}
-          <div className="mt-5 flex items-center gap-2 bg-white/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-neutral-200/80 shadow-xs w-fit">
+          <div className="mt-3 sm:mt-3.5 flex items-center gap-2 bg-white/85 backdrop-blur-md px-3 py-1 rounded-full border border-neutral-200/80 shadow-xs w-fit">
             {showcaseSlides.map((slide, i) => (
               <button
                 key={slide.id}
@@ -902,7 +901,7 @@ function Home() {
       </section>
 
       {/* Trust Stats Strip (Positioned directly below the compact hero slider) */}
-      <div className="border-b border-neutral-200/70 bg-[#fafcfb] py-3.5 sm:py-4">
+      <div className="border-b border-neutral-200/70 bg-[#fafcfb] py-2 sm:py-2.5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:divide-x sm:divide-neutral-200/70">
             {stats.map((s) => {
@@ -930,13 +929,13 @@ function Home() {
       {/* ==================================================================== */}
       {/* 2. ENTERPRISE TECH STACK INFINITE MARQUEE                             */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-3 overflow-hidden">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-2 overflow-hidden">
         <div className="relative w-full overflow-hidden flex items-center">
           <div className="flex items-center gap-4 whitespace-nowrap animate-marquee">
             {[...techStackMarquee, ...techStackMarquee].map((tech, idx) => (
               <div
                 key={idx}
-                className="inline-flex items-center gap-2.5 rounded-full border border-neutral-200/80 bg-white px-4 py-2 text-xs font-semibold text-neutral-700 hover:border-emerald-600/40 hover:bg-emerald-50/40 hover:text-emerald-900 transition-colors shadow-2xs"
+                className="inline-flex items-center gap-2.5 rounded-full border border-neutral-200/80 bg-white px-4 py-1.5 text-xs font-semibold text-neutral-700 hover:border-emerald-600/40 hover:bg-emerald-50/40 hover:text-emerald-900 transition-colors shadow-2xs"
               >
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                 <span>{tech.name}</span>
@@ -953,7 +952,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 3. ABOUT REGAL OPS — "WHO WE ARE & WHAT WE DO" (Vuesol Reference)    */}
       {/* ==================================================================== */}
-      <section id="about" className="relative bg-white py-6 sm:py-8 overflow-hidden">
+      <section id="about" className="relative bg-white py-4 sm:py-5 overflow-hidden">
         {/* Ambient background soft glow */}
         <div className="absolute top-1/2 right-12 -translate-y-1/2 w-96 h-96 rounded-full bg-gradient-to-tr from-sky-400/10 via-orange-400/10 to-amber-300/10 blur-3xl pointer-events-none" />
 
@@ -970,27 +969,27 @@ function Home() {
               </div>
 
               {/* Main Heading matching Reference */}
-              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight leading-[1.15]">
+              <h2 className="mt-3 text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight leading-[1.15]">
                 About Regal OPs
               </h2>
 
               {/* Subheading in Italicized Font matching Reference */}
-              <p className="mt-2 text-lg sm:text-xl font-normal italic font-serif text-neutral-600 tracking-wide">
+              <p className="mt-1.5 text-lg sm:text-xl font-normal italic font-serif text-neutral-600 tracking-wide">
                 Who We Are &amp; What We Do
               </p>
 
               {/* Paragraph 1 matching Reference */}
-              <p className="mt-3.5 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
+              <p className="mt-3 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
                 We empower companies by helping them utilize and integrate the most recent technological advances. This allows businesses to respond more quickly and intuitively to changing market dynamics. At Regal OPs, we have a long track record of transforming organizations into high-performing businesses that can tap into new, high-profit opportunities.
               </p>
 
               {/* Paragraph 2 matching Reference */}
-              <p className="mt-2.5 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
+              <p className="mt-2 text-sm sm:text-[15.5px] leading-relaxed text-neutral-600">
                 By utilizing our technical expertise, industry insight, technological vision, and innovative thinking we can help you identify new opportunities for growth and innovation. We enable organizations to reach their full potential and accelerate their business. Don’t just keep up with the competition, get ahead. The market can be crowded, but we will make you stand out.
               </p>
 
               {/* CTAs matching reference button style */}
-              <div className="mt-5 flex flex-wrap items-center gap-3.5">
+              <div className="mt-4 flex flex-wrap items-center gap-3.5">
                 <Link
                   to="/about"
                   className="inline-flex items-center gap-2 rounded bg-[#0091d5] hover:bg-[#007cb8] px-6 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
@@ -1025,7 +1024,7 @@ function Home() {
                 </div>
 
                 {/* Overlaid Floating Badge */}
-                <div className="absolute -bottom-2 -left-2 sm:bottom-4 sm:left-4 z-20 rounded-2xl border border-neutral-200/90 bg-white/95 backdrop-blur-md p-3.5 sm:p-4 shadow-xl shadow-neutral-900/8 max-w-[240px] sm:max-w-[270px]">
+                <div className="absolute -bottom-2 -left-2 sm:bottom-4 sm:left-4 z-20 rounded-2xl border border-neutral-200/90 bg-white/95 backdrop-blur-md p-3 sm:p-3.5 shadow-xl shadow-neutral-900/8 max-w-[240px] sm:max-w-[270px]">
                   <div className="flex items-center gap-3">
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-orange-600 border border-orange-100 shadow-xs">
                       <Sparkles className="h-4 w-4" />
@@ -1053,9 +1052,9 @@ function Home() {
         </div>
 
         {/* Seamless Soft Curve Transition into Our Services */}
-        <div className="w-full overflow-hidden leading-none mt-12 sm:mt-16 -mb-1">
+        <div className="w-full overflow-hidden leading-none mt-4 sm:mt-6 -mb-1">
           <svg
-            className="relative block w-full h-8 sm:h-12 lg:h-16 text-[#fafcfb]"
+            className="relative block w-full h-6 sm:h-8 lg:h-10 text-[#fafcfb]"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
             fill="currentColor"
@@ -1069,7 +1068,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 4. OUR SERVICES SECTION (Infinite Scrolling Marquee + Grid Toggle)   */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-6 sm:py-8 overflow-hidden">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-4 sm:py-5 overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Header */}
@@ -1077,20 +1076,20 @@ function Home() {
             <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight">
               Our Services
             </h2>
-            <p className="mt-2 text-base sm:text-lg text-neutral-600 italic font-serif sm:font-normal">
+            <p className="mt-1.5 text-base sm:text-lg text-neutral-600 italic font-serif sm:font-normal">
               Accelerate your journey to success with our expertise, insights, innovation and vision
             </p>
           </div>
         </div>
 
         {/* AUTO-SCROLLING MARQUEE FLOW */}
-        <div className="mt-5 sm:mt-6 relative w-full overflow-hidden group py-1.5">
+        <div className="mt-3 sm:mt-4 relative w-full overflow-hidden group py-1">
           {/* Subtle Gradient Fade Masks on Edges */}
           <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
           <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
 
           {/* Seamless Infinite Marquee Track with Pause on Hover */}
-          <div className="flex gap-5 w-max py-3 px-4 transition-all duration-300 animate-marquee-services hover:[animation-play-state:paused]">
+          <div className="flex gap-5 w-max py-2 px-4 transition-all duration-300 animate-marquee-services hover:[animation-play-state:paused]">
             {[...displayServices, ...displayServices].map((service, idx) => {
               const iconElement =
                 service.icon && typeof service.icon !== "string"
@@ -1104,25 +1103,25 @@ function Home() {
                 <Link
                   key={`${service.id || "srv"}-${idx}`}
                   to={link}
-                  className="group/card flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-7 sm:p-8 w-[285px] sm:w-[320px] shrink-0 transition-all duration-300 hover:-translate-y-2 hover:border-sky-400/60 hover:shadow-[0_16px_35px_rgba(2,132,199,0.12)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer select-none"
+                  className="group/card flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-6 w-[285px] sm:w-[320px] shrink-0 transition-all duration-300 hover:-translate-y-2 hover:border-sky-400/60 hover:shadow-[0_16px_35px_rgba(2,132,199,0.12)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer select-none"
                 >
                   {/* Vector Icon */}
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50/80 group-hover/card:bg-sky-50 transition-colors duration-300">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50/80 group-hover/card:bg-sky-50 transition-colors duration-300">
                     {iconElement}
                   </div>
 
                   {/* Title */}
-                  <h3 className="mt-6 text-lg sm:text-[18px] font-bold text-neutral-900 group-hover/card:text-sky-700 transition-colors leading-snug">
+                  <h3 className="mt-4 text-base sm:text-[17px] font-bold text-neutral-900 group-hover/card:text-sky-700 transition-colors leading-snug">
                     {title}
                   </h3>
 
                   {/* Description */}
-                  <p className="mt-3 text-xs sm:text-[13.5px] leading-relaxed text-neutral-500 line-clamp-3">
+                  <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-neutral-500 line-clamp-3">
                     {desc}
                   </p>
 
                   {/* Bottom Explore Link */}
-                  <div className="mt-auto pt-6 flex items-center gap-1.5 text-xs font-semibold text-[#136a3e] group-hover/card:text-[#0e5230]">
+                  <div className="mt-auto pt-4 flex items-center gap-1.5 text-xs font-semibold text-[#136a3e] group-hover/card:text-[#0e5230]">
                     <span>Explore Practice</span>
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/card:translate-x-1" />
                   </div>
@@ -1133,13 +1132,13 @@ function Home() {
         </div>
 
         {/* Bottom Explore CTA Bar */}
-        <div className="mt-5 sm:mt-6 text-center">
+        <div className="mt-3 sm:mt-4 text-center">
           <Link
             to="/solutions"
-            className="inline-flex items-center gap-2.5 rounded-full bg-[#136a3e] hover:bg-[#0e5230] px-7 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#136a3e]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
+            className="inline-flex items-center gap-2 rounded-full bg-[#136a3e] hover:bg-[#0e5230] px-6 py-2.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#136a3e]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
           >
             <span>Explore Solutions</span>
-            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
         </div>
       </section>
@@ -1147,7 +1146,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 5. OUR CLIENTS — "WHO WE WORK WITH" (Vuesol Reference Match)         */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fbfcfd] py-6 sm:py-8">
+      <section className="border-b border-neutral-200/70 bg-[#fbfcfd] py-4 sm:py-5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Desktop Layout: Exact center-callout 4-row layout matching reference */}
@@ -1267,7 +1266,7 @@ function Home() {
           </div>
 
           {/* "More Clients" Centered Button */}
-          <div className="mt-8 sm:mt-10 lg:mt-12 text-center">
+          <div className="mt-4 sm:mt-5 text-center">
             <Link
               to="/clients"
               className="inline-flex items-center justify-center rounded border border-[#0091d5] text-[#0091d5] hover:bg-[#0091d5] hover:text-white px-8 py-2 text-xs sm:text-sm font-semibold shadow-2xs hover:shadow transition-all duration-200 cursor-pointer"
@@ -1283,7 +1282,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 7. INTERACTIVE ARCHITECTURE BLUEPRINT & TOPOLOGY SHOWCASE            */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-6 sm:py-8">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-4 sm:py-5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
@@ -1292,12 +1291,12 @@ function Home() {
             <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               The Regal OPs Production Topology
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-neutral-600">
+            <p className="mt-1.5 text-sm sm:text-base text-neutral-600">
               Click through the architectural layers of our resilient, audited enterprise platform foundation.
             </p>
           </div>
 
-          <div className="mt-5 sm:mt-6 grid gap-5 lg:grid-cols-12 items-start">
+          <div className="mt-4 sm:mt-5 grid gap-5 lg:grid-cols-12 items-start">
             
             {/* Left Layer Selectors */}
             <div className="lg:col-span-5 space-y-3">
@@ -1438,7 +1437,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 9. AUDITED CASE STUDIES & CLIENT OUTCOMES                             */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-6 sm:py-8">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-4 sm:py-5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 max-w-2xl">
             <div>
@@ -1458,12 +1457,12 @@ function Home() {
             </Link>
           </div>
 
-          <div className="mt-5 sm:mt-6 grid gap-4 lg:grid-cols-3">
+          <div className="mt-3 sm:mt-4 grid gap-4 lg:grid-cols-3">
             {cases.map((c) => (
               <Link
                 key={c.title}
                 to="/clients"
-                className="group flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-white p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-emerald-600/40 hover:shadow-xl hover:shadow-emerald-950/5 cursor-pointer"
+                className="group flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-white p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-emerald-600/40 hover:shadow-xl hover:shadow-emerald-950/5 cursor-pointer"
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -1475,15 +1474,15 @@ function Home() {
                     </span>
                   </div>
 
-                  <h3 className="mt-4 text-lg font-bold text-neutral-900 group-hover:text-emerald-800 transition-colors">
+                  <h3 className="mt-3 text-base sm:text-lg font-bold text-neutral-900 group-hover:text-emerald-800 transition-colors">
                     {c.title}
                   </h3>
-                  <p className="mt-3 text-xs sm:text-sm leading-relaxed text-neutral-600">
+                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-neutral-600">
                     {c.result}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-5 border-t border-neutral-200/70 flex items-center justify-between">
+                <div className="mt-4 pt-4 border-t border-neutral-200/70 flex items-center justify-between">
                   <div>
                     <div className="text-xl font-extrabold text-neutral-900 font-display">
                       {c.metric}
@@ -1505,7 +1504,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 10. EXECUTIVE TESTIMONIALS                                            */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-white py-6 sm:py-8">
+      <section className="border-b border-neutral-200/70 bg-white py-4 sm:py-5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
@@ -1516,14 +1515,14 @@ function Home() {
             </h2>
           </div>
 
-          <div className="mt-5 sm:mt-6 grid gap-4 md:grid-cols-3">
+          <div className="mt-3 sm:mt-4 grid gap-4 md:grid-cols-3">
             {testimonials.map((t, idx) => (
               <figure
                 key={idx}
-                className="flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-[#fafcfb] p-7 shadow-xs hover:border-emerald-600/30 hover:shadow-md transition-all relative overflow-hidden"
+                className="flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-[#fafcfb] p-5 sm:p-6 shadow-xs hover:border-emerald-600/30 hover:shadow-md transition-all relative overflow-hidden"
               >
                 <div>
-                  <div className="flex items-center gap-1 text-emerald-600 mb-3">
+                  <div className="flex items-center gap-1 text-emerald-600 mb-2">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <span key={star} className="text-sm">★</span>
                     ))}
@@ -1531,14 +1530,14 @@ function Home() {
                       {t.highlight}
                     </span>
                   </div>
-                  <blockquote className="text-sm sm:text-[15px] italic leading-relaxed text-neutral-700">
+                  <blockquote className="text-xs sm:text-sm italic leading-relaxed text-neutral-700">
                     "{t.quote}"
                   </blockquote>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-neutral-200/60">
-                  <figcaption className="text-sm font-bold text-neutral-900">{t.author}</figcaption>
-                  <p className="text-xs text-neutral-500 font-medium mt-0.5">{t.role} • {t.org}</p>
+                <div className="mt-4 pt-3 border-t border-neutral-200/60">
+                  <figcaption className="text-xs sm:text-sm font-bold text-neutral-900">{t.author}</figcaption>
+                  <p className="text-[11px] text-neutral-500 font-medium mt-0.5">{t.role} • {t.org}</p>
                 </div>
               </figure>
             ))}
@@ -1549,7 +1548,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 11. FREQUENTLY ASKED QUESTIONS (C-SUITE ACCORDION)                   */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-6 sm:py-8">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-4 sm:py-5">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
@@ -1558,12 +1557,12 @@ function Home() {
             <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               Clear Answers for Leadership
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-neutral-600">
+            <p className="mt-1.5 text-sm sm:text-base text-neutral-600">
               Everything you need to know about our engagement models, IP security, and SLA guarantees.
             </p>
           </div>
 
-          <div className="mt-5 sm:mt-6 space-y-3">
+          <div className="mt-3 sm:mt-4 space-y-2.5">
             {faqs.map((faq, idx) => {
               const isOpen = openFaqIndex === idx;
               return (
@@ -1574,77 +1573,24 @@ function Home() {
                   <button
                     type="button"
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between p-5 sm:p-6 text-left cursor-pointer gap-4"
+                    className="w-full flex items-center justify-between p-4 sm:p-5 text-left cursor-pointer gap-4"
                   >
-                    <span className="text-sm sm:text-base font-bold text-neutral-900">
+                    <span className="text-xs sm:text-sm font-bold text-neutral-900">
                       {faq.question}
                     </span>
-                    <div className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-transform duration-200 ${isOpen ? "rotate-180 bg-emerald-100 text-emerald-800" : ""}`}>
-                      <ChevronDown className="h-4 w-4" />
+                    <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-transform duration-200 ${isOpen ? "rotate-180 bg-emerald-100 text-emerald-800" : ""}`}>
+                      <ChevronDown className="h-3.5 w-3.5" />
                     </div>
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-neutral-600 leading-relaxed border-t border-neutral-100">
+                    <div className="px-4 sm:px-5 pb-5 pt-1 text-xs sm:text-sm text-neutral-600 leading-relaxed border-t border-neutral-100">
                       {faq.answer}
                     </div>
                   )}
                 </div>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* ==================================================================== */}
-      {/* 12. HIGH-IMPACT CALL TO ACTION BANNER                                 */}
-      {/* ==================================================================== */}
-      <section className="py-6 sm:py-8 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-900 via-[#0a311b] to-neutral-950 p-6 sm:p-10 text-white shadow-2xl">
-            {/* Ambient Background Glow */}
-            <div className="pointer-events-none absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-emerald-500/20 blur-3xl" />
-            <div className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
-
-            <div className="relative z-10 max-w-3xl">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-300">
-                Ready to Scale?
-              </span>
-              <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
-                Start with a High-Impact Technical Conversation
-              </h2>
-              <p className="mt-2.5 text-sm sm:text-base text-neutral-300 leading-relaxed max-w-2xl">
-                Bring your architecture. We will review your topology and tell you candidly what to optimize first — no sales decks required.
-              </p>
-
-              <div className="mt-5 flex flex-wrap items-center gap-3.5">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-emerald-500 hover:bg-emerald-400 px-6 py-3 text-xs sm:text-sm font-bold text-neutral-950 shadow-lg shadow-emerald-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all"
-                >
-                  Book an Architecture Consultation <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  to="/solutions"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 hover:bg-white/20 hover:border-white px-6 py-3 text-xs sm:text-sm font-semibold text-white shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all backdrop-blur-sm group"
-                >
-                  <span>Explore Solutions</span>
-                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                </Link>
-              </div>
-
-              <div className="mt-5 pt-4 border-t border-white/10 flex flex-wrap items-center gap-5 text-xs text-neutral-400">
-                <span className="flex items-center gap-1.5">
-                  <Check className="h-4 w-4 text-emerald-400" /> NDAs Respected
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Check className="h-4 w-4 text-emerald-400" /> 48-Hour Response Guarantee
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Check className="h-4 w-4 text-emerald-400" /> Senior Technologists Only
-                </span>
-              </div>
-            </div>
           </div>
         </div>
       </section>

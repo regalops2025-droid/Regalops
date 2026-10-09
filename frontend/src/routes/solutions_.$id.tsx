@@ -278,11 +278,11 @@ function SolutionDetail() {
         <div className="grid gap-6 lg:grid-cols-[1fr_380px] items-start">
           <div className="space-y-6">
             {solution.image && (
-              <div className="rounded-3xl overflow-hidden border border-border/80 shadow-md">
+              <div className="rounded-3xl overflow-hidden border border-border/80 shadow-md bg-surface-2/40 flex items-center justify-center">
                 <img
                   src={solution.image}
                   alt={solution.name}
-                  className="w-full h-64 sm:h-96 object-cover"
+                  className="w-full h-auto max-h-[520px] object-contain rounded-3xl"
                 />
               </div>
             )}

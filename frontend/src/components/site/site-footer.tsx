@@ -121,46 +121,18 @@ export function SiteFooter() {
           {/* COLUMN 1: Brand Identity, Mission, & Stat Metrics (lg:col-span-4)*/}
           {/* ---------------------------------------------------------------- */}
           <div className="lg:col-span-4 space-y-4">
-            {/* Geometric Golden Logo */}
+            {/* Official Brand Logo matching Header */}
             <Link to="/" className="inline-flex items-center gap-3.5 group">
-              <div className="relative flex h-14 w-14 shrink-0 items-center justify-center">
-                {/* SVG Geometric layered triangle icon matching brand emblem */}
-                <svg
-                  viewBox="0 0 64 64"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-full w-full drop-shadow-[0_2px_8px_rgba(217,168,62,0.35)]"
-                >
-                  <polygon
-                    points="32,6 58,54 6,54"
-                    stroke="#D4AF37"
-                    strokeWidth="3.2"
-                    strokeLinejoin="round"
-                  />
-                  <polygon
-                    points="32,16 50,50 14,50"
-                    stroke="#D4AF37"
-                    strokeWidth="2.2"
-                    strokeLinejoin="round"
-                    strokeOpacity="0.85"
-                  />
-                  <polygon
-                    points="32,26 42,46 22,46"
-                    stroke="#D4AF37"
-                    strokeWidth="1.8"
-                    strokeLinejoin="round"
-                    strokeOpacity="0.7"
-                  />
-                  {/* Subtle inner horizontal lines */}
-                  <line x1="22" y1="36" x2="42" y2="36" stroke="#D4AF37" strokeWidth="1.2" strokeOpacity="0.5" />
-                  <line x1="17" y1="44" x2="47" y2="44" stroke="#D4AF37" strokeWidth="1.2" strokeOpacity="0.5" />
-                </svg>
-              </div>
-              <div>
-                <span className="font-display text-2xl font-black tracking-tight text-white block group-hover:text-amber-300 transition-colors">
+              <img
+                src="/logo-emblem.png"
+                alt="Regal OPs Logo"
+                className="h-12 sm:h-14 w-auto object-contain shrink-0 transition-transform duration-200 group-hover:scale-105 drop-shadow-[0_2px_12px_rgba(217,168,62,0.35)]"
+              />
+              <div className="flex flex-col justify-center">
+                <span className="font-display text-2xl font-black tracking-tight text-white block group-hover:text-amber-300 transition-colors leading-none">
                   Regal OPs
                 </span>
-                <span className="text-[10px] font-bold tracking-[0.22em] text-[#D4AF37] block uppercase mt-0.5">
+                <span className="text-[10px] font-bold tracking-[0.22em] text-[#D4AF37] block uppercase mt-1 leading-none">
                   CONSULT &nbsp;|&nbsp; BUILD &nbsp;|&nbsp; DEPLOY
                 </span>
               </div>

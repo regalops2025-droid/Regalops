@@ -136,7 +136,6 @@ export const navItems: NavItem[] = [
   {
     label: "Career",
     to: "/career",
-    badge: "HIRING",
     featured: {
       badge: "GROWTH & CULTURE",
       title: "Shape the Future of Enterprise Tech",

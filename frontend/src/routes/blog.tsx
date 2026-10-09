@@ -100,11 +100,11 @@ function Blog() {
 
             {/* Main Cover Image */}
             {selectedPost.image && (
-              <div className="mt-4 rounded-2xl overflow-hidden border border-border/80 shadow-xl bg-slate-900/10 dark:bg-slate-900/60 aspect-[16/9] sm:aspect-[21/9] max-h-[460px] flex items-center justify-center">
+              <div className="mt-4 rounded-2xl overflow-hidden border border-border/80 shadow-lg bg-surface-2/40 flex items-center justify-center">
                 <img
                   src={selectedPost.image}
                   alt={selectedPost.title}
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-auto max-h-[580px] object-contain rounded-2xl"
                 />
               </div>
             )}
@@ -126,11 +126,11 @@ function Blog() {
                       )}
                       
                       {sec.image && (
-                        <div className="rounded-2xl overflow-hidden border border-border/80 my-6 bg-slate-900/5 dark:bg-slate-900/40 shadow-md aspect-[16/9] max-h-[420px] flex items-center justify-center">
+                        <div className="rounded-2xl overflow-hidden border border-border/80 my-6 bg-surface-2/40 shadow-sm flex items-center justify-center">
                           <img
                             src={sec.image}
                             alt={sec.heading || "Illustration"}
-                            className="w-full h-full object-cover object-center"
+                            className="w-full h-auto max-h-[520px] object-contain rounded-2xl"
                             loading="lazy"
                           />
                         </div>

@@ -244,9 +244,14 @@ export function SiteHeader() {
               <span className="text-white/30">|</span>
               <Link
                 to="/career"
-                className="font-medium text-white/90 hover:text-amber-300 transition-colors whitespace-nowrap text-xs"
+                className="inline-flex items-center gap-1.5 font-medium text-white/90 hover:text-amber-300 transition-colors whitespace-nowrap text-xs"
               >
-                Careers
+                <span>Careers</span>
+                {dynamicJobs.length > 0 && (
+                  <span className="inline-flex items-center justify-center rounded-full bg-amber-400 text-neutral-900 text-[10px] font-extrabold px-1.5 py-0.2 min-w-4 leading-none shadow-xs">
+                    {dynamicJobs.length}
+                  </span>
+                )}
               </Link>
             </div>
           </div>
@@ -419,13 +424,18 @@ export function SiteHeader() {
               {/* Career */}
               <Link
                 to="/career"
-                className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
+                className={`relative inline-flex items-center gap-1.5 whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
                   isActive("/career")
                     ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
                 }`}
               >
-                Career
+                <span>Career</span>
+                {dynamicJobs.length > 0 && (
+                  <span className="inline-flex items-center justify-center rounded-full bg-[#555d25] text-white text-[10px] font-bold px-1.5 py-0.2 min-w-4 shadow-2xs">
+                    {dynamicJobs.length}
+                  </span>
+                )}
               </Link>
 
               {/* Blog */}
@@ -536,11 +546,15 @@ export function SiteHeader() {
                           }`}
                         >
                           <span>{item.label}</span>
-                          {item.badge && (
+                          {item.to === "/career" && dynamicJobs.length > 0 ? (
+                            <span className="rounded-full bg-[#555d25] text-white px-2 py-0.2 text-[10px] font-bold">
+                              {dynamicJobs.length}
+                            </span>
+                          ) : item.badge ? (
                             <span className="rounded-full bg-[#dcfce7] px-2 py-0.2 text-[10px] font-bold uppercase tracking-wider text-[#15803d]">
                               {item.badge}
                             </span>
-                          )}
+                          ) : null}
                         </Link>
                         {hasChildren && (
                           <button

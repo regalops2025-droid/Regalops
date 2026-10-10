@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { LogOut, ExternalLink, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen, Compass } from "lucide-react";
+import { LogOut, ExternalLink, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen, Compass, Bell } from "lucide-react";
 import { ImageUploadField } from "@/components/admin/image-upload-field";
 
 export const Route = createFileRoute("/admin")({
@@ -1276,14 +1276,14 @@ function AdminDashboard() {
         {/* Navigation Items */}
         <nav className="p-3 space-y-1">
           {[
-            { id: "enquiries" as const, label: "Enquiries", icon: Inbox, count: enquiries.length },
+            { id: "enquiries" as const, label: "Enquiries", icon: Inbox, count: enquiries.length, isNotify: true, badgeClass: "bg-rose-500/20 text-rose-300 border-rose-500/40" },
             { id: "solutions" as const, label: "Manage Solutions", icon: Layers, count: solutions.length },
             { id: "technologies" as const, label: "Manage Technologies", icon: Cpu, count: techList.length },
             { id: "services" as const, label: "Manage Services", icon: Compass, count: serviceList.length },
             { id: "clients" as const, label: "Manage Clients", icon: User, count: clientList.length },
-            { id: "careers" as const, label: "Manage Careers", icon: Briefcase, count: jobList.length },
+            { id: "careers" as const, label: "Manage Careers", icon: Briefcase, count: jobList.length, isNotify: true, badgeClass: "bg-[#555d25]/40 text-[#e4ebb2] border-[#555d25]/60" },
             { id: "blogs" as const, label: "Manage Blogs", icon: BookOpen, count: blogList.length },
-            { id: "applications" as const, label: "Applications", icon: Inbox, count: applications.length },
+            { id: "applications" as const, label: "Applications", icon: Inbox, count: applications.length, isNotify: true, badgeClass: "bg-amber-500/20 text-amber-300 border-amber-500/40" },
           ].map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -1300,13 +1300,28 @@ function AdminDashboard() {
                     : "hover:bg-zinc-800/60 hover:text-white text-zinc-400"
                 }`}
               >
-                <Icon className="h-4.5 w-4.5 shrink-0" />
+                <div className="relative shrink-0 flex items-center justify-center">
+                  <Icon className="h-4.5 w-4.5" />
+                  {item.isNotify && item.count > 0 && !isActive && (
+                    <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                    </span>
+                  )}
+                </div>
                 <span className="whitespace-nowrap tracking-tight">{item.label}</span>
                 <span
-                  className={`ml-auto shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${
-                    isActive ? "bg-white/20 text-white" : "bg-zinc-800 text-zinc-400"
+                  className={`ml-auto shrink-0 flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${
+                    isActive 
+                      ? "bg-white/20 text-white" 
+                      : item.isNotify && item.count > 0
+                        ? `${item.badgeClass} border shadow-xs`
+                        : "bg-zinc-800 text-zinc-400"
                   }`}
                 >
+                  {item.isNotify && item.count > 0 && (
+                    <Bell className="h-2.5 w-2.5 shrink-0" />
+                  )}
                   {item.count}
                 </span>
               </button>
@@ -1389,6 +1404,70 @@ function AdminDashboard() {
           </div>
 
           <div className="flex items-center gap-2">
+            {/* Quick Notification Button: Contact Enquiries */}
+            <button
+              type="button"
+              onClick={() => setActiveTab("enquiries")}
+              className={`relative inline-flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-semibold transition-all cursor-pointer shadow-xs ${
+                activeTab === "enquiries"
+                  ? "border-primary bg-primary text-primary-foreground shadow-sm"
+                  : "border-border bg-surface text-foreground hover:bg-secondary hover:border-border/80"
+              }`}
+              title={`Contact Enquiries (${enquiries.length})`}
+            >
+              <div className="relative flex items-center justify-center">
+                <Bell className="h-3.5 w-3.5" />
+                {enquiries.length > 0 && activeTab !== "enquiries" && (
+                  <span className="absolute -top-1.5 -right-1.5 flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                  </span>
+                )}
+              </div>
+              <span className="hidden sm:inline">Enquiries</span>
+              <span
+                className={`inline-flex items-center justify-center rounded-full px-1.5 py-0.2 text-[11px] font-bold min-w-[20px] ${
+                  activeTab === "enquiries"
+                    ? "bg-white/25 text-white"
+                    : "bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30"
+                }`}
+              >
+                {enquiriesLoading ? "..." : enquiries.length}
+              </span>
+            </button>
+
+            {/* Quick Notification Button: Careers & Job Openings */}
+            <button
+              type="button"
+              onClick={() => setActiveTab("careers")}
+              className={`relative inline-flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-semibold transition-all cursor-pointer shadow-xs ${
+                activeTab === "careers"
+                  ? "border-primary bg-primary text-primary-foreground shadow-sm"
+                  : "border-border bg-surface text-foreground hover:bg-secondary hover:border-border/80"
+              }`}
+              title={`Careers & Job Openings (${jobList.length})`}
+            >
+              <div className="relative flex items-center justify-center">
+                <Briefcase className="h-3.5 w-3.5" />
+                {jobList.length > 0 && activeTab !== "careers" && (
+                  <span className="absolute -top-1.5 -right-1.5 flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#555d25] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#555d25]"></span>
+                  </span>
+                )}
+              </div>
+              <span className="hidden sm:inline">Careers</span>
+              <span
+                className={`inline-flex items-center justify-center rounded-full px-1.5 py-0.2 text-[11px] font-bold min-w-[20px] ${
+                  activeTab === "careers"
+                    ? "bg-white/25 text-white"
+                    : "bg-[#555d25]/15 text-[#555d25] dark:text-[#d3dda3] border border-[#555d25]/30"
+                }`}
+              >
+                {jobLoading ? "..." : jobList.length}
+              </span>
+            </button>
+
             <a
               href={
                 activeTab === "clients"
@@ -1479,9 +1558,19 @@ function AdminDashboard() {
                     >
                       {metric.label}
                     </p>
-                    {isActive && (
+                    {metric.id === "enquiries" ? (
+                      <span className="inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-bold bg-rose-500/15 text-rose-500 border border-rose-500/30">
+                        <Bell className="h-2.5 w-2.5" />
+                        <span>{metric.loading ? "..." : metric.count}</span>
+                      </span>
+                    ) : metric.id === "careers" ? (
+                      <span className="inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-bold bg-[#555d25]/15 text-[#555d25] dark:text-[#d3dda3] border border-[#555d25]/30">
+                        <Briefcase className="h-2.5 w-2.5" />
+                        <span>{metric.loading ? "..." : metric.count}</span>
+                      </span>
+                    ) : isActive ? (
                       <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                    )}
+                    ) : null}
                   </div>
                   <h3
                     className={`mt-1 font-display text-2xl font-bold transition-colors ${

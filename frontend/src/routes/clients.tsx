@@ -7,6 +7,7 @@ import {
   HeartPulse,
   Cpu,
   Radio,
+  Box,
   ShieldCheck,
   Award,
   ArrowRight,
@@ -306,49 +307,64 @@ const DEFAULT_EIGHT_INDUSTRIES = [
 export interface OriginalClientBrand {
   id: string;
   name: string;
+  subtitle: string;
   category: "banking" | "tech" | "telecom" | "enterprise" | "healthcare" | "media";
   image: string;
 }
 
+export const FEATURED_HERO_CLIENTS = [
+  { id: "capital-one", name: "Capital One", image: "/clients/capital-one.jpg" },
+  { id: "wellsfargo", name: "Wells Fargo", image: "/clients/wellsfargo.jpg" },
+  { id: "credit-suisse", name: "Credit Suisse", image: "/clients/credit-suisse.jpg" },
+  { id: "fis", name: "FIS", image: "/clients/fis.jpg" },
+  { id: "synovus-bank", name: "Synovus Bank", image: "/clients/synovus-bank.jpg" },
+  { id: "zions-bank", name: "Zions Bank", image: "/clients/zions-bank.jpg" },
+  { id: "mphasis", name: "Mphasis", image: "/clients/mphasis.jpg" },
+  { id: "highpoint", name: "HighPoint", image: "/clients/highpoint-solutions.jpg" },
+  { id: "ivedix", name: "Avedia", image: "/clients/ivedix.jpg" },
+];
+
 export const ORIGINAL_CLIENT_BRANDS: OriginalClientBrand[] = [
-  // Banking & Finance (8)
-  { id: "visa", name: "Visa", category: "banking", image: "/clients/visa.jpg" },
-  { id: "capital-one", name: "Capital One", category: "banking", image: "/clients/capital-one.jpg" },
-  { id: "wellsfargo", name: "Wells Fargo", category: "banking", image: "/clients/wellsfargo.jpg" },
-  { id: "credit-suisse", name: "Credit Suisse", category: "banking", image: "/clients/credit-suisse.jpg" },
-  { id: "dtcc", name: "DTCC", category: "banking", image: "/clients/dtcc.jpg" },
-  { id: "fis", name: "FIS", category: "banking", image: "/clients/fis.jpg" },
-  { id: "synovus-bank", name: "Synovus Bank", category: "banking", image: "/clients/synovus-bank.jpg" },
-  { id: "zions-bank", name: "Zions Bank", category: "banking", image: "/clients/zions-bank.jpg" },
+  // Top 10 matching user reference image:
+  { id: "visa", name: "Visa", subtitle: "Global Payments Technology", category: "banking", image: "/clients/visa.jpg" },
+  { id: "capital-one", name: "Capital One", subtitle: "Banking & Financial Services", category: "banking", image: "/clients/capital-one.jpg" },
+  { id: "wellsfargo", name: "Wells Fargo", subtitle: "Banking & Financial Services", category: "banking", image: "/clients/wellsfargo.jpg" },
+  { id: "credit-suisse", name: "Credit Suisse", subtitle: "Investment Banking", category: "banking", image: "/clients/credit-suisse.jpg" },
+  { id: "fis", name: "FIS", subtitle: "Financial Technology", category: "banking", image: "/clients/fis.jpg" },
+  { id: "synovus-bank", name: "Synovus Bank", subtitle: "Banking & Financial Services", category: "banking", image: "/clients/synovus-bank.jpg" },
+  { id: "zions-bank", name: "Zions Bank", subtitle: "Banking & Financial Services", category: "banking", image: "/clients/zions-bank.jpg" },
+  { id: "mphasis", name: "Mphasis", subtitle: "IT Services & Consulting", category: "tech", image: "/clients/mphasis.jpg" },
+  { id: "highpoint", name: "HighPoint", subtitle: "Enterprise Solutions", category: "tech", image: "/clients/highpoint-solutions.jpg" },
+  { id: "ivedix", name: "Avedia", subtitle: "Technology Solutions", category: "tech", image: "/clients/ivedix.jpg" },
 
-  // Technology (8)
-  { id: "apple", name: "Apple", category: "tech", image: "/clients/apple.jpg" },
-  { id: "tcs", name: "TCS", category: "tech", image: "/clients/tcs.jpg" },
-  { id: "infosys", name: "Infosys", category: "tech", image: "/clients/infosys.jpg" },
-  { id: "mphasis", name: "Mphasis", category: "tech", image: "/clients/mphasis.jpg" },
-  { id: "highpoint", name: "HighPoint Solutions", category: "tech", image: "/clients/highpoint-solutions.jpg" },
-  { id: "ivedix", name: "Ivedix", category: "tech", image: "/clients/ivedix.jpg" },
-  { id: "socket", name: "Socket", category: "tech", image: "/clients/socket.jpg" },
-  { id: "synchronoss", name: "Synchronoss", category: "tech", image: "/clients/synchronious.jpg" },
+  // Remaining Banking & Finance
+  { id: "dtcc", name: "DTCC", subtitle: "Post-Trade Market Utilities", category: "banking", image: "/clients/dtcc.jpg" },
 
-  // Telecom (3)
-  { id: "at-t", name: "AT&T", category: "telecom", image: "/clients/at-t.jpg" },
-  { id: "tmobile", name: "T-Mobile", category: "telecom", image: "/clients/tmobile.jpg" },
-  { id: "cricket", name: "Cricket Wireless", category: "telecom", image: "/clients/cricket-wireless.jpg" },
+  // Remaining Technology
+  { id: "apple", name: "Apple", subtitle: "Consumer Electronics & Software", category: "tech", image: "/clients/apple.jpg" },
+  { id: "tcs", name: "TCS", subtitle: "Global IT & Digital Transformation", category: "tech", image: "/clients/tcs.jpg" },
+  { id: "infosys", name: "Infosys", subtitle: "Enterprise Cloud & Digital Solutions", category: "tech", image: "/clients/infosys.jpg" },
+  { id: "socket", name: "Socket", subtitle: "Developer Infrastructure & Security", category: "tech", image: "/clients/socket.jpg" },
+  { id: "synchronoss", name: "Synchronoss", subtitle: "Cloud & Messaging Platforms", category: "tech", image: "/clients/synchronious.jpg" },
 
-  // Enterprise & Logistics (4)
-  { id: "fedex", name: "FedEx", category: "enterprise", image: "/clients/fedex.jpg" },
-  { id: "adt", name: "ADT", category: "enterprise", image: "/clients/adt.jpg" },
-  { id: "agco", name: "AGCO", category: "enterprise", image: "/clients/agco.jpg" },
-  { id: "assurant", name: "Assurant", category: "enterprise", image: "/clients/assurant.jpg" },
+  // Telecom
+  { id: "at-t", name: "AT&T", subtitle: "Telecommunications & 5G", category: "telecom", image: "/clients/at-t.jpg" },
+  { id: "tmobile", name: "T-Mobile", subtitle: "Wireless Telecommunications", category: "telecom", image: "/clients/tmobile.jpg" },
+  { id: "cricket", name: "Cricket Wireless", subtitle: "Mobile Virtual Network", category: "telecom", image: "/clients/cricket-wireless.jpg" },
 
-  // Healthcare (1)
-  { id: "premier", name: "Premier Healthcare", category: "healthcare", image: "/clients/premier.jpg" },
+  // Enterprise & Logistics
+  { id: "fedex", name: "FedEx", subtitle: "Global Logistics & Freight", category: "enterprise", image: "/clients/fedex.jpg" },
+  { id: "adt", name: "ADT", subtitle: "Commercial Security & Automation", category: "enterprise", image: "/clients/adt.jpg" },
+  { id: "agco", name: "AGCO", subtitle: "Precision Agricultural Tech", category: "enterprise", image: "/clients/agco.jpg" },
+  { id: "assurant", name: "Assurant", subtitle: "Risk Management & Protection", category: "enterprise", image: "/clients/assurant.jpg" },
 
-  // Media & Public (3)
-  { id: "the-economist", name: "The Economist", category: "media", image: "/clients/the-economist.jpg" },
-  { id: "turner", name: "Turner Broadcasting", category: "media", image: "/clients/turner.jpg" },
-  { id: "dot-usa", name: "U.S. Department of Transportation", category: "media", image: "/clients/dot-usa.jpg" },
+  // Healthcare
+  { id: "premier", name: "Premier Healthcare", subtitle: "Healthcare Informatics", category: "healthcare", image: "/clients/premier.jpg" },
+
+  // Media & Public
+  { id: "the-economist", name: "The Economist", subtitle: "Global Business Intelligence", category: "media", image: "/clients/the-economist.jpg" },
+  { id: "turner", name: "Turner Broadcasting", subtitle: "Broadcasting & Media", category: "media", image: "/clients/turner.jpg" },
+  { id: "dot-usa", name: "U.S. Department of Transportation", subtitle: "Transportation Infrastructure", category: "media", image: "/clients/dot-usa.jpg" },
 ];
 
 const CLIENT_CATEGORIES = [
@@ -356,9 +372,8 @@ const CLIENT_CATEGORIES = [
   { id: "banking", label: "BANKING & FINANCE", icon: Landmark },
   { id: "tech", label: "TECHNOLOGY", icon: Cpu },
   { id: "telecom", label: "TELECOM", icon: Radio },
-  { id: "enterprise", label: "ENTERPRISE & LOGISTICS", icon: ShieldCheck },
+  { id: "enterprise", label: "ENTERPRISE & LOGISTICS", icon: Box },
   { id: "healthcare", label: "HEALTHCARE", icon: HeartPulse },
-  { id: "media", label: "MEDIA & PUBLIC", icon: Award },
 ] as const;
 
 function Clients() {
@@ -377,34 +392,23 @@ function Clients() {
 
     const adminBrands: OriginalClientBrand[] = adminClientStudies.map((c) => {
       const s = (c.sector || "").toLowerCase();
-      let cat = "tech";
+      let cat: OriginalClientBrand["category"] = "tech";
       if (s.includes("bank") || s.includes("finan")) cat = "banking";
       else if (s.includes("telecom") || s.includes("network") || s.includes("mobile")) cat = "telecom";
       else if (s.includes("health") || s.includes("medic") || s.includes("pharma")) cat = "healthcare";
       else if (s.includes("enterprise") || s.includes("logistics") || s.includes("supply") || s.includes("manufactur")) cat = "enterprise";
-      else if (s.includes("auto")) cat = "automotive";
-      else if (s.includes("insur")) cat = "insurance";
-      else if (s.includes("educat")) cat = "education";
 
       return {
         id: `admin-${c.id}`,
         name: c.name,
+        subtitle: c.sector || "Strategic Client Partner",
         category: cat,
         image: c.image || "/logo.png",
       };
     });
 
-    // Admin-added client brands are prepended so they appear immediately in the top grid and marquee
-    return [...adminBrands, ...ORIGINAL_CLIENT_BRANDS];
+    return [...ORIGINAL_CLIENT_BRANDS, ...adminBrands];
   }, [adminClientStudies]);
-
-  // Segment brands for the mosaic layout matching the reference design
-  const marquee1Row1 = useMemo(() => allClientBrands.slice(0, 5), [allClientBrands]);
-  const marquee1Row2 = useMemo(() => allClientBrands.slice(5, 10), [allClientBrands]);
-  const marquee1Row3 = useMemo(() => allClientBrands.slice(10, 14), [allClientBrands]);
-  const marquee2Row1 = useMemo(() => allClientBrands.slice(14, 19), [allClientBrands]);
-  const marquee2Row2 = useMemo(() => allClientBrands.slice(19, 23), [allClientBrands]);
-  const marquee2Row3 = useMemo(() => allClientBrands.slice(23, 27), [allClientBrands]);
 
   // Filter client brands based on category tab
   const filteredBrands = useMemo(() => {
@@ -412,16 +416,12 @@ function Clients() {
     return allClientBrands.filter((b) => b.category === selectedCategory);
   }, [allClientBrands, selectedCategory]);
 
-  const topGridBrands = useMemo(() => {
-    return filteredBrands.slice(0, 4);
-  }, [filteredBrands]);
-
-  const bottomGridBrands = useMemo(() => {
-    if (filteredBrands.length > 4) {
-      return filteredBrands.slice(4, 8);
+  const displayedRightBrands = useMemo(() => {
+    if (showAll) {
+      return filteredBrands;
     }
-    return allClientBrands.slice(4, 8);
-  }, [filteredBrands, allClientBrands]);
+    return filteredBrands.slice(0, 10);
+  }, [filteredBrands, showAll]);
 
   // Filter admin case studies by category
   const filteredCaseStudies = useMemo(() => {
@@ -438,10 +438,6 @@ function Clients() {
     });
     return matched.length > 0 ? matched : adminClientStudies;
   }, [adminClientStudies, selectedCategory]);
-
-  const extendedBrands = useMemo(() => {
-    return filteredBrands.slice(8);
-  }, [filteredBrands]);
 
   useEffect(() => {
     // Fetch clients & case studies managed from Admin
@@ -494,262 +490,151 @@ function Clients() {
   return (
     <SiteLayout>
       {/* ==================================================================== */}
-      {/* OUR CLIENTS GALLERY (Matches User Reference Mosaic & Scrolling Logos)*/}
+      {/* TRUSTED BY INDUSTRY LEADERS SHOWCASE (Matches User Reference Image)  */}
       {/* ==================================================================== */}
-      <section className="bg-white dark:bg-slate-950 py-5 sm:py-6">
+      <section className="bg-white dark:bg-slate-950 py-8 sm:py-12 border-b border-border/60">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-3.5 sm:mb-4">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-slate-900 dark:text-white">
-              Our Clients
+          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold tracking-tight text-neutral-900 dark:text-white">
+              Trusted by Industry Leaders
             </h1>
-            <p className="mt-2 text-sm sm:text-base text-slate-500 dark:text-slate-400 font-medium">
-              Trusted by industry leaders and high-growth organizations worldwide
+            <p className="mt-3 text-sm sm:text-base text-neutral-600 dark:text-neutral-400 font-normal leading-relaxed">
+              We partner with global organizations across industries to deliver impactful technology solutions, driving efficiency, innovation and long-term growth.
             </p>
           </div>
 
-          {/* Category Tabs Bar with Icons (Matching Reference Image) */}
-          <div className="border-b border-border/80 mb-3.5 sm:mb-4 overflow-x-auto no-scrollbar">
-            <div className="flex items-center justify-center gap-2 sm:gap-6 min-w-max px-4">
-              {CLIENT_CATEGORIES.map((cat) => {
+          {/* Category Tabs Bar with Icons and Dividers (Exact Match to Reference Screenshot) */}
+          <div className="mb-8 sm:mb-10 overflow-x-auto no-scrollbar">
+            <div className="flex items-center justify-center gap-1 sm:gap-2.5 min-w-max px-2 py-1">
+              {CLIENT_CATEGORIES.map((cat, idx) => {
                 const IconComponent = cat.icon;
                 const isActive = selectedCategory === cat.id;
                 return (
-                  <button
-                    key={cat.id}
-                    onClick={() => {
-                      setSelectedCategory(cat.id);
-                      setShowAll(false);
-                    }}
-                    className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 border-b-2 cursor-pointer ${
-                      isActive
-                        ? "border-[#555d25] dark:border-emerald-400 text-[#555d25] dark:text-emerald-400"
-                        : "border-transparent text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                    }`}
-                  >
-                    <IconComponent
-                      className={`h-4 w-4 ${isActive ? "text-[#555d25] dark:text-emerald-400" : "text-slate-400"}`}
-                    />
-                    <span>{cat.label}</span>
-                  </button>
+                  <div key={cat.id} className="flex items-center">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedCategory(cat.id);
+                        setShowAll(false);
+                      }}
+                      className={`flex items-center gap-2 px-3 sm:px-4 py-2.5 text-xs sm:text-[13px] font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer rounded-t-lg relative ${
+                        isActive
+                          ? "text-[#555d25] dark:text-[#a4c965]"
+                          : "text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+                      }`}
+                    >
+                      <IconComponent
+                        className={`h-4 w-4 shrink-0 transition-colors ${
+                          isActive ? "text-[#555d25] dark:text-[#a4c965]" : "text-neutral-400"
+                        }`}
+                      />
+                      <span>{cat.label}</span>
+                      {/* Active Indicator Underline */}
+                      {isActive && (
+                        <div className="absolute bottom-0 left-2 right-2 h-0.5 bg-[#555d25] dark:bg-[#a4c965] rounded-full" />
+                      )}
+                    </button>
+                    {idx < CLIENT_CATEGORIES.length - 1 && (
+                      <span className="text-neutral-300 dark:text-neutral-700 mx-1 sm:mx-2 font-light select-none">
+                        |
+                      </span>
+                    )}
+                  </div>
                 );
               })}
             </div>
           </div>
 
           {/* ================================================================ */}
-          {/* MOSAIC GALLERY: PART 1 (Big Scrolling Card Left, 2x2 Tiles Right) */}
+          {/* MAIN TWO-COLUMN SPLIT SHOWCASE                                   */}
+          {/* Left: Featured Dark Card with 3x3 Mini Logos Grid                */}
+          {/* Right: 2-Column Grid of Partner Cards with Logos, Name & Sector  */}
           {/* ================================================================ */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-stretch mb-4 sm:mb-5">
-            {/* BIG CARD ON LEFT: SCROLLING LOGOS STREAM */}
-            <div className="lg:col-span-6 relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-[#0b3821] p-4 sm:p-5 flex flex-col justify-center items-stretch text-white border border-emerald-900/50 shadow-xl min-h-[320px] sm:min-h-[340px] group/big">
-              {/* Ambient Glow Orbs */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch mb-6 sm:mb-8">
+            
+            {/* LEFT FEATURED CARD: Deep Forest Dark Card with 3x3 Mini Grid */}
+            <div className="lg:col-span-5 relative overflow-hidden rounded-[26px] sm:rounded-3xl bg-gradient-to-br from-[#0c2017] via-[#091811] to-[#06120d] text-white p-6 sm:p-7 lg:p-8 flex flex-col justify-between border border-[#1b3e2d] shadow-2xl min-h-[460px]">
+              {/* Subtle ambient glows and background wave lines */}
               <div className="pointer-events-none absolute -top-24 -left-24 w-80 h-80 bg-emerald-500/15 rounded-full blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-24 -right-24 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-24 -right-24 w-80 h-80 bg-[#555d25]/25 rounded-full blur-3xl" />
+              <div className="pointer-events-none absolute inset-0 opacity-15 bg-[radial-gradient(#34d399_1px,transparent_1px)] [background-size:20px_20px]" />
 
-              {/* SCROLLING BRAND LOGOS (Three Opposing Marquee Streams - Pure Original Logos) */}
-              <div className="relative z-10 w-full space-y-2.5 sm:space-y-3 overflow-hidden py-1">
-                {/* Fade masks */}
-                <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-slate-950 to-transparent z-10" />
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#0b3821] to-transparent z-10" />
-
-                {/* Track 1 (Scrolling Left) */}
-                <div className="flex gap-4 w-max animate-marquee hover:[animation-play-state:paused] py-1">
-                  {[...marquee1Row1, ...marquee1Row1, ...marquee1Row1, ...marquee1Row1].map((brand, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-center bg-white rounded-xl px-4 py-2 transition-all duration-300 min-w-[125px] sm:min-w-[145px] h-12 sm:h-14 shadow-md hover:scale-105 shrink-0"
-                    >
-                      <img
-                        src={brand.image}
-                        alt={brand.name}
-                        className="max-h-7 sm:max-h-8 max-w-[105px] sm:max-w-[120px] w-auto object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Track 2 (Scrolling Right / Reverse) */}
-                <div className="flex gap-4 w-max animate-marquee-reverse hover:[animation-play-state:paused] py-1">
-                  {[...marquee1Row2, ...marquee1Row2, ...marquee1Row2, ...marquee1Row2].map((brand, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-center bg-white rounded-xl px-4 py-2 transition-all duration-300 min-w-[125px] sm:min-w-[145px] h-12 sm:h-14 shadow-md hover:scale-105 shrink-0"
-                    >
-                      <img
-                        src={brand.image}
-                        alt={brand.name}
-                        className="max-h-7 sm:max-h-8 max-w-[105px] sm:max-w-[120px] w-auto object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Track 3 (Scrolling Left) */}
-                <div className="flex gap-4 w-max animate-marquee hover:[animation-play-state:paused] py-1">
-                  {[...marquee1Row3, ...marquee1Row3, ...marquee1Row3, ...marquee1Row3].map((brand, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-center bg-white rounded-xl px-4 py-2 transition-all duration-300 min-w-[125px] sm:min-w-[145px] h-12 sm:h-14 shadow-md hover:scale-105 shrink-0"
-                    >
-                      <img
-                        src={brand.image}
-                        alt={brand.name}
-                        className="max-h-7 sm:max-h-8 max-w-[105px] sm:max-w-[120px] w-auto object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
-                </div>
+              {/* Header content */}
+              <div className="relative z-10">
+                <span className="inline-block text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-[#86efac]">
+                  GLOBAL PARTNERSHIP
+                </span>
+                <h2 className="mt-2 text-2xl sm:text-3xl lg:text-[34px] font-serif font-bold text-white leading-tight">
+                  Trusted by <br />
+                  <span className="text-[#a4c965]">Industry Leaders</span>
+                </h2>
+                <p className="mt-3 text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-sm">
+                  Our clients trust us to solve complex challenges, modernize operations and build future-ready solutions across industries.
+                </p>
               </div>
-            </div>
 
-            {/* 2x2 TILES ON RIGHT (4 Distinct Original Brand Cards - Logos Only) */}
-            <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-              {topGridBrands.map((brand) => (
-                <div
-                  key={brand.id}
-                  className="group relative bg-white dark:bg-white border border-slate-200/90 dark:border-slate-300 rounded-2xl p-4 sm:p-5 flex items-center justify-center text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1 min-h-[145px] sm:min-h-[155px]"
-                >
-                  <div className="h-10 sm:h-12 w-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                    <img
-                      src={brand.image}
-                      alt={brand.name}
-                      className="max-h-9 sm:max-h-11 max-w-[140px] sm:max-w-[160px] w-auto object-contain"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ================================================================ */}
-          {/* MOSAIC GALLERY: PART 2 (2x2 Tiles Left, Big Scrolling Card Right) */}
-          {/* ================================================================ */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-stretch">
-            {/* 2x2 TILES ON LEFT (4 Distinct Original Brand Cards - Logos Only) */}
-            <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 order-2 lg:order-1">
-              {bottomGridBrands.map((brand) => (
-                <div
-                  key={brand.id}
-                  className="group relative bg-white dark:bg-white border border-slate-200/90 dark:border-slate-300 rounded-2xl p-4 sm:p-5 flex items-center justify-center text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1 min-h-[145px] sm:min-h-[155px]"
-                >
-                  <div className="h-10 sm:h-12 w-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                    <img
-                      src={brand.image}
-                      alt={brand.name}
-                      className="max-h-9 sm:max-h-11 max-w-[140px] sm:max-w-[160px] w-auto object-contain"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* BIG CARD ON RIGHT: SCROLLING ORIGINAL LOGOS */}
-            <div className="lg:col-span-6 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0c2333] via-slate-900 to-[#0e3b25] p-4 sm:p-5 flex flex-col justify-center items-stretch text-white border border-cyan-900/50 shadow-xl min-h-[320px] sm:min-h-[340px] group/big order-1 lg:order-2">
-              {/* Ambient Glow Orbs */}
-              <div className="pointer-events-none absolute -top-24 -right-24 w-80 h-80 bg-cyan-500/15 rounded-full blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-24 -left-24 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
-
-              {/* SCROLLING BRAND LOGOS (Three Opposing Marquee Streams - Pure Original Logos) */}
-              <div className="relative z-10 w-full space-y-2.5 sm:space-y-3 overflow-hidden py-1">
-                {/* Fade masks */}
-                <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#0c2333] to-transparent z-10" />
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#0e3b25] to-transparent z-10" />
-
-                {/* Track 1 (Scrolling Left) */}
-                <div className="flex gap-4 w-max animate-marquee hover:[animation-play-state:paused] py-1">
-                  {[...marquee2Row1, ...marquee2Row1, ...marquee2Row1, ...marquee2Row1].map((brand, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-center bg-white rounded-xl px-4 py-2 transition-all duration-300 min-w-[125px] sm:min-w-[145px] h-12 sm:h-14 shadow-md hover:scale-105 shrink-0"
-                    >
-                      <img
-                        src={brand.image}
-                        alt={brand.name}
-                        className="max-h-7 sm:max-h-8 max-w-[105px] sm:max-w-[120px] w-auto object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Track 2 (Scrolling Right / Reverse) */}
-                <div className="flex gap-4 w-max animate-marquee-reverse hover:[animation-play-state:paused] py-1">
-                  {[...marquee2Row2, ...marquee2Row2, ...marquee2Row2, ...marquee2Row2].map((brand, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-center bg-white rounded-xl px-4 py-2 transition-all duration-300 min-w-[125px] sm:min-w-[145px] h-12 sm:h-14 shadow-md hover:scale-105 shrink-0"
-                    >
-                      <img
-                        src={brand.image}
-                        alt={brand.name}
-                        className="max-h-7 sm:max-h-8 max-w-[105px] sm:max-w-[120px] w-auto object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Track 3 (Scrolling Left) */}
-                <div className="flex gap-4 w-max animate-marquee hover:[animation-play-state:paused] py-1">
-                  {[...marquee2Row3, ...marquee2Row3, ...marquee2Row3, ...marquee2Row3].map((brand, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-center bg-white rounded-xl px-4 py-2 transition-all duration-300 min-w-[125px] sm:min-w-[145px] h-12 sm:h-14 shadow-md hover:scale-105 shrink-0"
-                    >
-                      <img
-                        src={brand.image}
-                        alt={brand.name}
-                        className="max-h-7 sm:max-h-8 max-w-[105px] sm:max-w-[120px] w-auto object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* EXTENDED DIRECTORY (Shown when "LOAD MORE" is toggled) */}
-          {showAll && extendedBrands.length > 0 && (
-            <div className="mt-8 pt-8 border-t border-border/80 animate-in fade-in duration-300">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-6 text-center">
-                Extended Partner Directory ({extendedBrands.length} Additional Brands)
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
-                {extendedBrands.map((brand) => (
+              {/* 3x3 Mini Logo Cards Grid (Exact match to left card in screenshot) */}
+              <div className="relative z-10 mt-6 sm:mt-8 grid grid-cols-3 gap-2 sm:gap-2.5">
+                {FEATURED_HERO_CLIENTS.map((logo) => (
                   <div
-                    key={brand.id}
-                    className="group relative bg-white dark:bg-white border border-slate-200/90 dark:border-slate-300 rounded-3xl p-6 sm:p-7 flex items-center justify-center text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1 min-h-[170px]"
+                    key={logo.id}
+                    className="bg-white rounded-xl p-2 sm:p-2.5 flex items-center justify-center h-14 sm:h-16 shadow-xs transition-transform duration-200 hover:scale-105"
                   >
-                    <div className="h-12 w-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                      <img
-                        src={brand.image}
-                        alt={brand.name}
-                        className="max-h-10 max-w-[140px] w-auto object-contain"
-                      />
-                    </div>
+                    <img
+                      src={logo.image}
+                      alt={logo.name}
+                      className="max-h-7 sm:max-h-8 max-w-[85%] w-auto object-contain"
+                      loading="lazy"
+                    />
                   </div>
                 ))}
               </div>
             </div>
-          )}
 
-          {/* Load More Pill Button (Matching Reference Image) */}
-          {extendedBrands.length > 0 && (
-            <div className="mt-4 sm:mt-5 text-center">
-              <button
-                onClick={() => setShowAll(!showAll)}
-                className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#555d25] to-[#0f5431] hover:from-[#0f5431] hover:to-[#0a3b22] text-white px-9 py-3 text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
-              >
-                <span>{showAll ? "Show Less" : "Load More"}</span>
-                <ArrowRight className={`h-4 w-4 transition-transform duration-300 ${showAll ? "-rotate-90" : ""}`} />
-              </button>
+            {/* RIGHT COLUMN: 2-Column Grid of Client Cards (Logos, Title & Sector Subtitle) */}
+            <div className="lg:col-span-7 flex flex-col justify-between">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
+                {displayedRightBrands.map((client) => (
+                  <div
+                    key={client.id}
+                    className="group relative bg-white dark:bg-white rounded-2xl border border-neutral-200/90 p-4 sm:p-5 flex flex-col items-center justify-center text-center shadow-xs hover:shadow-md hover:border-[#555d25]/50 transition-all duration-300 hover:-translate-y-0.5 min-h-[110px] sm:min-h-[118px]"
+                  >
+                    <div className="h-9 sm:h-10 w-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                      <img
+                        src={client.image}
+                        alt={client.name}
+                        className="max-h-8 sm:max-h-9 max-w-[130px] sm:max-w-[145px] w-auto object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 className="mt-2 text-xs sm:text-[13px] font-bold text-neutral-900 tracking-tight leading-snug">
+                      {client.name}
+                    </h3>
+                    <p className="mt-0.5 text-[10.5px] sm:text-[11.5px] text-neutral-500 font-medium leading-tight">
+                      {client.subtitle}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* View All / Show Less Toggle Button */}
+              {filteredBrands.length > 10 && (
+                <div className="mt-4 pt-2 text-center">
+                  <button
+                    type="button"
+                    onClick={() => setShowAll(!showAll)}
+                    className="inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 px-6 py-2 text-xs font-bold uppercase tracking-wider text-neutral-700 shadow-2xs hover:shadow-xs transition-all cursor-pointer"
+                  >
+                    <span>{showAll ? "Show Less" : `View All (${filteredBrands.length} Partners)`}</span>
+                    <ArrowRight className={`h-3.5 w-3.5 transition-transform duration-200 ${showAll ? "-rotate-90" : ""}`} />
+                  </button>
+                </div>
+              )}
             </div>
-          )}
+
+          </div>
         </div>
       </section>
 

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { SiteHeader } from "./site-header";
 import { SiteFooter } from "./site-footer";
-import { StickySocialBar, StickyBottomActions } from "./social-icons";
+import { StickyBottomActions } from "./social-icons";
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   return (
@@ -10,10 +10,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       <main className="flex-1">{children}</main>
       <SiteFooter />
 
-      {/* Sticky Social Media Sidebar (Floating on Left Screen Edge) */}
-      <StickySocialBar />
-
-      {/* Sticky Quick Contact Actions (Original WhatsApp & Call Buttons) */}
+      {/* Sticky Quick Contact Actions (WhatsApp & Call Buttons) */}
       <StickyBottomActions />
     </div>
   );

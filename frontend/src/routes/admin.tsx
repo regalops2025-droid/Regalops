@@ -118,6 +118,7 @@ function AdminDashboard() {
   const [jobTitle, setJobTitle] = useState("");
   const [jobLocation, setJobLocation] = useState("");
   const [jobType, setJobType] = useState("Full-time");
+  const [jobDescription, setJobDescription] = useState("");
   const [jobFormLoading, setJobFormLoading] = useState(false);
   const [jobFormSuccess, setJobFormSuccess] = useState(false);
   const [jobFormError, setJobFormError] = useState("");
@@ -1039,6 +1040,7 @@ function AdminDashboard() {
     setJobTitle(item.title);
     setJobLocation(item.location);
     setJobType(item.type || "Full-time");
+    setJobDescription(item.description || "");
     setJobFormSuccess(false);
     setJobFormError("");
   };
@@ -1049,6 +1051,7 @@ function AdminDashboard() {
     setJobTitle("");
     setJobLocation("");
     setJobType("Full-time");
+    setJobDescription("");
     setJobFormSuccess(false);
     setJobFormError("");
   };
@@ -1069,7 +1072,12 @@ function AdminDashboard() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ title: jobTitle, location: jobLocation, type: jobType }),
+          body: JSON.stringify({ 
+            title: jobTitle, 
+            location: jobLocation, 
+            type: jobType,
+            description: jobDescription 
+          }),
         });
 
         if (!response.ok) {
@@ -1088,7 +1096,12 @@ function AdminDashboard() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ title: jobTitle, location: jobLocation, type: jobType }),
+          body: JSON.stringify({ 
+            title: jobTitle, 
+            location: jobLocation, 
+            type: jobType,
+            description: jobDescription 
+          }),
         });
 
         if (!response.ok) {
@@ -1101,6 +1114,7 @@ function AdminDashboard() {
         setJobTitle("");
         setJobLocation("");
         setJobType("Full-time");
+        setJobDescription("");
         setJobFormSuccess(true);
         setTimeout(() => setJobFormSuccess(false), 3000);
       }
@@ -2781,6 +2795,11 @@ function AdminDashboard() {
                               • {item.type}
                             </span>
                           </div>
+                          {item.description && (
+                            <p className="mt-1.5 text-xs text-muted-foreground line-clamp-2">
+                              {item.description}
+                            </p>
+                          )}
                         </div>
 
                         <div className="flex gap-2 shrink-0">
@@ -2877,6 +2896,18 @@ function AdminDashboard() {
                         <option value="Freelance">Freelance</option>
                         <option value="Internship">Internship</option>
                       </select>
+                    </label>
+
+                    <label className="block text-sm font-medium">
+                      Job Description
+                      <textarea
+                        rows={4}
+                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-y"
+                        placeholder="Key responsibilities, qualifications, and core technical requirements..."
+                        value={jobDescription}
+                        onChange={(e) => setJobDescription(e.target.value)}
+                        disabled={jobFormLoading}
+                      />
                     </label>
 
                     <div className="space-y-2">

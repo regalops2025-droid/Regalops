@@ -75,10 +75,10 @@ function Career() {
             {roles.map((r) => (
               <article
                 key={r.id}
-                className="panel grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 p-5 sm:flex sm:justify-between sm:p-6 hover:border-primary/30 transition-all duration-300 bg-surface"
+                className="panel flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 sm:p-6 hover:border-primary/30 transition-all duration-300 bg-surface"
               >
-                <div className="min-w-0">
-                  <h2 className="truncate text-base font-semibold sm:text-lg text-foreground">{r.title}</h2>
+                <div className="min-w-0 flex-1">
+                  <h2 className="text-base font-semibold sm:text-lg text-foreground">{r.title}</h2>
                   <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1.5">
                       <MapPin className="h-3.5 w-3.5 text-primary" /> {r.location}
@@ -87,11 +87,16 @@ function Career() {
                       <Clock className="h-3.5 w-3.5 text-primary" /> {r.type}
                     </span>
                   </div>
+                  {r.description && (
+                    <p className="mt-2.5 text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                      {r.description}
+                    </p>
+                  )}
                 </div>
                 <Link
                   to="/contact"
                   search={{ jobId: r.id, jobTitle: r.title }}
-                  className="shrink-0 rounded-xl border border-border px-4 py-2 text-sm font-semibold transition-colors hover:border-primary hover:text-primary bg-background"
+                  className="shrink-0 self-start sm:self-center rounded-xl border border-border px-5 py-2.5 text-sm font-semibold transition-colors hover:border-primary hover:text-primary bg-background"
                 >
                   Apply
                 </Link>

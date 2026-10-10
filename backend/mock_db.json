@@ -254,49 +254,56 @@
       "created_at": "2026-08-19T07:05:39.352Z",
       "title": "Senior Platform Engineer",
       "location": "Chennai / Hybrid",
-      "type": "Full-time"
+      "type": "Full-time",
+      "description": "Architect and maintain enterprise Kubernetes clusters, automated CI/CD pipelines, and high-resilience production infrastructure for mission-critical client workloads."
     },
     {
       "id": 2,
       "created_at": "2026-08-19T07:05:39.353Z",
       "title": "Cloud Architect — Azure",
       "location": "Remote, India",
-      "type": "Full-time"
+      "type": "Full-time",
+      "description": "Lead Azure enterprise cloud migrations, multi-region architecture design, FinOps cost optimization, and infrastructure-as-code automation."
     },
     {
       "id": 3,
       "created_at": "2026-08-19T07:05:39.354Z",
       "title": "Data Engineer (Snowflake, dbt)",
       "location": "Bengaluru",
-      "type": "Full-time"
+      "type": "Full-time",
+      "description": "Design scalable real-time and batch data pipelines using Snowflake, dbt, and Kafka to support enterprise business intelligence and analytics."
     },
     {
       "id": 4,
       "created_at": "2026-08-19T07:05:39.355Z",
       "title": "ML Engineer — NLP",
       "location": "Remote, EU",
-      "type": "Full-time"
+      "type": "Full-time",
+      "description": "Develop and deploy large language model pipelines, vector embeddings, fine-tuning workflows, and low-latency inference services."
     },
     {
       "id": 5,
       "created_at": "2026-08-19T07:05:39.356Z",
       "title": "Security Analyst",
       "location": "Chennai",
-      "type": "Full-time"
+      "type": "Full-time",
+      "description": "Conduct vulnerability assessments, penetration testing, compliance audits (SOC2/ISO27001), and continuous DevSecOps pipeline integrations."
     },
     {
       "id": 6,
       "created_at": "2026-08-19T07:05:39.357Z",
       "title": "Engineering Manager",
       "location": "Chennai / Hybrid",
-      "type": "Full-time"
+      "type": "Full-time",
+      "description": "Lead cross-functional engineering teams delivering complex client modernization engagements while driving engineering excellence and technical mentorship."
     },
     {
       "id": 7,
       "created_at": "2026-10-09T09:24:18.658Z",
       "title": "developer",
       "location": "vizag",
-      "type": "Part-time"
+      "type": "Part-time",
+      "description": "Support full-stack application development, API integration, and front-end interface enhancements."
     }
   ],
   "blogs": [

@@ -206,6 +206,16 @@ class MockPool {
             { Field: "created_at" }
           ]];
         }
+        if (table === "jobs") {
+          return [[
+            { Field: "id" },
+            { Field: "title" },
+            { Field: "location" },
+            { Field: "type" },
+            { Field: "description" },
+            { Field: "created_at" }
+          ]];
+        }
       }
       return [[]];
     }
@@ -551,10 +561,23 @@ async function initDB() {
         title VARCHAR(255) NOT NULL,
         location VARCHAR(255) NOT NULL,
         type VARCHAR(255) NOT NULL,
+        description TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
     console.log('Table "jobs" verified.');
+
+    // Add description column dynamically if table already existed without it
+    try {
+      const [jobColumns] = await pool.query("SHOW COLUMNS FROM jobs");
+      const jobColNames = Array.isArray(jobColumns) ? jobColumns.map(c => c.Field) : [];
+      if (jobColNames.length > 0 && !jobColNames.includes("description")) {
+        await pool.query("ALTER TABLE jobs ADD COLUMN description TEXT");
+        console.log("Database Migration: Added missing 'description' column to 'jobs' table.");
+      }
+    } catch (err) {
+      console.error("Error migrating jobs table:", err.message);
+    }
 
     // Create blogs table
     await pool.query(`
@@ -1176,18 +1199,19 @@ app.get("/api/jobs", async (req, res) => {
 
 // POST a new job opening
 app.post("/api/jobs", verifyToken, async (req, res) => {
-  const { title, location, type } = req.body;
+  const { title, location, type, description } = req.body;
 
   if (!title || !location || !type) {
     return res.status(400).json({ error: "Title, location, and type are required." });
   }
 
   try {
+    const jobDescription = description || "";
     const [result] = await pool.query(
-      "INSERT INTO jobs (title, location, type) VALUES (?, ?, ?)",
-      [title, location, type]
+      "INSERT INTO jobs (title, location, type, description) VALUES (?, ?, ?, ?)",
+      [title, location, type, jobDescription]
     );
-    res.status(201).json({ id: result.insertId, title, location, type });
+    res.status(201).json({ id: result.insertId, title, location, type, description: jobDescription });
   } catch (error) {
     console.error("Error creating job record:", error);
     res.status(500).json({ error: "Failed to create job record." });
@@ -1197,18 +1221,19 @@ app.post("/api/jobs", verifyToken, async (req, res) => {
 // PUT (update) a job by ID
 app.put("/api/jobs/:id", verifyToken, async (req, res) => {
   const { id } = req.params;
-  const { title, location, type } = req.body;
+  const { title, location, type, description } = req.body;
 
   if (!title || !location || !type) {
     return res.status(400).json({ error: "Title, location, and type are required." });
   }
 
   try {
+    const jobDescription = description || "";
     await pool.query(
-      "UPDATE jobs SET title = ?, location = ?, type = ? WHERE id = ?",
-      [title, location, type, id]
+      "UPDATE jobs SET title = ?, location = ?, type = ?, description = ? WHERE id = ?",
+      [title, location, type, jobDescription, id]
     );
-    res.json({ id: parseInt(id), title, location, type });
+    res.json({ id: parseInt(id), title, location, type, description: jobDescription });
   } catch (error) {
     console.error("Error updating job record:", error);
     res.status(500).json({ error: "Failed to update job record." });

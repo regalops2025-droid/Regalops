@@ -698,9 +698,12 @@ function parseArrayField(val: any): string[] {
   return [];
 }
 
-function ClientLogoCard({ client }: { client: { name: string; logo: string } }) {
+function ClientLogoCard({ client, index = 0 }: { client: { name: string; logo: string }; index?: number }) {
+  const delays = ["delay-50", "delay-100", "delay-150", "delay-200", "delay-250", "delay-300", "delay-350", "delay-400"];
+  const staggerClass = delays[index % delays.length];
+
   return (
-    <div className="group/client relative flex items-center justify-center p-3 h-20 xl:h-22 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-[0_14px_30px_rgba(0,145,213,0.18)] hover:border-sky-400 hover:ring-2 hover:ring-sky-400/20 hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer overflow-hidden">
+    <div className={`reveal-on-scroll ${staggerClass} group/client relative flex items-center justify-center p-3 h-20 xl:h-22 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-[0_14px_30px_rgba(0,145,213,0.18)] hover:border-sky-400 hover:ring-2 hover:ring-sky-400/20 hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer overflow-hidden`}>
       {/* Light sweep sheen beam on hover */}
       <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/80 to-transparent transition-transform duration-700 ease-in-out group-hover/client:translate-x-full" />
 
@@ -723,9 +726,12 @@ function ClientLogoCard({ client }: { client: { name: string; logo: string } }) 
   );
 }
 
-function MobileClientLogoCard({ client }: { client: { name: string; logo: string } }) {
+function MobileClientLogoCard({ client, index = 0 }: { client: { name: string; logo: string }; index?: number }) {
+  const delays = ["delay-50", "delay-100", "delay-150", "delay-200"];
+  const staggerClass = delays[index % delays.length];
+
   return (
-    <div className="group/client relative flex items-center justify-center p-2.5 h-16 sm:h-20 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-sky-400 hover:-translate-y-1 transition-all duration-200 cursor-pointer overflow-hidden">
+    <div className={`reveal-on-scroll ${staggerClass} group/client relative flex items-center justify-center p-2.5 h-16 sm:h-20 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-sky-400 hover:-translate-y-1 transition-all duration-200 cursor-pointer overflow-hidden`}>
       <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/70 to-transparent transition-transform duration-700 ease-in-out group-hover/client:translate-x-full" />
       <img
         src={client.logo}
@@ -1017,7 +1023,7 @@ function Home() {
           <div className="grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-center">
             
             {/* Left Content Column (Exact Text & Layout from Reference) */}
-            <div className="lg:col-span-6 xl:col-span-6">
+            <div className="lg:col-span-6 xl:col-span-6 reveal-from-left">
               
               {/* Category Pill */}
               <div className="inline-flex items-center gap-2 rounded-full border border-sky-200/80 bg-sky-50/70 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#007cb8]">
@@ -1065,7 +1071,7 @@ function Home() {
             </div>
 
             {/* Right Graphic Showcase (Exact Geometric Artwork from Reference) */}
-            <div className="lg:col-span-6 xl:col-span-6 flex justify-center items-center">
+            <div className="lg:col-span-6 xl:col-span-6 flex justify-center items-center reveal-from-right">
               <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
                 
                 {/* Backlight Glow Effect */}
@@ -1129,7 +1135,7 @@ function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Header */}
-          <div className="text-left max-w-3xl mb-6 sm:mb-8">
+          <div className="text-left max-w-3xl mb-6 sm:mb-8 reveal-on-scroll">
             <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight">
               Our Services
             </h2>
@@ -1140,7 +1146,7 @@ function Home() {
         </div>
 
         {/* AUTO-SCROLLING MARQUEE FLOW */}
-        <div className="mt-3 sm:mt-4 relative w-full overflow-hidden group py-1">
+        <div className="mt-3 sm:mt-4 relative w-full overflow-hidden group py-1 reveal-scale delay-100">
           {/* Subtle Gradient Fade Masks on Edges */}
           <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
           <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
@@ -1219,7 +1225,7 @@ function Home() {
             {/* Row 1 (8 cards) */}
             <div className="grid grid-cols-8 gap-3 xl:gap-3.5">
               {row1Logos.map((client, idx) => (
-                <ClientLogoCard key={`r1-${idx}`} client={client} />
+                <ClientLogoCard key={`r1-${idx}`} client={client} index={idx} />
               ))}
             </div>
 
@@ -1229,12 +1235,12 @@ function Home() {
               {/* Left 6 cards (3 columns x 2 rows) */}
               <div className="flex-1 grid grid-cols-3 gap-3 xl:gap-3.5">
                 {midLeftLogos.map((client, idx) => (
-                  <ClientLogoCard key={`ml-${idx}`} client={client} />
+                  <ClientLogoCard key={`ml-${idx}`} client={client} index={idx} />
                 ))}
               </div>
 
               {/* Center Callout Title Box (Illuminated Focal Hub) */}
-              <div className="relative w-64 xl:w-72 shrink-0 flex flex-col items-center justify-center text-center px-4 py-2 group/center">
+              <div className="reveal-scale relative w-64 xl:w-72 shrink-0 flex flex-col items-center justify-center text-center px-4 py-2 group/center">
                 {/* Center radial ambient bloom */}
                 <div className="pointer-events-none absolute inset-0 bg-radial from-sky-400/20 via-sky-300/10 to-transparent blur-xl rounded-2xl -z-10 group-hover/center:scale-125 transition-transform duration-500" />
 
@@ -1266,7 +1272,7 @@ function Home() {
               {/* Right 6 cards (3 columns x 2 rows) */}
               <div className="flex-1 grid grid-cols-3 gap-3 xl:gap-3.5">
                 {midRightLogos.map((client, idx) => (
-                  <ClientLogoCard key={`mr-${idx}`} client={client} />
+                  <ClientLogoCard key={`mr-${idx}`} client={client} index={idx + 3} />
                 ))}
               </div>
 
@@ -1275,7 +1281,7 @@ function Home() {
             {/* Row 4 (8 cards) */}
             <div className="grid grid-cols-8 gap-3 xl:gap-3.5">
               {row4Logos.map((client, idx) => (
-                <ClientLogoCard key={`r4-${idx}`} client={client} />
+                <ClientLogoCard key={`r4-${idx}`} client={client} index={idx} />
               ))}
             </div>
 
@@ -1283,7 +1289,7 @@ function Home() {
 
           {/* Mobile / Tablet Layout */}
           <div className="lg:hidden flex flex-col gap-6">
-            <div className="text-left">
+            <div className="text-left reveal-on-scroll">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-300/70 bg-sky-50/90 px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#007cb8] shadow-2xs mb-2">
                 Enterprise Trust
               </span>
@@ -1297,13 +1303,13 @@ function Home() {
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
               {allClientLogos.map((client, idx) => (
-                <MobileClientLogoCard key={`mob-${idx}`} client={client} />
+                <MobileClientLogoCard key={`mob-${idx}`} client={client} index={idx} />
               ))}
             </div>
           </div>
 
           {/* "More Clients" Centered Button with Interactive Micro-Animations */}
-          <div className="mt-6 sm:mt-8 text-center">
+          <div className="mt-6 sm:mt-8 text-center reveal-on-scroll delay-150">
             <Link
               to="/clients"
               className="group inline-flex items-center gap-2 rounded-full border-2 border-[#0091d5] bg-white text-[#0091d5] hover:bg-[#0091d5] hover:text-white px-8 py-2.5 text-xs sm:text-sm font-bold shadow-xs hover:shadow-lg hover:shadow-sky-500/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
@@ -1322,7 +1328,7 @@ function Home() {
       {/* ==================================================================== */}
       <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-left max-w-4xl mb-6 sm:mb-8">
+          <div className="text-left max-w-4xl mb-6 sm:mb-8 reveal-on-scroll">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
               Interactive Blueprint
             </span>
@@ -1337,7 +1343,7 @@ function Home() {
           <div className="mt-4 sm:mt-5 grid gap-5 lg:grid-cols-12 items-start">
             
             {/* Left Layer Selectors */}
-            <div className="lg:col-span-5 space-y-3">
+            <div className="lg:col-span-5 space-y-3 reveal-from-left">
               {architectureLayers.map((layer) => {
                 const isSelected = layer.id === activeArchLayer;
                 return (
@@ -1369,7 +1375,7 @@ function Home() {
             </div>
 
             {/* Right Live Layer Console HUD */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7 reveal-from-right">
               <div className="rounded-3xl border border-neutral-200/80 bg-neutral-950 text-white p-7 sm:p-8 shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
 
@@ -1429,7 +1435,7 @@ function Home() {
       {/* ==================================================================== */}
       <section className="border-b border-neutral-200/70 bg-white py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-left max-w-2xl mb-6 sm:mb-8">
+          <div className="text-left max-w-2xl mb-6 sm:mb-8 reveal-on-scroll">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
               Delivery Methodology
             </span>
@@ -1442,10 +1448,10 @@ function Home() {
           </div>
 
           <div className="mt-5 sm:mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {methodologySteps.map((step) => (
+            {methodologySteps.map((step, idx) => (
               <div
                 key={step.number}
-                className="relative rounded-3xl border border-neutral-200/80 bg-[#fafcfb] p-6 shadow-sm hover:border-emerald-600/30 hover:shadow-md transition-all flex flex-col justify-between"
+                className={`reveal-on-scroll delay-${(idx + 1) * 100} relative rounded-3xl border border-neutral-200/80 bg-[#fafcfb] p-6 shadow-sm hover:border-emerald-600/30 hover:shadow-md transition-all flex flex-col justify-between`}
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -1477,7 +1483,7 @@ function Home() {
       {/* ==================================================================== */}
       <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 max-w-2xl mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 max-w-2xl mb-6 sm:mb-8 reveal-on-scroll">
             <div>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
                 Case Studies
@@ -1496,11 +1502,11 @@ function Home() {
           </div>
 
           <div className="mt-3 sm:mt-4 grid gap-4 lg:grid-cols-3">
-            {cases.map((c) => (
+            {cases.map((c, idx) => (
               <Link
                 key={c.title}
                 to="/clients"
-                className="group flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-white p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-emerald-600/40 hover:shadow-xl hover:shadow-emerald-950/5 cursor-pointer"
+                className={`reveal-on-scroll delay-${(idx + 1) * 100} group flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-white p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-emerald-600/40 hover:shadow-xl hover:shadow-emerald-950/5 cursor-pointer`}
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -1544,7 +1550,7 @@ function Home() {
       {/* ==================================================================== */}
       <section className="border-b border-neutral-200/70 bg-white py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-left max-w-2xl mb-6 sm:mb-8">
+          <div className="text-left max-w-2xl mb-6 sm:mb-8 reveal-on-scroll">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
               Executive Validation
             </span>
@@ -1557,7 +1563,7 @@ function Home() {
             {testimonials.map((t, idx) => (
               <figure
                 key={idx}
-                className="flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-[#fafcfb] p-5 sm:p-6 shadow-xs hover:border-emerald-600/30 hover:shadow-md transition-all relative overflow-hidden"
+                className={`reveal-on-scroll delay-${(idx + 1) * 100} flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-[#fafcfb] p-5 sm:p-6 shadow-xs hover:border-emerald-600/30 hover:shadow-md transition-all relative overflow-hidden`}
               >
                 <div>
                   <div className="flex items-center gap-1 text-emerald-600 mb-2">
@@ -1588,7 +1594,7 @@ function Home() {
       {/* ==================================================================== */}
       <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="text-left max-w-2xl mb-6 sm:mb-8">
+          <div className="text-left max-w-2xl mb-6 sm:mb-8 reveal-on-scroll">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
               Executive FAQ
             </span>
@@ -1600,7 +1606,7 @@ function Home() {
             </p>
           </div>
 
-          <div className="mt-3 sm:mt-4 space-y-2.5">
+          <div className="mt-3 sm:mt-4 space-y-2.5 reveal-on-scroll delay-100">
             {faqs.map((faq, idx) => {
               const isOpen = openFaqIndex === idx;
               return (

@@ -122,7 +122,7 @@ export function resolveBrandLogos(brandsStr?: string | null, fallbackLogos: Bran
     return {
       name,
       Logo: Cpu,
-      color: "#0284c7",
+      color: "#555d25",
       badge: "Enterprise",
     };
   });

@@ -260,7 +260,7 @@ function About() {
             >
               Transforming Businesses Through Technology
             </span>
-            <div className="w-20 h-[2px] bg-[#E5A93C] ml-auto mt-0.5 rounded-full shadow-sm" />
+            <div className="w-20 h-[2px] bg-[#b38e36] ml-auto mt-0.5 rounded-full shadow-sm" />
           </div>
 
           {/* Left Column Content Container */}
@@ -268,15 +268,15 @@ function About() {
             <div className="max-w-2xl text-left space-y-6">
               
               {/* Top Tagline / Eyebrow */}
-              <div className="flex items-center gap-2.5 text-[#E5A93C] text-[11px] sm:text-xs font-bold tracking-[0.22em] uppercase">
-                <span className="w-6 h-[2px] bg-[#E5A93C]" />
+              <div className="flex items-center gap-2.5 text-[#b38e36] text-[11px] sm:text-xs font-bold tracking-[0.22em] uppercase">
+                <span className="w-6 h-[2px] bg-[#b38e36]" />
                 <span>Enterprise IT Consulting &amp; Managed Services</span>
               </div>
 
               {/* Headline */}
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.08] drop-shadow-md">
                 About <br />
-                <span className="text-[#E5A93C]">Regal OPs</span>
+                <span className="text-[#b38e36]">Regal OPs</span>
               </h1>
 
               {/* Subheading / Lifecycle Statement */}
@@ -288,7 +288,7 @@ function About() {
               <div className="flex flex-wrap items-center gap-3.5 pt-1">
                 <Link
                   to="/solutions"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#059669] hover:bg-[#10B981] px-6 sm:px-7 py-3 text-xs sm:text-sm font-bold text-white shadow-lg shadow-emerald-950/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#555d25] hover:bg-[#464d1e] px-6 sm:px-7 py-3 text-xs sm:text-sm font-bold text-white shadow-lg shadow-emerald-950/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                 >
                   Explore Our Solutions <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -313,10 +313,10 @@ function About() {
             >
               <defs>
                 <linearGradient id="goldWaveRibbon" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#D4AF37" />
+                  <stop offset="0%" stopColor="#b38e36" />
                   <stop offset="35%" stopColor="#F59E0B" />
-                  <stop offset="70%" stopColor="#E5A93C" />
-                  <stop offset="100%" stopColor="#D4AF37" />
+                  <stop offset="70%" stopColor="#b38e36" />
+                  <stop offset="100%" stopColor="#b38e36" />
                 </linearGradient>
               </defs>
               {/* Golden metallic wave ribbon accent layer */}
@@ -361,13 +361,13 @@ function About() {
           {/* Section Header with Carousel Navigation Controls */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5">
             <div className="max-w-2xl text-left">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#007cb8]">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#8c6d23]">
                 Why Leading Enterprises Choose Us
               </span>
               <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">
                 Our Key Benefits
               </h2>
-              <div className="w-12 h-1 bg-[#0091d5] rounded-full mt-3 mb-4" />
+              <div className="w-12 h-1 bg-[#555d25] rounded-full mt-3 mb-4" />
               <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
                 We empower organizations to reach their full potential and accelerate
                 their technological transformation with battle-tested rigor.
@@ -384,7 +384,7 @@ function About() {
                 type="button"
                 onClick={() => scroll("left")}
                 aria-label="Scroll left"
-                className="h-10 w-10 rounded-full border border-neutral-200/80 bg-white text-neutral-700 hover:bg-[#0091d5] hover:text-white hover:border-[#0091d5] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
+                className="h-10 w-10 rounded-full border border-neutral-200/80 bg-white text-neutral-700 hover:bg-[#555d25] hover:text-white hover:border-[#555d25] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -392,7 +392,7 @@ function About() {
                 type="button"
                 onClick={() => scroll("right")}
                 aria-label="Scroll right"
-                className="h-10 w-10 rounded-full border border-neutral-200/80 bg-white text-neutral-700 hover:bg-[#0091d5] hover:text-white hover:border-[#0091d5] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
+                className="h-10 w-10 rounded-full border border-neutral-200/80 bg-white text-neutral-700 hover:bg-[#555d25] hover:text-white hover:border-[#555d25] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
@@ -426,15 +426,15 @@ function About() {
                   <div>
                     {/* Top Icon & Tag */}
                     <div className="flex items-center justify-between mb-5">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-50 text-[#0091d5] border border-sky-100 group-hover:bg-[#0091d5] group-hover:text-white transition-colors duration-300">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#fdfaf2] text-[#555d25] border border-sky-100 group-hover:bg-[#555d25] group-hover:text-white transition-colors duration-300">
                         <Icon className="h-6 w-6" />
                       </div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 bg-neutral-100/80 px-2.5 py-1 rounded-full group-hover:bg-sky-50 group-hover:text-[#007cb8] transition-colors">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 bg-neutral-100/80 px-2.5 py-1 rounded-full group-hover:bg-[#fdfaf2] group-hover:text-[#8c6d23] transition-colors">
                         {item.badge}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-bold text-neutral-900 group-hover:text-[#0091d5] transition-colors">
+                    <h3 className="text-lg font-bold text-neutral-900 group-hover:text-[#555d25] transition-colors">
                       {item.title}
                     </h3>
                     <p className="mt-2.5 text-xs sm:text-sm text-neutral-600 leading-relaxed">
@@ -442,7 +442,7 @@ function About() {
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-neutral-100 flex items-center justify-between text-xs font-semibold text-[#0091d5]">
+                  <div className="mt-6 pt-4 border-t border-neutral-100 flex items-center justify-between text-xs font-semibold text-[#555d25]">
                     <span>Standard in every engagement</span>
                     <span className="text-neutral-400 font-mono text-[11px]">0{idx + 1}</span>
                   </div>
@@ -462,7 +462,7 @@ function About() {
                 onClick={() => scrollTo(idx)}
                 className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   idx === activeIndex
-                    ? "w-8 bg-[#0091d5] shadow-[0_0_8px_rgba(0,145,213,0.4)]"
+                    ? "w-8 bg-[#555d25] shadow-[0_0_8px_rgba(0,145,213,0.4)]"
                     : "w-2 bg-neutral-300 hover:bg-neutral-400"
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
@@ -548,13 +548,13 @@ function About() {
       <section id="our-core-values" className="bg-[#fafcfb] dark:bg-slate-900/60 py-6 sm:py-8 border-b border-neutral-200/70 dark:border-slate-800/80">
         <div id="values" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-left max-w-3xl">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-950/50 px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#007cb8] dark:text-sky-400">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 dark:border-sky-800 bg-[#fdfaf2] dark:bg-sky-950/50 px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#8c6d23] dark:text-[#b38e36]">
               Ethical Standards &amp; Principles
             </span>
             <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-900 dark:text-white tracking-tight">
               Our Core Values
             </h2>
-            <div className="w-10 h-0.5 bg-[#0091d5] rounded-full mt-2 mb-2" />
+            <div className="w-10 h-0.5 bg-[#555d25] rounded-full mt-2 mb-2" />
             <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl">
               We have embedded the highest ethical standards across our organization,
               reflected in how we conduct our business and collaborate with all stakeholders.
@@ -571,7 +571,7 @@ function About() {
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-50 dark:bg-sky-950/60 text-[#0091d5] dark:text-sky-400 border border-sky-200/50 dark:border-sky-800/50 group-hover:scale-105 group-hover:bg-[#0091d5] group-hover:text-white transition-all duration-300 shadow-xs">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#fdfaf2] dark:bg-sky-950/60 text-[#555d25] dark:text-[#b38e36] border border-[#b38e36]/40/50 dark:border-sky-800/50 group-hover:scale-105 group-hover:bg-[#555d25] group-hover:text-white transition-all duration-300 shadow-xs">
                         <Icon className="h-5 w-5" />
                       </div>
                       <span className="text-2xl sm:text-3xl font-mono font-black text-slate-200 dark:text-slate-800 group-hover:text-sky-500/30 transition-colors select-none">
@@ -579,7 +579,7 @@ function About() {
                       </span>
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-extrabold text-neutral-900 dark:text-white tracking-tight group-hover:text-[#0091d5] transition-colors">
+                    <h3 className="text-lg sm:text-xl font-extrabold text-neutral-900 dark:text-white tracking-tight group-hover:text-[#555d25] transition-colors">
                       {v.title}
                     </h3>
                     <p className="mt-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -603,23 +603,23 @@ function About() {
       <section className="bg-[#fafcfb] py-6 sm:py-8 border-b border-neutral-200/70">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#007cb8]">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#8c6d23]">
               Fifteen Years of Impact
             </span>
             <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-900">
               Our Journey &amp; Milestones
             </h2>
-            <div className="w-12 h-1 bg-[#0091d5] rounded-full mt-2 mb-3" />
+            <div className="w-12 h-1 bg-[#555d25] rounded-full mt-2 mb-3" />
             <p className="text-sm sm:text-base text-neutral-600">
               From an agile architecture squad to a global practice serving Fortune 500 institutions.
             </p>
           </div>
 
-          <div className="mt-5 sm:mt-6 relative border-l-2 border-sky-200 ml-4 sm:ml-6 space-y-5 pl-6 sm:pl-8">
+          <div className="mt-5 sm:mt-6 relative border-l-2 border-[#b38e36]/40 ml-4 sm:ml-6 space-y-5 pl-6 sm:pl-8">
             {timeline.map((item) => (
               <div key={item.year} className="relative group">
-                <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 h-4 w-4 rounded-full border-2 border-white bg-[#0091d5] shadow-xs group-hover:scale-125 transition-transform" />
-                <div className="inline-block rounded-full bg-sky-100 text-[#007cb8] px-3 py-0.5 text-xs font-bold font-mono">
+                <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 h-4 w-4 rounded-full border-2 border-white bg-[#555d25] shadow-xs group-hover:scale-125 transition-transform" />
+                <div className="inline-block rounded-full bg-[#f5f6ee] text-[#8c6d23] px-3 py-0.5 text-xs font-bold font-mono">
                   {item.year}
                 </div>
                 <h3 className="mt-1 text-base sm:text-lg font-bold text-neutral-900">
@@ -640,11 +640,11 @@ function About() {
       <section className="bg-white py-6 sm:py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-neutral-900 via-neutral-950 to-neutral-900 p-6 sm:p-8 lg:p-10 shadow-2xl border border-neutral-800 text-center">
-            <div className="pointer-events-none absolute -right-20 -bottom-20 h-80 w-80 rounded-full bg-sky-500/10 blur-3xl" />
-            <div className="pointer-events-none absolute -left-20 -top-20 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
+            <div className="pointer-events-none absolute -right-20 -bottom-20 h-80 w-80 rounded-full bg-[#fdfaf2]0/10 blur-3xl" />
+            <div className="pointer-events-none absolute -left-20 -top-20 h-80 w-80 rounded-full bg-[#555d25]/10 blur-3xl" />
 
             <div className="relative z-10 max-w-3xl mx-auto">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-400/30 bg-sky-500/10 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-sky-300">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/30 bg-[#fdfaf2]0/10 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#eddcb8]">
                 Accelerate With Confidence
               </span>
               <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
@@ -656,7 +656,7 @@ function About() {
               <div className="mt-5 flex flex-wrap justify-center items-center gap-3.5">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#0091d5] hover:bg-[#007cb8] px-7 py-3 text-sm font-bold text-white shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#555d25] hover:bg-[#8c6d23] px-7 py-3 text-sm font-bold text-white shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                 >
                   Talk to an Engineer <ArrowRight className="h-4 w-4" />
                 </Link>

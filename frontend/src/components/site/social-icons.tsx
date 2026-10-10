@@ -204,12 +204,12 @@ export function StickyBottomActions() {
       {/* Call Button */}
       <a
         href="tel:+914012345678"
-        className="group relative flex h-13 w-13 items-center justify-center rounded-full bg-[#0284c7] text-white shadow-xl shadow-sky-900/40 transition-all duration-300 hover:scale-110 hover:bg-[#0369a1] active:scale-95"
+        className="group relative flex h-13 w-13 items-center justify-center rounded-full bg-[#555d25] text-white shadow-xl shadow-sky-900/40 transition-all duration-300 hover:scale-110 hover:bg-[#464d1e] active:scale-95"
         title="Call Regal OPs (+91 40 1234 5678)"
         aria-label="Call Regal OPs"
       >
         {/* Subtle breathing ripple */}
-        <span className="absolute -inset-1 rounded-full bg-sky-500/30 animate-pulse pointer-events-none" />
+        <span className="absolute -inset-1 rounded-full bg-amber-400/30 animate-pulse pointer-events-none" />
         <Phone className="h-5 w-5 relative z-10" />
         <span className="pointer-events-none absolute right-15 scale-0 rounded-lg bg-neutral-900/95 px-3 py-1.5 text-xs font-semibold text-white shadow-xl border border-white/10 backdrop-blur-md transition-all duration-200 group-hover:scale-100 whitespace-nowrap">
           Call: +91 40 1234 5678

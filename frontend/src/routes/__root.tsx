@@ -10,7 +10,7 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#fafcfb] px-4 py-12">
       <div className="max-w-md text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-300/80 bg-sky-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#007cb8]">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#8c6d23]">
           Error 404
         </span>
         <h1 className="mt-4 text-7xl font-black text-neutral-900 tracking-tight">404</h1>
@@ -21,7 +21,7 @@ function NotFoundComponent() {
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-full bg-[#0091d5] hover:bg-[#007cb8] px-6 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-200 cursor-pointer"
+            className="inline-flex items-center justify-center rounded-full bg-[#555d25] hover:bg-[#8c6d23] px-6 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-200 cursor-pointer"
           >
             Go Home
           </Link>

@@ -50,6 +50,11 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
+  --color-brand-olive: #555d25;
+  --color-brand-olive-dark: #464d1e;
+  --color-brand-gold: #b38e36;
+  --color-brand-gold-dark: #997728;
+  --color-brand-sage: #8c9646;
   --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
 }
@@ -57,43 +62,43 @@
 :root {
   --radius: 0.75rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.21 0.015 120);
-  --card: oklch(0.98 0.005 120);
-  --card-foreground: oklch(0.21 0.015 120);
+  --foreground: oklch(0.20 0.015 118);
+  --card: oklch(0.99 0.005 118);
+  --card-foreground: oklch(0.20 0.015 118);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.21 0.015 120);
-  --primary: oklch(0.48 0.11 120);
+  --popover-foreground: oklch(0.20 0.015 118);
+  --primary: #555d25;
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.94 0.015 120);
-  --secondary-foreground: oklch(0.35 0.08 120);
-  --muted: oklch(0.96 0.008 120);
-  --muted-foreground: oklch(0.5 0.02 120);
-  --accent: oklch(0.68 0.14 85);
+  --secondary: #f5f6ee;
+  --secondary-foreground: #555d25;
+  --muted: #f6f8f0;
+  --muted-foreground: #666b57;
+  --accent: #b38e36;
   --accent-foreground: oklch(1 0 0);
-  --gold: oklch(0.68 0.14 85);
+  --gold: #b38e36;
   --gold-foreground: oklch(1 0 0);
-  --surface: oklch(0.985 0.004 120);
-  --surface-2: oklch(0.95 0.01 120);
+  --surface: #fafbf7;
+  --surface-2: #f2f4ea;
   --destructive: oklch(0.62 0.21 25);
   --destructive-foreground: oklch(0.98 0.005 250);
-  --border: oklch(0.9 0.01 120);
-  --input: oklch(0.93 0.01 120);
-  --ring: oklch(0.48 0.11 120);
+  --border: #e3e7d5;
+  --input: #e3e7d5;
+  --ring: #555d25;
 
   --gradient-hero: radial-gradient(
       120% 120% at 15% 0%,
-      color-mix(in oklab, var(--primary) 10%, transparent),
+      rgba(85, 93, 37, 0.08),
       transparent 55%
     ),
     radial-gradient(
       90% 90% at 100% 20%,
-      color-mix(in oklab, var(--gold) 8%, transparent),
+      rgba(179, 142, 54, 0.08),
       transparent 60%
     );
-  --gradient-accent: linear-gradient(120deg, var(--primary), var(--gold));
-  --shadow-elevated: 0 20px 40px -20px oklch(0.25 0.02 120 / 0.06), 0 1px 3px oklch(0.25 0.02 120 / 0.04);
-  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--primary) 12%, transparent),
-    0 12px 30px -15px color-mix(in oklab, var(--primary) 20%, transparent);
+  --gradient-accent: linear-gradient(120deg, #555d25, #b38e36);
+  --shadow-elevated: 0 20px 40px -20px rgba(85, 93, 37, 0.08), 0 1px 3px rgba(85, 93, 37, 0.04);
+  --shadow-glow: 0 0 0 1px rgba(85, 93, 37, 0.15),
+    0 12px 30px -15px rgba(85, 93, 37, 0.25);
 }
 
 .dark {

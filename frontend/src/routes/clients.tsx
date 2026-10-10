@@ -523,12 +523,12 @@ function Clients() {
                     }}
                     className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 border-b-2 cursor-pointer ${
                       isActive
-                        ? "border-[#136a3e] dark:border-emerald-400 text-[#136a3e] dark:text-emerald-400"
+                        ? "border-[#555d25] dark:border-emerald-400 text-[#555d25] dark:text-emerald-400"
                         : "border-transparent text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                     }`}
                   >
                     <IconComponent
-                      className={`h-4 w-4 ${isActive ? "text-[#136a3e] dark:text-emerald-400" : "text-slate-400"}`}
+                      className={`h-4 w-4 ${isActive ? "text-[#555d25] dark:text-emerald-400" : "text-slate-400"}`}
                     />
                     <span>{cat.label}</span>
                   </button>
@@ -743,7 +743,7 @@ function Clients() {
             <div className="mt-4 sm:mt-5 text-center">
               <button
                 onClick={() => setShowAll(!showAll)}
-                className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#136a3e] to-[#0f5431] hover:from-[#0f5431] hover:to-[#0a3b22] text-white px-9 py-3 text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#555d25] to-[#0f5431] hover:from-[#0f5431] hover:to-[#0a3b22] text-white px-9 py-3 text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
               >
                 <span>{showAll ? "Show Less" : "Load More"}</span>
                 <ArrowRight className={`h-4 w-4 transition-transform duration-300 ${showAll ? "-rotate-90" : ""}`} />
@@ -760,13 +760,13 @@ function Clients() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 sm:mb-5 gap-3">
             <div>
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#136a3e] dark:text-emerald-400">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#555d25] dark:text-emerald-400">
                 Enterprise Case Studies
               </span>
               <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
                 Client Success Stories &amp; Deliverables
               </h2>
-              <div className="w-12 h-1 bg-[#136a3e] rounded-full mt-3" />
+              <div className="w-12 h-1 bg-[#555d25] rounded-full mt-3" />
             </div>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md leading-relaxed">
               Real-world transformations, platform modernization, and quantifiable business outcomes engineered for our clients.
@@ -808,13 +808,13 @@ function Clients() {
                       </div>
                     ) : (
                       study.sector && (
-                        <div className="mb-4 inline-block rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#136a3e] dark:text-emerald-400 border border-emerald-500/20">
+                        <div className="mb-4 inline-block rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#555d25] dark:text-emerald-400 border border-emerald-500/20">
                           {study.sector}
                         </div>
                       )
                     )}
 
-                    <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-[#136a3e] dark:group-hover:text-emerald-400 transition-colors">
+                    <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-[#555d25] dark:group-hover:text-emerald-400 transition-colors">
                       {study.name}
                     </h3>
                     <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -822,7 +822,7 @@ function Clients() {
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-[#136a3e] dark:text-emerald-400">
+                  <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-[#555d25] dark:text-emerald-400">
                     <span>Verified Engagement</span>
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
@@ -839,13 +839,13 @@ function Clients() {
       <section className="border-t border-border/80 bg-white dark:bg-slate-950 py-5 sm:py-6">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-4 sm:mb-5">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#136a3e] dark:text-emerald-400">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#555d25] dark:text-emerald-400">
               Domains &amp; Verticals
             </span>
             <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
               Industries We Serve
             </h2>
-            <div className="w-12 h-1 bg-[#136a3e] rounded-full mt-2" />
+            <div className="w-12 h-1 bg-[#555d25] rounded-full mt-2" />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-x-8 gap-y-5 sm:gap-y-6">
@@ -859,7 +859,7 @@ function Clients() {
                   </div>
 
                   {/* Industry Title */}
-                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-[#136a3e] dark:group-hover:text-emerald-400 transition-colors">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-[#555d25] dark:group-hover:text-emerald-400 transition-colors">
                     {ind.name}
                   </h3>
 

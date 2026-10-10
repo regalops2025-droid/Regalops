@@ -155,7 +155,7 @@ export function SiteHeader() {
     <>
       <header className="sticky top-0 z-50 w-full select-none bg-transparent">
         {/* Top Micro-Bar (Enterprise Utility Strip matching Brand Green) */}
-        <div className="w-full border-b border-[#0f4e2e] bg-[#136a3e] text-xs text-white/90 transition-all duration-300 shadow-xs">
+        <div className="w-full border-b border-[#464d1e] bg-[#555d25] text-xs text-white/90 transition-all duration-300 shadow-xs">
           <div className="mx-auto flex max-w-[1400px] items-center justify-between px-3 sm:px-6 lg:px-8 py-1.5">
             {/* Mobile View (< sm): Centered, Rotating Single Trust Badge (Never clipped, fits 320px+) */}
             <div className="flex sm:hidden w-full items-center justify-center py-0.5 overflow-hidden">
@@ -285,7 +285,7 @@ export function SiteHeader() {
                 to="/"
                 className={`relative whitespace-nowrap text-[12.5px] xl:text-[13px] 2xl:text-sm font-semibold transition-colors py-1 ${
                   isActive("/")
-                    ? "text-[#136a3e] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#136a3e] after:rounded-full"
+                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
                 }`}
               >
@@ -297,7 +297,7 @@ export function SiteHeader() {
                 to="/about"
                 className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
                   isActive("/about")
-                    ? "text-[#136a3e] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#136a3e] after:rounded-full"
+                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
                 }`}
               >
@@ -310,7 +310,7 @@ export function SiteHeader() {
                   to="/solutions"
                   className={`flex items-center gap-0.5 whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
                     isActive("/solutions")
-                      ? "text-[#136a3e] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#136a3e] after:rounded-full"
+                      ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
                       : "text-neutral-700 hover:text-neutral-950"
                   }`}
                 >
@@ -334,10 +334,10 @@ export function SiteHeader() {
                           key={child.label}
                           to={(child.to || "/solutions") as any}
                           params={child.params as any}
-                          className="group/item flex items-center justify-between rounded-xl px-3 py-2 text-xs font-semibold text-neutral-700 hover:text-[#136a3e] hover:bg-emerald-50/70 transition-colors"
+                          className="group/item flex items-center justify-between rounded-xl px-3 py-2 text-xs font-semibold text-neutral-700 hover:text-[#555d25] hover:bg-[#f5f6ee] transition-colors"
                         >
                           <span className="truncate">{child.label}</span>
-                          <ArrowRight className="h-3 w-3 text-neutral-400 group-hover/item:text-[#136a3e] group-hover/item:translate-x-0.5 transition-all opacity-0 group-hover/item:opacity-100 shrink-0 ml-1.5" />
+                          <ArrowRight className="h-3 w-3 text-neutral-400 group-hover/item:text-[#555d25] group-hover/item:translate-x-0.5 transition-all opacity-0 group-hover/item:opacity-100 shrink-0 ml-1.5" />
                         </Link>
                       ))}
                     </div>
@@ -346,7 +346,7 @@ export function SiteHeader() {
 
                     <Link
                       to="/solutions"
-                      className="flex items-center justify-between rounded-xl px-3 py-2 text-xs font-bold text-[#136a3e] hover:bg-emerald-50/70 transition-colors"
+                      className="flex items-center justify-between rounded-xl px-3 py-2 text-xs font-bold text-[#555d25] hover:bg-[#f5f6ee] transition-colors"
                     >
                       <span>All Solutions</span>
                       <ArrowRight className="h-3.5 w-3.5" />
@@ -361,7 +361,7 @@ export function SiteHeader() {
                   to="/technologies"
                   className={`flex items-center gap-0.5 whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
                     isActive("/technologies")
-                      ? "text-[#136a3e] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#136a3e] after:rounded-full"
+                      ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
                       : "text-neutral-700 hover:text-neutral-950"
                   }`}
                 >
@@ -383,10 +383,10 @@ export function SiteHeader() {
                         <Link
                           key={child.label}
                           to="/technologies"
-                          className="group/item flex items-center justify-between rounded-xl px-3 py-2 text-xs font-semibold text-neutral-700 hover:text-[#136a3e] hover:bg-emerald-50/70 transition-colors"
+                          className="group/item flex items-center justify-between rounded-xl px-3 py-2 text-xs font-semibold text-neutral-700 hover:text-[#555d25] hover:bg-[#f5f6ee] transition-colors"
                         >
                           <span className="truncate">{child.label}</span>
-                          <ArrowRight className="h-3 w-3 text-neutral-400 group-hover/item:text-[#136a3e] group-hover/item:translate-x-0.5 transition-all opacity-0 group-hover/item:opacity-100 shrink-0 ml-1.5" />
+                          <ArrowRight className="h-3 w-3 text-neutral-400 group-hover/item:text-[#555d25] group-hover/item:translate-x-0.5 transition-all opacity-0 group-hover/item:opacity-100 shrink-0 ml-1.5" />
                         </Link>
                       ))}
                     </div>
@@ -395,7 +395,7 @@ export function SiteHeader() {
 
                     <Link
                       to="/technologies"
-                      className="flex items-center justify-between rounded-xl px-3 py-2 text-xs font-bold text-[#136a3e] hover:bg-emerald-50/70 transition-colors"
+                      className="flex items-center justify-between rounded-xl px-3 py-2 text-xs font-bold text-[#555d25] hover:bg-[#f5f6ee] transition-colors"
                     >
                       <span>All Technologies</span>
                       <ArrowRight className="h-3.5 w-3.5" />
@@ -409,7 +409,7 @@ export function SiteHeader() {
                 to="/clients"
                 className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
                   isActive("/clients")
-                    ? "text-[#136a3e] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#136a3e] after:rounded-full"
+                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
                 }`}
               >
@@ -421,7 +421,7 @@ export function SiteHeader() {
                 to="/career"
                 className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
                   isActive("/career")
-                    ? "text-[#136a3e] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#136a3e] after:rounded-full"
+                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
                 }`}
               >
@@ -433,7 +433,7 @@ export function SiteHeader() {
                 to="/blog"
                 className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
                   isActive("/blog")
-                    ? "text-[#136a3e] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#136a3e] after:rounded-full"
+                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
                 }`}
               >
@@ -445,7 +445,7 @@ export function SiteHeader() {
                 to="/contact"
                 className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
                   isActive("/contact")
-                    ? "text-[#136a3e] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#136a3e] after:rounded-full"
+                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
                 }`}
               >
@@ -460,7 +460,7 @@ export function SiteHeader() {
               <Link
                 to="/contact"
                 id="header-cta-button"
-                className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#136a3e] hover:bg-[#0e5230] text-white text-xs xl:text-[13px] font-semibold px-3.5 sm:px-4 xl:px-4.5 2xl:px-5 py-2 xl:py-2.5 shadow-sm shadow-[#136a3e]/25 hover:shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap shrink-0 group"
+                className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#555d25] hover:bg-[#464d1e] text-white text-xs xl:text-[13px] font-semibold px-3.5 sm:px-4 xl:px-4.5 2xl:px-5 py-2 xl:py-2.5 shadow-sm shadow-[#555d25]/25 hover:shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap shrink-0 group"
               >
                 <span>Book Consultation</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
@@ -532,7 +532,7 @@ export function SiteHeader() {
                           to={item.to}
                           onClick={() => setOpen(false)}
                           className={`text-base font-semibold py-1 transition-colors flex items-center gap-2 ${
-                            active ? "text-[#136a3e] font-bold" : "text-neutral-800 hover:text-[#136a3e]"
+                            active ? "text-[#555d25] font-bold" : "text-neutral-800 hover:text-[#555d25]"
                           }`}
                         >
                           <span>{item.label}</span>
@@ -553,7 +553,7 @@ export function SiteHeader() {
                           >
                             <ChevronDown
                               className={`h-4 w-4 transition-transform duration-200 ${
-                                expanded === item.label ? "rotate-180 text-[#136a3e]" : ""
+                                expanded === item.label ? "rotate-180 text-[#555d25]" : ""
                               }`}
                             />
                           </button>
@@ -561,7 +561,7 @@ export function SiteHeader() {
                       </div>
 
                       {hasChildren && expanded === item.label && (
-                        <div className="mt-2 pl-2 space-y-1.5 border-l-2 border-[#136a3e]/30 animate-in fade-in slide-in-from-top-2 duration-200">
+                        <div className="mt-2 pl-2 space-y-1.5 border-l-2 border-[#555d25]/30 animate-in fade-in slide-in-from-top-2 duration-200">
                           {childrenToRender.map((child) => {
                             const ChildIcon = getNavIcon(child.icon || child.label);
                             return (
@@ -572,7 +572,7 @@ export function SiteHeader() {
                                 onClick={() => setOpen(false)}
                                 className="flex items-start gap-2.5 rounded-lg p-2 transition-colors hover:bg-neutral-50"
                               >
-                                <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded bg-emerald-50 text-[#136a3e]">
+                                <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[#f5f6ee] text-[#555d25]">
                                   <ChildIcon className="h-3.5 w-3.5" />
                                 </div>
                                 <div className="min-w-0 flex-1">
@@ -610,7 +610,7 @@ export function SiteHeader() {
                 <Link
                   to="/contact"
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-center gap-1.5 rounded-xl bg-[#136a3e] py-2.5 text-center text-xs font-bold text-white shadow-sm hover:bg-[#0e5230] transition-all"
+                  className="flex items-center justify-center gap-1.5 rounded-xl bg-[#555d25] py-2.5 text-center text-xs font-bold text-white shadow-sm hover:bg-[#464d1e] transition-all"
                 >
                   Book Consultation
                 </Link>
@@ -634,23 +634,23 @@ export function SiteHeader() {
           {/* Quick Navigation */}
           <CommandGroup heading="Quick Navigation">
             <CommandItem onSelect={() => handleSelectSearch("/")}>
-              <Compass className="mr-2 h-4 w-4 text-[#136a3e]" />
+              <Compass className="mr-2 h-4 w-4 text-[#555d25]" />
               <span>Home</span>
             </CommandItem>
             <CommandItem onSelect={() => handleSelectSearch("/about")}>
-              <Building2 className="mr-2 h-4 w-4 text-[#136a3e]" />
+              <Building2 className="mr-2 h-4 w-4 text-[#555d25]" />
               <span>About Regal OPs</span>
             </CommandItem>
             <CommandItem onSelect={() => handleSelectSearch("/clients")}>
-              <Users className="mr-2 h-4 w-4 text-[#136a3e]" />
+              <Users className="mr-2 h-4 w-4 text-[#555d25]" />
               <span>Clients & Case Studies</span>
             </CommandItem>
             <CommandItem onSelect={() => handleSelectSearch("/blog")}>
-              <FileText className="mr-2 h-4 w-4 text-[#136a3e]" />
+              <FileText className="mr-2 h-4 w-4 text-[#555d25]" />
               <span>Engineering Blog</span>
             </CommandItem>
             <CommandItem onSelect={() => handleSelectSearch("/contact")}>
-              <Mail className="mr-2 h-4 w-4 text-[#136a3e]" />
+              <Mail className="mr-2 h-4 w-4 text-[#555d25]" />
               <span>Contact & Consultation</span>
             </CommandItem>
             <CommandItem onSelect={() => handleSelectSearch("/login")}>
@@ -669,7 +669,7 @@ export function SiteHeader() {
                     key={s.id}
                     onSelect={() => handleSelectSearch("/solutions/$id", { id: String(s.id) })}
                   >
-                    <Workflow className="mr-2 h-4 w-4 text-[#136a3e]" />
+                    <Workflow className="mr-2 h-4 w-4 text-[#555d25]" />
                     <span>{s.name}</span>
                   </CommandItem>
                 ))
@@ -678,7 +678,7 @@ export function SiteHeader() {
                     key={c.label}
                     onSelect={() => handleSelectSearch("/solutions")}
                   >
-                    <Workflow className="mr-2 h-4 w-4 text-[#136a3e]" />
+                    <Workflow className="mr-2 h-4 w-4 text-[#555d25]" />
                     <span>{c.label}</span>
                   </CommandItem>
                 ))}
@@ -693,7 +693,7 @@ export function SiteHeader() {
                 key={t.label}
                 onSelect={() => handleSelectSearch("/technologies")}
               >
-                <Cpu className="mr-2 h-4 w-4 text-[#136a3e]" />
+                <Cpu className="mr-2 h-4 w-4 text-[#555d25]" />
                 <span>{t.label}</span>
               </CommandItem>
             ))}
@@ -704,7 +704,7 @@ export function SiteHeader() {
           {/* Careers & Jobs */}
           <CommandGroup heading="Careers & Open Roles">
             <CommandItem onSelect={() => handleSelectSearch("/career")}>
-              <Briefcase className="mr-2 h-4 w-4 text-[#136a3e]" />
+              <Briefcase className="mr-2 h-4 w-4 text-[#555d25]" />
               <span>View All Open Positions</span>
             </CommandItem>
             {dynamicJobs.map((j) => (
@@ -712,7 +712,7 @@ export function SiteHeader() {
                 key={j.id || j.title}
                 onSelect={() => handleSelectSearch("/career")}
               >
-                <Sparkles className="mr-2 h-4 w-4 text-emerald-600" />
+                <Sparkles className="mr-2 h-4 w-4 text-[#555d25]" />
                 <span>{j.title} ({j.location})</span>
               </CommandItem>
             ))}

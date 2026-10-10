@@ -238,7 +238,7 @@ export function renderServiceIcon(iconKey?: string, title?: string) {
         <path d="M32 20C32 20 38 23 38 31L35 34L32 32L29 34L26 31C26 23 32 20 32 20Z" stroke="#334155" strokeWidth="2.2" strokeLinejoin="round" fill="#ffffff" />
         <circle cx="32" cy="27" r="2.5" fill="#f97316" />
         <path d="M30 35L32 39L34 35" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M44 24L45 22L46 24L48 25L46 26L45 28L44 26L42 25Z" fill="#0284c7" />
+        <path d="M44 24L45 22L46 24L48 25L46 26L45 28L44 26L42 25Z" fill="#555d25" />
       </svg>
     );
   }
@@ -265,7 +265,7 @@ export function renderServiceIcon(iconKey?: string, title?: string) {
         <circle cx="32" cy="30" r="8.5" fill="#fff7ed" stroke="#f97316" strokeWidth="2" />
         <path d="M32 25C32 25 35 27 35 31L33.5 32.5L32 31.5L30.5 32.5L29 31C29 27 32 25 32 25Z" fill="#f97316" />
         <path d="M31 33L32 35.5L33 33" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="15" cy="22" r="1.5" fill="#0284c7" />
+        <circle cx="15" cy="22" r="1.5" fill="#555d25" />
         <path d="M48 20L49 18L50 20L52 21L50 22L49 24L48 22L46 21Z" fill="#f97316" />
       </svg>
     );
@@ -285,9 +285,9 @@ export function renderServiceIcon(iconKey?: string, title?: string) {
         <circle cx="48" cy="42" r="3" fill="#334155" />
         <circle cx="20" cy="44" r="3.5" fill="#334155" />
         <circle cx="32" cy="14" r="2.5" fill="#f97316" />
-        <circle cx="32" cy="50" r="2.5" fill="#0284c7" />
+        <circle cx="32" cy="50" r="2.5" fill="#555d25" />
         <circle cx="44" cy="30" r="2" fill="#f97316" />
-        <circle cx="18" cy="34" r="2" fill="#0284c7" />
+        <circle cx="18" cy="34" r="2" fill="#555d25" />
       </svg>
     );
   }
@@ -298,8 +298,8 @@ export function renderServiceIcon(iconKey?: string, title?: string) {
         <line x1="28" y1="18" x2="36" y2="18" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
         <circle cx="32" cy="48" r="1.5" fill="#334155" />
         <g transform="translate(32, 32)">
-          <circle cx="0" cy="0" r="7.5" stroke="#0284c7" strokeWidth="2" strokeDasharray="3 2" fill="#f0f9ff" />
-          <circle cx="0" cy="0" r="3.5" fill="#0284c7" />
+          <circle cx="0" cy="0" r="7.5" stroke="#555d25" strokeWidth="2" strokeDasharray="3 2" fill="#f0f9ff" />
+          <circle cx="0" cy="0" r="3.5" fill="#555d25" />
         </g>
         <line x1="48" y1="28" x2="52" y2="28" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
         <line x1="48" y1="32" x2="55" y2="32" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
@@ -314,7 +314,7 @@ export function renderServiceIcon(iconKey?: string, title?: string) {
         <path d="M24 41V46" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
         <circle cx="24" cy="48" r="2" fill="#f97316" />
         <path d="M32 41V48" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
-        <circle cx="32" cy="50" r="2" fill="#0284c7" />
+        <circle cx="32" cy="50" r="2" fill="#555d25" />
         <path d="M40 41V45" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
         <circle cx="40" cy="47" r="2" fill="#f97316" />
         <path d="M46 41V49" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
@@ -328,9 +328,9 @@ export function renderServiceIcon(iconKey?: string, title?: string) {
         <path d="M16 22H38C42 22 45 25 45 29C45 33 42 36 38 36H24C20 36 17 39 17 43C17 47 20 50 24 50H46" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
         <circle cx="16" cy="22" r="3" fill="#334155" />
         <circle cx="32" cy="22" r="2.5" fill="#f97316" />
-        <circle cx="45" cy="29" r="2.5" fill="#0284c7" />
+        <circle cx="45" cy="29" r="2.5" fill="#555d25" />
         <circle cx="28" cy="36" r="3" fill="#f97316" />
-        <circle cx="36" cy="50" r="2.5" fill="#0284c7" />
+        <circle cx="36" cy="50" r="2.5" fill="#555d25" />
         <circle cx="48" cy="50" r="3.5" fill="#f97316" />
         <path d="M35 19L38 22L35 25" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M27 33L24 36L27 39" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -343,10 +343,10 @@ export function renderServiceIcon(iconKey?: string, title?: string) {
       <svg className="w-14 h-14 mx-auto group-hover:scale-105 transition-transform duration-300" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="18" y="18" width="28" height="28" rx="6" stroke="#334155" strokeWidth="2.5" fill="#f8fafc" />
         <circle cx="32" cy="32" r="6" fill="#f97316" />
-        <line x1="32" y1="12" x2="32" y2="18" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
-        <line x1="32" y1="46" x2="32" y2="52" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
-        <line x1="12" y1="32" x2="18" y2="32" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
-        <line x1="46" y1="32" x2="52" y2="32" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
+        <line x1="32" y1="12" x2="32" y2="18" stroke="#555d25" strokeWidth="2.5" strokeLinecap="round" />
+        <line x1="32" y1="46" x2="32" y2="52" stroke="#555d25" strokeWidth="2.5" strokeLinecap="round" />
+        <line x1="12" y1="32" x2="18" y2="32" stroke="#555d25" strokeWidth="2.5" strokeLinecap="round" />
+        <line x1="46" y1="32" x2="52" y2="32" stroke="#555d25" strokeWidth="2.5" strokeLinecap="round" />
       </svg>
     );
   }
@@ -367,8 +367,8 @@ export function renderServiceIcon(iconKey?: string, title?: string) {
       <path d="M15 41C15 37 17.5 35 21 35C22.8 35 24.3 35.5 25.2 36.5" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
       <circle cx="43" cy="26" r="3.8" stroke="#334155" strokeWidth="2" fill="#ffffff" />
       <path d="M38.8 36.5C39.7 35.5 41.2 35 43 35C46.5 35 49 37 49 41" stroke="#334155" strokeWidth="2.2" strokeLinecap="round" />
-      <path d="M12 44C18 49 46 49 52 44" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M16 48C22 52 42 52 48 48" stroke="#0284c7" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M12 44C18 49 46 49 52 44" stroke="#555d25" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M16 48C22 52 42 52 48 48" stroke="#555d25" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   );
 }
@@ -386,7 +386,7 @@ const ourServices = [
         <path d="M32 20C32 20 38 23 38 31L35 34L32 32L29 34L26 31C26 23 32 20 32 20Z" stroke="#334155" strokeWidth="2.2" strokeLinejoin="round" fill="#ffffff" />
         <circle cx="32" cy="27" r="2.5" fill="#f97316" />
         <path d="M30 35L32 39L34 35" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M44 24L45 22L46 24L48 25L46 26L45 28L44 26L42 25Z" fill="#0284c7" />
+        <path d="M44 24L45 22L46 24L48 25L46 26L45 28L44 26L42 25Z" fill="#555d25" />
       </svg>
     ),
     link: "/solutions",
@@ -421,7 +421,7 @@ const ourServices = [
         <circle cx="32" cy="30" r="8.5" fill="#fff7ed" stroke="#f97316" strokeWidth="2" />
         <path d="M32 25C32 25 35 27 35 31L33.5 32.5L32 31.5L30.5 32.5L29 31C29 27 32 25 32 25Z" fill="#f97316" />
         <path d="M31 33L32 35.5L33 33" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="15" cy="22" r="1.5" fill="#0284c7" />
+        <circle cx="15" cy="22" r="1.5" fill="#555d25" />
         <path d="M48 20L49 18L50 20L52 21L50 22L49 24L48 22L46 21Z" fill="#f97316" />
       </svg>
     ),
@@ -445,9 +445,9 @@ const ourServices = [
         <circle cx="48" cy="42" r="3" fill="#334155" />
         <circle cx="20" cy="44" r="3.5" fill="#334155" />
         <circle cx="32" cy="14" r="2.5" fill="#f97316" />
-        <circle cx="32" cy="50" r="2.5" fill="#0284c7" />
+        <circle cx="32" cy="50" r="2.5" fill="#555d25" />
         <circle cx="44" cy="30" r="2" fill="#f97316" />
-        <circle cx="18" cy="34" r="2" fill="#0284c7" />
+        <circle cx="18" cy="34" r="2" fill="#555d25" />
       </svg>
     ),
     link: "/solutions",
@@ -462,8 +462,8 @@ const ourServices = [
         <line x1="28" y1="18" x2="36" y2="18" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
         <circle cx="32" cy="48" r="1.5" fill="#334155" />
         <g transform="translate(32, 32)">
-          <circle cx="0" cy="0" r="7.5" stroke="#0284c7" strokeWidth="2" strokeDasharray="3 2" fill="#f0f9ff" />
-          <circle cx="0" cy="0" r="3.5" fill="#0284c7" />
+          <circle cx="0" cy="0" r="7.5" stroke="#555d25" strokeWidth="2" strokeDasharray="3 2" fill="#f0f9ff" />
+          <circle cx="0" cy="0" r="3.5" fill="#555d25" />
         </g>
         <line x1="48" y1="28" x2="52" y2="28" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
         <line x1="48" y1="32" x2="55" y2="32" stroke="#f97316" strokeWidth="2" strokeLinecap="round" />
@@ -482,7 +482,7 @@ const ourServices = [
         <path d="M24 41V46" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
         <circle cx="24" cy="48" r="2" fill="#f97316" />
         <path d="M32 41V48" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
-        <circle cx="32" cy="50" r="2" fill="#0284c7" />
+        <circle cx="32" cy="50" r="2" fill="#555d25" />
         <path d="M40 41V45" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
         <circle cx="40" cy="47" r="2" fill="#f97316" />
         <path d="M46 41V49" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
@@ -500,9 +500,9 @@ const ourServices = [
         <path d="M16 22H38C42 22 45 25 45 29C45 33 42 36 38 36H24C20 36 17 39 17 43C17 47 20 50 24 50H46" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
         <circle cx="16" cy="22" r="3" fill="#334155" />
         <circle cx="32" cy="22" r="2.5" fill="#f97316" />
-        <circle cx="45" cy="29" r="2.5" fill="#0284c7" />
+        <circle cx="45" cy="29" r="2.5" fill="#555d25" />
         <circle cx="28" cy="36" r="3" fill="#f97316" />
-        <circle cx="36" cy="50" r="2.5" fill="#0284c7" />
+        <circle cx="36" cy="50" r="2.5" fill="#555d25" />
         <circle cx="48" cy="50" r="3.5" fill="#f97316" />
         <path d="M35 19L38 22L35 25" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M27 33L24 36L27 39" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -523,8 +523,8 @@ const ourServices = [
         <path d="M15 41C15 37 17.5 35 21 35C22.8 35 24.3 35.5 25.2 36.5" stroke="#334155" strokeWidth="2" strokeLinecap="round" />
         <circle cx="43" cy="26" r="3.8" stroke="#334155" strokeWidth="2" fill="#ffffff" />
         <path d="M38.8 36.5C39.7 35.5 41.2 35 43 35C46.5 35 49 37 49 41" stroke="#334155" strokeWidth="2.2" strokeLinecap="round" />
-        <path d="M12 44C18 49 46 49 52 44" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
-        <path d="M16 48C22 52 42 52 48 48" stroke="#0284c7" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M12 44C18 49 46 49 52 44" stroke="#555d25" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M16 48C22 52 42 52 48 48" stroke="#555d25" strokeWidth="1.8" strokeLinecap="round" />
       </svg>
     ),
     link: "/solutions",
@@ -703,12 +703,12 @@ function ClientLogoCard({ client, index = 0 }: { client: { name: string; logo: s
   const staggerClass = delays[index % delays.length];
 
   return (
-    <div className={`reveal-on-scroll ${staggerClass} group/client relative flex items-center justify-center p-3 h-20 xl:h-22 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-[0_14px_30px_rgba(0,145,213,0.18)] hover:border-sky-400 hover:ring-2 hover:ring-sky-400/20 hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer overflow-hidden`}>
+    <div className={`reveal-on-scroll ${staggerClass} group/client relative flex items-center justify-center p-3 h-20 xl:h-22 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-[0_14px_30px_rgba(85,93,37,0.14)] hover:border-[#555d25]/50 hover:ring-2 hover:ring-[#555d25]/15 hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer overflow-hidden`}>
       {/* Light sweep sheen beam on hover */}
       <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/80 to-transparent transition-transform duration-700 ease-in-out group-hover/client:translate-x-full" />
 
       {/* Subtle top glow highlight */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#0091d5] to-transparent opacity-0 group-hover/client:opacity-100 transition-opacity duration-300" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#555d25] to-transparent opacity-0 group-hover/client:opacity-100 transition-opacity duration-300" />
 
       {/* Logo */}
       <img
@@ -731,7 +731,7 @@ function MobileClientLogoCard({ client, index = 0 }: { client: { name: string; l
   const staggerClass = delays[index % delays.length];
 
   return (
-    <div className={`reveal-on-scroll ${staggerClass} group/client relative flex items-center justify-center p-2.5 h-16 sm:h-20 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-sky-400 hover:-translate-y-1 transition-all duration-200 cursor-pointer overflow-hidden`}>
+    <div className={`reveal-on-scroll ${staggerClass} group/client relative flex items-center justify-center p-2.5 h-16 sm:h-20 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-[#555d25]/50 hover:-translate-y-1 transition-all duration-200 cursor-pointer overflow-hidden`}>
       <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/70 to-transparent transition-transform duration-700 ease-in-out group-hover/client:translate-x-full" />
       <img
         src={client.logo}
@@ -861,8 +861,8 @@ function Home() {
                   {/* Slide Category Badge */}
                   <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/95 px-2.5 sm:px-3 py-0.5 text-[9.5px] sm:text-[11px] font-bold tracking-[0.14em] text-neutral-800 uppercase shadow-xs backdrop-blur-sm">
                     <span className="relative flex h-2 w-2 items-center justify-center">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#0091d5]" />
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#b38e36] opacity-75" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#555d25]" />
                     </span>
                     {slide.tag}
                   </div>
@@ -893,7 +893,7 @@ function Home() {
                   <div className="mt-3.5 sm:mt-4 flex flex-wrap items-center gap-2 sm:gap-3">
                     <Link
                       to={slide.primaryCta.link}
-                      className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-[#136a3e] hover:bg-[#0e5230] px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#136a3e]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer group"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-[#555d25] hover:bg-[#464d1e] px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#555d25]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer group"
                     >
                       <span>{slide.primaryCta.text}</span>
                       <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -911,13 +911,13 @@ function Home() {
                   {/* Trust guarantees bar - Dark crisp text */}
                   <div className="mt-3 flex flex-wrap items-center gap-2.5 sm:gap-3.5 text-[10px] sm:text-[11px] font-bold text-neutral-900 sm:text-neutral-600">
                     <span className="flex items-center gap-1">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-700" /> 99.98% SLA Uptime
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[#555d25]" /> 99.98% SLA Uptime
                     </span>
                     <span className="flex items-center gap-1">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-700" /> Zero-Outage Migrations
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[#555d25]" /> Zero-Outage Migrations
                     </span>
                     <span className="flex items-center gap-1">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-700" /> 72-Hour Mobilization
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[#555d25]" /> 72-Hour Mobilization
                     </span>
                   </div>
                 </div>
@@ -942,7 +942,7 @@ function Home() {
                 onClick={() => setActiveSlide(i)}
                 className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   i === activeSlide
-                    ? "w-5 sm:w-6 bg-[#136a3e] shadow-[0_0_8px_rgba(19,106,62,0.4)]"
+                    ? "w-5 sm:w-6 bg-[#555d25] shadow-[0_0_8px_rgba(19,106,62,0.4)]"
                     : "w-2 bg-neutral-300 hover:bg-neutral-400"
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
@@ -971,7 +971,7 @@ function Home() {
               const Icon = s.icon;
               return (
                 <div key={s.label} className="flex items-center gap-2.5 sm:px-4 first:sm:pl-0">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-[#136a3e] border border-emerald-100">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-[#555d25] border border-emerald-100">
                     <Icon className="h-4 w-4" />
                   </div>
                   <div>
@@ -998,9 +998,9 @@ function Home() {
             {[...techStackMarquee, ...techStackMarquee].map((tech, idx) => (
               <div
                 key={idx}
-                className="inline-flex items-center gap-2.5 rounded-full border border-neutral-200/80 bg-white px-4 py-1.5 text-xs font-semibold text-neutral-700 hover:border-emerald-600/40 hover:bg-emerald-50/40 hover:text-emerald-900 transition-colors shadow-2xs"
+                className="inline-flex items-center gap-2.5 rounded-full border border-neutral-200/80 bg-white px-4 py-1.5 text-xs font-semibold text-neutral-700 hover:border-[#555d25]/40 hover:bg-emerald-50/40 hover:text-[#555d25] transition-colors shadow-2xs"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[#555d25]" />
                 <span>{tech.name}</span>
                 <span className="text-[10px] font-medium text-neutral-400">({tech.category})</span>
               </div>
@@ -1026,8 +1026,8 @@ function Home() {
             <div className="lg:col-span-6 xl:col-span-6 reveal-from-left">
               
               {/* Category Pill */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-sky-200/80 bg-sky-50/70 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#007cb8]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#0091d5]" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#8c6d23]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#555d25]" />
                 Who We Are &amp; What We Do
               </div>
 
@@ -1055,7 +1055,7 @@ function Home() {
               <div className="mt-4 flex flex-wrap items-center gap-3.5">
                 <Link
                   to="/about"
-                  className="inline-flex items-center gap-2 rounded bg-[#0091d5] hover:bg-[#007cb8] px-6 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
+                  className="inline-flex items-center gap-2 rounded bg-[#555d25] hover:bg-[#8c6d23] px-6 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
                 >
                   <span className="font-bold">&mdash;</span> Know more
                 </Link>
@@ -1104,7 +1104,7 @@ function Home() {
                 </div>
 
                 {/* Overlaid Top-Right Accent Tag */}
-                <div className="absolute top-2 -right-2 sm:top-6 sm:right-2 z-20 rounded-full border border-sky-200/90 bg-white/90 backdrop-blur-md px-3.5 py-1 text-[11px] font-bold text-[#007cb8] shadow-md shadow-sky-900/5">
+                <div className="absolute top-2 -right-2 sm:top-6 sm:right-2 z-20 rounded-full border border-[#b38e36]/40/90 bg-white/90 backdrop-blur-md px-3.5 py-1 text-[11px] font-bold text-[#8c6d23] shadow-md shadow-sky-900/5">
                   Next-Gen Innovation &bull; 99.98% SLA
                 </div>
 
@@ -1166,10 +1166,10 @@ function Home() {
                 <Link
                   key={`${service.id || "srv"}-${idx}`}
                   to={link}
-                  className="group/card flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-6 w-[285px] sm:w-[320px] shrink-0 transition-all duration-300 hover:-translate-y-2 hover:border-sky-400/60 hover:shadow-[0_16px_35px_rgba(2,132,199,0.12)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer select-none"
+                  className="group/card flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-6 w-[285px] sm:w-[320px] shrink-0 transition-all duration-300 hover:-translate-y-2 hover:border-[#555d25]/50/60 hover:shadow-[0_16px_35px_rgba(85,93,37,0.12)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer select-none"
                 >
                   {/* Vector Icon */}
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50/80 group-hover/card:bg-sky-50 transition-colors duration-300">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50/80 group-hover/card:bg-[#fdfaf2] transition-colors duration-300">
                     {iconElement}
                   </div>
 
@@ -1184,7 +1184,7 @@ function Home() {
                   </p>
 
                   {/* Bottom Explore Link */}
-                  <div className="mt-auto pt-4 flex items-center gap-1.5 text-xs font-semibold text-[#136a3e] group-hover/card:text-[#0e5230]">
+                  <div className="mt-auto pt-4 flex items-center gap-1.5 text-xs font-semibold text-[#555d25] group-hover/card:text-[#464d1e]">
                     <span>Explore Practice</span>
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/card:translate-x-1" />
                   </div>
@@ -1198,7 +1198,7 @@ function Home() {
         <div className="mt-3 sm:mt-4 text-center">
           <Link
             to="/solutions"
-            className="inline-flex items-center gap-2 rounded-full bg-[#136a3e] hover:bg-[#0e5230] px-6 py-2.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#136a3e]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
+            className="inline-flex items-center gap-2 rounded-full bg-[#555d25] hover:bg-[#464d1e] px-6 py-2.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#555d25]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
           >
             <span>Explore Solutions</span>
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
@@ -1213,8 +1213,8 @@ function Home() {
         {/* Ambient Atmospheric Lighting */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[480px] bg-gradient-to-tr from-sky-400/12 via-emerald-400/8 to-amber-300/10 blur-3xl rounded-full" />
-          <div className="absolute -top-16 right-10 w-80 h-80 bg-sky-200/25 blur-3xl rounded-full" />
-          <div className="absolute -bottom-16 left-10 w-80 h-80 bg-emerald-200/20 blur-3xl rounded-full" />
+          <div className="absolute -top-16 right-10 w-80 h-80 bg-[#b38e36]/15 blur-3xl rounded-full" />
+          <div className="absolute -bottom-16 left-10 w-80 h-80 bg-[#555d25]/10 blur-3xl rounded-full" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -1242,13 +1242,13 @@ function Home() {
               {/* Center Callout Title Box (Illuminated Focal Hub) */}
               <div className="reveal-scale relative w-64 xl:w-72 shrink-0 flex flex-col items-center justify-center text-center px-4 py-2 group/center">
                 {/* Center radial ambient bloom */}
-                <div className="pointer-events-none absolute inset-0 bg-radial from-sky-400/20 via-sky-300/10 to-transparent blur-xl rounded-2xl -z-10 group-hover/center:scale-125 transition-transform duration-500" />
+                <div className="pointer-events-none absolute inset-0 bg-radial from-[#555d25]/15 via-[#b38e36]/10 to-transparent blur-xl rounded-2xl -z-10 group-hover/center:scale-125 transition-transform duration-500" />
 
                 {/* Eyebrow badge */}
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-300/70 bg-sky-50/90 px-3 py-0.5 text-[10px] sm:text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#007cb8] shadow-2xs mb-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3 py-0.5 text-[10px] sm:text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs mb-2">
                   <span className="relative flex h-2 w-2 items-center justify-center">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75" />
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#0091d5]" />
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#b38e36] opacity-75" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#555d25]" />
                   </span>
                   Enterprise Trust
                 </span>
@@ -1257,14 +1257,14 @@ function Home() {
                   Our Clients
                 </h2>
 
-                <div className="h-0.5 w-10 bg-gradient-to-r from-[#0091d5] to-emerald-500 rounded-full my-2.5" />
+                <div className="h-0.5 w-10 bg-gradient-to-r from-[#555d25] to-emerald-500 rounded-full my-2.5" />
 
                 <p className="text-base xl:text-lg italic font-serif text-neutral-600 tracking-wide">
                   Who We Work With
                 </p>
 
                 <div className="mt-2.5 inline-flex items-center gap-1.5 text-[11px] font-medium text-neutral-500 bg-white/90 border border-neutral-200/80 rounded-full px-3 py-0.5 shadow-2xs">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#555d25]" />
                   <span>Fortune 1000 Leaders</span>
                 </div>
               </div>
@@ -1290,7 +1290,7 @@ function Home() {
           {/* Mobile / Tablet Layout */}
           <div className="lg:hidden flex flex-col gap-6">
             <div className="text-left reveal-on-scroll">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-300/70 bg-sky-50/90 px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#007cb8] shadow-2xs mb-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs mb-2">
                 Enterprise Trust
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight">
@@ -1312,7 +1312,7 @@ function Home() {
           <div className="mt-6 sm:mt-8 text-center reveal-on-scroll delay-150">
             <Link
               to="/clients"
-              className="group inline-flex items-center gap-2 rounded-full border-2 border-[#0091d5] bg-white text-[#0091d5] hover:bg-[#0091d5] hover:text-white px-8 py-2.5 text-xs sm:text-sm font-bold shadow-xs hover:shadow-lg hover:shadow-sky-500/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
+              className="group inline-flex items-center gap-2 rounded-full border-2 border-[#555d25] bg-white text-[#555d25] hover:bg-[#555d25] hover:text-white px-8 py-2.5 text-xs sm:text-sm font-bold shadow-xs hover:shadow-lg hover:shadow-[#555d25]/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
             >
               <span>More Clients &amp; Industries</span>
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -1329,7 +1329,7 @@ function Home() {
       <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-left max-w-4xl mb-6 sm:mb-8 reveal-on-scroll">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
               Interactive Blueprint
             </span>
             <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
@@ -1353,22 +1353,22 @@ function Home() {
                     onClick={() => setActiveArchLayer(layer.id)}
                     className={`w-full text-left p-5 rounded-2xl border transition-all duration-200 cursor-pointer flex items-center justify-between ${
                       isSelected
-                        ? "bg-white border-emerald-600/40 shadow-lg shadow-emerald-950/5 ring-1 ring-emerald-600/20"
+                        ? "bg-white border-[#555d25]/40 shadow-lg shadow-neutral-900/5 ring-1 ring-[#555d25]/15"
                         : "bg-white/60 border-neutral-200/80 hover:bg-white hover:border-neutral-300"
                     }`}
                   >
                     <div className="flex items-center gap-4">
-                      <span className={`font-mono text-sm font-bold ${isSelected ? "text-emerald-700" : "text-neutral-400"}`}>
+                      <span className={`font-mono text-sm font-bold ${isSelected ? "text-[#555d25]" : "text-neutral-400"}`}>
                         {layer.number}
                       </span>
                       <div>
                         <div className="text-sm font-bold text-neutral-900">{layer.name}</div>
-                        <div className="text-[11px] font-mono font-medium text-emerald-700 mt-0.5">
+                        <div className="text-[11px] font-mono font-medium text-[#555d25] mt-0.5">
                           {layer.badge}
                         </div>
                       </div>
                     </div>
-                    <ArrowRight className={`h-4 w-4 transition-transform ${isSelected ? "text-emerald-700 translate-x-1" : "text-neutral-300"}`} />
+                    <ArrowRight className={`h-4 w-4 transition-transform ${isSelected ? "text-[#555d25] translate-x-1" : "text-neutral-300"}`} />
                   </button>
                 );
               })}
@@ -1377,15 +1377,15 @@ function Home() {
             {/* Right Live Layer Console HUD */}
             <div className="lg:col-span-7 reveal-from-right">
               <div className="rounded-3xl border border-neutral-200/80 bg-neutral-950 text-white p-7 sm:p-8 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
+                <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-[#555d25]/10 blur-3xl pointer-events-none" />
 
                 {/* HUD Header */}
                 <div className="flex items-center justify-between border-b border-neutral-800 pb-5">
                   <div className="flex items-center gap-2.5">
-                    <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="flex h-2.5 w-2.5 rounded-full bg-[#b38e36] animate-pulse" />
                     <span className="font-mono text-xs text-neutral-400">LAYER {currentArch.number} TOPOLOGY</span>
                   </div>
-                  <span className="font-mono text-[11px] px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  <span className="font-mono text-[11px] px-2.5 py-1 rounded-md bg-[#555d25]/20 text-emerald-300 border border-emerald-500/30">
                     {currentArch.status}
                   </span>
                 </div>
@@ -1406,7 +1406,7 @@ function Home() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {currentArch.specs.map((spec) => (
                         <div key={spec} className="flex items-center gap-2 rounded-xl bg-neutral-900/80 p-3 border border-neutral-800 text-xs text-neutral-200">
-                          <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                          <Check className="h-3.5 w-3.5 text-[#b38e36] shrink-0" />
                           <span>{spec}</span>
                         </div>
                       ))}
@@ -1417,7 +1417,7 @@ function Home() {
                     <span>DEPLOYMENT: IAC TERRAFORM v1.9</span>
                     <Link
                       to="/solutions"
-                      className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1"
+                      className="text-[#b38e36] hover:text-emerald-300 font-bold flex items-center gap-1"
                     >
                       View Architecture Docs →
                     </Link>
@@ -1436,7 +1436,7 @@ function Home() {
       <section className="border-b border-neutral-200/70 bg-white py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-left max-w-2xl mb-6 sm:mb-8 reveal-on-scroll">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
               Delivery Methodology
             </span>
             <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
@@ -1451,14 +1451,14 @@ function Home() {
             {methodologySteps.map((step, idx) => (
               <div
                 key={step.number}
-                className={`reveal-on-scroll delay-${(idx + 1) * 100} relative rounded-3xl border border-neutral-200/80 bg-[#fafcfb] p-6 shadow-sm hover:border-emerald-600/30 hover:shadow-md transition-all flex flex-col justify-between`}
+                className={`reveal-on-scroll delay-${(idx + 1) * 100} relative rounded-3xl border border-neutral-200/80 bg-[#fafcfb] p-6 shadow-sm hover:border-[#555d25]/40 hover:shadow-md transition-all flex flex-col justify-between`}
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="font-display text-3xl font-extrabold text-emerald-800/25">
+                    <span className="font-display text-3xl font-extrabold text-[#8c6d23]/25">
                       {step.number}
                     </span>
-                    <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold text-emerald-800">
+                    <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold text-[#8c6d23]">
                       {step.phase}
                     </span>
                   </div>
@@ -1469,7 +1469,7 @@ function Home() {
                     {step.desc}
                   </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-neutral-200/60 text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-800">
+                <div className="mt-6 pt-4 border-t border-neutral-200/60 text-[10px] font-mono font-bold uppercase tracking-wider text-[#8c6d23]">
                   {step.timeframe}
                 </div>
               </div>
@@ -1485,7 +1485,7 @@ function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 max-w-2xl mb-6 sm:mb-8 reveal-on-scroll">
             <div>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
                 Case Studies
               </span>
               <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
@@ -1494,7 +1494,7 @@ function Home() {
             </div>
             <Link
               to="/clients"
-              className="text-xs sm:text-sm font-bold text-emerald-800 hover:text-emerald-700 flex items-center gap-1.5 group shrink-0"
+              className="text-xs sm:text-sm font-bold text-[#8c6d23] hover:text-[#555d25] flex items-center gap-1.5 group shrink-0"
             >
               <span>View all client outcomes</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -1506,19 +1506,19 @@ function Home() {
               <Link
                 key={c.title}
                 to="/clients"
-                className={`reveal-on-scroll delay-${(idx + 1) * 100} group flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-white p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-emerald-600/40 hover:shadow-xl hover:shadow-emerald-950/5 cursor-pointer`}
+                className={`reveal-on-scroll delay-${(idx + 1) * 100} group flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-white p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#555d25]/40 hover:shadow-xl hover:shadow-neutral-900/5 cursor-pointer`}
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-800">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#8c6d23]">
                       {c.sector}
                     </span>
-                    <span className="rounded-full bg-emerald-100/70 px-2 py-0.5 text-[10px] font-mono font-bold text-emerald-900">
+                    <span className="rounded-full bg-[#f5f6ee] px-2 py-0.5 text-[10px] font-mono font-bold text-[#555d25]">
                       VERIFIED OUTCOME
                     </span>
                   </div>
 
-                  <h3 className="mt-3 text-base sm:text-lg font-bold text-neutral-900 group-hover:text-emerald-800 transition-colors">
+                  <h3 className="mt-3 text-base sm:text-lg font-bold text-neutral-900 group-hover:text-[#8c6d23] transition-colors">
                     {c.title}
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm leading-relaxed text-neutral-600">
@@ -1535,7 +1535,7 @@ function Home() {
                       {c.metricLabel}
                     </div>
                   </div>
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 text-emerald-800 border border-neutral-200 group-hover:bg-emerald-600 group-hover:text-white group-hover:border-transparent transition-all">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 text-[#8c6d23] border border-neutral-200 group-hover:bg-[#555d25] group-hover:text-white group-hover:border-transparent transition-all">
                     <ArrowRight className="h-4 w-4" />
                   </div>
                 </div>
@@ -1551,7 +1551,7 @@ function Home() {
       <section className="border-b border-neutral-200/70 bg-white py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-left max-w-2xl mb-6 sm:mb-8 reveal-on-scroll">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
               Executive Validation
             </span>
             <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
@@ -1563,10 +1563,10 @@ function Home() {
             {testimonials.map((t, idx) => (
               <figure
                 key={idx}
-                className={`reveal-on-scroll delay-${(idx + 1) * 100} flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-[#fafcfb] p-5 sm:p-6 shadow-xs hover:border-emerald-600/30 hover:shadow-md transition-all relative overflow-hidden`}
+                className={`reveal-on-scroll delay-${(idx + 1) * 100} flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-[#fafcfb] p-5 sm:p-6 shadow-xs hover:border-[#555d25]/40 hover:shadow-md transition-all relative overflow-hidden`}
               >
                 <div>
-                  <div className="flex items-center gap-1 text-emerald-600 mb-2">
+                  <div className="flex items-center gap-1 text-[#b38e36] mb-2">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <span key={star} className="text-sm">★</span>
                     ))}
@@ -1595,7 +1595,7 @@ function Home() {
       <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="text-left max-w-2xl mb-6 sm:mb-8 reveal-on-scroll">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
               Executive FAQ
             </span>
             <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
@@ -1622,7 +1622,7 @@ function Home() {
                     <span className="text-xs sm:text-sm font-bold text-neutral-900">
                       {faq.question}
                     </span>
-                    <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-transform duration-200 ${isOpen ? "rotate-180 bg-emerald-100 text-emerald-800" : ""}`}>
+                    <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-transform duration-200 ${isOpen ? "rotate-180 bg-[#f5f6ee] text-[#8c6d23]" : ""}`}>
                       <ChevronDown className="h-3.5 w-3.5" />
                     </div>
                   </button>

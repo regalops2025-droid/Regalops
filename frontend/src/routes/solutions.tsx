@@ -49,9 +49,9 @@ function Solutions() {
         const element = document.getElementById(targetId) || document.getElementById(rawTarget);
         if (element) {
           element.scrollIntoView({ behavior: "smooth", block: "center" });
-          element.classList.add("ring-2", "ring-[#136a3e]", "rounded-3xl", "shadow-2xl");
+          element.classList.add("ring-2", "ring-[#555d25]", "rounded-3xl", "shadow-2xl");
           const clearTimer = setTimeout(() => {
-            element.classList.remove("ring-2", "ring-[#136a3e]", "rounded-3xl", "shadow-2xl");
+            element.classList.remove("ring-2", "ring-[#555d25]", "rounded-3xl", "shadow-2xl");
           }, 2500);
           return () => clearTimeout(clearTimer);
         }
@@ -69,11 +69,11 @@ function Solutions() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="mb-5 sm:mb-6 text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#136a3e] dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-200/50 dark:border-emerald-800/50">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#555d25] dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-200/50 dark:border-emerald-800/50">
               <Sparkles className="h-3.5 w-3.5" /> Specialized Practices
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-              Enterprise <span className="bg-gradient-to-r from-[#136a3e] to-emerald-600 bg-clip-text text-transparent">Solutions</span>
+              Enterprise <span className="bg-gradient-to-r from-[#555d25] to-emerald-600 bg-clip-text text-transparent">Solutions</span>
             </h1>
             <p className="mt-2 text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
               Tailored engineering, staffing, and operational practices built for high concurrency, velocity, and enterprise reliability.
@@ -106,7 +106,7 @@ function Solutions() {
                       <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch lg:h-[420px]">
                         {/* Text Side (Left) */}
                         <div className="lg:col-span-6 xl:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-center z-20 h-full">
-                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#136a3e] dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-200/50 dark:border-emerald-800/50 w-fit">
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#555d25] dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-200/50 dark:border-emerald-800/50 w-fit">
                             <Sparkles className="h-3 w-3" /> Practice {String(index + 1).padStart(2, "0")}
                           </div>
 
@@ -122,7 +122,7 @@ function Solutions() {
                             <Link
                               to="/solutions/$id"
                               params={{ id: String(item.id) }}
-                              className="inline-flex items-center gap-2.5 rounded-xl bg-[#136a3e] hover:bg-[#0f5431] text-white px-7 py-3 text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 group/btn"
+                              className="inline-flex items-center gap-2.5 rounded-xl bg-[#555d25] hover:bg-[#0f5431] text-white px-7 py-3 text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 group/btn"
                             >
                               <span>{index === 0 ? "Know more" : "Learn more"}</span>
                               <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
@@ -210,7 +210,7 @@ function Solutions() {
 
                         {/* Text Side (Right) - Order 1 on mobile, Order 2 on lg */}
                         <div className="lg:col-span-6 xl:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-center z-20 order-1 lg:order-2 h-full">
-                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#136a3e] dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-200/50 dark:border-emerald-800/50 w-fit">
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#555d25] dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-200/50 dark:border-emerald-800/50 w-fit">
                             <Sparkles className="h-3 w-3" /> Practice {String(index + 1).padStart(2, "0")}
                           </div>
 
@@ -226,7 +226,7 @@ function Solutions() {
                             <Link
                               to="/solutions/$id"
                               params={{ id: String(item.id) }}
-                              className="inline-flex items-center gap-2.5 rounded-xl bg-[#136a3e] hover:bg-[#0f5431] text-white px-7 py-3 text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 group/btn"
+                              className="inline-flex items-center gap-2.5 rounded-xl bg-[#555d25] hover:bg-[#0f5431] text-white px-7 py-3 text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 group/btn"
                             >
                               <span>Learn more</span>
                               <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />

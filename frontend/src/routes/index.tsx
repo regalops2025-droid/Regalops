@@ -698,6 +698,45 @@ function parseArrayField(val: any): string[] {
   return [];
 }
 
+function ClientLogoCard({ client }: { client: { name: string; logo: string } }) {
+  return (
+    <div className="group/client relative flex items-center justify-center p-3 h-20 xl:h-22 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-[0_14px_30px_rgba(0,145,213,0.18)] hover:border-sky-400 hover:ring-2 hover:ring-sky-400/20 hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer overflow-hidden">
+      {/* Light sweep sheen beam on hover */}
+      <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/80 to-transparent transition-transform duration-700 ease-in-out group-hover/client:translate-x-full" />
+
+      {/* Subtle top glow highlight */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#0091d5] to-transparent opacity-0 group-hover/client:opacity-100 transition-opacity duration-300" />
+
+      {/* Logo */}
+      <img
+        src={client.logo}
+        alt={client.name}
+        className="max-h-10 xl:max-h-11 w-auto object-contain filter contrast-[1.03] select-none transition-transform duration-300 ease-out group-hover/client:scale-110 relative z-10"
+        loading="lazy"
+      />
+
+      {/* Floating tooltip label */}
+      <span className="pointer-events-none absolute bottom-1 opacity-0 translate-y-1.5 scale-90 rounded-md bg-neutral-900/90 backdrop-blur-xs px-2 py-0.5 text-[9.5px] font-semibold text-white shadow-md transition-all duration-200 group-hover/client:opacity-100 group-hover/client:translate-y-0 group-hover/client:scale-100 z-20 whitespace-nowrap">
+        {client.name}
+      </span>
+    </div>
+  );
+}
+
+function MobileClientLogoCard({ client }: { client: { name: string; logo: string } }) {
+  return (
+    <div className="group/client relative flex items-center justify-center p-2.5 h-16 sm:h-20 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-sky-400 hover:-translate-y-1 transition-all duration-200 cursor-pointer overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/70 to-transparent transition-transform duration-700 ease-in-out group-hover/client:translate-x-full" />
+      <img
+        src={client.logo}
+        alt={client.name}
+        className="max-h-8 sm:max-h-9 w-auto object-contain select-none transition-transform duration-200 group-hover/client:scale-105"
+        loading="lazy"
+      />
+    </div>
+  );
+}
+
 function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [selectedPracticeCategory, setSelectedPracticeCategory] = useState("All");
@@ -1164,8 +1203,15 @@ function Home() {
       {/* ==================================================================== */}
       {/* 5. OUR CLIENTS — "WHO WE WORK WITH" (Vuesol Reference Match)         */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fbfcfd] py-10 sm:py-14 lg:py-16 scroll-mt-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative border-b border-neutral-200/70 bg-[#fbfcfd] py-12 sm:py-16 lg:py-20 scroll-mt-28 overflow-hidden">
+        {/* Ambient Atmospheric Lighting */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[480px] bg-gradient-to-tr from-sky-400/12 via-emerald-400/8 to-amber-300/10 blur-3xl rounded-full" />
+          <div className="absolute -top-16 right-10 w-80 h-80 bg-sky-200/25 blur-3xl rounded-full" />
+          <div className="absolute -bottom-16 left-10 w-80 h-80 bg-emerald-200/20 blur-3xl rounded-full" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Desktop Layout: Exact center-callout 4-row layout matching reference */}
           <div className="hidden lg:flex flex-col gap-3.5 xl:gap-4">
@@ -1173,17 +1219,7 @@ function Home() {
             {/* Row 1 (8 cards) */}
             <div className="grid grid-cols-8 gap-3 xl:gap-3.5">
               {row1Logos.map((client, idx) => (
-                <div
-                  key={`r1-${idx}`}
-                  className="bg-white rounded-md border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-sky-300 transition-all duration-200 flex items-center justify-center p-3 h-20 xl:h-22"
-                >
-                  <img
-                    src={client.logo}
-                    alt={client.name}
-                    className="max-h-11 xl:max-h-12 w-auto object-contain filter contrast-[1.03] select-none"
-                    loading="lazy"
-                  />
-                </div>
+                <ClientLogoCard key={`r1-${idx}`} client={client} />
               ))}
             </div>
 
@@ -1193,44 +1229,44 @@ function Home() {
               {/* Left 6 cards (3 columns x 2 rows) */}
               <div className="flex-1 grid grid-cols-3 gap-3 xl:gap-3.5">
                 {midLeftLogos.map((client, idx) => (
-                  <div
-                    key={`ml-${idx}`}
-                    className="bg-white rounded-md border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-sky-300 transition-all duration-200 flex items-center justify-center p-3 h-20 xl:h-22"
-                  >
-                    <img
-                      src={client.logo}
-                      alt={client.name}
-                      className="max-h-11 xl:max-h-12 w-auto object-contain filter contrast-[1.03] select-none"
-                      loading="lazy"
-                    />
-                  </div>
+                  <ClientLogoCard key={`ml-${idx}`} client={client} />
                 ))}
               </div>
 
-              {/* Center Callout Title Box */}
-              <div className="w-64 xl:w-72 shrink-0 flex flex-col items-center justify-center text-center px-4 py-2">
-                <h2 className="text-3xl xl:text-4xl font-bold text-neutral-900 tracking-tight leading-none">
+              {/* Center Callout Title Box (Illuminated Focal Hub) */}
+              <div className="relative w-64 xl:w-72 shrink-0 flex flex-col items-center justify-center text-center px-4 py-2 group/center">
+                {/* Center radial ambient bloom */}
+                <div className="pointer-events-none absolute inset-0 bg-radial from-sky-400/20 via-sky-300/10 to-transparent blur-xl rounded-2xl -z-10 group-hover/center:scale-125 transition-transform duration-500" />
+
+                {/* Eyebrow badge */}
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-300/70 bg-sky-50/90 px-3 py-0.5 text-[10px] sm:text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#007cb8] shadow-2xs mb-2">
+                  <span className="relative flex h-2 w-2 items-center justify-center">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#0091d5]" />
+                  </span>
+                  Enterprise Trust
+                </span>
+
+                <h2 className="text-3xl xl:text-4xl font-extrabold text-neutral-900 tracking-tight leading-none">
                   Our Clients
                 </h2>
-                <p className="mt-2.5 text-base xl:text-lg italic font-serif text-neutral-600 tracking-wide">
+
+                <div className="h-0.5 w-10 bg-gradient-to-r from-[#0091d5] to-emerald-500 rounded-full my-2.5" />
+
+                <p className="text-base xl:text-lg italic font-serif text-neutral-600 tracking-wide">
                   Who We Work With
                 </p>
+
+                <div className="mt-2.5 inline-flex items-center gap-1.5 text-[11px] font-medium text-neutral-500 bg-white/90 border border-neutral-200/80 rounded-full px-3 py-0.5 shadow-2xs">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  <span>Fortune 1000 Leaders</span>
+                </div>
               </div>
 
               {/* Right 6 cards (3 columns x 2 rows) */}
               <div className="flex-1 grid grid-cols-3 gap-3 xl:gap-3.5">
                 {midRightLogos.map((client, idx) => (
-                  <div
-                    key={`mr-${idx}`}
-                    className="bg-white rounded-md border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-sky-300 transition-all duration-200 flex items-center justify-center p-3 h-20 xl:h-22"
-                  >
-                    <img
-                      src={client.logo}
-                      alt={client.name}
-                      className="max-h-11 xl:max-h-12 w-auto object-contain filter contrast-[1.03] select-none"
-                      loading="lazy"
-                    />
-                  </div>
+                  <ClientLogoCard key={`mr-${idx}`} client={client} />
                 ))}
               </div>
 
@@ -1239,17 +1275,7 @@ function Home() {
             {/* Row 4 (8 cards) */}
             <div className="grid grid-cols-8 gap-3 xl:gap-3.5">
               {row4Logos.map((client, idx) => (
-                <div
-                  key={`r4-${idx}`}
-                  className="bg-white rounded-md border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-sky-300 transition-all duration-200 flex items-center justify-center p-3 h-20 xl:h-22"
-                >
-                  <img
-                    src={client.logo}
-                    alt={client.name}
-                    className="max-h-11 xl:max-h-12 w-auto object-contain filter contrast-[1.03] select-none"
-                    loading="lazy"
-                  />
-                </div>
+                <ClientLogoCard key={`r4-${idx}`} client={client} />
               ))}
             </div>
 
@@ -1258,6 +1284,9 @@ function Home() {
           {/* Mobile / Tablet Layout */}
           <div className="lg:hidden flex flex-col gap-6">
             <div className="text-left">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-300/70 bg-sky-50/90 px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#007cb8] shadow-2xs mb-2">
+                Enterprise Trust
+              </span>
               <h2 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight">
                 Our Clients
               </h2>
@@ -1268,28 +1297,19 @@ function Home() {
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
               {allClientLogos.map((client, idx) => (
-                <div
-                  key={`mob-${idx}`}
-                  className="bg-white rounded-md border border-neutral-200/80 shadow-2xs flex items-center justify-center p-2.5 h-16 sm:h-20"
-                >
-                  <img
-                    src={client.logo}
-                    alt={client.name}
-                    className="max-h-9 sm:max-h-10 w-auto object-contain"
-                    loading="lazy"
-                  />
-                </div>
+                <MobileClientLogoCard key={`mob-${idx}`} client={client} />
               ))}
             </div>
           </div>
 
-          {/* "More Clients" Centered Button */}
-          <div className="mt-4 sm:mt-5 text-center">
+          {/* "More Clients" Centered Button with Interactive Micro-Animations */}
+          <div className="mt-6 sm:mt-8 text-center">
             <Link
               to="/clients"
-              className="inline-flex items-center justify-center rounded border border-[#0091d5] text-[#0091d5] hover:bg-[#0091d5] hover:text-white px-8 py-2 text-xs sm:text-sm font-semibold shadow-2xs hover:shadow transition-all duration-200 cursor-pointer"
+              className="group inline-flex items-center gap-2 rounded-full border-2 border-[#0091d5] bg-white text-[#0091d5] hover:bg-[#0091d5] hover:text-white px-8 py-2.5 text-xs sm:text-sm font-bold shadow-xs hover:shadow-lg hover:shadow-sky-500/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
             >
-              More Clients
+              <span>More Clients &amp; Industries</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
           </div>
 

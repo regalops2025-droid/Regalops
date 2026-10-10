@@ -1346,7 +1346,7 @@ function AdminDashboard() {
       <div className="flex-1 flex flex-col min-w-0">
         
         {/* Main Panel Header */}
-        <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-border/70 bg-background/85 backdrop-blur-xl px-6">
+        <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-border/70 bg-background/85 backdrop-blur-xl px-3.5 sm:px-6">
           <div className="flex items-center gap-4">
             <button
               onClick={() => setMobileSidebarOpen(true)}
@@ -1421,7 +1421,7 @@ function AdminDashboard() {
         </header>
 
         {/* Main Panel Content Area */}
-        <main className="flex-1 p-6 md:p-8 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-3.5 sm:p-6 md:p-8 max-w-7xl w-full mx-auto">
           
           {/* Stat Metrics Grid (Interactive Tabs) */}
           <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 mb-8">
@@ -1673,7 +1673,7 @@ function AdminDashboard() {
 
               {/* Right Column: Creation / Editing Form */}
               <div>
-                <div className="panel p-6 bg-surface border border-border/80 sticky top-24">
+                <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80 sticky top-24">
                   <div className="flex items-center gap-2 mb-4">
                     <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
                       {editingSolId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
@@ -1920,7 +1920,7 @@ function AdminDashboard() {
 
               {/* Right Column: Creation / Editing Form */}
               <div>
-                <div className="panel p-6 bg-surface border border-border/80 sticky top-24">
+                <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80 sticky top-24">
                   <div className="flex items-center gap-2 mb-4">
                     <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
                       {editingTechId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
@@ -2232,7 +2232,7 @@ function AdminDashboard() {
 
               {/* Right Column: Creation / Editing Form */}
               <div>
-                <div className="panel p-6 bg-surface border border-border/80 sticky top-24">
+                <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80 sticky top-24">
                   <div className="flex items-center gap-2 mb-4">
                     <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
                       {editingServiceId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
@@ -2483,7 +2483,7 @@ function AdminDashboard() {
 
                   {/* Right Column: Creation / Editing Form */}
                   <div>
-                    <div className="panel p-6 bg-surface border border-border/80 sticky top-24">
+                    <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80 sticky top-24">
                       <div className="flex items-center gap-2 mb-4">
                         <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
                           {editingClientId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
@@ -2666,7 +2666,7 @@ function AdminDashboard() {
 
                   {/* Right Column: Industry Creation Form */}
                   <div>
-                    <div className="panel p-6 bg-surface border border-border/80 sticky top-24">
+                    <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80 sticky top-24">
                       <div className="flex items-center gap-2 mb-4">
                         <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
                           {editingIndustryId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
@@ -2813,7 +2813,7 @@ function AdminDashboard() {
 
               {/* Right Column: Creation / Editing Form */}
               <div>
-                <div className="panel p-6 bg-surface border border-border/80 sticky top-24">
+                <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80 sticky top-24">
                   <div className="flex items-center gap-2 mb-4">
                     <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
                       {editingJobId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
@@ -2998,7 +2998,7 @@ function AdminDashboard() {
 
               {/* Right Column: Creation / Editing Form */}
               <div className="max-h-[80vh] overflow-y-auto pr-2">
-                <div className="panel p-6 bg-surface border border-border/80">
+                <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80">
                   <div className="flex items-center gap-2 mb-4">
                     <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
                       {editingBlogId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}

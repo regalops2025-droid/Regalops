@@ -8,11 +8,8 @@ import {
   MapPin,
   ArrowRight,
   ArrowUp,
-  Linkedin,
-  Instagram,
-  Youtube,
-  Facebook,
 } from "lucide-react";
+import { FooterSocialIcons } from "./social-icons";
 
 export function SiteFooter() {
   const scrollToTop = () => {
@@ -361,69 +358,17 @@ export function SiteFooter() {
             </Link>
           </div>
 
-          {/* Social Links & Floating Scroll-to-Top Button */}
-          <div className="flex items-center gap-2.5">
-            {/* LinkedIn */}
-            <a
-              href="https://www.linkedin.com/company/regalops/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-neutral-400 hover:border-emerald-500 hover:text-white hover:bg-emerald-500/10 transition-all"
-            >
-              <Linkedin className="h-3.5 w-3.5" />
-            </a>
-
-            {/* X (Twitter) */}
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="X"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-neutral-400 hover:border-emerald-500 hover:text-white hover:bg-emerald-500/10 transition-all font-bold text-xs"
-            >
-              &#120143;
-            </a>
-
-            {/* Facebook */}
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-neutral-400 hover:border-emerald-500 hover:text-white hover:bg-emerald-500/10 transition-all"
-            >
-              <Facebook className="h-3.5 w-3.5" />
-            </a>
-
-            {/* YouTube */}
-            <a
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-neutral-400 hover:border-emerald-500 hover:text-white hover:bg-emerald-500/10 transition-all"
-            >
-              <Youtube className="h-3.5 w-3.5" />
-            </a>
-
-            {/* Instagram */}
-            <a
-              href="https://www.instagram.com/regal_ops/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-neutral-400 hover:border-emerald-500 hover:text-white hover:bg-emerald-500/10 transition-all"
-            >
-              <Instagram className="h-3.5 w-3.5" />
-            </a>
+          {/* Original Social Links & Floating Scroll-to-Top Button */}
+          <div className="flex items-center gap-3">
+            <FooterSocialIcons />
 
             {/* Scroll to Top Circular Button */}
             <button
               type="button"
               onClick={scrollToTop}
               aria-label="Scroll to top"
-              className="ml-2 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 hover:bg-emerald-500 text-white transition-all shadow-md shadow-emerald-950/40 cursor-pointer hover:scale-110 active:scale-95"
+              title="Scroll to top"
+              className="ml-1 flex h-8 w-8 sm:h-8.5 sm:w-8.5 items-center justify-center rounded-full bg-emerald-600 hover:bg-emerald-500 text-white transition-all shadow-md shadow-emerald-950/40 cursor-pointer hover:scale-110 active:scale-95"
             >
               <ArrowUp className="h-4 w-4" />
             </button>

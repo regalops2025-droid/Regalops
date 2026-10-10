@@ -775,21 +775,23 @@ function Home() {
                   <img
                     src={slide.image}
                     alt={slide.alt}
-                    className="h-full w-full object-cover object-right transition-transform duration-1000 ease-out"
+                    className="h-full w-full object-cover object-[82%_center] sm:object-right transition-transform duration-1000 ease-out"
                   />
-                  {/* Soft readable gradient mask across text area */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent w-full lg:w-[65%]" />
+                  {/* Smart contrast gradient: Protects dark text legibility on the left while keeping images colorful and visible on the right */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/25 sm:from-white/95 sm:via-white/85 sm:to-white/30 lg:bg-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent lg:w-[68%]" />
+                  {/* Subtle bottom gradient to smoothly transition into stats bar */}
+                  <div className="absolute inset-0 sm:hidden bg-gradient-to-t from-white/60 via-transparent to-transparent pointer-events-none" />
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Side Navigation Buttons (Pinned to Left and Right edges like in reference) */}
+        {/* Side Navigation Buttons (Hidden on small mobile screens to prevent blocking text) */}
         <button
           type="button"
           onClick={() => setActiveSlide((prev) => (prev - 1 + showcaseSlides.length) % showcaseSlides.length)}
-          className="absolute left-1.5 sm:left-2.5 top-1/2 -translate-y-1/2 z-20 flex h-9 w-7 sm:h-10 sm:w-8 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
+          className="hidden sm:flex absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 h-9 w-7 sm:h-10 sm:w-8 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
           aria-label="Previous slide"
         >
           <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -798,21 +800,21 @@ function Home() {
         <button
           type="button"
           onClick={() => setActiveSlide((prev) => (prev + 1) % showcaseSlides.length)}
-          className="absolute right-1.5 sm:right-2.5 top-1/2 -translate-y-1/2 z-20 flex h-9 w-7 sm:h-10 sm:w-8 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
+          className="hidden sm:flex absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 h-9 w-7 sm:h-10 sm:w-8 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
           aria-label="Next slide"
         >
           <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
         </button>
 
         {/* Foreground Content for Active Slide */}
-        <div className="relative z-10 w-full pl-8 sm:pl-10 lg:pl-12 pr-4 sm:pr-8 py-3 sm:py-3.5 lg:py-4">
+        <div className="relative z-10 w-full px-4 sm:pl-8 sm:pr-6 lg:pl-12 lg:pr-8 py-3.5 sm:py-4 lg:py-5">
           <div className="max-w-2xl lg:max-w-3xl xl:max-w-4xl">
             {showcaseSlides.map((slide, idx) => {
               if (idx !== activeSlide) return null;
               return (
                 <div key={slide.id} className="transition-all duration-500">
                   {/* Slide Category Badge */}
-                  <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/90 px-3 py-0.5 text-[10px] sm:text-[11px] font-bold tracking-[0.14em] text-neutral-800 uppercase shadow-xs backdrop-blur-sm">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/95 px-2.5 sm:px-3 py-0.5 text-[9.5px] sm:text-[11px] font-bold tracking-[0.14em] text-neutral-800 uppercase shadow-xs backdrop-blur-sm">
                     <span className="relative flex h-2 w-2 items-center justify-center">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75" />
                       <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#0091d5]" />
@@ -821,56 +823,56 @@ function Home() {
                   </div>
 
                   {/* Main Headline */}
-                  <h1 className="mt-2 text-2xl sm:text-3xl lg:text-[2.25rem] xl:text-[2.5rem] font-medium tracking-tight text-neutral-800 leading-[1.14]">
+                  <h1 className="mt-2 text-[20px] xs:text-[22px] sm:text-3xl lg:text-[2.25rem] xl:text-[2.5rem] font-bold tracking-tight text-black leading-[1.2] sm:leading-[1.14]">
                     {slide.titlePrefix}
                     {slide.titleBreak && <br />}
-                    <span className="font-extrabold text-neutral-950">
+                    <span className="font-black text-black">
                       {slide.titleHighlight}
                     </span>
                     {slide.titleSuffix}
                   </h1>
 
-                  {/* Subtitle / Eyebrow text */}
+                  {/* Subtitle / Eyebrow text - Dark and punchy */}
                   {slide.subtitle && (
-                    <p className="mt-1 text-[10px] sm:text-[11px] font-bold tracking-wider text-neutral-500 uppercase">
+                    <p className="mt-1.5 text-[10px] sm:text-[11px] font-black tracking-wider text-black/95 sm:text-neutral-700 uppercase">
                       {slide.subtitle}
                     </p>
                   )}
 
-                  {/* Paragraph Description */}
-                  <p className="mt-2 max-w-xl text-xs sm:text-sm leading-relaxed text-neutral-600">
+                  {/* Paragraph Description - Deep dark readable text */}
+                  <p className="mt-2 max-w-xl text-xs sm:text-sm leading-relaxed text-neutral-950 sm:text-neutral-700 font-semibold sm:font-normal">
                     {slide.desc}
                   </p>
 
                   {/* Action Buttons */}
-                  <div className="mt-3.5 sm:mt-4 flex flex-wrap items-center gap-3">
+                  <div className="mt-3.5 sm:mt-4 flex flex-wrap items-center gap-2 sm:gap-3">
                     <Link
                       to={slide.primaryCta.link}
-                      className="inline-flex items-center gap-2 rounded-full bg-[#136a3e] hover:bg-[#0e5230] px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#136a3e]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer group"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-[#136a3e] hover:bg-[#0e5230] px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#136a3e]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer group"
                     >
                       <span>{slide.primaryCta.text}</span>
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+                      <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
                     </Link>
 
                     <Link
                       to={slide.secondaryCta.link}
-                      className="inline-flex items-center gap-2 rounded-full border border-neutral-300 hover:border-neutral-400 bg-white/90 hover:bg-white px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-neutral-800 shadow-xs hover:shadow-sm transition-all duration-200 cursor-pointer"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-neutral-300 hover:border-neutral-400 bg-white/95 hover:bg-white px-3.5 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-neutral-800 shadow-xs hover:shadow-sm transition-all duration-200 cursor-pointer"
                     >
                       <span>{slide.secondaryCta.text}</span>
-                      <ArrowRight className="h-3.5 w-3.5 text-neutral-500" />
+                      <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-neutral-500" />
                     </Link>
                   </div>
 
-                  {/* Trust guarantees bar */}
-                  <div className="mt-3 flex flex-wrap items-center gap-3.5 text-[10px] sm:text-[11px] font-medium text-neutral-500">
+                  {/* Trust guarantees bar - Dark crisp text */}
+                  <div className="mt-3 flex flex-wrap items-center gap-2.5 sm:gap-3.5 text-[10px] sm:text-[11px] font-bold text-neutral-900 sm:text-neutral-600">
                     <span className="flex items-center gap-1">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> 99.98% SLA Uptime
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-700" /> 99.98% SLA Uptime
                     </span>
                     <span className="flex items-center gap-1">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> Zero-Outage Migrations
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-700" /> Zero-Outage Migrations
                     </span>
                     <span className="flex items-center gap-1">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> 72-Hour Mobilization
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-700" /> 72-Hour Mobilization
                     </span>
                   </div>
                 </div>
@@ -879,7 +881,15 @@ function Home() {
           </div>
 
           {/* Carousel Indicators / Navigation Dots anchored inside */}
-          <div className="mt-3 sm:mt-3.5 flex items-center gap-2 bg-white/85 backdrop-blur-md px-3 py-1 rounded-full border border-neutral-200/80 shadow-xs w-fit">
+          <div className="mt-3 sm:mt-3.5 flex items-center gap-1.5 sm:gap-2 bg-white/95 backdrop-blur-md px-2.5 sm:px-3 py-1 rounded-full border border-neutral-200/90 shadow-xs w-fit">
+            <button
+              type="button"
+              onClick={() => setActiveSlide((prev) => (prev - 1 + showcaseSlides.length) % showcaseSlides.length)}
+              className="sm:hidden p-0.5 text-neutral-600 hover:text-neutral-900 cursor-pointer"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="h-3.5 w-3.5" />
+            </button>
             {showcaseSlides.map((slide, i) => (
               <button
                 key={slide.id}
@@ -887,12 +897,20 @@ function Home() {
                 onClick={() => setActiveSlide(i)}
                 className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   i === activeSlide
-                    ? "w-6 bg-[#136a3e] shadow-[0_0_8px_rgba(19,106,62,0.4)]"
+                    ? "w-5 sm:w-6 bg-[#136a3e] shadow-[0_0_8px_rgba(19,106,62,0.4)]"
                     : "w-2 bg-neutral-300 hover:bg-neutral-400"
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
             ))}
+            <button
+              type="button"
+              onClick={() => setActiveSlide((prev) => (prev + 1) % showcaseSlides.length)}
+              className="sm:hidden p-0.5 text-neutral-600 hover:text-neutral-900 cursor-pointer"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="h-3.5 w-3.5" />
+            </button>
             <span className="text-[10px] font-bold text-neutral-600 ml-1">
               0{activeSlide + 1} / 0{showcaseSlides.length}
             </span>
@@ -952,7 +970,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 3. ABOUT REGAL OPS — "WHO WE ARE & WHAT WE DO" (Vuesol Reference)    */}
       {/* ==================================================================== */}
-      <section id="about" className="relative bg-white py-4 sm:py-5 overflow-hidden">
+      <section id="about" className="relative bg-white py-10 sm:py-14 lg:py-16 overflow-hidden scroll-mt-28 border-b border-neutral-200/70">
         {/* Ambient background soft glow */}
         <div className="absolute top-1/2 right-12 -translate-y-1/2 w-96 h-96 rounded-full bg-gradient-to-tr from-sky-400/10 via-orange-400/10 to-amber-300/10 blur-3xl pointer-events-none" />
 
@@ -1068,15 +1086,15 @@ function Home() {
       {/* ==================================================================== */}
       {/* 4. OUR SERVICES SECTION (Infinite Scrolling Marquee + Grid Toggle)   */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-4 sm:py-5 overflow-hidden">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 overflow-hidden scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Header */}
-          <div className="text-center max-w-3xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
             <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight">
               Our Services
             </h2>
-            <p className="mt-1.5 text-base sm:text-lg text-neutral-600 italic font-serif sm:font-normal">
+            <p className="mt-2 text-base sm:text-lg text-neutral-600 italic font-serif sm:font-normal">
               Accelerate your journey to success with our expertise, insights, innovation and vision
             </p>
           </div>
@@ -1146,7 +1164,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 5. OUR CLIENTS — "WHO WE WORK WITH" (Vuesol Reference Match)         */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fbfcfd] py-4 sm:py-5">
+      <section className="border-b border-neutral-200/70 bg-[#fbfcfd] py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Desktop Layout: Exact center-callout 4-row layout matching reference */}
@@ -1282,16 +1300,16 @@ function Home() {
       {/* ==================================================================== */}
       {/* 7. INTERACTIVE ARCHITECTURE BLUEPRINT & TOPOLOGY SHOWCASE            */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-4 sm:py-5">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
+          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
               Interactive Blueprint
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               The Regal OPs Production Topology
             </h2>
-            <p className="mt-1.5 text-sm sm:text-base text-neutral-600">
+            <p className="mt-2 text-sm sm:text-base text-neutral-600 max-w-2xl mx-auto">
               Click through the architectural layers of our resilient, audited enterprise platform foundation.
             </p>
           </div>
@@ -1389,13 +1407,13 @@ function Home() {
       {/* ==================================================================== */}
       {/* 8. DELIVERY METHODOLOGY (4-PHASE FRAMEWORK)                           */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-white py-6 sm:py-8">
+      <section className="border-b border-neutral-200/70 bg-white py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
               Delivery Methodology
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               Predictable, Audited, Repeatable
             </h2>
             <p className="mt-2 text-sm sm:text-base text-neutral-600">
@@ -1437,14 +1455,14 @@ function Home() {
       {/* ==================================================================== */}
       {/* 9. AUDITED CASE STUDIES & CLIENT OUTCOMES                             */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-4 sm:py-5">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 max-w-2xl">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 max-w-2xl mb-6 sm:mb-8">
             <div>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
                 Case Studies
               </span>
-              <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
+              <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
                 Work That Holds Up Under Audit
               </h2>
             </div>
@@ -1504,13 +1522,13 @@ function Home() {
       {/* ==================================================================== */}
       {/* 10. EXECUTIVE TESTIMONIALS                                            */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-white py-4 sm:py-5">
+      <section className="border-b border-neutral-200/70 bg-white py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
               Executive Validation
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               Trusted by Engineering Leaders
             </h2>
           </div>
@@ -1548,16 +1566,16 @@ function Home() {
       {/* ==================================================================== */}
       {/* 11. FREQUENTLY ASKED QUESTIONS (C-SUITE ACCORDION)                   */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-4 sm:py-5">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-800">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
               Executive FAQ
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               Clear Answers for Leadership
             </h2>
-            <p className="mt-1.5 text-sm sm:text-base text-neutral-600">
+            <p className="mt-2 text-sm sm:text-base text-neutral-600">
               Everything you need to know about our engagement models, IP security, and SLA guarantees.
             </p>
           </div>

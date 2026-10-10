@@ -5,7 +5,6 @@ import {
   Menu,
   X,
   ArrowRight,
-  Search,
   Sparkles,
   Briefcase,
   Code2,
@@ -31,6 +30,7 @@ import {
   Mail,
 } from "lucide-react";
 import { navItems, type NavChild } from "./nav-data";
+import { FooterSocialIcons } from "./social-icons";
 import {
   CommandDialog,
   CommandInput,
@@ -77,6 +77,7 @@ export function SiteHeader() {
   const [dynamicJobs, setDynamicJobs] = useState<any[]>([]);
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [activeAnnouncement, setActiveAnnouncement] = useState(0);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -107,6 +108,14 @@ export function SiteHeader() {
     };
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
+  }, []);
+
+  // Auto-cycle top announcement badge on small mobile screens
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveAnnouncement((prev) => (prev + 1) % 3);
+    }, 3200);
+    return () => clearInterval(timer);
   }, []);
 
   // Fetch dynamic content
@@ -148,8 +157,36 @@ export function SiteHeader() {
         {/* Top Micro-Bar (Enterprise Utility Strip matching Brand Green) */}
         <div className="w-full border-b border-[#0f4e2e] bg-[#136a3e] text-xs text-white/90 transition-all duration-300 shadow-xs">
           <div className="mx-auto flex max-w-[1400px] items-center justify-between px-3 sm:px-6 lg:px-8 py-1.5">
-            {/* Left Badges */}
-            <div className="flex items-center gap-2.5 sm:gap-4 overflow-x-auto no-scrollbar">
+            {/* Mobile View (< sm): Centered, Rotating Single Trust Badge (Never clipped, fits 320px+) */}
+            <div className="flex sm:hidden w-full items-center justify-center py-0.5 overflow-hidden">
+              {activeAnnouncement === 0 && (
+                <div className="flex items-center justify-center gap-1.5 text-center transition-all duration-300 animate-in fade-in">
+                  <Crown className="h-3.5 w-3.5 text-[#fbbf24] shrink-0" />
+                  <span className="font-medium text-white/95 text-[11px] whitespace-nowrap">
+                    Top 500 Enterprise Partner
+                  </span>
+                </div>
+              )}
+              {activeAnnouncement === 1 && (
+                <div className="flex items-center justify-center gap-1.5 text-center transition-all duration-300 animate-in fade-in">
+                  <ShieldCheck className="h-3.5 w-3.5 text-[#6ee7b7] shrink-0" />
+                  <span className="font-medium text-white/95 text-[11px] whitespace-nowrap">
+                    99.98% SLA Guaranteed Uptime
+                  </span>
+                </div>
+              )}
+              {activeAnnouncement === 2 && (
+                <div className="flex items-center justify-center gap-1.5 text-center transition-all duration-300 animate-in fade-in">
+                  <Globe className="h-3.5 w-3.5 text-[#6ee7b7] shrink-0" />
+                  <span className="font-medium text-white/95 text-[11px] whitespace-nowrap">
+                    Serving 14+ Countries Worldwide
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Tablet & Desktop View (sm+): All 3 Badges side-by-side */}
+            <div className="hidden sm:flex items-center gap-2.5 sm:gap-4 overflow-x-auto no-scrollbar">
               <div className="flex items-center gap-1.5 whitespace-nowrap">
                 <Crown className="h-3.5 w-3.5 text-[#fbbf24] shrink-0" />
                 <span className="font-medium text-white/95">Top 500 Enterprise Partner</span>
@@ -159,16 +196,16 @@ export function SiteHeader() {
                 <ShieldCheck className="h-3.5 w-3.5 text-[#6ee7b7] shrink-0" />
                 <span className="font-medium text-white/95">99.98% SLA Uptime</span>
               </div>
-              <span className="hidden sm:inline text-white/30">|</span>
-              <div className="hidden sm:flex items-center gap-1.5 whitespace-nowrap">
+              <span className="hidden md:inline text-white/30">|</span>
+              <div className="hidden md:flex items-center gap-1.5 whitespace-nowrap">
                 <Globe className="h-3.5 w-3.5 text-[#6ee7b7] shrink-0" />
                 <span className="font-medium text-white/95">Serving 14+ Countries</span>
               </div>
             </div>
 
-            {/* Right Socials & Micro Links */}
-            <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
-              <div className="flex items-center gap-2 sm:gap-2.5">
+            {/* Right Socials & Micro Links (visible on tablet & desktop) */}
+            <div className="hidden sm:flex items-center gap-2.5 sm:gap-4 shrink-0">
+              <div className="hidden md:flex items-center gap-2 sm:gap-2.5">
                 <a
                   href="https://linkedin.com"
                   target="_blank"
@@ -197,7 +234,7 @@ export function SiteHeader() {
                   <XIcon className="h-3 w-3" />
                 </a>
               </div>
-              <span className="text-white/30">|</span>
+              <span className="hidden md:inline text-white/30">|</span>
               <Link
                 to="/login"
                 className="font-medium text-white/90 hover:text-amber-300 transition-colors whitespace-nowrap text-xs"
@@ -216,37 +253,37 @@ export function SiteHeader() {
         </div>
 
         {/* Floating Pill Main Navigation Bar (Calculated with ample internal clearance to NEVER overflow) */}
-        <div className="w-full px-2.5 sm:px-5 lg:px-7 py-2 sm:py-2.5 transition-all duration-300">
+        <div className="w-full px-2 sm:px-4 lg:px-6 py-2 sm:py-2.5 transition-all duration-300">
           <div
-            className={`mx-auto max-w-[1400px] rounded-full border border-neutral-200/90 bg-white/95 backdrop-blur-md px-4 sm:px-6 xl:px-7 2xl:px-8 py-2 sm:py-2.5 flex items-center justify-between gap-2 xl:gap-4 transition-all duration-300 min-h-[74px] sm:min-h-[82px] ${
+            className={`mx-auto max-w-[1440px] rounded-full border border-neutral-200/90 bg-white/95 backdrop-blur-md px-3.5 sm:px-5 xl:px-6 2xl:px-8 py-1.5 sm:py-2 flex items-center justify-between gap-1.5 sm:gap-2 xl:gap-3 transition-all duration-300 min-h-[66px] sm:min-h-[72px] xl:min-h-[76px] ${
               scrolled
                 ? "shadow-[0_8px_30px_rgba(0,0,0,0.08)] border-neutral-300/80"
                 : "shadow-[0_4px_22px_rgba(0,0,0,0.04)]"
             }`}
           >
             {/* Logo Section */}
-            <Link to="/" className="flex items-center gap-3 sm:gap-3.5 shrink-0 group">
+            <Link to="/" className="flex items-center gap-2 sm:gap-3 shrink-0 group">
               <img
                 src="/logo.png"
                 alt="Regal OPs Logo"
-                className="h-13 sm:h-15 xl:h-16 2xl:h-[68px] w-auto object-contain shrink-0 transition-transform duration-200 group-hover:scale-105"
+                className="h-10 sm:h-12 xl:h-13 2xl:h-14 w-auto object-contain shrink-0 transition-transform duration-200 group-hover:scale-105"
               />
               <div className="flex flex-col shrink-0 justify-center">
-                <span className="font-display text-[22px] sm:text-[24px] xl:text-[26px] font-bold tracking-tight text-neutral-900 leading-none whitespace-nowrap">
+                <span className="font-display text-[18px] sm:text-[20px] xl:text-[22px] 2xl:text-[24px] font-bold tracking-tight text-neutral-900 leading-none whitespace-nowrap">
                   Regal OPs
                 </span>
-                <span className="text-[9px] sm:text-[10px] xl:text-[11px] font-bold uppercase tracking-[0.22em] text-neutral-500 mt-1 leading-none whitespace-nowrap">
+                <span className="text-[7.5px] sm:text-[8.5px] xl:text-[9.5px] 2xl:text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 mt-0.5 sm:mt-1 leading-none whitespace-nowrap">
                   CONSULT | BUILD | DEPLOY
                 </span>
               </div>
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden xl:flex items-center gap-3 2xl:gap-5 shrink-0" aria-label="Main Navigation">
+            <nav className="hidden xl:flex items-center gap-1.5 xl:gap-2.5 2xl:gap-4 shrink" aria-label="Main Navigation">
               {/* Home */}
               <Link
                 to="/"
-                className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-semibold transition-colors py-1 ${
+                className={`relative whitespace-nowrap text-[12.5px] xl:text-[13px] 2xl:text-sm font-semibold transition-colors py-1 ${
                   isActive("/")
                     ? "text-[#136a3e] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#136a3e] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
@@ -418,42 +455,15 @@ export function SiteHeader() {
 
             {/* Right Action Group */}
             <div className="flex items-center gap-1.5 sm:gap-2 2xl:gap-2.5 shrink-0">
-              {/* Search Pill */}
-              <button
-                type="button"
-                id="header-search-trigger"
-                onClick={() => setSearchOpen(true)}
-                aria-label="Search"
-                className="flex items-center gap-1.5 rounded-full border border-neutral-200/90 bg-[#F9FAFB] hover:bg-neutral-100/90 px-3 sm:px-3.5 py-2 text-xs text-neutral-400 hover:text-neutral-600 transition-colors shadow-2xs cursor-pointer"
-              >
-                <Search className="h-3.5 w-3.5 text-[#b4883b]" />
-                <span className="hidden sm:inline font-normal text-neutral-500">Search...</span>
-                <kbd className="hidden 2xl:inline-flex items-center rounded border border-neutral-200/80 bg-white px-1 py-0.2 text-[9px] font-mono text-neutral-400 shadow-2xs">
-                  ⌘K
-                </kbd>
-              </button>
 
-              {/* Divider - only on desktop when portal is shown */}
-              <div className="hidden xl:block h-4 w-px bg-neutral-200" />
-
-              {/* Portal Button */}
-              <Link
-                to="/login"
-                id="header-client-portal"
-                className="hidden xl:flex items-center gap-1 rounded-full border border-neutral-200 bg-white hover:bg-neutral-50 px-3 2xl:px-3.5 py-2 text-xs font-semibold text-neutral-700 hover:text-neutral-900 shadow-2xs transition-all hover:border-neutral-300 whitespace-nowrap"
-              >
-                <Lock className="h-3 w-3 text-[#854d0e]" />
-                <span>Portal</span>
-              </Link>
-
-              {/* Book Consultation Button */}
+              {/* Book Consultation Button (displayed on tablet & desktop, accessible via mobile drawer on phones) */}
               <Link
                 to="/contact"
                 id="header-cta-button"
-                className="flex items-center gap-1.5 rounded-full bg-[#136a3e] hover:bg-[#0e5230] text-white text-xs sm:text-[13px] font-semibold px-4 sm:px-5 py-2 sm:py-2.5 shadow-sm shadow-[#136a3e]/25 hover:shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap group"
+                className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#136a3e] hover:bg-[#0e5230] text-white text-xs xl:text-[13px] font-semibold px-3.5 sm:px-4 xl:px-4.5 2xl:px-5 py-2 xl:py-2.5 shadow-sm shadow-[#136a3e]/25 hover:shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap shrink-0 group"
               >
                 <span>Book Consultation</span>
-                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
               </Link>
 
               {/* Mobile Menu Hamburger Toggle */}
@@ -474,23 +484,6 @@ export function SiteHeader() {
         {open && (
           <div className="fixed inset-x-0 bottom-0 top-[100px] z-40 h-[calc(100vh-100px)] overflow-y-auto bg-white/98 backdrop-blur-2xl border-t border-neutral-200 px-5 py-6 transition-all duration-300 animate-in fade-in slide-in-from-top-4 xl:hidden flex flex-col justify-between">
             <div className="space-y-4">
-              {/* Mobile Search Button */}
-              <button
-                type="button"
-                onClick={() => {
-                  setOpen(false);
-                  setSearchOpen(true);
-                }}
-                className="w-full flex items-center justify-between rounded-xl border border-neutral-200 bg-[#F9FAFB] px-4 py-2.5 text-sm text-neutral-500 shadow-2xs"
-              >
-                <span className="flex items-center gap-2">
-                  <Search className="h-4 w-4 text-[#b4883b]" />
-                  Search solutions, tech, jobs...
-                </span>
-                <kbd className="rounded border border-neutral-200 bg-white px-1.5 py-0.5 text-xs font-semibold">
-                  ⌘K
-                </kbd>
-              </button>
 
               {/* Mobile Nav Links */}
               <div className="divide-y divide-neutral-100">
@@ -621,6 +614,11 @@ export function SiteHeader() {
                 >
                   Book Consultation
                 </Link>
+              </div>
+
+              {/* Original Social Links in Mobile Menu */}
+              <div className="pt-2 flex items-center justify-center">
+                <FooterSocialIcons />
               </div>
             </div>
           </div>

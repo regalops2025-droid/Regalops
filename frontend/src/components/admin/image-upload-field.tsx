@@ -162,9 +162,9 @@ export function ImageUploadField({
 
       {/* When an image is already selected/uploaded */}
       {value ? (
-        <div className="group relative overflow-hidden rounded-2xl border border-border bg-surface/50 p-3 transition-all hover:border-primary/40">
-          <div className="flex items-center gap-4">
-            <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-xl border border-border/80 bg-surface-2 shadow-xs flex items-center justify-center">
+        <div className="group relative overflow-hidden rounded-2xl border border-border bg-surface/50 p-2.5 sm:p-3 transition-all hover:border-primary/40">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+            <div className="relative h-28 xs:h-32 sm:h-20 w-full sm:w-28 shrink-0 overflow-hidden rounded-xl border border-border/80 bg-surface-2 shadow-xs flex items-center justify-center">
               <img
                 src={value}
                 alt={label}
@@ -175,8 +175,8 @@ export function ImageUploadField({
               />
             </div>
 
-            <div className="min-w-0 flex-1 space-y-2">
-              <div className="flex flex-wrap items-center gap-2">
+            <div className="min-w-0 flex-1 space-y-1.5 sm:space-y-2">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                 <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
                   <CheckCircle2 className="h-4 w-4 shrink-0" />
                   <span>Image uploaded</span>
@@ -187,7 +187,7 @@ export function ImageUploadField({
                   </span>
                 )}
                 {recommendedDimensions && (
-                  <span className="text-[11px] text-muted-foreground">
+                  <span className="text-[10px] sm:text-[11px] text-muted-foreground break-words">
                     (Target: {recommendedDimensions})
                   </span>
                 )}
@@ -195,11 +195,11 @@ export function ImageUploadField({
               <p className="truncate text-xs text-muted-foreground font-mono" title={value}>
                 {value.startsWith("data:") ? "Local upload (embedded)" : value}
               </p>
-              <p className="text-[11px] text-emerald-600/90 dark:text-emerald-400/90 font-medium">
+              <p className="text-[11px] text-emerald-600/90 dark:text-emerald-400/90 font-medium leading-tight">
                 ✓ Full image preserved naturally without cutting or blocking
               </p>
 
-              <div className="flex items-center gap-2 pt-1">
+              <div className="flex flex-wrap items-center gap-2 pt-1">
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}

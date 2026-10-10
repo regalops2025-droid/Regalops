@@ -342,9 +342,9 @@ function About() {
               <span>OUR PURPOSE</span>
               <span className="w-5 h-[2px] bg-emerald-500" />
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight">
-              Building Smarter, Stronger{" "}
-              <span className="text-[#0F172A]">and More Resilient Businesses</span>
+            <h2 className="text-[20px] xs:text-[22px] sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight leading-snug">
+              <span className="block sm:inline">Building Smarter, Stronger</span>{" "}
+              <span className="block sm:inline">and More Resilient Businesses</span>
             </h2>
             <p className="mt-3.5 text-sm sm:text-base text-neutral-600 max-w-2xl mx-auto leading-relaxed">
               We combine deep industry knowledge, advanced technologies and a client-first approach to create sustainable value for organizations across the globe.

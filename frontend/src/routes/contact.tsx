@@ -132,6 +132,7 @@ function Contact() {
       <PageHero
         eyebrow={jobTitle ? "Careers" : "Contact us"}
         title={jobTitle ? `Apply for ${jobTitle}` : "Start with a technical conversation"}
+        titleClassName="max-w-none whitespace-nowrap text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight"
         description={
           jobTitle
             ? "Submit your details and CV/Resume below to apply. Our engineering leads will review it shortly."

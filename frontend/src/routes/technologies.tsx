@@ -388,9 +388,9 @@ function Technologies() {
             </div>
 
             {/* Main Headline */}
-            <h1 className="mt-3.5 max-w-4xl font-display text-3xl font-black tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-              Production-proven, <br className="hidden sm:inline" />
-              <span className="bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent">
+            <h1 className="mt-3.5 max-w-4xl font-display text-[24px] xs:text-[28px] sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground leading-[1.18] sm:leading-tight">
+              <span className="block whitespace-nowrap">Production-proven,</span>
+              <span className="block whitespace-nowrap bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent">
                 never experimental.
               </span>
             </h1>
@@ -399,26 +399,6 @@ function Technologies() {
             <p className="mt-2.5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
               We standardise on technologies our teams have operated at scale for years — backed by official partner ecosystems, zero vendor lock-in, and guaranteed SLAs.
             </p>
-
-            {/* Live Trust Metrics Ribbon */}
-            <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-4 sm:gap-4 border-y border-border/60 py-2.5 max-w-3xl w-full">
-              <div className="text-center">
-                <div className="text-xl sm:text-2xl font-black text-foreground">99.98%</div>
-                <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Target Uptime</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xl sm:text-2xl font-black text-foreground">6 Core</div>
-                <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Tech Practices</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xl sm:text-2xl font-black text-foreground">20+ Stack</div>
-                <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Frameworks</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xl sm:text-2xl font-black text-emerald-500">Zero</div>
-                <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Vendor Lock-In</div>
-              </div>
-            </div>
           </div>
         </div>
       </section>

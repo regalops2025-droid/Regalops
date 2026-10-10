@@ -216,6 +216,19 @@ class MockPool {
             { Field: "created_at" }
           ]];
         }
+        if (table === "technologies") {
+          return [[
+            { Field: "id" },
+            { Field: "name" },
+            { Field: "description" },
+            { Field: "keywords" },
+            { Field: "how_to_work" },
+            { Field: "category" },
+            { Field: "status_badge" },
+            { Field: "brands" },
+            { Field: "created_at" }
+          ]];
+        }
       }
       return [[]];
     }
@@ -479,9 +492,12 @@ async function initDB() {
       CREATE TABLE IF NOT EXISTS technologies (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
-        description TEXT NOT NULL,
+        description TEXT,
         keywords VARCHAR(500),
         how_to_work TEXT,
+        category VARCHAR(255),
+        status_badge VARCHAR(255),
+        brands TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
@@ -492,7 +508,7 @@ async function initDB() {
       const [columns] = await pool.query("SHOW COLUMNS FROM technologies");
       const columnNames = columns.map(c => c.Field);
       if (columnNames.length > 0 && !columnNames.includes("description")) {
-        await pool.query("ALTER TABLE technologies ADD COLUMN description TEXT NOT NULL");
+        await pool.query("ALTER TABLE technologies ADD COLUMN description TEXT");
         console.log("Database Migration: Added missing 'description' column to 'technologies' table.");
       }
       if (columnNames.length > 0 && !columnNames.includes("keywords")) {
@@ -502,6 +518,18 @@ async function initDB() {
       if (columnNames.length > 0 && !columnNames.includes("how_to_work")) {
         await pool.query("ALTER TABLE technologies ADD COLUMN how_to_work TEXT");
         console.log("Database Migration: Added missing 'how_to_work' column to 'technologies' table.");
+      }
+      if (columnNames.length > 0 && !columnNames.includes("category")) {
+        await pool.query("ALTER TABLE technologies ADD COLUMN category VARCHAR(255)");
+        console.log("Database Migration: Added missing 'category' column to 'technologies' table.");
+      }
+      if (columnNames.length > 0 && !columnNames.includes("status_badge")) {
+        await pool.query("ALTER TABLE technologies ADD COLUMN status_badge VARCHAR(255)");
+        console.log("Database Migration: Added missing 'status_badge' column to 'technologies' table.");
+      }
+      if (columnNames.length > 0 && !columnNames.includes("brands")) {
+        await pool.query("ALTER TABLE technologies ADD COLUMN brands TEXT");
+        console.log("Database Migration: Added missing 'brands' column to 'technologies' table.");
       }
 
       // One-time cleanup: remove any automatically seeded default technologies
@@ -962,16 +990,18 @@ app.get("/api/technologies", async (req, res) => {
 app.post("/api/technologies", verifyToken, async (req, res) => {
   const { name, description, keywords, how_to_work, category, status_badge, brands } = req.body;
 
-  if (!name || !description) {
-    return res.status(400).json({ error: "Name and description are required." });
+  if (!name || !name.trim()) {
+    return res.status(400).json({ error: "Technology name is required." });
   }
+
+  const techDescription = (description && description.trim()) ? description.trim() : `${name.trim()} enterprise stack and implementation.`;
 
   try {
     const [result] = await pool.query(
       "INSERT INTO technologies (name, description, keywords, how_to_work, category, status_badge, brands) VALUES (?, ?, ?, ?, ?, ?, ?)",
       [
-        name,
-        description,
+        name.trim(),
+        techDescription,
         keywords || null,
         how_to_work || null,
         category || null,
@@ -981,8 +1011,8 @@ app.post("/api/technologies", verifyToken, async (req, res) => {
     );
     res.status(201).json({
       id: result.insertId,
-      name,
-      description,
+      name: name.trim(),
+      description: techDescription,
       keywords: keywords || null,
       how_to_work: how_to_work || null,
       category: category || null,
@@ -991,7 +1021,7 @@ app.post("/api/technologies", verifyToken, async (req, res) => {
     });
   } catch (error) {
     console.error("Error creating technology:", error);
-    res.status(500).json({ error: "Failed to create technology." });
+    res.status(500).json({ error: error.sqlMessage || error.message || "Failed to create technology." });
   }
 });
 
@@ -1000,16 +1030,18 @@ app.put("/api/technologies/:id", verifyToken, async (req, res) => {
   const { id } = req.params;
   const { name, description, keywords, how_to_work, category, status_badge, brands } = req.body;
 
-  if (!name || !description) {
-    return res.status(400).json({ error: "Name and description are required." });
+  if (!name || !name.trim()) {
+    return res.status(400).json({ error: "Technology name is required." });
   }
+
+  const techDescription = (description && description.trim()) ? description.trim() : `${name.trim()} enterprise stack and implementation.`;
 
   try {
     await pool.query(
       "UPDATE technologies SET name = ?, description = ?, keywords = ?, how_to_work = ?, category = ?, status_badge = ?, brands = ? WHERE id = ?",
       [
-        name,
-        description,
+        name.trim(),
+        techDescription,
         keywords || null,
         how_to_work || null,
         category || null,
@@ -1020,8 +1052,8 @@ app.put("/api/technologies/:id", verifyToken, async (req, res) => {
     );
     res.json({
       id: parseInt(id),
-      name,
-      description,
+      name: name.trim(),
+      description: techDescription,
       keywords: keywords || null,
       how_to_work: how_to_work || null,
       category: category || null,
@@ -1030,7 +1062,7 @@ app.put("/api/technologies/:id", verifyToken, async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating technology:", error);
-    res.status(500).json({ error: "Failed to update technology." });
+    res.status(500).json({ error: error.sqlMessage || error.message || "Failed to update technology." });
   }
 });
 

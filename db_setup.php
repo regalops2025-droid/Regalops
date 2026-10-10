@@ -68,11 +68,26 @@ try {
     $pdo->exec("CREATE TABLE IF NOT EXISTS technologies (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
-        description TEXT NOT NULL,
+        description TEXT,
         keywords VARCHAR(500),
         how_to_work TEXT,
+        category VARCHAR(255),
+        status_badge VARCHAR(255),
+        brands TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
+    try {
+        $pdo->exec("ALTER TABLE technologies ADD COLUMN category VARCHAR(255)");
+    } catch (Exception $e) {}
+    try {
+        $pdo->exec("ALTER TABLE technologies ADD COLUMN status_badge VARCHAR(255)");
+    } catch (Exception $e) {}
+    try {
+        $pdo->exec("ALTER TABLE technologies ADD COLUMN brands TEXT");
+    } catch (Exception $e) {}
+    try {
+        $pdo->exec("ALTER TABLE technologies MODIFY COLUMN description TEXT NULL");
+    } catch (Exception $e) {}
     echo "<p>Table 'technologies' checked/created.</p>";
 
     // 5. clients

@@ -657,15 +657,15 @@ function AdminDashboard() {
   // Submit Technology (Create or Update)
   const handleSubmitTech = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!techName || !techDesc) return;
+    if (!techName || !techName.trim()) return;
     
     setTechFormLoading(true);
     setTechFormError("");
     setTechFormSuccess(false);
 
     const payload = {
-      name: techName,
-      description: techDesc,
+      name: techName.trim(),
+      description: techDesc && techDesc.trim() ? techDesc.trim() : `${techName.trim()} enterprise stack and architecture.`,
       keywords: techKeywords || null,
       how_to_work: techHowToWork || null,
       category: techCategory || null,
@@ -2187,14 +2187,13 @@ function AdminDashboard() {
                     </div>
 
                     <label className="block text-sm font-medium">
-                      Description
+                      Description <span className="text-xs text-muted-foreground font-normal">(Optional)</span>
                       <textarea
                         rows={3}
                         className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
                         placeholder="Describe what this technology/stack is used for..."
                         value={techDesc}
                         onChange={(e) => setTechDesc(e.target.value)}
-                        required
                         disabled={techFormLoading}
                       />
                     </label>
@@ -2226,7 +2225,7 @@ function AdminDashboard() {
                     <div className="space-y-2">
                       <button
                         type="submit"
-                        disabled={techFormLoading || !techName || !techDesc}
+                        disabled={techFormLoading || !techName.trim()}
                         className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
                       >
                         {techFormLoading 

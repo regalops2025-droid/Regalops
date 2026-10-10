@@ -316,3 +316,21 @@
 .delay-400 { transition-delay: 400ms; }
 .delay-450 { transition-delay: 450ms; }
 .delay-500 { transition-delay: 500ms; }
+
+/* Accessibility: Support prefers-reduced-motion (Req #11 & #29) */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-on-scroll,
+  .reveal-scale,
+  .reveal-from-left,
+  .reveal-from-right {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

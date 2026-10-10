@@ -547,15 +547,15 @@ function About() {
       {/* ==================================================================== */}
       <section id="our-core-values" className="bg-[#fafcfb] dark:bg-slate-900/60 py-6 sm:py-8 border-b border-neutral-200/70 dark:border-slate-800/80">
         <div id="values" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto">
+          <div className="text-left max-w-3xl">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-950/50 px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#007cb8] dark:text-sky-400">
               Ethical Standards &amp; Principles
             </span>
             <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-900 dark:text-white tracking-tight">
               Our Core Values
             </h2>
-            <div className="w-10 h-0.5 bg-[#0091d5] rounded-full mx-auto mt-2 mb-2" />
-            <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl mx-auto">
+            <div className="w-10 h-0.5 bg-[#0091d5] rounded-full mt-2 mb-2" />
+            <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl">
               We have embedded the highest ethical standards across our organization,
               reflected in how we conduct our business and collaborate with all stakeholders.
             </p>

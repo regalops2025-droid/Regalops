@@ -1090,7 +1090,7 @@ function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
+          <div className="text-left max-w-3xl mb-6 sm:mb-8">
             <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight">
               Our Services
             </h2>
@@ -1257,7 +1257,7 @@ function Home() {
 
           {/* Mobile / Tablet Layout */}
           <div className="lg:hidden flex flex-col gap-6">
-            <div className="text-center">
+            <div className="text-left">
               <h2 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight">
                 Our Clients
               </h2>
@@ -1302,14 +1302,14 @@ function Home() {
       {/* ==================================================================== */}
       <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto mb-6 sm:mb-8">
+          <div className="text-left max-w-4xl mb-6 sm:mb-8">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
               Interactive Blueprint
             </span>
             <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               The Regal OPs Production Topology
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-neutral-600 max-w-4xl mx-auto md:whitespace-nowrap">
+            <p className="mt-2 text-sm sm:text-base text-neutral-600 max-w-4xl md:whitespace-nowrap">
               Click through the architectural layers of our resilient, audited enterprise platform foundation.
             </p>
           </div>
@@ -1409,7 +1409,7 @@ function Home() {
       {/* ==================================================================== */}
       <section className="border-b border-neutral-200/70 bg-white py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+          <div className="text-left max-w-2xl mb-6 sm:mb-8">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
               Delivery Methodology
             </span>
@@ -1524,7 +1524,7 @@ function Home() {
       {/* ==================================================================== */}
       <section className="border-b border-neutral-200/70 bg-white py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+          <div className="text-left max-w-2xl mb-6 sm:mb-8">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
               Executive Validation
             </span>
@@ -1568,7 +1568,7 @@ function Home() {
       {/* ==================================================================== */}
       <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+          <div className="text-left max-w-2xl mb-6 sm:mb-8">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
               Executive FAQ
             </span>

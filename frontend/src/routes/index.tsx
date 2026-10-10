@@ -1302,14 +1302,14 @@ function Home() {
       {/* ==================================================================== */}
       <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
+          <div className="text-center max-w-4xl mx-auto mb-6 sm:mb-8">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700/20 bg-emerald-50 px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-emerald-800 shadow-2xs">
               Interactive Blueprint
             </span>
             <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               The Regal OPs Production Topology
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-neutral-600 max-w-2xl mx-auto">
+            <p className="mt-2 text-sm sm:text-base text-neutral-600 max-w-4xl mx-auto md:whitespace-nowrap">
               Click through the architectural layers of our resilient, audited enterprise platform foundation.
             </p>
           </div>

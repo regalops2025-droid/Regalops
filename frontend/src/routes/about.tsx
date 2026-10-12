@@ -604,38 +604,100 @@ function About() {
       </section>
 
       {/* ==================================================================== */}
-      {/* 5. JOURNEY & MILESTONES TIMELINE                                     */}
+      {/* 5. JOURNEY & MILESTONES TIMELINE WITH ROTATING ENTERPRISE SHOWCASE   */}
       {/* ==================================================================== */}
-      <section className="bg-[#fafcfb] py-6 sm:py-8 border-b border-neutral-200/70">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
+      <section className="bg-[#fafcfb] py-8 sm:py-12 lg:py-16 border-b border-neutral-200/70 overflow-hidden relative">
+        {/* Subtle background ambient glow */}
+        <div className="absolute top-1/3 right-10 -z-0 h-96 w-96 rounded-full bg-[#f3cd67]/10 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 left-10 -z-0 h-80 w-80 rounded-full bg-[#555d25]/10 blur-3xl pointer-events-none" />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-2xl text-left mb-6 sm:mb-8">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#8c6d23]">
               Fifteen Years of Impact
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-900">
+            <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-900 text-left">
               Our Journey &amp; Milestones
             </h2>
-            <div className="w-12 h-1 bg-[#555d25] rounded-full mt-2 mb-3" />
-            <p className="text-sm sm:text-base text-neutral-600">
+            <div className="w-12 h-1 bg-[#555d25] rounded-full mt-2.5 mb-3" />
+            <p className="text-sm sm:text-base text-neutral-600 text-left">
               From an agile architecture squad to a global practice serving Fortune 500 institutions.
             </p>
           </div>
 
-          <div className="mt-5 sm:mt-6 relative border-l-2 border-[#b38e36]/40 ml-4 sm:ml-6 space-y-5 pl-6 sm:pl-8">
-            {timeline.map((item) => (
-              <div key={item.year} className="relative group">
-                <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 h-4 w-4 rounded-full border-2 border-white bg-[#555d25] shadow-xs group-hover:scale-125 transition-transform" />
-                <div className="inline-block rounded-full bg-[#f5f6ee] text-[#8c6d23] px-3 py-0.5 text-xs font-bold font-mono">
-                  {item.year}
+          {/* 2-Column Grid: Left Timeline with Transitions, Right Rotating Pyramid Showcase */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* LEFT COLUMN: Timeline Items with Interactive Transitions */}
+            <div className="lg:col-span-7 relative border-l-2 border-[#b38e36]/40 ml-4 sm:ml-6 space-y-5 pl-6 sm:pl-8">
+              {timeline.map((item) => (
+                <div
+                  key={item.year}
+                  className="relative group transition-all duration-300 hover:translate-x-1.5"
+                >
+                  {/* Glowing Node Dot with Hover Pulse & Glow */}
+                  <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 h-4 w-4 rounded-full border-2 border-white bg-[#555d25] shadow-xs group-hover:scale-135 group-hover:bg-[#8c6d23] group-hover:shadow-[0_0_12px_rgba(217,168,62,0.6)] transition-all duration-300" />
+                  
+                  {/* Card Container with Transition & Hover Effects */}
+                  <div className="rounded-2xl p-3 sm:p-4 border border-transparent group-hover:border-[#b38e36]/30 group-hover:bg-white group-hover:shadow-md transition-all duration-300">
+                    <div className="inline-block rounded-full bg-[#f5f6ee] group-hover:bg-[#555d25] group-hover:text-white text-[#8c6d23] px-3 py-0.5 text-xs font-bold font-mono transition-colors duration-300 shadow-2xs">
+                      {item.year}
+                    </div>
+                    <h3 className="mt-1.5 text-base sm:text-lg font-bold text-neutral-900 group-hover:text-[#555d25] transition-colors duration-300">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1 text-xs sm:text-sm leading-relaxed text-neutral-600 max-w-xl">
+                      {item.text}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="mt-1 text-base sm:text-lg font-bold text-neutral-900">
-                  {item.title}
-                </h3>
-                <p className="mt-0.5 text-xs sm:text-sm leading-relaxed text-neutral-600 max-w-2xl">
-                  {item.text}
-                </p>
+              ))}
+            </div>
+
+            {/* RIGHT COLUMN: Continuous Rotating Golden Pyramid Showcase */}
+            <div className="lg:col-span-5 flex flex-col items-center justify-center relative py-6">
+              
+              {/* Outer Rotating Orbital Rings & Glow */}
+              <div className="relative flex items-center justify-center">
+                {/* Rotating Outer Dashed Orbital Ring */}
+                <div
+                  className="w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] xl:w-[400px] xl:h-[400px] rounded-full border-2 border-dashed border-[#b38e36]/40 pointer-events-none animate-[spin_35s_linear_infinite]"
+                />
+                
+                {/* Counter-Rotating Inner Ring with Accents */}
+                <div
+                  className="absolute w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] xl:w-[340px] xl:h-[340px] rounded-full border border-dotted border-[#555d25]/40 pointer-events-none animate-[spin_20s_linear_infinite_reverse]"
+                />
+
+                {/* Ambient Radial Golden Glow */}
+                <div className="absolute w-60 h-60 sm:w-72 sm:h-72 rounded-full bg-gradient-to-tr from-[#555d25]/25 via-[#f3cd67]/20 to-transparent blur-3xl pointer-events-none" />
+
+                {/* Rotating Pyramid Image Container */}
+                <div className="absolute z-10 w-52 h-52 sm:w-68 sm:h-68 xl:w-76 xl:h-76 rounded-full overflow-hidden border-2 border-[#b38e36]/60 shadow-[0_12px_45px_rgba(217,168,62,0.35)] bg-[#071324] flex items-center justify-center group cursor-pointer transition-all duration-500 hover:scale-105 hover:border-[#f3cd67]">
+                  {/* The Rotating Image with Continuous 360 Spin */}
+                  <img
+                    src="/milestones-pyramid.png"
+                    alt="Regal OPs 3-Tier Enterprise Architectural Delivery Model"
+                    className="w-full h-full object-cover object-center animate-[spin_28s_linear_infinite] group-hover:[animation-play-state:paused] transition-transform select-none"
+                  />
+                  
+                  {/* Glass Shimmer Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#071324]/20 via-transparent to-white/15 pointer-events-none rounded-full" />
+                </div>
               </div>
-            ))}
+
+              {/* Floating Status Badge Beneath Rotating Pyramid */}
+              <div className="mt-8 z-20 inline-flex items-center gap-2 rounded-full border border-[#b38e36]/30 bg-white/90 backdrop-blur-md px-4 py-1.5 shadow-md shadow-neutral-900/5">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#f3cd67] opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#555d25]" />
+                </span>
+                <span className="text-[11px] font-bold text-neutral-800 tracking-wider uppercase">
+                  3-Tier Delivery &bull; Consult | Build | Deploy
+                </span>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

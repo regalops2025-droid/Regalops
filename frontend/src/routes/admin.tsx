@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { LogOut, ExternalLink, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen, Compass, Bell, FileText } from "lucide-react";
+import { LogOut, ExternalLink, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen, Compass, Bell } from "lucide-react";
 import { ImageUploadField } from "@/components/admin/image-upload-field";
 
 export const Route = createFileRoute("/admin")({
@@ -1281,9 +1281,9 @@ function AdminDashboard() {
             { id: "technologies" as const, label: "Manage Technologies", icon: Cpu, count: techList.length },
             { id: "services" as const, label: "Manage Services", icon: Compass, count: serviceList.length },
             { id: "clients" as const, label: "Manage Clients", icon: User, count: clientList.length },
-            { id: "careers" as const, label: "Manage Careers", icon: Briefcase, count: jobList.length },
+            { id: "careers" as const, label: "Manage Careers", icon: Briefcase, count: jobList.length, isNotify: true, badgeClass: "bg-[#555d25]/40 text-[#e4ebb2] border-[#555d25]/60" },
             { id: "blogs" as const, label: "Manage Blogs", icon: BookOpen, count: blogList.length },
-            { id: "applications" as const, label: "Applications", icon: FileText, count: applications.length, isNotify: true, badgeClass: "bg-amber-500/20 text-amber-300 border-amber-500/40" },
+            { id: "applications" as const, label: "Applications", icon: Inbox, count: applications.length, isNotify: true, badgeClass: "bg-amber-500/20 text-amber-300 border-amber-500/40" },
           ].map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -1436,35 +1436,35 @@ function AdminDashboard() {
               </span>
             </button>
 
-            {/* Quick Notification Button: Job Applications */}
+            {/* Quick Notification Button: Careers & Job Openings */}
             <button
               type="button"
-              onClick={() => setActiveTab("applications")}
+              onClick={() => setActiveTab("careers")}
               className={`relative inline-flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-semibold transition-all cursor-pointer shadow-xs ${
-                activeTab === "applications"
+                activeTab === "careers"
                   ? "border-primary bg-primary text-primary-foreground shadow-sm"
                   : "border-border bg-surface text-foreground hover:bg-secondary hover:border-border/80"
               }`}
-              title={`Job Applications (${applications.length})`}
+              title={`Careers & Job Openings (${jobList.length})`}
             >
               <div className="relative flex items-center justify-center">
-                <FileText className="h-3.5 w-3.5" />
-                {applications.length > 0 && activeTab !== "applications" && (
+                <Briefcase className="h-3.5 w-3.5" />
+                {jobList.length > 0 && activeTab !== "careers" && (
                   <span className="absolute -top-1.5 -right-1.5 flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#555d25] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#555d25]"></span>
                   </span>
                 )}
               </div>
-              <span className="hidden sm:inline">Applications</span>
+              <span className="hidden sm:inline">Careers</span>
               <span
                 className={`inline-flex items-center justify-center rounded-full px-1.5 py-0.2 text-[11px] font-bold min-w-[20px] ${
-                  activeTab === "applications"
+                  activeTab === "careers"
                     ? "bg-white/25 text-white"
-                    : "bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30"
+                    : "bg-[#555d25]/15 text-[#555d25] dark:text-[#d3dda3] border border-[#555d25]/30"
                 }`}
               >
-                {applicationsLoading ? "..." : applications.length}
+                {jobLoading ? "..." : jobList.length}
               </span>
             </button>
 
@@ -1476,7 +1476,7 @@ function AdminDashboard() {
                     ? "/solutions"
                     : activeTab === "technologies"
                       ? "/technologies"
-                      : activeTab === "careers" || activeTab === "applications"
+                      : activeTab === "careers"
                         ? "/career"
                         : activeTab === "blogs"
                           ? "/blog"
@@ -1507,7 +1507,7 @@ function AdminDashboard() {
               className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-foreground transition-all hover:bg-secondary"
               title="Refresh Data"
             >
-              <RefreshCw className={`h-3.5 w-3.5 ${enquiriesLoading || solutionsLoading || techLoading || serviceLoading || clientLoading || jobLoading || blogLoading || applicationsLoading ? "animate-spin" : ""}`} />
+              <RefreshCw className={`h-3.5 w-3.5 ${enquiriesLoading || solutionsLoading || techLoading || serviceLoading || clientLoading || jobLoading || blogLoading ? "animate-spin" : ""}`} />
               <span className="hidden sm:inline">Refresh Data</span>
             </button>
           </div>
@@ -1517,7 +1517,7 @@ function AdminDashboard() {
         <main className="flex-1 p-3.5 sm:p-6 md:p-8 max-w-7xl w-full mx-auto">
           
           {/* Stat Metrics Grid (Interactive Tabs) */}
-          <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 mb-8">
+          <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 mb-8">
             {[
               { id: "enquiries" as const, label: "Enquiries", count: enquiries.length, loading: enquiriesLoading },
               { id: "solutions" as const, label: "Solutions", count: solutions.length, loading: solutionsLoading },
@@ -1526,7 +1526,6 @@ function AdminDashboard() {
               { id: "clients" as const, label: "Clients", count: clientList.length, loading: clientLoading },
               { id: "careers" as const, label: "Careers", count: jobList.length, loading: jobLoading },
               { id: "blogs" as const, label: "Blogs", count: blogList.length, loading: blogLoading },
-              { id: "applications" as const, label: "Applications", count: applications.length, loading: applicationsLoading },
             ].map((metric) => {
               const isActive = activeTab === metric.id;
               return (
@@ -1567,11 +1566,6 @@ function AdminDashboard() {
                     ) : metric.id === "careers" ? (
                       <span className="inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-bold bg-[#555d25]/15 text-[#555d25] dark:text-[#d3dda3] border border-[#555d25]/30">
                         <Briefcase className="h-2.5 w-2.5" />
-                        <span>{metric.loading ? "..." : metric.count}</span>
-                      </span>
-                    ) : metric.id === "applications" ? (
-                      <span className="inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
-                        <FileText className="h-2.5 w-2.5" />
                         <span>{metric.loading ? "..." : metric.count}</span>
                       </span>
                     ) : isActive ? (

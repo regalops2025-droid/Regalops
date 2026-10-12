@@ -416,6 +416,32 @@ function Clients() {
     return allClientBrands.filter((b) => b.category === selectedCategory);
   }, [allClientBrands, selectedCategory]);
 
+  const [isScrollingMode, setIsScrollingMode] = useState(true);
+
+  // Split filtered brands into two balanced columns for smooth continuous vertical marquee scrolling
+  const { col1Brands, col2Brands } = useMemo(() => {
+    const col1: typeof filteredBrands = [];
+    const col2: typeof filteredBrands = [];
+    filteredBrands.forEach((b, idx) => {
+      if (idx % 2 === 0) col1.push(b);
+      else col2.push(b);
+    });
+
+    const ensureLoop = (arr: typeof filteredBrands) => {
+      if (arr.length === 0) return [];
+      let list = [...arr];
+      while (list.length < 5) {
+        list = [...list, ...arr];
+      }
+      return [...list, ...list];
+    };
+
+    return {
+      col1Brands: ensureLoop(col1),
+      col2Brands: ensureLoop(col2),
+    };
+  }, [filteredBrands]);
+
   const displayedRightBrands = useMemo(() => {
     if (showAll) {
       return filteredBrands;
@@ -552,10 +578,10 @@ function Clients() {
           {/* Left: Featured Dark Card with 3x3 Mini Logos Grid                */}
           {/* Right: 2-Column Grid of Partner Cards with Logos, Name & Sector  */}
           {/* ================================================================ */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch mb-6 sm:mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-start mb-6 sm:mb-8">
             
             {/* LEFT FEATURED CARD: Deep Forest Dark Card with 3x3 Mini Grid */}
-            <div className="lg:col-span-5 relative overflow-hidden rounded-[26px] sm:rounded-3xl bg-gradient-to-br from-[#0c2017] via-[#091811] to-[#06120d] text-white p-6 sm:p-7 lg:p-8 flex flex-col justify-between border border-[#1b3e2d] shadow-2xl min-h-[460px]">
+            <div className="lg:col-span-5 lg:sticky lg:top-28 lg:self-start relative overflow-hidden rounded-[26px] sm:rounded-3xl bg-gradient-to-br from-[#0c2017] via-[#091811] to-[#06120d] text-white p-6 sm:p-7 lg:p-8 flex flex-col justify-start border border-[#1b3e2d] shadow-2xl">
               {/* Subtle ambient glows and background wave lines */}
               <div className="pointer-events-none absolute -top-24 -left-24 w-80 h-80 bg-emerald-500/15 rounded-full blur-3xl" />
               <div className="pointer-events-none absolute -bottom-24 -right-24 w-80 h-80 bg-[#555d25]/25 rounded-full blur-3xl" />
@@ -575,8 +601,8 @@ function Clients() {
                 </p>
               </div>
 
-              {/* 3x3 Mini Logo Cards Grid (Exact match to left card in screenshot) */}
-              <div className="relative z-10 mt-6 sm:mt-8 grid grid-cols-3 gap-2 sm:gap-2.5">
+              {/* 3x3 Mini Logo Cards Grid */}
+              <div className="relative z-10 mt-5 sm:mt-6 grid grid-cols-3 gap-2 sm:gap-2.5">
                 {FEATURED_HERO_CLIENTS.map((logo) => (
                   <div
                     key={logo.id}
@@ -593,43 +619,147 @@ function Clients() {
               </div>
             </div>
 
-            {/* RIGHT COLUMN: 2-Column Grid of Client Cards (Logos, Title & Sector Subtitle) */}
-            <div className="lg:col-span-7 flex flex-col justify-between">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
-                {displayedRightBrands.map((client) => (
-                  <div
-                    key={client.id}
-                    className="group relative bg-white dark:bg-white rounded-2xl border border-neutral-200/90 p-4 sm:p-5 flex flex-col items-center justify-center text-center shadow-xs hover:shadow-md hover:border-[#555d25]/50 transition-all duration-300 hover:-translate-y-0.5 min-h-[110px] sm:min-h-[118px]"
-                  >
-                    <div className="h-9 sm:h-10 w-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-                      <img
-                        src={client.image}
-                        alt={client.name}
-                        className="max-h-8 sm:max-h-9 max-w-[130px] sm:max-w-[145px] w-auto object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                    <h3 className="mt-2 text-xs sm:text-[13px] font-bold text-neutral-900 tracking-tight leading-snug">
-                      {client.name}
-                    </h3>
-                    <p className="mt-0.5 text-[10.5px] sm:text-[11.5px] text-neutral-500 font-medium leading-tight">
-                      {client.subtitle}
-                    </p>
-                  </div>
-                ))}
-              </div>
+            {/* RIGHT COLUMN: 2-Column Scrolling Client Cards */}
+            <div className="lg:col-span-7 flex flex-col">
+              {/* Header Bar with Scrolling status & Mode Switcher */}
+              <div className="flex items-center justify-between mb-3 px-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold text-neutral-800 dark:text-neutral-200">
+                    Partner Network ({filteredBrands.length})
+                  </span>
+                  {isScrollingMode && (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-[#555d25]/10 px-2 py-0.5 text-[10.5px] font-semibold text-[#555d25]">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#555d25] animate-pulse" />
+                      Hover to pause
+                    </span>
+                  )}
+                </div>
 
-              {/* View All / Show Less Toggle Button */}
-              {filteredBrands.length > 10 && (
-                <div className="mt-4 pt-2 text-center">
+                <div className="inline-flex rounded-xl border border-neutral-200 bg-neutral-50 p-0.5 text-[11px] font-semibold">
                   <button
                     type="button"
-                    onClick={() => setShowAll(!showAll)}
-                    className="inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 px-6 py-2 text-xs font-bold uppercase tracking-wider text-neutral-700 shadow-2xs hover:shadow-xs transition-all cursor-pointer"
+                    onClick={() => setIsScrollingMode(true)}
+                    className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                      isScrollingMode
+                        ? "bg-white text-[#555d25] shadow-xs font-bold"
+                        : "text-neutral-500 hover:text-neutral-900"
+                    }`}
                   >
-                    <span>{showAll ? "Show Less" : `View All (${filteredBrands.length} Partners)`}</span>
-                    <ArrowRight className={`h-3.5 w-3.5 transition-transform duration-200 ${showAll ? "-rotate-90" : ""}`} />
+                    Auto-Scroll
                   </button>
+                  <button
+                    type="button"
+                    onClick={() => setIsScrollingMode(false)}
+                    className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                      !isScrollingMode
+                        ? "bg-white text-[#555d25] shadow-xs font-bold"
+                        : "text-neutral-500 hover:text-neutral-900"
+                    }`}
+                  >
+                    Static Grid
+                  </button>
+                </div>
+              </div>
+
+              {isScrollingMode ? (
+                /* Auto-Scrolling Infinite Vertical Ticker */
+                <div className="relative h-[490px] sm:h-[530px] lg:h-[550px] overflow-hidden rounded-2xl">
+                  {/* Top & Bottom Gradient Fade Shadows */}
+                  <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-white to-transparent z-10" />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5 h-full">
+                    {/* Column 1 Scrolling Up */}
+                    <div className="flex flex-col gap-3 sm:gap-3.5 animate-marquee-vertical-1 pause-on-hover">
+                      {col1Brands.map((client, idx) => (
+                        <div
+                          key={`col1-${client.id}-${idx}`}
+                          className="group relative bg-white dark:bg-white rounded-2xl border border-neutral-200/90 p-4 sm:p-5 flex flex-col items-center justify-center text-center shadow-xs hover:shadow-md hover:border-[#555d25]/60 transition-all duration-300 hover:-translate-y-1 min-h-[110px] sm:min-h-[118px] cursor-pointer shrink-0"
+                        >
+                          <div className="h-9 sm:h-10 w-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                            <img
+                              src={client.image}
+                              alt={client.name}
+                              className="max-h-8 sm:max-h-9 max-w-[130px] sm:max-w-[145px] w-auto object-contain"
+                              loading="lazy"
+                            />
+                          </div>
+                          <h3 className="mt-2 text-xs sm:text-[13px] font-bold text-neutral-900 tracking-tight leading-snug">
+                            {client.name}
+                          </h3>
+                          <p className="mt-0.5 text-[10.5px] sm:text-[11.5px] text-neutral-500 font-medium leading-tight">
+                            {client.subtitle}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Column 2 Scrolling Up (Slightly Slower for Organic Asymmetry) */}
+                    <div className="flex flex-col gap-3 sm:gap-3.5 animate-marquee-vertical-2 pause-on-hover">
+                      {col2Brands.map((client, idx) => (
+                        <div
+                          key={`col2-${client.id}-${idx}`}
+                          className="group relative bg-white dark:bg-white rounded-2xl border border-neutral-200/90 p-4 sm:p-5 flex flex-col items-center justify-center text-center shadow-xs hover:shadow-md hover:border-[#555d25]/60 transition-all duration-300 hover:-translate-y-1 min-h-[110px] sm:min-h-[118px] cursor-pointer shrink-0"
+                        >
+                          <div className="h-9 sm:h-10 w-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                            <img
+                              src={client.image}
+                              alt={client.name}
+                              className="max-h-8 sm:max-h-9 max-w-[130px] sm:max-w-[145px] w-auto object-contain"
+                              loading="lazy"
+                            />
+                          </div>
+                          <h3 className="mt-2 text-xs sm:text-[13px] font-bold text-neutral-900 tracking-tight leading-snug">
+                            {client.name}
+                          </h3>
+                          <p className="mt-0.5 text-[10.5px] sm:text-[11.5px] text-neutral-500 font-medium leading-tight">
+                            {client.subtitle}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                /* Static Grid View */
+                <div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
+                    {displayedRightBrands.map((client) => (
+                      <div
+                        key={client.id}
+                        className="group relative bg-white dark:bg-white rounded-2xl border border-neutral-200/90 p-4 sm:p-5 flex flex-col items-center justify-center text-center shadow-xs hover:shadow-md hover:border-[#555d25]/50 transition-all duration-300 hover:-translate-y-0.5 min-h-[110px] sm:min-h-[118px]"
+                      >
+                        <div className="h-9 sm:h-10 w-full flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                          <img
+                            src={client.image}
+                            alt={client.name}
+                            className="max-h-8 sm:max-h-9 max-w-[130px] sm:max-w-[145px] w-auto object-contain"
+                            loading="lazy"
+                          />
+                        </div>
+                        <h3 className="mt-2 text-xs sm:text-[13px] font-bold text-neutral-900 tracking-tight leading-snug">
+                          {client.name}
+                        </h3>
+                        <p className="mt-0.5 text-[10.5px] sm:text-[11.5px] text-neutral-500 font-medium leading-tight">
+                          {client.subtitle}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* View All / Show Less Toggle Button */}
+                  {filteredBrands.length > 10 && (
+                    <div className="mt-4 pt-2 text-center">
+                      <button
+                        type="button"
+                        onClick={() => setShowAll(!showAll)}
+                        className="inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 px-6 py-2 text-xs font-bold uppercase tracking-wider text-neutral-700 shadow-2xs hover:shadow-xs transition-all cursor-pointer"
+                      >
+                        <span>{showAll ? "Show Less" : `View All (${filteredBrands.length} Partners)`}</span>
+                        <ArrowRight className={`h-3.5 w-3.5 transition-transform duration-200 ${showAll ? "-rotate-90" : ""}`} />
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

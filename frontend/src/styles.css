@@ -339,3 +339,29 @@
     transition: none !important;
   }
 }
+
+/* ========================================================================== */
+/* VERTICAL MARQUEE / SCROLLING EFFECTS                                       */
+/* ========================================================================== */
+@keyframes vertical-marquee {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-marquee-vertical-1 {
+  animation: vertical-marquee 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-vertical-2 {
+  animation: vertical-marquee 38s linear infinite;
+  will-change: transform;
+}
+
+.pause-on-hover:hover {
+  animation-play-state: paused !important;
+}

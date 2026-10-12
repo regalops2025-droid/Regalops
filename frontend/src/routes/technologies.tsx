@@ -10,7 +10,6 @@ import {
   Zap,
   Activity,
   Layers,
-  Search,
 } from "lucide-react";
 import {
   ReactLogo,
@@ -336,8 +335,6 @@ const TOOLCHAIN_ITEMS = [
 function Technologies() {
   const [techList, setTechList] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeFilter, setActiveFilter] = useState<DomainFilter>("all");
-  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetch("/api/technologies")
@@ -352,19 +349,7 @@ function Technologies() {
       });
   }, []);
 
-  // Filtered technology cards
-  const filteredTechList = useMemo(() => {
-    return techList.filter((tech) => {
-      const meta = getTechMetadata(tech.name);
-      const matchesFilter = activeFilter === "all" || meta.domain === activeFilter;
-      const matchesSearch =
-        searchQuery === "" ||
-        tech.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tech.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (tech.keywords && tech.keywords.toLowerCase().includes(searchQuery.toLowerCase()));
-      return matchesFilter && matchesSearch;
-    });
-  }, [techList, activeFilter, searchQuery]);
+  const filteredTechList = techList;
 
   return (
     <SiteLayout>
@@ -404,53 +389,7 @@ function Technologies() {
       </section>
 
       {/* ==================================================================== */}
-      {/* 2. FILTER & SEARCH CONTROLS                                          */}
-      {/* ==================================================================== */}
-      <section className="bg-surface/50 border-b border-border/70 sticky top-16 z-20 backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-4 py-3.5 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            {/* Domain Tabs */}
-            <div className="flex flex-wrap items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-              {[
-                { id: "all", label: "All Technologies" },
-                { id: "frontend", label: "Frontend" },
-                { id: "backend", label: "Backend & APIs" },
-                { id: "cloud", label: "Multi-Cloud" },
-                { id: "devops", label: "Kubernetes & DevOps" },
-                { id: "mobile", label: "Mobile" },
-                { id: "ai", label: "AI & ML" },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveFilter(tab.id as DomainFilter)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                    activeFilter === tab.id
-                      ? "bg-primary text-primary-foreground shadow-sm scale-102"
-                      : "bg-background/80 hover:bg-surface text-muted-foreground hover:text-foreground border border-border/50"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Quick Search */}
-            <div className="relative w-full sm:w-64">
-              <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-muted-foreground" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search frameworks..."
-                className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg bg-background border border-border/80 focus:outline-none focus:ring-1 focus:ring-primary text-foreground placeholder:text-muted-foreground"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ==================================================================== */}
-      {/* 3. PREMIUM TECHNOLOGY CARDS WITH BRAND LOGOS                         */}
+      {/* 2. PREMIUM TECHNOLOGY CARDS WITH BRAND LOGOS                         */}
       {/* ==================================================================== */}
       <Section className="py-6 sm:py-8">
         {loading ? (
@@ -462,17 +401,8 @@ function Technologies() {
         ) : filteredTechList.length === 0 ? (
           <div className="text-center py-16 bg-surface/40 rounded-2xl border border-border/50 max-w-lg mx-auto">
             <Cpu className="h-10 w-10 mx-auto text-muted-foreground stroke-1" />
-            <h3 className="mt-3 text-base font-bold text-foreground">No technologies match your filter</h3>
-            <p className="mt-1 text-xs text-muted-foreground">Try selecting "All Technologies" or clearing your search.</p>
-            <button
-              onClick={() => {
-                setActiveFilter("all");
-                setSearchQuery("");
-              }}
-              className="mt-4 px-4 py-2 text-xs font-semibold rounded-lg bg-primary text-primary-foreground"
-            >
-              Reset Filters
-            </button>
+            <h3 className="mt-3 text-base font-bold text-foreground">No technologies available</h3>
+            <p className="mt-1 text-xs text-muted-foreground">Technologies will appear here once added in the admin portal.</p>
           </div>
         ) : (
           <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">

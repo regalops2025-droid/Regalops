@@ -1559,14 +1559,14 @@ function Home() {
       {/* ==================================================================== */}
       <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="text-left max-w-2xl mb-6 sm:mb-8 reveal-on-scroll">
+          <div className="text-left max-w-4xl mb-6 sm:mb-8 reveal-on-scroll">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
               Executive FAQ
             </span>
             <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               Clear Answers for Leadership
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-neutral-600">
+            <p className="mt-2 text-sm sm:text-base text-neutral-600 sm:whitespace-nowrap">
               Everything you need to know about our engagement models, IP security, and SLA guarantees.
             </p>
           </div>

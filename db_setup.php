@@ -131,11 +131,14 @@ try {
         id INT AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(255) NOT NULL,
         tag VARCHAR(255) NOT NULL,
-        image VARCHAR(255),
+        image TEXT,
         description TEXT NOT NULL,
         content LONGTEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
+    try {
+        $pdo->exec("ALTER TABLE blogs MODIFY COLUMN image TEXT");
+    } catch (Exception $e) {}
     echo "<p>Table 'blogs' checked/created.</p>";
 
     // 9. job_applications

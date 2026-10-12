@@ -28,9 +28,17 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-// Serve static uploads (from both backend/uploads and root/uploads)
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+// Serve static uploads (from both backend/uploads and root/uploads) with browser caching headers
+const staticUploadOptions = {
+  maxAge: "30d",
+  etag: true,
+  lastModified: true,
+  setHeaders: (res) => {
+    res.setHeader("Cache-Control", "public, max-age=2592000, immutable");
+  }
+};
+app.use("/uploads", express.static(path.join(__dirname, "uploads"), staticUploadOptions));
+app.use("/uploads", express.static(path.join(__dirname, "../uploads"), staticUploadOptions));
 // Return clean 404 for missing uploads so SPA route doesn't return index.html
 app.use("/uploads", (req, res) => {
   res.status(404).json({ error: "Upload not found" });
@@ -643,8 +651,10 @@ async function initDB() {
       const columnNames = columns.map(c => c.Field);
       if (columnNames.length > 0) {
         if (columnNames.includes("image_path") && !columnNames.includes("image")) {
-          await pool.query("ALTER TABLE blogs CHANGE COLUMN image_path image VARCHAR(255)");
+          await pool.query("ALTER TABLE blogs CHANGE COLUMN image_path image TEXT");
           console.log("Database Migration: Renamed 'image_path' to 'image' in 'blogs' table.");
+        } else if (columnNames.includes("image")) {
+          await pool.query("ALTER TABLE blogs MODIFY COLUMN image TEXT");
         }
         if (!columnNames.includes("tag")) {
           await pool.query("ALTER TABLE blogs ADD COLUMN tag VARCHAR(255) NOT NULL DEFAULT 'Engineering'");

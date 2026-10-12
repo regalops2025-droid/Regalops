@@ -1,5 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Upload, Image as ImageIcon, X, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Upload, Image as ImageIcon, X, Loader2, CheckCircle2, AlertCircle, Sparkles } from "lucide-react";
+import { compressImageFile } from "@/lib/image-compress";
+
+const PRESET_BANNERS = [
+  { label: "Architecture", url: "/solutions-strategy.jpg" },
+  { label: "Cloud & App Dev", url: "/solutions-app-dev.jpg" },
+  { label: "AI & Data", url: "/hero-slide-ai.jpg" },
+  { label: "Cyber Security", url: "/hero-slide-cyber.jpg" },
+  { label: "Infrastructure", url: "/hero-slide-1.jpg" },
+];
 
 interface ImageUploadFieldProps {
   label: string;
@@ -21,6 +30,7 @@ export function ImageUploadField({
   recommendedDimensions,
 }: ImageUploadFieldProps) {
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadStatusText, setUploadStatusText] = useState("Uploading image from device...");
   const [uploadError, setUploadError] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const [showUrlInput, setShowUrlInput] = useState(false);
@@ -56,18 +66,28 @@ export function ImageUploadField({
       return;
     }
 
-    // Validate size (10MB)
-    if (file.size > 10 * 1024 * 1024) {
-      setUploadError("Image file size must be less than 10MB.");
+    // Validate size (15MB max before compression)
+    if (file.size > 15 * 1024 * 1024) {
+      setUploadError("Image file size must be less than 15MB.");
       return;
     }
 
     setIsUploading(true);
     setUploadError("");
+    setUploadStatusText("Optimizing image for fast loading...");
 
     try {
+      // 1. Client-side compression to WebP (shrinks 5MB -> 100KB)
+      const optimizedFile = await compressImageFile(file, {
+        maxWidth: 1600,
+        maxHeight: 1200,
+        quality: 0.82,
+      });
+
+      setUploadStatusText("Uploading optimized image...");
+
       const formData = new FormData();
-      formData.append("image", file);
+      formData.append("image", optimizedFile);
 
       const response = await fetch("/api/upload/image", {
         method: "POST",
@@ -87,16 +107,17 @@ export function ImageUploadField({
         throw new Error("Server did not return image URL.");
       }
     } catch (err: any) {
-      console.warn("Backend upload failed, using local base64 fallback:", err);
-      // Fallback to FileReader base64 so user can still proceed seamlessly
+      console.warn("Backend upload failed, using optimized base64 fallback:", err);
+      // Fallback to FileReader base64 with optimized file so payload is small
       try {
+        const optimizedFile = await compressImageFile(file, { maxWidth: 1000, quality: 0.75 });
         const reader = new FileReader();
         reader.onload = (e) => {
           if (e.target?.result && typeof e.target.result === "string") {
             onChange(e.target.result);
           }
         };
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(optimizedFile);
       } catch (fallbackErr) {
         setUploadError(err.message || "Failed to upload image from device.");
       }
@@ -285,8 +306,8 @@ export function ImageUploadField({
               <div className="rounded-full bg-primary/10 p-3 text-primary animate-pulse">
                 <Loader2 className="h-6 w-6 animate-spin" />
               </div>
-              <p className="text-sm font-semibold text-foreground">Uploading image from device...</p>
-              <p className="text-xs text-muted-foreground">Please wait while the file is processed</p>
+              <p className="text-sm font-semibold text-foreground">{uploadStatusText}</p>
+              <p className="text-xs text-muted-foreground">Auto-compressing to lightweight modern WebP format...</p>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2.5 py-1">
@@ -311,10 +332,36 @@ export function ImageUploadField({
               )}
 
               <p className="text-[11px] text-muted-foreground/80">
-                PNG, JPG, WEBP or GIF (All aspect ratios supported cleanly)
+                PNG, JPG, WEBP or GIF (Auto-optimized for instant page loading)
               </p>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Quick Enterprise Preset Banners */}
+      {!disabled && !isUploading && (
+        <div className="pt-1">
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1.5">
+            <Sparkles className="h-3 w-3 text-primary" />
+            <span className="font-medium">Or choose an instant Regal OPs cover banner:</span>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {PRESET_BANNERS.map((preset) => (
+              <button
+                key={preset.url}
+                type="button"
+                onClick={() => onChange(preset.url)}
+                className={`inline-flex items-center gap-1 rounded-lg border px-2.5 py-1 text-[11px] font-medium transition-all cursor-pointer ${
+                  value === preset.url
+                    ? "border-primary bg-primary/10 text-primary font-semibold ring-1 ring-primary/30"
+                    : "border-border/80 bg-surface/50 text-muted-foreground hover:border-primary/40 hover:text-foreground hover:bg-secondary/60"
+                }`}
+              >
+                <span>{preset.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
       )}
 

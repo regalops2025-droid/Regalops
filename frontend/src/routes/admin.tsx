@@ -3427,6 +3427,10 @@ function AdminDashboard() {
                             <img
                               src={item.image}
                               alt={item.title}
+                              onError={(e) => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = "/solutions-strategy.jpg";
+                              }}
                               className="h-16 w-16 rounded-xl object-cover border border-border/80 shrink-0"
                             />
                           ) : (

@@ -89,10 +89,10 @@ function Login() {
   return (
     <SiteLayout>
       <section className="hero-glow min-h-[calc(100vh-5rem)] flex items-center justify-center py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-5xl overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-2xl grid grid-cols-1 lg:grid-cols-12 min-h-[580px]">
+        <div className="w-full max-w-4xl overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-2xl grid grid-cols-1 lg:grid-cols-12">
           
           {/* LEFT SIDE: Visual Showcase Image Card */}
-          <div className="lg:col-span-5 relative overflow-hidden bg-neutral-950 text-white flex flex-col justify-between p-7 sm:p-9 min-h-[360px] lg:min-h-full">
+          <div className="lg:col-span-5 relative overflow-hidden bg-neutral-950 text-white flex flex-col justify-center p-6 sm:p-8 space-y-6">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
               <img
@@ -106,23 +106,23 @@ function Login() {
 
             {/* Top Badge & Header */}
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3 py-1 backdrop-blur-md mb-4">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3 py-1 backdrop-blur-md mb-3">
                 <span className="h-2 w-2 rounded-full bg-[#a4c965] animate-pulse" />
                 <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#a4c965]">
                   Secure Gateway
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-[26px] font-extrabold text-white tracking-tight leading-tight">
                 Client Delivery <br />
                 <span className="text-[#a4c965]">& Architecture Portal</span>
               </h2>
-              <p className="mt-3 text-xs sm:text-sm text-neutral-300 leading-relaxed">
+              <p className="mt-2.5 text-xs sm:text-sm text-neutral-300 leading-relaxed text-justify">
                 Direct access to your real-time delivery dashboards, sprint velocity, infrastructure runbooks, and 24/7 dedicated engineering support tickets.
               </p>
             </div>
 
             {/* Bottom Trust & Feature Card */}
-            <div className="relative z-10 pt-5 mt-6 border-t border-white/10 space-y-2.5">
+            <div className="relative z-10 pt-4 border-t border-white/10 space-y-2">
               <div className="flex items-center gap-2.5 text-xs text-neutral-200">
                 <ShieldCheck className="h-4 w-4 text-[#a4c965] shrink-0" />
                 <span>256-Bit AES Encrypted Session</span>
@@ -139,22 +139,22 @@ function Login() {
           </div>
 
           {/* RIGHT SIDE: Login Form */}
-          <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-between bg-card">
+          <div className="lg:col-span-7 p-6 sm:p-8 lg:p-9 flex flex-col justify-center bg-card">
             <div>
-              <div className="mb-6">
-                <span className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
+              <div className="mb-4">
+                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
                   Regal OPs Portal
                 </span>
-                <h1 className="mt-1.5 text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+                <h1 className="mt-1 text-2xl sm:text-[26px] font-bold tracking-tight text-foreground">
                   Client portal login
                 </h1>
-                <p className="mt-1.5 text-sm text-muted-foreground">
+                <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
                   Delivery dashboards, runbooks and support tickets in one place.
                 </p>
               </div>
 
               {status === "success" && (
-                <div className="mb-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 flex items-center gap-3">
+                <div className="mb-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 p-3.5 text-sm text-emerald-600 flex items-center gap-3">
                   <CheckCircle2 className="h-5 w-5 shrink-0" />
                   <div>
                     Welcome back, <strong>{user?.name || "Client"}</strong>! Signing in to your portal...
@@ -163,15 +163,15 @@ function Login() {
               )}
 
               {status !== "success" && (
-                <form className="space-y-5" onSubmit={handleSubmit}>
+                <form className="space-y-3.5" onSubmit={handleSubmit}>
                   {status === "error" && (
-                    <div className="rounded-xl bg-destructive/10 border border-destructive/30 p-3.5 text-sm text-destructive">
+                    <div className="rounded-xl bg-destructive/10 border border-destructive/30 p-3 text-sm text-destructive">
                       {errorMsg}
                     </div>
                   )}
 
                   <div>
-                    <label className="block text-sm font-semibold text-foreground mb-1.5">
+                    <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1">
                       Work email
                     </label>
                     <div className="relative">
@@ -180,7 +180,7 @@ function Login() {
                       </div>
                       <input
                         type="email"
-                        className="w-full rounded-xl border border-input bg-background pl-10 pr-4 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary/20"
+                        className="w-full rounded-xl border border-input bg-background pl-10 pr-4 py-2 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary/20"
                         placeholder="you@company.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -191,8 +191,8 @@ function Login() {
                   </div>
 
                   <div>
-                    <div className="flex items-center justify-between mb-1.5">
-                      <label className="block text-sm font-semibold text-foreground">
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="block text-xs sm:text-sm font-semibold text-foreground">
                         Password
                       </label>
                       <Link
@@ -208,7 +208,7 @@ function Login() {
                       </div>
                       <input
                         type={showPassword ? "text" : "password"}
-                        className="w-full rounded-xl border border-input bg-background pl-10 pr-10 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary/20"
+                        className="w-full rounded-xl border border-input bg-background pl-10 pr-10 py-2 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary/20"
                         placeholder="••••••••"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -222,7 +222,7 @@ function Login() {
                         title={showPassword ? "Hide password" : "Show password"}
                         aria-label={showPassword ? "Hide password" : "Show password"}
                       >
-                        <span className="p-1.5 rounded-lg hover:bg-muted/80 flex items-center justify-center transition-colors">
+                        <span className="p-1 rounded-lg hover:bg-muted/80 flex items-center justify-center transition-colors">
                           {showPassword ? (
                             <EyeOff className="h-4 w-4 text-primary" />
                           ) : (
@@ -236,7 +236,7 @@ function Login() {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="w-full rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2 mt-6"
+                    className="w-full rounded-xl bg-primary px-6 py-2.5 sm:py-3 text-sm font-semibold text-primary-foreground transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2 mt-4"
                   >
                     {status === "loading" ? (
                       "Signing in..."
@@ -249,15 +249,15 @@ function Login() {
                   </button>
                 </form>
               )}
-            </div>
 
-            <div className="mt-8 pt-5 border-t border-border/60 text-center">
-              <p className="text-xs text-muted-foreground">
-                Need access?{" "}
-                <Link to="/contact" className="font-semibold text-primary hover:underline">
-                  Contact your delivery lead
-                </Link>
-              </p>
+              <div className="mt-4 pt-3.5 border-t border-border/60 text-center">
+                <p className="text-xs text-muted-foreground">
+                  Need access?{" "}
+                  <Link to="/contact" className="font-semibold text-primary hover:underline">
+                    Contact your delivery lead
+                  </Link>
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -335,16 +335,21 @@ export function SiteFooter() {
         </div>
 
         {/* ================================================================== */}
-        {/* 3. BOTTOM BAR: Copyright, Legal, Social Icons, Scroll to Top       */}
+        {/* 3. BOTTOM BAR: Copyright, Centered Social Icons, Legal & Scroll     */}
         {/* ================================================================== */}
-        <div className="mt-6 pt-4 border-t border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-6 pt-4 border-t border-white/[0.08] flex flex-col lg:grid lg:grid-cols-3 items-center justify-between gap-4">
           {/* Copyright */}
-          <div className="text-xs text-neutral-400">
+          <div className="text-xs text-neutral-400 text-center lg:text-left order-3 lg:order-1">
             &copy; {new Date().getFullYear()} Regal OPs. All rights reserved.
           </div>
 
-          {/* Legal Links */}
-          <div className="flex items-center gap-3 text-xs text-neutral-400">
+          {/* Original Social Links Centered */}
+          <div className="flex items-center justify-center order-1 lg:order-2 w-full">
+            <FooterSocialIcons />
+          </div>
+
+          {/* Legal Links & Scroll to Top Button */}
+          <div className="flex items-center gap-3 text-xs text-neutral-400 justify-center lg:justify-end order-2 lg:order-3 pr-0 sm:pr-8 lg:pr-14">
             <Link to="/about" className="hover:text-white transition-colors">
               Privacy Policy
             </Link>
@@ -356,11 +361,6 @@ export function SiteFooter() {
             <Link to="/about" className="hover:text-white transition-colors">
               Sitemap
             </Link>
-          </div>
-
-          {/* Original Social Links & Floating Scroll-to-Top Button */}
-          <div className="flex items-center gap-3">
-            <FooterSocialIcons />
 
             {/* Scroll to Top Circular Button */}
             <button

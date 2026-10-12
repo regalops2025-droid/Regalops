@@ -139,7 +139,7 @@ export const OFFICIAL_SOCIAL_LINKS: SocialLinkItem[] = [
 
 export function FooterSocialIcons() {
   return (
-    <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap">
+    <div className="flex items-center justify-center gap-2 sm:gap-2.5 flex-wrap">
       {OFFICIAL_SOCIAL_LINKS.map((item) => {
         const Icon = item.icon;
         return (
@@ -150,9 +150,9 @@ export function FooterSocialIcons() {
             rel="noopener noreferrer"
             aria-label={item.name}
             title={item.name}
-            className={`group relative flex h-8 w-8 sm:h-8.5 sm:w-8.5 items-center justify-center rounded-full ${item.bgColor} ${item.hoverBg} ${item.textColor} shadow-md transition-all duration-300 hover:scale-115 active:scale-95 ${item.glowColor}`}
+            className={`group relative flex h-8.5 w-8.5 sm:h-9 sm:w-9 items-center justify-center rounded-full ${item.bgColor} ${item.hoverBg} ${item.textColor} shadow-md transition-all duration-300 hover:scale-115 active:scale-95 ${item.glowColor}`}
           >
-            <Icon className="h-4 w-4" />
+            <Icon className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
           </a>
         );
       })}

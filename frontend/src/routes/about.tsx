@@ -335,18 +335,16 @@ function About() {
         </div>
 
         {/* Section Intro: "OUR PURPOSE" (Directly under the banner) */}
-        <div className="relative bg-white pt-8 pb-4 text-center">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6">
-            <div className="flex items-center justify-center gap-2.5 text-emerald-600 text-xs font-bold tracking-[0.22em] uppercase mb-3">
-              <span className="w-5 h-[2px] bg-emerald-500" />
+        <div className="relative bg-white pt-8 pb-5 text-left">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-start gap-2.5 text-[#555d25] text-xs font-bold tracking-[0.22em] uppercase mb-2.5">
+              <span className="w-5 h-[2px] bg-[#555d25]" />
               <span>OUR PURPOSE</span>
-              <span className="w-5 h-[2px] bg-emerald-500" />
             </div>
-            <h2 className="text-[20px] xs:text-[22px] sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] tracking-tight leading-snug">
-              <span className="block sm:inline">Building Smarter, Stronger</span>{" "}
-              <span className="block sm:inline">and More Resilient Businesses</span>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#0F172A] tracking-tight text-left leading-snug">
+              Building Smarter, Stronger and More Resilient Businesses
             </h2>
-            <p className="mt-3.5 text-sm sm:text-base text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-2 text-sm sm:text-base text-neutral-600 max-w-3xl text-left leading-relaxed">
               We combine deep industry knowledge, advanced technologies and a client-first approach to create sustainable value for organizations across the globe.
             </p>
           </div>

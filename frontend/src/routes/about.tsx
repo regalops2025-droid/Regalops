@@ -447,62 +447,70 @@ function About() {
       </section>
 
       {/* ==================================================================== */}
-      {/* 3. OUR PEOPLE (Architectural Card-Free Editorial Pillars - COMPACT)  */}
+      {/* 3. OUR PEOPLE (Luxury Glassmorphism with Panoramic Background Image)  */}
       {/* ==================================================================== */}
-      <section className="relative bg-white dark:bg-slate-950 py-6 sm:py-8 border-b border-neutral-200/70 dark:border-slate-800/80 overflow-hidden">
-        {/* Ambient subtle light glow behind the pillars */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[220px] bg-emerald-500/5 dark:bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none" />
+      <section className="relative py-12 sm:py-16 border-b border-neutral-800 overflow-hidden bg-neutral-950 text-white">
+        {/* Panoramic High-Res Background Image with Vignette & Overlays */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/our-people-bg.jpg"
+            alt="Regal OPs Global Culture and Visionary Engineering Team"
+            className="h-full w-full object-cover object-center brightness-[0.42] contrast-[1.12] scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#060907]/90 via-[#060907]/70 to-[#060907]/95" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#060907]/80 via-transparent to-[#060907]/80 pointer-events-none" />
+        </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 dark:border-emerald-800/60 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#136a3e] dark:text-emerald-400">
-              <Sparkles className="h-3 w-3" /> Culture &amp; Talent Excellence
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/60 backdrop-blur-md px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-[#a4c965] shadow-md">
+              <Sparkles className="h-3 w-3 text-[#f3cd67]" /> Culture &amp; Talent Excellence
             </span>
-            <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-900 dark:text-white tracking-tight">
-              Our People
+            <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+              Our <span className="text-[#f3cd67] drop-shadow-[0_2px_12px_rgba(243,205,103,0.3)]">People</span>
             </h2>
-            <div className="w-10 h-0.5 bg-gradient-to-r from-[#136a3e] to-amber-500 rounded-full mx-auto mt-2 mb-2" />
-            <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl mx-auto">
+            <div className="w-12 h-0.5 bg-gradient-to-r from-[#a4c965] to-[#f3cd67] rounded-full mx-auto mt-2.5 mb-3" />
+            <p className="text-sm sm:text-base text-neutral-200 leading-relaxed max-w-2xl mx-auto text-justify sm:text-center">
               We nurture a truly diverse and talented pool of people who work with a
               customer-centric attitude to deliver phenomenal results.
             </p>
           </div>
 
-          {/* Open Architectural 3-Column Pillar Presentation (NO CARDS - COMPACT HEIGHT) */}
-          <div className="mt-5 sm:mt-6 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80 dark:divide-slate-800">
+          {/* 3-Column Luxury Glassmorphism Pillar Presentation */}
+          <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
             {peoplePillars.map((p, idx) => {
               const Icon = p.icon;
               return (
                 <div
                   key={p.title}
-                  className="group relative py-5 sm:py-6 px-5 lg:px-8 flex flex-col justify-between transition-colors duration-300"
+                  className="group relative rounded-2xl border border-white/15 hover:border-[#a4c965]/50 bg-black/55 hover:bg-black/75 backdrop-blur-md p-6 sm:p-7 flex flex-col justify-between shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.4)]"
                 >
                   <div>
                     {/* Top row: Floating luminous icon + sleek mono index */}
                     <div className="flex items-center justify-between mb-4">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/10 via-teal-500/10 to-amber-500/10 text-[#136a3e] dark:text-emerald-400 border border-emerald-500/20 shadow-xs group-hover:scale-105 group-hover:bg-[#136a3e] group-hover:text-white transition-all duration-300">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-[#a4c965] border border-white/15 shadow-inner group-hover:scale-105 group-hover:bg-[#555d25] group-hover:text-white transition-all duration-300">
                         <Icon className="h-5 w-5 transition-colors" />
                       </div>
-                      <span className="text-2xl sm:text-3xl font-mono font-black text-slate-200 dark:text-slate-800 group-hover:text-emerald-600/30 dark:group-hover:text-emerald-400/30 transition-colors select-none">
+                      <span className="text-2xl sm:text-3xl font-mono font-black text-white/25 group-hover:text-[#a4c965]/50 transition-colors select-none">
                         0{idx + 1}
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-lg sm:text-xl font-extrabold text-neutral-900 dark:text-white tracking-tight group-hover:text-[#136a3e] dark:group-hover:text-emerald-400 transition-colors">
+                    <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-tight group-hover:text-[#f3cd67] transition-colors">
                       {p.title}
                     </h3>
 
-                    {/* Description */}
-                    <p className="mt-2 text-xs sm:text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+                    {/* Description - Justified */}
+                    <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-neutral-300 text-justify">
                       {p.desc}
                     </p>
                   </div>
 
                   {/* Bottom expanding gradient accent line */}
-                  <div className="mt-5 pt-3.5 border-t border-neutral-100 dark:border-slate-800/60 flex items-center gap-2.5">
-                    <div className="h-0.5 w-6 rounded-full bg-gradient-to-r from-[#136a3e] to-amber-500 group-hover:w-16 transition-all duration-300" />
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 group-hover:text-[#136a3e] dark:group-hover:text-emerald-400 transition-colors">
+                  <div className="mt-6 pt-4 border-t border-white/10 flex items-center gap-2.5">
+                    <div className="h-0.5 w-6 rounded-full bg-gradient-to-r from-[#a4c965] to-[#f3cd67] group-hover:w-16 transition-all duration-300" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#a4c965]/80 group-hover:text-[#a4c965] transition-colors">
                       Core Pillar
                     </span>
                   </div>

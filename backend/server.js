@@ -707,10 +707,16 @@ app.post("/api/contact", async (req, res) => {
     return res.status(400).json({ error: "Full name, email, mobile, service, and comments are required." });
   }
 
+  const cleanMobile = String(mobile).replace(/\D/g, "").slice(-10);
+  if (!/^[6-9]\d{9}$/.test(cleanMobile)) {
+    return res.status(400).json({ error: "Invalid mobile number. Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9." });
+  }
+  const formattedMobile = `+91 ${cleanMobile}`;
+
   try {
     await pool.query(
       "INSERT INTO contact_enquiries (first_name, last_name, email, mobile, city, state, country, zip_code, service, comments) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      [fName, lName, email, mobile, city || null, state || null, country || null, zip_code || null, service, comments]
+      [fName, lName, email, formattedMobile, city || null, state || null, country || null, zip_code || null, service, comments]
     );
     res.status(201).json({ message: "Enquiry received successfully." });
   } catch (error) {
@@ -829,6 +835,15 @@ app.post("/api/jobs/:id/apply", upload.single("cv"), async (req, res) => {
     return res.status(400).json({ error: "Full name, email, mobile, and job title are required." });
   }
 
+  const cleanMobile = String(mobile).replace(/\D/g, "").slice(-10);
+  if (!/^[6-9]\d{9}$/.test(cleanMobile)) {
+    if (req.file) {
+      fs.unlinkSync(req.file.path);
+    }
+    return res.status(400).json({ error: "Invalid mobile number. Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9." });
+  }
+  const formattedMobile = `+91 ${cleanMobile}`;
+
   if (!req.file) {
     return res.status(400).json({ error: "PDF Resume/CV is required." });
   }
@@ -838,7 +853,7 @@ app.post("/api/jobs/:id/apply", upload.single("cv"), async (req, res) => {
   try {
     await pool.query(
       "INSERT INTO job_applications (job_id, job_title, first_name, last_name, email, mobile, cv_path) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [parseInt(id), job_title, fName, lName, email, mobile, cv_path]
+      [parseInt(id), job_title, fName, lName, email, formattedMobile, cv_path]
     );
     res.status(201).json({ message: "Job application submitted successfully!" });
   } catch (error) {
@@ -1434,82 +1449,6 @@ app.delete("/api/industries/:id", verifyToken, async (req, res) => {
   }
 });
 
-// --- SERVICES ENDPOINTS ---
-
-// GET all services
-app.get("/api/services", async (req, res) => {
-  try {
-    const [rows] = await pool.query("SELECT * FROM services ORDER BY id ASC");
-    res.json(rows);
-  } catch (error) {
-    console.error("Error fetching services:", error);
-    res.status(500).json({ error: "Failed to fetch services." });
-  }
-});
-
-// POST (create) a new service
-app.post("/api/services", verifyToken, async (req, res) => {
-  const { title, description, icon, link } = req.body;
-  if (!title || !description) {
-    return res.status(400).json({ error: "Title and description are required." });
-  }
-
-  try {
-    const [result] = await pool.query(
-      "INSERT INTO services (title, description, icon, link) VALUES (?, ?, ?, ?)",
-      [title.trim(), description.trim(), (icon || "tech-consulting").trim(), (link || "/solutions").trim()]
-    );
-    res.status(201).json({
-      id: result.insertId,
-      title: title.trim(),
-      description: description.trim(),
-      icon: (icon || "tech-consulting").trim(),
-      link: (link || "/solutions").trim()
-    });
-  } catch (error) {
-    console.error("Error creating service:", error);
-    res.status(500).json({ error: "Failed to create service." });
-  }
-});
-
-// PUT (update) a service by ID
-app.put("/api/services/:id", verifyToken, async (req, res) => {
-  const { id } = req.params;
-  const { title, description, icon, link } = req.body;
-
-  if (!title || !description) {
-    return res.status(400).json({ error: "Title and description are required." });
-  }
-
-  try {
-    await pool.query(
-      "UPDATE services SET title = ?, description = ?, icon = ?, link = ? WHERE id = ?",
-      [title.trim(), description.trim(), (icon || "tech-consulting").trim(), (link || "/solutions").trim(), id]
-    );
-    res.json({
-      id: parseInt(id),
-      title: title.trim(),
-      description: description.trim(),
-      icon: (icon || "tech-consulting").trim(),
-      link: (link || "/solutions").trim()
-    });
-  } catch (error) {
-    console.error("Error updating service:", error);
-    res.status(500).json({ error: "Failed to update service." });
-  }
-});
-
-// DELETE a service by ID
-app.delete("/api/services/:id", verifyToken, async (req, res) => {
-  const { id } = req.params;
-  try {
-    await pool.query("DELETE FROM services WHERE id = ?", [id]);
-    res.json({ message: "Service deleted successfully." });
-  } catch (error) {
-    console.error("Error deleting service:", error);
-    res.status(500).json({ error: "Failed to delete service." });
-  }
-});
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {

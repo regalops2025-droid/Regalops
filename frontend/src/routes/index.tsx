@@ -1145,54 +1145,109 @@ function Home() {
           </div>
         </div>
 
-        {/* AUTO-SCROLLING MARQUEE FLOW */}
-        <div className="mt-3 sm:mt-4 relative w-full overflow-hidden group py-1 reveal-scale delay-100">
-          {/* Subtle Gradient Fade Masks on Edges */}
-          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
+        {/* SERVICES DISPLAY: Responsive Grid (No Duplicates) when <= 4 services, Marquee when 5+ services */}
+        {displayServices.length <= 4 ? (
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6">
+            <div
+              className={`grid gap-5 sm:gap-6 justify-center ${
+                displayServices.length === 1
+                  ? "grid-cols-1 max-w-sm mx-auto"
+                  : displayServices.length === 2
+                    ? "grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto"
+                    : displayServices.length === 3
+                      ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto"
+                      : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto"
+              }`}
+            >
+              {displayServices.map((service, idx) => {
+                const iconElement =
+                  service.icon && typeof service.icon !== "string"
+                    ? service.icon
+                    : renderServiceIcon(service.icon, service.title);
+                const title = service.title;
+                const desc = service.description || service.desc;
+                const link = service.link || "/solutions";
 
-          {/* Seamless Infinite Marquee Track with Pause on Hover */}
-          <div className="flex gap-5 w-max py-2 px-4 transition-all duration-300 animate-marquee-services hover:[animation-play-state:paused]">
-            {[...displayServices, ...displayServices].map((service, idx) => {
-              const iconElement =
-                service.icon && typeof service.icon !== "string"
-                  ? service.icon
-                  : renderServiceIcon(service.icon, service.title);
-              const title = service.title;
-              const desc = service.description || service.desc;
-              const link = service.link || "/solutions";
+                return (
+                  <Link
+                    key={`${service.id || "srv"}-${idx}`}
+                    to={link}
+                    className="group/card flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-6 w-full transition-all duration-300 hover:-translate-y-2 hover:border-[#555d25]/60 hover:shadow-[0_16px_35px_rgba(85,93,37,0.12)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer select-none"
+                  >
+                    {/* Vector Icon */}
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50/80 group-hover/card:bg-[#fdfaf2] transition-colors duration-300">
+                      {iconElement}
+                    </div>
 
-              return (
-                <Link
-                  key={`${service.id || "srv"}-${idx}`}
-                  to={link}
-                  className="group/card flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-6 w-[285px] sm:w-[320px] shrink-0 transition-all duration-300 hover:-translate-y-2 hover:border-[#555d25]/50/60 hover:shadow-[0_16px_35px_rgba(85,93,37,0.12)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer select-none"
-                >
-                  {/* Vector Icon */}
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50/80 group-hover/card:bg-[#fdfaf2] transition-colors duration-300">
-                    {iconElement}
-                  </div>
+                    {/* Title */}
+                    <h3 className="mt-4 text-base sm:text-[17px] font-bold text-neutral-900 group-hover/card:text-sky-700 transition-colors leading-snug">
+                      {title}
+                    </h3>
 
-                  {/* Title */}
-                  <h3 className="mt-4 text-base sm:text-[17px] font-bold text-neutral-900 group-hover/card:text-sky-700 transition-colors leading-snug">
-                    {title}
-                  </h3>
+                    {/* Description */}
+                    <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-neutral-500 line-clamp-3">
+                      {desc}
+                    </p>
 
-                  {/* Description */}
-                  <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-neutral-500 line-clamp-3">
-                    {desc}
-                  </p>
-
-                  {/* Bottom Explore Link */}
-                  <div className="mt-auto pt-4 flex items-center gap-1.5 text-xs font-semibold text-[#555d25] group-hover/card:text-[#464d1e]">
-                    <span>Explore Practice</span>
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/card:translate-x-1" />
-                  </div>
-                </Link>
-              );
-            })}
+                    {/* Bottom Explore Link */}
+                    <div className="mt-auto pt-4 flex items-center gap-1.5 text-xs font-semibold text-[#555d25] group-hover/card:text-[#464d1e]">
+                      <span>Explore Practice</span>
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/card:translate-x-1" />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="mt-3 sm:mt-4 relative w-full overflow-hidden group py-1 reveal-scale delay-100">
+            {/* Subtle Gradient Fade Masks on Edges */}
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
+
+            {/* Seamless Infinite Marquee Track with Pause on Hover */}
+            <div className="flex gap-5 w-max py-2 px-4 transition-all duration-300 animate-marquee-services hover:[animation-play-state:paused]">
+              {[...displayServices, ...displayServices].map((service, idx) => {
+                const iconElement =
+                  service.icon && typeof service.icon !== "string"
+                    ? service.icon
+                    : renderServiceIcon(service.icon, service.title);
+                const title = service.title;
+                const desc = service.description || service.desc;
+                const link = service.link || "/solutions";
+
+                return (
+                  <Link
+                    key={`${service.id || "srv"}-${idx}`}
+                    to={link}
+                    className="group/card flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-6 w-[285px] sm:w-[320px] shrink-0 transition-all duration-300 hover:-translate-y-2 hover:border-[#555d25]/60 hover:shadow-[0_16px_35px_rgba(85,93,37,0.12)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer select-none"
+                  >
+                    {/* Vector Icon */}
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50/80 group-hover/card:bg-[#fdfaf2] transition-colors duration-300">
+                      {iconElement}
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="mt-4 text-base sm:text-[17px] font-bold text-neutral-900 group-hover/card:text-sky-700 transition-colors leading-snug">
+                      {title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-neutral-500 line-clamp-3">
+                      {desc}
+                    </p>
+
+                    {/* Bottom Explore Link */}
+                    <div className="mt-auto pt-4 flex items-center gap-1.5 text-xs font-semibold text-[#555d25] group-hover/card:text-[#464d1e]">
+                      <span>Explore Practice</span>
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/card:translate-x-1" />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Bottom Explore CTA Bar */}
         <div className="mt-3 sm:mt-4 text-center">

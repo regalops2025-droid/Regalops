@@ -42,6 +42,8 @@ function Contact() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
+  const [mobileError, setMobileError] = useState("");
+  const [mobileTouched, setMobileTouched] = useState(false);
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
@@ -52,10 +54,61 @@ function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
+  // Indian mobile validation: starts with 6, 7, 8, or 9 and strictly 10 digits
+  const validateMobile = (value: string): string => {
+    if (!value || !value.trim()) {
+      return "Mobile number is required";
+    }
+    const clean = value.replace(/\D/g, "");
+    if (clean.length === 0) {
+      return "Mobile number is required";
+    }
+    if (!/^[6-9]/.test(clean)) {
+      return "Must start with 6, 7, 8, or 9 (cannot start with 0, 1, 2, 3, 4, 5)";
+    }
+    if (clean.length < 10) {
+      return `Must be exactly 10 digits (${10 - clean.length} more needed)`;
+    }
+    if (clean.length > 10) {
+      return "Must not exceed 10 digits";
+    }
+    return "";
+  };
+
+  const handleMobileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let raw = e.target.value.replace(/\D/g, "");
+    // If user pasted with country code +91 (12 digits), strip leading 91
+    if (raw.length === 12 && raw.startsWith("91")) {
+      raw = raw.slice(2);
+    } else if (raw.length === 11 && raw.startsWith("0")) {
+      raw = raw.slice(1);
+    }
+    const clean = raw.slice(0, 10);
+    setMobile(clean);
+
+    if (mobileTouched || clean.length > 0) {
+      setMobileError(validateMobile(clean));
+    }
+  };
+
+  const handleMobileBlur = () => {
+    setMobileTouched(true);
+    setMobileError(validateMobile(mobile));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
     setErrorMsg("");
+
+    const mobErr = validateMobile(mobile);
+    if (mobErr) {
+      setMobileTouched(true);
+      setMobileError(mobErr);
+      setStatus("error");
+      setErrorMsg(mobErr);
+      return;
+    }
 
     const nameParts = fullName.trim().split(/\s+/);
     const firstName = nameParts[0] || fullName.trim();
@@ -71,7 +124,7 @@ function Contact() {
         formData.append("first_name", firstName);
         formData.append("last_name", lastName);
         formData.append("email", email);
-        formData.append("mobile", mobile);
+        formData.append("mobile", `+91 ${mobile}`);
         formData.append("job_title", jobTitle);
         formData.append("cv", cvFile);
 
@@ -95,7 +148,7 @@ function Contact() {
             first_name: firstName,
             last_name: lastName,
             email,
-            mobile,
+            mobile: `+91 ${mobile}`,
             city,
             state,
             country,
@@ -114,6 +167,8 @@ function Contact() {
       setFullName("");
       setEmail("");
       setMobile("");
+      setMobileError("");
+      setMobileTouched(false);
       setCity("");
       setState("");
       setCountry("");
@@ -201,14 +256,45 @@ function Contact() {
               <div className="grid gap-6 sm:grid-cols-2">
                 <label className="block text-sm font-medium text-foreground">
                   Mobile*
-                  <input
-                    className={field}
-                    placeholder="+91 98000 00000"
-                    value={mobile}
-                    onChange={(e) => setMobile(e.target.value)}
-                    required
-                    disabled={status === "loading"}
-                  />
+                  <div
+                    className={`relative mt-1.5 flex rounded-xl border bg-background transition-all overflow-hidden ${
+                      mobileTouched && mobileError
+                        ? "border-rose-500 focus-within:border-rose-500 ring-1 ring-rose-500/20"
+                        : mobile.length === 10 && !mobileError
+                          ? "border-emerald-500/70 focus-within:border-emerald-500"
+                          : "border-input focus-within:border-primary"
+                    }`}
+                  >
+                    <span className="inline-flex items-center px-3.5 text-xs font-semibold text-muted-foreground bg-secondary/60 border-r border-border select-none shrink-0">
+                      +91
+                    </span>
+                    <input
+                      type="tel"
+                      inputMode="numeric"
+                      maxLength={10}
+                      pattern="[6-9][0-9]{9}"
+                      className="w-full bg-transparent px-3.5 py-2.5 text-sm outline-none placeholder:text-muted-foreground text-foreground"
+                      placeholder="98765 43210"
+                      value={mobile}
+                      onChange={handleMobileChange}
+                      onBlur={handleMobileBlur}
+                      required
+                      disabled={status === "loading"}
+                    />
+                  </div>
+                  {mobileTouched && mobileError ? (
+                    <p className="mt-1.5 text-xs font-medium text-rose-500 animate-in fade-in">
+                      {mobileError}
+                    </p>
+                  ) : mobile.length === 10 && !mobileError ? (
+                    <p className="mt-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400 animate-in fade-in">
+                      ✓ Valid 10-digit Indian mobile number
+                    </p>
+                  ) : (
+                    <p className="mt-1 text-[11px] text-muted-foreground">
+                      10 digits starting with 6, 7, 8, or 9
+                    </p>
+                  )}
                 </label>
 
                 <div>
@@ -236,14 +322,45 @@ function Contact() {
                 <div className="grid gap-6 sm:grid-cols-2">
                   <label className="block text-sm font-medium text-foreground">
                     Mobile*
-                    <input
-                      className={field}
-                      placeholder="+91 98000 00000"
-                      value={mobile}
-                      onChange={(e) => setMobile(e.target.value)}
-                      required
-                      disabled={status === "loading"}
-                    />
+                    <div
+                      className={`relative mt-1.5 flex rounded-xl border bg-background transition-all overflow-hidden ${
+                        mobileTouched && mobileError
+                          ? "border-rose-500 focus-within:border-rose-500 ring-1 ring-rose-500/20"
+                          : mobile.length === 10 && !mobileError
+                            ? "border-emerald-500/70 focus-within:border-emerald-500"
+                            : "border-input focus-within:border-primary"
+                      }`}
+                    >
+                      <span className="inline-flex items-center px-3.5 text-xs font-semibold text-muted-foreground bg-secondary/60 border-r border-border select-none shrink-0">
+                        +91
+                      </span>
+                      <input
+                        type="tel"
+                        inputMode="numeric"
+                        maxLength={10}
+                        pattern="[6-9][0-9]{9}"
+                        className="w-full bg-transparent px-3.5 py-2.5 text-sm outline-none placeholder:text-muted-foreground text-foreground"
+                        placeholder="98765 43210"
+                        value={mobile}
+                        onChange={handleMobileChange}
+                        onBlur={handleMobileBlur}
+                        required
+                        disabled={status === "loading"}
+                      />
+                    </div>
+                    {mobileTouched && mobileError ? (
+                      <p className="mt-1.5 text-xs font-medium text-rose-500 animate-in fade-in">
+                        {mobileError}
+                      </p>
+                    ) : mobile.length === 10 && !mobileError ? (
+                      <p className="mt-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400 animate-in fade-in">
+                        ✓ Valid 10-digit Indian mobile number
+                      </p>
+                    ) : (
+                      <p className="mt-1 text-[11px] text-muted-foreground">
+                        10 digits starting with 6, 7, 8, or 9
+                      </p>
+                    )}
                   </label>
 
                   <label className="block text-sm font-medium text-foreground">

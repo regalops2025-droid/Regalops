@@ -260,7 +260,7 @@ export function SiteHeader() {
         {/* Floating Pill Main Navigation Bar (Calculated with ample internal clearance to NEVER overflow) */}
         <div className="w-full px-2 sm:px-4 lg:px-6 py-2 sm:py-2.5 transition-all duration-300">
           <div
-            className={`mx-auto max-w-[1440px] rounded-full border border-neutral-200/90 bg-white/95 backdrop-blur-md px-3.5 sm:px-5 xl:px-6 2xl:px-8 py-1.5 sm:py-2 flex items-center justify-between gap-1.5 sm:gap-2 xl:gap-3 transition-all duration-300 min-h-[66px] sm:min-h-[72px] xl:min-h-[76px] ${
+            className={`mx-auto max-w-[1440px] rounded-full border border-neutral-200/90 bg-white/95 backdrop-blur-md px-3.5 sm:px-5 xl:px-6 2xl:px-8 py-1 sm:py-1.5 flex items-center justify-between gap-1.5 sm:gap-2 xl:gap-3 transition-all duration-300 h-[66px] sm:h-[72px] xl:h-[76px] ${
               scrolled
                 ? "shadow-[0_8px_30px_rgba(0,0,0,0.08)] border-neutral-300/80"
                 : "shadow-[0_4px_22px_rgba(0,0,0,0.04)]"
@@ -271,13 +271,13 @@ export function SiteHeader() {
               <img
                 src="/logo.png"
                 alt="Regal OPs Logo"
-                className="h-10 sm:h-12 xl:h-13 2xl:h-14 w-auto object-contain shrink-0 transition-transform duration-200 group-hover:scale-105"
+                className="h-12 sm:h-14 xl:h-[58px] 2xl:h-[62px] w-auto object-contain shrink-0 transition-transform duration-200 group-hover:scale-105"
               />
               <div className="flex flex-col shrink-0 justify-center">
-                <span className="font-display text-[18px] sm:text-[20px] xl:text-[22px] 2xl:text-[24px] font-bold tracking-tight text-neutral-900 leading-none whitespace-nowrap">
+                <span className="font-display text-[18.5px] sm:text-[20.5px] xl:text-[22.5px] 2xl:text-[24.5px] font-bold tracking-tight text-neutral-900 leading-none whitespace-nowrap">
                   Regal OPs
                 </span>
-                <span className="text-[7.5px] sm:text-[8.5px] xl:text-[9.5px] 2xl:text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 mt-0.5 sm:mt-1 leading-none whitespace-nowrap">
+                <span className="text-[7.5px] sm:text-[8.5px] xl:text-[9.5px] 2xl:text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 mt-1 leading-none whitespace-nowrap">
                   CONSULT | BUILD | DEPLOY
                 </span>
               </div>

@@ -255,10 +255,10 @@ export function SiteHeader() {
         {/* Floating Pill Main Navigation Bar (Calculated with ample internal clearance to NEVER overflow) */}
         <div className="w-full px-2 sm:px-4 lg:px-6 py-2 sm:py-2.5 transition-all duration-300">
           <div
-            className={`mx-auto max-w-[1440px] rounded-full border border-neutral-200/90 bg-white/95 backdrop-blur-md px-3.5 sm:px-5 xl:px-6 2xl:px-8 py-1 sm:py-1.5 flex items-center justify-between gap-1.5 sm:gap-2 xl:gap-3 transition-all duration-300 h-[66px] sm:h-[72px] xl:h-[76px] ${
+            className={`mx-auto max-w-[1440px] rounded-full border bg-white/95 backdrop-blur-md px-3.5 sm:px-5 xl:px-6 2xl:px-8 py-1 sm:py-1.5 flex items-center justify-between gap-1.5 sm:gap-2 xl:gap-3 transition-all duration-300 h-[66px] sm:h-[72px] xl:h-[76px] ${
               scrolled
-                ? "shadow-[0_8px_30px_rgba(0,0,0,0.08)] border-neutral-300/80"
-                : "shadow-[0_4px_22px_rgba(0,0,0,0.04)]"
+                ? "shadow-[0_12px_36px_rgba(0,0,0,0.12)] border-neutral-300/90 bg-white/98"
+                : "shadow-[0_4px_22px_rgba(0,0,0,0.04)] border-neutral-200/90"
             }`}
           >
             {/* Logo Section */}

@@ -10,6 +10,10 @@ import {
   Zap,
   Activity,
   Layers,
+  Play,
+  Pause,
+  LayoutGrid,
+  Waves,
 } from "lucide-react";
 import {
   ReactLogo,
@@ -332,9 +336,14 @@ const TOOLCHAIN_ITEMS = [
   { name: "Redis", category: "Data", Logo: RedisLogo, desc: "Sub-millisecond In-Memory Cache" },
 ];
 
+const toolchainRow1 = TOOLCHAIN_ITEMS.slice(0, 10);
+const toolchainRow2 = TOOLCHAIN_ITEMS.slice(10);
+
 function Technologies() {
   const [techList, setTechList] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [toolchainViewMode, setToolchainViewMode] = useState<"stream" | "grid">("stream");
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     fetch("/api/technologies")
@@ -513,71 +522,222 @@ function Technologies() {
       </Section>
 
       {/* ==================================================================== */}
-      {/* 4. "FULL TOOLCHAIN" SECTION (Re-architected as Brand Logo Matrix)     */}
+      {/* 4. "FULL TOOLCHAIN" SECTION (Dual-Track Infinite Scrolling Effect)    */}
       {/* ==================================================================== */}
-      <section className="border-t border-border bg-gradient-to-b from-surface via-background to-surface py-6 sm:py-8">
+      <section className="border-t border-border bg-gradient-to-b from-surface via-background to-surface py-8 sm:py-12 overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-primary">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-primary shadow-xs">
                 <Layers className="h-3.5 w-3.5" />
-                Comprehensive Matrix
+                Continuous Toolchain Telemetry
               </div>
-              <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+              <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
                 Full Production Toolchain
               </h2>
-              <p className="mt-3 text-sm sm:text-base text-muted-foreground max-w-2xl leading-relaxed">
+              <p className="mt-2 text-sm sm:text-base text-muted-foreground max-w-2xl leading-relaxed">
                 The certified frameworks, runtimes, clouds, and databases our architects operate in enterprise production environments.
               </p>
             </div>
 
-            {/* Contact / Stack Consultation CTA */}
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-xs font-bold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md cursor-pointer whitespace-nowrap self-start md:self-auto"
-            >
-              Consult On Your Stack
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-
-          {/* High-Fidelity Toolchain Brand Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 sm:gap-4">
-            {TOOLCHAIN_ITEMS.map((tool, idx) => {
-              const LogoComp = tool.Logo;
-              return (
-                <div
-                  key={idx}
-                  className="group relative flex flex-col items-center text-center rounded-xl border border-border/70 bg-card p-4 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md cursor-default"
+            {/* Controls: Mode Switcher & Stream Play/Pause + Consultation Link */}
+            <div className="flex flex-wrap items-center gap-3 self-start md:self-auto">
+              {/* Stream / Grid Mode Toggle */}
+              <div className="inline-flex items-center rounded-xl border border-border/80 bg-background/90 p-1 shadow-xs">
+                <button
+                  type="button"
+                  onClick={() => setToolchainViewMode("stream")}
+                  className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+                    toolchainViewMode === "stream"
+                      ? "bg-primary text-primary-foreground shadow-xs"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                  title="Animated Continuous Stream"
                 >
-                  {/* Brand Logo Container */}
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-surface border border-border/50 p-2.5 transition-transform duration-200 group-hover:scale-110">
-                    <LogoComp className="h-7 w-7" />
-                  </div>
+                  <Waves className="h-3.5 w-3.5" />
+                  <span>Stream</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setToolchainViewMode("grid")}
+                  className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+                    toolchainViewMode === "grid"
+                      ? "bg-primary text-primary-foreground shadow-xs"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                  title="Full Static Matrix Grid"
+                >
+                  <LayoutGrid className="h-3.5 w-3.5" />
+                  <span>Grid</span>
+                </button>
+              </div>
 
-                  {/* Name */}
-                  <div className="mt-3 font-bold text-xs text-foreground group-hover:text-primary transition-colors">
-                    {tool.name}
-                  </div>
+              {/* Pause/Play Stream Button (when in Stream Mode) */}
+              {toolchainViewMode === "stream" && (
+                <button
+                  type="button"
+                  onClick={() => setIsPaused(!isPaused)}
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-border/80 bg-background/90 px-3 py-1.5 text-xs font-semibold text-foreground hover:border-primary/50 hover:bg-secondary transition-all cursor-pointer shadow-xs"
+                  title={isPaused ? "Resume auto-scroll" : "Pause auto-scroll"}
+                >
+                  {isPaused ? (
+                    <>
+                      <Play className="h-3.5 w-3.5 text-emerald-500 fill-emerald-500" />
+                      <span>Resume</span>
+                    </>
+                  ) : (
+                    <>
+                      <Pause className="h-3.5 w-3.5 text-muted-foreground" />
+                      <span>Pause</span>
+                    </>
+                  )}
+                </button>
+              )}
 
-                  {/* Category Pill */}
-                  <div className="mt-1 text-[10px] font-semibold text-muted-foreground">
-                    {tool.category}
-                  </div>
-
-                  {/* Short Description */}
-                  <div className="mt-1 text-[9px] text-muted-foreground/80 line-clamp-1">
-                    {tool.desc}
-                  </div>
-                </div>
-              );
-            })}
+              {/* Contact / Stack Consultation CTA */}
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4.5 py-2 text-xs font-bold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md cursor-pointer whitespace-nowrap"
+              >
+                Consult On Stack
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
           </div>
+        </div>
 
-          {/* Database Driven Toolchain Pills */}
-          <div className="mt-5 rounded-2xl border border-border/60 bg-surface/60 p-4 sm:p-5">
-            <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3">
-              Registered Architecture Modules ({techList.length})
+        {/* ========================================================== */}
+        {/* VIEW 1: DUAL-TRACK CONTINUOUS INFINITE SCROLLING MARQUEE   */}
+        {/* ========================================================== */}
+        {toolchainViewMode === "stream" ? (
+          <div className="relative w-full py-2 space-y-4">
+            {/* Left & Right Edge Gradient Fade Masks */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 md:w-40 bg-gradient-to-r from-surface via-surface/80 to-transparent z-20" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 md:w-40 bg-gradient-to-l from-surface via-surface/80 to-transparent z-20" />
+
+            {/* Track 1: Web, Cloud & Infra (Moves Left) */}
+            <div className="flex overflow-hidden">
+              <div
+                className="flex w-max gap-4 py-1.5 animate-marquee hover:[animation-play-state:paused]"
+                style={{ animationPlayState: isPaused ? "paused" : undefined }}
+              >
+                {[...toolchainRow1, ...toolchainRow1].map((tool, idx) => {
+                  const LogoComp = tool.Logo;
+                  return (
+                    <div
+                      key={`t1-${idx}`}
+                      className="group relative flex items-center gap-3.5 w-60 sm:w-68 shrink-0 rounded-2xl border border-border/80 bg-card/95 p-3.5 sm:p-4 shadow-sm hover:shadow-xl hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 cursor-default backdrop-blur-xs select-none"
+                    >
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                      <div className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl bg-surface border border-border/60 p-2.5 transition-transform duration-300 group-hover:scale-110 shadow-xs">
+                        <LogoComp className="h-6 w-6 sm:h-7 sm:w-7" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center justify-between gap-1.5">
+                          <div className="font-bold text-xs sm:text-sm text-foreground group-hover:text-primary transition-colors truncate">
+                            {tool.name}
+                          </div>
+                          <span className="text-[9px] sm:text-[10px] font-semibold text-primary/90 bg-primary/10 px-2 py-0.5 rounded-full shrink-0">
+                            {tool.category}
+                          </span>
+                        </div>
+                        <div className="mt-1 text-[11px] text-muted-foreground truncate">
+                          {tool.desc}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Track 2: Mobile, AI/ML & Data (Moves Right - Reverse) */}
+            <div className="flex overflow-hidden">
+              <div
+                className="flex w-max gap-4 py-1.5 animate-marquee-reverse hover:[animation-play-state:paused]"
+                style={{ animationPlayState: isPaused ? "paused" : undefined }}
+              >
+                {[...toolchainRow2, ...toolchainRow2].map((tool, idx) => {
+                  const LogoComp = tool.Logo;
+                  return (
+                    <div
+                      key={`t2-${idx}`}
+                      className="group relative flex items-center gap-3.5 w-60 sm:w-68 shrink-0 rounded-2xl border border-border/80 bg-card/95 p-3.5 sm:p-4 shadow-sm hover:shadow-xl hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 cursor-default backdrop-blur-xs select-none"
+                    >
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                      <div className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl bg-surface border border-border/60 p-2.5 transition-transform duration-300 group-hover:scale-110 shadow-xs">
+                        <LogoComp className="h-6 w-6 sm:h-7 sm:w-7" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center justify-between gap-1.5">
+                          <div className="font-bold text-xs sm:text-sm text-foreground group-hover:text-primary transition-colors truncate">
+                            {tool.name}
+                          </div>
+                          <span className="text-[9px] sm:text-[10px] font-semibold text-primary/90 bg-primary/10 px-2 py-0.5 rounded-full shrink-0">
+                            {tool.category}
+                          </span>
+                        </div>
+                        <div className="mt-1 text-[11px] text-muted-foreground truncate">
+                          {tool.desc}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Subtle Interactive Instruction */}
+            <div className="text-center pt-2">
+              <span className="text-[11px] text-muted-foreground/75 inline-flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping" />
+                Hover any card to inspect • Continuous infinite toolchain stream
+              </span>
+            </div>
+          </div>
+        ) : (
+          /* ========================================================== */
+          /* VIEW 2: EXPANDED 6-COLUMN MATRIX GRID                      */
+          /* ========================================================== */
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 sm:gap-4 animate-in fade-in-50 duration-300">
+              {TOOLCHAIN_ITEMS.map((tool, idx) => {
+                const LogoComp = tool.Logo;
+                return (
+                  <div
+                    key={idx}
+                    className="group relative flex flex-col items-center text-center rounded-xl border border-border/70 bg-card p-4 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md cursor-default"
+                  >
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-surface border border-border/50 p-2.5 transition-transform duration-200 group-hover:scale-110">
+                      <LogoComp className="h-7 w-7" />
+                    </div>
+                    <div className="mt-3 font-bold text-xs text-foreground group-hover:text-primary transition-colors">
+                      {tool.name}
+                    </div>
+                    <div className="mt-1 text-[10px] font-semibold text-muted-foreground">
+                      {tool.category}
+                    </div>
+                    <div className="mt-1 text-[9px] text-muted-foreground/80 line-clamp-1">
+                      {tool.desc}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Database Driven Toolchain Pills */}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-6">
+          <div className="rounded-2xl border border-border/60 bg-surface/60 p-4 sm:p-5">
+            <div className="flex items-center justify-between mb-3">
+              <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                Registered Architecture Modules ({techList.length})
+              </div>
+              <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                Live Architecture Registry
+              </span>
             </div>
             <div className="flex flex-wrap gap-2">
               {techList.map((tech) => (

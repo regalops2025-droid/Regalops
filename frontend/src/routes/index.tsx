@@ -601,32 +601,7 @@ const methodologySteps = [
   },
 ];
 
-const cases = [
-  {
-    sector: "Banking & Fintech",
-    title: "Core Replatform with Zero Outage",
-    result: "14-year-old banking monolith split into 9 resilient microservices. Deployment release cycle cut from 6 weeks down to 48 hours with 100% data fidelity.",
-    metric: "6 wks → 2 days",
-    metricLabel: "Release Velocity",
-    tag: "Tier 1 Regional Bank",
-  },
-  {
-    sector: "Healthcare Systems",
-    title: "Unified Patient Data Platform",
-    result: "Consolidated 41 disparate clinical hospital source systems into an audited, HIPAA-compliant real-time data warehouse with instant query capabilities.",
-    metric: "9 hrs → 4 min",
-    metricLabel: "Clinician Query Latency",
-    tag: "Apollo Healthcare Systems",
-  },
-  {
-    sector: "Industrial Manufacturing",
-    title: "Predictive IoT Line Maintenance",
-    result: "High-frequency telemetry ingestion across 38 manufacturing facilities, predicting hardware failures and reducing unplanned assembly line stoppages by 27%.",
-    metric: "-27%",
-    metricLabel: "Unplanned Stoppages",
-    tag: "Global Auto Parts Manufacturer",
-  },
-];
+
 
 const testimonials = [
   {
@@ -1533,72 +1508,7 @@ function Home() {
         </div>
       </section>
 
-      {/* ==================================================================== */}
-      {/* 9. AUDITED CASE STUDIES & CLIENT OUTCOMES                             */}
-      {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 max-w-2xl mb-6 sm:mb-8 reveal-on-scroll">
-            <div>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
-                Case Studies
-              </span>
-              <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
-                Work That Holds Up Under Audit
-              </h2>
-            </div>
-            <Link
-              to="/clients"
-              className="text-xs sm:text-sm font-bold text-[#8c6d23] hover:text-[#555d25] flex items-center gap-1.5 group shrink-0"
-            >
-              <span>View all client outcomes</span>
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
 
-          <div className="mt-3 sm:mt-4 grid gap-4 lg:grid-cols-3">
-            {cases.map((c, idx) => (
-              <Link
-                key={c.title}
-                to="/clients"
-                className={`reveal-on-scroll delay-${(idx + 1) * 100} group flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-white p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#555d25]/40 hover:shadow-xl hover:shadow-neutral-900/5 cursor-pointer`}
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#8c6d23]">
-                      {c.sector}
-                    </span>
-                    <span className="rounded-full bg-[#f5f6ee] px-2 py-0.5 text-[10px] font-mono font-bold text-[#555d25]">
-                      VERIFIED OUTCOME
-                    </span>
-                  </div>
-
-                  <h3 className="mt-3 text-base sm:text-lg font-bold text-neutral-900 group-hover:text-[#8c6d23] transition-colors">
-                    {c.title}
-                  </h3>
-                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-neutral-600">
-                    {c.result}
-                  </p>
-                </div>
-
-                <div className="mt-4 pt-4 border-t border-neutral-200/70 flex items-center justify-between">
-                  <div>
-                    <div className="text-xl font-extrabold text-neutral-900 font-display">
-                      {c.metric}
-                    </div>
-                    <div className="text-[10px] uppercase font-bold text-neutral-400">
-                      {c.metricLabel}
-                    </div>
-                  </div>
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-100 text-[#8c6d23] border border-neutral-200 group-hover:bg-[#555d25] group-hover:text-white group-hover:border-transparent transition-all">
-                    <ArrowRight className="h-4 w-4" />
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ==================================================================== */}
       {/* 10. EXECUTIVE TESTIMONIALS                                            */}

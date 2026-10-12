@@ -303,10 +303,39 @@ function About() {
             </div>
           </div>
 
+          {/* Multi-Layer Wave Transition SVG with Golden Metallic Ribbon Trim */}
+          <div className="relative w-full overflow-hidden leading-none select-none pointer-events-none -mb-[1px] mt-6 sm:mt-10">
+            <svg
+              className="w-full h-16 sm:h-24 lg:h-32 block"
+              viewBox="0 0 1440 180"
+              preserveAspectRatio="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="goldWaveRibbon" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#D4AF37" />
+                  <stop offset="35%" stopColor="#F59E0B" />
+                  <stop offset="70%" stopColor="#E5A93C" />
+                  <stop offset="100%" stopColor="#D4AF37" />
+                </linearGradient>
+              </defs>
+              {/* Golden metallic wave ribbon accent layer */}
+              <path
+                d="M0,60 C320,165 650,140 980,50 C1200,-10 1350,35 1440,60 L1440,180 L0,180 Z"
+                fill="url(#goldWaveRibbon)"
+              />
+              {/* White wave base smoothly flowing into page */}
+              <path
+                d="M0,76 C320,180 650,155 980,66 C1200,6 1350,50 1440,75 L1440,180 L0,180 Z"
+                fill="#FFFFFF"
+              />
+            </svg>
+          </div>
+
         </div>
 
         {/* Section Intro: "OUR PURPOSE" (Directly under the banner) */}
-        <div className="relative bg-white pt-10 pb-4 text-center">
+        <div className="relative bg-white pt-8 pb-4 text-center">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
             <div className="flex items-center justify-center gap-2.5 text-emerald-600 text-xs font-bold tracking-[0.22em] uppercase mb-3">
               <span className="w-5 h-[2px] bg-emerald-500" />

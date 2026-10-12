@@ -205,12 +205,12 @@ function Contact() {
               {/* Image Background */}
               <div className="absolute inset-0 z-0">
                 <img
-                  src="/solutions-team.jpg"
-                  alt="Regal OPs Engineering Team Consultation"
-                  className="h-full w-full object-cover object-center scale-105"
+                  src="/contact-handshake.jpg"
+                  alt="Regal OPs Strategic Engineering Partnership"
+                  className="h-full w-full object-cover object-center brightness-[0.58] contrast-[1.1] scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/85 to-neutral-950/40" />
-                <div className="absolute inset-0 bg-[#07192F]/60 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/95 via-neutral-950/50 to-neutral-950/75" />
+                <div className="absolute inset-0 bg-[#07192F]/30 mix-blend-multiply" />
               </div>
 
               {/* Top Details */}
@@ -225,7 +225,7 @@ function Contact() {
                   Let&apos;s Build Resilient <br />
                   <span className="text-[#a4c965]">Systems Together</span>
                 </h2>
-                <p className="mt-3 text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-sm">
+                <p className="mt-3 text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-sm text-justify">
                   Schedule an architectural review with our principal engineers. We dive straight into technical realities &mdash; zero sales bureaucracy.
                 </p>
               </div>

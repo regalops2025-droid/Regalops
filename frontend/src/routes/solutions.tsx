@@ -68,14 +68,14 @@ function Solutions() {
       <section className="py-6 sm:py-8 bg-slate-50/50 dark:bg-slate-950">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="mb-5 sm:mb-6 text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#555d25] dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-200/50 dark:border-emerald-800/50">
+          <div className="mb-5 sm:mb-6 text-left max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#555d25] dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2.5 border border-emerald-200/50 dark:border-emerald-800/50">
               <Sparkles className="h-3.5 w-3.5" /> Specialized Practices
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white tracking-tight text-left">
               Enterprise <span className="bg-gradient-to-r from-[#555d25] to-emerald-600 bg-clip-text text-transparent">Solutions</span>
             </h1>
-            <p className="mt-2 text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed text-left">
               Tailored engineering, staffing, and operational practices built for high concurrency, velocity, and enterprise reliability.
             </p>
           </div>

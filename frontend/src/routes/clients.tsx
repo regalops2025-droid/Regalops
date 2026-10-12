@@ -598,18 +598,18 @@ function Clients() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold tracking-tight text-neutral-900 dark:text-white">
+          <div className="text-left max-w-3xl mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold tracking-tight text-neutral-900 dark:text-white">
               Trusted by Industry Leaders
             </h1>
-            <p className="mt-3 text-sm sm:text-base text-neutral-600 dark:text-neutral-400 font-normal leading-relaxed">
+            <p className="mt-2 text-sm sm:text-base text-neutral-600 dark:text-neutral-400 font-normal leading-relaxed text-left">
               We partner with global organizations across industries to deliver impactful technology solutions, driving efficiency, innovation and long-term growth.
             </p>
           </div>
 
           {/* Category Tabs Bar with Icons and Dividers (Exact Match to Reference Screenshot) */}
           <div className="mb-8 sm:mb-10 overflow-x-auto no-scrollbar">
-            <div className="flex items-center justify-center gap-1 sm:gap-2.5 min-w-max px-2 py-1">
+            <div className="flex items-center justify-start gap-1 sm:gap-2.5 min-w-max px-2 py-1">
               {CLIENT_CATEGORIES.map((cat, idx) => {
                 const IconComponent = cat.icon;
                 const isActive = selectedCategory === cat.id;

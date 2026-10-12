@@ -362,9 +362,9 @@ function Technologies() {
         <div className="absolute top-10 right-1/4 -z-10 h-96 w-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center text-center">
+          <div className="flex flex-col items-start text-left max-w-3xl">
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase shadow-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
@@ -373,15 +373,15 @@ function Technologies() {
             </div>
 
             {/* Main Headline */}
-            <h1 className="mt-3.5 max-w-4xl font-display text-[24px] xs:text-[28px] sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground leading-[1.18] sm:leading-tight">
-              <span className="block whitespace-nowrap">Production-proven,</span>
-              <span className="block whitespace-nowrap bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent">
+            <h1 className="mt-3 font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground leading-tight text-left">
+              <span>Production-proven, </span>
+              <span className="bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent">
                 never experimental.
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="mt-2.5 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base text-left">
               We standardise on technologies our teams have operated at scale for years — backed by official partner ecosystems, zero vendor lock-in, and guaranteed SLAs.
             </p>
           </div>

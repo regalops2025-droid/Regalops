@@ -1006,7 +1006,7 @@ function Home() {
               </div>
 
               {/* Main Heading matching Reference */}
-              <h2 className="mt-3 text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight leading-[1.15]">
+              <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900 tracking-tight leading-tight text-left">
                 About Regal OPs
               </h2>
 
@@ -1110,7 +1110,7 @@ function Home() {
           
           {/* Header */}
           <div className="text-left max-w-3xl mb-6 sm:mb-8 reveal-on-scroll">
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-neutral-900 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900 tracking-tight text-left">
               Our Services
             </h2>
             <p className="mt-2 text-base sm:text-lg text-neutral-600 italic font-serif sm:font-normal">

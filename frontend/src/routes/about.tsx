@@ -274,7 +274,7 @@ function About() {
               </div>
 
               {/* Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.08] drop-shadow-md">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.1] drop-shadow-md text-left">
                 About <br />
                 <span className="text-[#b38e36]">Regal OPs</span>
               </h1>
@@ -462,15 +462,15 @@ function About() {
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto">
+          <div className="text-left max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/60 backdrop-blur-md px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-[#a4c965] shadow-md">
               <Sparkles className="h-3 w-3 text-[#f3cd67]" /> Culture &amp; Talent Excellence
             </span>
-            <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className="mt-2 text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight text-left">
               Our <span className="text-[#f3cd67] drop-shadow-[0_2px_12px_rgba(243,205,103,0.3)]">People</span>
             </h2>
-            <div className="w-12 h-0.5 bg-gradient-to-r from-[#a4c965] to-[#f3cd67] rounded-full mx-auto mt-2.5 mb-3" />
-            <p className="text-sm sm:text-base text-neutral-200 leading-relaxed max-w-2xl mx-auto text-justify sm:text-center">
+            <div className="w-12 h-0.5 bg-gradient-to-r from-[#a4c965] to-[#f3cd67] rounded-full mt-2 mb-2.5" />
+            <p className="text-sm sm:text-base text-neutral-200 leading-relaxed max-w-2xl text-left">
               We nurture a truly diverse and talented pool of people who work with a
               customer-centric attitude to deliver phenomenal results.
             </p>

@@ -187,14 +187,14 @@ function Contact() {
       <PageHero
         eyebrow={jobTitle ? "Careers" : "Contact us"}
         title={jobTitle ? `Apply for ${jobTitle}` : "Start with a technical conversation"}
-        titleClassName="max-w-none text-2xl xs:text-3xl sm:text-4xl lg:text-5xl lg:whitespace-nowrap tracking-tight break-words"
+        titleClassName="max-w-none text-xl xs:text-2xl sm:text-3xl font-bold tracking-tight text-left break-words"
         containerClassName="max-w-full px-3 sm:px-5 lg:px-8 xl:px-10"
         description={
           jobTitle
             ? "Submit your details and CV/Resume below to apply. Our engineering leads will review it shortly."
             : undefined
         }
-        descriptionClassName="max-w-none md:whitespace-nowrap break-words"
+        descriptionClassName="max-w-none text-left break-words"
       />
       <Section className="w-full max-w-full px-3 sm:px-5 lg:px-8 xl:px-10 py-4 sm:py-6">
         {/* Full Screen Width 2-Column Split: Left Image Card, Right Form */}
@@ -222,11 +222,11 @@ function Contact() {
                     Architecture Consultation
                   </span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
+                <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-tight text-left">
                   Let&apos;s Build Resilient <br />
                   <span className="text-[#a4c965]">Systems Together</span>
                 </h2>
-                <p className="mt-3 text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-sm text-justify">
+                <p className="mt-2.5 text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-sm text-left">
                   Schedule an architectural review with our principal engineers. We dive straight into technical realities &mdash; zero sales bureaucracy.
                 </p>
               </div>
@@ -277,7 +277,7 @@ function Contact() {
             <div className="lg:col-span-7">
               <form className="panel p-5 sm:p-7 lg:p-8 space-y-4 w-full shadow-xl border border-border/80 rounded-3xl bg-surface h-full flex flex-col justify-between" onSubmit={handleSubmit}>
                 <div className="border-b border-border/60 pb-3.5 mb-1.5">
-                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+                  <h2 className="text-lg sm:text-xl font-bold tracking-tight text-foreground text-left">
                     {jobTitle ? `Submit Application for ${jobTitle}` : "Send an Engineering Enquiry"}
                   </h2>
                   <p className="mt-1 text-sm text-muted-foreground">
@@ -540,7 +540,7 @@ function Contact() {
 
       {/* Office locations & Direct engineering contact: full-width 4-column cards below */}
       <div className="pt-6 sm:pt-8 border-t border-border/60">
-            <h3 className="text-xl font-bold tracking-tight text-foreground text-center mb-6">
+            <h3 className="text-lg sm:text-xl font-bold tracking-tight text-foreground text-left mb-4">
               Our Offices & Global Engineering Hubs
             </h3>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

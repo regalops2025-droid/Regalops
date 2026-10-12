@@ -188,6 +188,7 @@ function Contact() {
         eyebrow={jobTitle ? "Careers" : "Contact us"}
         title={jobTitle ? `Apply for ${jobTitle}` : "Start with a technical conversation"}
         titleClassName="max-w-none text-2xl xs:text-3xl sm:text-4xl lg:text-5xl lg:whitespace-nowrap tracking-tight break-words"
+        containerClassName="max-w-full px-3 sm:px-5 lg:px-8 xl:px-10"
         description={
           jobTitle
             ? "Submit your details and CV/Resume below to apply. Our engineering leads will review it shortly."
@@ -195,10 +196,10 @@ function Contact() {
         }
         descriptionClassName="max-w-none md:whitespace-nowrap break-words"
       />
-      <Section className="w-full max-w-[1440px] px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
+      <Section className="w-full max-w-full px-3 sm:px-5 lg:px-8 xl:px-10 py-4 sm:py-6">
         {/* Full Screen Width 2-Column Split: Left Image Card, Right Form */}
         <div className="w-full space-y-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 xl:gap-8 items-stretch w-full">
             
             {/* LEFT COLUMN: Visual Image Card & Executive Contact Details */}
             <div className="lg:col-span-5 relative overflow-hidden rounded-3xl bg-neutral-950 text-white border border-neutral-800/80 shadow-2xl flex flex-col justify-between min-h-[460px] lg:min-h-full">

@@ -24,7 +24,8 @@ import {
   Crown,
   Globe,
   Linkedin,
-  Youtube,
+  Instagram,
+  Facebook,
   Building2,
   Phone,
   Mail,
@@ -207,7 +208,7 @@ export function SiteHeader() {
             <div className="hidden sm:flex items-center gap-2.5 sm:gap-4 shrink-0">
               <div className="hidden md:flex items-center gap-2 sm:gap-2.5">
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/company/regalops/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
@@ -216,22 +217,22 @@ export function SiteHeader() {
                   <Linkedin className="h-3.5 w-3.5" />
                 </a>
                 <a
-                  href="https://youtube.com"
+                  href="https://www.instagram.com/regal_ops/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="YouTube"
+                  aria-label="Instagram"
                   className="text-white/75 hover:text-white transition-colors"
                 >
-                  <Youtube className="h-3.5 w-3.5" />
+                  <Instagram className="h-3.5 w-3.5" />
                 </a>
                 <a
-                  href="https://twitter.com"
+                  href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="X"
+                  aria-label="Facebook"
                   className="text-white/75 hover:text-white transition-colors"
                 >
-                  <XIcon className="h-3 w-3" />
+                  <Facebook className="h-3.5 w-3.5" />
                 </a>
               </div>
               <span className="hidden md:inline text-white/30">|</span>

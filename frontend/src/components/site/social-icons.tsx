@@ -82,16 +82,6 @@ export const OFFICIAL_SOCIAL_LINKS: SocialLinkItem[] = [
     icon: LinkedInIcon,
   },
   {
-    id: "whatsapp",
-    name: "WhatsApp",
-    url: "https://wa.me/914400000000?text=Hi%20Regal%20OPs,%20I%20would%20like%20to%20discuss%20our%20enterprise%20platform%20needs.",
-    bgColor: "bg-[#25D366]",
-    hoverBg: "hover:bg-[#1ebe5b]",
-    textColor: "text-white",
-    glowColor: "hover:shadow-[0_0_16px_rgba(37,211,102,0.6)]",
-    icon: WhatsAppIcon,
-  },
-  {
     id: "instagram",
     name: "Instagram",
     url: "https://www.instagram.com/regal_ops/",
@@ -110,26 +100,6 @@ export const OFFICIAL_SOCIAL_LINKS: SocialLinkItem[] = [
     textColor: "text-white",
     glowColor: "hover:shadow-[0_0_16px_rgba(24,119,242,0.6)]",
     icon: FacebookIcon,
-  },
-  {
-    id: "x",
-    name: "X (Twitter)",
-    url: "https://twitter.com",
-    bgColor: "bg-[#000000] border border-white/20",
-    hoverBg: "hover:bg-neutral-800",
-    textColor: "text-white",
-    glowColor: "hover:shadow-[0_0_16px_rgba(255,255,255,0.3)]",
-    icon: XIcon,
-  },
-  {
-    id: "youtube",
-    name: "YouTube",
-    url: "https://youtube.com",
-    bgColor: "bg-[#FF0000]",
-    hoverBg: "hover:bg-[#cc0000]",
-    textColor: "text-white",
-    glowColor: "hover:shadow-[0_0_16px_rgba(255,0,0,0.6)]",
-    icon: YouTubeIcon,
   },
 ];
 

@@ -28,7 +28,7 @@ export function PageHero({
 }: {
   eyebrow: string;
   title: string;
-  description: string;
+  description?: string;
   className?: string;
   descriptionClassName?: string;
   titleClassName?: string;
@@ -42,9 +42,11 @@ export function PageHero({
         <h1 className={`mt-2.5 sm:mt-3 text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl ${titleClassName || "max-w-3xl"}`}>
           {title}
         </h1>
-        <p className={`mt-2 sm:mt-2.5 text-base leading-relaxed text-muted-foreground sm:text-lg ${descriptionClassName || "max-w-2xl"}`}>
-          {description}
-        </p>
+        {description && (
+          <p className={`mt-2 sm:mt-2.5 text-base leading-relaxed text-muted-foreground sm:text-lg ${descriptionClassName || "max-w-2xl"}`}>
+            {description}
+          </p>
+        )}
       </div>
     </section>
   );

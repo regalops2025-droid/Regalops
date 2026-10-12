@@ -159,8 +159,9 @@ const showcaseSlides = [
     image: "/hero-slide-3.jpg",
     alt: "Hybrid Cloud Infrastructure, Server Architecture and Autonomous Reliability",
     tag: "Next-Gen Cloud & Multi-Region SRE",
-    titlePrefix: "Scalable ",
-    titleHighlight: "Cloud Platforms & Autonomous Systems",
+    titlePrefix: "Scalable Cloud Platforms & ",
+    titleBreak: true,
+    titleHighlight: "Autonomous Systems",
     titleSuffix: "",
     subtitle: "99.98% SLA UPTIME GUARANTEE & PETABYTE-SCALE RELIABILITY",
     desc: "Migrate legacy monoliths, automate infrastructure-as-code, and build self-healing multi-region cloud networks engineered for high availability.",
@@ -844,8 +845,8 @@ function Home() {
                   {/* Main Headline with White Text & Golden Highlights */}
                   <h1 className="mt-2.5 text-[22px] xs:text-[24px] sm:text-3xl lg:text-[2.5rem] xl:text-[2.75rem] font-extrabold tracking-tight text-white leading-[1.2] sm:leading-[1.14]">
                     {slide.titlePrefix}
-                    {slide.titleBreak && <br />}
-                    <span className="text-[#f3cd67] drop-shadow-[0_2px_12px_rgba(243,205,103,0.3)]">
+                    {slide.titleBreak && <br className="hidden sm:inline" />}
+                    <span className="text-[#f3cd67] drop-shadow-[0_2px_12px_rgba(243,205,103,0.3)] inline-block sm:inline whitespace-nowrap">
                       {slide.titleHighlight}
                     </span>
                     {slide.titleSuffix}

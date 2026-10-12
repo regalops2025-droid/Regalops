@@ -776,7 +776,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 1. HERO SECTION WITH BACKGROUND CAROUSEL & ROTATION EFFECTS           */}
       {/* ==================================================================== */}
-      <section className="relative overflow-hidden bg-white border-b border-neutral-200/70">
+      <section className="relative overflow-hidden bg-[#060907] border-b border-neutral-800 text-white">
         
         {/* Full-bleed Background Slide Images */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -794,72 +794,71 @@ function Home() {
                   <img
                     src={slide.image}
                     alt={slide.alt}
-                    className="h-full w-full object-cover object-[82%_center] sm:object-right transition-transform duration-1000 ease-out"
+                    className="h-full w-full object-cover object-right sm:object-right transition-transform duration-1000 ease-out"
                   />
-                  {/* Smart contrast gradient: Protects dark text legibility on the left while keeping images colorful and visible on the right */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/25 sm:from-white/95 sm:via-white/85 sm:to-white/30 lg:bg-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent lg:w-[68%]" />
-                  {/* Subtle bottom gradient to smoothly transition into stats bar */}
-                  <div className="absolute inset-0 sm:hidden bg-gradient-to-t from-white/60 via-transparent to-transparent pointer-events-none" />
+                  {/* Smart dark gradient on the left to ensure pure white text is 100% legible against the dark background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#060907] via-[#060907]/80 to-transparent sm:w-[64%] pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#060907]/70 via-transparent to-transparent pointer-events-none sm:hidden" />
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Side Navigation Buttons (Hidden on small mobile screens to prevent blocking text) */}
+        {/* Side Navigation Buttons */}
         <button
           type="button"
           onClick={() => setActiveSlide((prev) => (prev - 1 + showcaseSlides.length) % showcaseSlides.length)}
-          className="hidden sm:flex absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 h-9 w-7 sm:h-10 sm:w-8 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
+          className="hidden sm:flex absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 h-10 w-8 items-center justify-center rounded-lg bg-black/60 hover:bg-black/85 border border-white/15 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-lg backdrop-blur-md"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+          <ChevronLeft className="h-5 w-5" />
         </button>
 
         <button
           type="button"
           onClick={() => setActiveSlide((prev) => (prev + 1) % showcaseSlides.length)}
-          className="hidden sm:flex absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 h-9 w-7 sm:h-10 sm:w-8 items-center justify-center rounded bg-black/45 hover:bg-black/75 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-md backdrop-blur-xs"
+          className="hidden sm:flex absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 h-10 w-8 items-center justify-center rounded-lg bg-black/60 hover:bg-black/85 border border-white/15 text-white/90 hover:text-white transition-all duration-200 cursor-pointer shadow-lg backdrop-blur-md"
           aria-label="Next slide"
         >
-          <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+          <ChevronRight className="h-5 w-5" />
         </button>
 
         {/* Foreground Content for Active Slide */}
-        <div className="relative z-10 w-full px-4 sm:pl-8 sm:pr-6 lg:pl-12 lg:pr-8 py-3.5 sm:py-4 lg:py-5">
+        <div className="relative z-10 w-full px-4 sm:pl-8 sm:pr-6 lg:pl-12 lg:pr-8 py-5 sm:py-6 lg:py-8">
           <div className="max-w-2xl lg:max-w-3xl xl:max-w-4xl">
             {showcaseSlides.map((slide, idx) => {
               if (idx !== activeSlide) return null;
               return (
                 <div key={slide.id} className="transition-all duration-500">
                   {/* Slide Category Badge */}
-                  <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/95 px-2.5 sm:px-3 py-0.5 text-[9.5px] sm:text-[11px] font-bold tracking-[0.14em] text-neutral-800 uppercase shadow-xs backdrop-blur-sm">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/50 px-3 py-1 text-[10px] sm:text-[11px] font-bold tracking-[0.16em] text-white uppercase shadow-md backdrop-blur-md">
                     <span className="relative flex h-2 w-2 items-center justify-center">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#b38e36] opacity-75" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#555d25]" />
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#f3cd67] opacity-75" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#a4c965]" />
                     </span>
                     {slide.tag}
                   </div>
 
-                  {/* Main Headline */}
-                  <h1 className="mt-2 text-[20px] xs:text-[22px] sm:text-3xl lg:text-[2.25rem] xl:text-[2.5rem] font-bold tracking-tight text-black leading-[1.2] sm:leading-[1.14]">
+                  {/* Main Headline with White Text & Golden Highlights */}
+                  <h1 className="mt-2.5 text-[22px] xs:text-[24px] sm:text-3xl lg:text-[2.5rem] xl:text-[2.75rem] font-extrabold tracking-tight text-white leading-[1.2] sm:leading-[1.14]">
                     {slide.titlePrefix}
                     {slide.titleBreak && <br />}
-                    <span className="font-black text-black">
+                    <span className="text-[#f3cd67] drop-shadow-[0_2px_12px_rgba(243,205,103,0.3)]">
                       {slide.titleHighlight}
                     </span>
                     {slide.titleSuffix}
                   </h1>
 
-                  {/* Subtitle / Eyebrow text - Dark and punchy */}
+                  {/* Subtitle / Eyebrow text */}
                   {slide.subtitle && (
-                    <p className="mt-1.5 text-[10px] sm:text-[11px] font-black tracking-wider text-black/95 sm:text-neutral-700 uppercase">
+                    <p className="mt-2 text-[10.5px] sm:text-[11.5px] font-bold tracking-widest text-[#a4c965] uppercase">
                       {slide.subtitle}
                     </p>
                   )}
 
-                  {/* Paragraph Description - Deep dark readable text */}
-                  <p className="mt-2 max-w-xl text-xs sm:text-sm leading-relaxed text-justify text-neutral-950 sm:text-neutral-700 font-semibold sm:font-normal">
+                  {/* Paragraph Description - White Text, Justified */}
+                  <p className="mt-2.5 max-w-xl text-xs sm:text-sm leading-relaxed text-justify text-neutral-200 font-normal">
                     {slide.desc}
                   </p>
 
@@ -875,23 +874,23 @@ function Home() {
 
                     <Link
                       to={slide.secondaryCta.link}
-                      className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-neutral-300 hover:border-neutral-400 bg-white/95 hover:bg-white px-3.5 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-neutral-800 shadow-xs hover:shadow-sm transition-all duration-200 cursor-pointer"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/20 hover:border-white/40 bg-white/10 hover:bg-white/15 px-3.5 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-white backdrop-blur-md shadow-sm transition-all duration-200 cursor-pointer group"
                     >
                       <span>{slide.secondaryCta.text}</span>
-                      <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-neutral-500" />
+                      <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-neutral-300 group-hover:translate-x-0.5 group-hover:text-white transition-all" />
                     </Link>
                   </div>
 
-                  {/* Trust guarantees bar - Dark crisp text */}
-                  <div className="mt-3 flex flex-wrap items-center gap-2.5 sm:gap-3.5 text-[10px] sm:text-[11px] font-bold text-neutral-900 sm:text-neutral-600">
-                    <span className="flex items-center gap-1">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-[#555d25]" /> 99.98% SLA Uptime
+                  {/* Trust guarantees bar */}
+                  <div className="mt-4 flex flex-wrap items-center gap-3 sm:gap-4 text-[10.5px] sm:text-[11.5px] font-semibold text-neutral-200">
+                    <span className="flex items-center gap-1.5">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[#a4c965]" /> 99.98% SLA Uptime
                     </span>
-                    <span className="flex items-center gap-1">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-[#555d25]" /> Zero-Outage Migrations
+                    <span className="flex items-center gap-1.5">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[#a4c965]" /> Zero-Outage Migrations
                     </span>
-                    <span className="flex items-center gap-1">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-[#555d25]" /> 72-Hour Mobilization
+                    <span className="flex items-center gap-1.5">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[#a4c965]" /> 72-Hour Mobilization
                     </span>
                   </div>
                 </div>
@@ -900,11 +899,11 @@ function Home() {
           </div>
 
           {/* Carousel Indicators / Navigation Dots anchored inside */}
-          <div className="mt-3 sm:mt-3.5 flex items-center gap-1.5 sm:gap-2 bg-white/95 backdrop-blur-md px-2.5 sm:px-3 py-1 rounded-full border border-neutral-200/90 shadow-xs w-fit">
+          <div className="mt-4 sm:mt-5 flex items-center gap-2 bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 shadow-lg w-fit text-white">
             <button
               type="button"
               onClick={() => setActiveSlide((prev) => (prev - 1 + showcaseSlides.length) % showcaseSlides.length)}
-              className="sm:hidden p-0.5 text-neutral-600 hover:text-neutral-900 cursor-pointer"
+              className="sm:hidden p-0.5 text-neutral-300 hover:text-white cursor-pointer"
               aria-label="Previous slide"
             >
               <ChevronLeft className="h-3.5 w-3.5" />
@@ -916,8 +915,8 @@ function Home() {
                 onClick={() => setActiveSlide(i)}
                 className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   i === activeSlide
-                    ? "w-5 sm:w-6 bg-[#555d25] shadow-[0_0_8px_rgba(19,106,62,0.4)]"
-                    : "w-2 bg-neutral-300 hover:bg-neutral-400"
+                    ? "w-6 bg-[#a4c965] shadow-[0_0_10px_#a4c965]"
+                    : "w-2 bg-white/30 hover:bg-white/60"
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
@@ -925,12 +924,12 @@ function Home() {
             <button
               type="button"
               onClick={() => setActiveSlide((prev) => (prev + 1) % showcaseSlides.length)}
-              className="sm:hidden p-0.5 text-neutral-600 hover:text-neutral-900 cursor-pointer"
+              className="sm:hidden p-0.5 text-neutral-300 hover:text-white cursor-pointer"
               aria-label="Next slide"
             >
               <ChevronRight className="h-3.5 w-3.5" />
             </button>
-            <span className="text-[10px] font-bold text-neutral-600 ml-1">
+            <span className="text-[10px] font-bold text-neutral-300 ml-1">
               0{activeSlide + 1} / 0{showcaseSlides.length}
             </span>
           </div>

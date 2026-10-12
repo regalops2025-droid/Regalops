@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { LogOut, ExternalLink, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen, Compass, Bell } from "lucide-react";
+import { LogOut, ExternalLink, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen, Compass, Bell, MessageSquare, Copy, Check, Search, LayoutGrid, List, Send, Filter, FileText } from "lucide-react";
 import { ImageUploadField } from "@/components/admin/image-upload-field";
 
 export const Route = createFileRoute("/admin")({
@@ -26,6 +26,23 @@ function AdminDashboard() {
   const [enquiriesLoading, setEnquiriesLoading] = useState(true);
   const [enquiriesError, setEnquiriesError] = useState("");
   const [deleteEnquiryStatus, setDeleteEnquiryStatus] = useState<{ id: number; status: "idle" | "loading" } | null>(null);
+  const [enquirySearchQuery, setEnquirySearchQuery] = useState("");
+  const [enquiryServiceFilter, setEnquiryServiceFilter] = useState("all");
+  const [enquiryViewMode, setEnquiryViewMode] = useState<"cards" | "table">("cards");
+  const [copiedEnquiryId, setCopiedEnquiryId] = useState<number | null>(null);
+
+  const handleCopyEnquiry = (item: any) => {
+    const cleanName = [item.first_name, item.last_name]
+      .filter(Boolean)
+      .map((s: string) => s.trim())
+      .filter((s: string) => s && s !== "-")
+      .join(" ");
+    const location = [item.city, item.state, item.country, item.zip_code].filter(Boolean).join(", ");
+    const summary = `Name: ${cleanName || "N/A"}\nEmail: ${item.email || "N/A"}\nPhone: ${item.mobile || "N/A"}\nService: ${item.service || "N/A"}\nLocation: ${location || "N/A"}\nMessage: ${item.comments || "N/A"}`;
+    navigator.clipboard.writeText(summary);
+    setCopiedEnquiryId(item.id);
+    setTimeout(() => setCopiedEnquiryId(null), 2000);
+  };
 
   // Solutions State
   const [solutions, setSolutions] = useState<any[]>([]);
@@ -1283,7 +1300,7 @@ function AdminDashboard() {
             { id: "clients" as const, label: "Manage Clients", icon: User, count: clientList.length },
             { id: "careers" as const, label: "Manage Careers", icon: Briefcase, count: jobList.length, isNotify: true, badgeClass: "bg-[#555d25]/40 text-[#e4ebb2] border-[#555d25]/60" },
             { id: "blogs" as const, label: "Manage Blogs", icon: BookOpen, count: blogList.length },
-            { id: "applications" as const, label: "Applications", icon: Inbox, count: applications.length, isNotify: true, badgeClass: "bg-amber-500/20 text-amber-300 border-amber-500/40" },
+            { id: "applications" as const, label: "Applications", icon: FileText, count: applications.length, isNotify: true, badgeClass: "bg-amber-500/20 text-amber-300 border-amber-500/40" },
           ].map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -1436,35 +1453,35 @@ function AdminDashboard() {
               </span>
             </button>
 
-            {/* Quick Notification Button: Careers & Job Openings */}
+            {/* Quick Notification Button: Job Applications */}
             <button
               type="button"
-              onClick={() => setActiveTab("careers")}
+              onClick={() => setActiveTab("applications")}
               className={`relative inline-flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-semibold transition-all cursor-pointer shadow-xs ${
-                activeTab === "careers"
+                activeTab === "applications"
                   ? "border-primary bg-primary text-primary-foreground shadow-sm"
                   : "border-border bg-surface text-foreground hover:bg-secondary hover:border-border/80"
               }`}
-              title={`Careers & Job Openings (${jobList.length})`}
+              title={`Job Applications (${applications.length})`}
             >
               <div className="relative flex items-center justify-center">
-                <Briefcase className="h-3.5 w-3.5" />
-                {jobList.length > 0 && activeTab !== "careers" && (
+                <FileText className="h-3.5 w-3.5" />
+                {applications.length > 0 && activeTab !== "applications" && (
                   <span className="absolute -top-1.5 -right-1.5 flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#555d25] opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-[#555d25]"></span>
                   </span>
                 )}
               </div>
-              <span className="hidden sm:inline">Careers</span>
+              <span className="hidden sm:inline">Applications</span>
               <span
                 className={`inline-flex items-center justify-center rounded-full px-1.5 py-0.2 text-[11px] font-bold min-w-[20px] ${
-                  activeTab === "careers"
+                  activeTab === "applications"
                     ? "bg-white/25 text-white"
                     : "bg-[#555d25]/15 text-[#555d25] dark:text-[#d3dda3] border border-[#555d25]/30"
                 }`}
               >
-                {jobLoading ? "..." : jobList.length}
+                {applicationsLoading ? "..." : applications.length}
               </span>
             </button>
 
@@ -1476,7 +1493,7 @@ function AdminDashboard() {
                     ? "/solutions"
                     : activeTab === "technologies"
                       ? "/technologies"
-                      : activeTab === "careers"
+                      : activeTab === "careers" || activeTab === "applications"
                         ? "/career"
                         : activeTab === "blogs"
                           ? "/blog"
@@ -1587,108 +1604,447 @@ function AdminDashboard() {
           <div id="admin-tab-content" className="scroll-mt-6" />
 
           {/* Active Tab Panel Rendering */}
-          {activeTab === "enquiries" && (
-            <div>
-              {enquiriesLoading && enquiries.length === 0 ? (
-                <div className="grid gap-4 md:grid-cols-2 animate-pulse">
-                  {[1, 2].map((i) => (
-                    <div key={i} className="panel p-6 bg-surface-2 border border-border/50 h-52"></div>
-                  ))}
-                </div>
-              ) : enquiriesError ? (
-                <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 text-center">
-                  <p className="text-sm text-destructive font-medium">{enquiriesError}</p>
-                </div>
-              ) : enquiries.length === 0 ? (
-                <div className="panel p-12 text-center border border-dashed border-border/80 rounded-2xl flex flex-col items-center justify-center">
-                  <div className="rounded-full bg-secondary p-3 text-muted-foreground">
-                    <Inbox className="h-8 w-8" />
+          {activeTab === "enquiries" && (() => {
+            const distinctServices = Array.from(new Set(enquiries.map((e) => e.service).filter(Boolean)));
+            const filteredEnquiries = enquiries.filter((item) => {
+              const q = enquirySearchQuery.toLowerCase().trim();
+              const fullName = [item.first_name, item.last_name].filter(Boolean).join(" ").toLowerCase();
+              const matchesSearch =
+                !q ||
+                fullName.includes(q) ||
+                (item.email && item.email.toLowerCase().includes(q)) ||
+                (item.mobile && item.mobile.toLowerCase().includes(q)) ||
+                (item.service && item.service.toLowerCase().includes(q)) ||
+                (item.comments && item.comments.toLowerCase().includes(q)) ||
+                (item.city && item.city.toLowerCase().includes(q)) ||
+                (item.state && item.state.toLowerCase().includes(q));
+
+              const matchesService = enquiryServiceFilter === "all" || item.service === enquiryServiceFilter;
+              return matchesSearch && matchesService;
+            });
+
+            return (
+              <div className="space-y-6">
+                {/* Section Header with Search, Filter & View Controls */}
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <div className="flex items-center gap-2.5">
+                      <h2 className="text-xl font-bold text-foreground">Contact Enquiries</h2>
+                      <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-bold text-primary">
+                        {enquiries.length} {enquiries.length === 1 ? "lead" : "leads"}
+                      </span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      Manage client leads, inquiries, and messages submitted from the contact form.
+                    </p>
                   </div>
-                  <h3 className="mt-4 text-base font-semibold text-foreground">No enquiries yet</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    Submissions from the website's contact form will appear here.
-                  </p>
-                </div>
-              ) : (
-                <div className="grid gap-6 md:grid-cols-2">
-                  {enquiries.map((item) => (
-                    <div
-                      key={item.id}
-                      className="panel p-6 bg-surface border border-border/85 flex flex-col justify-between transition-all hover:border-primary/40 duration-300"
-                    >
-                      <div>
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex items-center gap-2">
-                            <div className="rounded-lg bg-secondary p-1.5 text-primary">
-                              <User className="h-4 w-4" />
-                            </div>
-                            <h4 className="font-bold text-foreground">{item.first_name} {item.last_name}</h4>
-                          </div>
-                          <span className="text-xs text-muted-foreground flex items-center gap-1">
-                            <Calendar className="h-3.5 w-3.5" />
-                            {new Date(item.created_at).toLocaleDateString(undefined, {
-                              month: "short",
-                              day: "numeric",
-                              year: "numeric",
-                            })}
-                          </span>
-                        </div>
 
-                        <div className="mt-4 space-y-2 border-b border-border/50 pb-4 text-sm text-muted-foreground">
-                          <div className="flex items-center gap-2">
-                            <Mail className="h-4 w-4 text-primary/70" />
-                            <a href={`mailto:${item.email}`} className="hover:text-primary transition-colors">
-                              {item.email}
-                            </a>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Phone className="h-4 w-4 text-primary/70" />
-                            <a href={`tel:${item.mobile}`} className="hover:text-primary transition-colors">
-                              {item.mobile}
-                            </a>
-                          </div>
-                          <div className="flex items-start gap-2">
-                            <MapPin className="h-4 w-4 text-primary/70 mt-0.5" />
-                            <span>
-                              {[item.city, item.state, item.country, item.zip_code].filter(Boolean).join(", ") || "N/A"}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Layers className="h-4 w-4 text-primary/70" />
-                            <span className="font-semibold text-primary uppercase text-[10px] tracking-wider bg-primary/10 px-2 py-0.5 rounded-full">
-                              {item.service}
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="mt-4">
-                          <h5 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">
-                            Additional Comments
-                          </h5>
-                          <p className="text-sm leading-relaxed text-foreground whitespace-pre-wrap bg-secondary/30 p-3.5 rounded-xl border border-border/40">
-                            {item.comments}
-                          </p>
-                        </div>
+                  {/* Toolbar: Search, Service Filter & View Switcher */}
+                  {enquiries.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      {/* Search Input */}
+                      <div className="relative min-w-[200px] sm:min-w-[240px]">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+                        <input
+                          type="text"
+                          value={enquirySearchQuery}
+                          onChange={(e) => setEnquirySearchQuery(e.target.value)}
+                          placeholder="Search leads..."
+                          className="w-full rounded-xl border border-border bg-surface pl-9 pr-7 py-1.5 text-xs text-foreground placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none transition-colors"
+                        />
+                        {enquirySearchQuery && (
+                          <button
+                            type="button"
+                            onClick={() => setEnquirySearchQuery("")}
+                            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground text-xs"
+                          >
+                            ×
+                          </button>
+                        )}
                       </div>
 
-                      <div className="mt-6 flex justify-end">
+                      {/* Service Filter */}
+                      {distinctServices.length > 0 && (
+                        <div className="relative">
+                          <select
+                            value={enquiryServiceFilter}
+                            onChange={(e) => setEnquiryServiceFilter(e.target.value)}
+                            aria-label="Filter enquiries by service"
+                            className="rounded-xl border border-border bg-surface px-3 py-1.5 text-xs text-foreground focus:border-primary focus:outline-none transition-colors cursor-pointer pr-7 appearance-none"
+                          >
+                            <option value="all">All Services ({enquiries.length})</option>
+                            {distinctServices.map((svc: string) => (
+                              <option key={svc} value={svc}>
+                                {svc}
+                              </option>
+                            ))}
+                          </select>
+                          <Filter className="absolute right-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
+                        </div>
+                      )}
+
+                      {/* View Mode Toggle (Cards vs Table) */}
+                      <div className="inline-flex rounded-xl border border-border bg-secondary/30 p-0.5">
                         <button
-                          onClick={() => handleDeleteEnquiry(item.id)}
-                          disabled={deleteEnquiryStatus?.id === item.id && deleteEnquiryStatus?.status === "loading"}
-                          className="inline-flex items-center gap-1.5 rounded-xl border border-destructive/30 bg-destructive/5 px-3.5 py-2 text-xs font-semibold text-destructive transition-all hover:bg-destructive hover:text-white disabled:opacity-50 cursor-pointer"
+                          type="button"
+                          onClick={() => setEnquiryViewMode("cards")}
+                          className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-semibold transition-all cursor-pointer ${
+                            enquiryViewMode === "cards"
+                              ? "bg-surface text-primary shadow-xs"
+                              : "text-muted-foreground hover:text-foreground"
+                          }`}
+                          title="Card Grid View"
                         >
-                          <Trash2 className="h-3.5 w-3.5" />
-                          {deleteEnquiryStatus?.id === item.id && deleteEnquiryStatus?.status === "loading"
-                            ? "Deleting..."
-                            : "Delete"}
+                          <LayoutGrid className="h-3.5 w-3.5" />
+                          <span className="hidden sm:inline">Cards</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setEnquiryViewMode("table")}
+                          className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-semibold transition-all cursor-pointer ${
+                            enquiryViewMode === "table"
+                              ? "bg-surface text-primary shadow-xs"
+                              : "text-muted-foreground hover:text-foreground"
+                          }`}
+                          title="Data Table View"
+                        >
+                          <List className="h-3.5 w-3.5" />
+                          <span className="hidden sm:inline">Table</span>
                         </button>
                       </div>
                     </div>
-                  ))}
+                  )}
                 </div>
-              )}
-            </div>
-          )}
+
+                {/* State: Loading */}
+                {enquiriesLoading && enquiries.length === 0 ? (
+                  <div className="grid gap-4 md:grid-cols-2 animate-pulse">
+                    {[1, 2].map((i) => (
+                      <div key={i} className="panel p-6 bg-surface-2 border border-border/50 h-56 rounded-2xl"></div>
+                    ))}
+                  </div>
+                ) : enquiriesError ? (
+                  <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 text-center">
+                    <p className="text-sm text-destructive font-medium">{enquiriesError}</p>
+                  </div>
+                ) : enquiries.length === 0 ? (
+                  <div className="panel p-12 text-center border border-dashed border-border/80 rounded-2xl flex flex-col items-center justify-center">
+                    <div className="rounded-full bg-secondary p-3 text-muted-foreground">
+                      <Inbox className="h-8 w-8" />
+                    </div>
+                    <h3 className="mt-4 text-base font-semibold text-foreground">No enquiries yet</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      Submissions from the website's contact form will appear here.
+                    </p>
+                  </div>
+                ) : filteredEnquiries.length === 0 ? (
+                  <div className="panel p-10 text-center border border-border/80 rounded-2xl flex flex-col items-center justify-center">
+                    <Search className="h-8 w-8 text-muted-foreground/60 mb-2" />
+                    <h3 className="text-sm font-semibold text-foreground">No matching enquiries</h3>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      No results matched your search or filter query.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEnquirySearchQuery("");
+                        setEnquiryServiceFilter("all");
+                      }}
+                      className="mt-3 text-xs font-semibold text-primary hover:underline cursor-pointer"
+                    >
+                      Clear search & filters
+                    </button>
+                  </div>
+                ) : enquiryViewMode === "cards" ? (
+                  /* Cards View */
+                  <div className="grid gap-6 md:grid-cols-2">
+                    {filteredEnquiries.map((item) => {
+                      const cleanName =
+                        [item.first_name, item.last_name]
+                          .filter(Boolean)
+                          .map((s: string) => s.trim())
+                          .filter((s: string) => s && s !== "-")
+                          .join(" ") || "Lead";
+
+                      const initials =
+                        cleanName
+                          .split(" ")
+                          .filter(Boolean)
+                          .slice(0, 2)
+                          .map((w: string) => w[0]?.toUpperCase())
+                          .join("") || "E";
+
+                      const locationString = [item.city, item.state, item.country, item.zip_code]
+                        .filter(Boolean)
+                        .join(", ");
+
+                      const formattedDate = item.created_at
+                        ? new Date(item.created_at).toLocaleDateString(undefined, {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                          })
+                        : "N/A";
+
+                      return (
+                        <div
+                          key={item.id}
+                          className="group relative rounded-2xl border border-border/80 bg-surface p-5 sm:p-6 shadow-xs transition-all duration-300 hover:shadow-lg hover:border-primary/45 flex flex-col justify-between overflow-hidden"
+                        >
+                          {/* Accent Gradient Border on Top */}
+                          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+
+                          <div>
+                            {/* Card Top Row: Avatar, Clean Name, Service Pill, and Date */}
+                            <div className="flex items-start justify-between gap-3">
+                              <div className="flex items-center gap-3 min-w-0">
+                                <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 border border-primary/25 text-primary flex items-center justify-center font-bold text-sm shrink-0 shadow-2xs">
+                                  {initials}
+                                </div>
+                                <div className="min-w-0">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <h4 className="font-bold text-base text-foreground truncate">
+                                      {cleanName}
+                                    </h4>
+                                    {item.service && (
+                                      <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20">
+                                        <Layers className="h-3 w-3" />
+                                        {item.service}
+                                      </span>
+                                    )}
+                                  </div>
+                                  {locationString && (
+                                    <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
+                                      <MapPin className="h-3 w-3 text-primary/70 shrink-0" />
+                                      <span className="truncate">{locationString}</span>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+
+                              <span className="shrink-0 inline-flex items-center gap-1 rounded-lg bg-secondary/60 border border-border/50 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+                                <Calendar className="h-3 w-3" />
+                                {formattedDate}
+                              </span>
+                            </div>
+
+                            {/* Contact Details Interactive Chips */}
+                            <div className="mt-4 flex flex-wrap items-center gap-2">
+                              {item.email && (
+                                <a
+                                  href={`mailto:${item.email}?subject=Regal%20OPs%20-%20Regarding%20your%20enquiry`}
+                                  className="inline-flex items-center gap-1.5 rounded-xl border border-border/70 bg-secondary/30 hover:bg-primary/10 hover:border-primary/40 px-3 py-1.5 text-xs font-medium text-foreground hover:text-primary transition-all"
+                                  title={`Email ${item.email}`}
+                                >
+                                  <Mail className="h-3.5 w-3.5 text-primary/70 shrink-0" />
+                                  <span className="truncate max-w-[200px]">{item.email}</span>
+                                </a>
+                              )}
+
+                              {item.mobile && (
+                                <a
+                                  href={`tel:${item.mobile}`}
+                                  className="inline-flex items-center gap-1.5 rounded-xl border border-border/70 bg-secondary/30 hover:bg-primary/10 hover:border-primary/40 px-3 py-1.5 text-xs font-medium text-foreground hover:text-primary transition-all"
+                                  title={`Call ${item.mobile}`}
+                                >
+                                  <Phone className="h-3.5 w-3.5 text-primary/70 shrink-0" />
+                                  <span>{item.mobile}</span>
+                                </a>
+                              )}
+                            </div>
+
+                            {/* Client Message / Comments Quote Block */}
+                            <div className="mt-4 rounded-xl border border-border/70 bg-secondary/25 p-3.5 transition-colors group-hover:border-primary/25">
+                              <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">
+                                <MessageSquare className="h-3.5 w-3.5 text-primary" />
+                                <span>Client Message / Notes</span>
+                              </div>
+                              <p className="text-sm leading-relaxed text-foreground whitespace-pre-wrap font-normal">
+                                {item.comments?.trim() ? (
+                                  item.comments
+                                ) : (
+                                  <span className="italic text-muted-foreground text-xs">No additional message provided.</span>
+                                )}
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Footer Action Bar */}
+                          <div className="mt-5 pt-3.5 border-t border-border/60 flex items-center justify-between gap-3">
+                            <div className="flex items-center gap-2">
+                              {item.email && (
+                                <a
+                                  href={`mailto:${item.email}?subject=Regal%20OPs%20-%20Response%20to%20your%20enquiry`}
+                                  className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground shadow-2xs hover:opacity-95 transition-all cursor-pointer"
+                                >
+                                  <Send className="h-3 w-3" />
+                                  <span>Reply via Email</span>
+                                </a>
+                              )}
+                              <button
+                                type="button"
+                                onClick={() => handleCopyEnquiry(item)}
+                                className="inline-flex items-center gap-1 rounded-xl border border-border bg-background hover:bg-secondary px-2.5 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+                                title="Copy Contact Summary"
+                              >
+                                {copiedEnquiryId === item.id ? (
+                                  <>
+                                    <Check className="h-3.5 w-3.5 text-emerald-500" />
+                                    <span className="text-emerald-600 font-semibold text-[11px]">Copied</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Copy className="h-3.5 w-3.5" />
+                                    <span className="text-[11px]">Copy</span>
+                                  </>
+                                )}
+                              </button>
+                            </div>
+
+                            <button
+                              onClick={() => handleDeleteEnquiry(item.id)}
+                              disabled={deleteEnquiryStatus?.id === item.id && deleteEnquiryStatus?.status === "loading"}
+                              className="inline-flex items-center gap-1.5 rounded-xl border border-destructive/25 bg-destructive/5 hover:bg-destructive hover:text-white px-3 py-1.5 text-xs font-semibold text-destructive transition-all disabled:opacity-50 cursor-pointer"
+                              title="Delete enquiry"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                              <span>
+                                {deleteEnquiryStatus?.id === item.id && deleteEnquiryStatus?.status === "loading"
+                                  ? "Deleting..."
+                                  : "Delete"}
+                              </span>
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  /* Compact Data Table View */
+                  <div className="rounded-2xl border border-border/80 bg-surface overflow-hidden shadow-xs">
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left text-xs">
+                        <thead className="bg-secondary/50 border-b border-border text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                          <tr>
+                            <th className="py-3 px-4">Contact</th>
+                            <th className="py-3 px-4">Service</th>
+                            <th className="py-3 px-4">Contact Info</th>
+                            <th className="py-3 px-4">Location</th>
+                            <th className="py-3 px-4">Message</th>
+                            <th className="py-3 px-4">Date</th>
+                            <th className="py-3 px-4 text-right">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-border/60">
+                          {filteredEnquiries.map((item) => {
+                            const cleanName =
+                              [item.first_name, item.last_name]
+                                .filter(Boolean)
+                                .map((s: string) => s.trim())
+                                .filter((s: string) => s && s !== "-")
+                                .join(" ") || "Lead";
+
+                            const initials =
+                              cleanName
+                                .split(" ")
+                                .filter(Boolean)
+                                .slice(0, 2)
+                                .map((w: string) => w[0]?.toUpperCase())
+                                .join("") || "E";
+
+                            const locationString = [item.city, item.state, item.country, item.zip_code]
+                              .filter(Boolean)
+                              .join(", ") || "—";
+
+                            const formattedDate = item.created_at
+                              ? new Date(item.created_at).toLocaleDateString(undefined, {
+                                  month: "short",
+                                  day: "numeric",
+                                  year: "numeric",
+                                })
+                              : "—";
+
+                            return (
+                              <tr key={item.id} className="hover:bg-secondary/20 transition-colors">
+                                <td className="py-3 px-4">
+                                  <div className="flex items-center gap-2.5">
+                                    <div className="h-8 w-8 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center font-bold text-xs shrink-0">
+                                      {initials}
+                                    </div>
+                                    <span className="font-bold text-foreground whitespace-nowrap">{cleanName}</span>
+                                  </div>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <span className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase bg-primary/10 text-primary border border-primary/20">
+                                    {item.service || "—"}
+                                  </span>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <div className="space-y-0.5">
+                                    {item.email && (
+                                      <a href={`mailto:${item.email}`} className="text-foreground hover:text-primary transition-colors flex items-center gap-1">
+                                        <Mail className="h-3 w-3 text-muted-foreground" /> {item.email}
+                                      </a>
+                                    )}
+                                    {item.mobile && (
+                                      <a href={`tel:${item.mobile}`} className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
+                                        <Phone className="h-3 w-3 text-muted-foreground" /> {item.mobile}
+                                      </a>
+                                    )}
+                                  </div>
+                                </td>
+                                <td className="py-3 px-4 text-muted-foreground max-w-[160px] truncate" title={locationString}>
+                                  {locationString}
+                                </td>
+                                <td className="py-3 px-4 max-w-[240px]">
+                                  <p className="line-clamp-2 text-foreground/90 text-xs" title={item.comments}>
+                                    {item.comments || <span className="italic text-muted-foreground text-[11px]">No message</span>}
+                                  </p>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap text-muted-foreground">
+                                  {formattedDate}
+                                </td>
+                                <td className="py-3 px-4 text-right whitespace-nowrap">
+                                  <div className="inline-flex items-center gap-1.5 justify-end">
+                                    {item.email && (
+                                      <a
+                                        href={`mailto:${item.email}?subject=Regal%20OPs%20-%20Response`}
+                                        className="p-1.5 rounded-lg border border-border hover:bg-primary/10 hover:border-primary/40 text-muted-foreground hover:text-primary transition-all"
+                                        title="Email Client"
+                                      >
+                                        <Mail className="h-3.5 w-3.5" />
+                                      </a>
+                                    )}
+                                    <button
+                                      type="button"
+                                      onClick={() => handleCopyEnquiry(item)}
+                                      className="p-1.5 rounded-lg border border-border hover:bg-secondary text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+                                      title="Copy Contact Details"
+                                    >
+                                      {copiedEnquiryId === item.id ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => handleDeleteEnquiry(item.id)}
+                                      disabled={deleteEnquiryStatus?.id === item.id && deleteEnquiryStatus?.status === "loading"}
+                                      className="p-1.5 rounded-lg border border-destructive/30 hover:bg-destructive hover:text-white text-destructive transition-all cursor-pointer disabled:opacity-50"
+                                      title="Delete"
+                                    >
+                                      <Trash2 className="h-3.5 w-3.5" />
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })()}
 
           {activeTab === "solutions" && (
             <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">

@@ -155,6 +155,29 @@
   box-shadow: var(--shadow-elevated);
 }
 
+/* ========================================================================== */
+/* TEXT JUSTIFICATION FOR CONTENT & CARDS (Req: Justify content for all & cards) */
+/* ========================================================================== */
+p,
+.panel p,
+.card p,
+article p,
+.prose p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Maintain explicit alignment when specified */
+.text-center, .text-center p, p.text-center {
+  text-align: center !important;
+}
+.text-left, .text-left p, p.text-left {
+  text-align: left !important;
+}
+.text-right, .text-right p, p.text-right {
+  text-align: right !important;
+}
+
 @utility grid-lines {
   background-image: linear-gradient(
       to right,

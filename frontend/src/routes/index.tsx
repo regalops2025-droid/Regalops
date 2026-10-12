@@ -859,7 +859,7 @@ function Home() {
                   )}
 
                   {/* Paragraph Description - Deep dark readable text */}
-                  <p className="mt-2 max-w-xl text-xs sm:text-sm leading-relaxed text-neutral-950 sm:text-neutral-700 font-semibold sm:font-normal">
+                  <p className="mt-2 max-w-xl text-xs sm:text-sm leading-relaxed text-justify text-neutral-950 sm:text-neutral-700 font-semibold sm:font-normal">
                     {slide.desc}
                   </p>
 

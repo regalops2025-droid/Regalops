@@ -6,10 +6,10 @@ import { ScrollRevealProvider } from "./scroll-reveal";
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col overflow-x-hidden w-full max-w-full">
       <ScrollRevealProvider />
       <SiteHeader />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 w-full max-w-full overflow-x-hidden">{children}</main>
       <SiteFooter />
 
       {/* Sticky Quick Contact Actions (WhatsApp & Call Buttons) */}

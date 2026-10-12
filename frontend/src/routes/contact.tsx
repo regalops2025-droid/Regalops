@@ -187,13 +187,13 @@ function Contact() {
       <PageHero
         eyebrow={jobTitle ? "Careers" : "Contact us"}
         title={jobTitle ? `Apply for ${jobTitle}` : "Start with a technical conversation"}
-        titleClassName="max-w-none whitespace-nowrap text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight"
+        titleClassName="max-w-none text-2xl xs:text-3xl sm:text-4xl lg:text-5xl lg:whitespace-nowrap tracking-tight break-words"
         description={
           jobTitle
             ? "Submit your details and CV/Resume below to apply. Our engineering leads will review it shortly."
             : undefined
         }
-        descriptionClassName="max-w-none md:whitespace-nowrap"
+        descriptionClassName="max-w-none md:whitespace-nowrap break-words"
       />
       <Section className="w-full">
         {/* Full Screen Width Contact Form */}

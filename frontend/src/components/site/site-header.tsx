@@ -279,13 +279,13 @@ export function SiteHeader() {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden xl:flex items-center gap-1.5 xl:gap-2.5 2xl:gap-4 shrink" aria-label="Main Navigation">
+            <nav className="hidden xl:flex items-center gap-3 xl:gap-5.5 2xl:gap-7 shrink-0" aria-label="Main Navigation">
               {/* Home */}
               <Link
                 to="/"
-                className={`relative whitespace-nowrap text-[12.5px] xl:text-[13px] 2xl:text-sm font-semibold transition-colors py-1 ${
+                className={`relative whitespace-nowrap text-[13.5px] xl:text-[14px] 2xl:text-[14.5px] font-semibold transition-colors py-1.5 px-1.5 ${
                   isActive("/")
-                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
+                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1 after:left-1.5 after:right-1.5 after:h-[2.5px] after:bg-[#555d25] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
                 }`}
               >
@@ -295,9 +295,9 @@ export function SiteHeader() {
               {/* About Us */}
               <Link
                 to="/about"
-                className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
+                className={`relative whitespace-nowrap text-[13.5px] xl:text-[14px] 2xl:text-[14.5px] font-medium transition-colors py-1.5 px-1.5 ${
                   isActive("/about")
-                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
+                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1 after:left-1.5 after:right-1.5 after:h-[2.5px] after:bg-[#555d25] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
                 }`}
               >
@@ -308,14 +308,14 @@ export function SiteHeader() {
               <div className="group relative">
                 <Link
                   to="/solutions"
-                  className={`flex items-center gap-0.5 whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
+                  className={`flex items-center gap-1 whitespace-nowrap text-[13.5px] xl:text-[14px] 2xl:text-[14.5px] font-medium transition-colors py-1.5 px-1.5 ${
                     isActive("/solutions")
-                      ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
+                      ? "text-[#555d25] font-bold after:absolute after:-bottom-1 after:left-1.5 after:right-1.5 after:h-[2.5px] after:bg-[#555d25] after:rounded-full"
                       : "text-neutral-700 hover:text-neutral-950"
                   }`}
                 >
                   <span>Solutions</span>
-                  <ChevronDown className="h-3 w-3 text-neutral-400 group-hover:rotate-180 transition-transform duration-200" />
+                  <ChevronDown className="h-3.5 w-3.5 text-neutral-400 group-hover:rotate-180 transition-transform duration-200" />
                 </Link>
 
                 {/* Solutions Dropdown Menu */}
@@ -359,14 +359,14 @@ export function SiteHeader() {
               <div className="group relative">
                 <Link
                   to="/technologies"
-                  className={`flex items-center gap-0.5 whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
+                  className={`flex items-center gap-1 whitespace-nowrap text-[13.5px] xl:text-[14px] 2xl:text-[14.5px] font-medium transition-colors py-1.5 px-1.5 ${
                     isActive("/technologies")
-                      ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
+                      ? "text-[#555d25] font-bold after:absolute after:-bottom-1 after:left-1.5 after:right-1.5 after:h-[2.5px] after:bg-[#555d25] after:rounded-full"
                       : "text-neutral-700 hover:text-neutral-950"
                   }`}
                 >
                   <span>Technologies</span>
-                  <ChevronDown className="h-3 w-3 text-neutral-400 group-hover:rotate-180 transition-transform duration-200" />
+                  <ChevronDown className="h-3.5 w-3.5 text-neutral-400 group-hover:rotate-180 transition-transform duration-200" />
                 </Link>
 
                 {/* Technologies Dropdown Menu */}
@@ -407,9 +407,9 @@ export function SiteHeader() {
               {/* Clients */}
               <Link
                 to="/clients"
-                className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
+                className={`relative whitespace-nowrap text-[13.5px] xl:text-[14px] 2xl:text-[14.5px] font-medium transition-colors py-1.5 px-1.5 ${
                   isActive("/clients")
-                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
+                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1 after:left-1.5 after:right-1.5 after:h-[2.5px] after:bg-[#555d25] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
                 }`}
               >
@@ -419,9 +419,9 @@ export function SiteHeader() {
               {/* Career */}
               <Link
                 to="/career"
-                className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
+                className={`relative whitespace-nowrap text-[13.5px] xl:text-[14px] 2xl:text-[14.5px] font-medium transition-colors py-1.5 px-1.5 ${
                   isActive("/career")
-                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
+                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1 after:left-1.5 after:right-1.5 after:h-[2.5px] after:bg-[#555d25] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
                 }`}
               >
@@ -431,9 +431,9 @@ export function SiteHeader() {
               {/* Blog */}
               <Link
                 to="/blog"
-                className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
+                className={`relative whitespace-nowrap text-[13.5px] xl:text-[14px] 2xl:text-[14.5px] font-medium transition-colors py-1.5 px-1.5 ${
                   isActive("/blog")
-                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
+                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1 after:left-1.5 after:right-1.5 after:h-[2.5px] after:bg-[#555d25] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
                 }`}
               >
@@ -443,9 +443,9 @@ export function SiteHeader() {
               {/* Contact Us */}
               <Link
                 to="/contact"
-                className={`relative whitespace-nowrap text-[13px] 2xl:text-sm font-medium transition-colors py-1 ${
+                className={`relative whitespace-nowrap text-[13.5px] xl:text-[14px] 2xl:text-[14.5px] font-medium transition-colors py-1.5 px-1.5 ${
                   isActive("/contact")
-                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-[2px] after:bg-[#555d25] after:rounded-full"
+                    ? "text-[#555d25] font-bold after:absolute after:-bottom-1 after:left-1.5 after:right-1.5 after:h-[2.5px] after:bg-[#555d25] after:rounded-full"
                     : "text-neutral-700 hover:text-neutral-950"
                 }`}
               >

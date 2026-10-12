@@ -376,6 +376,82 @@ const CLIENT_CATEGORIES = [
   { id: "healthcare", label: "HEALTHCARE", icon: HeartPulse },
 ] as const;
 
+function ClientCaseCard({ study }: { study: any }) {
+  const [imgError, setImgError] = useState(false);
+  const initials = (study.name || "C")
+    .trim()
+    .split(/\s+/)
+    .map((s: string) => s[0])
+    .filter(Boolean)
+    .join("")
+    .slice(0, 2)
+    .toUpperCase() || "CP";
+
+  const hasValidImage = Boolean(study.image && !imgError);
+
+  return (
+    <div
+      key={study.id}
+      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-white dark:bg-slate-950 border border-slate-200/90 dark:border-slate-800 p-6 sm:p-7 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5"
+    >
+      <div>
+        {/* Cover image or high-end branded fallback banner */}
+        {hasValidImage ? (
+          <div className="relative mb-5 h-48 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100/90 dark:from-slate-900 dark:to-slate-950 border border-slate-200/60 dark:border-slate-800 flex items-center justify-center p-3">
+            <img
+              src={study.image}
+              alt={study.name}
+              className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+              onError={() => setImgError(true)}
+            />
+            {study.sector && (
+              <div className="absolute top-3 left-3 rounded-full bg-slate-950/85 backdrop-blur-md px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-emerald-400 border border-emerald-500/30 shadow-md">
+                {study.sector}
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="relative mb-5 h-44 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-[#0c2017] via-[#091811] to-[#06120d] border border-[#1b3e2d] flex items-center justify-between p-5 sm:p-6 shadow-inner">
+            {/* Ambient pattern */}
+            <div className="pointer-events-none absolute inset-0 opacity-20 bg-[radial-gradient(#34d399_1px,transparent_1px)] [background-size:16px_16px]" />
+            <div className="relative z-10 flex items-center gap-3.5">
+              <div className="h-14 w-14 rounded-2xl bg-[#555d25]/30 border border-[#555d25]/50 flex items-center justify-center text-xl font-black text-[#a4c965] shadow-inner">
+                {initials}
+              </div>
+              <div className="max-w-[150px] sm:max-w-[180px]">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400/90">
+                  Client Partner
+                </span>
+                <p className="text-sm font-bold text-white leading-tight line-clamp-1">
+                  {study.name}
+                </p>
+              </div>
+            </div>
+            {study.sector && (
+              <div className="relative z-10 rounded-full bg-emerald-500/15 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-400 border border-emerald-500/30">
+                {study.sector}
+              </div>
+            )}
+          </div>
+        )}
+
+        <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-[#555d25] dark:group-hover:text-emerald-400 transition-colors">
+          {study.name}
+        </h3>
+        <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          {study.description}
+        </p>
+      </div>
+
+      <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-[#555d25] dark:text-emerald-400">
+        <span>Verified Engagement</span>
+        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+      </div>
+    </div>
+  );
+}
+
 function Clients() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [showAll, setShowAll] = useState(false);
@@ -801,47 +877,7 @@ function Clients() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {filteredCaseStudies.map((study) => (
-                <div
-                  key={study.id}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-white dark:bg-slate-950 border border-slate-200/90 dark:border-slate-800 p-6 sm:p-7 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5"
-                >
-                  <div>
-                    {/* Cover image if available */}
-                    {study.image ? (
-                      <div className="relative mb-5 h-48 w-full overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800">
-                        <img
-                          src={study.image}
-                          alt={study.name}
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          loading="lazy"
-                        />
-                        {study.sector && (
-                          <div className="absolute top-3 left-3 rounded-full bg-slate-950/85 backdrop-blur-md px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-emerald-400 border border-emerald-500/30 shadow-md">
-                            {study.sector}
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      study.sector && (
-                        <div className="mb-4 inline-block rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#555d25] dark:text-emerald-400 border border-emerald-500/20">
-                          {study.sector}
-                        </div>
-                      )
-                    )}
-
-                    <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-[#555d25] dark:group-hover:text-emerald-400 transition-colors">
-                      {study.name}
-                    </h3>
-                    <p className="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                      {study.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-[#555d25] dark:text-emerald-400">
-                    <span>Verified Engagement</span>
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
+                <ClientCaseCard key={study.id} study={study} />
               ))}
             </div>
           )}

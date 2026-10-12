@@ -28,13 +28,24 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-// Serve static uploads
+// Serve static uploads (from both backend/uploads and root/uploads)
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+// Return clean 404 for missing uploads so SPA route doesn't return index.html
+app.use("/uploads", (req, res) => {
+  res.status(404).json({ error: "Upload not found" });
+});
 
 // Ensure upload directory exists
 const uploadDir = path.join(__dirname, "uploads");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
+}
+const rootUploadDir = path.join(__dirname, "../uploads");
+if (!fs.existsSync(rootUploadDir)) {
+  try {
+    fs.mkdirSync(rootUploadDir, { recursive: true });
+  } catch (e) {}
 }
 
 // Multer config for CV/Resume uploads
@@ -565,12 +576,17 @@ async function initDB() {
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         sector VARCHAR(255) NOT NULL,
-        image VARCHAR(255),
+        image TEXT,
         description TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
     console.log('Table "clients" verified.');
+
+    // Ensure image column is TEXT in MySQL
+    try {
+      await pool.query("ALTER TABLE clients MODIFY COLUMN image TEXT");
+    } catch (e) {}
 
     // Create industries table
     await pool.query(`
@@ -682,6 +698,19 @@ async function initDB() {
 app.post("/api/upload/image", imageUpload.single("image"), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: "No image file provided." });
+  }
+  // Sync to root uploads folder as well for direct static file serving
+  try {
+    const rootUploads = path.join(__dirname, "../uploads");
+    if (!fs.existsSync(rootUploads)) {
+      fs.mkdirSync(rootUploads, { recursive: true });
+    }
+    const rootDest = path.join(rootUploads, req.file.filename);
+    if (!fs.existsSync(rootDest)) {
+      fs.copyFileSync(req.file.path, rootDest);
+    }
+  } catch (syncErr) {
+    // Non-fatal if root directory is restricted
   }
   const fileUrl = `/uploads/${req.file.filename}`;
   res.json({ url: fileUrl });

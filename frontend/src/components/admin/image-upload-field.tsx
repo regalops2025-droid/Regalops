@@ -24,18 +24,26 @@ export function ImageUploadField({
   const [uploadError, setUploadError] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const [showUrlInput, setShowUrlInput] = useState(false);
+  const [loadError, setLoadError] = useState(false);
   const [imageDim, setImageDim] = useState<{ width: number; height: number } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!value) {
       setImageDim(null);
+      setLoadError(false);
       return;
     }
+    setLoadError(false);
     const img = new Image();
     img.src = value;
     img.onload = () => {
       setImageDim({ width: img.naturalWidth, height: img.naturalHeight });
+      setLoadError(false);
+    };
+    img.onerror = () => {
+      setLoadError(true);
+      setImageDim(null);
     };
   }, [value]);
 
@@ -165,23 +173,35 @@ export function ImageUploadField({
         <div className="group relative overflow-hidden rounded-2xl border border-border bg-surface/50 p-2.5 sm:p-3 transition-all hover:border-primary/40">
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
             <div className="relative h-28 xs:h-32 sm:h-20 w-full sm:w-28 shrink-0 overflow-hidden rounded-xl border border-border/80 bg-surface-2 shadow-xs flex items-center justify-center">
-              <img
-                src={value}
-                alt={label}
-                className="max-h-full max-w-full object-contain p-1 transition-transform duration-300 group-hover:scale-105"
-                onError={(e) => {
-                  (e.target as HTMLElement).style.display = "none";
-                }}
-              />
+              {loadError ? (
+                <div className="flex flex-col items-center justify-center p-2 text-center text-amber-500">
+                  <AlertCircle className="h-6 w-6 mb-1" />
+                  <span className="text-[10px] font-semibold">Image broken</span>
+                </div>
+              ) : (
+                <img
+                  src={value}
+                  alt={label}
+                  className="max-h-full max-w-full object-contain p-1 transition-transform duration-300 group-hover:scale-105"
+                  onError={() => setLoadError(true)}
+                />
+              )}
             </div>
 
             <div className="min-w-0 flex-1 space-y-1.5 sm:space-y-2">
               <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                  <CheckCircle2 className="h-4 w-4 shrink-0" />
-                  <span>Image uploaded</span>
-                </div>
-                {imageDim && (
+                {loadError ? (
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-600 dark:text-amber-400">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    <span>File not found on server or link broken</span>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                    <span>Image uploaded</span>
+                  </div>
+                )}
+                {imageDim && !loadError && (
                   <span className="text-[10px] px-2 py-0.5 rounded-md bg-surface-2 border border-border/80 text-foreground font-mono font-medium">
                     {imageDim.width} × {imageDim.height} px
                   </span>
@@ -195,9 +215,15 @@ export function ImageUploadField({
               <p className="truncate text-xs text-muted-foreground font-mono" title={value}>
                 {value.startsWith("data:") ? "Local upload (embedded)" : value}
               </p>
-              <p className="text-[11px] text-emerald-600/90 dark:text-emerald-400/90 font-medium leading-tight">
-                ✓ Full image preserved naturally without cutting or blocking
-              </p>
+              {loadError ? (
+                <p className="text-[11px] text-amber-600 dark:text-amber-400 font-medium leading-tight">
+                  ⚠ Please click &ldquo;Replace image&rdquo; below to upload photo from your device.
+                </p>
+              ) : (
+                <p className="text-[11px] text-emerald-600/90 dark:text-emerald-400/90 font-medium leading-tight">
+                  ✓ Full image preserved naturally without cutting or blocking
+                </p>
+              )}
 
               <div className="flex flex-wrap items-center gap-2 pt-1">
                 <button

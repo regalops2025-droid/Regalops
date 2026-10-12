@@ -95,10 +95,13 @@ try {
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         sector VARCHAR(255) NOT NULL,
-        image VARCHAR(255),
+        image TEXT,
         description TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
+    try {
+        $pdo->exec("ALTER TABLE clients MODIFY COLUMN image TEXT");
+    } catch (Exception $e) {}
     echo "<p>Table 'clients' checked/created.</p>";
 
     // 6. industries

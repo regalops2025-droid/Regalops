@@ -226,7 +226,7 @@ function About() {
       {/* ==================================================================== */}
       <section className="relative w-full overflow-hidden bg-[#07192F]">
         {/* Main Banner Container */}
-        <div className="relative min-h-[380px] sm:min-h-[420px] lg:min-h-[460px] flex flex-col justify-between">
+        <div className="relative flex flex-col justify-center">
           
           {/* Background Right Side Image: Twilight Skyline & Highway Trails */}
           <div className="absolute top-0 right-0 bottom-0 w-full lg:w-[60%] select-none pointer-events-none overflow-hidden">
@@ -264,7 +264,7 @@ function About() {
           </div>
 
           {/* Left Column Content Container */}
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-8 sm:py-10 lg:py-12">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-10 sm:py-14 lg:py-16">
             <div className="max-w-2xl text-left space-y-6">
               
               {/* Top Tagline / Eyebrow */}
@@ -303,38 +303,9 @@ function About() {
             </div>
           </div>
 
-          {/* Multi-Layer Wave Transition SVG with Golden Metallic Ribbon Trim */}
-          <div className="relative w-full overflow-hidden leading-none select-none pointer-events-none -mb-[1px]">
-            <svg
-              className="w-full h-16 sm:h-24 lg:h-32 block"
-              viewBox="0 0 1440 180"
-              preserveAspectRatio="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="goldWaveRibbon" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#b38e36" />
-                  <stop offset="35%" stopColor="#F59E0B" />
-                  <stop offset="70%" stopColor="#b38e36" />
-                  <stop offset="100%" stopColor="#b38e36" />
-                </linearGradient>
-              </defs>
-              {/* Golden metallic wave ribbon accent layer */}
-              <path
-                d="M0,60 C320,165 650,140 980,50 C1200,-10 1350,35 1440,60 L1440,180 L0,180 Z"
-                fill="url(#goldWaveRibbon)"
-              />
-              {/* White wave base smoothly flowing into page */}
-              <path
-                d="M0,76 C320,180 650,155 980,66 C1200,6 1350,50 1440,75 L1440,180 L0,180 Z"
-                fill="#FFFFFF"
-              />
-            </svg>
-          </div>
-
         </div>
 
-        {/* Section Intro: "OUR PURPOSE" (Directly under the wave) */}
+        {/* Section Intro: "OUR PURPOSE" (Directly under the banner) */}
         <div className="relative bg-white pt-10 pb-4 text-center">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
             <div className="flex items-center justify-center gap-2.5 text-emerald-600 text-xs font-bold tracking-[0.22em] uppercase mb-3">
@@ -637,32 +608,32 @@ function About() {
       {/* ==================================================================== */}
       {/* 6. EXECUTIVE CTA BANNER                                               */}
       {/* ==================================================================== */}
-      <section className="bg-white py-6 sm:py-8">
+      <section className="bg-white py-3 sm:py-4">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-neutral-900 via-neutral-950 to-neutral-900 p-6 sm:p-8 lg:p-10 shadow-2xl border border-neutral-800 text-center">
-            <div className="pointer-events-none absolute -right-20 -bottom-20 h-80 w-80 rounded-full bg-[#fdfaf2]0/10 blur-3xl" />
-            <div className="pointer-events-none absolute -left-20 -top-20 h-80 w-80 rounded-full bg-[#555d25]/10 blur-3xl" />
+          <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-neutral-900 via-neutral-950 to-neutral-900 py-5 sm:py-6 lg:py-7 px-5 sm:px-8 shadow-2xl border border-neutral-800 text-center">
+            <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-[#b38e36]/10 blur-3xl" />
+            <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-[#555d25]/10 blur-3xl" />
 
             <div className="relative z-10 max-w-3xl mx-auto">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/30 bg-[#fdfaf2]0/10 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#eddcb8]">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/30 bg-[#b38e36]/10 px-3 py-0.5 text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#eddcb8]">
                 Accelerate With Confidence
               </span>
-              <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+              <h2 className="mt-2 text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight">
                 Ready to Transform Your Technology Landscape?
               </h2>
-              <p className="mt-2 text-sm sm:text-base text-neutral-300 leading-relaxed max-w-xl mx-auto">
+              <p className="mt-1.5 text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-lg mx-auto">
                 Schedule an executive architectural consultation with our principal engineering team.
               </p>
-              <div className="mt-5 flex flex-wrap justify-center items-center gap-3.5">
+              <div className="mt-4 flex flex-wrap justify-center items-center gap-3">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#555d25] hover:bg-[#8c6d23] px-7 py-3 text-sm font-bold text-white shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#555d25] hover:bg-[#8c6d23] px-6 py-2.5 text-xs sm:text-sm font-bold text-white shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                 >
                   Talk to an Engineer <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   to="/solutions"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 px-6 py-3 text-sm font-semibold text-white transition-all backdrop-blur-xs cursor-pointer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white transition-all backdrop-blur-xs cursor-pointer"
                 >
                   View Solutions Catalog
                 </Link>

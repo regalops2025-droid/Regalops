@@ -23,6 +23,7 @@ export function PageHero({
   title,
   description,
   className = "",
+  containerClassName = "",
   descriptionClassName = "",
   titleClassName = "",
 }: {
@@ -30,12 +31,14 @@ export function PageHero({
   title: string;
   description?: string;
   className?: string;
+  containerClassName?: string;
   descriptionClassName?: string;
   titleClassName?: string;
 }) {
+  const hasCustomMaxW = containerClassName.includes("max-w-");
   return (
     <section className={`hero-glow border-b border-border ${className}`}>
-      <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
+      <div className={`mx-auto ${hasCustomMaxW ? "" : "max-w-7xl"} px-4 py-5 sm:px-6 sm:py-6 lg:px-8 ${containerClassName}`}>
         <span className="inline-flex items-center rounded-full border border-border bg-surface px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
           {eyebrow}
         </span>
@@ -59,8 +62,13 @@ export function Section({
   children: ReactNode;
   className?: string;
 }) {
+  const hasCustomMaxW = className.includes("max-w-");
+  const hasCustomPx = className.includes("px-");
+  const hasCustomPy = className.includes("py-");
   return (
-    <section className={`mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-6 lg:px-8 ${className}`}>
+    <section
+      className={`mx-auto ${hasCustomMaxW ? "" : "max-w-7xl"} ${hasCustomPx ? "" : "px-4 sm:px-6 lg:px-8"} ${hasCustomPy ? "" : "py-5 sm:py-6"} ${className}`}
+    >
       {children}
     </section>
   );

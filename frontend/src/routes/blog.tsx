@@ -157,12 +157,13 @@ function Blog() {
             eyebrow="Blog"
             title="Engineering notes, no marketing filler"
             description="Written by the people on call. Practical lessons from production systems in regulated industries."
+            containerClassName="w-full max-w-[1720px] px-4 sm:px-6 lg:px-8 xl:px-12"
           />
-          <Section>
+          <Section className="w-full max-w-[1720px] px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8">
             {loading ? (
-              <div className="grid gap-6 sm:grid-cols-2 animate-pulse">
-                {[1, 2].map((i) => (
-                  <div key={i} className="panel h-64 bg-surface-2 border border-border/50 rounded-2xl"></div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-6 animate-pulse">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="panel h-80 bg-surface-2 border border-border/50 rounded-2xl"></div>
                 ))}
               </div>
             ) : posts.length === 0 ? (
@@ -176,28 +177,29 @@ function Blog() {
                 </p>
               </div>
             ) : (
-              <div className="grid gap-6 sm:grid-cols-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-6">
                 {posts.map((p) => (
                   <article
                     key={p.id}
-                    className="panel overflow-hidden border border-border/85 hover:border-primary/45 transition-all duration-300 flex flex-col justify-between rounded-2xl bg-surface group"
+                    className="panel overflow-hidden border border-border/85 hover:border-primary/50 transition-all duration-300 flex flex-col justify-between rounded-2xl bg-surface group shadow-sm hover:shadow-md hover:-translate-y-0.5"
                   >
                     <div>
                       {p.image && (
-                        <div className="aspect-[16/9] w-full overflow-hidden border-b border-border/80 bg-slate-900/10 relative">
+                        <div className="aspect-[16/10] w-full overflow-hidden border-b border-border/80 bg-slate-900/10 relative">
                           <img
                             src={p.image}
                             alt={p.title}
                             className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
                           />
                         </div>
                       )}
-                      <div className="p-6">
-                        <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-                          <span className="rounded-full bg-primary/10 px-3 py-1 font-semibold text-primary uppercase tracking-wider">
+                      <div className="p-5">
+                        <div className="flex flex-wrap items-center gap-2.5 text-xs text-muted-foreground">
+                          <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-semibold text-primary uppercase tracking-wider">
                             {p.tag}
                           </span>
-                          <span>
+                          <span className="text-[11px]">
                             {new Date(p.created_at).toLocaleDateString(undefined, {
                               month: "short",
                               day: "numeric",
@@ -205,18 +207,19 @@ function Blog() {
                             })}
                           </span>
                         </div>
-                        <h2 className="mt-4 text-lg font-semibold sm:text-xl text-foreground leading-snug group-hover:text-primary transition-colors">
+                        <h2 className="mt-3 text-base font-bold sm:text-lg text-foreground leading-snug group-hover:text-primary transition-colors line-clamp-2">
                           {p.title}
                         </h2>
-                        <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                        <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground line-clamp-3">
                           {p.description}
                         </p>
                       </div>
                     </div>
-                    <div className="p-6 pt-0 flex justify-end">
+                    <div className="p-5 pt-0 flex items-center justify-between border-t border-border/40 mt-3">
+                      <span className="text-[11px] text-muted-foreground font-medium">Regal OPs</span>
                       <button
                         onClick={() => handleSelectPost(p)}
-                        className="inline-flex items-center gap-1 rounded-xl border border-border bg-background px-4 py-2 text-xs font-semibold text-foreground transition-all hover:border-primary hover:text-primary cursor-pointer"
+                        className="inline-flex items-center gap-1 rounded-xl border border-border bg-background px-3.5 py-1.5 text-xs font-semibold text-foreground transition-all hover:border-primary hover:text-primary hover:bg-primary/5 cursor-pointer"
                       >
                         Read more &gt;
                       </button>

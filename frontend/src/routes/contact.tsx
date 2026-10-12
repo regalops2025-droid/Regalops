@@ -195,33 +195,109 @@ function Contact() {
         }
         descriptionClassName="max-w-none md:whitespace-nowrap break-words"
       />
-      <Section className="w-full">
-        {/* Full Screen Width Contact Form */}
-        <div className="w-full space-y-5">
-          <form className="panel p-5 sm:p-7 lg:p-8 space-y-4 w-full shadow-lg border border-border/80 rounded-3xl bg-surface" onSubmit={handleSubmit}>
-            <div className="border-b border-border/60 pb-3.5 mb-1.5">
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
-                {jobTitle ? `Submit Application for ${jobTitle}` : "Send an Engineering Enquiry"}
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {jobTitle
-                  ? "Fill in your details below and upload your CV/Resume."
-                  : "Tell us about your system architecture, project scope, or enterprise technical requirements."}
-              </p>
+      <Section className="w-full max-w-[1440px] px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
+        {/* Full Screen Width 2-Column Split: Left Image Card, Right Form */}
+        <div className="w-full space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+            
+            {/* LEFT COLUMN: Visual Image Card & Executive Contact Details */}
+            <div className="lg:col-span-5 relative overflow-hidden rounded-3xl bg-neutral-950 text-white border border-neutral-800/80 shadow-2xl flex flex-col justify-between min-h-[460px] lg:min-h-full">
+              {/* Image Background */}
+              <div className="absolute inset-0 z-0">
+                <img
+                  src="/solutions-team.jpg"
+                  alt="Regal OPs Engineering Team Consultation"
+                  className="h-full w-full object-cover object-center scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/85 to-neutral-950/40" />
+                <div className="absolute inset-0 bg-[#07192F]/60 mix-blend-multiply" />
+              </div>
+
+              {/* Top Details */}
+              <div className="relative z-10 p-6 sm:p-8">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="h-2 w-2 rounded-full bg-[#a4c965] animate-pulse" />
+                  <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#a4c965]">
+                    Architecture Consultation
+                  </span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
+                  Let&apos;s Build Resilient <br />
+                  <span className="text-[#a4c965]">Systems Together</span>
+                </h2>
+                <p className="mt-3 text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-sm">
+                  Schedule an architectural review with our principal engineers. We dive straight into technical realities &mdash; zero sales bureaucracy.
+                </p>
+              </div>
+
+              {/* Bottom Card Content */}
+              <div className="relative z-10 p-6 sm:p-8 space-y-4">
+                <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md p-4 space-y-3 shadow-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="h-9 w-9 rounded-xl bg-[#555d25] flex items-center justify-center shrink-0 text-white shadow-sm">
+                      <Mail className="h-4 w-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 block">Direct Engineering Contact</span>
+                      <a href="mailto:Info@regalops.com" className="text-sm font-bold text-white hover:text-[#a4c965] transition-colors truncate block">
+                        Info@regalops.com
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 pt-2.5 border-t border-white/10">
+                    <div className="h-9 w-9 rounded-xl bg-neutral-800 flex items-center justify-center shrink-0 text-[#a4c965]">
+                      <MapPin className="h-4 w-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 block">Global Hubs</span>
+                      <p className="text-xs font-medium text-neutral-200 truncate">
+                        Atlanta, GA, USA &bull; Hyderabad &bull; Warangal
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-2 text-[11px] font-medium text-neutral-300">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-black/40 border border-white/15 px-3 py-1 backdrop-blur-sm">
+                    &check; 24-Hour SLA Response
+                  </span>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-black/40 border border-white/15 px-3 py-1 backdrop-blur-sm">
+                    &check; 100% NDA Protected
+                  </span>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-black/40 border border-white/15 px-3 py-1 backdrop-blur-sm">
+                    &check; Senior Engineers Only
+                  </span>
+                </div>
+              </div>
             </div>
 
-            {status === "success" && (
-              <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
-                {jobTitle
-                  ? "Job application submitted successfully! Our recruiters will review your CV shortly."
-                  : "Enquiry sent successfully! A senior engineer will review it and reply within one business day."}
-              </div>
-            )}
-            {status === "error" && (
-              <div className="rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
-                {errorMsg}
-              </div>
-            )}
+            {/* RIGHT COLUMN: Contact / Application Form */}
+            <div className="lg:col-span-7">
+              <form className="panel p-5 sm:p-7 lg:p-8 space-y-4 w-full shadow-xl border border-border/80 rounded-3xl bg-surface h-full flex flex-col justify-between" onSubmit={handleSubmit}>
+                <div className="border-b border-border/60 pb-3.5 mb-1.5">
+                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+                    {jobTitle ? `Submit Application for ${jobTitle}` : "Send an Engineering Enquiry"}
+                  </h2>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {jobTitle
+                      ? "Fill in your details below and upload your CV/Resume."
+                      : "Tell us about your system architecture, project scope, or enterprise technical requirements."}
+                  </p>
+                </div>
+
+                {status === "success" && (
+                  <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
+                    {jobTitle
+                      ? "Job application submitted successfully! Our recruiters will review your CV shortly."
+                      : "Enquiry sent successfully! A senior engineer will review it and reply within one business day."}
+                  </div>
+                )}
+                {status === "error" && (
+                  <div className="rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
+                    {errorMsg}
+                  </div>
+                )}
 
             {/* Row 1: Full Name & Email Address */}
             <div className="grid gap-6 sm:grid-cols-2">
@@ -458,9 +534,11 @@ function Contact() {
               {status === "loading" ? "Submitting..." : jobTitle ? "Submit Application" : "Send Enquiry"}
             </button>
           </form>
+        </div>
+      </div>
 
-          {/* Office locations & Direct engineering contact: full-width 4-column cards below */}
-          <div>
+      {/* Office locations & Direct engineering contact: full-width 4-column cards below */}
+      <div className="pt-6 sm:pt-8 border-t border-border/60">
             <h3 className="text-xl font-bold tracking-tight text-foreground text-center mb-6">
               Our Offices & Global Engineering Hubs
             </h3>

@@ -30,6 +30,7 @@ import {
   HelpCircle,
   Building2,
   CheckCircle,
+  TrendingUp,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { SiteLayout } from "@/components/site/site-layout";
@@ -1368,43 +1369,79 @@ function Home() {
             </p>
           </div>
 
-          <div className="mt-4 sm:mt-5 grid gap-5 lg:grid-cols-12 items-start">
+          <div className="mt-4 sm:mt-5 grid gap-5 lg:grid-cols-12 items-stretch">
             
-            {/* Left Layer Selectors */}
-            <div className="lg:col-span-5 space-y-3 reveal-from-left">
-              {architectureLayers.map((layer) => {
-                const isSelected = layer.id === activeArchLayer;
-                return (
-                  <button
-                    key={layer.id}
-                    type="button"
-                    onClick={() => setActiveArchLayer(layer.id)}
-                    className={`w-full text-left p-5 rounded-2xl border transition-all duration-200 cursor-pointer flex items-center justify-between ${
-                      isSelected
-                        ? "bg-white border-[#555d25]/40 shadow-lg shadow-neutral-900/5 ring-1 ring-[#555d25]/15"
-                        : "bg-white/60 border-neutral-200/80 hover:bg-white hover:border-neutral-300"
-                    }`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <span className={`font-mono text-sm font-bold ${isSelected ? "text-[#555d25]" : "text-neutral-400"}`}>
-                        {layer.number}
-                      </span>
-                      <div>
-                        <div className="text-sm font-bold text-neutral-900">{layer.name}</div>
-                        <div className="text-[11px] font-mono font-medium text-[#555d25] mt-0.5">
-                          {layer.badge}
+            {/* Left Layer Selectors & Increasing Growth Card */}
+            <div className="lg:col-span-5 flex flex-col justify-between gap-3 reveal-from-left">
+              <div className="space-y-2.5">
+                {architectureLayers.map((layer) => {
+                  const isSelected = layer.id === activeArchLayer;
+                  return (
+                    <button
+                      key={layer.id}
+                      type="button"
+                      onClick={() => setActiveArchLayer(layer.id)}
+                      className={`w-full text-left px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl border transition-all duration-200 cursor-pointer flex items-center justify-between ${
+                        isSelected
+                          ? "bg-white border-[#555d25]/40 shadow-md shadow-neutral-900/5 ring-1 ring-[#555d25]/15"
+                          : "bg-white/60 border-neutral-200/80 hover:bg-white hover:border-neutral-300"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3.5">
+                        <span className={`font-mono text-sm font-bold ${isSelected ? "text-[#555d25]" : "text-neutral-400"}`}>
+                          {layer.number}
+                        </span>
+                        <div>
+                          <div className="text-sm font-bold text-neutral-900">{layer.name}</div>
+                          <div className="text-[11px] font-mono font-medium text-[#555d25] mt-0.5">
+                            {layer.badge}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <ArrowRight className={`h-4 w-4 transition-transform ${isSelected ? "text-[#555d25] translate-x-1" : "text-neutral-300"}`} />
-                  </button>
-                );
-              })}
+                      <ArrowRight className={`h-4 w-4 transition-transform ${isSelected ? "text-[#555d25] translate-x-1" : "text-neutral-300"}`} />
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Attractive Increasing Growth / ROI Card with user's increasing arrow image */}
+              <Link
+                to="/about"
+                className="group relative overflow-hidden rounded-2xl border border-neutral-800 bg-gradient-to-br from-neutral-950 via-neutral-900 to-[#071714] p-3.5 sm:p-4 text-white shadow-xl hover:shadow-2xl hover:border-cyan-500/50 hover:ring-1 hover:ring-cyan-500/30 transition-all duration-300 flex items-center gap-3.5 sm:gap-4 cursor-pointer mt-1"
+              >
+                {/* Glowing Handshake with Holographic Increasing Arrow */}
+                <div className="relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden rounded-xl border border-cyan-500/40 bg-black shadow-[0_0_18px_rgba(6,182,212,0.25)]">
+                  <img
+                    src="/enterprise-growth-arrow.png"
+                    alt="Strategic Enterprise Partnership and Exponential Growth Velocity"
+                    className="h-full w-full object-cover object-center group-hover:scale-108 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                {/* Growth Card Text */}
+                <div className="flex-1 min-w-0">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-cyan-500/15 border border-cyan-400/30 px-2.5 py-0.5 text-[9.5px] sm:text-[10px] font-bold uppercase tracking-wider text-cyan-300">
+                    <TrendingUp className="h-3 w-3 text-cyan-400" />
+                    <span>Compounding Velocity</span>
+                  </div>
+                  <div className="mt-1 text-xs sm:text-sm font-bold text-white group-hover:text-cyan-200 transition-colors leading-snug">
+                    Proven Architecture ROI &amp; Scale
+                  </div>
+                  <p className="mt-0.5 text-[11px] sm:text-xs text-neutral-300 line-clamp-2 leading-relaxed">
+                    Deploy high-velocity engineering pods delivering rapid transformation and zero outages.
+                  </p>
+                  <div className="mt-1.5 flex items-center gap-1 text-[11px] font-bold text-[#a4c965] group-hover:text-[#bde27c] transition-colors">
+                    <span>Explore Delivery Model</span>
+                    <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </Link>
             </div>
 
             {/* Right Live Layer Console HUD */}
-            <div className="lg:col-span-7 reveal-from-right">
-              <div className="rounded-3xl border border-neutral-200/80 bg-neutral-950 text-white p-7 sm:p-8 shadow-2xl relative overflow-hidden">
+            <div className="lg:col-span-7 reveal-from-right flex flex-col">
+              <div className="h-full rounded-3xl border border-neutral-200/80 bg-neutral-950 text-white p-6 sm:p-8 shadow-2xl relative overflow-hidden flex flex-col justify-between">
                 <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-[#555d25]/10 blur-3xl pointer-events-none" />
 
                 {/* HUD Header */}
@@ -1419,25 +1456,27 @@ function Home() {
                 </div>
 
                 {/* Content */}
-                <div className="mt-6">
-                  <div className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-                    {currentArch.name}
-                  </div>
-                  <p className="mt-3 text-sm text-neutral-300 leading-relaxed">
-                    {currentArch.desc}
-                  </p>
-
-                  <div className="mt-6 pt-5 border-t border-neutral-800">
-                    <div className="text-xs font-mono font-semibold uppercase tracking-wider text-neutral-400 mb-3">
-                      Standard Technical Specifications
+                <div className="mt-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+                      {currentArch.name}
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {currentArch.specs.map((spec) => (
-                        <div key={spec} className="flex items-center gap-2 rounded-xl bg-neutral-900/80 p-3 border border-neutral-800 text-xs text-neutral-200">
-                          <Check className="h-3.5 w-3.5 text-[#b38e36] shrink-0" />
-                          <span>{spec}</span>
-                        </div>
-                      ))}
+                    <p className="mt-3 text-sm text-neutral-300 leading-relaxed">
+                      {currentArch.desc}
+                    </p>
+
+                    <div className="mt-6 pt-5 border-t border-neutral-800">
+                      <div className="text-xs font-mono font-semibold uppercase tracking-wider text-neutral-400 mb-3">
+                        Standard Technical Specifications
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {currentArch.specs.map((spec) => (
+                          <div key={spec} className="flex items-center gap-2 rounded-xl bg-neutral-900/80 p-3 border border-neutral-800 text-xs text-neutral-200">
+                            <Check className="h-3.5 w-3.5 text-[#b38e36] shrink-0" />
+                            <span>{spec}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
 

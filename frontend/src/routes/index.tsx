@@ -1004,7 +1004,7 @@ function Home() {
       </section>
 
       {/* Trust Stats Strip (Positioned directly below the compact hero slider) */}
-      <div className="border-b border-neutral-200/70 bg-[#fafcfb] py-2 sm:py-2.5">
+      <div className="border-b border-neutral-200/70 bg-[#fafcfb] pt-6 sm:pt-8 pb-3.5 sm:pb-4">
         <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:divide-x sm:divide-neutral-200/70">
             {stats.map((s) => {

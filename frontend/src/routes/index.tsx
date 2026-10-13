@@ -649,6 +649,10 @@ const faqs = [
     question: "What is your ongoing operational SLA once systems go live?",
     answer: "We back our enterprise platforms with a contractually bound 99.98% High Availability SLA. We provide 24/7 follow-the-sun incident response runbooks, automated alerting, and dedicated Site Reliability Engineers to ensure continuous uptime.",
   },
+  {
+    question: "How do we get started or schedule an initial architecture consultation?",
+    answer: "You can book an executive consultation directly through our website or reach out via our contact page. Our engineering leadership conducts an initial architecture review within 24 hours.",
+  },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -723,7 +727,7 @@ function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [selectedPracticeCategory, setSelectedPracticeCategory] = useState("All");
   const [activeArchLayer, setActiveArchLayer] = useState("edge");
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const [openFaqIndices, setOpenFaqIndices] = useState<number[]>([0]);
   const [solutions, setSolutions] = useState<any[]>([]);
   const [servicesList, setServicesList] = useState<any[]>([]);
 
@@ -1607,29 +1611,37 @@ function Home() {
             </p>
           </div>
 
-          <div className="mt-2 sm:mt-2.5 space-y-1.5 sm:space-y-2 reveal-on-scroll delay-100">
+          <div className="mt-2.5 sm:mt-3.5 grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 items-start reveal-on-scroll delay-100">
             {faqs.map((faq, idx) => {
-              const isOpen = openFaqIndex === idx;
+              const isOpen = openFaqIndices.includes(idx);
               return (
                 <div
                   key={faq.question}
-                  className="rounded-xl border border-neutral-200/80 bg-white overflow-hidden shadow-xs transition-colors"
+                  className="rounded-xl border border-neutral-200/80 bg-white overflow-hidden shadow-xs hover:border-[#555d25]/40 transition-all duration-200"
                 >
                   <button
                     type="button"
-                    onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between p-3 sm:p-3.5 text-left cursor-pointer gap-3"
+                    onClick={() =>
+                      setOpenFaqIndices((prev) =>
+                        prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
+                      )
+                    }
+                    className="w-full flex items-center justify-between p-3.5 sm:p-4 text-left cursor-pointer gap-3 hover:bg-[#fafcfb] transition-colors"
                   >
-                    <span className="text-xs sm:text-sm font-bold text-neutral-900">
+                    <span className="text-xs sm:text-sm font-bold text-neutral-900 leading-snug">
                       {faq.question}
                     </span>
-                    <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-transform duration-200 ${isOpen ? "rotate-180 bg-[#f5f6ee] text-[#8c6d23]" : ""}`}>
+                    <div
+                      className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-transform duration-200 ${
+                        isOpen ? "rotate-180 bg-[#f5f6ee] text-[#8c6d23]" : ""
+                      }`}
+                    >
                       <ChevronDown className="h-3 w-3" />
                     </div>
                   </button>
 
                   {isOpen && (
-                    <div className="px-3 sm:px-3.5 pb-3 pt-0.5 text-xs text-neutral-600 leading-relaxed border-t border-neutral-100">
+                    <div className="px-3.5 sm:px-4 pb-3.5 pt-1 text-xs text-neutral-600 leading-relaxed border-t border-neutral-100 bg-white">
                       {faq.answer}
                     </div>
                   )}

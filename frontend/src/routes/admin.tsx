@@ -1705,7 +1705,7 @@ function AdminDashboard() {
         </header>
 
         {/* Main Panel Content Area */}
-        <main className="flex-1 p-2 sm:p-3 md:p-4 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-2 sm:p-3 md:p-4 max-w-[1440px] w-full mx-auto">
           
           {/* Stat Metrics Navigation & Hub (Includes all 8 categories with responsive mobile switcher) */}
           <div className="mb-3 space-y-2">

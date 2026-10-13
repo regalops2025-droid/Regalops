@@ -276,9 +276,9 @@ function Blog() {
             eyebrow="Blog"
             title="Engineering notes, no marketing filler"
             description="Written by the people on call. Practical lessons from production systems in regulated industries."
-            containerClassName="w-full max-w-[1720px] px-4 sm:px-6 lg:px-8 xl:px-12"
+            containerClassName="w-full max-w-[1440px] px-4 sm:px-6 lg:px-8"
           />
-          <Section className="w-full max-w-[1720px] px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8">
+          <Section className="w-full max-w-[1440px] px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5">
             {loading ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-6 animate-pulse">
                 {[1, 2, 3, 4].map((i) => (

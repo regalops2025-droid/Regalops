@@ -65,31 +65,31 @@ function Solutions() {
       {/* ======================================================== */}
       {/* SIDE-BY-SIDE SOLUTIONS WITH ORGANIC WAVE SHAPED IMAGES   */}
       {/* ======================================================== */}
-      <section className="py-6 sm:py-8 bg-slate-50/50 dark:bg-slate-950">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="py-2.5 sm:py-3.5 bg-slate-50/50 dark:bg-slate-950">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="mb-5 sm:mb-6 text-left max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#555d25] dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2.5 border border-emerald-200/50 dark:border-emerald-800/50">
+          <div className="mb-2.5 sm:mb-3 text-left max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#555d25] dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1.5 border border-emerald-200/50 dark:border-emerald-800/50">
               <Sparkles className="h-3.5 w-3.5" /> Specialized Practices
             </div>
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white tracking-tight text-left">
               Enterprise <span className="bg-gradient-to-r from-[#555d25] to-emerald-600 bg-clip-text text-transparent">Solutions</span>
             </h1>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed text-left">
+            <p className="mt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed text-left">
               Tailored engineering, staffing, and operational practices built for high concurrency, velocity, and enterprise reliability.
             </p>
           </div>
 
           {loading ? (
-            <div className="space-y-6">
+            <div className="space-y-4">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="animate-pulse h-96 bg-slate-200/60 dark:bg-slate-800/60 rounded-3xl" />
+                <div key={i} className="animate-pulse h-80 bg-slate-200/60 dark:bg-slate-800/60 rounded-3xl" />
               ))}
             </div>
           ) : solutions.length === 0 ? (
             <p className="text-sm text-muted-foreground text-center py-8">No solutions available.</p>
           ) : (
-            <div className="space-y-5 sm:space-y-6">
+            <div className="space-y-3 sm:space-y-4">
               {solutions.map((item, index) => {
                 const isEven = index % 2 === 0;
 
@@ -103,9 +103,9 @@ function Solutions() {
                       /* ======================================================== */
                       /* EVEN ROW: TEXT ON LEFT, SHAPED IMAGE ON RIGHT           */
                       /* ======================================================== */
-                      <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch lg:h-[420px]">
+                      <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch lg:h-[380px]">
                         {/* Text Side (Left) */}
-                        <div className="lg:col-span-6 xl:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-center z-20 h-full">
+                        <div className="lg:col-span-6 xl:col-span-5 p-4 sm:p-6 lg:p-7 flex flex-col justify-center z-20 h-full">
                           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#555d25] dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-200/50 dark:border-emerald-800/50 w-fit">
                             <Sparkles className="h-3 w-3" /> Practice {String(index + 1).padStart(2, "0")}
                           </div>
@@ -209,7 +209,7 @@ function Solutions() {
                         </div>
 
                         {/* Text Side (Right) - Order 1 on mobile, Order 2 on lg */}
-                        <div className="lg:col-span-6 xl:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-center z-20 order-1 lg:order-2 h-full">
+                        <div className="lg:col-span-6 xl:col-span-5 p-4 sm:p-6 lg:p-7 flex flex-col justify-center z-20 order-1 lg:order-2 h-full">
                           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#555d25] dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-200/50 dark:border-emerald-800/50 w-fit">
                             <Sparkles className="h-3 w-3" /> Practice {String(index + 1).padStart(2, "0")}
                           </div>

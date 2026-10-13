@@ -188,7 +188,7 @@ function Contact() {
         eyebrow={jobTitle ? "Careers" : "Contact us"}
         title={jobTitle ? `Apply for ${jobTitle}` : "Start with a technical conversation"}
         titleClassName="max-w-none text-xl xs:text-2xl sm:text-3xl font-bold tracking-tight text-left break-words"
-        containerClassName="max-w-full px-3 sm:px-5 lg:px-8 xl:px-10"
+        containerClassName="max-w-[1440px] px-4 sm:px-6 lg:px-8"
         description={
           jobTitle
             ? "Submit your details and CV/Resume below to apply. Our engineering leads will review it shortly."
@@ -196,10 +196,10 @@ function Contact() {
         }
         descriptionClassName="max-w-none text-left break-words"
       />
-      <Section className="w-full max-w-full px-3 sm:px-5 lg:px-8 xl:px-10 py-4 sm:py-6">
+      <Section className="w-full max-w-[1440px] px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5">
         {/* Full Screen Width 2-Column Split: Left Image Card, Right Form */}
-        <div className="w-full space-y-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 xl:gap-8 items-stretch w-full">
+        <div className="w-full space-y-3 sm:space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5 xl:gap-6 items-stretch w-full">
             
             {/* LEFT COLUMN: Visual Image Card & Executive Contact Details */}
             <div className="lg:col-span-5 relative overflow-hidden rounded-3xl bg-neutral-950 text-white border border-neutral-800/80 shadow-2xl flex flex-col justify-between min-h-[460px] lg:min-h-full">
@@ -539,64 +539,64 @@ function Contact() {
       </div>
 
       {/* Office locations & Direct engineering contact: full-width 4-column cards below */}
-      <div className="pt-6 sm:pt-8 border-t border-border/60">
-            <h3 className="text-lg sm:text-xl font-bold tracking-tight text-foreground text-left mb-4">
+      <div className="pt-3 sm:pt-4 border-t border-border/60">
+            <h3 className="text-base sm:text-lg font-bold tracking-tight text-foreground text-left mb-2">
               Our Offices & Global Engineering Hubs
             </h3>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="panel p-6 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
+            <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-2 text-primary font-semibold text-sm">
                     <MapPin className="h-4 w-4" />
                     <span>USA Office</span>
                   </div>
-                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                  <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
                     8 Chill Sean Street, Dunwoody, Atlanta, Georgia, USA
                   </p>
                 </div>
-                <span className="mt-4 text-[10px] uppercase font-bold tracking-widest text-primary/80">North America HQ</span>
+                <span className="mt-2 text-[10px] uppercase font-bold tracking-widest text-primary/80">North America HQ</span>
               </div>
 
-              <div className="panel p-6 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
+              <div className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-2 text-primary font-semibold text-sm">
                     <MapPin className="h-4 w-4" />
                     <span>Hyderabad Office</span>
                   </div>
-                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                  <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
                     Floor 1, MB3 Block, Raheja Mindspace, Hyderabad, Telangana
                   </p>
                 </div>
-                <span className="mt-4 text-[10px] uppercase font-bold tracking-widest text-primary/80">Delivery Center</span>
+                <span className="mt-2 text-[10px] uppercase font-bold tracking-widest text-primary/80">Delivery Center</span>
               </div>
 
-              <div className="panel p-6 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
+              <div className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-2 text-primary font-semibold text-sm">
                     <MapPin className="h-4 w-4" />
                     <span>Warangal Office</span>
                   </div>
-                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                  <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
                     H.No: 12-13, 1st Floor, Warangal, Telangana, 506002
                   </p>
                 </div>
-                <span className="mt-4 text-[10px] uppercase font-bold tracking-widest text-primary/80">Innovation Lab</span>
+                <span className="mt-2 text-[10px] uppercase font-bold tracking-widest text-primary/80">Innovation Lab</span>
               </div>
 
-              <div className="panel p-6 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
+              <div className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-2 text-primary font-semibold text-sm">
                     <Mail className="h-4 w-4" />
                     <span>Direct Engineering Contact</span>
                   </div>
-                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                  <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
                     For direct architecture reviews & inquiries:
                   </p>
-                  <a href="mailto:Info@regalops.com" className="mt-1 block text-xs font-semibold text-primary hover:underline">
+                  <a href="mailto:Info@regalops.com" className="mt-0.5 block text-xs font-semibold text-primary hover:underline">
                     Info@regalops.com
                   </a>
                 </div>
-                <span className="mt-4 text-[10px] uppercase font-bold tracking-widest text-emerald-600">24/7 Response SLA</span>
+                <span className="mt-2 text-[10px] uppercase font-bold tracking-widest text-emerald-600">24/7 Response SLA</span>
               </div>
             </div>
           </div>

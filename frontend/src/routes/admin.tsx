@@ -1,7 +1,20 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { LogOut, ExternalLink, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen, Compass, Bell, MessageSquare, Copy, Check, Search, LayoutGrid, List, Send, Filter, FileText } from "lucide-react";
+import { 
+  LogOut, ExternalLink, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, 
+  Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen, 
+  Compass, Bell, MessageSquare, Copy, Check, Search, LayoutGrid, List, Send, Filter, 
+  FileText, Sun, Moon, Download, CheckCircle2, Clock, Sparkles, Share2, Users, 
+  ArrowUpRight, SlidersHorizontal, AlertCircle, Eye, ChevronRight
+} from "lucide-react";
 import { ImageUploadField } from "@/components/admin/image-upload-field";
+
+// Custom official SVG for WhatsApp
+const WhatsAppIcon = ({ className = "h-3.5 w-3.5" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+);
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -21,6 +34,28 @@ function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<"enquiries" | "solutions" | "technologies" | "services" | "clients" | "careers" | "blogs" | "applications">("enquiries");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   
+  // Theme state (Executive Dark / Crisp Modern Light)
+  const [adminTheme, setAdminTheme] = useState<"dark" | "light">(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("regalops_admin_theme") as "dark" | "light") || "light";
+    }
+    return "light";
+  });
+
+  const toggleAdminTheme = () => {
+    const next = adminTheme === "dark" ? "light" : "dark";
+    setAdminTheme(next);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("regalops_admin_theme", next);
+    }
+  };
+
+  // Mobile Stats Display Mode: "carousel" or "grid"
+  const [mobileStatsView, setMobileStatsView] = useState<"carousel" | "grid">("carousel");
+
+  // Notifications dropdown open state
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+
   // Enquiries State
   const [enquiries, setEnquiries] = useState<any[]>([]);
   const [enquiriesLoading, setEnquiriesLoading] = useState(true);
@@ -28,8 +63,29 @@ function AdminDashboard() {
   const [deleteEnquiryStatus, setDeleteEnquiryStatus] = useState<{ id: number; status: "idle" | "loading" } | null>(null);
   const [enquirySearchQuery, setEnquirySearchQuery] = useState("");
   const [enquiryServiceFilter, setEnquiryServiceFilter] = useState("all");
+  const [enquiryStatusFilter, setEnquiryStatusFilter] = useState<"all" | "new" | "contacted">("all");
   const [enquiryViewMode, setEnquiryViewMode] = useState<"cards" | "table">("cards");
   const [copiedEnquiryId, setCopiedEnquiryId] = useState<number | null>(null);
+
+  // Lead CRM statuses stored in local storage
+  const [leadStatuses, setLeadStatuses] = useState<Record<number, "new" | "contacted" | "in_discussion" | "closed">>(() => {
+    try {
+      if (typeof window !== "undefined") {
+        return JSON.parse(localStorage.getItem("regalops_lead_statuses") || "{}");
+      }
+      return {};
+    } catch {
+      return {};
+    }
+  });
+
+  const updateLeadStatus = (id: number, status: "new" | "contacted" | "in_discussion" | "closed") => {
+    const next = { ...leadStatuses, [id]: status };
+    setLeadStatuses(next);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("regalops_lead_statuses", JSON.stringify(next));
+    }
+  };
 
   const handleCopyEnquiry = (item: any) => {
     const cleanName = [item.first_name, item.last_name]
@@ -38,10 +94,45 @@ function AdminDashboard() {
       .filter((s: string) => s && s !== "-")
       .join(" ");
     const location = [item.city, item.state, item.country, item.zip_code].filter(Boolean).join(", ");
-    const summary = `Name: ${cleanName || "N/A"}\nEmail: ${item.email || "N/A"}\nPhone: ${item.mobile || "N/A"}\nService: ${item.service || "N/A"}\nLocation: ${location || "N/A"}\nMessage: ${item.comments || "N/A"}`;
+    const summary = `Name: ${cleanName || "N/A"}\nEmail: ${item.email || "N/A"}\nPhone: ${item.mobile || "N/A"}\nService: ${item.service || "N/A"}\nLocation: ${location || "N/A"}\nStatus: ${leadStatuses[item.id] || "new"}\nMessage: ${item.comments || "N/A"}`;
     navigator.clipboard.writeText(summary);
     setCopiedEnquiryId(item.id);
     setTimeout(() => setCopiedEnquiryId(null), 2000);
+  };
+
+  const exportEnquiriesCSV = () => {
+    if (!enquiries.length) return;
+    const headers = ["ID", "First Name", "Last Name", "Email", "Phone", "Service", "City", "State", "Country", "Date", "Status", "Message"];
+    const rows = enquiries.map((e) => [
+      e.id,
+      `"${(e.first_name || "").replace(/"/g, '""')}"`,
+      `"${(e.last_name || "").replace(/"/g, '""')}"`,
+      `"${(e.email || "").replace(/"/g, '""')}"`,
+      `"${(e.mobile || "").replace(/"/g, '""')}"`,
+      `"${(e.service || "").replace(/"/g, '""')}"`,
+      `"${(e.city || "").replace(/"/g, '""')}"`,
+      `"${(e.state || "").replace(/"/g, '""')}"`,
+      `"${(e.country || "").replace(/"/g, '""')}"`,
+      `"${e.created_at ? new Date(e.created_at).toISOString() : ""}"`,
+      `"${leadStatuses[e.id] || "new"}"`,
+      `"${(e.comments || "").replace(/"/g, '""')}"`,
+    ]);
+    const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `regalops_leads_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const getWhatsAppLink = (phone: string, name: string) => {
+    if (!phone) return null;
+    const cleanNumber = phone.replace(/[^\d]/g, "");
+    if (!cleanNumber) return null;
+    const message = encodeURIComponent(`Hello ${name || ""}, thank you for reaching out to Regal OPs. We received your inquiry and would be glad to assist you!`);
+    return `https://wa.me/${cleanNumber}?text=${message}`;
   };
 
   // Solutions State
@@ -1361,7 +1452,7 @@ function AdminDashboard() {
   );
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className={`admin-portal flex min-h-screen transition-colors duration-200 ${adminTheme === "dark" ? "dark bg-zinc-950 text-zinc-100" : "bg-slate-50/70 text-slate-900"}`}>
       
       {/* 1. Desktop Sidebar (Left) */}
       <aside className="hidden w-72 shrink-0 border-r border-border/70 xl:block sticky top-0 h-screen z-30">
@@ -1375,10 +1466,10 @@ function AdminDashboard() {
             className="fixed inset-0 bg-background/80 backdrop-blur-sm"
             onClick={() => setMobileSidebarOpen(false)}
           />
-          <div className="relative flex w-72 max-w-xs flex-col border-r border-border bg-background animate-in slide-in-from-left duration-200">
+          <div className="relative flex w-72 max-w-xs flex-col border-r border-border bg-background animate-in slide-in-from-left duration-200 shadow-2xl">
             <button
               onClick={() => setMobileSidebarOpen(false)}
-              className="absolute right-4 top-4 rounded-xl border border-border p-1.5 text-muted-foreground bg-background"
+              className="absolute right-4 top-4 rounded-xl border border-border p-1.5 text-muted-foreground bg-background hover:text-foreground cursor-pointer"
               aria-label="Close sidebar"
             >
               <X className="h-4 w-4" />
@@ -1392,99 +1483,175 @@ function AdminDashboard() {
       <div className="flex-1 flex flex-col min-w-0">
         
         {/* Main Panel Header */}
-        <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-border/70 bg-background/85 backdrop-blur-xl px-3.5 sm:px-6">
-          <div className="flex items-center gap-4">
+        <header className={`sticky top-0 z-40 flex h-16 items-center justify-between border-b px-3.5 sm:px-6 backdrop-blur-xl transition-colors ${
+          adminTheme === "dark"
+            ? "border-zinc-800/80 bg-zinc-950/85"
+            : "border-slate-200/80 bg-white/85 shadow-2xs"
+        }`}>
+          <div className="flex items-center gap-3 min-w-0">
             <button
               onClick={() => setMobileSidebarOpen(true)}
-              className="rounded-xl border border-border p-2 text-foreground xl:hidden"
+              className={`rounded-xl border p-2 transition-all xl:hidden cursor-pointer ${
+                adminTheme === "dark"
+                  ? "border-zinc-800 bg-zinc-900 text-zinc-200 hover:bg-zinc-800"
+                  : "border-slate-200 bg-white text-slate-700 hover:bg-slate-100 shadow-2xs"
+              }`}
               aria-label="Open sidebar menu"
             >
               <Menu className="h-5 w-5" />
             </button>
-            <h1 className="text-lg font-bold text-foreground">
-              {activeTab === "enquiries" 
-                ? "Contact Enquiries" 
-                : activeTab === "solutions"
-                  ? "Manage Solutions"
-                  : activeTab === "technologies"
-                    ? "Manage Technologies"
-                    : activeTab === "services"
-                      ? "Manage Services"
-                      : activeTab === "clients"
-                        ? "Manage Clients"
-                        : activeTab === "careers"
-                          ? "Manage Careers"
-                          : activeTab === "blogs"
-                            ? "Manage Blogs"
-                            : "Applications"}
-            </h1>
+            
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="hidden sm:flex h-9 w-9 rounded-xl bg-gradient-to-br from-[#555d25] to-[#b38e36] items-center justify-center text-white font-black text-sm shrink-0 shadow-xs">
+                R
+              </div>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="hidden sm:inline-block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Admin Portal</span>
+                  <span className="hidden sm:inline-block text-muted-foreground text-xs">•</span>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    Live Sync
+                  </span>
+                </div>
+                <h1 className="text-base sm:text-lg font-bold truncate text-foreground tracking-tight">
+                  {activeTab === "enquiries" 
+                    ? "Contact Enquiries" 
+                    : activeTab === "solutions"
+                      ? "Manage Solutions"
+                      : activeTab === "technologies"
+                        ? "Manage Technologies"
+                        : activeTab === "services"
+                          ? "Manage Services"
+                          : activeTab === "clients"
+                            ? "Manage Clients"
+                            : activeTab === "careers"
+                              ? "Manage Careers"
+                              : activeTab === "blogs"
+                                ? "Manage Blogs"
+                                : "Job Applications"}
+                </h1>
+              </div>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            {/* Quick Notification Button: Contact Enquiries */}
-            <button
-              type="button"
-              onClick={() => setActiveTab("enquiries")}
-              className={`relative inline-flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-semibold transition-all cursor-pointer shadow-xs ${
-                activeTab === "enquiries"
-                  ? "border-primary bg-primary text-primary-foreground shadow-sm"
-                  : "border-border bg-surface text-foreground hover:bg-secondary hover:border-border/80"
-              }`}
-              title={`Contact Enquiries (${enquiries.length})`}
-            >
-              <div className="relative flex items-center justify-center">
-                <Bell className="h-3.5 w-3.5" />
-                {enquiries.length > 0 && activeTab !== "enquiries" && (
-                  <span className="absolute -top-1.5 -right-1.5 flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            {/* Unified Notification Center Button */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setNotificationsOpen(!notificationsOpen)}
+                className={`relative inline-flex items-center justify-center h-9 px-2.5 sm:px-3 rounded-xl border text-xs font-semibold transition-all cursor-pointer shadow-2xs ${
+                  notificationsOpen
+                    ? "border-primary bg-primary text-primary-foreground shadow-sm"
+                    : adminTheme === "dark"
+                      ? "border-zinc-800 bg-zinc-900/90 text-zinc-300 hover:bg-zinc-800"
+                      : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                }`}
+                title="Notifications & Activity"
+              >
+                <Bell className="h-4 w-4" />
+                {(enquiries.length > 0 || applications.length > 0) && (
+                  <span className="ml-1.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-rose-500 px-1 text-[10px] font-bold text-white shadow-xs">
+                    {enquiries.length + applications.length}
                   </span>
                 )}
-              </div>
-              <span className="hidden sm:inline">Enquiries</span>
-              <span
-                className={`inline-flex items-center justify-center rounded-full px-1.5 py-0.2 text-[11px] font-bold min-w-[20px] ${
-                  activeTab === "enquiries"
-                    ? "bg-white/25 text-white"
-                    : "bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30"
-                }`}
-              >
-                {enquiriesLoading ? "..." : enquiries.length}
-              </span>
-            </button>
+              </button>
 
-            {/* Quick Notification Button: Job Applications */}
+              {/* Notification Dropdown / Sheet */}
+              {notificationsOpen && (
+                <div className={`absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl border p-4 shadow-2xl z-50 animate-in fade-in-50 zoom-in-95 duration-150 ${
+                  adminTheme === "dark"
+                    ? "bg-zinc-900 border-zinc-800 text-zinc-100"
+                    : "bg-white border-slate-200 text-slate-900"
+                }`}>
+                  <div className="flex items-center justify-between pb-3 border-b border-border/60">
+                    <div className="flex items-center gap-2">
+                      <Bell className="h-4 w-4 text-primary" />
+                      <span className="font-bold text-sm">Notifications & Alerts</span>
+                    </div>
+                    <button
+                      onClick={() => setNotificationsOpen(false)}
+                      className="text-muted-foreground hover:text-foreground text-xs p-1 cursor-pointer"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
+
+                  <div className="py-2 space-y-2">
+                    {/* Enquiries alert */}
+                    <div 
+                      onClick={() => { setActiveTab("enquiries"); setNotificationsOpen(false); }}
+                      className={`p-3 rounded-xl border transition-all cursor-pointer flex items-start gap-3 ${
+                        activeTab === "enquiries"
+                          ? "border-primary/50 bg-primary/10"
+                          : adminTheme === "dark"
+                            ? "border-zinc-800 hover:bg-zinc-800/60"
+                            : "border-slate-100 hover:bg-slate-50"
+                      }`}
+                    >
+                      <div className="h-8 w-8 rounded-lg bg-rose-500/15 text-rose-600 flex items-center justify-center shrink-0">
+                        <Inbox className="h-4 w-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <p className="font-semibold text-xs">Client Enquiries</p>
+                          <span className="text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-rose-500/20 text-rose-500">
+                            {enquiries.length} new
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-muted-foreground mt-0.5 truncate">
+                          {enquiries.length > 0 ? `${enquiries[0]?.first_name || "Lead"} submitted a form message` : "No new messages"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Job Applications alert */}
+                    <div 
+                      onClick={() => { setActiveTab("applications"); setNotificationsOpen(false); }}
+                      className={`p-3 rounded-xl border transition-all cursor-pointer flex items-start gap-3 ${
+                        activeTab === "applications"
+                          ? "border-primary/50 bg-primary/10"
+                          : adminTheme === "dark"
+                            ? "border-zinc-800 hover:bg-zinc-800/60"
+                            : "border-slate-100 hover:bg-slate-50"
+                      }`}
+                    >
+                      <div className="h-8 w-8 rounded-lg bg-amber-500/15 text-amber-600 flex items-center justify-center shrink-0">
+                        <FileText className="h-4 w-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <p className="font-semibold text-xs">Job Applications</p>
+                          <span className="text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-600">
+                            {applications.length} total
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-muted-foreground mt-0.5 truncate">
+                          {applications.length > 0 ? `${applications[0]?.first_name} applied for ${applications[0]?.job_title}` : "No candidate resumes"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Theme Switcher Toggle (Executive Dark / Crisp Modern Light) */}
             <button
               type="button"
-              onClick={() => setActiveTab("applications")}
-              className={`relative inline-flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-semibold transition-all cursor-pointer shadow-xs ${
-                activeTab === "applications"
-                  ? "border-primary bg-primary text-primary-foreground shadow-sm"
-                  : "border-border bg-surface text-foreground hover:bg-secondary hover:border-border/80"
+              onClick={toggleAdminTheme}
+              className={`inline-flex items-center justify-center h-9 w-9 rounded-xl border transition-all cursor-pointer shadow-2xs ${
+                adminTheme === "dark"
+                  ? "border-zinc-800 bg-zinc-900 text-amber-400 hover:bg-zinc-800"
+                  : "border-slate-200 bg-white text-slate-700 hover:bg-slate-100"
               }`}
-              title={`Job Applications (${applications.length})`}
+              title={adminTheme === "dark" ? "Switch to Crisp Light Mode" : "Switch to Executive Dark Mode"}
             >
-              <div className="relative flex items-center justify-center">
-                <FileText className="h-3.5 w-3.5" />
-                {applications.length > 0 && activeTab !== "applications" && (
-                  <span className="absolute -top-1.5 -right-1.5 flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#555d25] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#555d25]"></span>
-                  </span>
-                )}
-              </div>
-              <span className="hidden sm:inline">Applications</span>
-              <span
-                className={`inline-flex items-center justify-center rounded-full px-1.5 py-0.2 text-[11px] font-bold min-w-[20px] ${
-                  activeTab === "applications"
-                    ? "bg-white/25 text-white"
-                    : "bg-[#555d25]/15 text-[#555d25] dark:text-[#d3dda3] border border-[#555d25]/30"
-                }`}
-              >
-                {applicationsLoading ? "..." : applications.length}
-              </span>
+              {adminTheme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
 
+            {/* Live Site Preview Link */}
             <a
               href={
                 activeTab === "clients"
@@ -1501,15 +1668,18 @@ function AdminDashboard() {
               }
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-primary/30 bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-2 text-xs font-semibold transition-all shadow-sm"
+              className={`inline-flex items-center gap-1.5 rounded-xl border px-2.5 sm:px-3 h-9 text-xs font-semibold transition-all shadow-2xs ${
+                adminTheme === "dark"
+                  ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20"
+                  : "border-[#555d25]/30 bg-[#555d25]/10 text-[#555d25] hover:bg-[#555d25] hover:text-white"
+              }`}
               title="Open live public page in new tab"
             >
               <ExternalLink className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">
-                {activeTab === "clients" ? "View Clients Page" : "View Live Page"}
-              </span>
+              <span className="hidden md:inline">Live Page</span>
             </a>
 
+            {/* Refresh Data button */}
             <button
               onClick={() => {
                 fetchEnquiries();
@@ -1521,84 +1691,212 @@ function AdminDashboard() {
                 fetchBlogs();
                 fetchApplications();
               }}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-foreground transition-all hover:bg-secondary"
+              className={`inline-flex items-center gap-1.5 rounded-xl border px-2.5 sm:px-3 h-9 text-xs font-semibold transition-all cursor-pointer shadow-2xs ${
+                adminTheme === "dark"
+                  ? "border-zinc-800 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                  : "border-slate-200 bg-white text-slate-700 hover:bg-slate-100"
+              }`}
               title="Refresh Data"
             >
-              <RefreshCw className={`h-3.5 w-3.5 ${enquiriesLoading || solutionsLoading || techLoading || serviceLoading || clientLoading || jobLoading || blogLoading ? "animate-spin" : ""}`} />
-              <span className="hidden sm:inline">Refresh Data</span>
+              <RefreshCw className={`h-3.5 w-3.5 ${enquiriesLoading || solutionsLoading || techLoading || serviceLoading || clientLoading || jobLoading || blogLoading ? "animate-spin text-primary" : ""}`} />
+              <span className="hidden lg:inline">Refresh</span>
             </button>
           </div>
         </header>
 
         {/* Main Panel Content Area */}
-        <main className="flex-1 p-3.5 sm:p-6 md:p-8 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-2 sm:p-3 md:p-4 max-w-7xl w-full mx-auto">
           
-          {/* Stat Metrics Grid (Interactive Tabs) */}
-          <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 mb-8">
-            {[
-              { id: "enquiries" as const, label: "Enquiries", count: enquiries.length, loading: enquiriesLoading },
-              { id: "solutions" as const, label: "Solutions", count: solutions.length, loading: solutionsLoading },
-              { id: "technologies" as const, label: "Tech Stack", count: techList.length, loading: techLoading },
-              { id: "services" as const, label: "Services", count: serviceList.length, loading: serviceLoading },
-              { id: "clients" as const, label: "Clients", count: clientList.length, loading: clientLoading },
-              { id: "careers" as const, label: "Careers", count: jobList.length, loading: jobLoading },
-              { id: "blogs" as const, label: "Blogs", count: blogList.length, loading: blogLoading },
-            ].map((metric) => {
-              const isActive = activeTab === metric.id;
-              return (
+          {/* Stat Metrics Navigation & Hub (Includes all 8 categories with responsive mobile switcher) */}
+          <div className="mb-3 space-y-2">
+            {/* Mobile View Toggle Bar */}
+            <div className="flex items-center justify-between xl:hidden">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+                <SlidersHorizontal className="h-3.5 w-3.5 text-primary" />
+                Category Overview
+              </span>
+              <div className="inline-flex rounded-xl border border-border/80 bg-secondary/40 p-0.5 text-xs">
                 <button
-                  key={metric.id}
                   type="button"
-                  onClick={() => {
-                    setActiveTab(metric.id);
-                    const panelEl = document.getElementById("admin-tab-content");
-                    if (panelEl) {
-                      panelEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-                    }
-                  }}
-                  title={`Switch to ${metric.label}`}
-                  className={`panel p-4 bg-surface text-left transition-all duration-200 cursor-pointer rounded-2xl relative overflow-hidden group select-none ${
-                    isActive
-                      ? "border-primary bg-primary/10 shadow-md ring-2 ring-primary/30 -translate-y-0.5"
-                      : "border-border/70 hover:border-primary/50 hover:bg-surface-2 hover:-translate-y-0.5 hover:shadow-sm"
+                  onClick={() => setMobileStatsView("carousel")}
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all cursor-pointer ${
+                    mobileStatsView === "carousel"
+                      ? "bg-surface text-primary shadow-xs"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  {/* Active Indicator Top Accent Bar */}
-                  {isActive && (
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-primary rounded-t-full" />
-                  )}
-                  <div className="flex items-center justify-between">
-                    <p
-                      className={`text-[10px] font-semibold uppercase tracking-wider transition-colors ${
-                        isActive ? "text-primary font-bold" : "text-primary/75 group-hover:text-primary"
-                      }`}
-                    >
-                      {metric.label}
-                    </p>
-                    {metric.id === "enquiries" ? (
-                      <span className="inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-bold bg-rose-500/15 text-rose-500 border border-rose-500/30">
-                        <Bell className="h-2.5 w-2.5" />
-                        <span>{metric.loading ? "..." : metric.count}</span>
-                      </span>
-                    ) : metric.id === "careers" ? (
-                      <span className="inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-bold bg-[#555d25]/15 text-[#555d25] dark:text-[#d3dda3] border border-[#555d25]/30">
-                        <Briefcase className="h-2.5 w-2.5" />
-                        <span>{metric.loading ? "..." : metric.count}</span>
-                      </span>
-                    ) : isActive ? (
-                      <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                    ) : null}
-                  </div>
-                  <h3
-                    className={`mt-1 font-display text-2xl font-bold transition-colors ${
-                      isActive ? "text-primary dark:text-white" : "text-foreground"
-                    }`}
-                  >
-                    {metric.loading ? "..." : metric.count}
-                  </h3>
+                  Swipe Bar
                 </button>
+                <button
+                  type="button"
+                  onClick={() => setMobileStatsView("grid")}
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all cursor-pointer ${
+                    mobileStatsView === "grid"
+                      ? "bg-surface text-primary shadow-xs"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Grid View
+                </button>
+              </div>
+            </div>
+
+            {/* Metrics List Definition */}
+            {(() => {
+              const metrics = [
+                { 
+                  id: "enquiries" as const, 
+                  label: "Enquiries", 
+                  count: enquiries.length, 
+                  loading: enquiriesLoading, 
+                  icon: Inbox, 
+                  badge: enquiries.length > 0 ? `${enquiries.length} New` : null,
+                  iconBg: "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/25",
+                  activeBorder: "border-rose-500",
+                },
+                { 
+                  id: "applications" as const, 
+                  label: "Applications", 
+                  count: applications.length, 
+                  loading: applicationsLoading, 
+                  icon: FileText, 
+                  badge: applications.length > 0 ? `${applications.length} CVs` : null,
+                  iconBg: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/25",
+                  activeBorder: "border-amber-500",
+                },
+                { 
+                  id: "solutions" as const, 
+                  label: "Solutions", 
+                  count: solutions.length, 
+                  loading: solutionsLoading, 
+                  icon: Layers, 
+                  iconBg: "bg-violet-500/15 text-violet-600 dark:text-violet-400 border-violet-500/25",
+                  activeBorder: "border-violet-500",
+                },
+                { 
+                  id: "technologies" as const, 
+                  label: "Tech Stack", 
+                  count: techList.length, 
+                  loading: techLoading, 
+                  icon: Cpu, 
+                  iconBg: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border-cyan-500/25",
+                  activeBorder: "border-cyan-500",
+                },
+                { 
+                  id: "services" as const, 
+                  label: "Services", 
+                  count: serviceList.length, 
+                  loading: serviceLoading, 
+                  icon: Compass, 
+                  iconBg: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/25",
+                  activeBorder: "border-blue-500",
+                },
+                { 
+                  id: "clients" as const, 
+                  label: "Clients", 
+                  count: clientList.length, 
+                  loading: clientLoading, 
+                  icon: Users, 
+                  iconBg: "bg-orange-500/15 text-orange-600 dark:text-orange-400 border-orange-500/25",
+                  activeBorder: "border-orange-500",
+                },
+                { 
+                  id: "careers" as const, 
+                  label: "Careers", 
+                  count: jobList.length, 
+                  loading: jobLoading, 
+                  icon: Briefcase, 
+                  iconBg: "bg-lime-500/15 text-lime-600 dark:text-lime-400 border-lime-500/25",
+                  activeBorder: "border-lime-500",
+                },
+                { 
+                  id: "blogs" as const, 
+                  label: "Blogs", 
+                  count: blogList.length, 
+                  loading: blogLoading, 
+                  icon: BookOpen, 
+                  iconBg: "bg-pink-500/15 text-pink-600 dark:text-pink-400 border-pink-500/25",
+                  activeBorder: "border-pink-500",
+                },
+              ];
+
+              return (
+                <div
+                  className={`
+                    ${mobileStatsView === "carousel" 
+                      ? "flex overflow-x-auto no-scrollbar scroll-smooth snap-x gap-2.5 pb-1 xl:grid xl:grid-cols-8 xl:gap-3 xl:overflow-visible" 
+                      : "grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-2.5 sm:gap-3"
+                    }
+                  `}
+                >
+                  {metrics.map((metric) => {
+                    const Icon = metric.icon;
+                    const isActive = activeTab === metric.id;
+                    return (
+                      <button
+                        key={metric.id}
+                        type="button"
+                        onClick={() => {
+                          setActiveTab(metric.id);
+                          const panelEl = document.getElementById("admin-tab-content");
+                          if (panelEl) {
+                            panelEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                          }
+                        }}
+                        title={`Switch to ${metric.label}`}
+                        className={`
+                          group relative flex flex-col justify-between p-3.5 text-left transition-all duration-200 cursor-pointer rounded-2xl overflow-hidden select-none shrink-0 snap-start
+                          ${mobileStatsView === "carousel" ? "min-w-[140px] xl:min-w-0" : ""}
+                          ${
+                            isActive
+                              ? adminTheme === "dark"
+                                ? "bg-zinc-900 border-2 border-primary shadow-lg ring-2 ring-primary/25 -translate-y-0.5"
+                                : "bg-white border-2 border-[#555d25] shadow-md ring-2 ring-[#555d25]/20 -translate-y-0.5"
+                              : adminTheme === "dark"
+                                ? "bg-zinc-900/60 border border-zinc-800/80 hover:bg-zinc-900 hover:border-zinc-700 hover:-translate-y-0.5"
+                                : "bg-white border border-slate-200/90 hover:border-slate-300 hover:shadow-xs hover:-translate-y-0.5"
+                          }
+                        `}
+                      >
+                        {/* Top Gradient Accent Bar for active tab */}
+                        {isActive && (
+                          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent" />
+                        )}
+
+                        <div className="flex items-center justify-between gap-1.5">
+                          <div className={`h-7 w-7 rounded-lg border flex items-center justify-center shrink-0 ${metric.iconBg}`}>
+                            <Icon className="h-3.5 w-3.5" />
+                          </div>
+
+                          {metric.badge ? (
+                            <span className="inline-flex items-center rounded-full px-1.5 py-0.2 text-[9px] font-bold bg-primary/15 text-primary border border-primary/25">
+                              {metric.badge}
+                            </span>
+                          ) : isActive ? (
+                            <span className="h-1.5 w-1.5 rounded-full bg-primary animate-ping" />
+                          ) : null}
+                        </div>
+
+                        <div className="mt-2.5">
+                          <p className={`text-[10px] font-bold uppercase tracking-wider truncate transition-colors ${
+                            isActive ? "text-primary font-extrabold" : "text-muted-foreground group-hover:text-foreground"
+                          }`}>
+                            {metric.label}
+                          </p>
+                          <h3 className={`mt-0.5 font-display text-xl sm:text-2xl font-black transition-colors ${
+                            isActive 
+                              ? adminTheme === "dark" ? "text-white" : "text-[#555d25]" 
+                              : "text-foreground"
+                          }`}>
+                            {metric.loading ? "..." : metric.count}
+                          </h3>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
               );
-            })}
+            })()}
           </div>
 
           <div id="admin-tab-content" className="scroll-mt-6" />
@@ -1620,97 +1918,165 @@ function AdminDashboard() {
                 (item.state && item.state.toLowerCase().includes(q));
 
               const matchesService = enquiryServiceFilter === "all" || item.service === enquiryServiceFilter;
-              return matchesSearch && matchesService;
+
+              const status = leadStatuses[item.id] || "new";
+              const matchesStatus =
+                enquiryStatusFilter === "all" ||
+                (enquiryStatusFilter === "new" && status === "new") ||
+                (enquiryStatusFilter === "contacted" && status !== "new");
+
+              return matchesSearch && matchesService && matchesStatus;
             });
 
             return (
-              <div className="space-y-6">
-                {/* Section Header with Search, Filter & View Controls */}
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <div className="flex items-center gap-2.5">
-                      <h2 className="text-xl font-bold text-foreground">Contact Enquiries</h2>
-                      <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-bold text-primary">
-                        {enquiries.length} {enquiries.length === 1 ? "lead" : "leads"}
-                      </span>
+              <div className="space-y-3">
+                {/* Section Header with CRM Stats, Export Actions & Toolbar */}
+                <div className={`p-3.5 sm:p-4 rounded-xl border transition-all ${
+                  adminTheme === "dark"
+                    ? "bg-zinc-900/80 border-zinc-800"
+                    : "bg-white border-slate-200/90 shadow-xs"
+                }`}>
+                  <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                    <div>
+                      <div className="flex items-center gap-2.5 flex-wrap">
+                        <h2 className="text-xl font-bold text-foreground tracking-tight">Contact Enquiries</h2>
+                        <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-bold text-primary border border-primary/20">
+                          {enquiries.length} {enquiries.length === 1 ? "lead" : "leads"}
+                        </span>
+                        {enquiries.length > 0 && (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                            <CheckCircle2 className="h-3 w-3" />
+                            Live CRM
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Client inquiries, leads & messages received through the public contact portal.
+                      </p>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      Manage client leads, inquiries, and messages submitted from the contact form.
-                    </p>
+
+                    {/* Fast Export CTA Buttons */}
+                    {enquiries.length > 0 && (
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <button
+                          type="button"
+                          onClick={exportEnquiriesCSV}
+                          className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer shadow-2xs ${
+                            adminTheme === "dark"
+                              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20"
+                              : "border-[#555d25]/30 bg-[#555d25]/10 text-[#555d25] hover:bg-[#555d25] hover:text-white"
+                          }`}
+                          title="Export all leads as a CSV spreadsheet"
+                        >
+                          <Download className="h-3.5 w-3.5" />
+                          <span>Export CSV</span>
+                        </button>
+                      </div>
+                    )}
                   </div>
 
-                  {/* Toolbar: Search, Service Filter & View Switcher */}
+                  {/* Toolbar: Search, Filters & View Mode */}
                   {enquiries.length > 0 && (
-                    <div className="flex flex-wrap items-center gap-2.5">
-                      {/* Search Input */}
-                      <div className="relative min-w-[200px] sm:min-w-[240px]">
+                    <div className="mt-4 pt-4 border-t border-border/60 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                      {/* Search Bar */}
+                      <div className="relative flex-1 min-w-[200px] max-w-md">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
                         <input
                           type="text"
                           value={enquirySearchQuery}
                           onChange={(e) => setEnquirySearchQuery(e.target.value)}
-                          placeholder="Search leads..."
-                          className="w-full rounded-xl border border-border bg-surface pl-9 pr-7 py-1.5 text-xs text-foreground placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none transition-colors"
+                          placeholder="Search by name, email, phone, city, notes..."
+                          className={`w-full rounded-xl border pl-9 pr-8 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all ${
+                            adminTheme === "dark"
+                              ? "bg-zinc-800/80 border-zinc-700 text-zinc-100 placeholder:text-zinc-500"
+                              : "bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400"
+                          }`}
                         />
                         {enquirySearchQuery && (
                           <button
                             type="button"
                             onClick={() => setEnquirySearchQuery("")}
-                            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground text-xs"
+                            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground text-xs p-1"
                           >
                             ×
                           </button>
                         )}
                       </div>
 
-                      {/* Service Filter */}
-                      {distinctServices.length > 0 && (
+                      {/* Filters & View Switches */}
+                      <div className="flex flex-wrap items-center gap-2">
+                        {/* Service Filter */}
+                        {distinctServices.length > 0 && (
+                          <div className="relative">
+                            <select
+                              value={enquiryServiceFilter}
+                              onChange={(e) => setEnquiryServiceFilter(e.target.value)}
+                              aria-label="Filter enquiries by service"
+                              className={`rounded-xl border px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all cursor-pointer pr-8 appearance-none ${
+                                adminTheme === "dark"
+                                  ? "bg-zinc-800/80 border-zinc-700 text-zinc-100"
+                                  : "bg-slate-50 border-slate-200 text-slate-800"
+                              }`}
+                            >
+                              <option value="all">All Services ({enquiries.length})</option>
+                              {distinctServices.map((svc: string) => (
+                                <option key={svc} value={svc}>
+                                  {svc}
+                                </option>
+                              ))}
+                            </select>
+                            <Filter className="absolute right-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
+                          </div>
+                        )}
+
+                        {/* Status Filter */}
                         <div className="relative">
                           <select
-                            value={enquiryServiceFilter}
-                            onChange={(e) => setEnquiryServiceFilter(e.target.value)}
-                            aria-label="Filter enquiries by service"
-                            className="rounded-xl border border-border bg-surface px-3 py-1.5 text-xs text-foreground focus:border-primary focus:outline-none transition-colors cursor-pointer pr-7 appearance-none"
+                            value={enquiryStatusFilter}
+                            onChange={(e) => setEnquiryStatusFilter(e.target.value as any)}
+                            aria-label="Filter by CRM status"
+                            className={`rounded-xl border px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all cursor-pointer pr-8 appearance-none ${
+                              adminTheme === "dark"
+                                ? "bg-zinc-800/80 border-zinc-700 text-zinc-100"
+                                : "bg-slate-50 border-slate-200 text-slate-800"
+                            }`}
                           >
-                            <option value="all">All Services ({enquiries.length})</option>
-                            {distinctServices.map((svc: string) => (
-                              <option key={svc} value={svc}>
-                                {svc}
-                              </option>
-                            ))}
+                            <option value="all">All Statuses</option>
+                            <option value="new">New Leads</option>
+                            <option value="contacted">Contacted / In Progress</option>
                           </select>
-                          <Filter className="absolute right-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
+                          <ChevronRight className="absolute right-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none rotate-90" />
                         </div>
-                      )}
 
-                      {/* View Mode Toggle (Cards vs Table) */}
-                      <div className="inline-flex rounded-xl border border-border bg-secondary/30 p-0.5">
-                        <button
-                          type="button"
-                          onClick={() => setEnquiryViewMode("cards")}
-                          className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-semibold transition-all cursor-pointer ${
-                            enquiryViewMode === "cards"
-                              ? "bg-surface text-primary shadow-xs"
-                              : "text-muted-foreground hover:text-foreground"
-                          }`}
-                          title="Card Grid View"
-                        >
-                          <LayoutGrid className="h-3.5 w-3.5" />
-                          <span className="hidden sm:inline">Cards</span>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setEnquiryViewMode("table")}
-                          className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-semibold transition-all cursor-pointer ${
-                            enquiryViewMode === "table"
-                              ? "bg-surface text-primary shadow-xs"
-                              : "text-muted-foreground hover:text-foreground"
-                          }`}
-                          title="Data Table View"
-                        >
-                          <List className="h-3.5 w-3.5" />
-                          <span className="hidden sm:inline">Table</span>
-                        </button>
+                        {/* View Switcher: Cards vs Table */}
+                        <div className="inline-flex rounded-xl border border-border/80 bg-secondary/40 p-0.5">
+                          <button
+                            type="button"
+                            onClick={() => setEnquiryViewMode("cards")}
+                            className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+                              enquiryViewMode === "cards"
+                                ? "bg-surface text-primary shadow-xs"
+                                : "text-muted-foreground hover:text-foreground"
+                            }`}
+                            title="Card Grid View"
+                          >
+                            <LayoutGrid className="h-3.5 w-3.5" />
+                            <span className="hidden sm:inline">Cards</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setEnquiryViewMode("table")}
+                            className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+                              enquiryViewMode === "table"
+                                ? "bg-surface text-primary shadow-xs"
+                                : "text-muted-foreground hover:text-foreground"
+                            }`}
+                            title="Data Table View"
+                          >
+                            <List className="h-3.5 w-3.5" />
+                            <span className="hidden sm:inline">Table</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -1720,7 +2086,7 @@ function AdminDashboard() {
                 {enquiriesLoading && enquiries.length === 0 ? (
                   <div className="grid gap-4 md:grid-cols-2 animate-pulse">
                     {[1, 2].map((i) => (
-                      <div key={i} className="panel p-6 bg-surface-2 border border-border/50 h-56 rounded-2xl"></div>
+                      <div key={i} className="h-60 rounded-2xl border border-border/50 bg-secondary/30"></div>
                     ))}
                   </div>
                 ) : enquiriesError ? (
@@ -1728,27 +2094,32 @@ function AdminDashboard() {
                     <p className="text-sm text-destructive font-medium">{enquiriesError}</p>
                   </div>
                 ) : enquiries.length === 0 ? (
-                  <div className="panel p-12 text-center border border-dashed border-border/80 rounded-2xl flex flex-col items-center justify-center">
-                    <div className="rounded-full bg-secondary p-3 text-muted-foreground">
+                  <div className={`p-12 text-center border border-dashed rounded-2xl flex flex-col items-center justify-center ${
+                    adminTheme === "dark" ? "border-zinc-800 bg-zinc-900/40" : "border-slate-300 bg-white"
+                  }`}>
+                    <div className="rounded-full bg-primary/10 p-4 text-primary">
                       <Inbox className="h-8 w-8" />
                     </div>
-                    <h3 className="mt-4 text-base font-semibold text-foreground">No enquiries yet</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      Submissions from the website's contact form will appear here.
+                    <h3 className="mt-4 text-base font-semibold text-foreground">No enquiries received yet</h3>
+                    <p className="mt-1 text-xs text-muted-foreground max-w-sm">
+                      When prospective clients submit requests through the website contact form, they will appear here in real-time.
                     </p>
                   </div>
                 ) : filteredEnquiries.length === 0 ? (
-                  <div className="panel p-10 text-center border border-border/80 rounded-2xl flex flex-col items-center justify-center">
+                  <div className={`p-10 text-center border rounded-2xl flex flex-col items-center justify-center ${
+                    adminTheme === "dark" ? "border-zinc-800 bg-zinc-900/40" : "border-slate-200 bg-white"
+                  }`}>
                     <Search className="h-8 w-8 text-muted-foreground/60 mb-2" />
                     <h3 className="text-sm font-semibold text-foreground">No matching enquiries</h3>
                     <p className="text-xs text-muted-foreground mt-1">
-                      No results matched your search or filter query.
+                      No client leads matched your search keyword or selected filters.
                     </p>
                     <button
                       type="button"
                       onClick={() => {
                         setEnquirySearchQuery("");
                         setEnquiryServiceFilter("all");
+                        setEnquiryStatusFilter("all");
                       }}
                       className="mt-3 text-xs font-semibold text-primary hover:underline cursor-pointer"
                     >
@@ -1756,15 +2127,15 @@ function AdminDashboard() {
                     </button>
                   </div>
                 ) : enquiryViewMode === "cards" ? (
-                  /* Cards View */
-                  <div className="grid gap-6 md:grid-cols-2">
+                  /* Executive CRM Cards View */
+                  <div className="grid gap-5 md:grid-cols-2">
                     {filteredEnquiries.map((item) => {
                       const cleanName =
                         [item.first_name, item.last_name]
                           .filter(Boolean)
                           .map((s: string) => s.trim())
                           .filter((s: string) => s && s !== "-")
-                          .join(" ") || "Lead";
+                          .join(" ") || "Client Lead";
 
                       const initials =
                         cleanName
@@ -1772,7 +2143,7 @@ function AdminDashboard() {
                           .filter(Boolean)
                           .slice(0, 2)
                           .map((w: string) => w[0]?.toUpperCase())
-                          .join("") || "E";
+                          .join("") || "L";
 
                       const locationString = [item.city, item.state, item.country, item.zip_code]
                         .filter(Boolean)
@@ -1786,20 +2157,30 @@ function AdminDashboard() {
                           })
                         : "N/A";
 
+                      const currentStatus = leadStatuses[item.id] || "new";
+                      const waLink = getWhatsAppLink(item.mobile, cleanName);
+
                       return (
                         <div
                           key={item.id}
-                          className="group relative rounded-2xl border border-border/80 bg-surface p-5 sm:p-6 shadow-xs transition-all duration-300 hover:shadow-lg hover:border-primary/45 flex flex-col justify-between overflow-hidden"
+                          className={`group relative rounded-2xl border p-5 sm:p-6 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xs hover:shadow-lg ${
+                            adminTheme === "dark"
+                              ? "bg-zinc-900/90 border-zinc-800 hover:border-primary/50 text-zinc-100"
+                              : "bg-white border-slate-200/90 hover:border-[#555d25]/50 text-slate-900"
+                          }`}
                         >
                           {/* Accent Gradient Border on Top */}
-                          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+                          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#555d25] via-[#b38e36] to-transparent opacity-90" />
 
                           <div>
-                            {/* Card Top Row: Avatar, Clean Name, Service Pill, and Date */}
+                            {/* Card Top Row: Avatar, Clean Name, Service Pill, Date & Status */}
                             <div className="flex items-start justify-between gap-3">
                               <div className="flex items-center gap-3 min-w-0">
-                                <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 border border-primary/25 text-primary flex items-center justify-center font-bold text-sm shrink-0 shadow-2xs">
+                                <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-[#555d25] to-[#b38e36] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-xs relative">
                                   {initials}
+                                  {currentStatus === "new" && (
+                                    <span className="absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full bg-emerald-500 border-2 border-background animate-pulse" />
+                                  )}
                                 </div>
                                 <div className="min-w-0">
                                   <div className="flex items-center gap-2 flex-wrap">
@@ -1815,17 +2196,40 @@ function AdminDashboard() {
                                   </div>
                                   {locationString && (
                                     <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
-                                      <MapPin className="h-3 w-3 text-primary/70 shrink-0" />
+                                      <MapPin className="h-3 w-3 text-primary/80 shrink-0" />
                                       <span className="truncate">{locationString}</span>
                                     </div>
                                   )}
                                 </div>
                               </div>
 
-                              <span className="shrink-0 inline-flex items-center gap-1 rounded-lg bg-secondary/60 border border-border/50 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
-                                <Calendar className="h-3 w-3" />
-                                {formattedDate}
-                              </span>
+                              <div className="flex flex-col items-end gap-1.5 shrink-0">
+                                <span className="inline-flex items-center gap-1 rounded-lg bg-secondary/60 border border-border/50 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+                                  <Calendar className="h-3 w-3" />
+                                  {formattedDate}
+                                </span>
+
+                                {/* Status Pill Selector */}
+                                <select
+                                  value={currentStatus}
+                                  onChange={(e) => updateLeadStatus(item.id, e.target.value as any)}
+                                  aria-label="Update lead CRM status"
+                                  className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border cursor-pointer focus:outline-none transition-colors ${
+                                    currentStatus === "new"
+                                      ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30"
+                                      : currentStatus === "contacted"
+                                        ? "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30"
+                                        : currentStatus === "in_discussion"
+                                          ? "bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30"
+                                          : "bg-zinc-500/15 text-zinc-600 dark:text-zinc-400 border-zinc-500/30"
+                                  }`}
+                                >
+                                  <option value="new">● New Lead</option>
+                                  <option value="contacted">● Contacted</option>
+                                  <option value="in_discussion">● In Discussion</option>
+                                  <option value="closed">● Closed</option>
+                                </select>
+                              </div>
                             </div>
 
                             {/* Contact Details Interactive Chips */}
@@ -1833,33 +2237,73 @@ function AdminDashboard() {
                               {item.email && (
                                 <a
                                   href={`mailto:${item.email}?subject=Regal%20OPs%20-%20Regarding%20your%20enquiry`}
-                                  className="inline-flex items-center gap-1.5 rounded-xl border border-border/70 bg-secondary/30 hover:bg-primary/10 hover:border-primary/40 px-3 py-1.5 text-xs font-medium text-foreground hover:text-primary transition-all"
+                                  className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-medium transition-all ${
+                                    adminTheme === "dark"
+                                      ? "border-zinc-800 bg-zinc-800/60 hover:bg-zinc-800 hover:border-primary/40 text-zinc-200 hover:text-white"
+                                      : "border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-primary/40 text-slate-800 hover:text-primary"
+                                  }`}
                                   title={`Email ${item.email}`}
                                 >
-                                  <Mail className="h-3.5 w-3.5 text-primary/70 shrink-0" />
-                                  <span className="truncate max-w-[200px]">{item.email}</span>
+                                  <Mail className="h-3.5 w-3.5 text-primary shrink-0" />
+                                  <span className="truncate max-w-[190px]">{item.email}</span>
                                 </a>
                               )}
 
                               {item.mobile && (
                                 <a
                                   href={`tel:${item.mobile}`}
-                                  className="inline-flex items-center gap-1.5 rounded-xl border border-border/70 bg-secondary/30 hover:bg-primary/10 hover:border-primary/40 px-3 py-1.5 text-xs font-medium text-foreground hover:text-primary transition-all"
+                                  className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-medium transition-all ${
+                                    adminTheme === "dark"
+                                      ? "border-zinc-800 bg-zinc-800/60 hover:bg-zinc-800 hover:border-primary/40 text-zinc-200 hover:text-white"
+                                      : "border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-primary/40 text-slate-800 hover:text-primary"
+                                  }`}
                                   title={`Call ${item.mobile}`}
                                 >
-                                  <Phone className="h-3.5 w-3.5 text-primary/70 shrink-0" />
+                                  <Phone className="h-3.5 w-3.5 text-primary shrink-0" />
                                   <span>{item.mobile}</span>
+                                </a>
+                              )}
+
+                              {/* Direct WhatsApp Action Link */}
+                              {waLink && (
+                                <a
+                                  href={waLink}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 px-3 py-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 transition-all cursor-pointer"
+                                  title="Chat with client on WhatsApp"
+                                >
+                                  <WhatsAppIcon className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                                  <span>WhatsApp</span>
                                 </a>
                               )}
                             </div>
 
                             {/* Client Message / Comments Quote Block */}
-                            <div className="mt-4 rounded-xl border border-border/70 bg-secondary/25 p-3.5 transition-colors group-hover:border-primary/25">
-                              <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">
-                                <MessageSquare className="h-3.5 w-3.5 text-primary" />
-                                <span>Client Message / Notes</span>
+                            <div className={`mt-4 rounded-xl border p-3.5 transition-colors ${
+                              adminTheme === "dark"
+                                ? "border-zinc-800 bg-zinc-800/40"
+                                : "border-slate-100 bg-slate-50/70"
+                            }`}>
+                              <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">
+                                <div className="flex items-center gap-1.5">
+                                  <MessageSquare className="h-3.5 w-3.5 text-primary" />
+                                  <span>Client Message / Notes</span>
+                                </div>
+                                {item.comments && (
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      navigator.clipboard.writeText(item.comments);
+                                    }}
+                                    className="text-[10px] text-muted-foreground hover:text-primary cursor-pointer"
+                                    title="Copy client message"
+                                  >
+                                    Copy Message
+                                  </button>
+                                )}
                               </div>
-                              <p className="text-sm leading-relaxed text-foreground whitespace-pre-wrap font-normal">
+                              <p className="text-xs sm:text-sm leading-relaxed text-foreground whitespace-pre-wrap font-normal">
                                 {item.comments?.trim() ? (
                                   item.comments
                                 ) : (
@@ -1878,13 +2322,17 @@ function AdminDashboard() {
                                   className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground shadow-2xs hover:opacity-95 transition-all cursor-pointer"
                                 >
                                   <Send className="h-3 w-3" />
-                                  <span>Reply via Email</span>
+                                  <span>Reply Email</span>
                                 </a>
                               )}
                               <button
                                 type="button"
                                 onClick={() => handleCopyEnquiry(item)}
-                                className="inline-flex items-center gap-1 rounded-xl border border-border bg-background hover:bg-secondary px-2.5 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+                                className={`inline-flex items-center gap-1 rounded-xl border px-2.5 py-1.5 text-xs font-medium transition-all cursor-pointer ${
+                                  adminTheme === "dark"
+                                    ? "border-zinc-800 bg-zinc-800/60 hover:bg-zinc-800 text-zinc-300"
+                                    : "border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
+                                }`}
                                 title="Copy Contact Summary"
                               >
                                 {copiedEnquiryId === item.id ? (
@@ -1894,7 +2342,7 @@ function AdminDashboard() {
                                   </>
                                 ) : (
                                   <>
-                                    <Copy className="h-3.5 w-3.5" />
+                                    <Copy className="h-3.5 w-3.5 text-muted-foreground" />
                                     <span className="text-[11px]">Copy</span>
                                   </>
                                 )}
@@ -1902,9 +2350,13 @@ function AdminDashboard() {
                             </div>
 
                             <button
-                              onClick={() => handleDeleteEnquiry(item.id)}
+                              onClick={() => {
+                                if (window.confirm(`Are you sure you want to delete the enquiry from "${cleanName}"?`)) {
+                                  handleDeleteEnquiry(item.id);
+                                }
+                              }}
                               disabled={deleteEnquiryStatus?.id === item.id && deleteEnquiryStatus?.status === "loading"}
-                              className="inline-flex items-center gap-1.5 rounded-xl border border-destructive/25 bg-destructive/5 hover:bg-destructive hover:text-white px-3 py-1.5 text-xs font-semibold text-destructive transition-all disabled:opacity-50 cursor-pointer"
+                              className="inline-flex items-center gap-1.5 rounded-xl border border-rose-500/25 bg-rose-500/5 hover:bg-rose-500 hover:text-white px-3 py-1.5 text-xs font-semibold text-rose-600 dark:text-rose-400 transition-all disabled:opacity-50 cursor-pointer"
                               title="Delete enquiry"
                             >
                               <Trash2 className="h-3.5 w-3.5" />
@@ -1920,15 +2372,20 @@ function AdminDashboard() {
                     })}
                   </div>
                 ) : (
-                  /* Compact Data Table View */
-                  <div className="rounded-2xl border border-border/80 bg-surface overflow-hidden shadow-xs">
+                  /* Executive Responsive Data Table View */
+                  <div className={`rounded-2xl border overflow-hidden shadow-xs ${
+                    adminTheme === "dark" ? "bg-zinc-900 border-zinc-800" : "bg-white border-slate-200/90"
+                  }`}>
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-secondary/50 border-b border-border text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                        <thead className={`border-b text-[11px] font-bold uppercase tracking-wider text-muted-foreground ${
+                          adminTheme === "dark" ? "bg-zinc-800/60 border-zinc-800" : "bg-slate-50 border-slate-200"
+                        }`}>
                           <tr>
                             <th className="py-3 px-4">Contact</th>
                             <th className="py-3 px-4">Service</th>
-                            <th className="py-3 px-4">Contact Info</th>
+                            <th className="py-3 px-4">Status</th>
+                            <th className="py-3 px-4">Contact Channels</th>
                             <th className="py-3 px-4">Location</th>
                             <th className="py-3 px-4">Message</th>
                             <th className="py-3 px-4">Date</th>
@@ -1964,11 +2421,16 @@ function AdminDashboard() {
                                 })
                               : "—";
 
+                            const currentStatus = leadStatuses[item.id] || "new";
+                            const waLink = getWhatsAppLink(item.mobile, cleanName);
+
                             return (
-                              <tr key={item.id} className="hover:bg-secondary/20 transition-colors">
+                              <tr key={item.id} className={`transition-colors ${
+                                adminTheme === "dark" ? "hover:bg-zinc-800/40" : "hover:bg-slate-50"
+                              }`}>
                                 <td className="py-3 px-4">
                                   <div className="flex items-center gap-2.5">
-                                    <div className="h-8 w-8 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center font-bold text-xs shrink-0">
+                                    <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-[#555d25] to-[#b38e36] text-white flex items-center justify-center font-bold text-xs shrink-0">
                                       {initials}
                                     </div>
                                     <span className="font-bold text-foreground whitespace-nowrap">{cleanName}</span>
@@ -1980,23 +2442,41 @@ function AdminDashboard() {
                                   </span>
                                 </td>
                                 <td className="py-3 px-4 whitespace-nowrap">
-                                  <div className="space-y-0.5">
+                                  <select
+                                    value={currentStatus}
+                                    onChange={(e) => updateLeadStatus(item.id, e.target.value as any)}
+                                    aria-label="Update lead status"
+                                    className="text-[10px] font-bold uppercase rounded-md px-1.5 py-0.5 border border-border bg-surface cursor-pointer focus:outline-none"
+                                  >
+                                    <option value="new">New</option>
+                                    <option value="contacted">Contacted</option>
+                                    <option value="in_discussion">Discussion</option>
+                                    <option value="closed">Closed</option>
+                                  </select>
+                                </td>
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <div className="flex items-center gap-2">
                                     {item.email && (
-                                      <a href={`mailto:${item.email}`} className="text-foreground hover:text-primary transition-colors flex items-center gap-1">
-                                        <Mail className="h-3 w-3 text-muted-foreground" /> {item.email}
+                                      <a href={`mailto:${item.email}`} className="text-muted-foreground hover:text-primary transition-colors" title={item.email}>
+                                        <Mail className="h-3.5 w-3.5" />
                                       </a>
                                     )}
                                     {item.mobile && (
-                                      <a href={`tel:${item.mobile}`} className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
-                                        <Phone className="h-3 w-3 text-muted-foreground" /> {item.mobile}
+                                      <a href={`tel:${item.mobile}`} className="text-muted-foreground hover:text-primary transition-colors" title={item.mobile}>
+                                        <Phone className="h-3.5 w-3.5" />
+                                      </a>
+                                    )}
+                                    {waLink && (
+                                      <a href={waLink} target="_blank" rel="noopener noreferrer" className="text-emerald-500 hover:text-emerald-600 transition-colors" title="WhatsApp Direct">
+                                        <WhatsAppIcon className="h-3.5 w-3.5" />
                                       </a>
                                     )}
                                   </div>
                                 </td>
-                                <td className="py-3 px-4 text-muted-foreground max-w-[160px] truncate" title={locationString}>
+                                <td className="py-3 px-4 text-muted-foreground max-w-[150px] truncate" title={locationString}>
                                   {locationString}
                                 </td>
-                                <td className="py-3 px-4 max-w-[240px]">
+                                <td className="py-3 px-4 max-w-[200px]">
                                   <p className="line-clamp-2 text-foreground/90 text-xs" title={item.comments}>
                                     {item.comments || <span className="italic text-muted-foreground text-[11px]">No message</span>}
                                   </p>
@@ -2006,15 +2486,6 @@ function AdminDashboard() {
                                 </td>
                                 <td className="py-3 px-4 text-right whitespace-nowrap">
                                   <div className="inline-flex items-center gap-1.5 justify-end">
-                                    {item.email && (
-                                      <a
-                                        href={`mailto:${item.email}?subject=Regal%20OPs%20-%20Response`}
-                                        className="p-1.5 rounded-lg border border-border hover:bg-primary/10 hover:border-primary/40 text-muted-foreground hover:text-primary transition-all"
-                                        title="Email Client"
-                                      >
-                                        <Mail className="h-3.5 w-3.5" />
-                                      </a>
-                                    )}
                                     <button
                                       type="button"
                                       onClick={() => handleCopyEnquiry(item)}
@@ -2025,9 +2496,13 @@ function AdminDashboard() {
                                     </button>
                                     <button
                                       type="button"
-                                      onClick={() => handleDeleteEnquiry(item.id)}
+                                      onClick={() => {
+                                        if (window.confirm(`Delete enquiry from "${cleanName}"?`)) {
+                                          handleDeleteEnquiry(item.id);
+                                        }
+                                      }}
                                       disabled={deleteEnquiryStatus?.id === item.id && deleteEnquiryStatus?.status === "loading"}
-                                      className="p-1.5 rounded-lg border border-destructive/30 hover:bg-destructive hover:text-white text-destructive transition-all cursor-pointer disabled:opacity-50"
+                                      className="p-1.5 rounded-lg border border-rose-500/30 hover:bg-rose-500 hover:text-white text-rose-500 transition-all cursor-pointer disabled:opacity-50"
                                       title="Delete"
                                     >
                                       <Trash2 className="h-3.5 w-3.5" />
@@ -3563,7 +4038,7 @@ function AdminDashboard() {
                         </button>
                       </div>
 
-                      <div className="space-y-6">
+                      <div className="space-y-3">
                         {blogSections.map((sec, idx) => (
                           <div key={idx} className="p-4 rounded-xl border border-border/80 bg-background/50 space-y-3 relative">
                             <div className="flex items-center justify-between">
@@ -3647,13 +4122,29 @@ function AdminDashboard() {
           )}
 
           {activeTab === "applications" && (
-            <div>
-              <h2 className="text-lg font-bold text-foreground mb-4">Job Applications</h2>
+            <div className="space-y-3">
+              <div className={`p-3.5 sm:p-4 rounded-xl border transition-all ${
+                adminTheme === "dark" ? "bg-zinc-900/80 border-zinc-800" : "bg-white border-slate-200/90 shadow-xs"
+              }`}>
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <div className="flex items-center gap-2.5 flex-wrap">
+                      <h2 className="text-xl font-bold text-foreground tracking-tight">Job Applications</h2>
+                      <span className="inline-flex items-center rounded-full bg-amber-500/10 px-2.5 py-0.5 text-xs font-bold text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                        {applications.length} {applications.length === 1 ? "applicant" : "applicants"}
+                      </span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Candidates who submitted resumes & credentials for open engineering and operations roles.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
               {applicationsLoading && applications.length === 0 ? (
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 animate-pulse">
                   {[1, 2, 3].map((i) => (
-                    <div key={i} className="panel h-48 bg-surface-2 border border-border/50 rounded-2xl"></div>
+                    <div key={i} className="h-56 rounded-2xl border border-border/50 bg-secondary/30"></div>
                   ))}
                 </div>
               ) : applicationsError ? (
@@ -3661,63 +4152,124 @@ function AdminDashboard() {
                   <p className="text-sm text-destructive font-medium">{applicationsError}</p>
                 </div>
               ) : applications.length === 0 ? (
-                <div className="panel p-12 text-center border border-dashed border-border/80 rounded-2xl">
-                  <Inbox className="h-12 w-12 text-muted-foreground mx-auto" />
-                  <h3 className="mt-4 text-base font-semibold text-foreground">No applications yet</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    Candidates applying for open roles will appear here.
+                <div className={`p-12 text-center border border-dashed rounded-2xl flex flex-col items-center justify-center ${
+                  adminTheme === "dark" ? "border-zinc-800 bg-zinc-900/40" : "border-slate-300 bg-white"
+                }`}>
+                  <div className="rounded-full bg-amber-500/10 p-4 text-amber-500">
+                    <FileText className="h-8 w-8" />
+                  </div>
+                  <h3 className="mt-4 text-base font-semibold text-foreground">No applications received yet</h3>
+                  <p className="mt-1 text-xs text-muted-foreground max-w-sm">
+                    When talent applies for positions on the Career page, their resumes and contact details will appear here.
                   </p>
                 </div>
               ) : (
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {applications.map((appItem) => (
-                    <div key={appItem.id} className="panel p-5 bg-surface border border-border flex flex-col justify-between">
-                      <div className="space-y-3">
-                        <div className="flex items-start justify-between">
-                          <div>
-                            <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold text-primary uppercase">
-                              {appItem.job_title}
-                            </span>
-                            <h3 className="text-base font-bold text-foreground mt-2">
-                              {appItem.first_name} {appItem.last_name}
-                            </h3>
+                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {applications.map((appItem) => {
+                    const cleanName = [appItem.first_name, appItem.last_name].filter(Boolean).join(" ") || "Candidate";
+                    const initials = cleanName.split(" ").filter(Boolean).slice(0, 2).map((w: string) => w[0]?.toUpperCase()).join("") || "C";
+                    const waLink = getWhatsAppLink(appItem.mobile, cleanName);
+
+                    return (
+                      <div
+                        key={appItem.id}
+                        className={`group relative rounded-2xl border p-5 flex flex-col justify-between transition-all duration-300 shadow-xs hover:shadow-lg ${
+                          adminTheme === "dark"
+                            ? "bg-zinc-900/90 border-zinc-800 hover:border-amber-500/50 text-zinc-100"
+                            : "bg-white border-slate-200/90 hover:border-amber-500/50 text-slate-900"
+                        }`}
+                      >
+                        {/* Top Accent Gradient Line */}
+                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-yellow-400 to-transparent opacity-90" />
+
+                        <div className="space-y-4">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex items-center gap-3 min-w-0">
+                              <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-600 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-xs">
+                                {initials}
+                              </div>
+                              <div className="min-w-0">
+                                <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold text-amber-600 dark:text-amber-400 border border-amber-500/20 uppercase tracking-wider truncate max-w-[170px]">
+                                  {appItem.job_title}
+                                </span>
+                                <h3 className="text-base font-bold text-foreground mt-1 truncate">
+                                  {cleanName}
+                                </h3>
+                              </div>
+                            </div>
+
+                            <button
+                              onClick={() => {
+                                if (window.confirm(`Delete application log for "${cleanName}"?`)) {
+                                  handleDeleteApplication(appItem.id);
+                                }
+                              }}
+                              disabled={deleteApplicationStatus?.id === appItem.id && deleteApplicationStatus.status === "loading"}
+                              className="text-muted-foreground hover:text-rose-500 p-1.5 rounded-lg border border-transparent hover:border-rose-500/20 hover:bg-rose-500/10 transition-all disabled:opacity-50 cursor-pointer shrink-0"
+                              title="Delete application log"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
                           </div>
-                          <button
-                            onClick={() => handleDeleteApplication(appItem.id)}
-                            disabled={deleteApplicationStatus?.id === appItem.id && deleteApplicationStatus.status === "loading"}
-                            className="text-muted-foreground hover:text-destructive transition-colors disabled:opacity-50 cursor-pointer"
-                            title="Delete application log"
+
+                          {/* Contact Details Interactive Chips */}
+                          <div className="space-y-2 text-xs pt-3 border-t border-border/60">
+                            {appItem.email && (
+                              <a
+                                href={`mailto:${appItem.email}?subject=Regal%20OPs%20-%20Regarding%20your%20application`}
+                                className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors truncate"
+                                title={`Email ${appItem.email}`}
+                              >
+                                <Mail className="h-3.5 w-3.5 text-primary shrink-0" />
+                                <span className="truncate">{appItem.email}</span>
+                              </a>
+                            )}
+                            {appItem.mobile && (
+                              <div className="flex items-center justify-between gap-2">
+                                <a
+                                  href={`tel:${appItem.mobile}`}
+                                  className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+                                  title={`Call ${appItem.mobile}`}
+                                >
+                                  <Phone className="h-3.5 w-3.5 text-primary shrink-0" />
+                                  <span>{appItem.mobile}</span>
+                                </a>
+                                {waLink && (
+                                  <a
+                                    href={waLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
+                                  >
+                                    <WhatsAppIcon className="h-3 w-3 text-emerald-500" />
+                                    <span>WhatsApp</span>
+                                  </a>
+                                )}
+                              </div>
+                            )}
+                            <div className="flex items-center gap-2 text-muted-foreground text-[11px]">
+                              <Calendar className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                              <span>Applied on {new Date(appItem.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Resume Download / View Button */}
+                        <div className="mt-5 pt-3 border-t border-border/60">
+                          <a
+                            href={`${appItem.cv_path}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-zinc-900 to-zinc-800 dark:from-zinc-800 dark:to-zinc-700 text-white hover:from-primary hover:to-primary/90 px-4 py-2.5 text-xs font-bold transition-all shadow-sm cursor-pointer text-center"
                           >
-                            <Trash2 className="h-4.5 w-4.5" />
-                          </button>
-                        </div>
-
-                        <div className="space-y-1.5 text-xs text-muted-foreground pt-1 border-t border-border/50">
-                          <p className="flex items-center gap-2">
-                            <Mail className="h-3.5 w-3.5" /> {appItem.email}
-                          </p>
-                          <p className="flex items-center gap-2">
-                            <Phone className="h-3.5 w-3.5" /> {appItem.mobile}
-                          </p>
-                          <p className="flex items-center gap-2">
-                            <Calendar className="h-3.5 w-3.5" /> {new Date(appItem.created_at).toLocaleDateString()}
-                          </p>
+                            <FileText className="h-4 w-4" />
+                            <span>View / Download Resume (PDF)</span>
+                            <ArrowUpRight className="h-3.5 w-3.5 opacity-70" />
+                          </a>
                         </div>
                       </div>
-
-                      <div className="mt-5 pt-3 border-t border-border/50">
-                        <a
-                          href={`${appItem.cv_path}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex w-full items-center justify-center gap-2 rounded-xl bg-zinc-800 text-white hover:bg-zinc-700 px-4 py-2.5 text-xs font-semibold transition-colors cursor-pointer text-center"
-                        >
-                          <BookOpen className="h-3.5 w-3.5" />
-                          View PDF Resume / CV
-                        </a>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>

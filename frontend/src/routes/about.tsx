@@ -264,8 +264,8 @@ function About() {
           </div>
 
           {/* Left Column Content Container */}
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-10 sm:py-14 lg:py-16">
-            <div className="max-w-2xl text-left space-y-6">
+          <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 w-full py-5 sm:py-7 lg:py-8">
+            <div className="max-w-2xl text-left space-y-3">
               
               {/* Top Tagline / Eyebrow */}
               <div className="flex items-center gap-2.5 text-[#b38e36] text-[11px] sm:text-xs font-bold tracking-[0.22em] uppercase">
@@ -285,16 +285,16 @@ function About() {
               </p>
 
               {/* Call to Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3.5 pt-1">
+              <div className="flex flex-wrap items-center gap-3 pt-0.5">
                 <Link
                   to="/solutions"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#555d25] hover:bg-[#464d1e] px-6 sm:px-7 py-3 text-xs sm:text-sm font-bold text-white shadow-lg shadow-emerald-950/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#555d25] hover:bg-[#464d1e] px-6 sm:px-7 py-2.5 text-xs sm:text-sm font-bold text-white shadow-lg shadow-emerald-950/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                 >
                   Explore Our Solutions <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/40 hover:border-white bg-white/10 hover:bg-white/20 px-5 sm:px-6 py-3 text-xs sm:text-sm font-semibold text-white backdrop-blur-xs transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/40 hover:border-white bg-white/10 hover:bg-white/20 px-5 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold text-white backdrop-blur-xs transition-all cursor-pointer"
                 >
                   Contact Leadership <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -304,9 +304,9 @@ function About() {
           </div>
 
           {/* Multi-Layer Wave Transition SVG with Golden Metallic Ribbon Trim */}
-          <div className="relative w-full overflow-hidden leading-none select-none pointer-events-none -mb-[1px] mt-6 sm:mt-10">
+          <div className="relative w-full overflow-hidden leading-none select-none pointer-events-none -mb-[1px] mt-1 sm:mt-2">
             <svg
-              className="w-full h-16 sm:h-24 lg:h-32 block"
+              className="w-full h-12 sm:h-16 lg:h-20 block"
               viewBox="0 0 1440 180"
               preserveAspectRatio="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -335,16 +335,16 @@ function About() {
         </div>
 
         {/* Section Intro: "OUR PURPOSE" (Directly under the banner) */}
-        <div className="relative bg-white pt-8 pb-5 text-left">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-start gap-2.5 text-[#555d25] text-xs font-bold tracking-[0.22em] uppercase mb-2.5">
+        <div className="relative bg-white pt-3 pb-2 text-left">
+          <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-start gap-2 text-[#555d25] text-xs font-bold tracking-[0.22em] uppercase mb-1">
               <span className="w-5 h-[2px] bg-[#555d25]" />
               <span>OUR PURPOSE</span>
             </div>
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#0F172A] tracking-tight text-left leading-snug">
               Building Smarter, Stronger and More Resilient Businesses
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-neutral-600 max-w-3xl text-left leading-relaxed">
+            <p className="mt-1 text-sm sm:text-base text-neutral-600 max-w-3xl text-left leading-relaxed">
               We combine deep industry knowledge, advanced technologies and a client-first approach to create sustainable value for organizations across the globe.
             </p>
           </div>
@@ -354,45 +354,45 @@ function About() {
       {/* ==================================================================== */}
       {/* 2. OUR KEY BENEFITS (Horizontal Auto-Scrolling Carousel)             */}
       {/* ==================================================================== */}
-      <section id="our-key-benefits" className="relative bg-white py-6 sm:py-8 border-b border-neutral-200/70 overflow-hidden">
-        <div id="benefits" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section id="our-key-benefits" className="relative bg-white py-3 sm:py-4 border-b border-neutral-200/70 overflow-hidden">
+        <div id="benefits" className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           {/* Section Header with Carousel Navigation Controls */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-2 mb-2">
             <div className="max-w-2xl text-left">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#8c6d23]">
                 Why Leading Enterprises Choose Us
               </span>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">
+              <h2 className="mt-1.5 text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight">
                 Our Key Benefits
               </h2>
-              <div className="w-12 h-1 bg-[#555d25] rounded-full mt-3 mb-4" />
-              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+              <div className="w-12 h-1 bg-[#555d25] rounded-full mt-1.5 mb-2" />
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
                 We empower organizations to reach their full potential and accelerate
                 their technological transformation with battle-tested rigor.
               </p>
             </div>
 
             {/* Navigation Buttons & Auto-scroll indicator */}
-            <div className="flex items-center gap-3 shrink-0 self-start md:self-end">
-              <span className="text-[11px] font-medium text-neutral-500 hidden sm:inline-flex items-center gap-1.5 bg-neutral-100/80 px-3 py-1.5 rounded-full border border-neutral-200/60">
+            <div className="flex items-center gap-2.5 shrink-0 self-start md:self-end">
+              <span className="text-[11px] font-medium text-neutral-500 hidden sm:inline-flex items-center gap-1.5 bg-neutral-100/80 px-2.5 py-1 rounded-full border border-neutral-200/60">
                 <span className={`h-2 w-2 rounded-full ${isHovered ? "bg-amber-400" : "bg-emerald-500 animate-pulse"}`} />
-                {isHovered ? "Paused on hover" : "Auto-scrolling"}
+                {isHovered ? "Paused" : "Auto-scrolling"}
               </span>
               <button
                 type="button"
                 onClick={() => scroll("left")}
                 aria-label="Scroll left"
-                className="h-10 w-10 rounded-full border border-neutral-200/80 bg-white text-neutral-700 hover:bg-[#555d25] hover:text-white hover:border-[#555d25] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
+                className="h-8 w-8 rounded-full border border-neutral-200/80 bg-white text-neutral-700 hover:bg-[#555d25] hover:text-white hover:border-[#555d25] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ChevronLeft className="h-4 w-4" />
               </button>
               <button
                 type="button"
                 onClick={() => scroll("right")}
                 aria-label="Scroll right"
-                className="h-10 w-10 rounded-full border border-neutral-200/80 bg-white text-neutral-700 hover:bg-[#555d25] hover:text-white hover:border-[#555d25] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
+                className="h-8 w-8 rounded-full border border-neutral-200/80 bg-white text-neutral-700 hover:bg-[#555d25] hover:text-white hover:border-[#555d25] shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-4 w-4" />
               </button>
             </div>
           </div>
@@ -412,37 +412,37 @@ function About() {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex gap-6 overflow-x-auto scroll-smooth py-4 px-4 sm:px-6 lg:px-8 snap-x snap-mandatory mx-auto max-w-7xl [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            className="flex gap-4 overflow-x-auto scroll-smooth py-1.5 px-4 sm:px-6 lg:px-8 snap-x snap-mandatory mx-auto max-w-[1440px] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           >
             {keyBenefits.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
                   key={item.title}
-                  className="group relative w-[85vw] sm:w-[360px] lg:w-[380px] shrink-0 snap-start rounded-2xl border border-neutral-200/80 bg-white p-7 shadow-xs hover:shadow-xl hover:border-sky-300 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 select-none"
+                  className="group relative w-[85vw] sm:w-[340px] lg:w-[360px] shrink-0 snap-start rounded-2xl border border-neutral-200/80 bg-white p-5 shadow-xs hover:shadow-lg hover:border-sky-300 transition-all duration-300 flex flex-col justify-between hover:-translate-y-0.5 select-none"
                 >
                   <div>
                     {/* Top Icon & Tag */}
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#fdfaf2] text-[#555d25] border border-sky-100 group-hover:bg-[#555d25] group-hover:text-white transition-colors duration-300">
-                        <Icon className="h-6 w-6" />
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#fdfaf2] text-[#555d25] border border-sky-100 group-hover:bg-[#555d25] group-hover:text-white transition-colors duration-300">
+                        <Icon className="h-5 w-5" />
                       </div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 bg-neutral-100/80 px-2.5 py-1 rounded-full group-hover:bg-[#fdfaf2] group-hover:text-[#8c6d23] transition-colors">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 bg-neutral-100/80 px-2 py-0.5 rounded-full group-hover:bg-[#fdfaf2] group-hover:text-[#8c6d23] transition-colors">
                         {item.badge}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-bold text-neutral-900 group-hover:text-[#555d25] transition-colors">
+                    <h3 className="text-base font-bold text-neutral-900 group-hover:text-[#555d25] transition-colors">
                       {item.title}
                     </h3>
-                    <p className="mt-2.5 text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                    <p className="mt-1.5 text-xs text-neutral-600 leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-neutral-100 flex items-center justify-between text-xs font-semibold text-[#555d25]">
+                  <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-between text-[11px] font-semibold text-[#555d25]">
                     <span>Standard in every engagement</span>
-                    <span className="text-neutral-400 font-mono text-[11px]">0{idx + 1}</span>
+                    <span className="text-neutral-400 font-mono text-[10px]">0{idx + 1}</span>
                   </div>
                 </div>
               );
@@ -451,22 +451,22 @@ function About() {
         </div>
 
         {/* Pagination Dots & Position Tracker */}
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mt-8 flex items-center justify-center gap-2">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <div className="mt-2.5 flex items-center justify-center gap-2">
             {keyBenefits.map((_, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => scrollTo(idx)}
-                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                   idx === activeIndex
-                    ? "w-8 bg-[#555d25] shadow-[0_0_8px_rgba(0,145,213,0.4)]"
-                    : "w-2 bg-neutral-300 hover:bg-neutral-400"
+                    ? "w-6 bg-[#555d25] shadow-xs"
+                    : "w-1.5 bg-neutral-300 hover:bg-neutral-400"
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
             ))}
-            <span className="text-xs font-bold font-mono text-neutral-500 ml-2">
+            <span className="text-[11px] font-bold font-mono text-neutral-500 ml-1.5">
               0{activeIndex + 1} / 0{keyBenefits.length}
             </span>
           </div>
@@ -476,7 +476,7 @@ function About() {
       {/* ==================================================================== */}
       {/* 3. OUR PEOPLE (Luxury Glassmorphism with Panoramic Background Image)  */}
       {/* ==================================================================== */}
-      <section className="relative py-12 sm:py-16 border-b border-neutral-800 overflow-hidden bg-neutral-950 text-white">
+      <section className="relative py-3 sm:py-5 border-b border-neutral-800 overflow-hidden bg-neutral-950 text-white">
         {/* Panoramic High-Res Background Image with Vignette & Overlays */}
         <div className="absolute inset-0 z-0">
           <img
@@ -488,55 +488,55 @@ function About() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#060907]/80 via-transparent to-[#060907]/80 pointer-events-none" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="text-left max-w-3xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/60 backdrop-blur-md px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-[#a4c965] shadow-md">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/60 backdrop-blur-md px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#a4c965] shadow-md">
               <Sparkles className="h-3 w-3 text-[#f3cd67]" /> Culture &amp; Talent Excellence
             </span>
-            <h2 className="mt-2 text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight text-left">
+            <h2 className="mt-1 text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight text-left">
               Our <span className="text-[#f3cd67] drop-shadow-[0_2px_12px_rgba(243,205,103,0.3)]">People</span>
             </h2>
-            <div className="w-12 h-0.5 bg-gradient-to-r from-[#a4c965] to-[#f3cd67] rounded-full mt-2 mb-2.5" />
-            <p className="text-sm sm:text-base text-neutral-200 leading-relaxed max-w-2xl text-left">
+            <div className="w-12 h-0.5 bg-gradient-to-r from-[#a4c965] to-[#f3cd67] rounded-full mt-1.5 mb-2" />
+            <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed max-w-2xl text-left">
               We nurture a truly diverse and talented pool of people who work with a
               customer-centric attitude to deliver phenomenal results.
             </p>
           </div>
 
           {/* 3-Column Luxury Glassmorphism Pillar Presentation */}
-          <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+          <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
             {peoplePillars.map((p, idx) => {
               const Icon = p.icon;
               return (
                 <div
                   key={p.title}
-                  className="group relative rounded-2xl border border-white/15 hover:border-[#a4c965]/50 bg-black/55 hover:bg-black/75 backdrop-blur-md p-6 sm:p-7 flex flex-col justify-between shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.4)]"
+                  className="group relative rounded-2xl border border-white/15 hover:border-[#a4c965]/50 bg-black/55 hover:bg-black/75 backdrop-blur-md p-5 flex flex-col justify-between shadow-xl transition-all duration-300 hover:-translate-y-0.5"
                 >
                   <div>
                     {/* Top row: Floating luminous icon + sleek mono index */}
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-[#a4c965] border border-white/15 shadow-inner group-hover:scale-105 group-hover:bg-[#555d25] group-hover:text-white transition-all duration-300">
-                        <Icon className="h-5 w-5 transition-colors" />
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-[#a4c965] border border-white/15 shadow-inner group-hover:scale-105 group-hover:bg-[#555d25] group-hover:text-white transition-all duration-300">
+                        <Icon className="h-4.5 w-4.5 transition-colors" />
                       </div>
-                      <span className="text-2xl sm:text-3xl font-mono font-black text-white/25 group-hover:text-[#a4c965]/50 transition-colors select-none">
+                      <span className="text-xl sm:text-2xl font-mono font-black text-white/25 group-hover:text-[#a4c965]/50 transition-colors select-none">
                         0{idx + 1}
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-tight group-hover:text-[#f3cd67] transition-colors">
+                    <h3 className="text-base sm:text-lg font-extrabold text-white tracking-tight group-hover:text-[#f3cd67] transition-colors">
                       {p.title}
                     </h3>
 
                     {/* Description - Justified */}
-                    <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-neutral-300 text-justify">
+                    <p className="mt-2 text-xs leading-relaxed text-neutral-300 text-justify">
                       {p.desc}
                     </p>
                   </div>
 
                   {/* Bottom expanding gradient accent line */}
-                  <div className="mt-6 pt-4 border-t border-white/10 flex items-center gap-2.5">
-                    <div className="h-0.5 w-6 rounded-full bg-gradient-to-r from-[#a4c965] to-[#f3cd67] group-hover:w-16 transition-all duration-300" />
+                  <div className="mt-4 pt-3 border-t border-white/10 flex items-center gap-2">
+                    <div className="h-0.5 w-5 rounded-full bg-gradient-to-r from-[#a4c965] to-[#f3cd67] group-hover:w-12 transition-all duration-300" />
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#a4c965]/80 group-hover:text-[#a4c965] transition-colors">
                       Core Pillar
                     </span>
@@ -551,8 +551,8 @@ function About() {
       {/* ==================================================================== */}
       {/* 4. OUR CORE VALUES (Open Architectural Feature Layout - COMPACT)     */}
       {/* ==================================================================== */}
-      <section id="our-core-values" className="bg-[#fafcfb] dark:bg-slate-900/60 py-6 sm:py-8 border-b border-neutral-200/70 dark:border-slate-800/80">
-        <div id="values" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section id="our-core-values" className="bg-[#fafcfb] dark:bg-slate-900/60 py-2.5 sm:py-3.5 border-b border-neutral-200/70 dark:border-slate-800/80">
+        <div id="values" className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="text-left max-w-3xl">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 dark:border-sky-800 bg-[#fdfaf2] dark:bg-sky-950/50 px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#8c6d23] dark:text-[#b38e36]">
               Ethical Standards &amp; Principles
@@ -567,34 +567,34 @@ function About() {
             </p>
           </div>
 
-          <div className="mt-5 sm:mt-6 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80 dark:divide-slate-800">
+          <div className="mt-2 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-200/80 dark:divide-slate-800">
             {coreValues.map((v, idx) => {
               const Icon = v.icon;
               return (
                 <div
                   key={v.title}
-                  className="group relative py-5 sm:py-6 px-5 lg:px-8 flex flex-col justify-between transition-colors duration-300"
+                  className="group relative py-2.5 px-4 sm:px-6 flex flex-col justify-between transition-colors duration-300"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#fdfaf2] dark:bg-sky-950/60 text-[#555d25] dark:text-[#b38e36] border border-[#b38e36]/40/50 dark:border-sky-800/50 group-hover:scale-105 group-hover:bg-[#555d25] group-hover:text-white transition-all duration-300 shadow-xs">
-                        <Icon className="h-5 w-5" />
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#fdfaf2] dark:bg-sky-950/60 text-[#555d25] dark:text-[#b38e36] border border-[#b38e36]/40/50 dark:border-sky-800/50 group-hover:scale-105 group-hover:bg-[#555d25] group-hover:text-white transition-all duration-300 shadow-xs">
+                        <Icon className="h-4 w-4" />
                       </div>
-                      <span className="text-2xl sm:text-3xl font-mono font-black text-slate-200 dark:text-slate-800 group-hover:text-sky-500/30 transition-colors select-none">
+                      <span className="text-xl sm:text-2xl font-mono font-black text-slate-200 dark:text-slate-800 group-hover:text-sky-500/30 transition-colors select-none">
                         0{idx + 1}
                       </span>
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-extrabold text-neutral-900 dark:text-white tracking-tight group-hover:text-[#555d25] transition-colors">
+                    <h3 className="text-base sm:text-lg font-extrabold text-neutral-900 dark:text-white tracking-tight group-hover:text-[#555d25] transition-colors">
                       {v.title}
                     </h3>
-                    <p className="mt-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    <p className="mt-1 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
                       {v.desc}
                     </p>
                   </div>
 
-                  <div className="mt-5 pt-3.5 border-t border-neutral-200/60 dark:border-slate-800 flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                    <CheckCircle2 className="h-4 w-4" /> Contractually Respected
+                  <div className="mt-2.5 pt-2 border-t border-neutral-200/60 dark:border-slate-800 flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                    <CheckCircle2 className="h-3.5 w-3.5" /> Contractually Respected
                   </div>
                 </div>
               );
@@ -606,47 +606,47 @@ function About() {
       {/* ==================================================================== */}
       {/* 5. JOURNEY & MILESTONES TIMELINE WITH ROTATING ENTERPRISE SHOWCASE   */}
       {/* ==================================================================== */}
-      <section className="bg-[#fafcfb] py-8 sm:py-12 lg:py-16 border-b border-neutral-200/70 overflow-hidden relative">
+      <section className="bg-[#fafcfb] py-3 sm:py-4 border-b border-neutral-200/70 overflow-hidden relative">
         {/* Subtle background ambient glow */}
         <div className="absolute top-1/3 right-10 -z-0 h-96 w-96 rounded-full bg-[#f3cd67]/10 blur-3xl pointer-events-none" />
         <div className="absolute bottom-10 left-10 -z-0 h-80 w-80 rounded-full bg-[#555d25]/10 blur-3xl pointer-events-none" />
 
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-2xl text-left mb-6 sm:mb-8">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#8c6d23]">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-2xl text-left mb-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.16em] text-[#8c6d23]">
               Fifteen Years of Impact
             </span>
-            <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-900 text-left">
+            <h2 className="mt-1 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-900 text-left">
               Our Journey &amp; Milestones
             </h2>
-            <div className="w-12 h-1 bg-[#555d25] rounded-full mt-2.5 mb-3" />
-            <p className="text-sm sm:text-base text-neutral-600 text-left">
+            <div className="w-12 h-0.5 bg-[#555d25] rounded-full mt-1.5 mb-2" />
+            <p className="text-xs sm:text-sm text-neutral-600 text-left">
               From an agile architecture squad to a global practice serving Fortune 500 institutions.
             </p>
           </div>
 
           {/* 2-Column Grid: Left Timeline with Transitions, Right Rotating Pyramid Showcase */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-center">
             
             {/* LEFT COLUMN: Timeline Items with Interactive Transitions */}
-            <div className="lg:col-span-7 relative border-l-2 border-[#b38e36]/40 ml-4 sm:ml-6 space-y-5 pl-6 sm:pl-8">
+            <div className="lg:col-span-7 relative border-l-2 border-[#b38e36]/40 ml-4 sm:ml-6 space-y-2 pl-4 sm:pl-6">
               {timeline.map((item) => (
                 <div
                   key={item.year}
                   className="relative group transition-all duration-300 hover:translate-x-1.5"
                 >
                   {/* Glowing Node Dot with Hover Pulse & Glow */}
-                  <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 h-4 w-4 rounded-full border-2 border-white bg-[#555d25] shadow-xs group-hover:scale-135 group-hover:bg-[#8c6d23] group-hover:shadow-[0_0_12px_rgba(217,168,62,0.6)] transition-all duration-300" />
+                  <div className="absolute -left-[25px] sm:-left-[33px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-white bg-[#555d25] shadow-xs group-hover:scale-135 group-hover:bg-[#8c6d23] group-hover:shadow-[0_0_12px_rgba(217,168,62,0.6)] transition-all duration-300" />
                   
                   {/* Card Container with Transition & Hover Effects */}
-                  <div className="rounded-2xl p-3 sm:p-4 border border-transparent group-hover:border-[#b38e36]/30 group-hover:bg-white group-hover:shadow-md transition-all duration-300">
-                    <div className="inline-block rounded-full bg-[#f5f6ee] group-hover:bg-[#555d25] group-hover:text-white text-[#8c6d23] px-3 py-0.5 text-xs font-bold font-mono transition-colors duration-300 shadow-2xs">
+                  <div className="rounded-xl p-2.5 sm:p-3 border border-transparent group-hover:border-[#b38e36]/30 group-hover:bg-white group-hover:shadow-md transition-all duration-300">
+                    <div className="inline-block rounded-full bg-[#f5f6ee] group-hover:bg-[#555d25] group-hover:text-white text-[#8c6d23] px-2.5 py-0.5 text-xs font-bold font-mono transition-colors duration-300 shadow-2xs">
                       {item.year}
                     </div>
-                    <h3 className="mt-1.5 text-base sm:text-lg font-bold text-neutral-900 group-hover:text-[#555d25] transition-colors duration-300">
+                    <h3 className="mt-1 text-sm sm:text-base font-bold text-neutral-900 group-hover:text-[#555d25] transition-colors duration-300">
                       {item.title}
                     </h3>
-                    <p className="mt-1 text-xs sm:text-sm leading-relaxed text-neutral-600 max-w-xl">
+                    <p className="mt-0.5 text-xs sm:text-sm leading-relaxed text-neutral-600 max-w-xl">
                       {item.text}
                     </p>
                   </div>
@@ -655,25 +655,25 @@ function About() {
             </div>
 
             {/* RIGHT COLUMN: Continuous Rotating Golden Pyramid Showcase */}
-            <div className="lg:col-span-5 flex flex-col items-center justify-center relative py-6">
+            <div className="lg:col-span-5 flex flex-col items-center justify-center relative py-2">
               
               {/* Outer Rotating Orbital Rings & Glow */}
               <div className="relative flex items-center justify-center">
                 {/* Rotating Outer Dashed Orbital Ring */}
                 <div
-                  className="w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] xl:w-[400px] xl:h-[400px] rounded-full border-2 border-dashed border-[#b38e36]/40 pointer-events-none animate-[spin_35s_linear_infinite]"
+                  className="w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] xl:w-[340px] xl:h-[340px] rounded-full border-2 border-dashed border-[#b38e36]/40 pointer-events-none animate-[spin_35s_linear_infinite]"
                 />
                 
                 {/* Counter-Rotating Inner Ring with Accents */}
                 <div
-                  className="absolute w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] xl:w-[340px] xl:h-[340px] rounded-full border border-dotted border-[#555d25]/40 pointer-events-none animate-[spin_20s_linear_infinite_reverse]"
+                  className="absolute w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] xl:w-[280px] xl:h-[280px] rounded-full border border-dotted border-[#555d25]/40 pointer-events-none animate-[spin_20s_linear_infinite_reverse]"
                 />
 
                 {/* Ambient Radial Golden Glow */}
-                <div className="absolute w-60 h-60 sm:w-72 sm:h-72 rounded-full bg-gradient-to-tr from-[#555d25]/25 via-[#f3cd67]/20 to-transparent blur-3xl pointer-events-none" />
+                <div className="absolute w-52 h-52 sm:w-60 sm:h-60 rounded-full bg-gradient-to-tr from-[#555d25]/25 via-[#f3cd67]/20 to-transparent blur-3xl pointer-events-none" />
 
                 {/* Rotating Pyramid Image Container */}
-                <div className="absolute z-10 w-52 h-52 sm:w-68 sm:h-68 xl:w-76 xl:h-76 rounded-full overflow-hidden border-2 border-[#b38e36]/60 shadow-[0_12px_45px_rgba(217,168,62,0.35)] bg-[#071324] flex items-center justify-center group cursor-pointer transition-all duration-500 hover:scale-105 hover:border-[#f3cd67]">
+                <div className="absolute z-10 w-44 h-44 sm:w-56 sm:h-56 xl:w-64 xl:h-64 rounded-full overflow-hidden border-2 border-[#b38e36]/60 shadow-[0_12px_45px_rgba(217,168,62,0.35)] bg-[#071324] flex items-center justify-center group cursor-pointer transition-all duration-500 hover:scale-105 hover:border-[#f3cd67]">
                   {/* The Rotating Image with Continuous 360 Spin */}
                   <img
                     src="/milestones-pyramid.png"
@@ -687,7 +687,7 @@ function About() {
               </div>
 
               {/* Floating Status Badge Beneath Rotating Pyramid */}
-              <div className="mt-8 z-20 inline-flex items-center gap-2 rounded-full border border-[#b38e36]/30 bg-white/90 backdrop-blur-md px-4 py-1.5 shadow-md shadow-neutral-900/5">
+              <div className="mt-4 z-20 inline-flex items-center gap-2 rounded-full border border-[#b38e36]/30 bg-white/90 backdrop-blur-md px-3.5 py-1 shadow-md shadow-neutral-900/5">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#f3cd67] opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#555d25]" />
@@ -705,9 +705,9 @@ function About() {
       {/* ==================================================================== */}
       {/* 6. EXECUTIVE CTA BANNER                                               */}
       {/* ==================================================================== */}
-      <section className="bg-white py-3 sm:py-4">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-neutral-900 via-neutral-950 to-neutral-900 py-5 sm:py-6 lg:py-7 px-5 sm:px-8 shadow-2xl border border-neutral-800 text-center">
+      <section className="bg-white py-2 sm:py-2.5">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-neutral-900 via-neutral-950 to-neutral-900 py-3.5 sm:py-4 lg:py-5 px-4 sm:px-6 shadow-xl border border-neutral-800 text-center">
             <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-[#b38e36]/10 blur-3xl" />
             <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-[#555d25]/10 blur-3xl" />
 

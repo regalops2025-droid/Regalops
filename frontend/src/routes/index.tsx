@@ -827,7 +827,7 @@ function Home() {
         </button>
 
         {/* Foreground Content for Active Slide */}
-        <div className="relative z-10 w-full px-4 sm:pl-8 sm:pr-6 lg:pl-12 lg:pr-8 py-5 sm:py-6 lg:py-8">
+        <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-5">
           <div className="max-w-2xl lg:max-w-3xl xl:max-w-4xl">
             {showcaseSlides.map((slide, idx) => {
               if (idx !== activeSlide) return null;
@@ -940,7 +940,7 @@ function Home() {
 
       {/* Trust Stats Strip (Positioned directly below the compact hero slider) */}
       <div className="border-b border-neutral-200/70 bg-[#fafcfb] py-2 sm:py-2.5">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:divide-x sm:divide-neutral-200/70">
             {stats.map((s) => {
               const Icon = s.icon;
@@ -990,11 +990,11 @@ function Home() {
       {/* ==================================================================== */}
       {/* 3. ABOUT REGAL OPS — "WHO WE ARE & WHAT WE DO" (Vuesol Reference)    */}
       {/* ==================================================================== */}
-      <section id="about" className="relative bg-white py-10 sm:py-14 lg:py-16 overflow-hidden scroll-mt-28 border-b border-neutral-200/70">
+      <section id="about" className="relative bg-white py-3 sm:py-4 lg:py-5 overflow-hidden scroll-mt-28 border-b border-neutral-200/70">
         {/* Ambient background soft glow */}
         <div className="absolute top-1/2 right-12 -translate-y-1/2 w-96 h-96 rounded-full bg-gradient-to-tr from-sky-400/10 via-orange-400/10 to-amber-300/10 blur-3xl pointer-events-none" />
 
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-center">
             
             {/* Left Content Column (Exact Text & Layout from Reference) */}
@@ -1090,9 +1090,9 @@ function Home() {
         </div>
 
         {/* Seamless Soft Curve Transition into Our Services */}
-        <div className="w-full overflow-hidden leading-none mt-4 sm:mt-6 -mb-1">
+        <div className="w-full overflow-hidden leading-none mt-2 sm:mt-3 -mb-1">
           <svg
-            className="relative block w-full h-6 sm:h-8 lg:h-10 text-[#fafcfb]"
+            className="relative block w-full h-4 sm:h-6 text-[#fafcfb]"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
             fill="currentColor"
@@ -1106,15 +1106,15 @@ function Home() {
       {/* ==================================================================== */}
       {/* 4. OUR SERVICES SECTION (Infinite Scrolling Marquee + Grid Toggle)   */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 overflow-hidden scroll-mt-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-3 sm:py-4 lg:py-5 overflow-hidden scroll-mt-28">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           
           {/* Header */}
-          <div className="text-left max-w-3xl mb-6 sm:mb-8 reveal-on-scroll">
+          <div className="text-left max-w-3xl mb-2.5 sm:mb-3 reveal-on-scroll">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900 tracking-tight text-left">
               Our Services
             </h2>
-            <p className="mt-2 text-base sm:text-lg text-neutral-600 italic font-serif sm:font-normal">
+            <p className="mt-1 text-sm sm:text-base text-neutral-600 italic font-serif sm:font-normal">
               Accelerate your journey to success with our expertise, insights, innovation and vision
             </p>
           </div>
@@ -1122,16 +1122,16 @@ function Home() {
 
         {/* SERVICES DISPLAY: Responsive Grid (No Duplicates) when <= 4 services, Marquee when 5+ services */}
         {displayServices.length <= 4 ? (
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6">
+          <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 mt-2.5 sm:mt-3">
             <div
-              className={`grid gap-5 sm:gap-6 justify-center ${
+              className={`grid gap-4 sm:gap-5 justify-center ${
                 displayServices.length === 1
                   ? "grid-cols-1 max-w-sm mx-auto"
                   : displayServices.length === 2
                     ? "grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto"
                     : displayServices.length === 3
                       ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto"
-                      : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto"
+                      : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-[1440px] mx-auto"
               }`}
             >
               {displayServices.map((service, idx) => {
@@ -1147,25 +1147,25 @@ function Home() {
                   <Link
                     key={`${service.id || "srv"}-${idx}`}
                     to={link}
-                    className="group/card flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-6 w-full transition-all duration-300 hover:-translate-y-2 hover:border-[#555d25]/60 hover:shadow-[0_16px_35px_rgba(85,93,37,0.12)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer select-none"
+                    className="group/card flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-3.5 sm:p-4 w-full transition-all duration-300 hover:-translate-y-1 hover:border-[#555d25]/60 hover:shadow-[0_12px_28px_rgba(85,93,37,0.12)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer select-none"
                   >
                     {/* Vector Icon */}
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50/80 group-hover/card:bg-[#fdfaf2] transition-colors duration-300">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-50/80 group-hover/card:bg-[#fdfaf2] transition-colors duration-300">
                       {iconElement}
                     </div>
 
                     {/* Title */}
-                    <h3 className="mt-4 text-base sm:text-[17px] font-bold text-neutral-900 group-hover/card:text-sky-700 transition-colors leading-snug">
+                    <h3 className="mt-2.5 text-sm sm:text-base font-bold text-neutral-900 group-hover/card:text-sky-700 transition-colors leading-snug">
                       {title}
                     </h3>
 
                     {/* Description */}
-                    <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-neutral-500 line-clamp-3">
+                    <p className="mt-1.5 text-xs sm:text-[13px] leading-relaxed text-neutral-500 line-clamp-3">
                       {desc}
                     </p>
 
                     {/* Bottom Explore Link */}
-                    <div className="mt-auto pt-4 flex items-center gap-1.5 text-xs font-semibold text-[#555d25] group-hover/card:text-[#464d1e]">
+                    <div className="mt-auto pt-2.5 flex items-center gap-1.5 text-xs font-semibold text-[#555d25] group-hover/card:text-[#464d1e]">
                       <span>Explore Practice</span>
                       <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/card:translate-x-1" />
                     </div>
@@ -1175,13 +1175,13 @@ function Home() {
             </div>
           </div>
         ) : (
-          <div className="mt-3 sm:mt-4 relative w-full overflow-hidden group py-1 reveal-scale delay-100">
+          <div className="mt-2.5 sm:mt-3 relative w-full overflow-hidden group py-0.5 reveal-scale delay-100">
             {/* Subtle Gradient Fade Masks on Edges */}
             <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
             <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
 
             {/* Seamless Infinite Marquee Track with Pause on Hover */}
-            <div className="flex gap-5 w-max py-2 px-4 transition-all duration-300 animate-marquee-services hover:[animation-play-state:paused]">
+            <div className="flex gap-4 w-max py-1.5 px-4 transition-all duration-300 animate-marquee-services hover:[animation-play-state:paused]">
               {[...displayServices, ...displayServices].map((service, idx) => {
                 const iconElement =
                   service.icon && typeof service.icon !== "string"
@@ -1195,25 +1195,25 @@ function Home() {
                   <Link
                     key={`${service.id || "srv"}-${idx}`}
                     to={link}
-                    className="group/card flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-6 w-[285px] sm:w-[320px] shrink-0 transition-all duration-300 hover:-translate-y-2 hover:border-[#555d25]/60 hover:shadow-[0_16px_35px_rgba(85,93,37,0.12)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer select-none"
+                    className="group/card flex flex-col items-center text-center rounded-2xl border border-neutral-200/80 bg-white p-3.5 sm:p-4 w-[260px] sm:w-[290px] shrink-0 transition-all duration-300 hover:-translate-y-1 hover:border-[#555d25]/60 hover:shadow-[0_12px_28px_rgba(85,93,37,0.12)] shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer select-none"
                   >
                     {/* Vector Icon */}
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50/80 group-hover/card:bg-[#fdfaf2] transition-colors duration-300">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-50/80 group-hover/card:bg-[#fdfaf2] transition-colors duration-300">
                       {iconElement}
                     </div>
 
                     {/* Title */}
-                    <h3 className="mt-4 text-base sm:text-[17px] font-bold text-neutral-900 group-hover/card:text-sky-700 transition-colors leading-snug">
+                    <h3 className="mt-2.5 text-sm sm:text-base font-bold text-neutral-900 group-hover/card:text-sky-700 transition-colors leading-snug">
                       {title}
                     </h3>
 
                     {/* Description */}
-                    <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-neutral-500 line-clamp-3">
+                    <p className="mt-1.5 text-xs sm:text-[13px] leading-relaxed text-neutral-500 line-clamp-3">
                       {desc}
                     </p>
 
                     {/* Bottom Explore Link */}
-                    <div className="mt-auto pt-4 flex items-center gap-1.5 text-xs font-semibold text-[#555d25] group-hover/card:text-[#464d1e]">
+                    <div className="mt-auto pt-2.5 flex items-center gap-1.5 text-xs font-semibold text-[#555d25] group-hover/card:text-[#464d1e]">
                       <span>Explore Practice</span>
                       <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/card:translate-x-1" />
                     </div>
@@ -1225,10 +1225,10 @@ function Home() {
         )}
 
         {/* Bottom Explore CTA Bar */}
-        <div className="mt-3 sm:mt-4 text-center">
+        <div className="mt-2 sm:mt-2.5 text-center">
           <Link
             to="/solutions"
-            className="inline-flex items-center gap-2 rounded-full bg-[#555d25] hover:bg-[#464d1e] px-6 py-2.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#555d25]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
+            className="inline-flex items-center gap-2 rounded-full bg-[#555d25] hover:bg-[#464d1e] px-5 py-2 text-xs sm:text-sm font-bold text-white shadow-md shadow-[#555d25]/20 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
           >
             <span>Explore Solutions</span>
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
@@ -1239,7 +1239,7 @@ function Home() {
       {/* ==================================================================== */}
       {/* 5. OUR CLIENTS — "WHO WE WORK WITH" (Vuesol Reference Match)         */}
       {/* ==================================================================== */}
-      <section className="relative border-b border-neutral-200/70 bg-[#fbfcfd] py-12 sm:py-16 lg:py-20 scroll-mt-28 overflow-hidden">
+      <section className="relative border-b border-neutral-200/70 bg-[#fbfcfd] py-3 sm:py-4 lg:py-5 scroll-mt-28 overflow-hidden">
         {/* Ambient Atmospheric Lighting */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[480px] bg-gradient-to-tr from-sky-400/12 via-emerald-400/8 to-amber-300/10 blur-3xl rounded-full" />
@@ -1247,23 +1247,23 @@ function Home() {
           <div className="absolute -bottom-16 left-10 w-80 h-80 bg-[#555d25]/10 blur-3xl rounded-full" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           
           {/* Desktop Layout: Exact center-callout 4-row layout matching reference */}
-          <div className="hidden lg:flex flex-col gap-3.5 xl:gap-4">
+          <div className="hidden lg:flex flex-col gap-3 xl:gap-3.5">
             
             {/* Row 1 (8 cards) */}
-            <div className="grid grid-cols-8 gap-3 xl:gap-3.5">
+            <div className="grid grid-cols-8 gap-2.5 xl:gap-3">
               {row1Logos.map((client, idx) => (
                 <ClientLogoCard key={`r1-${idx}`} client={client} index={idx} />
               ))}
             </div>
 
             {/* Middle Section: Left 6 cards (3x2), Center Title Box, Right 6 cards (3x2) */}
-            <div className="flex items-center gap-3.5 xl:gap-4">
+            <div className="flex items-center gap-3 xl:gap-3.5">
               
               {/* Left 6 cards (3 columns x 2 rows) */}
-              <div className="flex-1 grid grid-cols-3 gap-3 xl:gap-3.5">
+              <div className="flex-1 grid grid-cols-3 gap-2.5 xl:gap-3">
                 {midLeftLogos.map((client, idx) => (
                   <ClientLogoCard key={`ml-${idx}`} client={client} index={idx} />
                 ))}
@@ -1275,7 +1275,7 @@ function Home() {
                 <div className="pointer-events-none absolute inset-0 bg-radial from-[#555d25]/15 via-[#b38e36]/10 to-transparent blur-xl rounded-2xl -z-10 group-hover/center:scale-125 transition-transform duration-500" />
 
                 {/* Eyebrow badge */}
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3 py-0.5 text-[10px] sm:text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs mb-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3 py-0.5 text-[10px] sm:text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs mb-1.5">
                   <span className="relative flex h-2 w-2 items-center justify-center">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#b38e36] opacity-75" />
                     <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#555d25]" />
@@ -1283,24 +1283,24 @@ function Home() {
                   Enterprise Trust
                 </span>
 
-                <h2 className="text-3xl xl:text-4xl font-extrabold text-neutral-900 tracking-tight leading-none">
+                <h2 className="text-2xl xl:text-3xl font-extrabold text-neutral-900 tracking-tight leading-none">
                   Our Clients
                 </h2>
 
-                <div className="h-0.5 w-10 bg-gradient-to-r from-[#555d25] to-emerald-500 rounded-full my-2.5" />
+                <div className="h-0.5 w-10 bg-gradient-to-r from-[#555d25] to-emerald-500 rounded-full my-2" />
 
-                <p className="text-base xl:text-lg italic font-serif text-neutral-600 tracking-wide">
+                <p className="text-sm xl:text-base italic font-serif text-neutral-600 tracking-wide">
                   Who We Work With
                 </p>
 
-                <div className="mt-2.5 inline-flex items-center gap-1.5 text-[11px] font-medium text-neutral-500 bg-white/90 border border-neutral-200/80 rounded-full px-3 py-0.5 shadow-2xs">
+                <div className="mt-2 inline-flex items-center gap-1.5 text-[10.5px] font-medium text-neutral-500 bg-white/90 border border-neutral-200/80 rounded-full px-2.5 py-0.5 shadow-2xs">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#555d25]" />
                   <span>Fortune 1000 Leaders</span>
                 </div>
               </div>
 
               {/* Right 6 cards (3 columns x 2 rows) */}
-              <div className="flex-1 grid grid-cols-3 gap-3 xl:gap-3.5">
+              <div className="flex-1 grid grid-cols-3 gap-2.5 xl:gap-3">
                 {midRightLogos.map((client, idx) => (
                   <ClientLogoCard key={`mr-${idx}`} client={client} index={idx + 3} />
                 ))}
@@ -1309,7 +1309,7 @@ function Home() {
             </div>
 
             {/* Row 4 (8 cards) */}
-            <div className="grid grid-cols-8 gap-3 xl:gap-3.5">
+            <div className="grid grid-cols-8 gap-2.5 xl:gap-3">
               {row4Logos.map((client, idx) => (
                 <ClientLogoCard key={`r4-${idx}`} client={client} index={idx} />
               ))}
@@ -1318,20 +1318,20 @@ function Home() {
           </div>
 
           {/* Mobile / Tablet Layout */}
-          <div className="lg:hidden flex flex-col gap-6">
+          <div className="lg:hidden flex flex-col gap-4">
             <div className="text-left reveal-on-scroll">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs mb-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs mb-1.5">
                 Enterprise Trust
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
                 Our Clients
               </h2>
-              <p className="mt-1.5 text-sm sm:text-base italic font-serif text-neutral-600">
+              <p className="mt-1 text-xs sm:text-sm italic font-serif text-neutral-600">
                 Who We Work With
               </p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
               {allClientLogos.map((client, idx) => (
                 <MobileClientLogoCard key={`mob-${idx}`} client={client} index={idx} />
               ))}
@@ -1339,13 +1339,13 @@ function Home() {
           </div>
 
           {/* "More Clients" Centered Button with Interactive Micro-Animations */}
-          <div className="mt-6 sm:mt-8 text-center reveal-on-scroll delay-150">
+          <div className="mt-3 sm:mt-4 text-center reveal-on-scroll delay-150">
             <Link
               to="/clients"
-              className="group inline-flex items-center gap-2 rounded-full border-2 border-[#555d25] bg-white text-[#555d25] hover:bg-[#555d25] hover:text-white px-8 py-2.5 text-xs sm:text-sm font-bold shadow-xs hover:shadow-lg hover:shadow-[#555d25]/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
+              className="group inline-flex items-center gap-2 rounded-full border-2 border-[#555d25] bg-white text-[#555d25] hover:bg-[#555d25] hover:text-white px-6 py-2 text-xs sm:text-sm font-bold shadow-xs hover:shadow-lg hover:shadow-[#555d25]/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
             >
               <span>More Clients &amp; Industries</span>
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
           </div>
 
@@ -1356,25 +1356,25 @@ function Home() {
       {/* ==================================================================== */}
       {/* 7. INTERACTIVE ARCHITECTURE BLUEPRINT & TOPOLOGY SHOWCASE            */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-left max-w-4xl mb-6 sm:mb-8 reveal-on-scroll">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-3 sm:py-4 lg:py-5 scroll-mt-28">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <div className="text-left max-w-4xl mb-2 sm:mb-3 reveal-on-scroll">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-0.5 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
               Interactive Blueprint
             </span>
-            <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               The Regal OPs Production Topology
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-neutral-600 max-w-4xl md:whitespace-nowrap">
+            <p className="mt-1 text-xs sm:text-sm text-neutral-600 max-w-4xl md:whitespace-nowrap">
               Click through the architectural layers of our resilient, audited enterprise platform foundation.
             </p>
           </div>
 
-          <div className="mt-4 sm:mt-5 grid gap-5 lg:grid-cols-12 items-stretch">
+          <div className="mt-2.5 sm:mt-3 grid gap-3.5 lg:grid-cols-12 items-stretch">
             
             {/* Left Layer Selectors & Increasing Growth Card */}
-            <div className="lg:col-span-5 flex flex-col justify-between gap-3 reveal-from-left">
-              <div className="space-y-2.5">
+            <div className="lg:col-span-5 flex flex-col justify-between gap-2.5 reveal-from-left">
+              <div className="space-y-1.5 sm:space-y-2">
                 {architectureLayers.map((layer) => {
                   const isSelected = layer.id === activeArchLayer;
                   return (
@@ -1382,24 +1382,24 @@ function Home() {
                       key={layer.id}
                       type="button"
                       onClick={() => setActiveArchLayer(layer.id)}
-                      className={`w-full text-left px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl border transition-all duration-200 cursor-pointer flex items-center justify-between ${
+                      className={`w-full text-left px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl border transition-all duration-200 cursor-pointer flex items-center justify-between ${
                         isSelected
                           ? "bg-white border-[#555d25]/40 shadow-md shadow-neutral-900/5 ring-1 ring-[#555d25]/15"
                           : "bg-white/60 border-neutral-200/80 hover:bg-white hover:border-neutral-300"
                       }`}
                     >
-                      <div className="flex items-center gap-3.5">
-                        <span className={`font-mono text-sm font-bold ${isSelected ? "text-[#555d25]" : "text-neutral-400"}`}>
+                      <div className="flex items-center gap-3">
+                        <span className={`font-mono text-xs sm:text-sm font-bold ${isSelected ? "text-[#555d25]" : "text-neutral-400"}`}>
                           {layer.number}
                         </span>
                         <div>
-                          <div className="text-sm font-bold text-neutral-900">{layer.name}</div>
-                          <div className="text-[11px] font-mono font-medium text-[#555d25] mt-0.5">
+                          <div className="text-xs sm:text-sm font-bold text-neutral-900">{layer.name}</div>
+                          <div className="text-[10px] font-mono font-medium text-[#555d25]">
                             {layer.badge}
                           </div>
                         </div>
                       </div>
-                      <ArrowRight className={`h-4 w-4 transition-transform ${isSelected ? "text-[#555d25] translate-x-1" : "text-neutral-300"}`} />
+                      <ArrowRight className={`h-3.5 w-3.5 transition-transform ${isSelected ? "text-[#555d25] translate-x-1" : "text-neutral-300"}`} />
                     </button>
                   );
                 })}
@@ -1408,10 +1408,10 @@ function Home() {
               {/* Attractive Increasing Growth / ROI Card with user's increasing arrow image */}
               <Link
                 to="/about"
-                className="group relative overflow-hidden rounded-2xl border border-neutral-800 bg-gradient-to-br from-neutral-950 via-neutral-900 to-[#071714] p-3.5 sm:p-4 text-white shadow-xl hover:shadow-2xl hover:border-cyan-500/50 hover:ring-1 hover:ring-cyan-500/30 transition-all duration-300 flex items-center gap-3.5 sm:gap-4 cursor-pointer mt-1"
+                className="group relative overflow-hidden rounded-xl border border-neutral-800 bg-gradient-to-br from-neutral-950 via-neutral-900 to-[#071714] p-2.5 sm:p-3 text-white shadow-xl hover:shadow-2xl hover:border-cyan-500/50 hover:ring-1 hover:ring-cyan-500/30 transition-all duration-300 flex items-center gap-3 cursor-pointer mt-0.5"
               >
                 {/* Glowing Handshake with Holographic Increasing Arrow */}
-                <div className="relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden rounded-xl border border-cyan-500/40 bg-black shadow-[0_0_18px_rgba(6,182,212,0.25)]">
+                <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 overflow-hidden rounded-xl border border-cyan-500/40 bg-black shadow-[0_0_18px_rgba(6,182,212,0.25)]">
                   <img
                     src="/enterprise-growth-arrow.png"
                     alt="Strategic Enterprise Partnership and Exponential Growth Velocity"
@@ -1422,17 +1422,17 @@ function Home() {
 
                 {/* Growth Card Text */}
                 <div className="flex-1 min-w-0">
-                  <div className="inline-flex items-center gap-1.5 rounded-full bg-cyan-500/15 border border-cyan-400/30 px-2.5 py-0.5 text-[9.5px] sm:text-[10px] font-bold uppercase tracking-wider text-cyan-300">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-cyan-500/15 border border-cyan-400/30 px-2 py-0.5 text-[9px] sm:text-[9.5px] font-bold uppercase tracking-wider text-cyan-300">
                     <TrendingUp className="h-3 w-3 text-cyan-400" />
                     <span>Compounding Velocity</span>
                   </div>
-                  <div className="mt-1 text-xs sm:text-sm font-bold text-white group-hover:text-cyan-200 transition-colors leading-snug">
+                  <div className="mt-0.5 text-xs sm:text-sm font-bold text-white group-hover:text-cyan-200 transition-colors leading-snug">
                     Proven Architecture ROI &amp; Scale
                   </div>
-                  <p className="mt-0.5 text-[11px] sm:text-xs text-neutral-300 line-clamp-2 leading-relaxed">
+                  <p className="mt-0.5 text-[10.5px] sm:text-xs text-neutral-300 line-clamp-2 leading-relaxed">
                     Deploy high-velocity engineering pods delivering rapid transformation and zero outages.
                   </p>
-                  <div className="mt-1.5 flex items-center gap-1 text-[11px] font-bold text-[#a4c965] group-hover:text-[#bde27c] transition-colors">
+                  <div className="mt-1 flex items-center gap-1 text-[10.5px] font-bold text-[#a4c965] group-hover:text-[#bde27c] transition-colors">
                     <span>Explore Delivery Model</span>
                     <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-1" />
                   </div>
@@ -1442,37 +1442,37 @@ function Home() {
 
             {/* Right Live Layer Console HUD */}
             <div className="lg:col-span-7 reveal-from-right flex flex-col">
-              <div className="h-full rounded-3xl border border-neutral-200/80 bg-neutral-950 text-white p-6 sm:p-8 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+              <div className="h-full rounded-2xl border border-neutral-200/80 bg-neutral-950 text-white p-4 sm:p-5 shadow-2xl relative overflow-hidden flex flex-col justify-between">
                 <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-[#555d25]/10 blur-3xl pointer-events-none" />
 
                 {/* HUD Header */}
-                <div className="flex items-center justify-between border-b border-neutral-800 pb-5">
-                  <div className="flex items-center gap-2.5">
-                    <span className="flex h-2.5 w-2.5 rounded-full bg-[#b38e36] animate-pulse" />
-                    <span className="font-mono text-xs text-neutral-400">LAYER {currentArch.number} TOPOLOGY</span>
+                <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-2 w-2 rounded-full bg-[#b38e36] animate-pulse" />
+                    <span className="font-mono text-[11px] text-neutral-400">LAYER {currentArch.number} TOPOLOGY</span>
                   </div>
-                  <span className="font-mono text-[11px] px-2.5 py-1 rounded-md bg-[#555d25]/20 text-emerald-300 border border-emerald-500/30">
+                  <span className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-[#555d25]/20 text-emerald-300 border border-emerald-500/30">
                     {currentArch.status}
                   </span>
                 </div>
 
                 {/* Content */}
-                <div className="mt-6 flex-1 flex flex-col justify-between">
+                <div className="mt-3 flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+                    <div className="text-lg sm:text-xl font-bold tracking-tight text-white">
                       {currentArch.name}
                     </div>
-                    <p className="mt-3 text-sm text-neutral-300 leading-relaxed">
+                    <p className="mt-1.5 text-xs sm:text-sm text-neutral-300 leading-relaxed">
                       {currentArch.desc}
                     </p>
 
-                    <div className="mt-6 pt-5 border-t border-neutral-800">
-                      <div className="text-xs font-mono font-semibold uppercase tracking-wider text-neutral-400 mb-3">
+                    <div className="mt-3 pt-3 border-t border-neutral-800">
+                      <div className="text-[10.5px] font-mono font-semibold uppercase tracking-wider text-neutral-400 mb-2">
                         Standard Technical Specifications
                       </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {currentArch.specs.map((spec) => (
-                          <div key={spec} className="flex items-center gap-2 rounded-xl bg-neutral-900/80 p-3 border border-neutral-800 text-xs text-neutral-200">
+                          <div key={spec} className="flex items-center gap-2 rounded-lg bg-neutral-900/80 p-2 border border-neutral-800 text-xs text-neutral-200">
                             <Check className="h-3.5 w-3.5 text-[#b38e36] shrink-0" />
                             <span>{spec}</span>
                           </div>
@@ -1481,7 +1481,7 @@ function Home() {
                     </div>
                   </div>
 
-                  <div className="mt-6 pt-5 border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
+                  <div className="mt-3 pt-3 border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
                     <span>DEPLOYMENT: IAC TERRAFORM v1.9</span>
                     <Link
                       to="/solutions"
@@ -1501,43 +1501,43 @@ function Home() {
       {/* ==================================================================== */}
       {/* 8. DELIVERY METHODOLOGY (4-PHASE FRAMEWORK)                           */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-white py-10 sm:py-14 lg:py-16 scroll-mt-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-left max-w-2xl mb-6 sm:mb-8 reveal-on-scroll">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
+      <section className="border-b border-neutral-200/70 bg-white py-3 sm:py-4 lg:py-5 scroll-mt-28">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <div className="text-left max-w-2xl mb-2 sm:mb-3 reveal-on-scroll">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-0.5 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
               Delivery Methodology
             </span>
-            <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               Predictable, Audited, Repeatable
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-neutral-600">
+            <p className="mt-1 text-xs sm:text-sm text-neutral-600">
               Our 4-phase framework takes complex enterprise platforms from architecture review to resilient, audited production operations.
             </p>
           </div>
 
-          <div className="mt-5 sm:mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-2.5 sm:mt-3 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
             {methodologySteps.map((step, idx) => (
               <div
                 key={step.number}
-                className={`reveal-on-scroll delay-${(idx + 1) * 100} relative rounded-3xl border border-neutral-200/80 bg-[#fafcfb] p-6 shadow-sm hover:border-[#555d25]/40 hover:shadow-md transition-all flex flex-col justify-between`}
+                className={`reveal-on-scroll delay-${(idx + 1) * 100} relative rounded-2xl border border-neutral-200/80 bg-[#fafcfb] p-4 sm:p-4.5 shadow-sm hover:border-[#555d25]/40 hover:shadow-md transition-all flex flex-col justify-between`}
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="font-display text-3xl font-extrabold text-[#8c6d23]/25">
+                    <span className="font-display text-2xl font-extrabold text-[#8c6d23]/25">
                       {step.number}
                     </span>
-                    <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold text-[#8c6d23]">
+                    <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-[#8c6d23]">
                       {step.phase}
                     </span>
                   </div>
-                  <h3 className="mt-4 text-base font-bold text-neutral-900">
+                  <h3 className="mt-2 text-sm sm:text-base font-bold text-neutral-900">
                     {step.title}
                   </h3>
-                  <p className="mt-2 text-xs sm:text-sm text-neutral-500 leading-relaxed">
+                  <p className="mt-1 text-xs text-neutral-500 leading-relaxed">
                     {step.desc}
                   </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-neutral-200/60 text-[10px] font-mono font-bold uppercase tracking-wider text-[#8c6d23]">
+                <div className="mt-3 pt-2 border-t border-neutral-200/60 text-[10px] font-mono font-bold uppercase tracking-wider text-[#8c6d23]">
                   {step.timeframe}
                 </div>
               </div>
@@ -1546,45 +1546,43 @@ function Home() {
         </div>
       </section>
 
-
-
       {/* ==================================================================== */}
       {/* 10. EXECUTIVE TESTIMONIALS                                            */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-white py-10 sm:py-14 lg:py-16 scroll-mt-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-left max-w-2xl mb-6 sm:mb-8 reveal-on-scroll">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
+      <section className="border-b border-neutral-200/70 bg-white py-3 sm:py-4 lg:py-5 scroll-mt-28">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <div className="text-left max-w-2xl mb-2 sm:mb-3 reveal-on-scroll">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-0.5 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
               Executive Validation
             </span>
-            <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               Trusted by Engineering Leaders
             </h2>
           </div>
 
-          <div className="mt-3 sm:mt-4 grid gap-4 md:grid-cols-3">
+          <div className="mt-2 sm:mt-2.5 grid gap-3.5 md:grid-cols-3">
             {testimonials.map((t, idx) => (
               <figure
                 key={idx}
-                className={`reveal-on-scroll delay-${(idx + 1) * 100} flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-[#fafcfb] p-5 sm:p-6 shadow-xs hover:border-[#555d25]/40 hover:shadow-md transition-all relative overflow-hidden`}
+                className={`reveal-on-scroll delay-${(idx + 1) * 100} flex flex-col justify-between rounded-2xl border border-neutral-200/80 bg-[#fafcfb] p-3.5 sm:p-4 shadow-xs hover:border-[#555d25]/40 hover:shadow-md transition-all relative overflow-hidden`}
               >
                 <div>
-                  <div className="flex items-center gap-1 text-[#b38e36] mb-2">
+                  <div className="flex items-center gap-1 text-[#b38e36] mb-1.5">
                     {[1, 2, 3, 4, 5].map((star) => (
-                      <span key={star} className="text-sm">★</span>
+                      <span key={star} className="text-xs">★</span>
                     ))}
-                    <span className="ml-2 text-[10px] font-bold text-neutral-400 uppercase tracking-wider">
+                    <span className="ml-1.5 text-[9.5px] font-bold text-neutral-400 uppercase tracking-wider">
                       {t.highlight}
                     </span>
                   </div>
-                  <blockquote className="text-xs sm:text-sm italic leading-relaxed text-neutral-700">
+                  <blockquote className="text-xs italic leading-relaxed text-neutral-700">
                     "{t.quote}"
                   </blockquote>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-neutral-200/60">
-                  <figcaption className="text-xs sm:text-sm font-bold text-neutral-900">{t.author}</figcaption>
-                  <p className="text-[11px] text-neutral-500 font-medium mt-0.5">{t.role} • {t.org}</p>
+                <div className="mt-2.5 pt-2 border-t border-neutral-200/60">
+                  <figcaption className="text-xs font-bold text-neutral-900">{t.author}</figcaption>
+                  <p className="text-[10px] text-neutral-500 font-medium mt-0.5">{t.role} • {t.org}</p>
                 </div>
               </figure>
             ))}
@@ -1595,43 +1593,43 @@ function Home() {
       {/* ==================================================================== */}
       {/* 11. FREQUENTLY ASKED QUESTIONS (C-SUITE ACCORDION)                   */}
       {/* ==================================================================== */}
-      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-10 sm:py-14 lg:py-16 scroll-mt-28">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="text-left max-w-4xl mb-6 sm:mb-8 reveal-on-scroll">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
+      <section className="border-b border-neutral-200/70 bg-[#fafcfb] py-3 sm:py-4 lg:py-5 scroll-mt-28">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <div className="text-left max-w-4xl mb-2 sm:mb-3 reveal-on-scroll">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3.5 py-0.5 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs">
               Executive FAQ
             </span>
-            <h2 className="mt-2.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
+            <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-900">
               Clear Answers for Leadership
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-neutral-600 sm:whitespace-nowrap">
+            <p className="mt-1 text-xs sm:text-sm text-neutral-600 sm:whitespace-nowrap">
               Everything you need to know about our engagement models, IP security, and SLA guarantees.
             </p>
           </div>
 
-          <div className="mt-3 sm:mt-4 space-y-2.5 reveal-on-scroll delay-100">
+          <div className="mt-2 sm:mt-2.5 space-y-1.5 sm:space-y-2 reveal-on-scroll delay-100">
             {faqs.map((faq, idx) => {
               const isOpen = openFaqIndex === idx;
               return (
                 <div
                   key={faq.question}
-                  className="rounded-2xl border border-neutral-200/80 bg-white overflow-hidden shadow-xs transition-colors"
+                  className="rounded-xl border border-neutral-200/80 bg-white overflow-hidden shadow-xs transition-colors"
                 >
                   <button
                     type="button"
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between p-4 sm:p-5 text-left cursor-pointer gap-4"
+                    className="w-full flex items-center justify-between p-3 sm:p-3.5 text-left cursor-pointer gap-3"
                   >
                     <span className="text-xs sm:text-sm font-bold text-neutral-900">
                       {faq.question}
                     </span>
-                    <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-transform duration-200 ${isOpen ? "rotate-180 bg-[#f5f6ee] text-[#8c6d23]" : ""}`}>
-                      <ChevronDown className="h-3.5 w-3.5" />
+                    <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-transform duration-200 ${isOpen ? "rotate-180 bg-[#f5f6ee] text-[#8c6d23]" : ""}`}>
+                      <ChevronDown className="h-3 w-3" />
                     </div>
                   </button>
 
                   {isOpen && (
-                    <div className="px-4 sm:px-5 pb-5 pt-1 text-xs sm:text-sm text-neutral-600 leading-relaxed border-t border-neutral-100">
+                    <div className="px-3 sm:px-3.5 pb-3 pt-0.5 text-xs text-neutral-600 leading-relaxed border-t border-neutral-100">
                       {faq.answer}
                     </div>
                   )}

@@ -594,21 +594,21 @@ function Clients() {
       {/* ==================================================================== */}
       {/* TRUSTED BY INDUSTRY LEADERS SHOWCASE (Matches User Reference Image)  */}
       {/* ==================================================================== */}
-      <section className="bg-white dark:bg-slate-950 py-8 sm:py-12 border-b border-border/60">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="bg-white dark:bg-slate-950 py-3 sm:py-4 border-b border-border/60">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           
           {/* Section Header */}
-          <div className="text-left max-w-3xl mb-6 sm:mb-8">
+          <div className="text-left max-w-3xl mb-3">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold tracking-tight text-neutral-900 dark:text-white">
               Trusted by Industry Leaders
             </h1>
-            <p className="mt-2 text-sm sm:text-base text-neutral-600 dark:text-neutral-400 font-normal leading-relaxed text-left">
+            <p className="mt-1 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-normal leading-relaxed text-left">
               We partner with global organizations across industries to deliver impactful technology solutions, driving efficiency, innovation and long-term growth.
             </p>
           </div>
 
           {/* Category Tabs Bar with Icons and Dividers (Exact Match to Reference Screenshot) */}
-          <div className="mb-8 sm:mb-10 overflow-x-auto no-scrollbar">
+          <div className="mb-3 sm:mb-4 overflow-x-auto no-scrollbar">
             <div className="flex items-center justify-start gap-1 sm:gap-2.5 min-w-max px-2 py-1">
               {CLIENT_CATEGORIES.map((cat, idx) => {
                 const IconComponent = cat.icon;
@@ -847,17 +847,17 @@ function Clients() {
       {/* ==================================================================== */}
       {/* CLIENT CASE STUDIES & OUTCOMES (Synced Live with Admin Panel)        */}
       {/* ==================================================================== */}
-      <section className="border-t border-border/80 bg-slate-50/70 dark:bg-slate-900/40 py-5 sm:py-6">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 sm:mb-5 gap-3">
+      <section className="border-t border-border/80 bg-slate-50/70 dark:bg-slate-900/40 py-2.5 sm:py-3">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-2.5 sm:mb-3 gap-2">
             <div>
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#555d25] dark:text-emerald-400">
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#555d25] dark:text-emerald-400">
                 Enterprise Case Studies
               </span>
-              <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+              <h2 className="mt-1 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
                 Client Success Stories &amp; Deliverables
               </h2>
-              <div className="w-12 h-1 bg-[#555d25] rounded-full mt-3" />
+              <div className="w-12 h-0.5 bg-[#555d25] rounded-full mt-2" />
             </div>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md leading-relaxed">
               Real-world transformations, platform modernization, and quantifiable business outcomes engineered for our clients.
@@ -887,16 +887,16 @@ function Clients() {
       {/* ==================================================================== */}
       {/* INDUSTRIES WE SERVE (Matches User Reference Image Layout & SVGs)     */}
       {/* ==================================================================== */}
-      <section className="border-t border-border/80 bg-white dark:bg-slate-950 py-5 sm:py-6">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-4 sm:mb-5">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#555d25] dark:text-emerald-400">
+      <section className="border-t border-border/80 bg-white dark:bg-slate-950 py-2.5 sm:py-3">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <div className="mb-2.5 sm:mb-3">
+            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#555d25] dark:text-emerald-400">
               Domains &amp; Verticals
             </span>
-            <h2 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            <h2 className="mt-1 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
               Industries We Serve
             </h2>
-            <div className="w-12 h-1 bg-[#555d25] rounded-full mt-2" />
+            <div className="w-12 h-0.5 bg-[#555d25] rounded-full mt-1.5" />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-x-8 gap-y-5 sm:gap-y-6">

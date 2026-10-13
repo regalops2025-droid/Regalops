@@ -365,15 +365,15 @@ function Technologies() {
       {/* ==================================================================== */}
       {/* 1. HERO SECTION: Sleek High-Tech Header with Live Metrics            */}
       {/* ==================================================================== */}
-      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-background via-surface to-background py-6 sm:py-8">
+      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-background via-surface to-background py-3 sm:py-4">
         {/* Ambient background glow dots */}
         <div className="absolute top-0 left-1/4 -z-10 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
         <div className="absolute top-10 right-1/4 -z-10 h-96 w-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
 
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-start text-left max-w-3xl">
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-0.5 text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase shadow-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
@@ -382,7 +382,7 @@ function Technologies() {
             </div>
 
             {/* Main Headline */}
-            <h1 className="mt-3 font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground leading-tight text-left">
+            <h1 className="mt-2 font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground leading-tight text-left">
               <span>Production-proven, </span>
               <span className="bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent">
                 never experimental.
@@ -390,7 +390,7 @@ function Technologies() {
             </h1>
 
             {/* Subtitle */}
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base text-left">
+            <p className="mt-1 text-xs sm:text-sm leading-relaxed text-muted-foreground text-left">
               We standardise on technologies our teams have operated at scale for years — backed by official partner ecosystems, zero vendor lock-in, and guaranteed SLAs.
             </p>
           </div>
@@ -400,7 +400,7 @@ function Technologies() {
       {/* ==================================================================== */}
       {/* 2. PREMIUM TECHNOLOGY CARDS WITH BRAND LOGOS                         */}
       {/* ==================================================================== */}
-      <Section className="py-6 sm:py-8">
+      <Section className="py-2.5 sm:py-3">
         {loading ? (
           <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -524,18 +524,18 @@ function Technologies() {
       {/* ==================================================================== */}
       {/* 4. "FULL TOOLCHAIN" SECTION (Dual-Track Infinite Scrolling Effect)    */}
       {/* ==================================================================== */}
-      <section className="border-t border-border bg-gradient-to-b from-surface via-background to-surface py-8 sm:py-12 overflow-hidden">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8">
+      <section className="border-t border-border bg-gradient-to-b from-surface via-background to-surface py-3 sm:py-4 overflow-hidden">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-3 sm:mb-4">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-primary shadow-xs">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-primary shadow-xs">
                 <Layers className="h-3.5 w-3.5" />
                 Continuous Toolchain Telemetry
               </div>
-              <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+              <h2 className="mt-1.5 font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
                 Full Production Toolchain
               </h2>
-              <p className="mt-2 text-sm sm:text-base text-muted-foreground max-w-2xl leading-relaxed">
+              <p className="mt-1 text-xs sm:text-sm text-muted-foreground max-w-2xl leading-relaxed">
                 The certified frameworks, runtimes, clouds, and databases our architects operate in enterprise production environments.
               </p>
             </div>
@@ -699,7 +699,7 @@ function Technologies() {
           /* ========================================================== */
           /* VIEW 2: EXPANDED 6-COLUMN MATRIX GRID                      */
           /* ========================================================== */
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 sm:gap-4 animate-in fade-in-50 duration-300">
               {TOOLCHAIN_ITEMS.map((tool, idx) => {
                 const LogoComp = tool.Logo;
@@ -728,7 +728,7 @@ function Technologies() {
         )}
 
         {/* Database Driven Toolchain Pills */}
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-6">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 mt-6">
           <div className="rounded-2xl border border-border/60 bg-surface/60 p-4 sm:p-5">
             <div className="flex items-center justify-between mb-3">
               <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">

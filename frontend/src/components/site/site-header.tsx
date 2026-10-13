@@ -157,7 +157,7 @@ export function SiteHeader() {
       <header className="sticky top-0 z-50 w-full select-none bg-transparent">
         {/* Top Micro-Bar (Enterprise Utility Strip matching Brand Green) */}
         <div className="w-full border-b border-[#464d1e] bg-[#555d25] text-xs text-white/90 transition-all duration-300 shadow-xs">
-          <div className="mx-auto flex max-w-[1400px] items-center justify-between px-3 sm:px-6 lg:px-8 py-1.5">
+          <div className="mx-auto flex max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-8 py-1.5">
             {/* Mobile View (< sm): Centered, Rotating Single Trust Badge (Never clipped, fits 320px+) */}
             <div className="flex sm:hidden w-full items-center justify-center py-0.5 overflow-hidden">
               {activeAnnouncement === 0 && (

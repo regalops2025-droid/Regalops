@@ -38,15 +38,15 @@ export function PageHero({
   const hasCustomMaxW = containerClassName.includes("max-w-");
   return (
     <section className={`hero-glow border-b border-border ${className}`}>
-      <div className={`mx-auto ${hasCustomMaxW ? "" : "max-w-7xl"} px-4 py-5 sm:px-6 sm:py-6 lg:px-8 text-left ${containerClassName}`}>
-        <span className="inline-flex items-center rounded-full border border-border bg-surface px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+      <div className={`mx-auto ${hasCustomMaxW ? "" : "max-w-[1440px]"} px-4 py-2 sm:px-6 sm:py-2.5 lg:px-8 text-left ${containerClassName}`}>
+        <span className="inline-flex items-center rounded-full border border-border bg-surface px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
           {eyebrow}
         </span>
-        <h1 className={`mt-2 sm:mt-2.5 text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl text-left ${titleClassName || "max-w-3xl"}`}>
+        <h1 className={`mt-1 sm:mt-1.5 text-xl font-bold leading-tight sm:text-2xl lg:text-3xl text-left ${titleClassName || "max-w-3xl"}`}>
           {title}
         </h1>
         {description && (
-          <p className={`mt-2 sm:mt-2.5 text-sm leading-relaxed text-muted-foreground sm:text-base text-left ${descriptionClassName || "max-w-2xl"}`}>
+          <p className={`mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm text-left ${descriptionClassName || "max-w-2xl"}`}>
             {description}
           </p>
         )}
@@ -67,7 +67,7 @@ export function Section({
   const hasCustomPy = className.includes("py-");
   return (
     <section
-      className={`mx-auto ${hasCustomMaxW ? "" : "max-w-7xl"} ${hasCustomPx ? "" : "px-4 sm:px-6 lg:px-8"} ${hasCustomPy ? "" : "py-5 sm:py-6"} ${className}`}
+      className={`mx-auto ${hasCustomMaxW ? "" : "max-w-[1440px]"} ${hasCustomPx ? "" : "px-4 sm:px-6 lg:px-8"} ${hasCustomPy ? "" : "py-2 sm:py-2.5"} ${className}`}
     >
       {children}
     </section>

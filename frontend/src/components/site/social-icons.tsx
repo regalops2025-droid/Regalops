@@ -188,11 +188,11 @@ export function StickyBottomActions() {
 
       {/* WhatsApp Button */}
       <a
-        href="https://wa.me/914400000000?text=Hi%20Regal%20OPs,%20I%20would%20like%20to%20discuss%20our%20enterprise%20platform%20needs."
+        href="https://wa.me/914012345678?text=Hi%20Regal%20OPs,%20I%20would%20like%20to%20discuss%20our%20enterprise%20platform%20needs."
         target="_blank"
         rel="noopener noreferrer"
         className="group relative flex h-13 w-13 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl shadow-green-900/40 transition-all duration-300 hover:scale-110 hover:bg-[#1ebe5b] active:scale-95"
-        title="Chat on WhatsApp"
+        title="Chat on WhatsApp (+91 40 1234 5678)"
         aria-label="Chat on WhatsApp"
       >
         {/* Live status pulsating ping indicator */}

@@ -279,6 +279,7 @@ function AdminDashboard() {
   const techStatusRef = useRef<HTMLDivElement>(null);
   const techBrandsRef = useRef<HTMLDivElement>(null);
   const serviceIconRef = useRef<HTMLDivElement>(null);
+  const notificationsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -293,6 +294,9 @@ function AdminDashboard() {
       }
       if (serviceIconRef.current && !serviceIconRef.current.contains(e.target as Node)) {
         setShowServiceIconPresets(false);
+      }
+      if (notificationsRef.current && !notificationsRef.current.contains(e.target as Node)) {
+        setNotificationsOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -1636,7 +1640,7 @@ function AdminDashboard() {
 
           <div className="flex items-center gap-1.5 sm:gap-2">
             {/* Unified Notification Center Button */}
-            <div className="relative">
+            <div className="relative" ref={notificationsRef}>
               <button
                 type="button"
                 onClick={() => setNotificationsOpen(!notificationsOpen)}
@@ -1659,11 +1663,18 @@ function AdminDashboard() {
 
               {/* Notification Dropdown / Sheet */}
               {notificationsOpen && (
-                <div className={`absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl border p-4 shadow-2xl z-50 animate-in fade-in-50 zoom-in-95 duration-150 ${
-                  adminTheme === "dark"
-                    ? "bg-zinc-900 border-zinc-800 text-zinc-100"
-                    : "bg-white border-slate-200 text-slate-900"
-                }`}>
+                <>
+                  {/* Backdrop for closing on mobile */}
+                  <div
+                    className="fixed inset-0 z-40 bg-black/20 backdrop-blur-[1px] sm:hidden"
+                    onClick={() => setNotificationsOpen(false)}
+                  />
+
+                  <div className={`fixed left-3 right-3 top-16 sm:absolute sm:inset-auto sm:right-0 sm:top-full sm:mt-2 w-auto sm:w-96 rounded-2xl border p-4 shadow-2xl z-50 animate-in fade-in-50 zoom-in-95 duration-150 ${
+                    adminTheme === "dark"
+                      ? "bg-zinc-900 border-zinc-800 text-zinc-100"
+                      : "bg-white border-slate-200 text-slate-900"
+                  }`}>
                   <div className="flex items-center justify-between pb-3 border-b border-border/60">
                     <div className="flex items-center gap-2">
                       <Bell className="h-4 w-4 text-primary" />
@@ -1733,6 +1744,7 @@ function AdminDashboard() {
                     </div>
                   </div>
                 </div>
+              </>
               )}
             </div>
 

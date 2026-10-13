@@ -1772,7 +1772,7 @@ function AdminDashboard() {
         </header>
 
         {/* Main Panel Content Area */}
-        <main className="flex-1 p-2 sm:p-3 md:p-4 max-w-[1440px] w-full mx-auto">
+        <main className="flex-1 p-2 sm:p-3.5 md:p-4 w-full">
           
           <div id="admin-tab-content" className="scroll-mt-6" />
 
@@ -2805,17 +2805,17 @@ function AdminDashboard() {
             <div className="space-y-6">
               
               {/* 1. Form FIRST at the top */}
-              <div id="solution-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
-                <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
-                  <div className="flex items-center gap-2.5">
-                    <div className="rounded-xl bg-primary/10 p-2 text-primary">
-                      {editingSolId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+              <div id="solution-form-card" className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-xl shadow-xs w-full">
+                <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-border/60">
+                  <div className="flex items-center gap-2">
+                    <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
+                      {editingSolId !== null ? <Pencil className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                     </div>
                     <div>
-                      <h2 className="text-xl font-bold text-foreground">
+                      <h2 className="text-base sm:text-lg font-bold text-foreground leading-tight">
                         {editingSolId !== null ? "Edit Solution" : "Add New Solution"}
                       </h2>
-                      <p className="text-xs text-muted-foreground mt-0.5">
+                      <p className="text-[11px] text-muted-foreground">
                         {editingSolId !== null 
                           ? "Update practice specifications, media, and enterprise deliverables." 
                           : "Configure a new specialized practice area to showcase on the live portal."}
@@ -2826,7 +2826,7 @@ function AdminDashboard() {
                     <button
                       type="button"
                       onClick={handleCancelEdit}
-                      className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
                     >
                       Cancel Editing
                     </button>
@@ -2834,118 +2834,141 @@ function AdminDashboard() {
                 </div>
 
                 {formSuccess && (
-                  <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                  <div className="mb-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-2.5 text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
                     <span>Solution {editingSolId !== null ? "updated" : "created"} and published successfully!</span>
                   </div>
                 )}
 
                 {formError && (
-                  <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4 shrink-0" />
+                  <div className="mb-3 rounded-lg bg-destructive/10 border border-destructive/30 p-2.5 text-xs text-destructive flex items-center gap-2">
+                    <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                     <span>{formError}</span>
                   </div>
                 )}
 
-                <form onSubmit={handleSubmitSolution} className="space-y-5">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
+                <form onSubmit={handleSubmitSolution} className="space-y-3">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 items-start">
                     {/* Left Column: Solution Identity & Image */}
-                    <div className="space-y-4">
-                      <label className="block text-sm font-medium">
-                        Solution Name
+                    <div className="space-y-2">
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1">
+                          Solution Name *
+                        </label>
                         <input
                           type="text"
-                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
                           placeholder="e.g. Artificial Intelligence Consulting"
                           value={solName}
                           onChange={(e) => setSolName(e.target.value)}
                           required
                           disabled={formLoading}
                         />
-                      </label>
+                      </div>
 
                       <ImageUploadField
                         label="Solution Image"
                         value={solImage}
                         onChange={setSolImage}
                         disabled={formLoading}
-                        recommendedDimensions="1200 × 700 px (16:9 Landscape)"
-                        helperText="Recommended size: 1200 × 700 px (16:9 landscape aspect ratio). Images of any resolution or ratio are accepted and will automatically be scaled & cropped to match the exact same height and width of all solution cards on the website."
+                        recommendedDimensions="1200 × 700 px (16:9)"
+                        compact={true}
                       />
 
-                      <label className="block text-sm font-medium">
-                        Description
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1">
+                          Description *
+                        </label>
                         <textarea
-                          rows={3}
-                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                          rows={2}
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
                           placeholder="Describe what this solution entails..."
                           value={solDesc}
                           onChange={(e) => setSolDesc(e.target.value)}
                           required
                           disabled={formLoading}
                         />
-                      </label>
+                      </div>
                     </div>
 
                     {/* Right Column: Capabilities, Methodology & Deliverables */}
-                    <div className="space-y-4">
-                      <label className="block text-sm font-medium">
-                        Core Capabilities (One per line)
+                    <div className="space-y-2">
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1">
+                          Core Capabilities (One per line)
+                        </label>
                         <textarea
                           rows={2}
-                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
                           placeholder="e.g. Domain-Driven Development (DDD)&#10;High-throughput event-driven microservices"
                           value={solCapabilities}
                           onChange={(e) => setSolCapabilities(e.target.value)}
                           disabled={formLoading}
                         />
-                      </label>
+                      </div>
 
-                      <label className="block text-sm font-medium">
-                        Delivery Methodology Phases (One per line)
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1">
+                          Delivery Methodology Phases (One per line)
+                        </label>
                         <textarea
                           rows={2}
-                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
                           placeholder="e.g. Discovery & Event Storming&#10;Target Architecture Blueprinting"
                           value={solMethodology}
                           onChange={(e) => setSolMethodology(e.target.value)}
                           disabled={formLoading}
                         />
-                      </label>
+                      </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                        <label className="block text-sm font-medium">
-                          Key Deliverables (One per line)
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <div>
+                          <label className="block text-xs font-semibold text-foreground mb-1">
+                            Key Deliverables
+                          </label>
                           <textarea
                             rows={2}
-                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                            className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
                             placeholder="e.g. OpenAPI specs&#10;Test suites"
                             value={solDeliverables}
                             onChange={(e) => setSolDeliverables(e.target.value)}
                             disabled={formLoading}
                           />
-                        </label>
+                        </div>
 
-                        <label className="block text-sm font-medium">
-                          Featured Technologies (One per line)
+                        <div>
+                          <label className="block text-xs font-semibold text-foreground mb-1">
+                            Featured Technologies
+                          </label>
                           <textarea
                             rows={2}
-                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                            className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
                             placeholder="e.g. Node.js&#10;TypeScript"
                             value={solTechnologies}
                             onChange={(e) => setSolTechnologies(e.target.value)}
                             disabled={formLoading}
                           />
-                        </label>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                  {/* Action buttons (Right-aligned compact bar) */}
+                  <div className="flex items-center justify-end gap-2 pt-1 border-t border-border/50">
+                    {editingSolId !== null && (
+                      <button
+                        type="button"
+                        onClick={handleCancelEdit}
+                        className="rounded-lg border border-border bg-background px-3.5 py-1.5 text-xs font-semibold text-foreground hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                        disabled={formLoading}
+                      >
+                        Cancel Edit
+                      </button>
+                    )}
                     <button
                       type="submit"
                       disabled={formLoading || !solName || !solDesc}
-                      className="flex-1 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center shadow-md"
+                      className="rounded-lg bg-primary px-5 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer text-center shadow-xs disabled:opacity-50"
                     >
                       {formLoading 
                         ? "Saving Solution..." 
@@ -2953,16 +2976,6 @@ function AdminDashboard() {
                           ? "Update Solution" 
                           : "Publish Solution"}
                     </button>
-                    {editingSolId !== null && (
-                      <button
-                        type="button"
-                        onClick={handleCancelEdit}
-                        className="rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                        disabled={formLoading}
-                      >
-                        Cancel Edit
-                      </button>
-                    )}
                   </div>
                 </form>
               </div>
@@ -3093,17 +3106,17 @@ function AdminDashboard() {
             <div className="space-y-6">
               
               {/* 1. Form FIRST at the top (Paina) */}
-              <div id="tech-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
-                <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
-                  <div className="flex items-center gap-2.5">
-                    <div className="rounded-xl bg-primary/10 p-2 text-primary">
-                      {editingTechId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+              <div id="tech-form-card" className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-xl shadow-xs w-full">
+                <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-border/60">
+                  <div className="flex items-center gap-2">
+                    <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
+                      {editingTechId !== null ? <Pencil className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                     </div>
                     <div>
-                      <h2 className="text-xl font-bold text-foreground">
+                      <h2 className="text-base sm:text-lg font-bold text-foreground leading-tight">
                         {editingTechId !== null ? "Edit Technology" : "Add New Technology"}
                       </h2>
-                      <p className="text-xs text-muted-foreground mt-0.5">
+                      <p className="text-[11px] text-muted-foreground">
                         {editingTechId !== null 
                           ? "Update technology specifications, category badge, and brand associations." 
                           : "Configure a new technology or engineering stack capability."}
@@ -3114,7 +3127,7 @@ function AdminDashboard() {
                     <button
                       type="button"
                       onClick={handleCancelTechEdit}
-                      className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
                     >
                       Cancel Editing
                     </button>
@@ -3122,120 +3135,142 @@ function AdminDashboard() {
                 </div>
 
                 {techFormSuccess && (
-                  <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                  <div className="mb-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-2.5 text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
                     <span>Technology {editingTechId !== null ? "updated" : "created"} and published successfully!</span>
                   </div>
                 )}
 
                 {techFormError && (
-                  <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4 shrink-0" />
+                  <div className="mb-3 rounded-lg bg-destructive/10 border border-destructive/30 p-2.5 text-xs text-destructive flex items-center gap-2">
+                    <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                     <span>{techFormError}</span>
                   </div>
                 )}
 
-                <form onSubmit={handleSubmitTech} className="space-y-4">
-                  <label className="block text-sm font-medium">
-                    Technology Name
-                    <input
-                      type="text"
-                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                      placeholder="e.g. React & Next.js"
-                      value={techName}
-                      onChange={(e) => setTechName(e.target.value)}
-                      required
-                      disabled={techFormLoading}
-                    />
-                  </label>
+                <form onSubmit={handleSubmitTech} className="space-y-3">
+                  {/* Top 3-Column Grid utilizing full screen width */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 items-start">
+                    {/* Col 1: Name & Keywords */}
+                    <div className="space-y-2">
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1">
+                          Technology Name *
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          placeholder="e.g. React & Next.js"
+                          value={techName}
+                          onChange={(e) => setTechName(e.target.value)}
+                          required
+                          disabled={techFormLoading}
+                        />
+                      </div>
 
-                  {/* Category Badge & Quick Presets */}
-                  <div>
-                    <label className="block text-sm font-medium">
-                      Category Badge
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1">
+                          Keywords (comma separated)
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          placeholder="e.g. Components, SSR, TypeScript"
+                          value={techKeywords}
+                          onChange={(e) => setTechKeywords(e.target.value)}
+                          disabled={techFormLoading}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Col 2: Category Badge & Presets */}
+                    <div>
+                      <label className="block text-xs font-semibold text-foreground mb-1">
+                        Category Badge
+                      </label>
                       <input
                         type="text"
-                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs uppercase"
+                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono uppercase"
                         placeholder="e.g. ENTERPRISE WEB & FRONTEND"
                         value={techCategory}
                         onChange={(e) => setTechCategory(e.target.value)}
                         disabled={techFormLoading}
                       />
-                    </label>
-                    <div className="mt-1.5 flex flex-wrap gap-1">
-                      {[
-                        "ENTERPRISE WEB & FRONTEND",
-                        "RUNTIMES & DISTRIBUTED APIS",
-                        "MULTI-CLOUD ARCHITECTURE",
-                        "CONTAINER PLATFORMS & CI/CD",
-                        "MOBILE & CROSS-PLATFORM",
-                        "AI & MACHINE LEARNING",
-                        "ENTERPRISE ERP & SAP",
-                      ].map((cat) => (
-                        <button
-                          key={cat}
-                          type="button"
-                          onClick={() => setTechCategory(cat)}
-                          className={`text-[10px] px-2 py-0.5 rounded-md border font-bold uppercase transition-all cursor-pointer ${
-                            techCategory.toUpperCase() === cat
-                              ? "bg-primary text-primary-foreground border-primary"
-                              : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
-                          }`}
-                        >
-                          {cat}
-                        </button>
-                      ))}
+                      <div className="mt-1.5 flex flex-wrap gap-1 max-h-16 overflow-y-auto">
+                        {[
+                          "ENTERPRISE WEB & FRONTEND",
+                          "RUNTIMES & DISTRIBUTED APIS",
+                          "MULTI-CLOUD ARCHITECTURE",
+                          "CONTAINER PLATFORMS & CI/CD",
+                          "MOBILE & CROSS-PLATFORM",
+                          "AI & MACHINE LEARNING",
+                          "ENTERPRISE ERP & SAP",
+                        ].map((cat) => (
+                          <button
+                            key={cat}
+                            type="button"
+                            onClick={() => setTechCategory(cat)}
+                            className={`text-[9px] px-1.5 py-0.5 rounded border font-semibold uppercase transition-all cursor-pointer ${
+                              techCategory.toUpperCase() === cat
+                                ? "bg-primary text-primary-foreground border-primary"
+                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                            }`}
+                          >
+                            {cat}
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Status Badge & Quick Presets */}
-                  <div>
-                    <label className="block text-sm font-medium">
-                      Status Badge
+                    {/* Col 3: Status Badge & Presets */}
+                    <div>
+                      <label className="block text-xs font-semibold text-foreground mb-1">
+                        Status Badge
+                      </label>
                       <input
                         type="text"
-                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs uppercase"
+                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono uppercase"
                         placeholder="e.g. PRODUCTION READY"
                         value={techStatusBadge}
                         onChange={(e) => setTechStatusBadge(e.target.value)}
                         disabled={techFormLoading}
                       />
-                    </label>
-                    <div className="mt-1.5 flex flex-wrap gap-1">
-                      {["PRODUCTION READY", "ENTERPRISE SCALE", "HIGH AVAILABILITY", "LATEST STABLE"].map((badge) => (
-                        <button
-                          key={badge}
-                          type="button"
-                          onClick={() => setTechStatusBadge(badge)}
-                          className={`text-[10px] px-2 py-0.5 rounded-md border font-bold uppercase transition-all cursor-pointer ${
-                            techStatusBadge.toUpperCase() === badge
-                              ? "bg-emerald-500 text-white border-emerald-600"
-                              : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
-                          }`}
-                        >
-                          {badge}
-                        </button>
-                      ))}
+                      <div className="mt-1.5 flex flex-wrap gap-1">
+                        {["PRODUCTION READY", "ENTERPRISE SCALE", "HIGH AVAILABILITY", "LATEST STABLE"].map((badge) => (
+                          <button
+                            key={badge}
+                            type="button"
+                            onClick={() => setTechStatusBadge(badge)}
+                            className={`text-[9px] px-1.5 py-0.5 rounded border font-semibold uppercase transition-all cursor-pointer ${
+                              techStatusBadge.toUpperCase() === badge
+                                ? "bg-emerald-500 text-white border-emerald-600"
+                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                            }`}
+                          >
+                            {badge}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
-                  {/* Brand Logos / Frameworks with Clickable Toggle Chips */}
-                  <div>
-                    <label className="block text-sm font-medium">
-                      Brand Logos / Frameworks (Comma separated)
-                      <input
-                        type="text"
-                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. React, Next.js, TypeScript"
-                        value={techBrands}
-                        onChange={(e) => setTechBrands(e.target.value)}
-                        disabled={techFormLoading}
-                      />
-                    </label>
-                    <p className="mt-1 text-[11px] text-muted-foreground">
-                      Click chips below to add/remove brand logos dynamically:
-                    </p>
-                    <div className="mt-1.5 flex flex-wrap gap-1.5 max-h-28 overflow-y-auto p-1.5 bg-background rounded-lg border border-border/70">
+                  {/* Row 2: Brand Logos Toggle Chips (horizontal bar) */}
+                  <div className="pt-0.5">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
+                      <label className="text-xs font-semibold text-foreground">
+                        Brand Logos / Frameworks (Comma separated)
+                      </label>
+                      <span className="text-[10px] text-muted-foreground">Click chips to toggle dynamically</span>
+                    </div>
+                    <input
+                      type="text"
+                      className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                      placeholder="e.g. React, Next.js, TypeScript"
+                      value={techBrands}
+                      onChange={(e) => setTechBrands(e.target.value)}
+                      disabled={techFormLoading}
+                    />
+                    <div className="mt-1 flex flex-wrap gap-1 max-h-16 overflow-y-auto p-1 bg-background rounded-lg border border-border/70">
                       {[
                         "React", "Next.js", "TypeScript", "Node.js", "Python",
                         "AWS", "Azure", "GCP", "Kubernetes", "Docker",
@@ -3263,9 +3298,9 @@ function AdminDashboard() {
                                 setTechBrands([...current, b].join(", "));
                               }
                             }}
-                            className={`text-[10px] px-2 py-0.5 rounded-md font-bold transition-all cursor-pointer border ${
+                            className={`text-[9.5px] px-1.5 py-0.5 rounded font-semibold transition-all cursor-pointer border ${
                               currentSelected
-                                ? "bg-primary text-primary-foreground border-primary shadow-xs"
+                                ? "bg-primary text-primary-foreground border-primary shadow-2xs"
                                 : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
                             }`}
                           >
@@ -3276,47 +3311,53 @@ function AdminDashboard() {
                     </div>
                   </div>
 
-                  <label className="block text-sm font-medium">
-                    Description <span className="text-xs text-muted-foreground font-normal">(Optional)</span>
-                    <textarea
-                      rows={3}
-                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
-                      placeholder="Describe what this technology/stack is used for..."
-                      value={techDesc}
-                      onChange={(e) => setTechDesc(e.target.value)}
-                      disabled={techFormLoading}
-                    />
-                  </label>
+                  {/* Row 3: Description & How It Works (2-column layout) */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-0.5">
+                    <div>
+                      <label className="block text-xs font-semibold text-foreground mb-1">
+                        Description <span className="text-[10px] text-muted-foreground font-normal">(Optional)</span>
+                      </label>
+                      <textarea
+                        rows={2}
+                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                        placeholder="Describe what this technology/stack is used for..."
+                        value={techDesc}
+                        onChange={(e) => setTechDesc(e.target.value)}
+                        disabled={techFormLoading}
+                      />
+                    </div>
 
-                  <label className="block text-sm font-medium">
-                    Keywords (comma separated)
-                    <input
-                      type="text"
-                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                      placeholder="e.g. Components, Designing, SSR, TypeScript"
-                      value={techKeywords}
-                      onChange={(e) => setTechKeywords(e.target.value)}
-                      disabled={techFormLoading}
-                    />
-                  </label>
+                    <div>
+                      <label className="block text-xs font-semibold text-foreground mb-1">
+                        How It Works / Usage Details
+                      </label>
+                      <textarea
+                        rows={2}
+                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                        placeholder="Describe how we run or implement this technology..."
+                        value={techHowToWork}
+                        onChange={(e) => setTechHowToWork(e.target.value)}
+                        disabled={techFormLoading}
+                      />
+                    </div>
+                  </div>
 
-                  <label className="block text-sm font-medium">
-                    How It Works / Usage Details
-                    <textarea
-                      rows={3}
-                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
-                      placeholder="Describe how we run or implement this technology..."
-                      value={techHowToWork}
-                      onChange={(e) => setTechHowToWork(e.target.value)}
-                      disabled={techFormLoading}
-                    />
-                  </label>
-
-                  <div className="space-y-2">
+                  {/* Action buttons (Right-aligned compact bar) */}
+                  <div className="flex items-center justify-end gap-2 pt-1 border-t border-border/50">
+                    {editingTechId !== null && (
+                      <button
+                        type="button"
+                        onClick={handleCancelTechEdit}
+                        className="rounded-lg border border-border bg-background px-3.5 py-1.5 text-xs font-semibold text-foreground hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                        disabled={techFormLoading}
+                      >
+                        Cancel Edit
+                      </button>
+                    )}
                     <button
                       type="submit"
                       disabled={techFormLoading || !techName.trim()}
-                      className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
+                      className="rounded-lg bg-primary px-5 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer text-center shadow-xs disabled:opacity-50"
                     >
                       {techFormLoading 
                         ? "Saving..." 
@@ -3324,16 +3365,6 @@ function AdminDashboard() {
                           ? "Update Technology" 
                           : "Publish Technology"}
                     </button>
-                    {editingTechId !== null && (
-                      <button
-                        type="button"
-                        onClick={handleCancelTechEdit}
-                        className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                        disabled={techFormLoading}
-                      >
-                        Cancel Edit
-                      </button>
-                    )}
                   </div>
                 </form>
               </div>
@@ -3467,17 +3498,17 @@ function AdminDashboard() {
             <div className="space-y-6">
               
               {/* 1. Form FIRST at the top (Paina) */}
-              <div id="service-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
-                <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
-                  <div className="flex items-center gap-2.5">
-                    <div className="rounded-xl bg-primary/10 p-2 text-primary">
-                      {editingServiceId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+              <div id="service-form-card" className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-xl shadow-xs w-full">
+                <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-border/60">
+                  <div className="flex items-center gap-2">
+                    <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
+                      {editingServiceId !== null ? <Pencil className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                     </div>
                     <div>
-                      <h2 className="text-xl font-bold text-foreground">
+                      <h2 className="text-base sm:text-lg font-bold text-foreground leading-tight">
                         {editingServiceId !== null ? "Edit Service" : "Add New Service"}
                       </h2>
-                      <p className="text-xs text-muted-foreground mt-0.5">
+                      <p className="text-[11px] text-muted-foreground">
                         {editingServiceId !== null 
                           ? "Update service card offerings and routing link." 
                           : "Configure a service card to showcase in offerings."}
@@ -3488,7 +3519,7 @@ function AdminDashboard() {
                     <button
                       type="button"
                       onClick={handleCancelServiceEdit}
-                      className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
                     >
                       Cancel Editing
                     </button>
@@ -3496,106 +3527,128 @@ function AdminDashboard() {
                 </div>
 
                 {serviceFormSuccess && (
-                  <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                  <div className="mb-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-2.5 text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
                     <span>Service {editingServiceId !== null ? "updated" : "created"} and published successfully!</span>
                   </div>
                 )}
 
                 {serviceFormError && (
-                  <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4 shrink-0" />
+                  <div className="mb-3 rounded-lg bg-destructive/10 border border-destructive/30 p-2.5 text-xs text-destructive flex items-center gap-2">
+                    <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                     <span>{serviceFormError}</span>
                   </div>
                 )}
 
-                <form onSubmit={handleSubmitService} className="space-y-4">
-                  <label className="block text-sm font-medium">
-                    Service Title
-                    <input
-                      type="text"
-                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                      placeholder="e.g. Technology Consulting"
-                      value={serviceTitle}
-                      onChange={(e) => setServiceTitle(e.target.value)}
-                      required
-                      disabled={serviceFormLoading}
-                    />
-                  </label>
+                <form onSubmit={handleSubmitService} className="space-y-3">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-start">
+                    {/* Col 1: Service Title & Target Link */}
+                    <div className="space-y-2">
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1">
+                          Service Title *
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          placeholder="e.g. Technology Consulting"
+                          value={serviceTitle}
+                          onChange={(e) => setServiceTitle(e.target.value)}
+                          required
+                          disabled={serviceFormLoading}
+                        />
+                      </div>
 
-                  {/* Icon Key / Presets */}
-                  <div>
-                    <label className="block text-sm font-medium">
-                      Service Icon Type
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1">
+                          Target Link
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono"
+                          placeholder="/solutions"
+                          value={serviceLink}
+                          onChange={(e) => setServiceLink(e.target.value)}
+                          disabled={serviceFormLoading}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Col 2: Service Icon Type & Presets */}
+                    <div>
+                      <label className="block text-xs font-semibold text-foreground mb-1">
+                        Service Icon Type
+                      </label>
                       <input
                         type="text"
-                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs"
+                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono"
                         placeholder="e.g. tech-consulting"
                         value={serviceIcon}
                         onChange={(e) => setServiceIcon(e.target.value)}
                         disabled={serviceFormLoading}
                       />
-                    </label>
-                    <p className="mt-1 text-[11px] text-muted-foreground">Select an icon preset:</p>
-                    <div className="mt-1.5 flex flex-wrap gap-1 max-h-28 overflow-y-auto p-1.5 bg-background rounded-lg border border-border/70">
-                      {[
-                        { id: "tech-consulting", label: "Tech Consulting" },
-                        { id: "bpo", label: "BPO / Operations" },
-                        { id: "custom-app", label: "Custom App Dev" },
-                        { id: "big-data", label: "Big Data" },
-                        { id: "mobile-solutions", label: "Mobile Solutions" },
-                        { id: "cloud-consulting", label: "Cloud Consulting" },
-                        { id: "project-implementation", label: "Implementation" },
-                        { id: "staffing-solutions", label: "Staffing" },
-                        { id: "ai-solutions", label: "AI & ML" },
-                        { id: "cyber-security", label: "Cyber Security" },
-                      ].map((iconItem) => (
-                        <button
-                          key={iconItem.id}
-                          type="button"
-                          onClick={() => setServiceIcon(iconItem.id)}
-                          className={`text-[10px] px-2 py-0.5 rounded-md border font-semibold transition-all cursor-pointer ${
-                            serviceIcon === iconItem.id
-                              ? "bg-primary text-primary-foreground border-primary"
-                              : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
-                          }`}
-                        >
-                          {iconItem.label}
-                        </button>
-                      ))}
+                      <div className="mt-1.5 flex flex-wrap gap-1 max-h-16 overflow-y-auto p-1 bg-background rounded-lg border border-border/70">
+                        {[
+                          { id: "tech-consulting", label: "Tech Consulting" },
+                          { id: "bpo", label: "BPO / Operations" },
+                          { id: "custom-app", label: "Custom App Dev" },
+                          { id: "big-data", label: "Big Data" },
+                          { id: "mobile-solutions", label: "Mobile Solutions" },
+                          { id: "cloud-consulting", label: "Cloud Consulting" },
+                          { id: "project-implementation", label: "Implementation" },
+                          { id: "staffing-solutions", label: "Staffing" },
+                          { id: "ai-solutions", label: "AI & ML" },
+                          { id: "cyber-security", label: "Cyber Security" },
+                        ].map((iconItem) => (
+                          <button
+                            key={iconItem.id}
+                            type="button"
+                            onClick={() => setServiceIcon(iconItem.id)}
+                            className={`text-[9px] px-1.5 py-0.5 rounded border font-semibold transition-all cursor-pointer ${
+                              serviceIcon === iconItem.id
+                                ? "bg-primary text-primary-foreground border-primary"
+                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                            }`}
+                          >
+                            {iconItem.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Col 3: Description */}
+                    <div>
+                      <label className="block text-xs font-semibold text-foreground mb-1">
+                        Description *
+                      </label>
+                      <textarea
+                        rows={3}
+                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                        placeholder="Brief summary of what this service offers..."
+                        value={serviceDesc}
+                        onChange={(e) => setServiceDesc(e.target.value)}
+                        required
+                        disabled={serviceFormLoading}
+                      />
                     </div>
                   </div>
 
-                  <label className="block text-sm font-medium">
-                    Description
-                    <textarea
-                      rows={3}
-                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
-                      placeholder="Brief summary of what this service offers..."
-                      value={serviceDesc}
-                      onChange={(e) => setServiceDesc(e.target.value)}
-                      required
-                      disabled={serviceFormLoading}
-                    />
-                  </label>
-
-                  <label className="block text-sm font-medium">
-                    Target Link
-                    <input
-                      type="text"
-                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs"
-                      placeholder="/solutions"
-                      value={serviceLink}
-                      onChange={(e) => setServiceLink(e.target.value)}
-                      disabled={serviceFormLoading}
-                    />
-                  </label>
-
-                  <div className="space-y-2 pt-2">
+                  {/* Action buttons (Right-aligned compact bar) */}
+                  <div className="flex items-center justify-end gap-2 pt-1 border-t border-border/50">
+                    {editingServiceId !== null && (
+                      <button
+                        type="button"
+                        onClick={handleCancelServiceEdit}
+                        className="rounded-lg border border-border bg-background px-3.5 py-1.5 text-xs font-semibold text-foreground hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                        disabled={serviceFormLoading}
+                      >
+                        Cancel Edit
+                      </button>
+                    )}
                     <button
                       type="submit"
                       disabled={serviceFormLoading || !serviceTitle || !serviceDesc}
-                      className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
+                      className="rounded-lg bg-primary px-5 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer text-center shadow-xs disabled:opacity-50"
                     >
                       {serviceFormLoading 
                         ? "Saving..." 
@@ -3603,16 +3656,6 @@ function AdminDashboard() {
                           ? "Update Service" 
                           : "Publish Service"}
                     </button>
-                    {editingServiceId !== null && (
-                      <button
-                        type="button"
-                        onClick={handleCancelServiceEdit}
-                        className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                        disabled={serviceFormLoading}
-                      >
-                        Cancel Edit
-                      </button>
-                    )}
                   </div>
                 </form>
               </div>
@@ -3733,17 +3776,17 @@ function AdminDashboard() {
               {clientSubTab === "cases" ? (
                 <div className="space-y-6">
                   {/* 1. Form FIRST at the top */}
-                  <div id="client-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
-                    <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
-                      <div className="flex items-center gap-2.5">
-                        <div className="rounded-xl bg-primary/10 p-2 text-primary">
-                          {editingClientId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                  <div id="client-form-card" className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-xl shadow-xs w-full">
+                    <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-border/60">
+                      <div className="flex items-center gap-2">
+                        <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
+                          {editingClientId !== null ? <Pencil className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                         </div>
                         <div>
-                          <h2 className="text-xl font-bold text-foreground">
+                          <h2 className="text-base sm:text-lg font-bold text-foreground leading-tight">
                             {editingClientId !== null ? "Edit Client Brand" : "Add Client Brand"}
                           </h2>
-                          <p className="text-xs text-muted-foreground mt-0.5">
+                          <p className="text-[11px] text-muted-foreground">
                             {editingClientId !== null 
                               ? "Update client brand details and logo asset." 
                               : "Add a client or partner logo to showcase on the live portal."}
@@ -3754,7 +3797,7 @@ function AdminDashboard() {
                         <button
                           type="button"
                           onClick={handleCancelClientEdit}
-                          className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
                         >
                           Cancel Editing
                         </button>
@@ -3762,38 +3805,42 @@ function AdminDashboard() {
                     </div>
 
                     {clientFormSuccess && (
-                      <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 shrink-0" />
+                      <div className="mb-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-2.5 text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                        <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
                         <span>Client brand {editingClientId !== null ? "updated" : "added"} successfully!</span>
                       </div>
                     )}
 
                     {clientFormError && (
-                      <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4 shrink-0" />
+                      <div className="mb-3 rounded-lg bg-destructive/10 border border-destructive/30 p-2.5 text-xs text-destructive flex items-center gap-2">
+                        <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                         <span>{clientFormError}</span>
                       </div>
                     )}
 
-                    <form onSubmit={handleSubmitClient} className="space-y-5">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <label className="block text-sm font-medium">
-                          Client / Company Name *
+                    <form onSubmit={handleSubmitClient} className="space-y-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-start">
+                        <div>
+                          <label className="block text-xs font-semibold text-foreground mb-1">
+                            Client / Company Name *
+                          </label>
                           <input
                             type="text"
-                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                            placeholder="e.g. Visa, Capital One, Apple, Infosys"
+                            className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                            placeholder="e.g. Visa, Capital One, Apple"
                             value={clientName}
                             onChange={(e) => setClientName(e.target.value)}
                             required
                             disabled={clientFormLoading}
                           />
-                        </label>
+                        </div>
 
-                        <label className="block text-sm font-medium">
-                          Industry / Category *
+                        <div>
+                          <label className="block text-xs font-semibold text-foreground mb-1">
+                            Industry / Category *
+                          </label>
                           <select
-                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary cursor-pointer"
+                            className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary cursor-pointer"
                             value={clientSector}
                             onChange={(e) => setClientSector(e.target.value)}
                             required
@@ -3813,35 +3860,50 @@ function AdminDashboard() {
                               </option>
                             ))}
                           </select>
-                        </label>
+                        </div>
+
+                        <div>
+                          <ImageUploadField
+                            label="Brand Logo"
+                            value={clientImage}
+                            onChange={setClientImage}
+                            disabled={clientFormLoading}
+                            recommendedDimensions="400 × 200 px"
+                            compact={true}
+                          />
+                        </div>
                       </div>
 
-                      <ImageUploadField
-                        label="Brand Logo"
-                        value={clientImage}
-                        onChange={setClientImage}
-                        disabled={clientFormLoading}
-                        recommendedDimensions="400 × 200 px (SVG, Transparent PNG)"
-                        helperText="Upload official brand logo. Transparent PNG, SVG, or high-res JPG recommended. Rendered cleanly on the website's client grid."
-                      />
-
-                      <label className="block text-sm font-medium">
-                        Partnership Notes / Summary (Optional)
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1">
+                          Partnership Notes / Summary <span className="text-[10px] text-muted-foreground font-normal">(Optional)</span>
+                        </label>
                         <textarea
                           rows={2}
-                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
                           placeholder="e.g. Enterprise technology partnership & cloud modernization collaboration."
                           value={clientDesc}
                           onChange={(e) => setClientDesc(e.target.value)}
                           disabled={clientFormLoading}
                         />
-                      </label>
+                      </div>
 
-                      <div className="pt-1 flex flex-col sm:flex-row gap-3">
+                      {/* Action buttons (Right-aligned compact bar) */}
+                      <div className="flex items-center justify-end gap-2 pt-1 border-t border-border/50">
+                        {editingClientId !== null && (
+                          <button
+                            type="button"
+                            onClick={handleCancelClientEdit}
+                            className="rounded-lg border border-border bg-background px-3.5 py-1.5 text-xs font-semibold text-foreground hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                            disabled={clientFormLoading}
+                          >
+                            Cancel Edit
+                          </button>
+                        )}
                         <button
                           type="submit"
                           disabled={clientFormLoading || !clientName.trim() || !clientSector}
-                          className="flex-1 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center shadow-md"
+                          className="rounded-lg bg-primary px-5 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer text-center shadow-xs disabled:opacity-50"
                         >
                           {clientFormLoading 
                             ? "Saving..." 
@@ -3849,16 +3911,6 @@ function AdminDashboard() {
                               ? "Update Client Brand" 
                               : "Add Client Brand"}
                         </button>
-                        {editingClientId !== null && (
-                          <button
-                            type="button"
-                            onClick={handleCancelClientEdit}
-                            className="rounded-xl border border-border bg-background px-6 py-2.5 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                            disabled={clientFormLoading}
-                          >
-                            Cancel Edit
-                          </button>
-                        )}
                       </div>
                     </form>
                   </div>
@@ -3970,17 +4022,17 @@ function AdminDashboard() {
               ) : (
                 <div className="space-y-6">
                   {/* 1. Form FIRST at the top */}
-                  <div id="industry-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
-                    <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
-                      <div className="flex items-center gap-2.5">
-                        <div className="rounded-xl bg-primary/10 p-2 text-primary">
-                          {editingIndustryId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                  <div id="industry-form-card" className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-xl shadow-xs w-full">
+                    <div className="flex items-center justify-between mb-3 pb-2 border-b border-border/60">
+                      <div className="flex items-center gap-2">
+                        <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
+                          {editingIndustryId !== null ? <Pencil className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                         </div>
                         <div>
-                          <h2 className="text-xl font-bold text-foreground">
+                          <h2 className="text-base sm:text-lg font-bold text-foreground leading-tight">
                             {editingIndustryId !== null ? "Edit Industry" : "Add Industry"}
                           </h2>
-                          <p className="text-xs text-muted-foreground mt-0.5">
+                          <p className="text-[11px] text-muted-foreground">
                             {editingIndustryId !== null 
                               ? "Update industry vertical sector name." 
                               : "Configure an industry vertical served by our solutions."}
@@ -3991,7 +4043,7 @@ function AdminDashboard() {
                         <button
                           type="button"
                           onClick={handleCancelIndustryEdit}
-                          className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
                         >
                           Cancel Editing
                         </button>
@@ -3999,38 +4051,50 @@ function AdminDashboard() {
                     </div>
 
                     {industryFormSuccess && (
-                      <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 shrink-0" />
+                      <div className="mb-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-2.5 text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                        <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
                         <span>Industry {editingIndustryId !== null ? "updated" : "created"} successfully!</span>
                       </div>
                     )}
 
                     {industryFormError && (
-                      <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4 shrink-0" />
+                      <div className="mb-3 rounded-lg bg-destructive/10 border border-destructive/30 p-2.5 text-xs text-destructive flex items-center gap-2">
+                        <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                         <span>{industryFormError}</span>
                       </div>
                     )}
 
-                    <form onSubmit={handleSubmitIndustry} className="space-y-4">
-                      <label className="block text-sm font-medium">
-                        Industry Name
+                    <form onSubmit={handleSubmitIndustry} className="flex flex-col sm:flex-row items-end gap-3">
+                      <div className="flex-1 w-full">
+                        <label className="block text-xs font-semibold text-foreground mb-1">
+                          Industry Name *
+                        </label>
                         <input
                           type="text"
-                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                          placeholder="e.g. Real Estate, Defense"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          placeholder="e.g. Real Estate, Defense, Aerospace"
                           value={industryName}
                           onChange={(e) => setIndustryName(e.target.value)}
                           required
                           disabled={industryFormLoading}
                         />
-                      </label>
+                      </div>
 
-                      <div className="pt-1 flex flex-col sm:flex-row gap-3">
+                      <div className="flex items-center gap-2 shrink-0">
+                        {editingIndustryId !== null && (
+                          <button
+                            type="button"
+                            onClick={handleCancelIndustryEdit}
+                            className="rounded-lg border border-border bg-background px-3.5 py-1.5 text-xs font-semibold text-foreground hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                            disabled={industryFormLoading}
+                          >
+                            Cancel Edit
+                          </button>
+                        )}
                         <button
                           type="submit"
                           disabled={industryFormLoading || !industryName}
-                          className="flex-1 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center shadow-md"
+                          className="rounded-lg bg-primary px-5 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer text-center shadow-xs disabled:opacity-50"
                         >
                           {industryFormLoading 
                             ? "Saving..." 
@@ -4038,16 +4102,6 @@ function AdminDashboard() {
                               ? "Update Industry" 
                               : "Publish Industry"}
                         </button>
-                        {editingIndustryId !== null && (
-                          <button
-                            type="button"
-                            onClick={handleCancelIndustryEdit}
-                            className="rounded-xl border border-border bg-background px-6 py-2.5 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                            disabled={industryFormLoading}
-                          >
-                            Cancel Edit
-                          </button>
-                        )}
                       </div>
                     </form>
                   </div>
@@ -4137,17 +4191,17 @@ function AdminDashboard() {
             <div className="space-y-6">
               
               {/* 1. Form FIRST at the top */}
-              <div id="career-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
-                <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
-                  <div className="flex items-center gap-2.5">
-                    <div className="rounded-xl bg-primary/10 p-2 text-primary">
-                      {editingJobId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+              <div id="career-form-card" className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-xl shadow-xs w-full">
+                <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-border/60">
+                  <div className="flex items-center gap-2">
+                    <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
+                      {editingJobId !== null ? <Pencil className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                     </div>
                     <div>
-                      <h2 className="text-xl font-bold text-foreground">
+                      <h2 className="text-base sm:text-lg font-bold text-foreground leading-tight">
                         {editingJobId !== null ? "Edit Job Opening" : "Post New Job"}
                       </h2>
-                      <p className="text-xs text-muted-foreground mt-0.5">
+                      <p className="text-[11px] text-muted-foreground">
                         {editingJobId !== null 
                           ? "Update position specifications and applicant criteria." 
                           : "Publish a new career role to attract enterprise talent."}
@@ -4158,7 +4212,7 @@ function AdminDashboard() {
                     <button
                       type="button"
                       onClick={handleCancelJobEdit}
-                      className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
                     >
                       Cancel Editing
                     </button>
@@ -4166,51 +4220,57 @@ function AdminDashboard() {
                 </div>
 
                 {jobFormSuccess && (
-                  <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                  <div className="mb-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-2.5 text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
                     <span>Job opening {editingJobId !== null ? "updated" : "posted"} successfully!</span>
                   </div>
                 )}
 
                 {jobFormError && (
-                  <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4 shrink-0" />
+                  <div className="mb-3 rounded-lg bg-destructive/10 border border-destructive/30 p-2.5 text-xs text-destructive flex items-center gap-2">
+                    <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                     <span>{jobFormError}</span>
                   </div>
                 )}
 
-                <form onSubmit={handleSubmitJob} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <label className="block text-sm font-medium">
-                      Job Title
+                <form onSubmit={handleSubmitJob} className="space-y-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-start">
+                    <div>
+                      <label className="block text-xs font-semibold text-foreground mb-1">
+                        Job Title *
+                      </label>
                       <input
                         type="text"
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
                         placeholder="e.g. Senior Platform Engineer"
                         value={jobTitle}
                         onChange={(e) => setJobTitle(e.target.value)}
                         required
                         disabled={jobFormLoading}
                       />
-                    </label>
+                    </div>
 
-                    <label className="block text-sm font-medium">
-                      Location
+                    <div>
+                      <label className="block text-xs font-semibold text-foreground mb-1">
+                        Location *
+                      </label>
                       <input
                         type="text"
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
                         placeholder="e.g. Chennai / Hybrid, Remote"
                         value={jobLocation}
                         onChange={(e) => setJobLocation(e.target.value)}
                         required
                         disabled={jobFormLoading}
                       />
-                    </label>
+                    </div>
 
-                    <label className="block text-sm font-medium sm:col-span-2 lg:col-span-1">
-                      Job Type
+                    <div>
+                      <label className="block text-xs font-semibold text-foreground mb-1">
+                        Job Type *
+                      </label>
                       <select
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary cursor-pointer"
                         value={jobType}
                         onChange={(e) => setJobType(e.target.value)}
                         required
@@ -4222,26 +4282,39 @@ function AdminDashboard() {
                         <option value="Freelance">Freelance</option>
                         <option value="Internship">Internship</option>
                       </select>
-                    </label>
+                    </div>
                   </div>
 
-                  <label className="block text-sm font-medium">
-                    Job Description
+                  <div>
+                    <label className="block text-xs font-semibold text-foreground mb-1">
+                      Job Description
+                    </label>
                     <textarea
-                      rows={3}
-                      className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-y"
+                      rows={2}
+                      className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
                       placeholder="Key responsibilities, qualifications, and core technical requirements..."
                       value={jobDescription}
                       onChange={(e) => setJobDescription(e.target.value)}
                       disabled={jobFormLoading}
                     />
-                  </label>
+                  </div>
 
-                  <div className="pt-1 flex flex-col sm:flex-row gap-3">
+                  {/* Action buttons (Right-aligned compact bar) */}
+                  <div className="flex items-center justify-end gap-2 pt-1 border-t border-border/50">
+                    {editingJobId !== null && (
+                      <button
+                        type="button"
+                        onClick={handleCancelJobEdit}
+                        className="rounded-lg border border-border bg-background px-3.5 py-1.5 text-xs font-semibold text-foreground hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                        disabled={jobFormLoading}
+                      >
+                        Cancel Edit
+                      </button>
+                    )}
                     <button
                       type="submit"
                       disabled={jobFormLoading || !jobTitle || !jobLocation}
-                      className="flex-1 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center shadow-md"
+                      className="rounded-lg bg-primary px-5 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer text-center shadow-xs disabled:opacity-50"
                     >
                       {jobFormLoading 
                         ? "Saving..." 
@@ -4249,16 +4322,6 @@ function AdminDashboard() {
                           ? "Update Job Opening" 
                           : "Publish Job Opening"}
                     </button>
-                    {editingJobId !== null && (
-                      <button
-                        type="button"
-                        onClick={handleCancelJobEdit}
-                        className="rounded-xl border border-border bg-background px-6 py-2.5 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                        disabled={jobFormLoading}
-                      >
-                        Cancel Edit
-                      </button>
-                    )}
                   </div>
                 </form>
               </div>
@@ -4374,17 +4437,17 @@ function AdminDashboard() {
             <div className="space-y-6">
               
               {/* 1. Form FIRST at the top */}
-              <div id="blog-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
-                <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
-                  <div className="flex items-center gap-2.5">
-                    <div className="rounded-xl bg-primary/10 p-2 text-primary">
-                      {editingBlogId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+              <div id="blog-form-card" className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-xl shadow-xs w-full">
+                <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-border/60">
+                  <div className="flex items-center gap-2">
+                    <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
+                      {editingBlogId !== null ? <Pencil className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                     </div>
                     <div>
-                      <h2 className="text-xl font-bold text-foreground">
+                      <h2 className="text-base sm:text-lg font-bold text-foreground leading-tight">
                         {editingBlogId !== null ? "Edit Article" : "Write Article"}
                       </h2>
-                      <p className="text-xs text-muted-foreground mt-0.5">
+                      <p className="text-[11px] text-muted-foreground">
                         {editingBlogId !== null 
                           ? "Update article copy, cover image, and structured sections." 
                           : "Publish engineering perspectives, architectures, and tech essays."}
@@ -4395,7 +4458,7 @@ function AdminDashboard() {
                     <button
                       type="button"
                       onClick={handleCancelBlogEdit}
-                      className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
                     >
                       Cancel Editing
                     </button>
@@ -4403,81 +4466,91 @@ function AdminDashboard() {
                 </div>
 
                 {blogFormSuccess && (
-                  <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                  <div className="mb-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-2.5 text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
                     <span>Blog post {editingBlogId !== null ? "updated" : "published"} successfully!</span>
                   </div>
                 )}
 
                 {blogFormError && (
-                  <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4 shrink-0" />
+                  <div className="mb-3 rounded-lg bg-destructive/10 border border-destructive/30 p-2.5 text-xs text-destructive flex items-center gap-2">
+                    <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                     <span>{blogFormError}</span>
                   </div>
                 )}
 
-                <form onSubmit={handleSubmitBlog} className="space-y-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <label className="block text-sm font-medium">
-                      Article Title
-                      <input
-                        type="text"
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. Strangler-fig migrations that finish"
-                        value={blogTitle}
-                        onChange={(e) => setBlogTitle(e.target.value)}
-                        required
-                        disabled={blogFormLoading}
-                      />
-                    </label>
+                <form onSubmit={handleSubmitBlog} className="space-y-3">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-start">
+                    <div className="space-y-2">
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1">
+                          Article Title *
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          placeholder="e.g. Strangler-fig migrations that finish"
+                          value={blogTitle}
+                          onChange={(e) => setBlogTitle(e.target.value)}
+                          required
+                          disabled={blogFormLoading}
+                        />
+                      </div>
 
-                    <label className="block text-sm font-medium">
-                      Tag / Category
-                      <input
-                        type="text"
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. Architecture, Data, AI"
-                        value={blogTag}
-                        onChange={(e) => setBlogTag(e.target.value)}
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1">
+                          Tag / Category *
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          placeholder="e.g. Architecture, Data, AI"
+                          value={blogTag}
+                          onChange={(e) => setBlogTag(e.target.value)}
+                          required
+                          disabled={blogFormLoading}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <ImageUploadField
+                        label="Cover Image"
+                        value={blogImage}
+                        onChange={setBlogImage}
+                        disabled={blogFormLoading}
+                        recommendedDimensions="1200 × 675 px (16:9)"
+                        compact={true}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-foreground mb-1">
+                        Excerpt / Short Description *
+                      </label>
+                      <textarea
+                        rows={3}
+                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                        placeholder="Brief summary shown in the articles feed grid..."
+                        value={blogDesc}
+                        onChange={(e) => setBlogDesc(e.target.value)}
                         required
                         disabled={blogFormLoading}
                       />
-                    </label>
+                    </div>
                   </div>
 
-                  <ImageUploadField
-                    label="Cover Image"
-                    value={blogImage}
-                    onChange={setBlogImage}
-                    disabled={blogFormLoading}
-                    recommendedDimensions="1200 × 675 px (16:9 Landscape)"
-                    helperText="Recommended size: 1200 × 675 px (16:9 aspect ratio). Auto-scaled & cropped for card feeds and article headers."
-                  />
-
-                  <label className="block text-sm font-medium">
-                    Excerpt / Short Description
-                    <textarea
-                      rows={2}
-                      className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
-                      placeholder="Brief summary shown in the articles feed grid..."
-                      value={blogDesc}
-                      onChange={(e) => setBlogDesc(e.target.value)}
-                      required
-                      disabled={blogFormLoading}
-                    />
-                  </label>
-
                   {/* Content Sections Editor */}
-                  <div className="border-t border-border/60 pt-5 space-y-4">
+                  <div className="border-t border-border/60 pt-3 space-y-2.5">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-sm font-bold text-foreground">Structured Article Details</h3>
-                        <p className="text-xs text-muted-foreground mt-0.5">Add story sections with optional headings and images.</p>
+                        <h3 className="text-xs font-bold text-foreground">Structured Article Details</h3>
+                        <p className="text-[10px] text-muted-foreground">Add story sections with optional headings and images.</p>
                       </div>
                       <button
                         type="button"
                         onClick={handleAddBlogSection}
-                        className="inline-flex items-center gap-1 rounded-lg border border-primary/20 bg-primary/5 px-2.5 py-1.5 text-xs font-semibold text-primary hover:bg-primary hover:text-white transition-all cursor-pointer"
+                        className="inline-flex items-center gap-1 rounded-md border border-primary/20 bg-primary/5 px-2 py-1 text-xs font-semibold text-primary hover:bg-primary hover:text-white transition-all cursor-pointer"
                         disabled={blogFormLoading}
                       >
                         <Plus className="h-3 w-3" />
@@ -4485,16 +4558,16 @@ function AdminDashboard() {
                       </button>
                     </div>
 
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       {blogSections.map((sec, idx) => (
-                        <div key={idx} className="p-4 rounded-xl border border-border/80 bg-background/50 space-y-3 relative">
+                        <div key={idx} className="p-2.5 rounded-lg border border-border/80 bg-background/50 space-y-2 relative">
                           <div className="flex items-center justify-between">
-                            <span className="text-xs font-semibold text-muted-foreground uppercase">Section #{idx + 1}</span>
+                            <span className="text-[10px] font-semibold text-muted-foreground uppercase">Section #{idx + 1}</span>
                             {blogSections.length > 1 && (
                               <button
                                 type="button"
                                 onClick={() => handleRemoveBlogSection(idx)}
-                                className="text-xs font-semibold text-rose-400 hover:text-rose-300 transition-all cursor-pointer"
+                                className="text-[11px] font-semibold text-rose-400 hover:text-rose-300 transition-all cursor-pointer"
                                 disabled={blogFormLoading}
                               >
                                 Remove
@@ -4502,47 +4575,67 @@ function AdminDashboard() {
                             )}
                           </div>
 
-                          <label className="block text-xs font-medium">
-                            Section Heading (Optional)
-                            <input
-                              type="text"
-                              className="mt-1 w-full rounded-lg border border-input bg-background px-3 py-2 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                              placeholder="Heading for this block..."
-                              value={sec.heading}
-                              onChange={(e) => handleUpdateBlogSection(idx, "heading", e.target.value)}
-                              disabled={blogFormLoading}
-                            />
-                          </label>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 items-start">
+                            <div>
+                              <label className="block text-[11px] font-semibold text-foreground mb-0.5">
+                                Section Heading (Optional)
+                              </label>
+                              <input
+                                type="text"
+                                className="w-full rounded-md border border-input bg-background px-2.5 py-1 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                                placeholder="Heading for this block..."
+                                value={sec.heading}
+                                onChange={(e) => handleUpdateBlogSection(idx, "heading", e.target.value)}
+                                disabled={blogFormLoading}
+                              />
+                            </div>
 
-                          <ImageUploadField
-                            label="Section Image (Optional)"
-                            value={sec.image}
-                            onChange={(val) => handleUpdateBlogSection(idx, "image", val)}
-                            disabled={blogFormLoading}
-                          />
+                            <div>
+                              <ImageUploadField
+                                label="Section Image (Optional)"
+                                value={sec.image}
+                                onChange={(val) => handleUpdateBlogSection(idx, "image", val)}
+                                disabled={blogFormLoading}
+                                compact={true}
+                              />
+                            </div>
+                          </div>
 
-                          <label className="block text-xs font-medium">
-                            Story / Story Text
+                          <div>
+                            <label className="block text-[11px] font-semibold text-foreground mb-0.5">
+                              Story / Narrative *
+                            </label>
                             <textarea
-                              rows={4}
-                              className="mt-1 w-full rounded-lg border border-input bg-background px-3 py-2 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                              rows={2}
+                              className="w-full rounded-md border border-input bg-background px-2.5 py-1 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
                               placeholder="Story paragraphs..."
                               value={sec.story}
                               onChange={(e) => handleUpdateBlogSection(idx, "story", e.target.value)}
                               required
                               disabled={blogFormLoading}
                             />
-                          </label>
+                          </div>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                  {/* Action buttons (Right-aligned compact bar) */}
+                  <div className="flex items-center justify-end gap-2 pt-1 border-t border-border/50">
+                    {editingBlogId !== null && (
+                      <button
+                        type="button"
+                        onClick={handleCancelBlogEdit}
+                        className="rounded-lg border border-border bg-background px-3.5 py-1.5 text-xs font-semibold text-foreground hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                        disabled={blogFormLoading}
+                      >
+                        Cancel Edit
+                      </button>
+                    )}
                     <button
                       type="submit"
                       disabled={blogFormLoading || !blogTitle || !blogTag || !blogDesc}
-                      className="flex-1 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center shadow-md"
+                      className="rounded-lg bg-primary px-5 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-all cursor-pointer text-center shadow-xs disabled:opacity-50"
                     >
                       {blogFormLoading 
                         ? "Saving..." 
@@ -4550,16 +4643,6 @@ function AdminDashboard() {
                           ? "Update Article" 
                           : "Publish Article"}
                     </button>
-                    {editingBlogId !== null && (
-                      <button
-                        type="button"
-                        onClick={handleCancelBlogEdit}
-                        className="rounded-xl border border-border bg-background px-6 py-2.5 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                        disabled={blogFormLoading}
-                      >
-                        Cancel Edit
-                      </button>
-                    )}
                   </div>
                 </form>
               </div>

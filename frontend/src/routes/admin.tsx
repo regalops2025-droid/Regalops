@@ -5,7 +5,8 @@ import {
   Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen, 
   Compass, Bell, MessageSquare, Copy, Check, Search, LayoutGrid, List, Send, Filter, 
   FileText, Sun, Moon, Download, CheckCircle2, Clock, Sparkles, Share2, Users, 
-  ArrowUpRight, SlidersHorizontal, AlertCircle, Eye, ChevronRight
+  ArrowUpRight, SlidersHorizontal, AlertCircle, Eye, ChevronRight, LayoutDashboard,
+  Zap, Activity, ShieldCheck, ArrowRight, TrendingUp
 } from "lucide-react";
 import { ImageUploadField } from "@/components/admin/image-upload-field";
 
@@ -31,7 +32,7 @@ export const Route = createFileRoute("/admin")({
 
 function AdminDashboard() {
   const [admin, setAdmin] = useState<any>(null);
-  const [activeTab, setActiveTab] = useState<"enquiries" | "solutions" | "technologies" | "services" | "clients" | "careers" | "blogs" | "applications">("enquiries");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "enquiries" | "solutions" | "technologies" | "services" | "clients" | "careers" | "blogs" | "applications">("dashboard");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   
   // Theme state (Executive Dark / Crisp Modern Light)
@@ -1364,6 +1365,17 @@ function AdminDashboard() {
     );
   }
 
+  const refreshAllData = () => {
+    fetchEnquiries();
+    fetchSolutions();
+    fetchTechnologies();
+    fetchServices();
+    fetchClients();
+    fetchJobs();
+    fetchBlogs();
+    fetchApplications();
+  };
+
   // Sidebar navigation component
   const SidebarContent = () => (
     <div className="flex h-full flex-col justify-between bg-zinc-950 text-zinc-200 select-none">
@@ -1384,6 +1396,7 @@ function AdminDashboard() {
         {/* Navigation Items */}
         <nav className="p-3 space-y-1">
           {[
+            { id: "dashboard" as const, label: "Dashboard", icon: LayoutDashboard, count: null, isNotify: false, badgeClass: "" },
             { id: "enquiries" as const, label: "Enquiries", icon: Inbox, count: enquiries.length, isNotify: true, badgeClass: "bg-rose-500/20 text-rose-300 border-rose-500/40" },
             { id: "solutions" as const, label: "Manage Solutions", icon: Layers, count: solutions.length },
             { id: "technologies" as const, label: "Manage Technologies", icon: Cpu, count: techList.length },
@@ -1410,7 +1423,7 @@ function AdminDashboard() {
               >
                 <div className="relative shrink-0 flex items-center justify-center">
                   <Icon className="h-4.5 w-4.5" />
-                  {item.isNotify && item.count > 0 && !isActive && (
+                  {item.isNotify && item.count !== null && item.count > 0 && !isActive && (
                     <span className="absolute -top-1 -right-1 flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
@@ -1418,20 +1431,30 @@ function AdminDashboard() {
                   )}
                 </div>
                 <span className="whitespace-nowrap tracking-tight">{item.label}</span>
-                <span
-                  className={`ml-auto shrink-0 flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${
-                    isActive 
-                      ? "bg-white/20 text-white" 
-                      : item.isNotify && item.count > 0
-                        ? `${item.badgeClass} border shadow-xs`
-                        : "bg-zinc-800 text-zinc-400"
-                  }`}
-                >
-                  {item.isNotify && item.count > 0 && (
-                    <Bell className="h-2.5 w-2.5 shrink-0" />
-                  )}
-                  {item.count}
-                </span>
+                {item.count !== null ? (
+                  <span
+                    className={`ml-auto shrink-0 flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${
+                      isActive 
+                        ? "bg-white/20 text-white" 
+                        : item.isNotify && item.count > 0
+                          ? `${item.badgeClass} border shadow-xs`
+                          : "bg-zinc-800 text-zinc-400"
+                    }`}
+                  >
+                    {item.isNotify && item.count > 0 && (
+                      <Bell className="h-2.5 w-2.5 shrink-0" />
+                    )}
+                    {item.count}
+                  </span>
+                ) : (
+                  <span
+                    className={`ml-auto shrink-0 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                      isActive ? "bg-white/20 text-white" : "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                    }`}
+                  >
+                    Hub
+                  </span>
+                )}
               </button>
             );
           })}
@@ -1515,21 +1538,23 @@ function AdminDashboard() {
                   </span>
                 </div>
                 <h1 className="text-base sm:text-lg font-bold truncate text-foreground tracking-tight">
-                  {activeTab === "enquiries" 
-                    ? "Contact Enquiries" 
-                    : activeTab === "solutions"
-                      ? "Manage Solutions"
-                      : activeTab === "technologies"
-                        ? "Manage Technologies"
-                        : activeTab === "services"
-                          ? "Manage Services"
-                          : activeTab === "clients"
-                            ? "Manage Clients"
-                            : activeTab === "careers"
-                              ? "Manage Careers"
-                              : activeTab === "blogs"
-                                ? "Manage Blogs"
-                                : "Job Applications"}
+                  {activeTab === "dashboard"
+                    ? "Control Center Dashboard"
+                    : activeTab === "enquiries" 
+                      ? "Contact Enquiries" 
+                      : activeTab === "solutions"
+                        ? "Manage Solutions"
+                        : activeTab === "technologies"
+                          ? "Manage Technologies"
+                          : activeTab === "services"
+                            ? "Manage Services"
+                            : activeTab === "clients"
+                              ? "Manage Clients"
+                              : activeTab === "careers"
+                                ? "Manage Careers"
+                                : activeTab === "blogs"
+                                  ? "Manage Blogs"
+                                  : "Job Applications"}
                 </h1>
               </div>
             </div>
@@ -1654,17 +1679,19 @@ function AdminDashboard() {
             {/* Live Site Preview Link */}
             <a
               href={
-                activeTab === "clients"
-                  ? "/clients"
-                  : activeTab === "solutions"
-                    ? "/solutions"
-                    : activeTab === "technologies"
-                      ? "/technologies"
-                      : activeTab === "careers" || activeTab === "applications"
-                        ? "/career"
-                        : activeTab === "blogs"
-                          ? "/blog"
-                          : "/clients"
+                activeTab === "dashboard"
+                  ? "/"
+                  : activeTab === "clients"
+                    ? "/clients"
+                    : activeTab === "solutions"
+                      ? "/solutions"
+                      : activeTab === "technologies"
+                        ? "/technologies"
+                        : activeTab === "careers" || activeTab === "applications"
+                          ? "/career"
+                          : activeTab === "blogs"
+                            ? "/blog"
+                            : "/contact"
               }
               target="_blank"
               rel="noopener noreferrer"
@@ -1745,6 +1772,16 @@ function AdminDashboard() {
             {(() => {
               const metrics = [
                 { 
+                  id: "dashboard" as const, 
+                  label: "Dashboard", 
+                  count: 8, 
+                  loading: false, 
+                  icon: LayoutDashboard, 
+                  badge: "Master Hub",
+                  iconBg: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/25",
+                  activeBorder: "border-emerald-500",
+                },
+                { 
                   id: "enquiries" as const, 
                   label: "Enquiries", 
                   count: enquiries.length, 
@@ -1824,8 +1861,8 @@ function AdminDashboard() {
                 <div
                   className={`
                     ${mobileStatsView === "carousel" 
-                      ? "flex overflow-x-auto no-scrollbar scroll-smooth snap-x gap-2.5 pb-1 xl:grid xl:grid-cols-8 xl:gap-3 xl:overflow-visible" 
-                      : "grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-2.5 sm:gap-3"
+                      ? "flex overflow-x-auto no-scrollbar scroll-smooth snap-x gap-2.5 pb-1 xl:grid xl:grid-cols-9 xl:gap-2.5 xl:overflow-visible" 
+                      : "grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-9 gap-2.5 sm:gap-2.5"
                     }
                   `}
                 >
@@ -1900,6 +1937,479 @@ function AdminDashboard() {
           </div>
 
           <div id="admin-tab-content" className="scroll-mt-6" />
+
+          {/* Active Tab Panel Rendering */}
+          {activeTab === "dashboard" && (
+            <div className="space-y-4 animate-in fade-in-50 duration-200">
+              {/* 1. Hero Welcome & Telemetry Banner */}
+              <div className="relative overflow-hidden rounded-3xl border border-border/80 bg-gradient-to-br from-card via-surface to-card p-5 sm:p-6 lg:p-7 shadow-lg">
+                <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
+                <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-amber-500/10 blur-3xl" />
+                
+                <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                  <div>
+                    <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary mb-2 shadow-2xs">
+                      <Sparkles className="h-3.5 w-3.5" />
+                      <span>Master Control Hub • Live Operations</span>
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
+                      Welcome back, {admin.name || "Administrator"}
+                    </h2>
+                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground max-w-2xl leading-relaxed">
+                      Centralized operations and content management overview across all 8 live modules: client inquiries, hiring pipeline, service catalog, tech stack, and publications.
+                    </p>
+
+                    {/* Real-time Telemetry Status Pills */}
+                    <div className="mt-3.5 flex flex-wrap items-center gap-2 text-xs">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 px-2.5 py-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        SQLite Database Live
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-500/10 border border-sky-500/25 px-2.5 py-1 text-[11px] font-semibold text-sky-600 dark:text-sky-400">
+                        <Activity className="h-3 w-3" />
+                        Hostinger Production Synced
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/25 px-2.5 py-1 text-[11px] font-semibold text-amber-600 dark:text-amber-400">
+                        <ShieldCheck className="h-3 w-3" />
+                        Zero-Trust Auth Validated
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Summary Metric Pill & Quick Sync */}
+                  <div className="flex flex-col sm:flex-row lg:flex-col items-start lg:items-end gap-2.5 shrink-0">
+                    <div className="rounded-2xl border border-border/80 bg-background/80 backdrop-blur-md p-3.5 shadow-sm text-left lg:text-right min-w-[210px]">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block">Total Records Managed</span>
+                      <span className="text-2xl font-black text-foreground">
+                        {enquiries.length + applications.length + solutions.length + techList.length + serviceList.length + clientList.length + jobList.length + blogList.length}
+                      </span>
+                      <span className="text-[11px] text-muted-foreground block mt-0.5">Across 8 Live Modules</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={refreshAllData}
+                      className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:opacity-95 transition-all shadow-xs cursor-pointer"
+                    >
+                      <RefreshCw className={`h-3.5 w-3.5 ${enquiriesLoading || solutionsLoading || techLoading ? "animate-spin" : ""}`} />
+                      <span>Sync All Data</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. Fast Navigation & Action Launcher */}
+              <div className="rounded-2xl border border-border/80 bg-card p-3.5 sm:p-4 shadow-xs">
+                <div className="flex items-center justify-between mb-2.5">
+                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+                    <Zap className="h-3.5 w-3.5 text-amber-500" />
+                    Quick Navigation Shortcuts
+                  </span>
+                  <span className="text-[11px] text-muted-foreground">Click to jump directly to any tab</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => setActiveTab("enquiries")}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-semibold transition-all cursor-pointer"
+                  >
+                    <Inbox className="h-3.5 w-3.5" />
+                    <span>Enquiries ({enquiries.length})</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("applications")}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 text-xs font-semibold transition-all cursor-pointer"
+                  >
+                    <FileText className="h-3.5 w-3.5" />
+                    <span>Job Applications ({applications.length})</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("solutions")}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-violet-500/30 bg-violet-500/10 hover:bg-violet-500/20 text-violet-600 dark:text-violet-400 text-xs font-semibold transition-all cursor-pointer"
+                  >
+                    <Layers className="h-3.5 w-3.5" />
+                    <span>Solutions ({solutions.length})</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("technologies")}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 text-xs font-semibold transition-all cursor-pointer"
+                  >
+                    <Cpu className="h-3.5 w-3.5" />
+                    <span>Tech Stack ({techList.length})</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("services")}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold transition-all cursor-pointer"
+                  >
+                    <Compass className="h-3.5 w-3.5" />
+                    <span>Services ({serviceList.length})</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("clients")}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-orange-500/30 bg-orange-500/10 hover:bg-orange-500/20 text-orange-600 dark:text-orange-400 text-xs font-semibold transition-all cursor-pointer"
+                  >
+                    <Users className="h-3.5 w-3.5" />
+                    <span>Clients ({clientList.length})</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("careers")}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-lime-500/30 bg-lime-500/10 hover:bg-lime-500/20 text-lime-600 dark:text-lime-400 text-xs font-semibold transition-all cursor-pointer"
+                  >
+                    <Briefcase className="h-3.5 w-3.5" />
+                    <span>Careers ({jobList.length})</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("blogs")}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-pink-500/30 bg-pink-500/10 hover:bg-pink-500/20 text-pink-600 dark:text-pink-400 text-xs font-semibold transition-all cursor-pointer"
+                  >
+                    <BookOpen className="h-3.5 w-3.5" />
+                    <span>Blogs ({blogList.length})</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* 3. All Tabs & Modules Master Navigation Grid */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div>
+                    <h3 className="text-base sm:text-lg font-bold tracking-tight text-foreground">
+                      All Portal Modules &amp; Tabs
+                    </h3>
+                    <p className="text-xs text-muted-foreground">
+                      Select any category below to manage its live contents, edit records, or create new entries.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
+                  {/* Module 1: Enquiries */}
+                  <div
+                    onClick={() => setActiveTab("enquiries")}
+                    className="group relative rounded-2xl border border-border/80 bg-card p-4 sm:p-4.5 shadow-xs hover:border-rose-500/50 hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between hover:-translate-y-0.5"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="h-10 w-10 rounded-xl bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/25 flex items-center justify-center group-hover:scale-105 transition-transform">
+                          <Inbox className="h-5 w-5" />
+                        </div>
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/25">
+                          {enquiries.length} Messages
+                        </span>
+                      </div>
+                      <h4 className="text-base font-bold text-foreground group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+                        Client Enquiries
+                      </h4>
+                      <p className="mt-1 text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                        Review inbound technical requests, consultation leads, email enquiries, and phone call requests.
+                      </p>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-xs font-semibold text-rose-600 dark:text-rose-400">
+                      <span>Manage Enquiries</span>
+                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+
+                  {/* Module 2: Applications */}
+                  <div
+                    onClick={() => setActiveTab("applications")}
+                    className="group relative rounded-2xl border border-border/80 bg-card p-4 sm:p-4.5 shadow-xs hover:border-amber-500/50 hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between hover:-translate-y-0.5"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="h-10 w-10 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 flex items-center justify-center group-hover:scale-105 transition-transform">
+                          <FileText className="h-5 w-5" />
+                        </div>
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25">
+                          {applications.length} Candidates
+                        </span>
+                      </div>
+                      <h4 className="text-base font-bold text-foreground group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                        Job Applications
+                      </h4>
+                      <p className="mt-1 text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                        Candidate resumes, contact details, role applied, and downloadable PDF CV attachments.
+                      </p>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-xs font-semibold text-amber-600 dark:text-amber-400">
+                      <span>Review Applications</span>
+                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+
+                  {/* Module 3: Solutions */}
+                  <div
+                    onClick={() => setActiveTab("solutions")}
+                    className="group relative rounded-2xl border border-border/80 bg-card p-4 sm:p-4.5 shadow-xs hover:border-violet-500/50 hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between hover:-translate-y-0.5"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="h-10 w-10 rounded-xl bg-violet-500/15 text-violet-600 dark:text-violet-400 border border-violet-500/25 flex items-center justify-center group-hover:scale-105 transition-transform">
+                          <Layers className="h-5 w-5" />
+                        </div>
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-violet-500/15 text-violet-600 dark:text-violet-400 border border-violet-500/25">
+                          {solutions.length} Practices
+                        </span>
+                      </div>
+                      <h4 className="text-base font-bold text-foreground group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                        Manage Solutions
+                      </h4>
+                      <p className="mt-1 text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                        Core practice offerings, detailed architecture delivery pod descriptions, and practice imagery.
+                      </p>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-xs font-semibold text-violet-600 dark:text-violet-400">
+                      <span>Manage Solutions</span>
+                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+
+                  {/* Module 4: Technologies */}
+                  <div
+                    onClick={() => setActiveTab("technologies")}
+                    className="group relative rounded-2xl border border-border/80 bg-card p-4 sm:p-4.5 shadow-xs hover:border-cyan-500/50 hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between hover:-translate-y-0.5"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="h-10 w-10 rounded-xl bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border border-cyan-500/25 flex items-center justify-center group-hover:scale-105 transition-transform">
+                          <Cpu className="h-5 w-5" />
+                        </div>
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border border-cyan-500/25">
+                          {techList.length} Stacks
+                        </span>
+                      </div>
+                      <h4 className="text-base font-bold text-foreground group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                        Manage Tech Stack
+                      </h4>
+                      <p className="mt-1 text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                        Architecture registries, certified frameworks, runtime libraries, and production badges.
+                      </p>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-xs font-semibold text-cyan-600 dark:text-cyan-400">
+                      <span>Manage Tech Stack</span>
+                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+
+                  {/* Module 5: Services */}
+                  <div
+                    onClick={() => setActiveTab("services")}
+                    className="group relative rounded-2xl border border-border/80 bg-card p-4 sm:p-4.5 shadow-xs hover:border-blue-500/50 hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between hover:-translate-y-0.5"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="h-10 w-10 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/25 flex items-center justify-center group-hover:scale-105 transition-transform">
+                          <Compass className="h-5 w-5" />
+                        </div>
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/25">
+                          {serviceList.length} Services
+                        </span>
+                      </div>
+                      <h4 className="text-base font-bold text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        Manage Services
+                      </h4>
+                      <p className="mt-1 text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                        Homepage service carousel offerings, strategic consulting, infrastructure build, and cloud operations.
+                      </p>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-xs font-semibold text-blue-600 dark:text-blue-400">
+                      <span>Manage Services</span>
+                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+
+                  {/* Module 6: Clients */}
+                  <div
+                    onClick={() => setActiveTab("clients")}
+                    className="group relative rounded-2xl border border-border/80 bg-card p-4 sm:p-4.5 shadow-xs hover:border-orange-500/50 hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between hover:-translate-y-0.5"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="h-10 w-10 rounded-xl bg-orange-500/15 text-orange-600 dark:text-orange-400 border border-orange-500/25 flex items-center justify-center group-hover:scale-105 transition-transform">
+                          <Users className="h-5 w-5" />
+                        </div>
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-orange-500/15 text-orange-600 dark:text-orange-400 border border-orange-500/25">
+                          {clientList.length} Partners
+                        </span>
+                      </div>
+                      <h4 className="text-base font-bold text-foreground group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                        Manage Clients
+                      </h4>
+                      <p className="mt-1 text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                        Fortune 1000 logos, case studies, enterprise testimonials, industry badges, and partner categories.
+                      </p>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-xs font-semibold text-orange-600 dark:text-orange-400">
+                      <span>Manage Clients</span>
+                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+
+                  {/* Module 7: Careers */}
+                  <div
+                    onClick={() => setActiveTab("careers")}
+                    className="group relative rounded-2xl border border-border/80 bg-card p-4 sm:p-4.5 shadow-xs hover:border-lime-500/50 hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between hover:-translate-y-0.5"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="h-10 w-10 rounded-xl bg-lime-500/15 text-lime-600 dark:text-lime-400 border border-lime-500/25 flex items-center justify-center group-hover:scale-105 transition-transform">
+                          <Briefcase className="h-5 w-5" />
+                        </div>
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-lime-500/15 text-lime-600 dark:text-lime-400 border border-lime-500/25">
+                          {jobList.length} Open Roles
+                        </span>
+                      </div>
+                      <h4 className="text-base font-bold text-foreground group-hover:text-lime-600 dark:group-hover:text-lime-400 transition-colors">
+                        Manage Careers
+                      </h4>
+                      <p className="mt-1 text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                        Engineering requisitions, senior developer vacancies, experience levels, and office locations.
+                      </p>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-xs font-semibold text-lime-600 dark:text-lime-400">
+                      <span>Manage Careers</span>
+                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+
+                  {/* Module 8: Blogs */}
+                  <div
+                    onClick={() => setActiveTab("blogs")}
+                    className="group relative rounded-2xl border border-border/80 bg-card p-4 sm:p-4.5 shadow-xs hover:border-pink-500/50 hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between hover:-translate-y-0.5"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="h-10 w-10 rounded-xl bg-pink-500/15 text-pink-600 dark:text-pink-400 border border-pink-500/25 flex items-center justify-center group-hover:scale-105 transition-transform">
+                          <BookOpen className="h-5 w-5" />
+                        </div>
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-pink-500/15 text-pink-600 dark:text-pink-400 border border-pink-500/25">
+                          {blogList.length} Articles
+                        </span>
+                      </div>
+                      <h4 className="text-base font-bold text-foreground group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
+                        Manage Blogs
+                      </h4>
+                      <p className="mt-1 text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                        Engineering articles, tech reviews, cloud post-mortems, author tags, and publishing dates.
+                      </p>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-xs font-semibold text-pink-600 dark:text-pink-400">
+                      <span>Manage Blogs</span>
+                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. Recent Activity & Feeds (2-Column Split) */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {/* Recent Enquiries Preview */}
+                <div className="rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs">
+                  <div className="flex items-center justify-between pb-3 border-b border-border/60 mb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="h-7 w-7 rounded-lg bg-rose-500/15 text-rose-600 dark:text-rose-400 flex items-center justify-center">
+                        <Inbox className="h-4 w-4" />
+                      </div>
+                      <h4 className="text-sm font-bold text-foreground">Recent Client Inquiries</h4>
+                    </div>
+                    <button
+                      onClick={() => setActiveTab("enquiries")}
+                      className="text-xs font-semibold text-primary hover:underline flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>View All ({enquiries.length})</span>
+                      <ChevronRight className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+
+                  {enquiries.length === 0 ? (
+                    <div className="py-8 text-center text-xs text-muted-foreground">
+                      No inquiries recorded yet.
+                    </div>
+                  ) : (
+                    <div className="space-y-2.5">
+                      {enquiries.slice(0, 3).map((item) => (
+                        <div
+                          key={item.id}
+                          onClick={() => setActiveTab("enquiries")}
+                          className="p-3 rounded-xl border border-border/60 bg-surface/50 hover:bg-surface hover:border-primary/40 transition-all cursor-pointer flex items-center justify-between"
+                        >
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs font-bold text-foreground truncate">
+                                {[item.first_name, item.last_name].filter(Boolean).join(" ") || "Prospect Lead"}
+                              </span>
+                              {item.service && (
+                                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-primary/10 text-primary truncate max-w-[120px]">
+                                  {item.service}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[11px] text-muted-foreground truncate mt-0.5">
+                              {item.email || item.mobile || "No contact info provided"}
+                            </p>
+                          </div>
+                          <span className="text-[10px] text-muted-foreground shrink-0 ml-2">
+                            {item.created_at ? new Date(item.created_at).toLocaleDateString() : "Recent"}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Recent Applications Preview */}
+                <div className="rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs">
+                  <div className="flex items-center justify-between pb-3 border-b border-border/60 mb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="h-7 w-7 rounded-lg bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+                        <FileText className="h-4 w-4" />
+                      </div>
+                      <h4 className="text-sm font-bold text-foreground">Recent Candidate Submissions</h4>
+                    </div>
+                    <button
+                      onClick={() => setActiveTab("applications")}
+                      className="text-xs font-semibold text-primary hover:underline flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>View All ({applications.length})</span>
+                      <ChevronRight className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+
+                  {applications.length === 0 ? (
+                    <div className="py-8 text-center text-xs text-muted-foreground">
+                      No candidate applications received yet.
+                    </div>
+                  ) : (
+                    <div className="space-y-2.5">
+                      {applications.slice(0, 3).map((item) => (
+                        <div
+                          key={item.id}
+                          onClick={() => setActiveTab("applications")}
+                          className="p-3 rounded-xl border border-border/60 bg-surface/50 hover:bg-surface hover:border-amber-500/40 transition-all cursor-pointer flex items-center justify-between"
+                        >
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs font-bold text-foreground truncate">
+                                {item.first_name || "Applicant"}
+                              </span>
+                              {item.job_title && (
+                                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 truncate max-w-[140px]">
+                                  {item.job_title}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[11px] text-muted-foreground truncate mt-0.5">
+                              {item.email || item.mobile}
+                            </p>
+                          </div>
+                          <span className="text-[10px] text-muted-foreground shrink-0 ml-2">
+                            {item.created_at ? new Date(item.created_at).toLocaleDateString() : "Recent"}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Active Tab Panel Rendering */}
           {activeTab === "enquiries" && (() => {

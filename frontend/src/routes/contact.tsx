@@ -34,7 +34,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 const field =
-  "mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary";
+  "mt-1 w-full rounded-xl border border-input bg-background px-3 py-1.5 sm:py-2 text-xs sm:text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary/20";
 
 function Contact() {
   const { jobId, jobTitle } = Route.useSearch();
@@ -183,224 +183,164 @@ function Contact() {
   };
 
   return (
-    <SiteLayout>
-      <PageHero
-        eyebrow={jobTitle ? "Careers" : "Contact us"}
-        title={jobTitle ? `Apply for ${jobTitle}` : "Start with a technical conversation"}
-        titleClassName="max-w-none text-xl xs:text-2xl sm:text-3xl font-bold tracking-tight text-left break-words"
-        containerClassName="max-w-[1440px] px-4 sm:px-6 lg:px-8"
-        description={
-          jobTitle
-            ? "Submit your details and CV/Resume below to apply. Our engineering leads will review it shortly."
-            : undefined
-        }
-        descriptionClassName="max-w-none text-left break-words"
-      />
-      <Section className="w-full max-w-[1440px] px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5">
-        {/* Full Screen Width 2-Column Split: Left Image Card, Right Form */}
-        <div className="w-full space-y-3 sm:space-y-4">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5 xl:gap-6 items-stretch w-full">
-            
-            {/* LEFT COLUMN: Visual Image Card & Executive Contact Details */}
-            <div className="lg:col-span-5 relative overflow-hidden rounded-3xl bg-neutral-950 text-white border border-neutral-800/80 shadow-2xl flex flex-col justify-between min-h-[460px] lg:min-h-full">
-              {/* Image Background */}
-              <div className="absolute inset-0 z-0">
-                <img
-                  src="/contact-handshake.jpg"
-                  alt="Regal OPs Strategic Engineering Partnership"
-                  className="h-full w-full object-cover object-center brightness-[0.58] contrast-[1.1] scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/95 via-neutral-950/50 to-neutral-950/75" />
-                <div className="absolute inset-0 bg-[#07192F]/30 mix-blend-multiply" />
+    <SiteLayout hideFooter noScroll hideStickyActions>
+      <section className="hero-glow flex-1 min-h-0 w-full flex items-center justify-center py-2 sm:py-3 lg:py-4 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="w-full max-w-[1440px] mx-auto overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-2xl grid grid-cols-1 lg:grid-cols-12 items-stretch max-h-[calc(100dvh-120px)]">
+          
+          {/* LEFT COLUMN: Visual Image Card & Executive Contact Details */}
+          <div className="lg:col-span-5 relative overflow-hidden bg-neutral-950 text-white flex flex-col justify-between p-5 sm:p-6 lg:p-7 space-y-4">
+            {/* Image Background */}
+            <div className="absolute inset-0 z-0">
+              <img
+                src="/contact-handshake.jpg"
+                alt="Regal OPs Strategic Engineering Partnership"
+                className="h-full w-full object-cover object-center brightness-[0.52] contrast-[1.1] scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-neutral-950/60" />
+              <div className="absolute inset-0 bg-[#07192F]/40 mix-blend-multiply" />
+            </div>
+
+            {/* Top Details */}
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3 py-0.5 backdrop-blur-md mb-2 sm:mb-2.5">
+                <span className="h-2 w-2 rounded-full bg-[#a4c965] animate-pulse" />
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#a4c965]">
+                  {jobTitle ? "Careers Gateway" : "Architecture Consultation"}
+                </span>
+              </div>
+              <h2 className="text-xl sm:text-2xl xl:text-3xl font-extrabold text-white tracking-tight leading-tight">
+                {jobTitle ? (
+                  <>
+                    Join Our Principal <br />
+                    <span className="text-[#a4c965]">Engineering Practice</span>
+                  </>
+                ) : (
+                  <>
+                    Let&apos;s Build Resilient <br />
+                    <span className="text-[#a4c965]">Systems Together</span>
+                  </>
+                )}
+              </h2>
+              <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-sm">
+                {jobTitle
+                  ? "Submit your application directly to our principal engineering leads. Fast-track technical evaluation."
+                  : "Schedule an architectural review with our principal engineers. We dive straight into technical realities."}
+              </p>
+            </div>
+
+            {/* Middle Card: Global Hubs & Direct Contact */}
+            <div className="relative z-10 rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md p-3.5 sm:p-4 space-y-2.5 shadow-lg">
+              <div className="flex items-center gap-2.5">
+                <div className="h-8 w-8 rounded-lg bg-[#555d25] flex items-center justify-center shrink-0 text-white shadow-xs">
+                  <Mail className="h-3.5 w-3.5" />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[9.5px] font-bold uppercase tracking-wider text-neutral-400 block">Direct Engineering Contact</span>
+                  <a href="mailto:Info@regalops.com" className="text-xs sm:text-sm font-bold text-white hover:text-[#a4c965] transition-colors truncate block">
+                    Info@regalops.com
+                  </a>
+                </div>
               </div>
 
-              {/* Top Details */}
-              <div className="relative z-10 p-6 sm:p-8">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="h-2 w-2 rounded-full bg-[#a4c965] animate-pulse" />
-                  <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#a4c965]">
-                    Architecture Consultation
+              <div className="flex items-center gap-2.5 pt-2 border-t border-white/10">
+                <div className="h-8 w-8 rounded-lg bg-neutral-800 flex items-center justify-center shrink-0 text-[#a4c965]">
+                  <MapPin className="h-3.5 w-3.5" />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[9.5px] font-bold uppercase tracking-wider text-neutral-400 block">Global Engineering Hubs</span>
+                  <p className="text-[11px] font-medium text-neutral-200 truncate">
+                    Atlanta, GA &bull; Hyderabad &bull; Warangal
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Trust Pills */}
+            <div className="relative z-10 flex flex-wrap gap-1.5 text-[10.5px] font-medium text-neutral-300">
+              <span className="inline-flex items-center gap-1 rounded-full bg-black/40 border border-white/15 px-2.5 py-0.5 backdrop-blur-sm">
+                &check; 24h SLA Response
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-black/40 border border-white/15 px-2.5 py-0.5 backdrop-blur-sm">
+                &check; 100% NDA Protected
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-black/40 border border-white/15 px-2.5 py-0.5 backdrop-blur-sm">
+                &check; Senior Engineers Only
+              </span>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: Contact / Application Form */}
+          <div className="lg:col-span-7 p-4 sm:p-5 lg:p-6 xl:p-8 flex flex-col justify-center bg-card overflow-y-auto lg:overflow-visible">
+            <form className="space-y-2.5 sm:space-y-3 w-full" onSubmit={handleSubmit}>
+              <div className="border-b border-border/60 pb-2 mb-1">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+                      {jobTitle ? "Career Application" : "Get In Touch"}
+                    </span>
+                    <h1 className="text-lg sm:text-xl xl:text-2xl font-bold tracking-tight text-foreground">
+                      {jobTitle ? `Apply for ${jobTitle}` : "Send an Engineering Enquiry"}
+                    </h1>
+                  </div>
+                  <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
+                    Active On-Call Engineers
                   </span>
                 </div>
-                <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-tight text-left">
-                  Let&apos;s Build Resilient <br />
-                  <span className="text-[#a4c965]">Systems Together</span>
-                </h2>
-                <p className="mt-2.5 text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-sm text-left">
-                  Schedule an architectural review with our principal engineers. We dive straight into technical realities &mdash; zero sales bureaucracy.
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {jobTitle
+                    ? "Fill in your details below and upload your CV/Resume."
+                    : "Tell us about your system architecture, project scope, or technical challenges."}
                 </p>
               </div>
 
-              {/* Bottom Card Content */}
-              <div className="relative z-10 p-6 sm:p-8 space-y-4">
-                <div className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md p-4 space-y-3 shadow-lg">
-                  <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 rounded-xl bg-[#555d25] flex items-center justify-center shrink-0 text-white shadow-sm">
-                      <Mail className="h-4 w-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 block">Direct Engineering Contact</span>
-                      <a href="mailto:Info@regalops.com" className="text-sm font-bold text-white hover:text-[#a4c965] transition-colors truncate block">
-                        Info@regalops.com
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3 pt-2.5 border-t border-white/10">
-                    <div className="h-9 w-9 rounded-xl bg-neutral-800 flex items-center justify-center shrink-0 text-[#a4c965]">
-                      <MapPin className="h-4 w-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 block">Global Hubs</span>
-                      <p className="text-xs font-medium text-neutral-200 truncate">
-                        Atlanta, GA, USA &bull; Hyderabad &bull; Warangal
-                      </p>
-                    </div>
-                  </div>
+              {status === "success" && (
+                <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-2.5 text-xs sm:text-sm text-emerald-600">
+                  {jobTitle
+                    ? "Job application submitted successfully! Our recruiters will review your CV shortly."
+                    : "Enquiry sent successfully! A senior engineer will review it and reply within one business day."}
                 </div>
-
-                <div className="flex flex-wrap gap-2 text-[11px] font-medium text-neutral-300">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-black/40 border border-white/15 px-3 py-1 backdrop-blur-sm">
-                    &check; 24-Hour SLA Response
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-black/40 border border-white/15 px-3 py-1 backdrop-blur-sm">
-                    &check; 100% NDA Protected
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-black/40 border border-white/15 px-3 py-1 backdrop-blur-sm">
-                    &check; Senior Engineers Only
-                  </span>
+              )}
+              {status === "error" && (
+                <div className="rounded-xl bg-destructive/10 border border-destructive/30 p-2.5 text-xs sm:text-sm text-destructive">
+                  {errorMsg}
                 </div>
-              </div>
-            </div>
+              )}
 
-            {/* RIGHT COLUMN: Contact / Application Form */}
-            <div className="lg:col-span-7">
-              <form className="panel p-5 sm:p-7 lg:p-8 space-y-4 w-full shadow-xl border border-border/80 rounded-3xl bg-surface h-full flex flex-col justify-between" onSubmit={handleSubmit}>
-                <div className="border-b border-border/60 pb-3.5 mb-1.5">
-                  <h2 className="text-lg sm:text-xl font-bold tracking-tight text-foreground text-left">
-                    {jobTitle ? `Submit Application for ${jobTitle}` : "Send an Engineering Enquiry"}
-                  </h2>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {jobTitle
-                      ? "Fill in your details below and upload your CV/Resume."
-                      : "Tell us about your system architecture, project scope, or enterprise technical requirements."}
-                  </p>
-                </div>
-
-                {status === "success" && (
-                  <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
-                    {jobTitle
-                      ? "Job application submitted successfully! Our recruiters will review your CV shortly."
-                      : "Enquiry sent successfully! A senior engineer will review it and reply within one business day."}
-                  </div>
-                )}
-                {status === "error" && (
-                  <div className="rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
-                    {errorMsg}
-                  </div>
-                )}
-
-            {/* Row 1: Full Name & Email Address */}
-            <div className="grid gap-6 sm:grid-cols-2">
-              <label className="block text-sm font-medium text-foreground">
-                Full Name*
-                <input
-                  className={field}
-                  placeholder="e.g. Priya Raman"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  required
-                  disabled={status === "loading"}
-                />
-              </label>
-
-              <label className="block text-sm font-medium text-foreground">
-                Email Address*
-                <input
-                  type="email"
-                  className={field}
-                  placeholder="priya@company.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  disabled={status === "loading"}
-                />
-              </label>
-            </div>
-
-            {jobTitle ? (
-              /* CV upload field for jobs application */
-              <div className="grid gap-6 sm:grid-cols-2">
-                <label className="block text-sm font-medium text-foreground">
-                  Mobile*
-                  <div
-                    className={`relative mt-1.5 flex rounded-xl border bg-background transition-all overflow-hidden ${
-                      mobileTouched && mobileError
-                        ? "border-rose-500 focus-within:border-rose-500 ring-1 ring-rose-500/20"
-                        : mobile.length === 10 && !mobileError
-                          ? "border-emerald-500/70 focus-within:border-emerald-500"
-                          : "border-input focus-within:border-primary"
-                    }`}
-                  >
-                    <span className="inline-flex items-center px-3.5 text-xs font-semibold text-muted-foreground bg-secondary/60 border-r border-border select-none shrink-0">
-                      +91
-                    </span>
-                    <input
-                      type="tel"
-                      inputMode="numeric"
-                      maxLength={10}
-                      pattern="[6-9][0-9]{9}"
-                      className="w-full bg-transparent px-3.5 py-2.5 text-sm outline-none placeholder:text-muted-foreground text-foreground"
-                      placeholder="98765 43210"
-                      value={mobile}
-                      onChange={handleMobileChange}
-                      onBlur={handleMobileBlur}
-                      required
-                      disabled={status === "loading"}
-                    />
-                  </div>
-                  {mobileTouched && mobileError ? (
-                    <p className="mt-1.5 text-xs font-medium text-rose-500 animate-in fade-in">
-                      {mobileError}
-                    </p>
-                  ) : mobile.length === 10 && !mobileError ? (
-                    <p className="mt-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400 animate-in fade-in">
-                      ✓ Valid 10-digit Indian mobile number
-                    </p>
-                  ) : (
-                    <p className="mt-1 text-[11px] text-muted-foreground">
-                      10 digits starting with 6, 7, 8, or 9
-                    </p>
-                  )}
-                </label>
-
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5">
-                    Upload Resume / CV (PDF only, max 5MB)*
-                  </label>
+              {/* Row 1: Full Name & Email Address */}
+              <div className="grid gap-2.5 sm:gap-3 sm:grid-cols-2">
+                <label className="block text-xs font-semibold text-foreground">
+                  Full Name*
                   <input
-                    type="file"
-                    accept=".pdf"
-                    onChange={(e) => setCvFile(e.target.files?.[0] || null)}
+                    className={field}
+                    placeholder="e.g. Priya Raman"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
                     required
                     disabled={status === "loading"}
-                    className="w-full text-sm text-zinc-500
-                      file:mr-4 file:py-2.5 file:px-4
-                      file:rounded-xl file:border-0
-                      file:text-sm file:font-semibold
-                      file:bg-primary file:text-primary-foreground
-                      hover:file:opacity-90 file:cursor-pointer"
                   />
-                </div>
+                </label>
+
+                <label className="block text-xs font-semibold text-foreground">
+                  Email Address*
+                  <input
+                    type="email"
+                    className={field}
+                    placeholder="priya@company.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    disabled={status === "loading"}
+                  />
+                </label>
               </div>
-            ) : (
-              /* Standard enquiry address and comments field */
-              <>
-                <div className="grid gap-6 sm:grid-cols-2">
-                  <label className="block text-sm font-medium text-foreground">
+
+              {jobTitle ? (
+                /* CV upload field for jobs application */
+                <div className="grid gap-2.5 sm:gap-3 sm:grid-cols-2">
+                  <label className="block text-xs font-semibold text-foreground">
                     Mobile*
                     <div
-                      className={`relative mt-1.5 flex rounded-xl border bg-background transition-all overflow-hidden ${
+                      className={`relative mt-1 flex rounded-xl border bg-background transition-all overflow-hidden ${
                         mobileTouched && mobileError
                           ? "border-rose-500 focus-within:border-rose-500 ring-1 ring-rose-500/20"
                           : mobile.length === 10 && !mobileError
@@ -408,7 +348,7 @@ function Contact() {
                             : "border-input focus-within:border-primary"
                       }`}
                     >
-                      <span className="inline-flex items-center px-3.5 text-xs font-semibold text-muted-foreground bg-secondary/60 border-r border-border select-none shrink-0">
+                      <span className="inline-flex items-center px-2.5 text-xs font-semibold text-muted-foreground bg-secondary/60 border-r border-border select-none shrink-0">
                         +91
                       </span>
                       <input
@@ -416,7 +356,7 @@ function Contact() {
                         inputMode="numeric"
                         maxLength={10}
                         pattern="[6-9][0-9]{9}"
-                        className="w-full bg-transparent px-3.5 py-2.5 text-sm outline-none placeholder:text-muted-foreground text-foreground"
+                        className="w-full bg-transparent px-3 py-1.5 sm:py-2 text-xs sm:text-sm outline-none placeholder:text-muted-foreground text-foreground"
                         placeholder="98765 43210"
                         value={mobile}
                         onChange={handleMobileChange}
@@ -425,183 +365,159 @@ function Contact() {
                         disabled={status === "loading"}
                       />
                     </div>
-                    {mobileTouched && mobileError ? (
-                      <p className="mt-1.5 text-xs font-medium text-rose-500 animate-in fade-in">
-                        {mobileError}
-                      </p>
-                    ) : mobile.length === 10 && !mobileError ? (
-                      <p className="mt-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400 animate-in fade-in">
-                        ✓ Valid 10-digit Indian mobile number
-                      </p>
-                    ) : (
-                      <p className="mt-1 text-[11px] text-muted-foreground">
-                        10 digits starting with 6, 7, 8, or 9
-                      </p>
-                    )}
                   </label>
 
-                  <label className="block text-sm font-medium text-foreground">
-                    How can we help you?*
-                    <select
-                      className={field}
-                      value={service}
-                      onChange={(e) => setService(e.target.value)}
+                  <div>
+                    <label className="block text-xs font-semibold text-foreground mb-1">
+                      Upload Resume / CV (PDF, max 5MB)*
+                    </label>
+                    <input
+                      type="file"
+                      accept=".pdf"
+                      onChange={(e) => setCvFile(e.target.files?.[0] || null)}
                       required
                       disabled={status === "loading"}
-                    >
-                      <option value="">-- Select Service Area --</option>
-                      <option value="Enterprise Software">Enterprise Software</option>
-                      <option value="Cloud Migration">Cloud Migration</option>
-                      <option value="Data & Analytics">Data & Analytics</option>
-                      <option value="AI Automation">AI Automation</option>
-                      <option value="Cyber Security">Cyber Security</option>
-                      <option value="Managed Support">Managed Support</option>
-                    </select>
-                  </label>
+                      className="w-full text-xs text-zinc-500
+                        file:mr-3 file:py-1.5 file:px-3
+                        file:rounded-xl file:border-0
+                        file:text-xs file:font-semibold
+                        file:bg-primary file:text-primary-foreground
+                        hover:file:opacity-90 file:cursor-pointer"
+                    />
+                  </div>
                 </div>
+              ) : (
+                /* Standard enquiry address and comments field */
+                <>
+                  <div className="grid gap-2.5 sm:gap-3 sm:grid-cols-2">
+                    <label className="block text-xs font-semibold text-foreground">
+                      Mobile*
+                      <div
+                        className={`relative mt-1 flex rounded-xl border bg-background transition-all overflow-hidden ${
+                          mobileTouched && mobileError
+                            ? "border-rose-500 focus-within:border-rose-500 ring-1 ring-rose-500/20"
+                            : mobile.length === 10 && !mobileError
+                              ? "border-emerald-500/70 focus-within:border-emerald-500"
+                              : "border-input focus-within:border-primary"
+                        }`}
+                      >
+                        <span className="inline-flex items-center px-2.5 text-xs font-semibold text-muted-foreground bg-secondary/60 border-r border-border select-none shrink-0">
+                          +91
+                        </span>
+                        <input
+                          type="tel"
+                          inputMode="numeric"
+                          maxLength={10}
+                          pattern="[6-9][0-9]{9}"
+                          className="w-full bg-transparent px-3 py-1.5 sm:py-2 text-xs sm:text-sm outline-none placeholder:text-muted-foreground text-foreground"
+                          placeholder="98765 43210"
+                          value={mobile}
+                          onChange={handleMobileChange}
+                          onBlur={handleMobileBlur}
+                          required
+                          disabled={status === "loading"}
+                        />
+                      </div>
+                    </label>
 
-                {/* 3-column location row (Zip Code removed) */}
-                <div className="grid gap-6 sm:grid-cols-3">
-                  <label className="block text-sm font-medium text-foreground">
-                    City
-                    <input
-                      className={field}
-                      placeholder="e.g. Chennai"
-                      value={city}
-                      onChange={(e) => setCity(e.target.value)}
+                    <label className="block text-xs font-semibold text-foreground">
+                      How can we help you?*
+                      <select
+                        className={field}
+                        value={service}
+                        onChange={(e) => setService(e.target.value)}
+                        required
+                        disabled={status === "loading"}
+                      >
+                        <option value="">-- Select Service Area --</option>
+                        <option value="Enterprise Software">Enterprise Software</option>
+                        <option value="Cloud Migration">Cloud Migration</option>
+                        <option value="Data & Analytics">Data & Analytics</option>
+                        <option value="AI Automation">AI Automation</option>
+                        <option value="Cyber Security">Cyber Security</option>
+                        <option value="Managed Support">Managed Support</option>
+                      </select>
+                    </label>
+                  </div>
+
+                  {/* 3-column location row */}
+                  <div className="grid gap-2.5 sm:gap-3 sm:grid-cols-3">
+                    <label className="block text-xs font-semibold text-foreground">
+                      City
+                      <input
+                        className={field}
+                        placeholder="e.g. Chennai"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        disabled={status === "loading"}
+                      />
+                    </label>
+
+                    <label className="block text-xs font-semibold text-foreground">
+                      Select State
+                      <select
+                        className={field}
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                        disabled={status === "loading"}
+                      >
+                        <option value="">-- State --</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="California">California</option>
+                        <option value="New York">New York</option>
+                        <option value="Texas">Texas</option>
+                      </select>
+                    </label>
+
+                    <label className="block text-xs font-semibold text-foreground">
+                      Select Country
+                      <select
+                        className={field}
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                        disabled={status === "loading"}
+                      >
+                        <option value="">-- Country --</option>
+                        <option value="India">India</option>
+                        <option value="United States">United States</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                      </select>
+                    </label>
+                  </div>
+
+                  <label className="block text-xs font-semibold text-foreground">
+                    Additional Comments*
+                    <textarea
+                      rows={2}
+                      className={`${field} resize-none`}
+                      placeholder="A short description of the system, timeline, or key technical challenges."
+                      value={comments}
+                      onChange={(e) => setComments(e.target.value)}
+                      required
                       disabled={status === "loading"}
                     />
                   </label>
+                </>
+              )}
 
-                  <label className="block text-sm font-medium text-foreground">
-                    Select State
-                    <select
-                      className={field}
-                      value={state}
-                      onChange={(e) => setState(e.target.value)}
-                      disabled={status === "loading"}
-                    >
-                      <option value="">-- Choose State --</option>
-                      <option value="Tamil Nadu">Tamil Nadu</option>
-                      <option value="Karnataka">Karnataka</option>
-                      <option value="Telangana">Telangana</option>
-                      <option value="Maharashtra">Maharashtra</option>
-                      <option value="Delhi">Delhi</option>
-                      <option value="Georgia">Georgia</option>
-                      <option value="California">California</option>
-                      <option value="New York">New York</option>
-                      <option value="Texas">Texas</option>
-                    </select>
-                  </label>
-
-                  <label className="block text-sm font-medium text-foreground">
-                    Select Country
-                    <select
-                      className={field}
-                      value={country}
-                      onChange={(e) => setCountry(e.target.value)}
-                      disabled={status === "loading"}
-                    >
-                      <option value="">-- Choose Country --</option>
-                      <option value="India">India</option>
-                      <option value="United States">United States</option>
-                      <option value="United Kingdom">United Kingdom</option>
-                      <option value="Canada">Canada</option>
-                      <option value="Australia">Australia</option>
-                    </select>
-                  </label>
-                </div>
-
-                <label className="block text-sm font-medium text-foreground">
-                  Additional Comments*
-                  <textarea
-                    rows={5}
-                    className={field}
-                    placeholder="A short description of the system, timeline, or key technical challenges."
-                    value={comments}
-                    onChange={(e) => setComments(e.target.value)}
-                    required
-                    disabled={status === "loading"}
-                  />
-                </label>
-              </>
-            )}
-
-            <button
-              type="submit"
-              disabled={status === "loading"}
-              className="mt-6 w-full rounded-xl bg-primary px-6 py-3.5 text-base font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 cursor-pointer shadow-md shadow-primary/20 hover:shadow-lg"
-            >
-              {status === "loading" ? "Submitting..." : jobTitle ? "Submit Application" : "Send Enquiry"}
-            </button>
-          </form>
-        </div>
-      </div>
-
-      {/* Office locations & Direct engineering contact: full-width 4-column cards below */}
-      <div className="pt-3 sm:pt-4 border-t border-border/60">
-            <h3 className="text-base sm:text-lg font-bold tracking-tight text-foreground text-left mb-2">
-              Our Offices & Global Engineering Hubs
-            </h3>
-            <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2 text-primary font-semibold text-sm">
-                    <MapPin className="h-4 w-4" />
-                    <span>USA Office</span>
-                  </div>
-                  <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                    8 Chill Sean Street, Dunwoody, Atlanta, Georgia, USA
-                  </p>
-                </div>
-                <span className="mt-2 text-[10px] uppercase font-bold tracking-widest text-primary/80">North America HQ</span>
-              </div>
-
-              <div className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2 text-primary font-semibold text-sm">
-                    <MapPin className="h-4 w-4" />
-                    <span>Hyderabad Office</span>
-                  </div>
-                  <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                    Floor 1, MB3 Block, Raheja Mindspace, Hyderabad, Telangana
-                  </p>
-                </div>
-                <span className="mt-2 text-[10px] uppercase font-bold tracking-widest text-primary/80">Delivery Center</span>
-              </div>
-
-              <div className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2 text-primary font-semibold text-sm">
-                    <MapPin className="h-4 w-4" />
-                    <span>Warangal Office</span>
-                  </div>
-                  <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                    H.No: 12-13, 1st Floor, Warangal, Telangana, 506002
-                  </p>
-                </div>
-                <span className="mt-2 text-[10px] uppercase font-bold tracking-widest text-primary/80">Innovation Lab</span>
-              </div>
-
-              <div className="panel p-3.5 sm:p-4 bg-surface border border-border/80 rounded-2xl flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2 text-primary font-semibold text-sm">
-                    <Mail className="h-4 w-4" />
-                    <span>Direct Engineering Contact</span>
-                  </div>
-                  <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                    For direct architecture reviews & inquiries:
-                  </p>
-                  <a href="mailto:Info@regalops.com" className="mt-0.5 block text-xs font-semibold text-primary hover:underline">
-                    Info@regalops.com
-                  </a>
-                </div>
-                <span className="mt-2 text-[10px] uppercase font-bold tracking-widest text-emerald-600">24/7 Response SLA</span>
-              </div>
-            </div>
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="w-full rounded-xl bg-primary px-5 py-2.5 text-xs sm:text-sm font-semibold text-primary-foreground transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 disabled:opacity-50 cursor-pointer shadow-sm mt-1 sm:mt-1.5"
+              >
+                {status === "loading" ? "Submitting..." : jobTitle ? "Submit Application" : "Send Enquiry"}
+              </button>
+            </form>
           </div>
         </div>
-      </Section>
+      </section>
     </SiteLayout>
   );
 }

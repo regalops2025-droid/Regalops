@@ -25,7 +25,7 @@ export function SiteLayout({
       <SiteHeader />
       <main
         className={`flex-1 w-full max-w-full ${
-          noScroll ? "min-h-0 overflow-hidden flex flex-col justify-center" : "overflow-x-clip"
+          noScroll ? "min-h-0 overflow-y-auto lg:overflow-hidden flex flex-col justify-center" : "overflow-x-clip"
         }`}
       >
         {children}

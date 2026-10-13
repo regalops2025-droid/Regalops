@@ -644,6 +644,12 @@ function AdminDashboard() {
 
     setFormSuccess(false);
     setFormError("");
+    setTimeout(() => {
+      const formEl = document.getElementById("solution-form-card");
+      if (formEl) {
+        formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 50);
   };
 
   // Cancel Edit Mode for Solutions
@@ -2828,16 +2834,195 @@ function AdminDashboard() {
           })()}
 
           {activeTab === "solutions" && (
-            <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
+            <div className="space-y-6">
               
-              {/* Left Column: Solutions List */}
-              <div>
-                <h2 className="text-lg font-bold text-foreground mb-4">Current Solutions</h2>
+              {/* 1. Form FIRST at the top */}
+              <div id="solution-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
+                  <div className="flex items-center gap-2.5">
+                    <div className="rounded-xl bg-primary/10 p-2 text-primary">
+                      {editingSolId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-bold text-foreground">
+                        {editingSolId !== null ? "Edit Solution" : "Add New Solution"}
+                      </h2>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        {editingSolId !== null 
+                          ? "Update practice specifications, media, and enterprise deliverables." 
+                          : "Configure a new specialized practice area to showcase on the live portal."}
+                      </p>
+                    </div>
+                  </div>
+                  {editingSolId !== null && (
+                    <button
+                      type="button"
+                      onClick={handleCancelEdit}
+                      className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                    >
+                      Cancel Editing
+                    </button>
+                  )}
+                </div>
+
+                {formSuccess && (
+                  <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                    <span>Solution {editingSolId !== null ? "updated" : "created"} and published successfully!</span>
+                  </div>
+                )}
+
+                {formError && (
+                  <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    <span>{formError}</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmitSolution} className="space-y-5">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
+                    {/* Left Column: Solution Identity & Image */}
+                    <div className="space-y-4">
+                      <label className="block text-sm font-medium">
+                        Solution Name
+                        <input
+                          type="text"
+                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          placeholder="e.g. Artificial Intelligence Consulting"
+                          value={solName}
+                          onChange={(e) => setSolName(e.target.value)}
+                          required
+                          disabled={formLoading}
+                        />
+                      </label>
+
+                      <ImageUploadField
+                        label="Solution Image"
+                        value={solImage}
+                        onChange={setSolImage}
+                        disabled={formLoading}
+                        recommendedDimensions="1200 × 700 px (16:9 Landscape)"
+                        helperText="Recommended size: 1200 × 700 px (16:9 landscape aspect ratio). Images of any resolution or ratio are accepted and will automatically be scaled & cropped to match the exact same height and width of all solution cards on the website."
+                      />
+
+                      <label className="block text-sm font-medium">
+                        Description
+                        <textarea
+                          rows={3}
+                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                          placeholder="Describe what this solution entails..."
+                          value={solDesc}
+                          onChange={(e) => setSolDesc(e.target.value)}
+                          required
+                          disabled={formLoading}
+                        />
+                      </label>
+                    </div>
+
+                    {/* Right Column: Capabilities, Methodology & Deliverables */}
+                    <div className="space-y-4">
+                      <label className="block text-sm font-medium">
+                        Core Capabilities (One per line)
+                        <textarea
+                          rows={2}
+                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          placeholder="e.g. Domain-Driven Development (DDD)&#10;High-throughput event-driven microservices"
+                          value={solCapabilities}
+                          onChange={(e) => setSolCapabilities(e.target.value)}
+                          disabled={formLoading}
+                        />
+                      </label>
+
+                      <label className="block text-sm font-medium">
+                        Delivery Methodology Phases (One per line)
+                        <textarea
+                          rows={2}
+                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          placeholder="e.g. Discovery & Event Storming&#10;Target Architecture Blueprinting"
+                          value={solMethodology}
+                          onChange={(e) => setSolMethodology(e.target.value)}
+                          disabled={formLoading}
+                        />
+                      </label>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <label className="block text-sm font-medium">
+                          Key Deliverables (One per line)
+                          <textarea
+                            rows={2}
+                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                            placeholder="e.g. OpenAPI specs&#10;Test suites"
+                            value={solDeliverables}
+                            onChange={(e) => setSolDeliverables(e.target.value)}
+                            disabled={formLoading}
+                          />
+                        </label>
+
+                        <label className="block text-sm font-medium">
+                          Featured Technologies (One per line)
+                          <textarea
+                            rows={2}
+                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                            placeholder="e.g. Node.js&#10;TypeScript"
+                            value={solTechnologies}
+                            onChange={(e) => setSolTechnologies(e.target.value)}
+                            disabled={formLoading}
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                    <button
+                      type="submit"
+                      disabled={formLoading || !solName || !solDesc}
+                      className="flex-1 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center shadow-md"
+                    >
+                      {formLoading 
+                        ? "Saving Solution..." 
+                        : editingSolId !== null 
+                          ? "Update Solution" 
+                          : "Publish Solution"}
+                    </button>
+                    {editingSolId !== null && (
+                      <button
+                        type="button"
+                        onClick={handleCancelEdit}
+                        className="rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                        disabled={formLoading}
+                      >
+                        Cancel Edit
+                      </button>
+                    )}
+                  </div>
+                </form>
+              </div>
+
+              {/* 2. Added Details List NEXT (Kindha na) */}
+              <div className="space-y-3.5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-lg font-bold text-foreground">Current Solutions</h2>
+                    <span className="rounded-full bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 text-xs font-bold">
+                      {solutions.length}
+                    </span>
+                  </div>
+                  <a
+                    href="/solutions"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+                  >
+                    <span>View Public Page</span>
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </div>
 
                 {solutionsLoading && solutions.length === 0 ? (
-                  <div className="space-y-4 animate-pulse">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-pulse">
                     {[1, 2].map((i) => (
-                      <div key={i} className="panel p-4 bg-surface-2 border border-border/50 h-28"></div>
+                      <div key={i} className="panel p-4 bg-surface-2 border border-border/50 h-28 rounded-2xl"></div>
                     ))}
                   </div>
                 ) : solutionsError ? (
@@ -2851,206 +3036,86 @@ function AdminDashboard() {
                     </div>
                     <h3 className="mt-4 text-base font-semibold text-foreground">No solutions yet</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      Create your first solution using the form on the right.
+                      Create your first solution using the form above.
                     </p>
                   </div>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     {solutions.map((item) => (
                       <div
                         key={item.id}
-                        className={`panel p-4 bg-surface border flex gap-4 items-center justify-between transition-all duration-300 ${
+                        className={`panel p-4 bg-surface border rounded-2xl flex flex-col justify-between transition-all duration-300 ${
                           editingSolId === item.id 
-                            ? "border-primary bg-primary/2" 
-                            : "border-border/85 hover:border-primary/30"
+                            ? "border-primary bg-primary/5 ring-2 ring-primary/25" 
+                            : "border-border/85 hover:border-primary/40 hover:shadow-md"
                         }`}
                       >
-                        <div className="flex gap-4 items-center min-w-0">
-                          {item.image ? (
-                            <img
-                              src={item.image}
-                              alt={item.name}
-                              onError={(e) => {
-                                const target = e.currentTarget;
-                                if (!target.dataset.fallback) {
-                                  target.dataset.fallback = "true";
-                                  target.src = "/solutions-training.jpg";
-                                }
-                              }}
-                              className="h-16 w-16 rounded-xl object-cover border border-border/80 shrink-0"
-                            />
-                          ) : (
-                            <div className="h-16 w-16 rounded-xl bg-secondary flex items-center justify-center text-primary shrink-0">
-                              <ImageIcon className="h-6 w-6" />
+                        <div>
+                          <div className="flex gap-3.5 items-start">
+                            {item.image ? (
+                              <img
+                                src={item.image}
+                                alt={item.name}
+                                onError={(e) => {
+                                  const target = e.currentTarget;
+                                  if (!target.dataset.fallback) {
+                                    target.dataset.fallback = "true";
+                                    target.src = "/solutions-training.jpg";
+                                  }
+                                }}
+                                className="h-16 w-20 rounded-xl object-cover border border-border/80 shrink-0 bg-secondary"
+                              />
+                            ) : (
+                              <div className="h-16 w-20 rounded-xl bg-secondary flex items-center justify-center text-primary shrink-0 border border-border/60">
+                                <ImageIcon className="h-6 w-6" />
+                              </div>
+                            )}
+                            <div className="min-w-0 flex-1">
+                              <h4 className="font-bold text-foreground text-sm line-clamp-1">{item.name}</h4>
+                              <p className="text-xs text-muted-foreground line-clamp-2 mt-1 leading-relaxed">{item.description}</p>
                             </div>
-                          )}
-                          <div className="min-w-0">
-                            <h4 className="font-bold text-foreground truncate">{item.name}</h4>
-                            <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{item.description}</p>
                           </div>
                         </div>
 
-                        <div className="flex gap-2 shrink-0">
-                          <button
-                            onClick={() => handleStartEdit(item)}
-                            className={`inline-flex items-center justify-center h-9 w-9 rounded-xl border transition-all shrink-0 cursor-pointer ${
-                              editingSolId === item.id 
-                                ? "border-primary bg-primary text-primary-foreground" 
-                                : "border-border bg-background text-foreground hover:bg-secondary"
-                            }`}
-                            title="Edit Solution"
-                            disabled={formLoading}
+                        <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between gap-2">
+                          <Link
+                            to="/solutions/$id"
+                            params={{ id: String(item.id) }}
+                            target="_blank"
+                            className="inline-flex items-center gap-1 text-[11px] font-semibold text-muted-foreground hover:text-primary transition-colors"
                           >
-                            <Pencil className="h-4 w-4" />
-                          </button>
-                          <button
-                            onClick={() => handleDeleteSolution(item.id)}
-                            disabled={deleteSolutionStatus?.id === item.id && deleteSolutionStatus?.status === "loading"}
-                            className="inline-flex items-center justify-center h-9 w-9 rounded-xl border border-destructive/30 bg-destructive/5 text-destructive hover:bg-destructive hover:text-white transition-all disabled:opacity-50 shrink-0 cursor-pointer"
-                            title="Delete Solution"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
+                            <span>Preview</span>
+                            <ExternalLink className="h-3 w-3" />
+                          </Link>
+
+                          <div className="flex gap-1.5 shrink-0">
+                            <button
+                              onClick={() => handleStartEdit(item)}
+                              className={`inline-flex items-center gap-1 h-8 px-2.5 rounded-lg border text-xs font-semibold transition-all cursor-pointer ${
+                                editingSolId === item.id 
+                                  ? "border-primary bg-primary text-primary-foreground" 
+                                  : "border-border bg-background text-foreground hover:bg-secondary"
+                              }`}
+                              title="Edit Solution"
+                              disabled={formLoading}
+                            >
+                              <Pencil className="h-3.5 w-3.5" />
+                              <span>Edit</span>
+                            </button>
+                            <button
+                              onClick={() => handleDeleteSolution(item.id)}
+                              disabled={deleteSolutionStatus?.id === item.id && deleteSolutionStatus?.status === "loading"}
+                              className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-destructive/30 bg-destructive/5 text-destructive hover:bg-destructive hover:text-white transition-all disabled:opacity-50 cursor-pointer"
+                              title="Delete Solution"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     ))}
                   </div>
                 )}
-              </div>
-
-              {/* Right Column: Creation / Editing Form */}
-              <div>
-                <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80 sticky top-24">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
-                      {editingSolId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
-                    </div>
-                    <h2 className="text-xl font-bold text-foreground">
-                      {editingSolId !== null ? "Edit Solution" : "Add New Solution"}
-                    </h2>
-                  </div>
-
-                  {formSuccess && (
-                    <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
-                      Solution {editingSolId !== null ? "updated" : "created"} and published successfully!
-                    </div>
-                  )}
-
-                  {formError && (
-                    <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
-                      {formError}
-                    </div>
-                  )}
-
-                  <form onSubmit={handleSubmitSolution} className="space-y-5">
-                    <label className="block text-sm font-medium">
-                      Solution Name
-                      <input
-                        type="text"
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. Artificial Intelligence Consulting"
-                        value={solName}
-                        onChange={(e) => setSolName(e.target.value)}
-                        required
-                        disabled={formLoading}
-                      />
-                    </label>
-
-                    <ImageUploadField
-                      label="Solution Image"
-                      value={solImage}
-                      onChange={setSolImage}
-                      disabled={formLoading}
-                      recommendedDimensions="1200 × 700 px (16:9 Landscape)"
-                      helperText="Recommended size: 1200 × 700 px (16:9 landscape aspect ratio). Images of any resolution or ratio are accepted and will automatically be scaled & cropped to match the exact same height and width of all solution cards on the website."
-                    />
-
-                    <label className="block text-sm font-medium">
-                      Description
-                      <textarea
-                        rows={4}
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
-                        placeholder="Describe what this solution entails..."
-                        value={solDesc}
-                        onChange={(e) => setSolDesc(e.target.value)}
-                        required
-                        disabled={formLoading}
-                      />
-                    </label>
-
-                    <label className="block text-sm font-medium">
-                      Core Capabilities (One per line)
-                      <textarea
-                        rows={3}
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. Domain-Driven Development (DDD)&#10;High-throughput event-driven microservices"
-                        value={solCapabilities}
-                        onChange={(e) => setSolCapabilities(e.target.value)}
-                        disabled={formLoading}
-                      />
-                    </label>
-
-                    <label className="block text-sm font-medium">
-                      Delivery Methodology Phases (One per line)
-                      <textarea
-                        rows={3}
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. Discovery & Event Storming&#10;Target Architecture Blueprinting"
-                        value={solMethodology}
-                        onChange={(e) => setSolMethodology(e.target.value)}
-                        disabled={formLoading}
-                      />
-                    </label>
-
-                    <label className="block text-sm font-medium">
-                      Key Deliverables (One per line)
-                      <textarea
-                        rows={3}
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. Fully documented OpenAPI specifications&#10;Automated integration test suites"
-                        value={solDeliverables}
-                        onChange={(e) => setSolDeliverables(e.target.value)}
-                        disabled={formLoading}
-                      />
-                    </label>
-
-                    <label className="block text-sm font-medium">
-                      Featured Technologies (One per line)
-                      <textarea
-                        rows={2}
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. Node.js&#10;TypeScript&#10;Go"
-                        value={solTechnologies}
-                        onChange={(e) => setSolTechnologies(e.target.value)}
-                        disabled={formLoading}
-                      />
-                    </label>
-
-                    <div className="space-y-2">
-                      <button
-                        type="submit"
-                        disabled={formLoading || !solName || !solDesc}
-                        className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
-                      >
-                        {formLoading 
-                          ? "Saving Solution..." 
-                          : editingSolId !== null 
-                            ? "Update Solution" 
-                            : "Publish Solution"}
-                      </button>
-                      {editingSolId !== null && (
-                        <button
-                          type="button"
-                          onClick={handleCancelEdit}
-                          className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                          disabled={formLoading}
-                        >
-                          Cancel Edit
-                        </button>
-                      )}
-                    </div>
-                  </form>
-                </div>
               </div>
 
             </div>

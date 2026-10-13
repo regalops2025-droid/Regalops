@@ -892,7 +892,7 @@ function Home() {
         </button>
 
         {/* Foreground Content for Active Slide */}
-        <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-5">
+        <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 lg:pt-5 pb-5 sm:pb-6 lg:pb-7">
           <div className="max-w-2xl lg:max-w-3xl xl:max-w-4xl">
             {showcaseSlides.map((slide, idx) => {
               if (idx !== activeSlide) return null;
@@ -1240,13 +1240,13 @@ function Home() {
             </div>
           </div>
         ) : (
-          <div className="mt-2.5 sm:mt-3 relative w-full overflow-hidden group py-0.5 reveal-scale delay-100">
+          <div className="mt-2.5 sm:mt-3 relative w-full overflow-hidden group py-2 sm:py-3 reveal-scale delay-100">
             {/* Subtle Gradient Fade Masks on Edges */}
             <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
             <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#fafcfb] via-[#fafcfb]/80 to-transparent z-10" />
 
             {/* Seamless Infinite Marquee Track with Pause on Hover */}
-            <div className="flex gap-4 w-max py-1.5 px-4 transition-all duration-300 animate-marquee-services hover:[animation-play-state:paused]">
+            <div className="flex gap-4 w-max py-3 sm:py-4 px-4 transition-all duration-300 animate-marquee-services hover:[animation-play-state:paused]">
               {[...displayServices, ...displayServices].map((service, idx) => {
                 const iconElement =
                   service.icon && typeof service.icon !== "string"

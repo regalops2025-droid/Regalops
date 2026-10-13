@@ -25,7 +25,7 @@ export function SiteLayout({
       <SiteHeader />
       <main
         className={`flex-1 w-full max-w-full ${
-          noScroll ? "min-h-0 overflow-y-auto lg:overflow-hidden flex flex-col justify-center" : "overflow-x-clip"
+          noScroll ? "min-h-0 overflow-y-auto flex flex-col justify-center" : "overflow-x-clip"
         }`}
       >
         {children}
@@ -87,7 +87,7 @@ export function Section({
   const hasCustomPy = className.includes("py-");
   return (
     <section
-      className={`mx-auto ${hasCustomMaxW ? "" : "max-w-[1440px]"} ${hasCustomPx ? "" : "px-4 sm:px-6 lg:px-8"} ${hasCustomPy ? "" : "py-2 sm:py-2.5"} ${className}`}
+      className={`mx-auto ${hasCustomMaxW ? "" : "max-w-[1440px]"} ${hasCustomPx ? "" : "px-4 sm:px-6 lg:px-8"} ${hasCustomPy ? "" : "py-4 sm:py-6 lg:py-8"} ${className}`}
     >
       {children}
     </section>

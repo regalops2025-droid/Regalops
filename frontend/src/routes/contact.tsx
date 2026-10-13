@@ -184,11 +184,11 @@ function Contact() {
 
   return (
     <SiteLayout hideFooter noScroll hideStickyActions>
-      <section className="hero-glow flex-1 min-h-0 w-full flex items-center justify-center py-2 sm:py-3 lg:py-4 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="w-full max-w-[1440px] mx-auto overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-2xl grid grid-cols-1 lg:grid-cols-12 items-stretch max-h-[calc(100dvh-120px)]">
+      <section className="hero-glow flex-1 min-h-0 w-full flex items-center justify-center py-3 sm:py-5 lg:py-6 px-4 sm:px-6 lg:px-8 overflow-y-auto">
+        <div className="w-full max-w-[1440px] mx-auto rounded-3xl border border-border/80 bg-surface shadow-2xl grid grid-cols-1 lg:grid-cols-12 items-stretch my-auto overflow-hidden">
           
           {/* LEFT COLUMN: Visual Image Card & Executive Contact Details */}
-          <div className="lg:col-span-5 relative overflow-hidden bg-neutral-950 text-white flex flex-col justify-between p-5 sm:p-6 lg:p-7 space-y-4">
+          <div className="lg:col-span-5 relative overflow-hidden bg-neutral-950 text-white flex flex-col justify-between p-5 sm:p-6 lg:p-7 space-y-3 sm:space-y-4">
             {/* Image Background */}
             <div className="absolute inset-0 z-0">
               <img
@@ -256,21 +256,21 @@ function Contact() {
             </div>
 
             {/* Bottom Trust Pills */}
-            <div className="relative z-10 flex flex-wrap gap-1.5 text-[10.5px] font-medium text-neutral-300">
-              <span className="inline-flex items-center gap-1 rounded-full bg-black/40 border border-white/15 px-2.5 py-0.5 backdrop-blur-sm">
-                &check; 24h SLA Response
+            <div className="relative z-10 flex flex-wrap gap-1.5 text-[10.5px] font-medium text-neutral-300 pt-1 pb-1">
+              <span className="inline-flex items-center gap-1 rounded-full bg-black/50 border border-white/20 px-2.5 py-1 backdrop-blur-sm shadow-xs">
+                ✓ 24h SLA Response
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-black/40 border border-white/15 px-2.5 py-0.5 backdrop-blur-sm">
-                &check; 100% NDA Protected
+              <span className="inline-flex items-center gap-1 rounded-full bg-black/50 border border-white/20 px-2.5 py-1 backdrop-blur-sm shadow-xs">
+                ✓ 100% NDA Protected
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-black/40 border border-white/15 px-2.5 py-0.5 backdrop-blur-sm">
-                &check; Senior Engineers Only
+              <span className="inline-flex items-center gap-1 rounded-full bg-black/50 border border-white/20 px-2.5 py-1 backdrop-blur-sm shadow-xs">
+                ✓ Senior Engineers Only
               </span>
             </div>
           </div>
 
           {/* RIGHT COLUMN: Contact / Application Form */}
-          <div className="lg:col-span-7 p-4 sm:p-5 lg:p-6 xl:p-8 flex flex-col justify-center bg-card overflow-y-auto lg:overflow-visible">
+          <div className="lg:col-span-7 p-4 sm:p-5 lg:p-6 xl:p-8 flex flex-col justify-center bg-card overflow-y-auto">
             <form className="space-y-2.5 sm:space-y-3 w-full" onSubmit={handleSubmit}>
               <div className="border-b border-border/60 pb-2 mb-1">
                 <div className="flex items-center justify-between">
@@ -510,7 +510,7 @@ function Contact() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full rounded-xl bg-primary px-5 py-2.5 text-xs sm:text-sm font-semibold text-primary-foreground transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 disabled:opacity-50 cursor-pointer shadow-sm mt-1 sm:mt-1.5"
+                className="w-full rounded-xl bg-primary px-5 py-2.5 text-xs sm:text-sm font-semibold text-primary-foreground transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 disabled:opacity-50 cursor-pointer shadow-sm mt-2 sm:mt-2.5 mb-1"
               >
                 {status === "loading" ? "Submitting..." : jobTitle ? "Submit Application" : "Send Enquiry"}
               </button>

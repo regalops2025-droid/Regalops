@@ -103,7 +103,7 @@ function Solutions() {
                       /* ======================================================== */
                       /* EVEN ROW: TEXT ON LEFT, SHAPED IMAGE ON RIGHT           */
                       /* ======================================================== */
-                      <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch lg:h-[380px]">
+                      <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch lg:min-h-[380px]">
                         {/* Text Side (Left) */}
                         <div className="lg:col-span-6 xl:col-span-5 p-4 sm:p-6 lg:p-7 flex flex-col justify-center z-20 h-full">
                           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-[#555d25] dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-200/50 dark:border-emerald-800/50 w-fit">
@@ -182,7 +182,7 @@ function Solutions() {
                       /* ======================================================== */
                       /* ODD ROW: SHAPED IMAGE ON LEFT, TEXT ON RIGHT            */
                       /* ======================================================== */
-                      <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch lg:h-[420px]">
+                      <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch lg:min-h-[380px]">
                         {/* Shaped Image Side (Left) - Order 2 on mobile, Order 1 on lg */}
                         <div className="lg:col-span-6 xl:col-span-7 relative h-[280px] sm:h-[340px] lg:h-full w-full overflow-hidden order-2 lg:order-1">
                           <Link

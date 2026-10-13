@@ -412,7 +412,7 @@ function About() {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex gap-4 overflow-x-auto scroll-smooth py-1.5 px-4 sm:px-6 lg:px-8 snap-x snap-mandatory mx-auto max-w-[1440px] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            className="flex gap-4 overflow-x-auto scroll-smooth py-3 sm:py-4 px-4 sm:px-6 lg:px-8 snap-x snap-mandatory mx-auto max-w-[1440px] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           >
             {keyBenefits.map((item, idx) => {
               const Icon = item.icon;
@@ -489,7 +489,7 @@ function About() {
         </div>
 
         <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
-          <div className="text-left max-w-3xl">
+          <div className="text-left max-w-5xl">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/60 backdrop-blur-md px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#a4c965] shadow-md">
               <Sparkles className="h-3 w-3 text-[#f3cd67]" /> Culture &amp; Talent Excellence
             </span>
@@ -497,9 +497,8 @@ function About() {
               Our <span className="text-[#f3cd67] drop-shadow-[0_2px_12px_rgba(243,205,103,0.3)]">People</span>
             </h2>
             <div className="w-12 h-0.5 bg-gradient-to-r from-[#a4c965] to-[#f3cd67] rounded-full mt-1.5 mb-2" />
-            <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed max-w-2xl text-left">
-              We nurture a truly diverse and talented pool of people who work with a
-              customer-centric attitude to deliver phenomenal results.
+            <p className="text-xs sm:text-sm text-neutral-200 leading-relaxed max-w-none text-left lg:whitespace-nowrap">
+              We nurture a truly diverse and talented pool of people who work with a customer-centric attitude to deliver phenomenal results.
             </p>
           </div>
 
@@ -711,14 +710,14 @@ function About() {
             <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-[#b38e36]/10 blur-3xl" />
             <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-[#555d25]/10 blur-3xl" />
 
-            <div className="relative z-10 max-w-3xl mx-auto">
+            <div className="relative z-10 max-w-4xl mx-auto">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/30 bg-[#b38e36]/10 px-3 py-0.5 text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#eddcb8]">
                 Accelerate With Confidence
               </span>
               <h2 className="mt-2 text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight">
                 Ready to Transform Your Technology Landscape?
               </h2>
-              <p className="mt-1.5 text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-lg mx-auto">
+              <p className="mt-1.5 text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-none mx-auto sm:whitespace-nowrap">
                 Schedule an executive architectural consultation with our principal engineering team.
               </p>
               <div className="mt-4 flex flex-wrap justify-center items-center gap-3">

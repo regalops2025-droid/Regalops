@@ -88,8 +88,8 @@ function Login() {
 
   return (
     <SiteLayout hideFooter noScroll hideStickyActions>
-      <section className="hero-glow flex-1 min-h-0 w-full flex items-center justify-center py-2 sm:py-3 lg:py-4 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="w-full max-w-[1440px] mx-auto overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-2xl grid grid-cols-1 lg:grid-cols-12 items-stretch max-h-[calc(100dvh-120px)]">
+      <section className="hero-glow flex-1 min-h-0 w-full flex items-center justify-center py-4 sm:py-6 lg:py-4 px-4 sm:px-6 lg:px-8 overflow-y-visible lg:overflow-hidden">
+        <div className="w-full max-w-[1440px] mx-auto overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-2xl grid grid-cols-1 lg:grid-cols-12 items-stretch my-2 lg:my-0 lg:max-h-[calc(100dvh-120px)]">
           
           {/* LEFT SIDE: Visual Showcase Image Card */}
           <div className="lg:col-span-6 relative overflow-hidden bg-neutral-950 text-white flex flex-col justify-between p-5 sm:p-7 xl:p-9 space-y-4">

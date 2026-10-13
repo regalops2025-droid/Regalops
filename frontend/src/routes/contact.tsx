@@ -184,8 +184,8 @@ function Contact() {
 
   return (
     <SiteLayout hideFooter noScroll hideStickyActions>
-      <section className="hero-glow flex-1 min-h-0 w-full flex items-center justify-center py-3 sm:py-5 lg:py-6 px-4 sm:px-6 lg:px-8 overflow-y-auto">
-        <div className="w-full max-w-[1440px] mx-auto rounded-3xl border border-border/80 bg-surface shadow-2xl grid grid-cols-1 lg:grid-cols-12 items-stretch my-auto overflow-hidden">
+      <section className="hero-glow flex-1 min-h-0 w-full flex flex-col items-center justify-start lg:justify-center py-4 sm:py-6 lg:py-6 px-3 sm:px-6 lg:px-8 pb-12 lg:pb-6 overflow-y-visible lg:overflow-y-auto touch-pan-y">
+        <div className="w-full max-w-[1440px] mx-auto rounded-3xl border border-border/80 bg-surface shadow-2xl grid grid-cols-1 lg:grid-cols-12 items-stretch my-2 lg:my-auto overflow-hidden">
           
           {/* LEFT COLUMN: Visual Image Card & Executive Contact Details */}
           <div className="lg:col-span-5 relative overflow-hidden bg-neutral-950 text-white flex flex-col justify-between p-5 sm:p-6 lg:p-7 space-y-3 sm:space-y-4">
@@ -270,7 +270,7 @@ function Contact() {
           </div>
 
           {/* RIGHT COLUMN: Contact / Application Form */}
-          <div className="lg:col-span-7 p-4 sm:p-5 lg:p-6 xl:p-8 flex flex-col justify-center bg-card overflow-y-auto">
+          <div className="lg:col-span-7 p-4 sm:p-5 lg:p-6 xl:p-8 flex flex-col justify-center bg-card overflow-y-visible lg:overflow-y-auto">
             <form className="space-y-2.5 sm:space-y-3 w-full" onSubmit={handleSubmit}>
               <div className="border-b border-border/60 pb-2 mb-1">
                 <div className="flex items-center justify-between">

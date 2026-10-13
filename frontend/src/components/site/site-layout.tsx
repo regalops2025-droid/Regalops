@@ -17,15 +17,15 @@ export function SiteLayout({
 }) {
   return (
     <div
-      className={`flex flex-col w-full max-w-full ${
-        noScroll ? "h-screen max-h-screen overflow-hidden" : "min-h-screen overflow-x-clip"
+      className={`flex flex-col w-full max-w-full min-h-screen ${
+        noScroll ? "lg:h-screen lg:max-h-screen lg:overflow-hidden overflow-x-clip" : "overflow-x-clip"
       }`}
     >
       <ScrollRevealProvider />
       <SiteHeader />
       <main
         className={`flex-1 w-full max-w-full ${
-          noScroll ? "min-h-0 overflow-y-auto flex flex-col justify-center" : "overflow-x-clip"
+          noScroll ? "lg:min-h-0 lg:overflow-y-auto lg:flex lg:flex-col lg:justify-center overflow-x-clip" : "overflow-x-clip"
         }`}
       >
         {children}

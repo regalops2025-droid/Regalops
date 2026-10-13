@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { 
   LogOut, ExternalLink, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, 
@@ -326,7 +326,7 @@ function AdminDashboard() {
         throw new Error("Failed to load solutions.");
       }
       const data = await response.json();
-      setSolutions(data);
+      setSolutions(Array.isArray(data) ? data : []);
     } catch (err: any) {
       console.error(err);
       setSolutionsError(err.message || "An error occurred while loading solutions.");
@@ -345,7 +345,7 @@ function AdminDashboard() {
         throw new Error("Failed to load technologies.");
       }
       const data = await response.json();
-      setTechList(data);
+      setTechList(Array.isArray(data) ? data : []);
     } catch (err: any) {
       console.error(err);
       setTechError(err.message || "An error occurred while loading technologies.");
@@ -364,7 +364,7 @@ function AdminDashboard() {
         throw new Error("Failed to load services.");
       }
       const data = await response.json();
-      setServiceList(data);
+      setServiceList(Array.isArray(data) ? data : []);
     } catch (err: any) {
       console.error(err);
       setServiceError(err.message || "An error occurred while loading services.");
@@ -383,7 +383,7 @@ function AdminDashboard() {
         throw new Error("Failed to load clients.");
       }
       const data = await response.json();
-      setClientList(data);
+      setClientList(Array.isArray(data) ? data : []);
     } catch (err: any) {
       console.error(err);
       setClientError(err.message || "An error occurred while loading clients.");
@@ -402,7 +402,7 @@ function AdminDashboard() {
         throw new Error("Failed to load jobs.");
       }
       const data = await response.json();
-      setJobList(data);
+      setJobList(Array.isArray(data) ? data : []);
     } catch (err: any) {
       console.error(err);
       setJobError(err.message || "An error occurred while loading jobs.");
@@ -421,7 +421,7 @@ function AdminDashboard() {
         throw new Error("Failed to load blogs.");
       }
       const data = await response.json();
-      setBlogList(data);
+      setBlogList(Array.isArray(data) ? data : []);
     } catch (err: any) {
       console.error(err);
       setBlogError(err.message || "An error occurred while loading blogs.");
@@ -440,7 +440,7 @@ function AdminDashboard() {
         throw new Error("Failed to load applications.");
       }
       const data = await response.json();
-      setApplications(data);
+      setApplications(Array.isArray(data) ? data : []);
     } catch (err: any) {
       console.error(err);
       setApplicationsError(err.message || "An error occurred while loading applications.");
@@ -4754,7 +4754,7 @@ function AdminDashboard() {
                                   handleDeleteApplication(appItem.id);
                                 }
                               }}
-                              disabled={deleteApplicationStatus?.id === appItem.id && deleteApplicationStatus.status === "loading"}
+                              disabled={deleteApplicationStatus?.id === appItem.id && deleteApplicationStatus?.status === "loading"}
                               className="text-muted-foreground hover:text-rose-500 p-1.5 rounded-lg border border-transparent hover:border-rose-500/20 hover:bg-rose-500/10 transition-all disabled:opacity-50 cursor-pointer shrink-0"
                               title="Delete application log"
                             >

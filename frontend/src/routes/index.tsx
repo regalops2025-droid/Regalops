@@ -60,47 +60,7 @@ export const Route = createFileRoute("/")({
 /* Static Data & Constants                                                    */
 /* -------------------------------------------------------------------------- */
 
-const row1Logos = [
-  { name: "Apple", logo: "/clients/apple.jpg" },
-  { name: "AGCO", logo: "/clients/agco.jpg" },
-  { name: "ADT", logo: "/clients/adt.jpg" },
-  { name: "Assurant", logo: "/clients/assurant.jpg" },
-  { name: "AT&T", logo: "/clients/at-t.jpg" },
-  { name: "Capital One", logo: "/clients/capital-one.jpg" },
-  { name: "Credit Suisse", logo: "/clients/credit-suisse.jpg" },
-  { name: "Cricket Wireless", logo: "/clients/cricket-wireless.jpg" },
-];
 
-const midLeftLogos = [
-  { name: "US DOT", logo: "/clients/dot-usa.jpg" },
-  { name: "DTCC", logo: "/clients/dtcc.jpg" },
-  { name: "FedEx", logo: "/clients/fedex.jpg" },
-  { name: "FIS", logo: "/clients/fis.jpg" },
-  { name: "Highpoint Solutions", logo: "/clients/highpoint-solutions.jpg" },
-  { name: "Infosys", logo: "/clients/infosys.jpg" },
-];
-
-const midRightLogos = [
-  { name: "iVEDiX", logo: "/clients/ivedix.jpg" },
-  { name: "Mphasis", logo: "/clients/mphasis.jpg" },
-  { name: "Premier", logo: "/clients/premier.jpg" },
-  { name: "Socket Mobile", logo: "/clients/socket.jpg" },
-  { name: "Synchronoss", logo: "/clients/synchronious.jpg" },
-  { name: "Synovus Bank", logo: "/clients/synovus-bank.jpg" },
-];
-
-const row4Logos = [
-  { name: "TATA Consultancy Services", logo: "/clients/tcs.jpg" },
-  { name: "The Economist", logo: "/clients/the-economist.jpg" },
-  { name: "T-Mobile", logo: "/clients/tmobile.jpg" },
-  { name: "Turner", logo: "/clients/turner.jpg" },
-  { name: "VISA", logo: "/clients/visa.jpg" },
-  { name: "Wells Fargo", logo: "/clients/wellsfargo.jpg" },
-  { name: "Zions Bank", logo: "/clients/zions-bank.jpg" },
-  { name: "DTCC", logo: "/clients/dtcc.jpg" },
-];
-
-const allClientLogos = [...row1Logos, ...midLeftLogos, ...midRightLogos, ...row4Logos];
 
 const techStackMarquee = [
   { name: "Amazon Web Services", category: "Cloud Infrastructure" },
@@ -678,12 +638,22 @@ function parseArrayField(val: any): string[] {
   return [];
 }
 
-function ClientLogoCard({ client, index = 0 }: { client: { name: string; logo: string }; index?: number }) {
+function ClientLogoCard({
+  client,
+  index = 0,
+}: {
+  client: { id?: number | string; name: string; image?: string; logo?: string; sector?: string };
+  index?: number;
+}) {
+  const [imgError, setImgError] = useState(false);
   const delays = ["delay-50", "delay-100", "delay-150", "delay-200", "delay-250", "delay-300", "delay-350", "delay-400"];
   const staggerClass = delays[index % delays.length];
+  const imageSrc = client.image || client.logo;
 
   return (
-    <div className={`reveal-on-scroll ${staggerClass} group/client relative flex items-center justify-center p-3 h-20 xl:h-22 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-[0_14px_30px_rgba(85,93,37,0.14)] hover:border-[#555d25]/50 hover:ring-2 hover:ring-[#555d25]/15 hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer overflow-hidden`}>
+    <div
+      className={`reveal-on-scroll ${staggerClass} group/client relative flex items-center justify-center p-3 h-20 xl:h-22 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-[0_14px_30px_rgba(85,93,37,0.14)] hover:border-[#555d25]/50 hover:ring-2 hover:ring-[#555d25]/15 hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer overflow-hidden`}
+    >
       {/* Light sweep sheen beam on hover */}
       <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/80 to-transparent transition-transform duration-700 ease-in-out group-hover/client:translate-x-full" />
 
@@ -691,12 +661,31 @@ function ClientLogoCard({ client, index = 0 }: { client: { name: string; logo: s
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#555d25] to-transparent opacity-0 group-hover/client:opacity-100 transition-opacity duration-300" />
 
       {/* Logo */}
-      <img
-        src={client.logo}
-        alt={client.name}
-        className="max-h-10 xl:max-h-11 w-auto object-contain filter contrast-[1.03] select-none transition-transform duration-300 ease-out group-hover/client:scale-110 relative z-10"
-        loading="lazy"
-      />
+      {imageSrc && !imgError ? (
+        <img
+          src={imageSrc}
+          alt={client.name}
+          onError={() => setImgError(true)}
+          className="max-h-10 xl:max-h-11 max-w-[85%] w-auto object-contain filter contrast-[1.03] select-none transition-transform duration-300 ease-out group-hover/client:scale-110 relative z-10"
+          loading="lazy"
+        />
+      ) : (
+        <div className="flex items-center gap-2 px-2 max-w-full relative z-10">
+          <div className="h-8 w-8 rounded-lg bg-[#555d25]/10 border border-[#555d25]/25 flex items-center justify-center text-[#555d25] font-extrabold text-xs shrink-0 shadow-2xs">
+            {client.name ? client.name.charAt(0).toUpperCase() : "C"}
+          </div>
+          <div className="min-w-0 text-left">
+            <p className="text-xs font-bold text-neutral-900 truncate leading-snug group-hover/client:text-[#555d25] transition-colors">
+              {client.name}
+            </p>
+            {client.sector && (
+              <p className="text-[10px] text-neutral-400 font-medium truncate uppercase tracking-wider">
+                {client.sector}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Floating tooltip label */}
       <span className="pointer-events-none absolute bottom-1 opacity-0 translate-y-1.5 scale-90 rounded-md bg-neutral-900/90 backdrop-blur-xs px-2 py-0.5 text-[9.5px] font-semibold text-white shadow-md transition-all duration-200 group-hover/client:opacity-100 group-hover/client:translate-y-0 group-hover/client:scale-100 z-20 whitespace-nowrap">
@@ -706,19 +695,41 @@ function ClientLogoCard({ client, index = 0 }: { client: { name: string; logo: s
   );
 }
 
-function MobileClientLogoCard({ client, index = 0 }: { client: { name: string; logo: string }; index?: number }) {
+function MobileClientLogoCard({
+  client,
+  index = 0,
+}: {
+  client: { id?: number | string; name: string; image?: string; logo?: string; sector?: string };
+  index?: number;
+}) {
+  const [imgError, setImgError] = useState(false);
   const delays = ["delay-50", "delay-100", "delay-150", "delay-200"];
   const staggerClass = delays[index % delays.length];
+  const imageSrc = client.image || client.logo;
 
   return (
-    <div className={`reveal-on-scroll ${staggerClass} group/client relative flex items-center justify-center p-2.5 h-16 sm:h-20 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-[#555d25]/50 hover:-translate-y-1 transition-all duration-200 cursor-pointer overflow-hidden`}>
+    <div
+      className={`reveal-on-scroll ${staggerClass} group/client relative flex items-center justify-center p-2.5 h-16 sm:h-20 rounded-xl bg-white border border-neutral-200/80 shadow-2xs hover:shadow-md hover:border-[#555d25]/50 hover:-translate-y-1 transition-all duration-200 cursor-pointer overflow-hidden`}
+    >
       <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/70 to-transparent transition-transform duration-700 ease-in-out group-hover/client:translate-x-full" />
-      <img
-        src={client.logo}
-        alt={client.name}
-        className="max-h-8 sm:max-h-9 w-auto object-contain select-none transition-transform duration-200 group-hover/client:scale-105"
-        loading="lazy"
-      />
+      {imageSrc && !imgError ? (
+        <img
+          src={imageSrc}
+          alt={client.name}
+          onError={() => setImgError(true)}
+          className="max-h-8 sm:max-h-9 max-w-[85%] w-auto object-contain select-none transition-transform duration-200 group-hover/client:scale-105"
+          loading="lazy"
+        />
+      ) : (
+        <div className="flex items-center gap-1.5 px-1 max-w-full">
+          <div className="h-6 w-6 rounded-md bg-[#555d25]/10 border border-[#555d25]/20 flex items-center justify-center text-[#555d25] font-bold text-[10px] shrink-0">
+            {client.name ? client.name.charAt(0).toUpperCase() : "C"}
+          </div>
+          <span className="text-[11px] font-bold text-neutral-800 truncate leading-tight">
+            {client.name}
+          </span>
+        </div>
+      )}
     </div>
   );
 }
@@ -760,6 +771,56 @@ function Home() {
       })
       .catch((err) => console.error("Failed to fetch services", err));
   }, []);
+
+  const [clientsList, setClientsList] = useState<any[]>([]);
+  const [clientsLoading, setClientsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/clients")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setClientsList(data);
+        }
+        setClientsLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch clients", err);
+        setClientsLoading(false);
+      });
+  }, []);
+
+  // Dynamic client distribution matching the illuminated center layout
+  const totalClients = clientsList.length;
+  let row1Clients: any[] = [];
+  let midLeftClients: any[] = [];
+  let midRightClients: any[] = [];
+  let row4Clients: any[] = [];
+
+  if (totalClients <= 6) {
+    const half = Math.ceil(totalClients / 2);
+    midLeftClients = clientsList.slice(0, half);
+    midRightClients = clientsList.slice(half);
+  } else if (totalClients <= 12) {
+    const topCount = Math.floor(totalClients / 4);
+    const bottomCount = Math.floor(totalClients / 4);
+    const midTotal = totalClients - topCount - bottomCount;
+    const leftCount = Math.ceil(midTotal / 2);
+    row1Clients = clientsList.slice(0, topCount);
+    midLeftClients = clientsList.slice(topCount, topCount + leftCount);
+    midRightClients = clientsList.slice(topCount + leftCount, topCount + midTotal);
+    row4Clients = clientsList.slice(topCount + midTotal);
+  } else {
+    const topCount = Math.min(8, Math.floor(totalClients * 0.28));
+    const bottomCount = Math.min(8, Math.floor(totalClients * 0.28));
+    const remainingMid = totalClients - topCount - bottomCount;
+    const leftCount = Math.min(6, Math.ceil(remainingMid / 2));
+    const rightCount = Math.min(6, remainingMid - leftCount);
+    row1Clients = clientsList.slice(0, topCount);
+    midLeftClients = clientsList.slice(topCount, topCount + leftCount);
+    midRightClients = clientsList.slice(topCount + leftCount, topCount + leftCount + rightCount);
+    row4Clients = clientsList.slice(topCount + leftCount + rightCount);
+  }
 
   const displaySolutions = solutions.length > 0 ? solutions : coreServices;
   const displayServices = servicesList.length > 0 ? servicesList : ourServices;
@@ -1253,72 +1314,174 @@ function Home() {
 
         <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           
-          {/* Desktop Layout: Exact center-callout 4-row layout matching reference */}
+          {/* Desktop Layout: Dynamic adaptive center-callout layout matching illuminated reference */}
           <div className="hidden lg:flex flex-col gap-3 xl:gap-3.5">
-            
-            {/* Row 1 (8 cards) */}
-            <div className="grid grid-cols-8 gap-2.5 xl:gap-3">
-              {row1Logos.map((client, idx) => (
-                <ClientLogoCard key={`r1-${idx}`} client={client} index={idx} />
-              ))}
-            </div>
+            {clientsLoading && clientsList.length === 0 ? (
+              <div className="flex items-center gap-3 xl:gap-3.5">
+                <div className="flex-1 grid grid-cols-2 gap-2.5 xl:gap-3 animate-pulse">
+                  {[1, 2].map((i) => (
+                    <div key={`sk-l-${i}`} className="h-20 xl:h-22 rounded-xl bg-neutral-200/60 border border-neutral-200" />
+                  ))}
+                </div>
 
-            {/* Middle Section: Left 6 cards (3x2), Center Title Box, Right 6 cards (3x2) */}
-            <div className="flex items-center gap-3 xl:gap-3.5">
-              
-              {/* Left 6 cards (3 columns x 2 rows) */}
-              <div className="flex-1 grid grid-cols-3 gap-2.5 xl:gap-3">
-                {midLeftLogos.map((client, idx) => (
-                  <ClientLogoCard key={`ml-${idx}`} client={client} index={idx} />
-                ))}
-              </div>
-
-              {/* Center Callout Title Box (Illuminated Focal Hub) */}
-              <div className="reveal-scale relative w-64 xl:w-72 shrink-0 flex flex-col items-center justify-center text-center px-4 py-2 group/center">
-                {/* Center radial ambient bloom */}
-                <div className="pointer-events-none absolute inset-0 bg-radial from-[#555d25]/15 via-[#b38e36]/10 to-transparent blur-xl rounded-2xl -z-10 group-hover/center:scale-125 transition-transform duration-500" />
-
-                {/* Eyebrow badge */}
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3 py-0.5 text-[10px] sm:text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs mb-1.5">
-                  <span className="relative flex h-2 w-2 items-center justify-center">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#b38e36] opacity-75" />
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#555d25]" />
+                {/* Center Callout Title Box (Illuminated Focal Hub) */}
+                <div className="reveal-scale relative w-64 xl:w-72 shrink-0 flex flex-col items-center justify-center text-center px-4 py-2 group/center">
+                  <div className="pointer-events-none absolute inset-0 bg-radial from-[#555d25]/15 via-[#b38e36]/10 to-transparent blur-xl rounded-2xl -z-10" />
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3 py-0.5 text-[10px] sm:text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs mb-1.5">
+                    <span className="relative flex h-2 w-2 items-center justify-center">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#b38e36] opacity-75" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#555d25]" />
+                    </span>
+                    Enterprise Trust
                   </span>
-                  Enterprise Trust
-                </span>
+                  <h2 className="text-2xl xl:text-3xl font-extrabold text-neutral-900 tracking-tight leading-none">
+                    Our Clients
+                  </h2>
+                  <div className="h-0.5 w-10 bg-gradient-to-r from-[#555d25] to-emerald-500 rounded-full my-2" />
+                  <p className="text-sm xl:text-base italic font-serif text-neutral-600 tracking-wide">
+                    Who We Work With
+                  </p>
+                  <div className="mt-2 inline-flex items-center gap-1.5 text-[10.5px] font-medium text-neutral-500 bg-white/90 border border-neutral-200/80 rounded-full px-2.5 py-0.5 shadow-2xs">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#555d25]" />
+                    <span>Fortune 1000 Leaders</span>
+                  </div>
+                </div>
 
-                <h2 className="text-2xl xl:text-3xl font-extrabold text-neutral-900 tracking-tight leading-none">
-                  Our Clients
-                </h2>
-
-                <div className="h-0.5 w-10 bg-gradient-to-r from-[#555d25] to-emerald-500 rounded-full my-2" />
-
-                <p className="text-sm xl:text-base italic font-serif text-neutral-600 tracking-wide">
-                  Who We Work With
-                </p>
-
-                <div className="mt-2 inline-flex items-center gap-1.5 text-[10.5px] font-medium text-neutral-500 bg-white/90 border border-neutral-200/80 rounded-full px-2.5 py-0.5 shadow-2xs">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#555d25]" />
-                  <span>Fortune 1000 Leaders</span>
+                <div className="flex-1 grid grid-cols-2 gap-2.5 xl:gap-3 animate-pulse">
+                  {[1, 2].map((i) => (
+                    <div key={`sk-r-${i}`} className="h-20 xl:h-22 rounded-xl bg-neutral-200/60 border border-neutral-200" />
+                  ))}
                 </div>
               </div>
-
-              {/* Right 6 cards (3 columns x 2 rows) */}
-              <div className="flex-1 grid grid-cols-3 gap-2.5 xl:gap-3">
-                {midRightLogos.map((client, idx) => (
-                  <ClientLogoCard key={`mr-${idx}`} client={client} index={idx + 3} />
-                ))}
+            ) : clientsList.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-6">
+                <div className="reveal-scale relative w-64 xl:w-72 shrink-0 flex flex-col items-center justify-center text-center px-4 py-2 group/center mb-4">
+                  <div className="pointer-events-none absolute inset-0 bg-radial from-[#555d25]/15 via-[#b38e36]/10 to-transparent blur-xl rounded-2xl -z-10" />
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3 py-0.5 text-[10px] sm:text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs mb-1.5">
+                    <span className="relative flex h-2 w-2 items-center justify-center">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#b38e36] opacity-75" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#555d25]" />
+                    </span>
+                    Enterprise Trust
+                  </span>
+                  <h2 className="text-2xl xl:text-3xl font-extrabold text-neutral-900 tracking-tight leading-none">
+                    Our Clients
+                  </h2>
+                  <div className="h-0.5 w-10 bg-gradient-to-r from-[#555d25] to-emerald-500 rounded-full my-2" />
+                  <p className="text-sm xl:text-base italic font-serif text-neutral-600 tracking-wide">
+                    Who We Work With
+                  </p>
+                </div>
+                <div className="p-5 text-center rounded-2xl border border-dashed border-neutral-200 bg-white/70 max-w-md">
+                  <p className="text-xs text-neutral-500 font-medium">
+                    No client brands added yet. Manage and add client logos from the{" "}
+                    <Link to="/admin" className="text-[#555d25] font-bold underline hover:text-[#464d1e]">
+                      Admin Portal
+                    </Link>{" "}
+                    to showcase them here.
+                  </p>
+                </div>
               </div>
+            ) : (
+              <>
+                {/* Row 1 (if row1Clients has items) */}
+                {row1Clients.length > 0 && (
+                  <div
+                    className="grid gap-2.5 xl:gap-3 justify-center"
+                    style={{
+                      gridTemplateColumns: `repeat(${row1Clients.length}, minmax(0, 1fr))`,
+                    }}
+                  >
+                    {row1Clients.map((client, idx) => (
+                      <ClientLogoCard key={`r1-${client.id || idx}`} client={client} index={idx} />
+                    ))}
+                  </div>
+                )}
 
-            </div>
+                {/* Middle Section: Left cards, Center Title Box, Right cards */}
+                <div className="flex items-center justify-center gap-3 xl:gap-3.5">
+                  {/* Left cards */}
+                  <div
+                    className={`flex-1 ${
+                      midLeftClients.length <= 2
+                        ? "flex justify-end gap-2.5 xl:gap-3"
+                        : "grid grid-cols-3 gap-2.5 xl:gap-3"
+                    }`}
+                  >
+                    {midLeftClients.map((client, idx) => (
+                      <div
+                        key={`ml-${client.id || idx}`}
+                        className={midLeftClients.length <= 2 ? "w-full max-w-[220px]" : ""}
+                      >
+                        <ClientLogoCard client={client} index={idx} />
+                      </div>
+                    ))}
+                  </div>
 
-            {/* Row 4 (8 cards) */}
-            <div className="grid grid-cols-8 gap-2.5 xl:gap-3">
-              {row4Logos.map((client, idx) => (
-                <ClientLogoCard key={`r4-${idx}`} client={client} index={idx} />
-              ))}
-            </div>
+                  {/* Center Callout Title Box (Illuminated Focal Hub) */}
+                  <div className="reveal-scale relative w-64 xl:w-72 shrink-0 flex flex-col items-center justify-center text-center px-4 py-2 group/center">
+                    {/* Center radial ambient bloom */}
+                    <div className="pointer-events-none absolute inset-0 bg-radial from-[#555d25]/15 via-[#b38e36]/10 to-transparent blur-xl rounded-2xl -z-10 group-hover/center:scale-125 transition-transform duration-500" />
 
+                    {/* Eyebrow badge */}
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#b38e36]/40 bg-[#fdfaf2] px-3 py-0.5 text-[10px] sm:text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#8c6d23] shadow-2xs mb-1.5">
+                      <span className="relative flex h-2 w-2 items-center justify-center">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#b38e36] opacity-75" />
+                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#555d25]" />
+                      </span>
+                      Enterprise Trust
+                    </span>
+
+                    <h2 className="text-2xl xl:text-3xl font-extrabold text-neutral-900 tracking-tight leading-none">
+                      Our Clients
+                    </h2>
+
+                    <div className="h-0.5 w-10 bg-gradient-to-r from-[#555d25] to-emerald-500 rounded-full my-2" />
+
+                    <p className="text-sm xl:text-base italic font-serif text-neutral-600 tracking-wide">
+                      Who We Work With
+                    </p>
+
+                    <div className="mt-2 inline-flex items-center gap-1.5 text-[10.5px] font-medium text-neutral-500 bg-white/90 border border-neutral-200/80 rounded-full px-2.5 py-0.5 shadow-2xs">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#555d25]" />
+                      <span>Fortune 1000 Leaders</span>
+                    </div>
+                  </div>
+
+                  {/* Right cards */}
+                  <div
+                    className={`flex-1 ${
+                      midRightClients.length <= 2
+                        ? "flex justify-start gap-2.5 xl:gap-3"
+                        : "grid grid-cols-3 gap-2.5 xl:gap-3"
+                    }`}
+                  >
+                    {midRightClients.map((client, idx) => (
+                      <div
+                        key={`mr-${client.id || idx}`}
+                        className={midRightClients.length <= 2 ? "w-full max-w-[220px]" : ""}
+                      >
+                        <ClientLogoCard client={client} index={idx + midLeftClients.length} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Row 4 (if row4Clients has items) */}
+                {row4Clients.length > 0 && (
+                  <div
+                    className="grid gap-2.5 xl:gap-3 justify-center"
+                    style={{
+                      gridTemplateColumns: `repeat(${row4Clients.length}, minmax(0, 1fr))`,
+                    }}
+                  >
+                    {row4Clients.map((client, idx) => (
+                      <ClientLogoCard key={`r4-${client.id || idx}`} client={client} index={idx} />
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
           </div>
 
           {/* Mobile / Tablet Layout */}
@@ -1335,11 +1498,25 @@ function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
-              {allClientLogos.map((client, idx) => (
-                <MobileClientLogoCard key={`mob-${idx}`} client={client} index={idx} />
-              ))}
-            </div>
+            {clientsLoading && clientsList.length === 0 ? (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 animate-pulse">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={`mob-sk-${i}`} className="h-16 sm:h-20 rounded-xl bg-neutral-200/60 border border-neutral-200" />
+                ))}
+              </div>
+            ) : clientsList.length === 0 ? (
+              <div className="p-4 text-center rounded-xl border border-dashed border-neutral-200 bg-white/70">
+                <p className="text-xs text-neutral-500 font-medium">
+                  No client brands added yet.
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
+                {clientsList.map((client, idx) => (
+                  <MobileClientLogoCard key={`mob-${client.id || idx}`} client={client} index={idx} />
+                ))}
+              </div>
+            )}
           </div>
 
           {/* "More Clients" Centered Button with Interactive Micro-Animations */}

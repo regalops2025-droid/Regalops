@@ -4890,7 +4890,7 @@ function AdminDashboard() {
                         {/* Resume Download / View Button */}
                         <div className="mt-5 pt-3 border-t border-border/60">
                           <a
-                            href={`${appItem.cv_path}`}
+                            href={appItem.cv_path ? (appItem.cv_path.startsWith('/') ? appItem.cv_path : `/${appItem.cv_path}`) : `/api/applications/${appItem.id}/resume`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-zinc-900 to-zinc-800 dark:from-zinc-800 dark:to-zinc-700 text-white hover:from-primary hover:to-primary/90 px-4 py-2.5 text-xs font-bold transition-all shadow-sm cursor-pointer text-center"

@@ -1,11 +1,11 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { 
   LogOut, ExternalLink, Trash2, Mail, Phone, Building2, Calendar, User, Inbox, RefreshCw, 
   Plus, Image as ImageIcon, Pencil, Menu, X, Layers, Cpu, Briefcase, MapPin, BookOpen, 
   Compass, Bell, MessageSquare, Copy, Check, Search, LayoutGrid, List, Send, Filter, 
   FileText, Sun, Moon, Download, CheckCircle2, Clock, Sparkles, Share2, Users, 
-  ArrowUpRight, SlidersHorizontal, AlertCircle, Eye, ChevronRight, LayoutDashboard,
+  ArrowUpRight, SlidersHorizontal, AlertCircle, Eye, ChevronRight, ChevronDown, LayoutDashboard,
   Zap, Activity, ShieldCheck, ArrowRight, TrendingUp
 } from "lucide-react";
 import { ImageUploadField } from "@/components/admin/image-upload-field";
@@ -268,6 +268,36 @@ function AdminDashboard() {
   const [industryFormSuccess, setIndustryFormSuccess] = useState(false);
   const [industryFormError, setIndustryFormError] = useState("");
   const [clientSubTab, setClientSubTab] = useState<"cases" | "industries">("cases");
+
+  // Dropdown preset popover states & refs for Technologies and Services forms
+  const [showTechCategoryPresets, setShowTechCategoryPresets] = useState(false);
+  const [showTechStatusPresets, setShowTechStatusPresets] = useState(false);
+  const [showTechBrandsPresets, setShowTechBrandsPresets] = useState(false);
+  const [showServiceIconPresets, setShowServiceIconPresets] = useState(false);
+
+  const techCategoryRef = useRef<HTMLDivElement>(null);
+  const techStatusRef = useRef<HTMLDivElement>(null);
+  const techBrandsRef = useRef<HTMLDivElement>(null);
+  const serviceIconRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (techCategoryRef.current && !techCategoryRef.current.contains(e.target as Node)) {
+        setShowTechCategoryPresets(false);
+      }
+      if (techStatusRef.current && !techStatusRef.current.contains(e.target as Node)) {
+        setShowTechStatusPresets(false);
+      }
+      if (techBrandsRef.current && !techBrandsRef.current.contains(e.target as Node)) {
+        setShowTechBrandsPresets(false);
+      }
+      if (serviceIconRef.current && !serviceIconRef.current.contains(e.target as Node)) {
+        setShowServiceIconPresets(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const navigate = useNavigate();
 
@@ -771,6 +801,9 @@ function AdminDashboard() {
     setTechHowToWork("");
     setTechFormSuccess(false);
     setTechFormError("");
+    setShowTechCategoryPresets(false);
+    setShowTechStatusPresets(false);
+    setShowTechBrandsPresets(false);
   };
 
   // Submit Technology (Create or Update)
@@ -872,6 +905,7 @@ function AdminDashboard() {
     setServiceLink("/solutions");
     setServiceFormSuccess(false);
     setServiceFormError("");
+    setShowServiceIconPresets(false);
   };
 
   // Submit Service (Create or Update)
@@ -3183,132 +3217,236 @@ function AdminDashboard() {
                       </div>
                     </div>
 
-                    {/* Col 2: Category Badge & Presets */}
-                    <div>
+                    {/* Col 2: Category Badge & Presets (Appears on click/focus) */}
+                    <div className="relative" ref={techCategoryRef}>
                       <label className="block text-xs font-semibold text-foreground mb-1">
                         Category Badge
                       </label>
-                      <input
-                        type="text"
-                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono uppercase"
-                        placeholder="e.g. ENTERPRISE WEB & FRONTEND"
-                        value={techCategory}
-                        onChange={(e) => setTechCategory(e.target.value)}
-                        disabled={techFormLoading}
-                      />
-                      <div className="mt-1.5 flex flex-wrap gap-1 max-h-16 overflow-y-auto">
-                        {[
-                          "ENTERPRISE WEB & FRONTEND",
-                          "RUNTIMES & DISTRIBUTED APIS",
-                          "MULTI-CLOUD ARCHITECTURE",
-                          "CONTAINER PLATFORMS & CI/CD",
-                          "MOBILE & CROSS-PLATFORM",
-                          "AI & MACHINE LEARNING",
-                          "ENTERPRISE ERP & SAP",
-                        ].map((cat) => (
-                          <button
-                            key={cat}
-                            type="button"
-                            onClick={() => setTechCategory(cat)}
-                            className={`text-[9px] px-1.5 py-0.5 rounded border font-semibold uppercase transition-all cursor-pointer ${
-                              techCategory.toUpperCase() === cat
-                                ? "bg-primary text-primary-foreground border-primary"
-                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
-                            }`}
-                          >
-                            {cat}
-                          </button>
-                        ))}
+                      <div className="relative">
+                        <input
+                          type="text"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 pr-7 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono uppercase cursor-pointer"
+                          placeholder="e.g. ENTERPRISE WEB & FRONTEND"
+                          value={techCategory}
+                          onFocus={() => setShowTechCategoryPresets(true)}
+                          onClick={() => setShowTechCategoryPresets(true)}
+                          onChange={(e) => {
+                            setTechCategory(e.target.value);
+                            setShowTechCategoryPresets(true);
+                          }}
+                          disabled={techFormLoading}
+                        />
+                        <button
+                          type="button"
+                          tabIndex={-1}
+                          onMouseDown={(e) => e.preventDefault()}
+                          onClick={() => setShowTechCategoryPresets(!showTechCategoryPresets)}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                          title="Toggle category presets"
+                        >
+                          <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${showTechCategoryPresets ? "rotate-180 text-primary" : ""}`} />
+                        </button>
                       </div>
+
+                      {showTechCategoryPresets && (
+                        <div
+                          onMouseDown={(e) => e.preventDefault()}
+                          className="absolute z-30 left-0 right-0 mt-1 p-2 bg-surface dark:bg-card border border-border/90 rounded-xl shadow-xl flex flex-wrap gap-1 max-h-48 overflow-y-auto animate-in fade-in zoom-in-95 duration-150"
+                        >
+                          <div className="w-full flex items-center justify-between pb-1 border-b border-border/50 text-[10px] text-muted-foreground font-semibold mb-1">
+                            <span>Select category preset:</span>
+                            <button
+                              type="button"
+                              onClick={() => setShowTechCategoryPresets(false)}
+                              className="hover:text-foreground cursor-pointer px-1 text-xs"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                          {[
+                            "ENTERPRISE WEB & FRONTEND",
+                            "RUNTIMES & DISTRIBUTED APIS",
+                            "MULTI-CLOUD ARCHITECTURE",
+                            "CONTAINER PLATFORMS & CI/CD",
+                            "MOBILE & CROSS-PLATFORM",
+                            "AI & MACHINE LEARNING",
+                            "ENTERPRISE ERP & SAP",
+                          ].map((cat) => (
+                            <button
+                              key={cat}
+                              type="button"
+                              onClick={() => {
+                                setTechCategory(cat);
+                                setShowTechCategoryPresets(false);
+                              }}
+                              className={`text-[9px] px-1.5 py-0.5 rounded border font-semibold uppercase transition-all cursor-pointer ${
+                                techCategory.toUpperCase() === cat
+                                  ? "bg-primary text-primary-foreground border-primary shadow-xs"
+                                  : "bg-background text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                              }`}
+                            >
+                              {cat}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
 
-                    {/* Col 3: Status Badge & Presets */}
-                    <div>
+                    {/* Col 3: Status Badge & Presets (Appears on click/focus) */}
+                    <div className="relative" ref={techStatusRef}>
                       <label className="block text-xs font-semibold text-foreground mb-1">
                         Status Badge
                       </label>
-                      <input
-                        type="text"
-                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono uppercase"
-                        placeholder="e.g. PRODUCTION READY"
-                        value={techStatusBadge}
-                        onChange={(e) => setTechStatusBadge(e.target.value)}
-                        disabled={techFormLoading}
-                      />
-                      <div className="mt-1.5 flex flex-wrap gap-1">
-                        {["PRODUCTION READY", "ENTERPRISE SCALE", "HIGH AVAILABILITY", "LATEST STABLE"].map((badge) => (
-                          <button
-                            key={badge}
-                            type="button"
-                            onClick={() => setTechStatusBadge(badge)}
-                            className={`text-[9px] px-1.5 py-0.5 rounded border font-semibold uppercase transition-all cursor-pointer ${
-                              techStatusBadge.toUpperCase() === badge
-                                ? "bg-emerald-500 text-white border-emerald-600"
-                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
-                            }`}
-                          >
-                            {badge}
-                          </button>
-                        ))}
+                      <div className="relative">
+                        <input
+                          type="text"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 pr-7 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono uppercase cursor-pointer"
+                          placeholder="e.g. PRODUCTION READY"
+                          value={techStatusBadge}
+                          onFocus={() => setShowTechStatusPresets(true)}
+                          onClick={() => setShowTechStatusPresets(true)}
+                          onChange={(e) => {
+                            setTechStatusBadge(e.target.value);
+                            setShowTechStatusPresets(true);
+                          }}
+                          disabled={techFormLoading}
+                        />
+                        <button
+                          type="button"
+                          tabIndex={-1}
+                          onMouseDown={(e) => e.preventDefault()}
+                          onClick={() => setShowTechStatusPresets(!showTechStatusPresets)}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                          title="Toggle status presets"
+                        >
+                          <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${showTechStatusPresets ? "rotate-180 text-emerald-500" : ""}`} />
+                        </button>
                       </div>
+
+                      {showTechStatusPresets && (
+                        <div
+                          onMouseDown={(e) => e.preventDefault()}
+                          className="absolute z-30 left-0 right-0 mt-1 p-2 bg-surface dark:bg-card border border-border/90 rounded-xl shadow-xl flex flex-wrap gap-1 animate-in fade-in zoom-in-95 duration-150"
+                        >
+                          <div className="w-full flex items-center justify-between pb-1 border-b border-border/50 text-[10px] text-muted-foreground font-semibold mb-1">
+                            <span>Select status preset:</span>
+                            <button
+                              type="button"
+                              onClick={() => setShowTechStatusPresets(false)}
+                              className="hover:text-foreground cursor-pointer px-1 text-xs"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                          {["PRODUCTION READY", "ENTERPRISE SCALE", "HIGH AVAILABILITY", "LATEST STABLE"].map((badge) => (
+                            <button
+                              key={badge}
+                              type="button"
+                              onClick={() => {
+                                setTechStatusBadge(badge);
+                                setShowTechStatusPresets(false);
+                              }}
+                              className={`text-[9px] px-1.5 py-0.5 rounded border font-semibold uppercase transition-all cursor-pointer ${
+                                techStatusBadge.toUpperCase() === badge
+                                  ? "bg-emerald-500 text-white border-emerald-600 shadow-xs"
+                                  : "bg-background text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                              }`}
+                            >
+                              {badge}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
 
-                  {/* Row 2: Brand Logos Toggle Chips (horizontal bar) */}
-                  <div className="pt-0.5">
+                  {/* Row 2: Brand Logos Toggle Chips (Appears on click/focus) */}
+                  <div className="pt-0.5 relative" ref={techBrandsRef}>
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
                       <label className="text-xs font-semibold text-foreground">
                         Brand Logos / Frameworks (Comma separated)
                       </label>
-                      <span className="text-[10px] text-muted-foreground">Click chips to toggle dynamically</span>
+                      <span className="text-[10px] text-muted-foreground">Click field to select / toggle brand chips</span>
                     </div>
-                    <input
-                      type="text"
-                      className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                      placeholder="e.g. React, Next.js, TypeScript"
-                      value={techBrands}
-                      onChange={(e) => setTechBrands(e.target.value)}
-                      disabled={techFormLoading}
-                    />
-                    <div className="mt-1 flex flex-wrap gap-1 max-h-16 overflow-y-auto p-1 bg-background rounded-lg border border-border/70">
-                      {[
-                        "React", "Next.js", "TypeScript", "Node.js", "Python",
-                        "AWS", "Azure", "GCP", "Kubernetes", "Docker",
-                        "Terraform", "Apple iOS", "Android", "Flutter",
-                        "PyTorch", "TensorFlow", "OpenAI", "PostgreSQL",
-                        "Redis", "SAP"
-                      ].map((b) => {
-                        const currentSelected = techBrands
-                          .split(",")
-                          .map((s) => s.trim().toLowerCase())
-                          .includes(b.toLowerCase());
-                        return (
+                    <div className="relative">
+                      <input
+                        type="text"
+                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 pr-7 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary cursor-pointer"
+                        placeholder="e.g. React, Next.js, TypeScript"
+                        value={techBrands}
+                        onFocus={() => setShowTechBrandsPresets(true)}
+                        onClick={() => setShowTechBrandsPresets(true)}
+                        onChange={(e) => setTechBrands(e.target.value)}
+                        disabled={techFormLoading}
+                      />
+                      <button
+                        type="button"
+                        tabIndex={-1}
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => setShowTechBrandsPresets(!showTechBrandsPresets)}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                        title="Toggle brand logo chips"
+                      >
+                        <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${showTechBrandsPresets ? "rotate-180 text-primary" : ""}`} />
+                      </button>
+                    </div>
+
+                    {showTechBrandsPresets && (
+                      <div
+                        onMouseDown={(e) => e.preventDefault()}
+                        className="absolute z-30 left-0 right-0 mt-1 p-2 bg-surface dark:bg-card border border-border/90 rounded-xl shadow-xl animate-in fade-in zoom-in-95 duration-150"
+                      >
+                        <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-border/50 text-[10px] text-muted-foreground font-semibold">
+                          <span>Click chips to add/remove frameworks:</span>
                           <button
-                            key={b}
                             type="button"
-                            onClick={() => {
-                              const current = techBrands
-                                .split(",")
-                                .map((s) => s.trim())
-                                .filter(Boolean);
-                              const exists = current.some((c) => c.toLowerCase() === b.toLowerCase());
-                              if (exists) {
-                                setTechBrands(current.filter((c) => c.toLowerCase() !== b.toLowerCase()).join(", "));
-                              } else {
-                                setTechBrands([...current, b].join(", "));
-                              }
-                            }}
-                            className={`text-[9.5px] px-1.5 py-0.5 rounded font-semibold transition-all cursor-pointer border ${
-                              currentSelected
-                                ? "bg-primary text-primary-foreground border-primary shadow-2xs"
-                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
-                            }`}
+                            onClick={() => setShowTechBrandsPresets(false)}
+                            className="hover:text-foreground font-bold cursor-pointer px-2 py-0.5 rounded bg-primary text-primary-foreground text-[10px]"
                           >
-                            {currentSelected ? `✓ ${b}` : `+ ${b}`}
+                            Done ✓
                           </button>
-                        );
-                      })}
-                    </div>
+                        </div>
+                        <div className="flex flex-wrap gap-1 max-h-36 overflow-y-auto p-1 bg-background rounded-lg border border-border/70">
+                          {[
+                            "React", "Next.js", "TypeScript", "Node.js", "Python",
+                            "AWS", "Azure", "GCP", "Kubernetes", "Docker",
+                            "Terraform", "Apple iOS", "Android", "Flutter",
+                            "PyTorch", "TensorFlow", "OpenAI", "PostgreSQL",
+                            "Redis", "SAP"
+                          ].map((b) => {
+                            const currentSelected = techBrands
+                              .split(",")
+                              .map((s) => s.trim().toLowerCase())
+                              .includes(b.toLowerCase());
+                            return (
+                              <button
+                                key={b}
+                                type="button"
+                                onClick={() => {
+                                  const current = techBrands
+                                    .split(",")
+                                    .map((s) => s.trim())
+                                    .filter(Boolean);
+                                  const exists = current.some((c) => c.toLowerCase() === b.toLowerCase());
+                                  if (exists) {
+                                    setTechBrands(current.filter((c) => c.toLowerCase() !== b.toLowerCase()).join(", "));
+                                  } else {
+                                    setTechBrands([...current, b].join(", "));
+                                  }
+                                }}
+                                className={`text-[9.5px] px-1.5 py-0.5 rounded font-semibold transition-all cursor-pointer border ${
+                                  currentSelected
+                                    ? "bg-primary text-primary-foreground border-primary shadow-2xs"
+                                    : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                                }`}
+                              >
+                                {currentSelected ? `✓ ${b}` : `+ ${b}`}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Row 3: Description & How It Works (2-column layout) */}
@@ -3574,46 +3712,84 @@ function AdminDashboard() {
                       </div>
                     </div>
 
-                    {/* Col 2: Service Icon Type & Presets */}
-                    <div>
+                    {/* Col 2: Service Icon Type & Presets (Appears on click/focus) */}
+                    <div className="relative" ref={serviceIconRef}>
                       <label className="block text-xs font-semibold text-foreground mb-1">
                         Service Icon Type
                       </label>
-                      <input
-                        type="text"
-                        className="w-full rounded-lg border border-input bg-background px-3 py-1.5 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono"
-                        placeholder="e.g. tech-consulting"
-                        value={serviceIcon}
-                        onChange={(e) => setServiceIcon(e.target.value)}
-                        disabled={serviceFormLoading}
-                      />
-                      <div className="mt-1.5 flex flex-wrap gap-1 max-h-16 overflow-y-auto p-1 bg-background rounded-lg border border-border/70">
-                        {[
-                          { id: "tech-consulting", label: "Tech Consulting" },
-                          { id: "bpo", label: "BPO / Operations" },
-                          { id: "custom-app", label: "Custom App Dev" },
-                          { id: "big-data", label: "Big Data" },
-                          { id: "mobile-solutions", label: "Mobile Solutions" },
-                          { id: "cloud-consulting", label: "Cloud Consulting" },
-                          { id: "project-implementation", label: "Implementation" },
-                          { id: "staffing-solutions", label: "Staffing" },
-                          { id: "ai-solutions", label: "AI & ML" },
-                          { id: "cyber-security", label: "Cyber Security" },
-                        ].map((iconItem) => (
-                          <button
-                            key={iconItem.id}
-                            type="button"
-                            onClick={() => setServiceIcon(iconItem.id)}
-                            className={`text-[9px] px-1.5 py-0.5 rounded border font-semibold transition-all cursor-pointer ${
-                              serviceIcon === iconItem.id
-                                ? "bg-primary text-primary-foreground border-primary"
-                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
-                            }`}
-                          >
-                            {iconItem.label}
-                          </button>
-                        ))}
+                      <div className="relative">
+                        <input
+                          type="text"
+                          className="w-full rounded-lg border border-input bg-background px-3 py-1.5 pr-7 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono cursor-pointer"
+                          placeholder="e.g. tech-consulting"
+                          value={serviceIcon}
+                          onFocus={() => setShowServiceIconPresets(true)}
+                          onClick={() => setShowServiceIconPresets(true)}
+                          onChange={(e) => {
+                            setServiceIcon(e.target.value);
+                            setShowServiceIconPresets(true);
+                          }}
+                          disabled={serviceFormLoading}
+                        />
+                        <button
+                          type="button"
+                          tabIndex={-1}
+                          onMouseDown={(e) => e.preventDefault()}
+                          onClick={() => setShowServiceIconPresets(!showServiceIconPresets)}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                          title="Toggle service icon presets"
+                        >
+                          <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${showServiceIconPresets ? "rotate-180 text-primary" : ""}`} />
+                        </button>
                       </div>
+
+                      {showServiceIconPresets && (
+                        <div
+                          onMouseDown={(e) => e.preventDefault()}
+                          className="absolute z-30 left-0 right-0 mt-1 p-2 bg-surface dark:bg-card border border-border/90 rounded-xl shadow-xl animate-in fade-in zoom-in-95 duration-150"
+                        >
+                          <div className="flex items-center justify-between pb-1 border-b border-border/50 text-[10px] text-muted-foreground font-semibold mb-1.5">
+                            <span>Select service icon preset:</span>
+                            <button
+                              type="button"
+                              onClick={() => setShowServiceIconPresets(false)}
+                              className="hover:text-foreground cursor-pointer px-1 text-xs"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                          <div className="flex flex-wrap gap-1 max-h-36 overflow-y-auto">
+                            {[
+                              { id: "tech-consulting", label: "Tech Consulting" },
+                              { id: "bpo", label: "BPO / Operations" },
+                              { id: "custom-app", label: "Custom App Dev" },
+                              { id: "big-data", label: "Big Data" },
+                              { id: "mobile-solutions", label: "Mobile Solutions" },
+                              { id: "cloud-consulting", label: "Cloud Consulting" },
+                              { id: "project-implementation", label: "Implementation" },
+                              { id: "staffing-solutions", label: "Staffing" },
+                              { id: "ai-solutions", label: "AI & ML" },
+                              { id: "cyber-security", label: "Cyber Security" },
+                            ].map((iconItem) => (
+                              <button
+                                key={iconItem.id}
+                                type="button"
+                                onClick={() => {
+                                  setServiceIcon(iconItem.id);
+                                  setShowServiceIconPresets(false);
+                                }}
+                                className={`text-[9px] px-2 py-0.5 rounded border font-semibold transition-all cursor-pointer ${
+                                  serviceIcon === iconItem.id
+                                    ? "bg-primary text-primary-foreground border-primary shadow-xs"
+                                    : "bg-background text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                                }`}
+                              >
+                                {iconItem.label}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     {/* Col 3: Description */}

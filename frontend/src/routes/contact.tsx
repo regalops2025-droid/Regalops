@@ -34,7 +34,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 const field =
-  "mt-1 w-full rounded-xl border border-input bg-background px-3 py-1.5 sm:py-2 text-xs sm:text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary/20";
+  "mt-0.5 w-full rounded-lg border border-input bg-background px-2.5 py-1 text-xs outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary/20";
 
 function Contact() {
   const { jobId, jobTitle } = Route.useSearch();
@@ -184,11 +184,11 @@ function Contact() {
 
   return (
     <SiteLayout hideFooter noScroll hideStickyActions>
-      <section className="hero-glow flex-1 min-h-0 w-full flex flex-col items-center justify-start lg:justify-center py-4 sm:py-6 lg:py-6 px-3 sm:px-6 lg:px-8 pb-12 lg:pb-6 overflow-y-visible lg:overflow-y-auto touch-pan-y">
-        <div className="w-full max-w-[1440px] mx-auto rounded-3xl border border-border/80 bg-surface shadow-2xl grid grid-cols-1 lg:grid-cols-12 items-stretch my-2 lg:my-auto overflow-hidden">
+      <section className="hero-glow flex-1 min-h-0 w-full flex flex-col items-center justify-start lg:justify-center py-2 sm:py-3 lg:py-4 px-3 sm:px-5 lg:px-6 pb-6 lg:pb-4 overflow-y-visible lg:overflow-y-auto touch-pan-y">
+        <div className="w-full max-w-[1440px] mx-auto rounded-2xl border border-border/80 bg-surface shadow-2xl grid grid-cols-1 lg:grid-cols-12 items-stretch my-1 lg:my-auto overflow-hidden">
           
           {/* LEFT COLUMN: Visual Image Card & Executive Contact Details */}
-          <div className="lg:col-span-5 relative overflow-hidden bg-neutral-950 text-white flex flex-col justify-between p-5 sm:p-6 lg:p-7 space-y-3 sm:space-y-4">
+          <div className="lg:col-span-5 relative overflow-hidden bg-neutral-950 text-white flex flex-col justify-between p-3.5 sm:p-4 lg:p-5 space-y-2 sm:space-y-2.5">
             {/* Image Background */}
             <div className="absolute inset-0 z-0">
               <img
@@ -202,13 +202,13 @@ function Contact() {
 
             {/* Top Details */}
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3 py-0.5 backdrop-blur-md mb-2 sm:mb-2.5">
-                <span className="h-2 w-2 rounded-full bg-[#a4c965] animate-pulse" />
-                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#a4c965]">
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/15 px-2.5 py-0.5 backdrop-blur-md mb-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#a4c965] animate-pulse" />
+                <span className="text-[9.5px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-[#a4c965]">
                   {jobTitle ? "Careers Gateway" : "Architecture Consultation"}
                 </span>
               </div>
-              <h2 className="text-xl sm:text-2xl xl:text-3xl font-extrabold text-white tracking-tight leading-tight">
+              <h2 className="text-lg sm:text-xl xl:text-2xl font-extrabold text-white tracking-tight leading-tight">
                 {jobTitle ? (
                   <>
                     Join Our Principal <br />
@@ -221,7 +221,7 @@ function Contact() {
                   </>
                 )}
               </h2>
-              <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-sm">
+              <p className="mt-1 text-xs text-neutral-300 leading-relaxed max-w-sm">
                 {jobTitle
                   ? "Submit your application directly to our principal engineering leads. Fast-track technical evaluation."
                   : "Schedule an architectural review with our principal engineers. We dive straight into technical realities."}
@@ -229,26 +229,26 @@ function Contact() {
             </div>
 
             {/* Middle Card: Global Hubs & Direct Contact */}
-            <div className="relative z-10 rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md p-3.5 sm:p-4 space-y-2.5 shadow-lg">
-              <div className="flex items-center gap-2.5">
-                <div className="h-8 w-8 rounded-lg bg-[#555d25] flex items-center justify-center shrink-0 text-white shadow-xs">
-                  <Mail className="h-3.5 w-3.5" />
+            <div className="relative z-10 rounded-xl border border-white/10 bg-white/10 backdrop-blur-md p-2.5 sm:p-3 space-y-2 shadow-md">
+              <div className="flex items-center gap-2">
+                <div className="h-7 w-7 rounded-md bg-[#555d25] flex items-center justify-center shrink-0 text-white shadow-xs">
+                  <Mail className="h-3 w-3" />
                 </div>
                 <div className="min-w-0">
-                  <span className="text-[9.5px] font-bold uppercase tracking-wider text-neutral-400 block">Direct Engineering Contact</span>
-                  <a href="mailto:Info@regalops.com" className="text-xs sm:text-sm font-bold text-white hover:text-[#a4c965] transition-colors truncate block">
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-neutral-400 block">Direct Engineering Contact</span>
+                  <a href="mailto:Info@regalops.com" className="text-xs font-bold text-white hover:text-[#a4c965] transition-colors truncate block">
                     Info@regalops.com
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5 pt-2 border-t border-white/10">
-                <div className="h-8 w-8 rounded-lg bg-neutral-800 flex items-center justify-center shrink-0 text-[#a4c965]">
-                  <MapPin className="h-3.5 w-3.5" />
+              <div className="flex items-center gap-2 pt-1.5 border-t border-white/10">
+                <div className="h-7 w-7 rounded-md bg-neutral-800 flex items-center justify-center shrink-0 text-[#a4c965]">
+                  <MapPin className="h-3 w-3" />
                 </div>
                 <div className="min-w-0">
-                  <span className="text-[9.5px] font-bold uppercase tracking-wider text-neutral-400 block">Global Engineering Hubs</span>
-                  <p className="text-[11px] font-medium text-neutral-200 truncate">
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-neutral-400 block">Global Engineering Hubs</span>
+                  <p className="text-[10.5px] font-medium text-neutral-200 truncate">
                     Atlanta, GA &bull; Hyderabad &bull; Warangal
                   </p>
                 </div>
@@ -256,37 +256,37 @@ function Contact() {
             </div>
 
             {/* Bottom Trust Pills */}
-            <div className="relative z-10 flex flex-wrap gap-1.5 text-[10.5px] font-medium text-neutral-300 pt-1 pb-1">
-              <span className="inline-flex items-center gap-1 rounded-full bg-black/50 border border-white/20 px-2.5 py-1 backdrop-blur-sm shadow-xs">
+            <div className="relative z-10 flex flex-wrap gap-1 text-[9.5px] font-medium text-neutral-300 pt-0.5 pb-0.5">
+              <span className="inline-flex items-center gap-1 rounded-full bg-black/50 border border-white/20 px-2 py-0.5 backdrop-blur-sm shadow-xs">
                 ✓ 24h SLA Response
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-black/50 border border-white/20 px-2.5 py-1 backdrop-blur-sm shadow-xs">
+              <span className="inline-flex items-center gap-1 rounded-full bg-black/50 border border-white/20 px-2 py-0.5 backdrop-blur-sm shadow-xs">
                 ✓ 100% NDA Protected
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-black/50 border border-white/20 px-2.5 py-1 backdrop-blur-sm shadow-xs">
+              <span className="inline-flex items-center gap-1 rounded-full bg-black/50 border border-white/20 px-2 py-0.5 backdrop-blur-sm shadow-xs">
                 ✓ Senior Engineers Only
               </span>
             </div>
           </div>
 
           {/* RIGHT COLUMN: Contact / Application Form */}
-          <div className="lg:col-span-7 p-4 sm:p-5 lg:p-6 xl:p-8 flex flex-col justify-center bg-card overflow-y-visible lg:overflow-y-auto">
-            <form className="space-y-2.5 sm:space-y-3 w-full" onSubmit={handleSubmit}>
-              <div className="border-b border-border/60 pb-2 mb-1">
+          <div className="lg:col-span-7 p-3 sm:p-4 lg:p-5 flex flex-col justify-center bg-card overflow-y-visible lg:overflow-y-auto">
+            <form className="space-y-1.5 sm:space-y-2 w-full" onSubmit={handleSubmit}>
+              <div className="border-b border-border/60 pb-1 mb-0.5">
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+                    <span className="text-[9.5px] sm:text-[10px] font-bold uppercase tracking-[0.18em] text-primary">
                       {jobTitle ? "Career Application" : "Get In Touch"}
                     </span>
-                    <h1 className="text-lg sm:text-xl xl:text-2xl font-bold tracking-tight text-foreground">
+                    <h1 className="text-base sm:text-lg xl:text-xl font-bold tracking-tight text-foreground">
                       {jobTitle ? `Apply for ${jobTitle}` : "Send an Engineering Enquiry"}
                     </h1>
                   </div>
-                  <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
+                  <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 text-[9.5px] font-bold text-emerald-600 dark:text-emerald-400">
                     Active On-Call Engineers
                   </span>
                 </div>
-                <p className="mt-0.5 text-xs text-muted-foreground">
+                <p className="mt-0.5 text-[11px] text-muted-foreground">
                   {jobTitle
                     ? "Fill in your details below and upload your CV/Resume."
                     : "Tell us about your system architecture, project scope, or technical challenges."}
@@ -294,21 +294,21 @@ function Contact() {
               </div>
 
               {status === "success" && (
-                <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-2.5 text-xs sm:text-sm text-emerald-600">
+                <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-2 text-xs text-emerald-600">
                   {jobTitle
                     ? "Job application submitted successfully! Our recruiters will review your CV shortly."
                     : "Enquiry sent successfully! A senior engineer will review it and reply within one business day."}
                 </div>
               )}
               {status === "error" && (
-                <div className="rounded-xl bg-destructive/10 border border-destructive/30 p-2.5 text-xs sm:text-sm text-destructive">
+                <div className="rounded-lg bg-destructive/10 border border-destructive/30 p-2 text-xs text-destructive">
                   {errorMsg}
                 </div>
               )}
 
               {/* Row 1: Full Name & Email Address */}
-              <div className="grid gap-2.5 sm:gap-3 sm:grid-cols-2">
-                <label className="block text-xs font-semibold text-foreground">
+              <div className="grid gap-1.5 sm:gap-2 sm:grid-cols-2">
+                <label className="block text-[11px] font-semibold text-foreground">
                   Full Name*
                   <input
                     className={field}
@@ -320,7 +320,7 @@ function Contact() {
                   />
                 </label>
 
-                <label className="block text-xs font-semibold text-foreground">
+                <label className="block text-[11px] font-semibold text-foreground">
                   Email Address*
                   <input
                     type="email"
@@ -336,11 +336,11 @@ function Contact() {
 
               {jobTitle ? (
                 /* CV upload field for jobs application */
-                <div className="grid gap-2.5 sm:gap-3 sm:grid-cols-2">
-                  <label className="block text-xs font-semibold text-foreground">
+                <div className="grid gap-1.5 sm:gap-2 sm:grid-cols-2">
+                  <label className="block text-[11px] font-semibold text-foreground">
                     Mobile*
                     <div
-                      className={`relative mt-1 flex rounded-xl border bg-background transition-all overflow-hidden ${
+                      className={`relative mt-0.5 flex rounded-lg border bg-background transition-all overflow-hidden ${
                         mobileTouched && mobileError
                           ? "border-rose-500 focus-within:border-rose-500 ring-1 ring-rose-500/20"
                           : mobile.length === 10 && !mobileError
@@ -348,7 +348,7 @@ function Contact() {
                             : "border-input focus-within:border-primary"
                       }`}
                     >
-                      <span className="inline-flex items-center px-2.5 text-xs font-semibold text-muted-foreground bg-secondary/60 border-r border-border select-none shrink-0">
+                      <span className="inline-flex items-center px-2 text-[11px] font-semibold text-muted-foreground bg-secondary/60 border-r border-border select-none shrink-0">
                         +91
                       </span>
                       <input
@@ -356,7 +356,7 @@ function Contact() {
                         inputMode="numeric"
                         maxLength={10}
                         pattern="[6-9][0-9]{9}"
-                        className="w-full bg-transparent px-3 py-1.5 sm:py-2 text-xs sm:text-sm outline-none placeholder:text-muted-foreground text-foreground"
+                        className="w-full bg-transparent px-2.5 py-1 text-xs outline-none placeholder:text-muted-foreground text-foreground"
                         placeholder="98765 43210"
                         value={mobile}
                         onChange={handleMobileChange}
@@ -368,7 +368,7 @@ function Contact() {
                   </label>
 
                   <div>
-                    <label className="block text-xs font-semibold text-foreground mb-1">
+                    <label className="block text-[11px] font-semibold text-foreground mb-0.5">
                       Upload Resume / CV (PDF, max 5MB)*
                     </label>
                     <input
@@ -377,9 +377,9 @@ function Contact() {
                       onChange={(e) => setCvFile(e.target.files?.[0] || null)}
                       required
                       disabled={status === "loading"}
-                      className="w-full text-xs text-zinc-500
-                        file:mr-3 file:py-1.5 file:px-3
-                        file:rounded-xl file:border-0
+                      className="w-full text-[11px] text-zinc-500
+                        file:mr-2 file:py-1 file:px-2.5
+                        file:rounded-lg file:border-0
                         file:text-xs file:font-semibold
                         file:bg-primary file:text-primary-foreground
                         hover:file:opacity-90 file:cursor-pointer"
@@ -389,11 +389,11 @@ function Contact() {
               ) : (
                 /* Standard enquiry address and comments field */
                 <>
-                  <div className="grid gap-2.5 sm:gap-3 sm:grid-cols-2">
-                    <label className="block text-xs font-semibold text-foreground">
+                  <div className="grid gap-1.5 sm:gap-2 sm:grid-cols-2">
+                    <label className="block text-[11px] font-semibold text-foreground">
                       Mobile*
                       <div
-                        className={`relative mt-1 flex rounded-xl border bg-background transition-all overflow-hidden ${
+                        className={`relative mt-0.5 flex rounded-lg border bg-background transition-all overflow-hidden ${
                           mobileTouched && mobileError
                             ? "border-rose-500 focus-within:border-rose-500 ring-1 ring-rose-500/20"
                             : mobile.length === 10 && !mobileError
@@ -401,7 +401,7 @@ function Contact() {
                               : "border-input focus-within:border-primary"
                         }`}
                       >
-                        <span className="inline-flex items-center px-2.5 text-xs font-semibold text-muted-foreground bg-secondary/60 border-r border-border select-none shrink-0">
+                        <span className="inline-flex items-center px-2 text-[11px] font-semibold text-muted-foreground bg-secondary/60 border-r border-border select-none shrink-0">
                           +91
                         </span>
                         <input
@@ -409,7 +409,7 @@ function Contact() {
                           inputMode="numeric"
                           maxLength={10}
                           pattern="[6-9][0-9]{9}"
-                          className="w-full bg-transparent px-3 py-1.5 sm:py-2 text-xs sm:text-sm outline-none placeholder:text-muted-foreground text-foreground"
+                          className="w-full bg-transparent px-2.5 py-1 text-xs outline-none placeholder:text-muted-foreground text-foreground"
                           placeholder="98765 43210"
                           value={mobile}
                           onChange={handleMobileChange}
@@ -420,7 +420,7 @@ function Contact() {
                       </div>
                     </label>
 
-                    <label className="block text-xs font-semibold text-foreground">
+                    <label className="block text-[11px] font-semibold text-foreground">
                       How can we help you?*
                       <select
                         className={field}
@@ -429,7 +429,7 @@ function Contact() {
                         required
                         disabled={status === "loading"}
                       >
-                        <option value="">-- Select Service Area --</option>
+                        <option value="">- Select Service Area -</option>
                         <option value="Enterprise Software">Enterprise Software</option>
                         <option value="Cloud Migration">Cloud Migration</option>
                         <option value="Data & Analytics">Data & Analytics</option>
@@ -441,8 +441,8 @@ function Contact() {
                   </div>
 
                   {/* 3-column location row */}
-                  <div className="grid gap-2.5 sm:gap-3 sm:grid-cols-3">
-                    <label className="block text-xs font-semibold text-foreground">
+                  <div className="grid gap-1.5 sm:gap-2 sm:grid-cols-3">
+                    <label className="block text-[11px] font-semibold text-foreground">
                       City
                       <input
                         className={field}
@@ -453,7 +453,7 @@ function Contact() {
                       />
                     </label>
 
-                    <label className="block text-xs font-semibold text-foreground">
+                    <label className="block text-[11px] font-semibold text-foreground">
                       Select State
                       <select
                         className={field}
@@ -461,7 +461,7 @@ function Contact() {
                         onChange={(e) => setState(e.target.value)}
                         disabled={status === "loading"}
                       >
-                        <option value="">-- State --</option>
+                        <option value="">- State -</option>
                         <option value="Tamil Nadu">Tamil Nadu</option>
                         <option value="Karnataka">Karnataka</option>
                         <option value="Telangana">Telangana</option>
@@ -474,7 +474,7 @@ function Contact() {
                       </select>
                     </label>
 
-                    <label className="block text-xs font-semibold text-foreground">
+                    <label className="block text-[11px] font-semibold text-foreground">
                       Select Country
                       <select
                         className={field}
@@ -482,7 +482,7 @@ function Contact() {
                         onChange={(e) => setCountry(e.target.value)}
                         disabled={status === "loading"}
                       >
-                        <option value="">-- Country --</option>
+                        <option value="">- Country -</option>
                         <option value="India">India</option>
                         <option value="United States">United States</option>
                         <option value="United Kingdom">United Kingdom</option>
@@ -492,7 +492,7 @@ function Contact() {
                     </label>
                   </div>
 
-                  <label className="block text-xs font-semibold text-foreground">
+                  <label className="block text-[11px] font-semibold text-foreground">
                     Additional Comments*
                     <textarea
                       rows={2}
@@ -510,7 +510,7 @@ function Contact() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full rounded-xl bg-primary px-5 py-2.5 text-xs sm:text-sm font-semibold text-primary-foreground transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 disabled:opacity-50 cursor-pointer shadow-sm mt-2 sm:mt-2.5 mb-1"
+                className="w-full rounded-lg bg-primary px-4 py-2 text-xs sm:text-sm font-semibold text-primary-foreground transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 disabled:opacity-50 cursor-pointer shadow-sm mt-1 sm:mt-1.5 mb-0.5"
               >
                 {status === "loading" ? "Submitting..." : jobTitle ? "Submit Application" : "Send Enquiry"}
               </button>

@@ -141,6 +141,13 @@ function Solutions() {
                             <img
                               src={item.image || "/solutions-team.jpg"}
                               alt={item.name}
+                              onError={(e) => {
+                                const target = e.currentTarget;
+                                if (!target.dataset.fallback) {
+                                  target.dataset.fallback = "true";
+                                  target.src = "/solutions-team.jpg";
+                                }
+                              }}
                               className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                             />
 
@@ -185,8 +192,15 @@ function Solutions() {
                           >
                             {/* Main Image - Absolutely positioned & center-cropped so it never inflates card height */}
                             <img
-                              src={item.image || "/solutions-bpo.jpg"}
+                              src={item.image || "/solutions-training.jpg"}
                               alt={item.name}
+                              onError={(e) => {
+                                const target = e.currentTarget;
+                                if (!target.dataset.fallback) {
+                                  target.dataset.fallback = "true";
+                                  target.src = "/solutions-training.jpg";
+                                }
+                              }}
                               className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                             />
 

@@ -3074,6 +3074,13 @@ function AdminDashboard() {
                             <img
                               src={item.image}
                               alt={item.name}
+                              onError={(e) => {
+                                const target = e.currentTarget;
+                                if (!target.dataset.fallback) {
+                                  target.dataset.fallback = "true";
+                                  target.src = "/solutions-training.jpg";
+                                }
+                              }}
                               className="h-16 w-16 rounded-xl object-cover border border-border/80 shrink-0"
                             />
                           ) : (

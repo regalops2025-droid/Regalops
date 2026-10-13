@@ -39,8 +39,19 @@ const staticUploadOptions = {
 };
 app.use("/uploads", express.static(path.join(__dirname, "uploads"), staticUploadOptions));
 app.use("/uploads", express.static(path.join(__dirname, "../uploads"), staticUploadOptions));
-// Return clean 404 for missing uploads so SPA route doesn't return index.html
+// Return clean 404 for missing uploads or serve graceful fallback for images
 app.use("/uploads", (req, res) => {
+  const ext = path.extname(req.path).toLowerCase();
+  if ([".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"].includes(ext)) {
+    const rootFallback = path.join(__dirname, "../solutions-training.jpg");
+    if (fs.existsSync(rootFallback)) {
+      return res.sendFile(rootFallback);
+    }
+    const publicFallback = path.join(__dirname, "../frontend/public/solutions-training.jpg");
+    if (fs.existsSync(publicFallback)) {
+      return res.sendFile(publicFallback);
+    }
+  }
   res.status(404).json({ error: "Upload not found" });
 });
 

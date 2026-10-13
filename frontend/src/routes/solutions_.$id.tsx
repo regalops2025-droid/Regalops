@@ -282,6 +282,13 @@ function SolutionDetail() {
                 <img
                   src={solution.image}
                   alt={solution.name}
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.dataset.fallback) {
+                      target.dataset.fallback = "true";
+                      target.src = "/solutions-training.jpg";
+                    }
+                  }}
                   className="w-full h-auto max-h-[520px] object-contain rounded-3xl"
                 />
               </div>

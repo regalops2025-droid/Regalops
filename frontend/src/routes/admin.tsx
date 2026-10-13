@@ -751,6 +751,12 @@ function AdminDashboard() {
     setTechHowToWork(item.how_to_work || "");
     setTechFormSuccess(false);
     setTechFormError("");
+    setTimeout(() => {
+      const formEl = document.getElementById("tech-form-card");
+      if (formEl) {
+        formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 50);
   };
 
   // Cancel Tech Edit Mode
@@ -849,6 +855,12 @@ function AdminDashboard() {
     setServiceLink(item.link || "/solutions");
     setServiceFormSuccess(false);
     setServiceFormError("");
+    setTimeout(() => {
+      const formEl = document.getElementById("service-form-card");
+      if (formEl) {
+        formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 50);
   };
 
   // Cancel Service Edit Mode
@@ -958,9 +970,15 @@ function AdminDashboard() {
     setClientName(item.name);
     setClientSector(item.sector || "Banking");
     setClientImage(item.image || "");
-    setClientDesc(item.description);
+    setClientDesc(item.description || "");
     setClientFormSuccess(false);
     setClientFormError("");
+    setTimeout(() => {
+      const formEl = document.getElementById("client-form-card");
+      if (formEl) {
+        formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 50);
   };
 
   // Cancel Client Edit Mode
@@ -1060,6 +1078,12 @@ function AdminDashboard() {
     setIndustryName(item.name);
     setIndustryFormError("");
     setIndustryFormSuccess(false);
+    setTimeout(() => {
+      const formEl = document.getElementById("industry-form-card");
+      if (formEl) {
+        formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 50);
   };
 
   // Cancel Industry Edit Mode
@@ -1156,6 +1180,12 @@ function AdminDashboard() {
     setJobDescription(item.description || "");
     setJobFormSuccess(false);
     setJobFormError("");
+    setTimeout(() => {
+      const formEl = document.getElementById("career-form-card");
+      if (formEl) {
+        formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 50);
   };
 
   // Cancel Job Edit Mode
@@ -1254,6 +1284,12 @@ function AdminDashboard() {
     }
     setBlogFormSuccess(false);
     setBlogFormError("");
+    setTimeout(() => {
+      const formEl = document.getElementById("blog-form-card");
+      if (formEl) {
+        formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 50);
   };
 
   // Cancel Blog Edit Mode
@@ -1799,74 +1835,6 @@ function AdminDashboard() {
                 </div>
               </div>
 
-              {/* 2. Fast Navigation & Action Launcher */}
-              <div className="rounded-2xl border border-border/80 bg-card p-3.5 sm:p-4 shadow-xs">
-                <div className="flex items-center justify-between mb-2.5">
-                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                    <Zap className="h-3.5 w-3.5 text-amber-500" />
-                    Quick Navigation Shortcuts
-                  </span>
-                  <span className="text-[11px] text-muted-foreground">Click to jump directly to any tab</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    onClick={() => setActiveTab("enquiries")}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-semibold transition-all cursor-pointer"
-                  >
-                    <Inbox className="h-3.5 w-3.5" />
-                    <span>Enquiries ({enquiries.length})</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("applications")}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 text-xs font-semibold transition-all cursor-pointer"
-                  >
-                    <FileText className="h-3.5 w-3.5" />
-                    <span>Job Applications ({applications.length})</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("solutions")}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-violet-500/30 bg-violet-500/10 hover:bg-violet-500/20 text-violet-600 dark:text-violet-400 text-xs font-semibold transition-all cursor-pointer"
-                  >
-                    <Layers className="h-3.5 w-3.5" />
-                    <span>Solutions ({solutions.length})</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("technologies")}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 text-xs font-semibold transition-all cursor-pointer"
-                  >
-                    <Cpu className="h-3.5 w-3.5" />
-                    <span>Tech Stack ({techList.length})</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("services")}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold transition-all cursor-pointer"
-                  >
-                    <Compass className="h-3.5 w-3.5" />
-                    <span>Services ({serviceList.length})</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("clients")}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-orange-500/30 bg-orange-500/10 hover:bg-orange-500/20 text-orange-600 dark:text-orange-400 text-xs font-semibold transition-all cursor-pointer"
-                  >
-                    <Users className="h-3.5 w-3.5" />
-                    <span>Clients ({clientList.length})</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("careers")}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-lime-500/30 bg-lime-500/10 hover:bg-lime-500/20 text-lime-600 dark:text-lime-400 text-xs font-semibold transition-all cursor-pointer"
-                  >
-                    <Briefcase className="h-3.5 w-3.5" />
-                    <span>Careers ({jobList.length})</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("blogs")}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-pink-500/30 bg-pink-500/10 hover:bg-pink-500/20 text-pink-600 dark:text-pink-400 text-xs font-semibold transition-all cursor-pointer"
-                  >
-                    <BookOpen className="h-3.5 w-3.5" />
-                    <span>Blogs ({blogList.length})</span>
-                  </button>
-                </div>
-              </div>
 
               {/* 3. All Tabs & Modules Master Navigation Grid */}
               <div>
@@ -3122,11 +3090,273 @@ function AdminDashboard() {
           )}
 
           {activeTab === "technologies" && (
-            <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
+            <div className="space-y-6">
               
-              {/* Left Column: Technologies List */}
-              <div>
-                <h2 className="text-lg font-bold text-foreground mb-4">Current Technologies</h2>
+              {/* 1. Form FIRST at the top (Paina) */}
+              <div id="tech-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
+                  <div className="flex items-center gap-2.5">
+                    <div className="rounded-xl bg-primary/10 p-2 text-primary">
+                      {editingTechId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-bold text-foreground">
+                        {editingTechId !== null ? "Edit Technology" : "Add New Technology"}
+                      </h2>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        {editingTechId !== null 
+                          ? "Update technology specifications, category badge, and brand associations." 
+                          : "Configure a new technology or engineering stack capability."}
+                      </p>
+                    </div>
+                  </div>
+                  {editingTechId !== null && (
+                    <button
+                      type="button"
+                      onClick={handleCancelTechEdit}
+                      className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                    >
+                      Cancel Editing
+                    </button>
+                  )}
+                </div>
+
+                {techFormSuccess && (
+                  <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                    <span>Technology {editingTechId !== null ? "updated" : "created"} and published successfully!</span>
+                  </div>
+                )}
+
+                {techFormError && (
+                  <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    <span>{techFormError}</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmitTech} className="space-y-4">
+                  <label className="block text-sm font-medium">
+                    Technology Name
+                    <input
+                      type="text"
+                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                      placeholder="e.g. React & Next.js"
+                      value={techName}
+                      onChange={(e) => setTechName(e.target.value)}
+                      required
+                      disabled={techFormLoading}
+                    />
+                  </label>
+
+                  {/* Category Badge & Quick Presets */}
+                  <div>
+                    <label className="block text-sm font-medium">
+                      Category Badge
+                      <input
+                        type="text"
+                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs uppercase"
+                        placeholder="e.g. ENTERPRISE WEB & FRONTEND"
+                        value={techCategory}
+                        onChange={(e) => setTechCategory(e.target.value)}
+                        disabled={techFormLoading}
+                      />
+                    </label>
+                    <div className="mt-1.5 flex flex-wrap gap-1">
+                      {[
+                        "ENTERPRISE WEB & FRONTEND",
+                        "RUNTIMES & DISTRIBUTED APIS",
+                        "MULTI-CLOUD ARCHITECTURE",
+                        "CONTAINER PLATFORMS & CI/CD",
+                        "MOBILE & CROSS-PLATFORM",
+                        "AI & MACHINE LEARNING",
+                        "ENTERPRISE ERP & SAP",
+                      ].map((cat) => (
+                        <button
+                          key={cat}
+                          type="button"
+                          onClick={() => setTechCategory(cat)}
+                          className={`text-[10px] px-2 py-0.5 rounded-md border font-bold uppercase transition-all cursor-pointer ${
+                            techCategory.toUpperCase() === cat
+                              ? "bg-primary text-primary-foreground border-primary"
+                              : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                          }`}
+                        >
+                          {cat}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Status Badge & Quick Presets */}
+                  <div>
+                    <label className="block text-sm font-medium">
+                      Status Badge
+                      <input
+                        type="text"
+                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs uppercase"
+                        placeholder="e.g. PRODUCTION READY"
+                        value={techStatusBadge}
+                        onChange={(e) => setTechStatusBadge(e.target.value)}
+                        disabled={techFormLoading}
+                      />
+                    </label>
+                    <div className="mt-1.5 flex flex-wrap gap-1">
+                      {["PRODUCTION READY", "ENTERPRISE SCALE", "HIGH AVAILABILITY", "LATEST STABLE"].map((badge) => (
+                        <button
+                          key={badge}
+                          type="button"
+                          onClick={() => setTechStatusBadge(badge)}
+                          className={`text-[10px] px-2 py-0.5 rounded-md border font-bold uppercase transition-all cursor-pointer ${
+                            techStatusBadge.toUpperCase() === badge
+                              ? "bg-emerald-500 text-white border-emerald-600"
+                              : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                          }`}
+                        >
+                          {badge}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Brand Logos / Frameworks with Clickable Toggle Chips */}
+                  <div>
+                    <label className="block text-sm font-medium">
+                      Brand Logos / Frameworks (Comma separated)
+                      <input
+                        type="text"
+                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                        placeholder="e.g. React, Next.js, TypeScript"
+                        value={techBrands}
+                        onChange={(e) => setTechBrands(e.target.value)}
+                        disabled={techFormLoading}
+                      />
+                    </label>
+                    <p className="mt-1 text-[11px] text-muted-foreground">
+                      Click chips below to add/remove brand logos dynamically:
+                    </p>
+                    <div className="mt-1.5 flex flex-wrap gap-1.5 max-h-28 overflow-y-auto p-1.5 bg-background rounded-lg border border-border/70">
+                      {[
+                        "React", "Next.js", "TypeScript", "Node.js", "Python",
+                        "AWS", "Azure", "GCP", "Kubernetes", "Docker",
+                        "Terraform", "Apple iOS", "Android", "Flutter",
+                        "PyTorch", "TensorFlow", "OpenAI", "PostgreSQL",
+                        "Redis", "SAP"
+                      ].map((b) => {
+                        const currentSelected = techBrands
+                          .split(",")
+                          .map((s) => s.trim().toLowerCase())
+                          .includes(b.toLowerCase());
+                        return (
+                          <button
+                            key={b}
+                            type="button"
+                            onClick={() => {
+                              const current = techBrands
+                                .split(",")
+                                .map((s) => s.trim())
+                                .filter(Boolean);
+                              const exists = current.some((c) => c.toLowerCase() === b.toLowerCase());
+                              if (exists) {
+                                setTechBrands(current.filter((c) => c.toLowerCase() !== b.toLowerCase()).join(", "));
+                              } else {
+                                setTechBrands([...current, b].join(", "));
+                              }
+                            }}
+                            className={`text-[10px] px-2 py-0.5 rounded-md font-bold transition-all cursor-pointer border ${
+                              currentSelected
+                                ? "bg-primary text-primary-foreground border-primary shadow-xs"
+                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                            }`}
+                          >
+                            {currentSelected ? `✓ ${b}` : `+ ${b}`}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <label className="block text-sm font-medium">
+                    Description <span className="text-xs text-muted-foreground font-normal">(Optional)</span>
+                    <textarea
+                      rows={3}
+                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                      placeholder="Describe what this technology/stack is used for..."
+                      value={techDesc}
+                      onChange={(e) => setTechDesc(e.target.value)}
+                      disabled={techFormLoading}
+                    />
+                  </label>
+
+                  <label className="block text-sm font-medium">
+                    Keywords (comma separated)
+                    <input
+                      type="text"
+                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                      placeholder="e.g. Components, Designing, SSR, TypeScript"
+                      value={techKeywords}
+                      onChange={(e) => setTechKeywords(e.target.value)}
+                      disabled={techFormLoading}
+                    />
+                  </label>
+
+                  <label className="block text-sm font-medium">
+                    How It Works / Usage Details
+                    <textarea
+                      rows={3}
+                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                      placeholder="Describe how we run or implement this technology..."
+                      value={techHowToWork}
+                      onChange={(e) => setTechHowToWork(e.target.value)}
+                      disabled={techFormLoading}
+                    />
+                  </label>
+
+                  <div className="space-y-2">
+                    <button
+                      type="submit"
+                      disabled={techFormLoading || !techName.trim()}
+                      className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
+                    >
+                      {techFormLoading 
+                        ? "Saving..." 
+                        : editingTechId !== null 
+                          ? "Update Technology" 
+                          : "Publish Technology"}
+                    </button>
+                    {editingTechId !== null && (
+                      <button
+                        type="button"
+                        onClick={handleCancelTechEdit}
+                        className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                        disabled={techFormLoading}
+                      >
+                        Cancel Edit
+                      </button>
+                    )}
+                  </div>
+                </form>
+              </div>
+
+              {/* 2. Added Technologies List NEXT (Kinda) */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-lg font-bold text-foreground">Current Technologies</h2>
+                    <span className="rounded-full bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 text-xs font-bold">
+                      {techList.length}
+                    </span>
+                  </div>
+                  <a
+                    href="/technologies"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+                  >
+                    <ExternalLink className="h-3.5 w-3.5" />
+                    View Live Page
+                  </a>
+                </div>
 
                 {techLoading && techList.length === 0 ? (
                   <div className="space-y-4 animate-pulse">
@@ -3145,11 +3375,11 @@ function AdminDashboard() {
                     </div>
                     <h3 className="mt-4 text-base font-semibold text-foreground">No technologies yet</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      Add your first technology using the form on the right.
+                      Add your first technology using the form above.
                     </p>
                   </div>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     {techList.map((item) => (
                       <div
                         key={item.id}
@@ -3230,243 +3460,173 @@ function AdminDashboard() {
                 )}
               </div>
 
-              {/* Right Column: Creation / Editing Form */}
-              <div>
-                <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80 sticky top-24">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
-                      {editingTechId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
-                    </div>
-                    <h2 className="text-xl font-bold text-foreground">
-                      {editingTechId !== null ? "Edit Technology" : "Add New Technology"}
-                    </h2>
-                  </div>
-
-                  {techFormSuccess && (
-                    <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
-                      Technology {editingTechId !== null ? "updated" : "created"} and published successfully!
-                    </div>
-                  )}
-
-                  {techFormError && (
-                    <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
-                      {techFormError}
-                    </div>
-                  )}
-
-                  <form onSubmit={handleSubmitTech} className="space-y-4">
-                    <label className="block text-sm font-medium">
-                      Technology Name
-                      <input
-                        type="text"
-                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. React & Next.js"
-                        value={techName}
-                        onChange={(e) => setTechName(e.target.value)}
-                        required
-                        disabled={techFormLoading}
-                      />
-                    </label>
-
-                    {/* Category Badge & Quick Presets */}
-                    <div>
-                      <label className="block text-sm font-medium">
-                        Category Badge
-                        <input
-                          type="text"
-                          className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs uppercase"
-                          placeholder="e.g. ENTERPRISE WEB & FRONTEND"
-                          value={techCategory}
-                          onChange={(e) => setTechCategory(e.target.value)}
-                          disabled={techFormLoading}
-                        />
-                      </label>
-                      <div className="mt-1.5 flex flex-wrap gap-1">
-                        {[
-                          "ENTERPRISE WEB & FRONTEND",
-                          "RUNTIMES & DISTRIBUTED APIS",
-                          "MULTI-CLOUD ARCHITECTURE",
-                          "CONTAINER PLATFORMS & CI/CD",
-                          "MOBILE & CROSS-PLATFORM",
-                          "AI & MACHINE LEARNING",
-                          "ENTERPRISE ERP & SAP",
-                        ].map((cat) => (
-                          <button
-                            key={cat}
-                            type="button"
-                            onClick={() => setTechCategory(cat)}
-                            className={`text-[10px] px-2 py-0.5 rounded-md border font-bold uppercase transition-all cursor-pointer ${
-                              techCategory.toUpperCase() === cat
-                                ? "bg-primary text-primary-foreground border-primary"
-                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
-                            }`}
-                          >
-                            {cat}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Status Badge & Quick Presets */}
-                    <div>
-                      <label className="block text-sm font-medium">
-                        Status Badge
-                        <input
-                          type="text"
-                          className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs uppercase"
-                          placeholder="e.g. PRODUCTION READY"
-                          value={techStatusBadge}
-                          onChange={(e) => setTechStatusBadge(e.target.value)}
-                          disabled={techFormLoading}
-                        />
-                      </label>
-                      <div className="mt-1.5 flex flex-wrap gap-1">
-                        {["PRODUCTION READY", "ENTERPRISE SCALE", "HIGH AVAILABILITY", "LATEST STABLE"].map((badge) => (
-                          <button
-                            key={badge}
-                            type="button"
-                            onClick={() => setTechStatusBadge(badge)}
-                            className={`text-[10px] px-2 py-0.5 rounded-md border font-bold uppercase transition-all cursor-pointer ${
-                              techStatusBadge.toUpperCase() === badge
-                                ? "bg-emerald-500 text-white border-emerald-600"
-                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
-                            }`}
-                          >
-                            {badge}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Brand Logos / Frameworks with Clickable Toggle Chips */}
-                    <div>
-                      <label className="block text-sm font-medium">
-                        Brand Logos / Frameworks (Comma separated)
-                        <input
-                          type="text"
-                          className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                          placeholder="e.g. React, Next.js, TypeScript"
-                          value={techBrands}
-                          onChange={(e) => setTechBrands(e.target.value)}
-                          disabled={techFormLoading}
-                        />
-                      </label>
-                      <p className="mt-1 text-[11px] text-muted-foreground">
-                        Click chips below to add/remove brand logos dynamically:
-                      </p>
-                      <div className="mt-1.5 flex flex-wrap gap-1.5 max-h-28 overflow-y-auto p-1.5 bg-background rounded-lg border border-border/70">
-                        {[
-                          "React", "Next.js", "TypeScript", "Node.js", "Python",
-                          "AWS", "Azure", "GCP", "Kubernetes", "Docker",
-                          "Terraform", "Apple iOS", "Android", "Flutter",
-                          "PyTorch", "TensorFlow", "OpenAI", "PostgreSQL",
-                          "Redis", "SAP"
-                        ].map((b) => {
-                          const currentSelected = techBrands
-                            .split(",")
-                            .map((s) => s.trim().toLowerCase())
-                            .includes(b.toLowerCase());
-                          return (
-                            <button
-                              key={b}
-                              type="button"
-                              onClick={() => {
-                                const current = techBrands
-                                  .split(",")
-                                  .map((s) => s.trim())
-                                  .filter(Boolean);
-                                const exists = current.some((c) => c.toLowerCase() === b.toLowerCase());
-                                if (exists) {
-                                  setTechBrands(current.filter((c) => c.toLowerCase() !== b.toLowerCase()).join(", "));
-                                } else {
-                                  setTechBrands([...current, b].join(", "));
-                                }
-                              }}
-                              className={`text-[10px] px-2 py-0.5 rounded-md font-bold transition-all cursor-pointer border ${
-                                currentSelected
-                                  ? "bg-primary text-primary-foreground border-primary shadow-xs"
-                                  : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
-                              }`}
-                            >
-                              {currentSelected ? `✓ ${b}` : `+ ${b}`}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    <label className="block text-sm font-medium">
-                      Description <span className="text-xs text-muted-foreground font-normal">(Optional)</span>
-                      <textarea
-                        rows={3}
-                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
-                        placeholder="Describe what this technology/stack is used for..."
-                        value={techDesc}
-                        onChange={(e) => setTechDesc(e.target.value)}
-                        disabled={techFormLoading}
-                      />
-                    </label>
-
-                    <label className="block text-sm font-medium">
-                      Keywords (comma separated)
-                      <input
-                        type="text"
-                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. Components, Designing, SSR, TypeScript"
-                        value={techKeywords}
-                        onChange={(e) => setTechKeywords(e.target.value)}
-                        disabled={techFormLoading}
-                      />
-                    </label>
-
-                    <label className="block text-sm font-medium">
-                      How It Works / Usage Details
-                      <textarea
-                        rows={3}
-                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
-                        placeholder="Describe how we run or implement this technology..."
-                        value={techHowToWork}
-                        onChange={(e) => setTechHowToWork(e.target.value)}
-                        disabled={techFormLoading}
-                      />
-                    </label>
-
-                    <div className="space-y-2">
-                      <button
-                        type="submit"
-                        disabled={techFormLoading || !techName.trim()}
-                        className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
-                      >
-                        {techFormLoading 
-                          ? "Saving..." 
-                          : editingTechId !== null 
-                            ? "Update Technology" 
-                            : "Publish Technology"}
-                      </button>
-                      {editingTechId !== null && (
-                        <button
-                          type="button"
-                          onClick={handleCancelTechEdit}
-                          className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                          disabled={techFormLoading}
-                        >
-                          Cancel Edit
-                        </button>
-                      )}
-                    </div>
-                  </form>
-                </div>
-              </div>
-
             </div>
           )}
 
           {activeTab === "services" && (
-            <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
+            <div className="space-y-6">
               
-              {/* Left Column: Services List */}
-              <div>
-                <h2 className="text-lg font-bold text-foreground mb-4">Current Services</h2>
+              {/* 1. Form FIRST at the top (Paina) */}
+              <div id="service-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
+                  <div className="flex items-center gap-2.5">
+                    <div className="rounded-xl bg-primary/10 p-2 text-primary">
+                      {editingServiceId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-bold text-foreground">
+                        {editingServiceId !== null ? "Edit Service" : "Add New Service"}
+                      </h2>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        {editingServiceId !== null 
+                          ? "Update service card offerings and routing link." 
+                          : "Configure a service card to showcase in offerings."}
+                      </p>
+                    </div>
+                  </div>
+                  {editingServiceId !== null && (
+                    <button
+                      type="button"
+                      onClick={handleCancelServiceEdit}
+                      className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                    >
+                      Cancel Editing
+                    </button>
+                  )}
+                </div>
+
+                {serviceFormSuccess && (
+                  <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                    <span>Service {editingServiceId !== null ? "updated" : "created"} and published successfully!</span>
+                  </div>
+                )}
+
+                {serviceFormError && (
+                  <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    <span>{serviceFormError}</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmitService} className="space-y-4">
+                  <label className="block text-sm font-medium">
+                    Service Title
+                    <input
+                      type="text"
+                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                      placeholder="e.g. Technology Consulting"
+                      value={serviceTitle}
+                      onChange={(e) => setServiceTitle(e.target.value)}
+                      required
+                      disabled={serviceFormLoading}
+                    />
+                  </label>
+
+                  {/* Icon Key / Presets */}
+                  <div>
+                    <label className="block text-sm font-medium">
+                      Service Icon Type
+                      <input
+                        type="text"
+                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs"
+                        placeholder="e.g. tech-consulting"
+                        value={serviceIcon}
+                        onChange={(e) => setServiceIcon(e.target.value)}
+                        disabled={serviceFormLoading}
+                      />
+                    </label>
+                    <p className="mt-1 text-[11px] text-muted-foreground">Select an icon preset:</p>
+                    <div className="mt-1.5 flex flex-wrap gap-1 max-h-28 overflow-y-auto p-1.5 bg-background rounded-lg border border-border/70">
+                      {[
+                        { id: "tech-consulting", label: "Tech Consulting" },
+                        { id: "bpo", label: "BPO / Operations" },
+                        { id: "custom-app", label: "Custom App Dev" },
+                        { id: "big-data", label: "Big Data" },
+                        { id: "mobile-solutions", label: "Mobile Solutions" },
+                        { id: "cloud-consulting", label: "Cloud Consulting" },
+                        { id: "project-implementation", label: "Implementation" },
+                        { id: "staffing-solutions", label: "Staffing" },
+                        { id: "ai-solutions", label: "AI & ML" },
+                        { id: "cyber-security", label: "Cyber Security" },
+                      ].map((iconItem) => (
+                        <button
+                          key={iconItem.id}
+                          type="button"
+                          onClick={() => setServiceIcon(iconItem.id)}
+                          className={`text-[10px] px-2 py-0.5 rounded-md border font-semibold transition-all cursor-pointer ${
+                            serviceIcon === iconItem.id
+                              ? "bg-primary text-primary-foreground border-primary"
+                              : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
+                          }`}
+                        >
+                          {iconItem.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <label className="block text-sm font-medium">
+                    Description
+                    <textarea
+                      rows={3}
+                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                      placeholder="Brief summary of what this service offers..."
+                      value={serviceDesc}
+                      onChange={(e) => setServiceDesc(e.target.value)}
+                      required
+                      disabled={serviceFormLoading}
+                    />
+                  </label>
+
+                  <label className="block text-sm font-medium">
+                    Target Link
+                    <input
+                      type="text"
+                      className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs"
+                      placeholder="/solutions"
+                      value={serviceLink}
+                      onChange={(e) => setServiceLink(e.target.value)}
+                      disabled={serviceFormLoading}
+                    />
+                  </label>
+
+                  <div className="space-y-2 pt-2">
+                    <button
+                      type="submit"
+                      disabled={serviceFormLoading || !serviceTitle || !serviceDesc}
+                      className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
+                    >
+                      {serviceFormLoading 
+                        ? "Saving..." 
+                        : editingServiceId !== null 
+                          ? "Update Service" 
+                          : "Publish Service"}
+                    </button>
+                    {editingServiceId !== null && (
+                      <button
+                        type="button"
+                        onClick={handleCancelServiceEdit}
+                        className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                        disabled={serviceFormLoading}
+                      >
+                        Cancel Edit
+                      </button>
+                    )}
+                  </div>
+                </form>
+              </div>
+
+              {/* 2. Added Services List NEXT (Kinda) */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-lg font-bold text-foreground">Current Services</h2>
+                    <span className="rounded-full bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 text-xs font-bold">
+                      {serviceList.length}
+                    </span>
+                  </div>
+                </div>
 
                 {serviceLoading && serviceList.length === 0 ? (
                   <div className="space-y-4 animate-pulse">
@@ -3485,11 +3645,11 @@ function AdminDashboard() {
                     </div>
                     <h3 className="mt-4 text-base font-semibold text-foreground">No services yet</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      Add your first service using the form on the right.
+                      Add your first service using the form above.
                     </p>
                   </div>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     {serviceList.map((item) => (
                       <div
                         key={item.id}
@@ -3541,139 +3701,6 @@ function AdminDashboard() {
                 )}
               </div>
 
-              {/* Right Column: Creation / Editing Form */}
-              <div>
-                <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80 sticky top-24">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
-                      {editingServiceId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
-                    </div>
-                    <h2 className="text-xl font-bold text-foreground">
-                      {editingServiceId !== null ? "Edit Service" : "Add New Service"}
-                    </h2>
-                  </div>
-
-                  {serviceFormSuccess && (
-                    <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
-                      Service {editingServiceId !== null ? "updated" : "created"} and published successfully!
-                    </div>
-                  )}
-
-                  {serviceFormError && (
-                    <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
-                      {serviceFormError}
-                    </div>
-                  )}
-
-                  <form onSubmit={handleSubmitService} className="space-y-4">
-                    <label className="block text-sm font-medium">
-                      Service Title
-                      <input
-                        type="text"
-                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                        placeholder="e.g. Technology Consulting"
-                        value={serviceTitle}
-                        onChange={(e) => setServiceTitle(e.target.value)}
-                        required
-                        disabled={serviceFormLoading}
-                      />
-                    </label>
-
-                    {/* Icon Key / Presets */}
-                    <div>
-                      <label className="block text-sm font-medium">
-                        Service Icon Type
-                        <input
-                          type="text"
-                          className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs"
-                          placeholder="e.g. tech-consulting"
-                          value={serviceIcon}
-                          onChange={(e) => setServiceIcon(e.target.value)}
-                          disabled={serviceFormLoading}
-                        />
-                      </label>
-                      <p className="mt-1 text-[11px] text-muted-foreground">Select an icon preset:</p>
-                      <div className="mt-1.5 flex flex-wrap gap-1 max-h-28 overflow-y-auto p-1.5 bg-background rounded-lg border border-border/70">
-                        {[
-                          { id: "tech-consulting", label: "Tech Consulting" },
-                          { id: "bpo", label: "BPO / Operations" },
-                          { id: "custom-app", label: "Custom App Dev" },
-                          { id: "big-data", label: "Big Data" },
-                          { id: "mobile-solutions", label: "Mobile Solutions" },
-                          { id: "cloud-consulting", label: "Cloud Consulting" },
-                          { id: "project-implementation", label: "Implementation" },
-                          { id: "staffing-solutions", label: "Staffing" },
-                          { id: "ai-solutions", label: "AI & ML" },
-                          { id: "cyber-security", label: "Cyber Security" },
-                        ].map((iconItem) => (
-                          <button
-                            key={iconItem.id}
-                            type="button"
-                            onClick={() => setServiceIcon(iconItem.id)}
-                            className={`text-[10px] px-2 py-0.5 rounded-md border font-semibold transition-all cursor-pointer ${
-                              serviceIcon === iconItem.id
-                                ? "bg-primary text-primary-foreground border-primary"
-                                : "bg-surface text-muted-foreground border-border hover:text-foreground hover:bg-secondary"
-                            }`}
-                          >
-                            {iconItem.label}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <label className="block text-sm font-medium">
-                      Description
-                      <textarea
-                        rows={3}
-                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
-                        placeholder="Brief summary of what this service offers..."
-                        value={serviceDesc}
-                        onChange={(e) => setServiceDesc(e.target.value)}
-                        required
-                        disabled={serviceFormLoading}
-                      />
-                    </label>
-
-                    <label className="block text-sm font-medium">
-                      Target Link
-                      <input
-                        type="text"
-                        className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary font-mono text-xs"
-                        placeholder="/solutions"
-                        value={serviceLink}
-                        onChange={(e) => setServiceLink(e.target.value)}
-                        disabled={serviceFormLoading}
-                      />
-                    </label>
-
-                    <div className="space-y-2 pt-2">
-                      <button
-                        type="submit"
-                        disabled={serviceFormLoading || !serviceTitle || !serviceDesc}
-                        className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
-                      >
-                        {serviceFormLoading 
-                          ? "Saving..." 
-                          : editingServiceId !== null 
-                            ? "Update Service" 
-                            : "Publish Service"}
-                      </button>
-                      {editingServiceId !== null && (
-                        <button
-                          type="button"
-                          onClick={handleCancelServiceEdit}
-                          className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                          disabled={serviceFormLoading}
-                        >
-                          Cancel Edit
-                        </button>
-                      )}
-                    </div>
-                  </form>
-                </div>
-              </div>
-
             </div>
           )}
 
@@ -3704,12 +3731,156 @@ function AdminDashboard() {
               </div>
 
               {clientSubTab === "cases" ? (
-                <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
-                  {/* Left Column: Clients List */}
-                  <div>
-                    <div>
-                      <h2 className="text-lg font-bold text-foreground">Current Clients & Brand Logos</h2>
-                      <p className="text-xs text-muted-foreground mb-4">Manage brand logos and client names displayed in the Our Clients section on the website.</p>
+                <div className="space-y-6">
+                  {/* 1. Form FIRST at the top */}
+                  <div id="client-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
+                    <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
+                      <div className="flex items-center gap-2.5">
+                        <div className="rounded-xl bg-primary/10 p-2 text-primary">
+                          {editingClientId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                        </div>
+                        <div>
+                          <h2 className="text-xl font-bold text-foreground">
+                            {editingClientId !== null ? "Edit Client Brand" : "Add Client Brand"}
+                          </h2>
+                          <p className="text-xs text-muted-foreground mt-0.5">
+                            {editingClientId !== null 
+                              ? "Update client brand details and logo asset." 
+                              : "Add a client or partner logo to showcase on the live portal."}
+                          </p>
+                        </div>
+                      </div>
+                      {editingClientId !== null && (
+                        <button
+                          type="button"
+                          onClick={handleCancelClientEdit}
+                          className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                        >
+                          Cancel Editing
+                        </button>
+                      )}
+                    </div>
+
+                    {clientFormSuccess && (
+                      <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                        <CheckCircle2 className="h-4 w-4 shrink-0" />
+                        <span>Client brand {editingClientId !== null ? "updated" : "added"} successfully!</span>
+                      </div>
+                    )}
+
+                    {clientFormError && (
+                      <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4 shrink-0" />
+                        <span>{clientFormError}</span>
+                      </div>
+                    )}
+
+                    <form onSubmit={handleSubmitClient} className="space-y-5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <label className="block text-sm font-medium">
+                          Client / Company Name *
+                          <input
+                            type="text"
+                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                            placeholder="e.g. Visa, Capital One, Apple, Infosys"
+                            value={clientName}
+                            onChange={(e) => setClientName(e.target.value)}
+                            required
+                            disabled={clientFormLoading}
+                          />
+                        </label>
+
+                        <label className="block text-sm font-medium">
+                          Industry / Category *
+                          <select
+                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary cursor-pointer"
+                            value={clientSector}
+                            onChange={(e) => setClientSector(e.target.value)}
+                            required
+                            disabled={clientFormLoading}
+                          >
+                            <option value="Banking">Banking &amp; Financial</option>
+                            <option value="Technology">Technology &amp; Software</option>
+                            <option value="Telecom">Telecom &amp; Networks</option>
+                            <option value="Enterprise">Enterprise &amp; Logistics</option>
+                            <option value="Healthcare">Healthcare &amp; Life Sciences</option>
+                            <option value="Automotive">Automotive</option>
+                            <option value="Insurance">Insurance</option>
+                            <option value="Education">Higher Education</option>
+                            {industriesList.filter(ind => !["Banking", "Technology", "Telecom", "Enterprise", "Healthcare", "Automotive", "Insurance", "Education"].includes(ind.name)).map((ind) => (
+                              <option key={ind.id} value={ind.name}>
+                                {ind.name}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+                      </div>
+
+                      <ImageUploadField
+                        label="Brand Logo"
+                        value={clientImage}
+                        onChange={setClientImage}
+                        disabled={clientFormLoading}
+                        recommendedDimensions="400 × 200 px (SVG, Transparent PNG)"
+                        helperText="Upload official brand logo. Transparent PNG, SVG, or high-res JPG recommended. Rendered cleanly on the website's client grid."
+                      />
+
+                      <label className="block text-sm font-medium">
+                        Partnership Notes / Summary (Optional)
+                        <textarea
+                          rows={2}
+                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                          placeholder="e.g. Enterprise technology partnership & cloud modernization collaboration."
+                          value={clientDesc}
+                          onChange={(e) => setClientDesc(e.target.value)}
+                          disabled={clientFormLoading}
+                        />
+                      </label>
+
+                      <div className="pt-1 flex flex-col sm:flex-row gap-3">
+                        <button
+                          type="submit"
+                          disabled={clientFormLoading || !clientName.trim() || !clientSector}
+                          className="flex-1 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center shadow-md"
+                        >
+                          {clientFormLoading 
+                            ? "Saving..." 
+                            : editingClientId !== null 
+                              ? "Update Client Brand" 
+                              : "Add Client Brand"}
+                        </button>
+                        {editingClientId !== null && (
+                          <button
+                            type="button"
+                            onClick={handleCancelClientEdit}
+                            className="rounded-xl border border-border bg-background px-6 py-2.5 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                            disabled={clientFormLoading}
+                          >
+                            Cancel Edit
+                          </button>
+                        )}
+                      </div>
+                    </form>
+                  </div>
+
+                  {/* 2. Added Details List NEXT (Kindha na) */}
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-lg font-bold text-foreground">Current Clients & Brand Logos</h2>
+                        <span className="rounded-full bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 text-xs font-bold">
+                          {clientList.length}
+                        </span>
+                      </div>
+                      <a
+                        href="/clients"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+                      >
+                        <ExternalLink className="h-3.5 w-3.5" />
+                        View Live Page
+                      </a>
                     </div>
 
                     {clientLoading && clientList.length === 0 ? (
@@ -3729,11 +3900,11 @@ function AdminDashboard() {
                         </div>
                         <h3 className="mt-4 text-base font-semibold text-foreground">No client brands yet</h3>
                         <p className="mt-1 text-sm text-muted-foreground">
-                          Add your first client brand name and logo using the form on the right.
+                          Add your first client brand name and logo using the form above.
                         </p>
                       </div>
                     ) : (
-                      <div className="space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                         {clientList.map((item) => (
                           <div
                             key={item.id}
@@ -3750,6 +3921,10 @@ function AdminDashboard() {
                                     src={item.image}
                                     alt={item.name}
                                     className="max-h-12 max-w-full object-contain"
+                                    onError={(e) => {
+                                      e.currentTarget.onerror = null;
+                                      e.currentTarget.src = "/logo.png";
+                                    }}
                                   />
                                 ) : (
                                   <Building2 className="h-6 w-6 text-slate-400" />
@@ -3791,123 +3966,102 @@ function AdminDashboard() {
                       </div>
                     )}
                   </div>
-
-                  {/* Right Column: Creation / Editing Form */}
-                  <div>
-                    <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80 sticky top-24">
-                      <div className="flex items-center gap-2 mb-4">
-                        <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
-                          {editingClientId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
-                        </div>
-                        <h2 className="text-xl font-bold text-foreground">
-                          {editingClientId !== null ? "Edit Client Brand" : "Add Client Brand"}
-                        </h2>
-                      </div>
-
-                      {clientFormSuccess && (
-                        <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
-                          Client brand {editingClientId !== null ? "updated" : "added"} successfully!
-                        </div>
-                      )}
-
-                      {clientFormError && (
-                        <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
-                          {clientFormError}
-                        </div>
-                      )}
-
-                      <form onSubmit={handleSubmitClient} className="space-y-5">
-                        <label className="block text-sm font-medium">
-                          Client / Company Name *
-                          <input
-                            type="text"
-                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                            placeholder="e.g. Visa, Capital One, Apple, Infosys"
-                            value={clientName}
-                            onChange={(e) => setClientName(e.target.value)}
-                            required
-                            disabled={clientFormLoading}
-                          />
-                        </label>
-
-                        <label className="block text-sm font-medium">
-                          Industry / Category *
-                          <select
-                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary cursor-pointer"
-                            value={clientSector}
-                            onChange={(e) => setClientSector(e.target.value)}
-                            required
-                            disabled={clientFormLoading}
-                          >
-                            <option value="Banking">Banking &amp; Financial</option>
-                            <option value="Technology">Technology &amp; Software</option>
-                            <option value="Telecom">Telecom &amp; Networks</option>
-                            <option value="Enterprise">Enterprise &amp; Logistics</option>
-                            <option value="Healthcare">Healthcare &amp; Life Sciences</option>
-                            <option value="Automotive">Automotive</option>
-                            <option value="Insurance">Insurance</option>
-                            <option value="Education">Higher Education</option>
-                            {industriesList.filter(ind => !["Banking", "Technology", "Telecom", "Enterprise", "Healthcare", "Automotive", "Insurance", "Education"].includes(ind.name)).map((ind) => (
-                              <option key={ind.id} value={ind.name}>
-                                {ind.name}
-                              </option>
-                            ))}
-                          </select>
-                        </label>
-
-                        <ImageUploadField
-                          label="Brand Logo"
-                          value={clientImage}
-                          onChange={setClientImage}
-                          disabled={clientFormLoading}
-                          recommendedDimensions="400 × 200 px (SVG, Transparent PNG)"
-                          helperText="Upload official brand logo. Transparent PNG, SVG, or high-res JPG recommended. Rendered cleanly on the website's client grid."
-                        />
-
-                        <label className="block text-sm font-medium">
-                          Partnership Notes / Summary (Optional)
-                          <textarea
-                            rows={2}
-                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
-                            placeholder="e.g. Enterprise technology partnership & cloud modernization collaboration."
-                            value={clientDesc}
-                            onChange={(e) => setClientDesc(e.target.value)}
-                            disabled={clientFormLoading}
-                          />
-                        </label>
-
-                        <div className="space-y-2">
-                          <button
-                            type="submit"
-                            disabled={clientFormLoading || !clientName.trim() || !clientSector}
-                            className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
-                          >
-                            {clientFormLoading 
-                              ? "Saving..." 
-                              : editingClientId !== null 
-                                ? "Update Client Brand" 
-                                : "Add Client Brand"}
-                          </button>
-                          {editingClientId !== null && (
-                            <button
-                              type="button"
-                              onClick={handleCancelClientEdit}
-                              className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                              disabled={clientFormLoading}
-                            >
-                              Cancel Edit
-                            </button>
-                          )}
-                        </div>
-                      </form>
-                    </div>
-                  </div>
                 </div>
               ) : (
-                <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
-                  {/* Left Column: Industries List */}
-                  <div>
-                    <h2 className="text-lg font-bold text-foreground mb-4">Current Industries We Serve</h2>
+                <div className="space-y-6">
+                  {/* 1. Form FIRST at the top */}
+                  <div id="industry-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
+                    <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
+                      <div className="flex items-center gap-2.5">
+                        <div className="rounded-xl bg-primary/10 p-2 text-primary">
+                          {editingIndustryId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                        </div>
+                        <div>
+                          <h2 className="text-xl font-bold text-foreground">
+                            {editingIndustryId !== null ? "Edit Industry" : "Add Industry"}
+                          </h2>
+                          <p className="text-xs text-muted-foreground mt-0.5">
+                            {editingIndustryId !== null 
+                              ? "Update industry vertical sector name." 
+                              : "Configure an industry vertical served by our solutions."}
+                          </p>
+                        </div>
+                      </div>
+                      {editingIndustryId !== null && (
+                        <button
+                          type="button"
+                          onClick={handleCancelIndustryEdit}
+                          className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                        >
+                          Cancel Editing
+                        </button>
+                      )}
+                    </div>
+
+                    {industryFormSuccess && (
+                      <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                        <CheckCircle2 className="h-4 w-4 shrink-0" />
+                        <span>Industry {editingIndustryId !== null ? "updated" : "created"} successfully!</span>
+                      </div>
+                    )}
+
+                    {industryFormError && (
+                      <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4 shrink-0" />
+                        <span>{industryFormError}</span>
+                      </div>
+                    )}
+
+                    <form onSubmit={handleSubmitIndustry} className="space-y-4">
+                      <label className="block text-sm font-medium">
+                        Industry Name
+                        <input
+                          type="text"
+                          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                          placeholder="e.g. Real Estate, Defense"
+                          value={industryName}
+                          onChange={(e) => setIndustryName(e.target.value)}
+                          required
+                          disabled={industryFormLoading}
+                        />
+                      </label>
+
+                      <div className="pt-1 flex flex-col sm:flex-row gap-3">
+                        <button
+                          type="submit"
+                          disabled={industryFormLoading || !industryName}
+                          className="flex-1 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center shadow-md"
+                        >
+                          {industryFormLoading 
+                            ? "Saving..." 
+                            : editingIndustryId !== null 
+                              ? "Update Industry" 
+                              : "Publish Industry"}
+                        </button>
+                        {editingIndustryId !== null && (
+                          <button
+                            type="button"
+                            onClick={handleCancelIndustryEdit}
+                            className="rounded-xl border border-border bg-background px-6 py-2.5 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                            disabled={industryFormLoading}
+                          >
+                            Cancel Edit
+                          </button>
+                        )}
+                      </div>
+                    </form>
+                  </div>
+
+                  {/* 2. Added Details List NEXT (Kindha na) */}
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-lg font-bold text-foreground">Current Industries We Serve</h2>
+                        <span className="rounded-full bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 text-xs font-bold">
+                          {industriesList.length}
+                        </span>
+                      </div>
+                    </div>
 
                     {industriesLoading && industriesList.length === 0 ? (
                       <div className="space-y-4 animate-pulse">
@@ -3926,11 +4080,11 @@ function AdminDashboard() {
                         </div>
                         <h3 className="mt-4 text-base font-semibold text-foreground">No industries yet</h3>
                         <p className="mt-1 text-sm text-muted-foreground">
-                          Add your first industry using the form on the right.
+                          Add your first industry using the form above.
                         </p>
                       </div>
                     ) : (
-                      <div className="space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                         {industriesList.map((item) => (
                           <div
                             key={item.id}
@@ -3974,184 +4128,59 @@ function AdminDashboard() {
                       </div>
                     )}
                   </div>
-
-                  {/* Right Column: Industry Creation Form */}
-                  <div>
-                    <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80 sticky top-24">
-                      <div className="flex items-center gap-2 mb-4">
-                        <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
-                          {editingIndustryId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
-                        </div>
-                        <h2 className="text-xl font-bold text-foreground">
-                          {editingIndustryId !== null ? "Edit Industry" : "Add Industry"}
-                        </h2>
-                      </div>
-
-                      {industryFormSuccess && (
-                        <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
-                          Industry {editingIndustryId !== null ? "updated" : "created"} successfully!
-                        </div>
-                      )}
-
-                      {industryFormError && (
-                        <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
-                          {industryFormError}
-                        </div>
-                      )}
-
-                      <form onSubmit={handleSubmitIndustry} className="space-y-5">
-                        <label className="block text-sm font-medium">
-                          Industry Name
-                          <input
-                            type="text"
-                            className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                            placeholder="e.g. Real Estate, Defense"
-                            value={industryName}
-                            onChange={(e) => setIndustryName(e.target.value)}
-                            required
-                            disabled={industryFormLoading}
-                          />
-                        </label>
-
-                        <div className="space-y-2">
-                          <button
-                            type="submit"
-                            disabled={industryFormLoading || !industryName}
-                            className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
-                          >
-                            {industryFormLoading 
-                              ? "Saving..." 
-                              : editingIndustryId !== null 
-                                ? "Update Industry" 
-                                : "Publish Industry"}
-                          </button>
-                          {editingIndustryId !== null && (
-                            <button
-                              type="button"
-                              onClick={handleCancelIndustryEdit}
-                              className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                              disabled={industryFormLoading}
-                            >
-                              Cancel Edit
-                            </button>
-                          )}
-                        </div>
-                      </form>
-                    </div>
-                  </div>
                 </div>
               )}
             </div>
           )}
 
           {activeTab === "careers" && (
-            <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
+            <div className="space-y-6">
               
-              {/* Left Column: Jobs List */}
-              <div>
-                <h2 className="text-lg font-bold text-foreground mb-4">Current Job Openings</h2>
-
-                {jobLoading && jobList.length === 0 ? (
-                  <div className="space-y-4 animate-pulse">
-                    {[1, 2].map((i) => (
-                      <div key={i} className="panel p-4 bg-surface-2 border border-border/50 h-24"></div>
-                    ))}
-                  </div>
-                ) : jobError ? (
-                  <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 text-center">
-                    <p className="text-sm text-destructive font-medium">{jobError}</p>
-                  </div>
-                ) : jobList.length === 0 ? (
-                  <div className="panel p-12 text-center border border-dashed border-border/80 rounded-2xl flex flex-col items-center justify-center">
-                    <div className="rounded-full bg-secondary p-3 text-muted-foreground">
-                      <Briefcase className="h-8 w-8 text-primary" />
-                    </div>
-                    <h3 className="mt-4 text-base font-semibold text-foreground">No jobs yet</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      Post your first job opening using the form on the right.
-                    </p>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {jobList.map((item) => (
-                      <div
-                        key={item.id}
-                        className={`panel p-4 bg-surface border flex gap-4 items-center justify-between transition-all duration-300 ${
-                          editingJobId === item.id 
-                            ? "border-primary bg-primary/2" 
-                            : "border-border/85 hover:border-primary/30"
-                        }`}
-                      >
-                        <div className="min-w-0">
-                          <h4 className="font-bold text-foreground truncate">{item.title}</h4>
-                          <div className="mt-1 flex flex-wrap gap-2 text-xs text-muted-foreground">
-                            <span className="flex items-center gap-1">
-                              <MapPin className="h-3 w-3 text-primary" /> {item.location}
-                            </span>
-                            <span className="font-semibold text-primary">
-                              • {item.type}
-                            </span>
-                          </div>
-                          {item.description && (
-                            <p className="mt-1.5 text-xs text-muted-foreground line-clamp-2">
-                              {item.description}
-                            </p>
-                          )}
-                        </div>
-
-                        <div className="flex gap-2 shrink-0">
-                          <button
-                            onClick={() => handleStartJobEdit(item)}
-                            className={`inline-flex items-center justify-center h-9 w-9 rounded-xl border transition-all shrink-0 cursor-pointer ${
-                              editingJobId === item.id 
-                                ? "border-primary bg-primary text-primary-foreground" 
-                                : "border-border bg-background text-foreground hover:bg-secondary"
-                            }`}
-                            title="Edit Job opening"
-                            disabled={jobFormLoading}
-                          >
-                            <Pencil className="h-4 w-4" />
-                          </button>
-                          <button
-                            onClick={() => handleDeleteJob(item.id)}
-                            disabled={deleteJobStatus?.id === item.id && deleteJobStatus?.status === "loading"}
-                            className="inline-flex items-center justify-center h-9 w-9 rounded-xl border border-destructive/30 bg-destructive/5 text-destructive hover:bg-destructive hover:text-white transition-all disabled:opacity-50 shrink-0 cursor-pointer"
-                            title="Delete Job opening"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Right Column: Creation / Editing Form */}
-              <div>
-                <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80 sticky top-24">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
+              {/* 1. Form FIRST at the top */}
+              <div id="career-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
+                  <div className="flex items-center gap-2.5">
+                    <div className="rounded-xl bg-primary/10 p-2 text-primary">
                       {editingJobId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
                     </div>
-                    <h2 className="text-xl font-bold text-foreground">
-                      {editingJobId !== null ? "Edit Job opening" : "Post New Job"}
-                    </h2>
+                    <div>
+                      <h2 className="text-xl font-bold text-foreground">
+                        {editingJobId !== null ? "Edit Job Opening" : "Post New Job"}
+                      </h2>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        {editingJobId !== null 
+                          ? "Update position specifications and applicant criteria." 
+                          : "Publish a new career role to attract enterprise talent."}
+                      </p>
+                    </div>
                   </div>
-
-                  {jobFormSuccess && (
-                    <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
-                      Job opening {editingJobId !== null ? "updated" : "posted"} successfully!
-                    </div>
+                  {editingJobId !== null && (
+                    <button
+                      type="button"
+                      onClick={handleCancelJobEdit}
+                      className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                    >
+                      Cancel Editing
+                    </button>
                   )}
+                </div>
 
-                  {jobFormError && (
-                    <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
-                      {jobFormError}
-                    </div>
-                  )}
+                {jobFormSuccess && (
+                  <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                    <span>Job opening {editingJobId !== null ? "updated" : "posted"} successfully!</span>
+                  </div>
+                )}
 
-                  <form onSubmit={handleSubmitJob} className="space-y-5">
+                {jobFormError && (
+                  <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    <span>{jobFormError}</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmitJob} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <label className="block text-sm font-medium">
                       Job Title
                       <input
@@ -4178,7 +4207,7 @@ function AdminDashboard() {
                       />
                     </label>
 
-                    <label className="block text-sm font-medium">
+                    <label className="block text-sm font-medium sm:col-span-2 lg:col-span-1">
                       Job Type
                       <select
                         className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
@@ -4194,133 +4223,143 @@ function AdminDashboard() {
                         <option value="Internship">Internship</option>
                       </select>
                     </label>
+                  </div>
 
-                    <label className="block text-sm font-medium">
-                      Job Description
-                      <textarea
-                        rows={4}
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-y"
-                        placeholder="Key responsibilities, qualifications, and core technical requirements..."
-                        value={jobDescription}
-                        onChange={(e) => setJobDescription(e.target.value)}
-                        disabled={jobFormLoading}
-                      />
-                    </label>
+                  <label className="block text-sm font-medium">
+                    Job Description
+                    <textarea
+                      rows={3}
+                      className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-y"
+                      placeholder="Key responsibilities, qualifications, and core technical requirements..."
+                      value={jobDescription}
+                      onChange={(e) => setJobDescription(e.target.value)}
+                      disabled={jobFormLoading}
+                    />
+                  </label>
 
-                    <div className="space-y-2">
+                  <div className="pt-1 flex flex-col sm:flex-row gap-3">
+                    <button
+                      type="submit"
+                      disabled={jobFormLoading || !jobTitle || !jobLocation}
+                      className="flex-1 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center shadow-md"
+                    >
+                      {jobFormLoading 
+                        ? "Saving..." 
+                        : editingJobId !== null 
+                          ? "Update Job Opening" 
+                          : "Publish Job Opening"}
+                    </button>
+                    {editingJobId !== null && (
                       <button
-                        type="submit"
-                        disabled={jobFormLoading || !jobTitle || !jobLocation}
-                        className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
+                        type="button"
+                        onClick={handleCancelJobEdit}
+                        className="rounded-xl border border-border bg-background px-6 py-2.5 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                        disabled={jobFormLoading}
                       >
-                        {jobFormLoading 
-                          ? "Saving..." 
-                          : editingJobId !== null 
-                            ? "Update Job Opening" 
-                            : "Publish Job Opening"}
+                        Cancel Edit
                       </button>
-                      {editingJobId !== null && (
-                        <button
-                          type="button"
-                          onClick={handleCancelJobEdit}
-                          className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                          disabled={jobFormLoading}
-                        >
-                          Cancel Edit
-                        </button>
-                      )}
-                    </div>
-                  </form>
-                </div>
+                    )}
+                  </div>
+                </form>
               </div>
 
-            </div>
-          )}
+              {/* 2. Added Details List NEXT (Kindha na) */}
+              <div className="space-y-3.5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-lg font-bold text-foreground">Current Job Openings</h2>
+                    <span className="rounded-full bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 text-xs font-bold">
+                      {jobList.length}
+                    </span>
+                  </div>
+                  <a
+                    href="/career"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+                  >
+                    <span>View Careers Page</span>
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </div>
 
-          {activeTab === "blogs" && (
-            <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
-              
-              {/* Left Column: Blogs List */}
-              <div className="max-h-[80vh] overflow-y-auto pr-2">
-                <h2 className="text-lg font-bold text-foreground mb-4">Current Blog Articles</h2>
-
-                {blogLoading && blogList.length === 0 ? (
-                  <div className="space-y-4 animate-pulse">
-                    {[1, 2].map((i) => (
-                      <div key={i} className="panel p-4 bg-surface-2 border border-border/50 h-28 animate-pulse"></div>
+                {jobLoading && jobList.length === 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-pulse">
+                    {[1, 2, 3].map((i) => (
+                      <div key={i} className="panel p-4 bg-surface-2 border border-border/50 h-28 rounded-2xl"></div>
                     ))}
                   </div>
-                ) : blogError ? (
+                ) : jobError ? (
                   <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 text-center">
-                    <p className="text-sm text-destructive font-medium">{blogError}</p>
+                    <p className="text-sm text-destructive font-medium">{jobError}</p>
                   </div>
-                ) : blogList.length === 0 ? (
+                ) : jobList.length === 0 ? (
                   <div className="panel p-12 text-center border border-dashed border-border/80 rounded-2xl flex flex-col items-center justify-center">
                     <div className="rounded-full bg-secondary p-3 text-muted-foreground">
-                      <BookOpen className="h-8 w-8 text-primary" />
+                      <Briefcase className="h-8 w-8 text-primary" />
                     </div>
-                    <h3 className="mt-4 text-base font-semibold text-foreground">No articles published yet</h3>
+                    <h3 className="mt-4 text-base font-semibold text-foreground">No jobs yet</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      Write your first engineering article using the form on the right.
+                      Post your first job opening using the form above.
                     </p>
                   </div>
                 ) : (
-                  <div className="space-y-4">
-                    {blogList.map((item) => (
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                    {jobList.map((item) => (
                       <div
                         key={item.id}
-                        className={`panel p-4 bg-surface border flex gap-4 items-center justify-between transition-all duration-300 ${
-                          editingBlogId === item.id 
-                            ? "border-primary bg-primary/2" 
-                            : "border-border/85 hover:border-primary/30"
+                        className={`panel p-4 bg-surface border rounded-2xl flex flex-col justify-between transition-all duration-300 ${
+                          editingJobId === item.id 
+                            ? "border-primary bg-primary/5 ring-2 ring-primary/25" 
+                            : "border-border/85 hover:border-primary/40 hover:shadow-md"
                         }`}
                       >
-                        <div className="flex gap-4 items-center min-w-0">
-                          {item.image ? (
-                            <img
-                              src={item.image}
-                              alt={item.title}
-                              onError={(e) => {
-                                e.currentTarget.onerror = null;
-                                e.currentTarget.src = "/solutions-strategy.jpg";
-                              }}
-                              className="h-16 w-16 rounded-xl object-cover border border-border/80 shrink-0"
-                            />
-                          ) : (
-                            <div className="h-16 w-16 rounded-xl bg-secondary flex items-center justify-center text-primary shrink-0">
-                              <BookOpen className="h-6 w-6" />
-                            </div>
-                          )}
-                          <div className="min-w-0">
-                            <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold text-primary uppercase tracking-wider">
-                              {item.tag}
+                        <div>
+                          <div className="flex items-start justify-between gap-2">
+                            <h4 className="font-bold text-foreground text-sm line-clamp-1">{item.title}</h4>
+                            <span className="shrink-0 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
+                              {item.type}
                             </span>
-                            <h4 className="font-bold text-foreground truncate mt-1">{item.title}</h4>
-                            <p className="text-xs text-muted-foreground line-clamp-2 mt-0.5">{item.description}</p>
                           </div>
+                          <div className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground">
+                            <MapPin className="h-3.5 w-3.5 text-primary shrink-0" />
+                            <span className="truncate">{item.location}</span>
+                          </div>
+                          {item.description && (
+                            <p className="mt-2 text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                              {item.description}
+                            </p>
+                          )}
                         </div>
 
-                        <div className="flex gap-2 shrink-0">
-                          <button
-                            onClick={() => handleStartBlogEdit(item)}
-                            className={`inline-flex items-center justify-center h-9 w-9 rounded-xl border transition-all shrink-0 cursor-pointer ${
-                              editingBlogId === item.id 
-                                ? "border-primary bg-primary text-primary-foreground" 
-                                : "border-border bg-background text-foreground hover:bg-secondary"
-                            }`}
-                            title="Edit Blog Post"
-                            disabled={blogFormLoading}
-                          >
-                            <Pencil className="h-4 w-4" />
-                          </button>
-                          <button
-                            onClick={() => handleDeleteBlog(item.id)}
-                            disabled={deleteBlogStatus?.id === item.id && deleteBlogStatus?.status === "loading"}
-                            className="inline-flex items-center justify-center h-9 w-9 rounded-xl border border-destructive/30 bg-destructive/5 text-destructive hover:bg-destructive hover:text-white transition-all disabled:opacity-50 shrink-0 cursor-pointer"
-                            title="Delete Blog Post"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
+                        <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between gap-2">
+                          <span className="text-[11px] text-muted-foreground font-medium">
+                            Role #{item.id}
+                          </span>
+
+                          <div className="flex gap-1.5 shrink-0">
+                            <button
+                              onClick={() => handleStartJobEdit(item)}
+                              className={`inline-flex items-center gap-1 h-8 px-2.5 rounded-lg border text-xs font-semibold transition-all cursor-pointer ${
+                                editingJobId === item.id 
+                                  ? "border-primary bg-primary text-primary-foreground" 
+                                  : "border-border bg-background text-foreground hover:bg-secondary"
+                              }`}
+                              title="Edit Job opening"
+                              disabled={jobFormLoading}
+                            >
+                              <Pencil className="h-3.5 w-3.5" />
+                              <span>Edit</span>
+                            </button>
+                            <button
+                              onClick={() => handleDeleteJob(item.id)}
+                              disabled={deleteJobStatus?.id === item.id && deleteJobStatus?.status === "loading"}
+                              className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-destructive/30 bg-destructive/5 text-destructive hover:bg-destructive hover:text-white transition-all disabled:opacity-50 cursor-pointer"
+                              title="Delete Job opening"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -4328,31 +4367,57 @@ function AdminDashboard() {
                 )}
               </div>
 
-              {/* Right Column: Creation / Editing Form */}
-              <div className="max-h-[80vh] overflow-y-auto pr-2">
-                <div className="panel p-3.5 sm:p-6 bg-surface border border-border/80">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
+            </div>
+          )}
+
+          {activeTab === "blogs" && (
+            <div className="space-y-6">
+              
+              {/* 1. Form FIRST at the top */}
+              <div id="blog-form-card" className="panel p-4 sm:p-6 bg-surface border border-border/80 rounded-2xl shadow-sm">
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
+                  <div className="flex items-center gap-2.5">
+                    <div className="rounded-xl bg-primary/10 p-2 text-primary">
                       {editingBlogId !== null ? <Pencil className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
                     </div>
-                    <h2 className="text-xl font-bold text-foreground">
-                      {editingBlogId !== null ? "Edit Article" : "Write Article"}
-                    </h2>
+                    <div>
+                      <h2 className="text-xl font-bold text-foreground">
+                        {editingBlogId !== null ? "Edit Article" : "Write Article"}
+                      </h2>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        {editingBlogId !== null 
+                          ? "Update article copy, cover image, and structured sections." 
+                          : "Publish engineering perspectives, architectures, and tech essays."}
+                      </p>
+                    </div>
                   </div>
-
-                  {blogFormSuccess && (
-                    <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600">
-                      Blog post {editingBlogId !== null ? "updated" : "published"} successfully!
-                    </div>
+                  {editingBlogId !== null && (
+                    <button
+                      type="button"
+                      onClick={handleCancelBlogEdit}
+                      className="px-3 py-1.5 rounded-xl border border-border bg-background text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                    >
+                      Cancel Editing
+                    </button>
                   )}
+                </div>
 
-                  {blogFormError && (
-                    <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive">
-                      {blogFormError}
-                    </div>
-                  )}
+                {blogFormSuccess && (
+                  <div className="mb-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                    <span>Blog post {editingBlogId !== null ? "updated" : "published"} successfully!</span>
+                  </div>
+                )}
 
-                  <form onSubmit={handleSubmitBlog} className="space-y-5">
+                {blogFormError && (
+                  <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/30 p-4 text-sm text-destructive flex items-center gap-2">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    <span>{blogFormError}</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmitBlog} className="space-y-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <label className="block text-sm font-medium">
                       Article Title
                       <input
@@ -4378,122 +4443,229 @@ function AdminDashboard() {
                         disabled={blogFormLoading}
                       />
                     </label>
+                  </div>
 
-                    <ImageUploadField
-                      label="Cover Image"
-                      value={blogImage}
-                      onChange={setBlogImage}
+                  <ImageUploadField
+                    label="Cover Image"
+                    value={blogImage}
+                    onChange={setBlogImage}
+                    disabled={blogFormLoading}
+                    recommendedDimensions="1200 × 675 px (16:9 Landscape)"
+                    helperText="Recommended size: 1200 × 675 px (16:9 aspect ratio). Auto-scaled & cropped for card feeds and article headers."
+                  />
+
+                  <label className="block text-sm font-medium">
+                    Excerpt / Short Description
+                    <textarea
+                      rows={2}
+                      className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                      placeholder="Brief summary shown in the articles feed grid..."
+                      value={blogDesc}
+                      onChange={(e) => setBlogDesc(e.target.value)}
+                      required
                       disabled={blogFormLoading}
-                      recommendedDimensions="1200 × 675 px (16:9 Landscape)"
-                      helperText="Recommended size: 1200 × 675 px (16:9 aspect ratio). Auto-scaled & cropped for card feeds and article headers."
                     />
+                  </label>
 
-                    <label className="block text-sm font-medium">
-                      Excerpt / Short Description
-                      <textarea
-                        rows={3}
-                        className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
-                        placeholder="Brief summary shown in the articles feed grid..."
-                        value={blogDesc}
-                        onChange={(e) => setBlogDesc(e.target.value)}
-                        required
-                        disabled={blogFormLoading}
-                      />
-                    </label>
-
-                    {/* Content Sections Editor */}
-                    <div className="border-t border-border/60 pt-5 space-y-4">
-                      <div className="flex items-center justify-between">
+                  {/* Content Sections Editor */}
+                  <div className="border-t border-border/60 pt-5 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
                         <h3 className="text-sm font-bold text-foreground">Structured Article Details</h3>
-                        <button
-                          type="button"
-                          onClick={handleAddBlogSection}
-                          className="inline-flex items-center gap-1 rounded-lg border border-primary/20 bg-primary/5 px-2.5 py-1.5 text-xs font-semibold text-primary hover:bg-primary hover:text-white transition-all cursor-pointer"
-                          disabled={blogFormLoading}
-                        >
-                          <Plus className="h-3 w-3" />
-                          Add Section
-                        </button>
+                        <p className="text-xs text-muted-foreground mt-0.5">Add story sections with optional headings and images.</p>
                       </div>
+                      <button
+                        type="button"
+                        onClick={handleAddBlogSection}
+                        className="inline-flex items-center gap-1 rounded-lg border border-primary/20 bg-primary/5 px-2.5 py-1.5 text-xs font-semibold text-primary hover:bg-primary hover:text-white transition-all cursor-pointer"
+                        disabled={blogFormLoading}
+                      >
+                        <Plus className="h-3 w-3" />
+                        Add Section
+                      </button>
+                    </div>
 
-                      <div className="space-y-3">
-                        {blogSections.map((sec, idx) => (
-                          <div key={idx} className="p-4 rounded-xl border border-border/80 bg-background/50 space-y-3 relative">
-                            <div className="flex items-center justify-between">
-                              <span className="text-xs font-semibold text-muted-foreground uppercase">Section #{idx + 1}</span>
-                              {blogSections.length > 1 && (
-                                <button
-                                  type="button"
-                                  onClick={() => handleRemoveBlogSection(idx)}
-                                  className="text-xs font-semibold text-rose-400 hover:text-rose-300 transition-all cursor-pointer"
-                                  disabled={blogFormLoading}
-                                >
-                                  Remove
-                                </button>
-                              )}
-                            </div>
-
-                            <label className="block text-xs font-medium">
-                              Section Heading (Optional)
-                              <input
-                                type="text"
-                                className="mt-1 w-full rounded-lg border border-input bg-background px-3 py-2 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
-                                placeholder="Heading for this block..."
-                                value={sec.heading}
-                                onChange={(e) => handleUpdateBlogSection(idx, "heading", e.target.value)}
+                    <div className="space-y-3">
+                      {blogSections.map((sec, idx) => (
+                        <div key={idx} className="p-4 rounded-xl border border-border/80 bg-background/50 space-y-3 relative">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-semibold text-muted-foreground uppercase">Section #{idx + 1}</span>
+                            {blogSections.length > 1 && (
+                              <button
+                                type="button"
+                                onClick={() => handleRemoveBlogSection(idx)}
+                                className="text-xs font-semibold text-rose-400 hover:text-rose-300 transition-all cursor-pointer"
                                 disabled={blogFormLoading}
-                              />
-                            </label>
+                              >
+                                Remove
+                              </button>
+                            )}
+                          </div>
 
-                            <ImageUploadField
-                              label="Section Image (Optional)"
-                              value={sec.image}
-                              onChange={(val) => handleUpdateBlogSection(idx, "image", val)}
+                          <label className="block text-xs font-medium">
+                            Section Heading (Optional)
+                            <input
+                              type="text"
+                              className="mt-1 w-full rounded-lg border border-input bg-background px-3 py-2 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary"
+                              placeholder="Heading for this block..."
+                              value={sec.heading}
+                              onChange={(e) => handleUpdateBlogSection(idx, "heading", e.target.value)}
                               disabled={blogFormLoading}
                             />
+                          </label>
 
-                            <label className="block text-xs font-medium">
-                              Story / Story Text
-                              <textarea
-                                rows={4}
-                                className="mt-1 w-full rounded-lg border border-input bg-background px-3 py-2 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
-                                placeholder="Story paragraphs..."
-                                value={sec.story}
-                                onChange={(e) => handleUpdateBlogSection(idx, "story", e.target.value)}
-                                required
-                                disabled={blogFormLoading}
-                              />
-                            </label>
-                          </div>
-                        ))}
-                      </div>
+                          <ImageUploadField
+                            label="Section Image (Optional)"
+                            value={sec.image}
+                            onChange={(val) => handleUpdateBlogSection(idx, "image", val)}
+                            disabled={blogFormLoading}
+                          />
+
+                          <label className="block text-xs font-medium">
+                            Story / Story Text
+                            <textarea
+                              rows={4}
+                              className="mt-1 w-full rounded-lg border border-input bg-background px-3 py-2 text-xs outline-none transition-all placeholder:text-muted-foreground focus:border-primary resize-none"
+                              placeholder="Story paragraphs..."
+                              value={sec.story}
+                              onChange={(e) => handleUpdateBlogSection(idx, "story", e.target.value)}
+                              required
+                              disabled={blogFormLoading}
+                            />
+                          </label>
+                        </div>
+                      ))}
                     </div>
+                  </div>
 
-                    <div className="space-y-2 border-t border-border/60 pt-5">
+                  <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                    <button
+                      type="submit"
+                      disabled={blogFormLoading || !blogTitle || !blogTag || !blogDesc}
+                      className="flex-1 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center shadow-md"
+                    >
+                      {blogFormLoading 
+                        ? "Saving..." 
+                        : editingBlogId !== null 
+                          ? "Update Article" 
+                          : "Publish Article"}
+                    </button>
+                    {editingBlogId !== null && (
                       <button
-                        type="submit"
-                        disabled={blogFormLoading || !blogTitle || !blogTag || !blogDesc}
-                        className="w-full rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer text-center"
+                        type="button"
+                        onClick={handleCancelBlogEdit}
+                        className="rounded-xl border border-border bg-background px-6 py-2.5 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
+                        disabled={blogFormLoading}
                       >
-                        {blogFormLoading 
-                          ? "Saving..." 
-                          : editingBlogId !== null 
-                            ? "Update Article" 
-                            : "Publish Article"}
+                        Cancel Edit
                       </button>
-                      {editingBlogId !== null && (
-                        <button
-                          type="button"
-                          onClick={handleCancelBlogEdit}
-                          className="w-full rounded-xl border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-98 cursor-pointer text-center"
-                          disabled={blogFormLoading}
-                        >
-                          Cancel Edit
-                        </button>
-                      )}
-                    </div>
-                  </form>
+                    )}
+                  </div>
+                </form>
+              </div>
+
+              {/* 2. Added Details List NEXT (Kindha na) */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-lg font-bold text-foreground">Current Blog Articles</h2>
+                    <span className="rounded-full bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 text-xs font-bold">
+                      {blogList.length}
+                    </span>
+                  </div>
+                  <a
+                    href="/blog"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+                  >
+                    <ExternalLink className="h-3.5 w-3.5" />
+                    View Live Page
+                  </a>
                 </div>
+
+                {blogLoading && blogList.length === 0 ? (
+                  <div className="space-y-4 animate-pulse">
+                    {[1, 2].map((i) => (
+                      <div key={i} className="panel p-4 bg-surface-2 border border-border/50 h-28 rounded-2xl"></div>
+                    ))}
+                  </div>
+                ) : blogError ? (
+                  <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 text-center">
+                    <p className="text-sm text-destructive font-medium">{blogError}</p>
+                  </div>
+                ) : blogList.length === 0 ? (
+                  <div className="panel p-12 text-center border border-dashed border-border/80 rounded-2xl flex flex-col items-center justify-center">
+                    <div className="rounded-full bg-secondary p-3 text-muted-foreground">
+                      <BookOpen className="h-8 w-8 text-primary" />
+                    </div>
+                    <h3 className="mt-4 text-base font-semibold text-foreground">No articles published yet</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      Write your first engineering article using the form above.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                    {blogList.map((item) => (
+                      <div
+                        key={item.id}
+                        className={`panel p-4 bg-surface border rounded-2xl flex flex-col justify-between transition-all duration-300 ${
+                          editingBlogId === item.id 
+                            ? "border-primary bg-primary/2" 
+                            : "border-border/85 hover:border-primary/30"
+                        }`}
+                      >
+                        <div className="flex gap-4 items-start min-w-0">
+                          {item.image ? (
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              onError={(e) => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = "/solutions-strategy.jpg";
+                              }}
+                              className="h-16 w-16 rounded-xl object-cover border border-border/80 shrink-0"
+                            />
+                          ) : (
+                            <div className="h-16 w-16 rounded-xl bg-secondary flex items-center justify-center text-primary shrink-0">
+                              <BookOpen className="h-6 w-6" />
+                            </div>
+                          )}
+                          <div className="min-w-0 flex-1">
+                            <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold text-primary uppercase tracking-wider">
+                              {item.tag}
+                            </span>
+                            <h4 className="font-bold text-foreground text-sm truncate mt-1">{item.title}</h4>
+                            <p className="text-xs text-muted-foreground line-clamp-2 mt-0.5">{item.description}</p>
+                          </div>
+                        </div>
+
+                        <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-end gap-2">
+                          <button
+                            onClick={() => handleStartBlogEdit(item)}
+                            className={`inline-flex items-center justify-center h-9 w-9 rounded-xl border transition-all shrink-0 cursor-pointer ${
+                              editingBlogId === item.id 
+                                ? "border-primary bg-primary text-primary-foreground" 
+                                : "border-border bg-background text-foreground hover:bg-secondary"
+                            }`}
+                            title="Edit Blog Post"
+                            disabled={blogFormLoading}
+                          >
+                            <Pencil className="h-4 w-4" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteBlog(item.id)}
+                            disabled={deleteBlogStatus?.id === item.id && deleteBlogStatus?.status === "loading"}
+                            className="inline-flex items-center justify-center h-9 w-9 rounded-xl border border-destructive/30 bg-destructive/5 text-destructive hover:bg-destructive hover:text-white transition-all disabled:opacity-50 shrink-0 cursor-pointer"
+                            title="Delete Blog Post"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
             </div>

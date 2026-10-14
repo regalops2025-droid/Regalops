@@ -28,10 +28,31 @@ export const Route = createFileRoute("/admin")({
     ],
   }),
   component: AdminDashboard,
+  errorComponent: ({ error }) => (
+    <div className="flex min-h-screen items-center justify-center bg-zinc-950 text-white p-6">
+      <div className="max-w-md text-center">
+        <h2 className="text-xl font-bold text-rose-400 mb-2">Admin Portal</h2>
+        <p className="text-sm text-zinc-400 mb-4">{error?.message || "Session expired or access error."}</p>
+        <a href="/login" className="px-4 py-2 bg-[#555d25] text-white rounded-xl text-xs font-semibold">
+          Go to Sign In
+        </a>
+      </div>
+    </div>
+  ),
 });
 
 function AdminDashboard() {
-  const [admin, setAdmin] = useState<any>(null);
+  const [admin, setAdmin] = useState<any>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const stored = localStorage.getItem("user");
+        return stored ? JSON.parse(stored) : null;
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  });
   const [activeTab, setActiveTab] = useState<"dashboard" | "enquiries" | "solutions" | "technologies" | "services" | "clients" | "careers" | "blogs" | "applications">("dashboard");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   
@@ -1467,8 +1488,8 @@ function AdminDashboard() {
         {/* Profile Card */}
         <div className="px-6 py-5 border-b border-border/20">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-primary">Logged In As</p>
-          <h4 className="mt-1 font-semibold text-white truncate">{admin.name}</h4>
-          <p className="text-xs text-zinc-400 truncate">{admin.email}</p>
+          <h4 className="mt-1 font-semibold text-white truncate">{admin?.name || "Administrator"}</h4>
+          <p className="text-xs text-zinc-400 truncate">{admin?.email || "admin@regalops.com"}</p>
         </div>
 
         {/* Navigation Items */}

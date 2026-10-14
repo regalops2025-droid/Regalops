@@ -9,6 +9,7 @@ const queryClient = new QueryClient();
 
 const router = createRouter({
   routeTree,
+  trailingSlash: "never",
   context: {
     queryClient,
   },

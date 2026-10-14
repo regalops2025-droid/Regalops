@@ -1825,63 +1825,6 @@ function AdminDashboard() {
           {/* Active Tab Panel Rendering */}
           {activeTab === "dashboard" && (
             <div className="space-y-4 animate-in fade-in-50 duration-200">
-              {/* 1. Hero Welcome & Telemetry Banner */}
-              <div className="relative overflow-hidden rounded-3xl border border-border/80 bg-gradient-to-br from-card via-surface to-card p-5 sm:p-6 lg:p-7 shadow-lg">
-                <div className="pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
-                <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-amber-500/10 blur-3xl" />
-                
-                <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                  <div>
-                    <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary mb-2 shadow-2xs">
-                      <Sparkles className="h-3.5 w-3.5" />
-                      <span>Master Control Hub • Live Operations</span>
-                    </div>
-                    <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
-                      Welcome back, {admin.name || "Administrator"}
-                    </h2>
-                    <p className="mt-1 text-xs sm:text-sm text-muted-foreground max-w-2xl leading-relaxed">
-                      Centralized operations and content management overview across all 8 live modules: client inquiries, hiring pipeline, service catalog, tech stack, and publications.
-                    </p>
-
-                    {/* Real-time Telemetry Status Pills */}
-                    <div className="mt-3.5 flex flex-wrap items-center gap-2 text-xs">
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 px-2.5 py-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        SQLite Database Live
-                      </span>
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-500/10 border border-sky-500/25 px-2.5 py-1 text-[11px] font-semibold text-sky-600 dark:text-sky-400">
-                        <Activity className="h-3 w-3" />
-                        Hostinger Production Synced
-                      </span>
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/25 px-2.5 py-1 text-[11px] font-semibold text-amber-600 dark:text-amber-400">
-                        <ShieldCheck className="h-3 w-3" />
-                        Zero-Trust Auth Validated
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Summary Metric Pill & Quick Sync */}
-                  <div className="flex flex-col sm:flex-row lg:flex-col items-start lg:items-end gap-2.5 shrink-0">
-                    <div className="rounded-2xl border border-border/80 bg-background/80 backdrop-blur-md p-3.5 shadow-sm text-left lg:text-right min-w-[210px]">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block">Total Records Managed</span>
-                      <span className="text-2xl font-black text-foreground">
-                        {enquiries.length + applications.length + solutions.length + techList.length + serviceList.length + clientList.length + jobList.length + blogList.length}
-                      </span>
-                      <span className="text-[11px] text-muted-foreground block mt-0.5">Across 8 Live Modules</span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={refreshAllData}
-                      className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:opacity-95 transition-all shadow-xs cursor-pointer"
-                    >
-                      <RefreshCw className={`h-3.5 w-3.5 ${enquiriesLoading || solutionsLoading || techLoading ? "animate-spin" : ""}`} />
-                      <span>Sync All Data</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-
               {/* 3. All Tabs & Modules Master Navigation Grid */}
               <div>
                 <div className="flex items-center justify-between mb-3">

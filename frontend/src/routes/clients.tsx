@@ -460,7 +460,7 @@ function Clients() {
   const [studiesLoading, setStudiesLoading] = useState(true);
   const [loading, setLoading] = useState(true);
 
-  // Merge dynamic admin client brands with default brand collection
+  // Merge dynamic admin client brands with default brand collection, prioritizing admin brands first
   const allClientBrands = useMemo(() => {
     if (!adminClientStudies || adminClientStudies.length === 0) {
       return ORIGINAL_CLIENT_BRANDS;
@@ -469,10 +469,11 @@ function Clients() {
     const adminBrands: OriginalClientBrand[] = adminClientStudies.map((c) => {
       const s = (c.sector || "").toLowerCase();
       let cat: OriginalClientBrand["category"] = "tech";
-      if (s.includes("bank") || s.includes("finan")) cat = "banking";
+      if (s.includes("bank") || s.includes("finan") || s.includes("insur")) cat = "banking";
       else if (s.includes("telecom") || s.includes("network") || s.includes("mobile")) cat = "telecom";
       else if (s.includes("health") || s.includes("medic") || s.includes("pharma")) cat = "healthcare";
-      else if (s.includes("enterprise") || s.includes("logistics") || s.includes("supply") || s.includes("manufactur")) cat = "enterprise";
+      else if (s.includes("enterprise") || s.includes("logistics") || s.includes("supply") || s.includes("manufactur") || s.includes("auto") || s.includes("educat")) cat = "enterprise";
+      else if (s.includes("media") || s.includes("public")) cat = "media";
 
       return {
         id: `admin-${c.id}`,
@@ -483,7 +484,38 @@ function Clients() {
       };
     });
 
-    return [...ORIGINAL_CLIENT_BRANDS, ...adminBrands];
+    const adminNames = new Set(adminBrands.map((b) => b.name.trim().toLowerCase()));
+    const remainingDefaults = ORIGINAL_CLIENT_BRANDS.filter(
+      (b) => !adminNames.has(b.name.trim().toLowerCase())
+    );
+
+    return [...adminBrands, ...remainingDefaults];
+  }, [adminClientStudies]);
+
+  // 3x3 Mini Grid logos on the left: prioritize admin clients with logos first, then fill up to 9
+  const featuredHeroLogos = useMemo(() => {
+    if (!adminClientStudies || adminClientStudies.length === 0) {
+      return FEATURED_HERO_CLIENTS;
+    }
+
+    const adminLogos = adminClientStudies
+      .filter((c) => c.image)
+      .map((c) => ({
+        id: `hero-admin-${c.id}`,
+        name: c.name,
+        image: c.image,
+      }));
+
+    if (adminLogos.length >= 9) {
+      return adminLogos.slice(0, 9);
+    }
+
+    const adminNames = new Set(adminLogos.map((l) => l.name.trim().toLowerCase()));
+    const remaining = FEATURED_HERO_CLIENTS.filter(
+      (f) => !adminNames.has(f.name.trim().toLowerCase())
+    );
+
+    return [...adminLogos, ...remaining].slice(0, 9);
   }, [adminClientStudies]);
 
   // Filter client brands based on category tab
@@ -546,7 +578,7 @@ function Clients() {
     fetch("/api/clients")
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
+        if (Array.isArray(data)) {
           setAdminClientStudies(data);
         }
         setStudiesLoading(false);
@@ -679,16 +711,20 @@ function Clients() {
 
               {/* 3x3 Mini Logo Cards Grid */}
               <div className="relative z-10 mt-5 sm:mt-6 grid grid-cols-3 gap-2 sm:gap-2.5">
-                {FEATURED_HERO_CLIENTS.map((logo) => (
+                {featuredHeroLogos.map((logo) => (
                   <div
                     key={logo.id}
-                    className="bg-white rounded-xl p-2 sm:p-2.5 flex items-center justify-center h-14 sm:h-16 shadow-xs transition-transform duration-200 hover:scale-105"
+                    className="bg-white rounded-xl p-2 sm:p-2.5 flex items-center justify-center h-14 sm:h-16 shadow-xs transition-transform duration-200 hover:scale-105 overflow-hidden"
                   >
                     <img
                       src={logo.image}
                       alt={logo.name}
                       className="max-h-7 sm:max-h-8 max-w-[85%] w-auto object-contain"
                       loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = "/logo.png";
+                      }}
                     />
                   </div>
                 ))}
@@ -758,6 +794,10 @@ function Clients() {
                               alt={client.name}
                               className="max-h-8 sm:max-h-9 max-w-[130px] sm:max-w-[145px] w-auto object-contain"
                               loading="lazy"
+                              onError={(e) => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = "/logo.png";
+                              }}
                             />
                           </div>
                           <h3 className="mt-2 text-xs sm:text-[13px] font-bold text-neutral-900 tracking-tight leading-snug">
@@ -783,6 +823,10 @@ function Clients() {
                               alt={client.name}
                               className="max-h-8 sm:max-h-9 max-w-[130px] sm:max-w-[145px] w-auto object-contain"
                               loading="lazy"
+                              onError={(e) => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = "/logo.png";
+                              }}
                             />
                           </div>
                           <h3 className="mt-2 text-xs sm:text-[13px] font-bold text-neutral-900 tracking-tight leading-snug">
@@ -811,6 +855,10 @@ function Clients() {
                             alt={client.name}
                             className="max-h-8 sm:max-h-9 max-w-[130px] sm:max-w-[145px] w-auto object-contain"
                             loading="lazy"
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = "/logo.png";
+                            }}
                           />
                         </div>
                         <h3 className="mt-2 text-xs sm:text-[13px] font-bold text-neutral-900 tracking-tight leading-snug">

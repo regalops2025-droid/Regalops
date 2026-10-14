@@ -130,26 +130,41 @@ const timeline = [
     year: "2011",
     title: "Practice Inception",
     text: "Founded as a specialized systems integration practice with deep roots in enterprise architecture and distributed systems.",
+    image: "/milestone-2011-architecture.jpg",
+    badge: "Enterprise Architecture & Integration",
+    highlight: "Distributed Systems & Systems Architecture",
   },
   {
     year: "2015",
     title: "Core Modernization",
     text: "Delivered first zero-downtime core banking migration with 100% transactional fidelity and automated failover.",
+    image: "/milestone-2015-banking.jpg",
+    badge: "Core Banking Modernization",
+    highlight: "Zero-Downtime Migration & Failover",
   },
   {
     year: "2019",
     title: "Multi-Cloud Expansion",
     text: "Launched dedicated AWS, Azure, and GCP practices with automated Terraform IaC and GitOps pipelines.",
+    image: "/milestone-2019-cloud.jpg",
+    badge: "Multi-Cloud & GitOps Orchestration",
+    highlight: "AWS • Azure • GCP Practice & Terraform IaC",
   },
   {
     year: "2023",
     title: "AI & Neural Automation",
     text: "Formed Autonomous AI squad, deploying production LLM agents and sub-15ms inference pipelines for enterprise clients.",
+    image: "/milestone-2023-ai.jpg",
+    badge: "Autonomous AI & Neural Pipelines",
+    highlight: "Production LLM Agents & Sub-15ms Inference",
   },
   {
     year: "2026",
     title: "Global Scale & Inc. 5000 Recognition",
     text: "220+ senior technologists across 14 countries maintaining contractually backed 99.98% high availability.",
+    image: "/milestones-pyramid.png",
+    badge: "Global Scale & Inc. 5000 Practice",
+    highlight: "220+ Technologists & 14 Countries Delivery",
   },
 ];
 
@@ -157,6 +172,17 @@ function About() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [activeMilestone, setActiveMilestone] = useState(1);
+  const [isMilestoneHovered, setIsMilestoneHovered] = useState(false);
+
+  // Auto-advance milestones when not hovered
+  useEffect(() => {
+    if (isMilestoneHovered) return;
+    const interval = setInterval(() => {
+      setActiveMilestone((prev) => (prev + 1) % timeline.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [isMilestoneHovered]);
 
   // Auto-scroll loop every 3.5 seconds when user is not hovering
   useEffect(() => {
@@ -605,7 +631,11 @@ function About() {
       {/* ==================================================================== */}
       {/* 5. JOURNEY & MILESTONES TIMELINE WITH ROTATING ENTERPRISE SHOWCASE   */}
       {/* ==================================================================== */}
-      <section className="bg-[#fafcfb] py-3 sm:py-4 border-b border-neutral-200/70 overflow-hidden relative">
+      <section 
+        className="bg-[#fafcfb] py-3 sm:py-4 border-b border-neutral-200/70 overflow-hidden relative"
+        onMouseEnter={() => setIsMilestoneHovered(true)}
+        onMouseLeave={() => setIsMilestoneHovered(false)}
+      >
         {/* Subtle background ambient glow */}
         <div className="absolute top-1/3 right-10 -z-0 h-96 w-96 rounded-full bg-[#f3cd67]/10 blur-3xl pointer-events-none" />
         <div className="absolute bottom-10 left-10 -z-0 h-80 w-80 rounded-full bg-[#555d25]/10 blur-3xl pointer-events-none" />
@@ -624,36 +654,83 @@ function About() {
             </p>
           </div>
 
-          {/* 2-Column Grid: Left Timeline with Transitions, Right Rotating Pyramid Showcase */}
+          {/* 2-Column Grid: Left Timeline with Transitions, Right Dynamic Milestone Showcase */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-center">
             
-            {/* LEFT COLUMN: Timeline Items with Interactive Transitions */}
-            <div className="lg:col-span-7 relative border-l-2 border-[#b38e36]/40 ml-4 sm:ml-6 space-y-2 pl-4 sm:pl-6">
-              {timeline.map((item) => (
-                <div
-                  key={item.year}
-                  className="relative group transition-all duration-300 hover:translate-x-1.5"
-                >
-                  {/* Glowing Node Dot with Hover Pulse & Glow */}
-                  <div className="absolute -left-[25px] sm:-left-[33px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-white bg-[#555d25] shadow-xs group-hover:scale-135 group-hover:bg-[#8c6d23] group-hover:shadow-[0_0_12px_rgba(217,168,62,0.6)] transition-all duration-300" />
-                  
-                  {/* Card Container with Transition & Hover Effects */}
-                  <div className="rounded-xl p-2.5 sm:p-3 border border-transparent group-hover:border-[#b38e36]/30 group-hover:bg-white group-hover:shadow-md transition-all duration-300">
-                    <div className="inline-block rounded-full bg-[#f5f6ee] group-hover:bg-[#555d25] group-hover:text-white text-[#8c6d23] px-2.5 py-0.5 text-xs font-bold font-mono transition-colors duration-300 shadow-2xs">
-                      {item.year}
+            {/* LEFT COLUMN: Timeline Items with Interactive Selection & Related Thumbnails */}
+            <div className="lg:col-span-7 relative border-l-2 border-[#b38e36]/40 ml-4 sm:ml-6 space-y-2.5 pl-4 sm:pl-6">
+              {timeline.map((item, idx) => {
+                const isActive = activeMilestone === idx;
+                return (
+                  <div
+                    key={item.year}
+                    onClick={() => setActiveMilestone(idx)}
+                    onMouseEnter={() => setActiveMilestone(idx)}
+                    className="relative group transition-all duration-300 cursor-pointer"
+                  >
+                    {/* Glowing Node Dot with Active / Hover State */}
+                    <div
+                      className={`absolute -left-[25px] sm:-left-[33px] top-3 h-3.5 w-3.5 rounded-full border-2 border-white transition-all duration-300 ${
+                        isActive
+                          ? "bg-[#8c6d23] scale-135 shadow-[0_0_14px_rgba(217,168,62,0.8)]"
+                          : "bg-[#555d25] shadow-xs group-hover:scale-125 group-hover:bg-[#8c6d23] group-hover:shadow-[0_0_10px_rgba(217,168,62,0.5)]"
+                      }`}
+                    />
+                    
+                    {/* Card Container with Transition & Active Highlight */}
+                    <div
+                      className={`rounded-xl p-2.5 sm:p-3 border transition-all duration-300 flex items-center justify-between gap-3 ${
+                        isActive
+                          ? "border-[#b38e36]/50 bg-white shadow-md ring-1 ring-[#b38e36]/25 translate-x-1"
+                          : "border-transparent hover:border-[#b38e36]/30 hover:bg-white/80 hover:shadow-xs hover:translate-x-1"
+                      }`}
+                    >
+                      <div className="flex-1 min-w-0">
+                        <div
+                          className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-bold font-mono transition-colors duration-300 shadow-2xs ${
+                            isActive
+                              ? "bg-[#555d25] text-white"
+                              : "bg-[#f5f6ee] group-hover:bg-[#555d25] group-hover:text-white text-[#8c6d23]"
+                          }`}
+                        >
+                          {item.year}
+                        </div>
+                        <h3
+                          className={`mt-1 text-sm sm:text-base font-bold transition-colors duration-300 ${
+                            isActive
+                              ? "text-[#555d25]"
+                              : "text-neutral-900 group-hover:text-[#555d25]"
+                          }`}
+                        >
+                          {item.title}
+                        </h3>
+                        <p className="mt-0.5 text-xs sm:text-sm leading-relaxed text-neutral-600 line-clamp-2">
+                          {item.text}
+                        </p>
+                      </div>
+
+                      {/* Milestone Related Thumbnail on the Side of Each Card */}
+                      <div
+                        className={`relative shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden border bg-[#071324] transition-all duration-300 shadow-xs ${
+                          isActive
+                            ? "border-[#b38e36] ring-2 ring-[#f3cd67]/50 shadow-md scale-105"
+                            : "border-neutral-200/90 group-hover:border-[#b38e36]/50 opacity-85 group-hover:opacity-100"
+                        }`}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-cover object-center"
+                          loading="lazy"
+                        />
+                      </div>
                     </div>
-                    <h3 className="mt-1 text-sm sm:text-base font-bold text-neutral-900 group-hover:text-[#555d25] transition-colors duration-300">
-                      {item.title}
-                    </h3>
-                    <p className="mt-0.5 text-xs sm:text-sm leading-relaxed text-neutral-600 max-w-xl">
-                      {item.text}
-                    </p>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
-            {/* RIGHT COLUMN: Continuous Rotating Golden Pyramid Showcase */}
+            {/* RIGHT COLUMN: Interactive Golden Orbit Showcase with Related Milestone Image */}
             <div className="lg:col-span-5 flex flex-col items-center justify-center relative py-2">
               
               {/* Outer Rotating Orbital Rings & Glow */}
@@ -671,13 +748,13 @@ function About() {
                 {/* Ambient Radial Golden Glow */}
                 <div className="absolute w-52 h-52 sm:w-60 sm:h-60 rounded-full bg-gradient-to-tr from-[#555d25]/25 via-[#f3cd67]/20 to-transparent blur-3xl pointer-events-none" />
 
-                {/* Rotating Pyramid Image Container */}
+                {/* Rotating Showcase Frame with Dynamic Milestone Image */}
                 <div className="absolute z-10 w-44 h-44 sm:w-56 sm:h-56 xl:w-64 xl:h-64 rounded-full overflow-hidden border-2 border-[#b38e36]/60 shadow-[0_12px_45px_rgba(217,168,62,0.35)] bg-[#071324] flex items-center justify-center group cursor-pointer transition-all duration-500 hover:scale-105 hover:border-[#f3cd67]">
-                  {/* The Rotating Image with Continuous 360 Spin */}
                   <img
-                    src="/milestones-pyramid.png"
-                    alt="Regal OPs 3-Tier Enterprise Architectural Delivery Model"
-                    className="w-full h-full object-cover object-center animate-[spin_28s_linear_infinite] group-hover:[animation-play-state:paused] transition-transform select-none"
+                    key={timeline[activeMilestone].year}
+                    src={timeline[activeMilestone].image}
+                    alt={timeline[activeMilestone].title}
+                    className="w-full h-full object-cover object-center transition-all duration-700 select-none animate-in fade-in zoom-in-95"
                   />
                   
                   {/* Glass Shimmer Overlay */}
@@ -685,16 +762,39 @@ function About() {
                 </div>
               </div>
 
-              {/* Floating Status Badge Beneath Rotating Pyramid */}
-              <div className="mt-4 z-20 inline-flex items-center gap-2 rounded-full border border-[#b38e36]/30 bg-white/90 backdrop-blur-md px-3.5 py-1 shadow-md shadow-neutral-900/5">
+              {/* Floating Status Badge Beneath Dynamic Showcase */}
+              <div className="mt-4 z-20 inline-flex items-center gap-2 rounded-full border border-[#b38e36]/30 bg-white/95 backdrop-blur-md px-3.5 py-1.5 shadow-md shadow-neutral-900/5 transition-all duration-300">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#f3cd67] opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#555d25]" />
                 </span>
                 <span className="text-[11px] font-bold text-neutral-800 tracking-wider uppercase">
-                  3-Tier Delivery &bull; Consult | Build | Deploy
+                  {timeline[activeMilestone].year} &bull; {timeline[activeMilestone].badge}
                 </span>
               </div>
+
+              {/* Quick Milestone Year Selector Pills */}
+              <div className="mt-2.5 flex items-center gap-1.5 z-20">
+                {timeline.map((m, idx) => (
+                  <button
+                    key={m.year}
+                    type="button"
+                    onClick={() => setActiveMilestone(idx)}
+                    className={`px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold transition-all duration-200 cursor-pointer ${
+                      activeMilestone === idx
+                        ? "bg-[#555d25] text-white shadow-xs scale-105"
+                        : "bg-[#f5f6ee] text-[#8c6d23] hover:bg-[#b38e36]/20"
+                    }`}
+                  >
+                    {m.year}
+                  </button>
+                ))}
+              </div>
+
+              {/* Sub-caption highlighting impact */}
+              <p className="mt-1 text-[11px] text-neutral-500 font-medium tracking-wide">
+                {timeline[activeMilestone].highlight}
+              </p>
             </div>
 
           </div>

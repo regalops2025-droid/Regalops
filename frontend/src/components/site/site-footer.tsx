@@ -195,7 +195,7 @@ export function SiteFooter() {
                 { label: "Key Benefits", to: "/about", hash: "benefits" },
                 { label: "Our Clients", to: "/clients" },
                 { label: "Leadership Team", to: "/about", hash: "leadership" },
-                { label: "News & Media", to: "/blogs" },
+                { label: "News & Media", to: "/blog" },
               ].map((item) => (
                 <li key={item.label}>
                   <Link
@@ -211,19 +211,15 @@ export function SiteFooter() {
           </div>
 
           {/* ---------------------------------------------------------------- */}
-          {/* COLUMN 3: Solutions Links (lg:col-span-2)                        */}
+          {/* COLUMN 3: Easy Navigates (lg:col-span-2)                         */}
           {/* ---------------------------------------------------------------- */}
           <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-[15px] font-bold tracking-tight text-white">Solutions</h4>
+            <h4 className="text-[15px] font-bold tracking-tight text-white">Easy Navigates</h4>
             <ul className="space-y-2.5 text-[13px]">
               {[
-                { label: "Strategic Staffing", to: "/solutions" },
-                { label: "Business Process Outsourcing", to: "/solutions" },
-                { label: "Recruitment Process Outsourcing", to: "/solutions" },
-                { label: "Application Development", to: "/solutions" },
-                { label: "Quality Assurance", to: "/solutions" },
-                { label: "Regal OPs Training Hub", to: "/solutions" },
-                { label: "IT Strategy and Assessment", to: "/solutions" },
+                { label: "Solutions", to: "/solutions" },
+                { label: "Technologies", to: "/technologies" },
+                { label: "Blogs", to: "/blog" },
               ].map((item) => (
                 <li key={item.label}>
                   <Link

@@ -191,17 +191,9 @@ function Login() {
                   </div>
 
                   <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <label className="block text-xs font-semibold text-foreground">
-                        Password
-                      </label>
-                      <Link
-                        to="/contact"
-                        className="text-xs font-medium text-primary hover:underline"
-                      >
-                        Forgot password?
-                      </Link>
-                    </div>
+                    <label className="block text-xs font-semibold text-foreground mb-1">
+                      Password
+                    </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
                         <Lock className="h-4 w-4" />
